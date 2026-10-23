@@ -19,7 +19,7 @@ On a connected MCP host, `covenant_onboard` is on the first tool page. Call
 `guide` with `query` or exact `task`; it returns the installed schema and missing
 parameters. Supply selected `parameters` to validate a proposed call. Follow
 `next_call` only within existing owner authority; schema validity is not consent.
-Ambiguous queries require a selected task. The 20-task catalog ships in the wheel.
+Ambiguous queries require a selected task. The task catalog ships in the wheel.
 For an editable first draft call `start`, then `preview` with the returned intent.
 Identity evidence and publication are optional and separately adopted.
 
