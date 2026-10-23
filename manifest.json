@@ -1,25 +1,37 @@
 {
   "format": "aap-documentation-preview/0.1",
-  "source_revision": "f0b628cd0b79387e6e80cd3a31d11da5a8a5d3b0",
+  "source_revision": "51cd57d6824030172002e5f312a181ac7f1889d2",
   "public_base": "https://covenant-common.github.io/covenant-docs",
-  "deployed": false,
+  "deployed": true,
   "contains_runtime_data": false,
   "assets": {
     "LICENSE": "a4d38acb959554692450b3e69e0b65ad4e13b525e0c5b32cbcb2e538a771f2b6",
-    "covenant.json": "a0988775dbf5d18d43687e0aa1f963d2c8c92329f4419b1b9ec6e46713fff46c",
-    "docs/AGENT_START.html": "2594b07ab9cecf552c335b980f4b19d1160323dc640d717e66aa3f91d59989b5",
+    "covenant.json": "5b8581f46cac3e770649d417b57417a315b33ddc4f1de22434ad35f13692e672",
+    "docs/AGENT_START.html": "16ada8e439f3ce8f1043dc2140ef96e2ea355eebd1872722fa7a5e52f8d1bf76",
     "docs/AGENT_START.html.md": "60c5a3b069c7ef5ec2ca361e99b12423c9c5e5d53abdbb0d548ff4896f0a71d5",
-    "docs/BILATERAL_WORK_ORDERS_02.html": "d3ecb952c9194ad03f732bde9008fce9df9d08cbc6e4070f955d792f58bd0be7",
-    "docs/DEVELOPER_PREVIEW.html": "195d1c831dfad6dd24a90d2a15b93194ae880942885e6ab6dd96663de10acbeb",
-    "docs/ONBOARDING.html": "01ff6475d0f97023a722c4818728a732fa5cc9c9ee82135c065a4233c5e32035",
-    "docs/OWNER_SETUP.html": "44d5de3c2a23d859b70897d476122f5f6d669fe5e75bf67f7c6cf29e13d1427f",
-    "index.html": "b6c2530c11fa81bd677c1f480c2edb8355bdc67b7c5b10a397bbb39718c09a94",
-    "llms.txt": "621d863e03692e68c903194b60e139b4318f4e2f178175cf921c54f5a40f0057",
+    "docs/BILATERAL_WORK_ORDERS_02.html": "8bfa943a9fe7083321a9671fb2a732fd7f95ea2e3eb34a0c9fcd91edaaffd956",
+    "docs/DEVELOPER_PREVIEW.html": "8356483caf4de75000c80aeb284aa2f69e8c3c620821b8c3263d586a13238f0f",
+    "docs/ONBOARDING.html": "5cf2b4fe9c15f0e78d18f45450231b04986a2131f328f805b9b754274dd09018",
+    "docs/OWNER_SETUP.html": "9900f65444047ef387b6b63e5750bcc962296c587f0c5e9c51ea894b3aed4b79",
+    "index.html": "1f0d9daca587680124127fab89f74e9a330b12f57fcb6c5c3d7635b1e71e9a88",
+    "llms.txt": "54423ca3dd5c7ffccbe4ef20a47bd52aa172bf2399c2f20f6561f2d6b09ebbbb",
     "robots.txt": "55900a9e1e453e7cb126d014691939208c2e7458dc6342d18ee7bdaceb74b1cd",
     "sitemap.xml": "667189b84cb35ae013b8048695bf338e6708bf1612e23dce7244970d44243d3b",
-    "skills/covenant-use/SKILL.md": "e0d4f6e67c5a7f326edede35ae6bd58453e727b4800dd01915c905f7ac6a4fe9",
+    "skills/covenant-use/SKILL.md": "643c198fc4b531265fde2b64ab1f2be73321e15da87da570084c7ef070022b59",
     "skills/covenant-use/references/QUICKSTART.md": "60c5a3b069c7ef5ec2ca361e99b12423c9c5e5d53abdbb0d548ff4896f0a71d5",
     ".nojekyll": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-    "README.md": "3fa54fbac8ca67dac51d4b3a145d544db1cbfc769b8f6d8c2f6524b05aa16187"
+    "README.md": "0bba9f8ef55262625d07e842a8991a57f189ca04223efeef8489192a5738e2e3"
+  },
+  "publication": {
+    "status": "PUBLIC_PAGES_SITE_VERIFIED",
+    "verified_before_this_documentation_refresh": true,
+    "base_url": "https://covenant-common.github.io/covenant-docs/",
+    "repository": "https://github.com/covenant-common/covenant-docs",
+    "publisher_additions": [
+      ".nojekyll",
+      "README.md"
+    ],
+    "source_access": "PRIVATE_OWNER_REVIEWED_SOURCE_OR_SUPPLIED_WHEEL_REQUIRED",
+    "mainnet_launched": false
   }
 }

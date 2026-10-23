@@ -34,7 +34,7 @@ schemas. The owner can explicitly run `python -m covenant_agent.demo_setup
 --directory /a/new/private/directory` to create synthetic one-key hosts and a
 funded local reference authority. Its printed manifest contains commands and
 public keys, never seeds. The demo owner controls all test actors. Real parties
-adopt their own custody/providers. Follow [the signed-work guide](https://github.com/covenant-common/covenant/blob/codex/mainnet-launch-readiness/docs/BILATERAL_WORK_ORDERS_02.html)
+adopt their own custody/providers. Follow [the signed-work guide](https://covenant-common.github.io/covenant-docs/docs/BILATERAL_WORK_ORDERS_02.html)
 for the exact lifecycle, UTF-8 file handoff, partial awards and retry. A market
 draft never inherits signatures into a work order.
 

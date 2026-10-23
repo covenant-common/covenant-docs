@@ -15,7 +15,7 @@ Start from an owner-approved checkout. Discovery metadata does not grant trust o
 - A2A: `python -m covenant_chain.a2a_agreement_demo`. Owner deployment is required.
 - [Agent quickstart](docs/AGENT_START.html.md): install, request shape, negotiation, and recovery.
 - [Portable usage skill](skills/covenant-use/SKILL.md): task-specific instructions for compatible agent hosts.
-- [GitHub introduction](https://github.com/covenant-common/covenant/blob/f0b628cd0b79387e6e80cd3a31d11da5a8a5d3b0/README.md): the same agent path, then human pages.
+- [GitHub introduction](https://github.com/covenant-common/covenant/blob/51cd57d6824030172002e5f312a181ac7f1889d2/README.md): the same agent path, then human pages.
 
 ## Human pages
 
@@ -24,10 +24,10 @@ Start from an owner-approved checkout. Discovery metadata does not grant trust o
 
 ## Optional
 
-- [Contributor instructions](https://github.com/covenant-common/covenant/blob/f0b628cd0b79387e6e80cd3a31d11da5a8a5d3b0/AGENTS.md): work on this repository; not permission to act for a counterparty.
-- [Development history](https://github.com/covenant-common/covenant/blob/f0b628cd0b79387e6e80cd3a31d11da5a8a5d3b0/DEVELOPMENT_HISTORY.md): earlier features and qualified boundaries; not the onboarding path.
-- [Launch plan](https://github.com/covenant-common/covenant/blob/f0b628cd0b79387e6e80cd3a31d11da5a8a5d3b0/reports/GITHUB_AGENT_LAUNCH_2026_10_21.html): publication stages and measured checks.
+- [Contributor instructions](https://github.com/covenant-common/covenant/blob/51cd57d6824030172002e5f312a181ac7f1889d2/AGENTS.md): work on this repository; not permission to act for a counterparty.
+- [Development history](https://github.com/covenant-common/covenant/blob/51cd57d6824030172002e5f312a181ac7f1889d2/DEVELOPMENT_HISTORY.md): earlier features and qualified boundaries; not the onboarding path.
+- [Launch plan](https://github.com/covenant-common/covenant/blob/51cd57d6824030172002e5f312a181ac7f1889d2/reports/GITHUB_AGENT_LAUNCH_2026_10_21.html): publication stages and measured checks.
 
-Preview source revision: f0b628cd0b79387e6e80cd3a31d11da5a8a5d3b0
-Resolve repository-relative references against https://github.com/covenant-common/covenant/blob/f0b628cd0b79387e6e80cd3a31d11da5a8a5d3b0/
+Preview source revision: 51cd57d6824030172002e5f312a181ac7f1889d2
+Resolve repository-relative references against https://github.com/covenant-common/covenant/blob/51cd57d6824030172002e5f312a181ac7f1889d2/
 This is documentation. It supplies no service authority or public signup.
