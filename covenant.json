@@ -1,0 +1,805 @@
+{
+  "agent_path": {
+    "a2a": [
+      "python",
+      "-m",
+      "covenant_chain.a2a_agreement_demo"
+    ],
+    "mcp": [
+      "python",
+      "-m",
+      "covenant_chain.agent_server",
+      "--keyless"
+    ],
+    "npm": [
+      "npx",
+      "-y",
+      "agentic-agreements"
+    ],
+    "onboarding": {
+      "action": "start",
+      "parameters": {},
+      "tool": "covenant_onboard"
+    },
+    "sdk": [
+      "covenant-agent"
+    ],
+    "task_guide": {
+      "action": "guide",
+      "parameters": {},
+      "tool": "covenant_onboard"
+    },
+    "uvx": [
+      "uvx",
+      "--from",
+      "agentic-agreements",
+      "covenant-agent",
+      "--keyless"
+    ]
+  },
+  "audience": "agents_acting_for_principals",
+  "discovery_is_authority": false,
+  "documents": {
+    "explainer": "docs/AGENT_START.html",
+    "history": "DEVELOPMENT_HISTORY.md",
+    "repository_instructions": "AGENTS.md",
+    "skill": "skills/covenant-use/SKILL.md",
+    "start": "docs/AGENT_START.html.md"
+  },
+  "expected_first_result": {
+    "automatic_assent": false,
+    "execution_authorized": false,
+    "payment_verified": false,
+    "status": "DRAFT_REQUIRES_ASSENT"
+  },
+  "first_command": [
+    "python",
+    "-m",
+    "covenant_chain.quickstart"
+  ],
+  "format": "covenant-agent-entrypoints/0.1",
+  "human_pages": "secondary",
+  "interfaces": {
+    "a2a": {
+      "deployment": "OWNER_DEPLOYED_SERVICE_REQUIRED",
+      "discovery_path": "/.well-known/agent-card.json",
+      "guide": "docs/REQUIRED_A2A_AGREEMENTS.html"
+    },
+    "bilateral_work_orders": {
+      "adoption": "OWNER_CONFIG_AND_EXACT_PARTY_ASSENT_REQUIRED",
+      "command": [
+        "python",
+        "-m",
+        "covenant_agent.server",
+        "--config",
+        "/owner-controlled/path/host.json"
+      ],
+      "guide": "docs/BILATERAL_WORK_ORDERS_02.html",
+      "profiles": [
+        "covenant-bilateral/0.1",
+        "covenant-bilateral/0.2"
+      ],
+      "recommended_new_agreements": "covenant-bilateral/0.2"
+    },
+    "flattened_functions": {
+      "call_shape": {
+        "arguments": {
+          "amount": 90,
+          "buyer": "0b513ad9b4924015ca0902ed079044d3ac5dbec2306f06948c10da8eb6e39f2d",
+          "compact": true,
+          "context": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "description": "One stock report for a small shop",
+          "payment_asset": {
+            "identifier": "CREDIT",
+            "namespace": "demo",
+            "unit": "credit"
+          },
+          "seller": "66be7e332c7a453332bd9d0a7f7db055f5c5ef1a06ada66d98b39fb6810c473a"
+        },
+        "name": "covenant_marketplace__quick_trade"
+      },
+      "factory": "covenant_chain.tool_surface.keyless_surface"
+    },
+    "native_stdio": {
+      "call_shape": {
+        "arguments": {
+          "action": "quick_trade",
+          "parameters": {
+            "amount": 90,
+            "buyer": "0b513ad9b4924015ca0902ed079044d3ac5dbec2306f06948c10da8eb6e39f2d",
+            "compact": true,
+            "context": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "description": "One stock report for a small shop",
+            "payment_asset": {
+              "identifier": "CREDIT",
+              "namespace": "demo",
+              "unit": "credit"
+            },
+            "seller": "66be7e332c7a453332bd9d0a7f7db055f5c5ef1a06ada66d98b39fb6810c473a"
+          }
+        },
+        "name": "covenant_marketplace"
+      },
+      "command": [
+        "python",
+        "-m",
+        "covenant_chain.agent_server",
+        "--keyless"
+      ],
+      "protocol_versions": [
+        "2026-07-28",
+        "2025-06-18"
+      ]
+    }
+  },
+  "live_public_endpoints": [],
+  "local_onboarding": {
+    "command": [
+      "python",
+      "-m",
+      "covenant_chain.welcome_app"
+    ],
+    "guide": "docs/ONBOARDING.html",
+    "hosted_signup": false,
+    "identity_evidence_required": false,
+    "preview": [
+      "python",
+      "-m",
+      "covenant_chain.welcome_app",
+      "--preview"
+    ],
+    "publication_default": "PRIVATE"
+  },
+  "maturity": "DEVELOPMENT_PREVIEW",
+  "name": "Agentic Agreements Protocol (AAP)",
+  "routes": [
+    {
+      "action": "start",
+      "boundary": "Local preview only. Identity evidence, publication and consequential owner authority are separately adopted; no public signup or package publication is implied.",
+      "guide": "docs/ONBOARDING.html",
+      "id": "onboarding",
+      "keywords": [
+        "onboarding",
+        "signup",
+        "identity",
+        "first use",
+        "opt in",
+        "getting started"
+      ],
+      "native_tool": "covenant_onboard",
+      "purpose": "Start with a useful draft and choose identity or sharing only when needed",
+      "required_parameters": [],
+      "schema_command": [
+        "python",
+        "-m",
+        "covenant_chain.agent_server",
+        "--keyless",
+        "--list-tools",
+        "--tool",
+        "covenant_onboard"
+      ]
+    },
+    {
+      "action": "quick_trade",
+      "boundary": "One preparation call; explicit buyer/seller assent and settlement remain separate.",
+      "guide": "docs/PEOPLE_JOURNEYS_056.html",
+      "id": "simple-trade",
+      "keywords": [
+        "buy",
+        "sell",
+        "selling",
+        "freelancer",
+        "hire",
+        "exchange",
+        "purchase",
+        "paid service"
+      ],
+      "native_tool": "covenant_marketplace",
+      "purpose": "Agree a price for one item or service",
+      "required_parameters": [
+        "amount",
+        "buyer",
+        "context",
+        "description",
+        "payment_asset",
+        "seller"
+      ],
+      "schema_command": [
+        "python",
+        "-m",
+        "covenant_chain.agent_server",
+        "--keyless",
+        "--list-tools",
+        "--tool",
+        "covenant_marketplace"
+      ]
+    },
+    {
+      "action": "work",
+      "boundary": "Read-only handoff to the separate /0.2 work-order host. Owner installs signing custody and adopts a provider; drafts cannot inherit assent.",
+      "guide": "docs/BILATERAL_WORK_ORDERS_02.html",
+      "id": "paid-work",
+      "keywords": [
+        "milestone",
+        "milestones",
+        "staged payments",
+        "stage payments",
+        "partial award",
+        "appeal",
+        "freelance",
+        "branding",
+        "settle",
+        "logo",
+        "corrections",
+        "support duty"
+      ],
+      "native_tool": "covenant_onboard",
+      "purpose": "Complete signed work, staged payments, delivery, partial awards and appeals",
+      "required_parameters": [],
+      "schema_command": [
+        "python",
+        "-m",
+        "covenant_chain.agent_server",
+        "--keyless",
+        "--list-tools",
+        "--tool",
+        "covenant_onboard"
+      ]
+    },
+    {
+      "action": "work",
+      "boundary": "Read-only owner handoff. Only the explicit owner CLI creates or inspects synthetic custody; no production readiness or live authority is inferred.",
+      "guide": "docs/OWNER_SETUP.html",
+      "id": "owner-setup",
+      "keywords": [
+        "owner setup",
+        "safe local demo",
+        "restart",
+        "inspect who controls",
+        "custody setup"
+      ],
+      "native_tool": "covenant_onboard",
+      "purpose": "Set up or inspect owner-controlled synthetic hosts after restart",
+      "required_parameters": [],
+      "schema_command": [
+        "python",
+        "-m",
+        "covenant_chain.agent_server",
+        "--keyless",
+        "--list-tools",
+        "--tool",
+        "covenant_onboard"
+      ]
+    },
+    {
+      "action": "describe",
+      "boundary": "Native GIVE and PERMIT remain owner operations. Snapshot review does not establish freshness or authorize the separate bilateral host.",
+      "guide": "docs/OWNER_SETUP.html",
+      "id": "principal-authority",
+      "keywords": [
+        "delegate",
+        "delegated authority",
+        "principal",
+        "limited authority",
+        "live grant",
+        "permit"
+      ],
+      "native_tool": "covenant_principal",
+      "purpose": "Inspect schemas for delegated native authority and review a signed policy against supplied state",
+      "required_parameters": [],
+      "schema_command": [
+        "python",
+        "-m",
+        "covenant_chain.agent_server",
+        "--keyless",
+        "--list-tools",
+        "--tool",
+        "covenant_principal"
+      ]
+    },
+    {
+      "action": "describe",
+      "boundary": "Complete schemas and synthetic examples only. Exact module assent, current authority, collateral custody and execution remain separate.",
+      "guide": "docs/ADVANCED_AGREEMENTS.html",
+      "id": "advanced-contract",
+      "keywords": [
+        "guarantor",
+        "guarantee",
+        "legal module",
+        "legal drafting",
+        "nested obligations"
+      ],
+      "native_tool": "covenant_legal",
+      "purpose": "Draft nested obligations, guarantees, delegation and arbitration",
+      "required_parameters": [],
+      "schema_command": [
+        "python",
+        "-m",
+        "covenant_chain.agent_server",
+        "--keyless",
+        "--list-tools",
+        "--tool",
+        "covenant_legal"
+      ]
+    },
+    {
+      "action": "counter",
+      "boundary": "Use complete selected replacement fields; changed terms require fresh assent.",
+      "guide": "docs/PEOPLE_JOURNEYS_056.html",
+      "id": "negotiate",
+      "keywords": [
+        "counteroffer",
+        "negotiate",
+        "change price",
+        "counter offer"
+      ],
+      "native_tool": "covenant_marketplace",
+      "purpose": "Change an offer and see exactly what changed",
+      "required_parameters": [
+        "changes",
+        "order"
+      ],
+      "schema_command": [
+        "python",
+        "-m",
+        "covenant_chain.agent_server",
+        "--keyless",
+        "--list-tools",
+        "--tool",
+        "covenant_marketplace"
+      ]
+    },
+    {
+      "action": "simple",
+      "boundary": "Drafting is keyless; prepare the meaning closure and review every required role assent.",
+      "guide": "docs/PROGRESSIVE_AGREEMENTS_043.html",
+      "id": "simple-agreement",
+      "keywords": [
+        "promise",
+        "contract",
+        "conditions",
+        "roles"
+      ],
+      "native_tool": "covenant_concept",
+      "purpose": "Record a simple or nested exact agreement",
+      "required_parameters": [
+        "terms"
+      ],
+      "schema_command": [
+        "python",
+        "-m",
+        "covenant_chain.agent_server",
+        "--keyless",
+        "--list-tools",
+        "--tool",
+        "covenant_concept"
+      ]
+    },
+    {
+      "action": "pack",
+      "boundary": "Commit exact source bytes; adopting semantics, authority and execution is separate.",
+      "guide": "docs/EXTERNAL_DRAFTS_052.html",
+      "id": "external-draft",
+      "keywords": [
+        "file",
+        "external draft",
+        "any language"
+      ],
+      "native_tool": "covenant_external_draft",
+      "purpose": "Use a document or drafting tool of your own",
+      "required_parameters": [
+        "source_base64"
+      ],
+      "schema_command": [
+        "python",
+        "-m",
+        "covenant_chain.agent_server",
+        "--keyless",
+        "--list-tools",
+        "--tool",
+        "covenant_external_draft"
+      ]
+    },
+    {
+      "action": "case",
+      "boundary": "A case joins evidence; arbitration requires the separately adopted procedure and authority.",
+      "guide": "docs/PEOPLE_JOURNEYS_056.html",
+      "id": "review-dispute",
+      "keywords": [
+        "dispute",
+        "arbitration",
+        "evidence",
+        "obligations",
+        "payment failed"
+      ],
+      "native_tool": "covenant_review",
+      "purpose": "Review agreements, authority, evidence, payments and remaining work together",
+      "required_parameters": [
+        "title"
+      ],
+      "schema_command": [
+        "python",
+        "-m",
+        "covenant_chain.agent_server",
+        "--keyless",
+        "--list-tools",
+        "--tool",
+        "covenant_review"
+      ]
+    },
+    {
+      "action": "draft",
+      "boundary": "Local signing/custody uses the owner CLI. Delivery is not payment finality.",
+      "guide": "docs/OFFLINE_APPLICATION.html",
+      "id": "offline",
+      "keywords": [
+        "offline",
+        "QR",
+        "radio",
+        "local"
+      ],
+      "native_tool": "covenant_offline",
+      "purpose": "Co-sign and carry agreements without Internet access",
+      "required_parameters": [
+        "nonce",
+        "parties",
+        "scope",
+        "terms",
+        "valid_from",
+        "valid_until"
+      ],
+      "schema_command": [
+        "python",
+        "-m",
+        "covenant_chain.agent_server",
+        "--keyless",
+        "--list-tools",
+        "--tool",
+        "covenant_offline"
+      ]
+    },
+    {
+      "action": "spec",
+      "boundary": "Owner connects and adopts each carrier. Keyless tools do not transmit; hardware and satellite service are unqualified.",
+      "guide": "docs/INTERMITTENT_CONNECTIVITY.html",
+      "id": "connectivity",
+      "keywords": [
+        "BLE",
+        "Bluetooth",
+        "gateway",
+        "satellite",
+        "store and forward",
+        "IoT"
+      ],
+      "native_tool": "covenant_connectivity",
+      "purpose": "Plan nearby BLE transfer or an adopted intermittent gateway",
+      "required_parameters": [],
+      "schema_command": [
+        "python",
+        "-m",
+        "covenant_chain.agent_server",
+        "--keyless",
+        "--list-tools",
+        "--tool",
+        "covenant_connectivity"
+      ]
+    },
+    {
+      "action": "prepare_request",
+      "boundary": "An owner must deploy/pin the service, agreement, current scoped grant and authenticated caller.",
+      "guide": "docs/REQUIRED_A2A_AGREEMENTS.html",
+      "id": "a2a",
+      "keywords": [
+        "A2A",
+        "agent-to-agent",
+        "authorise"
+      ],
+      "native_tool": "covenant_a2a_agreement",
+      "purpose": "Require exact assent before an A2A service performs work",
+      "required_parameters": [
+        "params"
+      ],
+      "schema_command": [
+        "python",
+        "-m",
+        "covenant_chain.agent_server",
+        "--keyless",
+        "--list-tools",
+        "--tool",
+        "covenant_a2a_agreement"
+      ]
+    },
+    {
+      "action": "draft",
+      "boundary": "Keyless preparation only. Owner installs authority checks and a controller adapter; hardware/safety are unqualified.",
+      "guide": "docs/ROBOTICS.html",
+      "id": "robotics",
+      "keywords": [
+        "robot",
+        "ROS 2",
+        "rosbridge",
+        "VDA 5050",
+        "fleet",
+        "Open-RMF"
+      ],
+      "native_tool": "covenant_robotics",
+      "purpose": "Agree and coordinate a robot mission through an adopted adapter",
+      "required_parameters": [
+        "adapter",
+        "arguments",
+        "capability",
+        "nonce",
+        "robot",
+        "valid_from",
+        "valid_until"
+      ],
+      "schema_command": [
+        "python",
+        "-m",
+        "covenant_chain.agent_server",
+        "--keyless",
+        "--list-tools",
+        "--tool",
+        "covenant_robotics"
+      ]
+    },
+    {
+      "action": "spec",
+      "boundary": "Programmes and service quotes require owner adoption; drafting creates no revenue entitlement.",
+      "guide": "docs/BUILDER_PROGRAMME.html",
+      "id": "builder",
+      "keywords": [
+        "developer",
+        "revenue sharing",
+        "builder"
+      ],
+      "native_tool": "covenant_builder",
+      "purpose": "Offer paid services or contribute reusable components",
+      "required_parameters": [],
+      "schema_command": [
+        "python",
+        "-m",
+        "covenant_chain.agent_server",
+        "--keyless",
+        "--list-tools",
+        "--tool",
+        "covenant_builder"
+      ]
+    },
+    {
+      "action": "scaffold",
+      "boundary": "Generated starter source is not installed or executed; owner installation is explicit.",
+      "guide": "docs/BUILDER_STANDARDS.html",
+      "id": "extend",
+      "keywords": [
+        "connector",
+        "layer",
+        "API",
+        "MCP",
+        "plugin"
+      ],
+      "native_tool": "covenant_developer",
+      "purpose": "Build a layer or an adapter",
+      "required_parameters": [
+        "name"
+      ],
+      "schema_command": [
+        "python",
+        "-m",
+        "covenant_chain.agent_server",
+        "--keyless",
+        "--list-tools",
+        "--tool",
+        "covenant_developer"
+      ]
+    },
+    {
+      "action": "pack",
+      "boundary": "A proof envelope does not prove its statement; use a pinned installed verifier and exact assumptions.",
+      "guide": "docs/COOPERATION_040.html",
+      "id": "proof",
+      "keywords": [
+        "proof",
+        "ZK",
+        "cryptography"
+      ],
+      "native_tool": "covenant_proof",
+      "purpose": "Carry a proof and select an adopted verifier",
+      "required_parameters": [
+        "context",
+        "proof",
+        "statement",
+        "system"
+      ],
+      "schema_command": [
+        "python",
+        "-m",
+        "covenant_chain.agent_server",
+        "--keyless",
+        "--list-tools",
+        "--tool",
+        "covenant_proof"
+      ]
+    },
+    {
+      "action": "market",
+      "boundary": "Market terms are drafts. Listings, custody, escrow controllers and execution require separate adoption.",
+      "guide": "docs/MARKETPLACES_045.html",
+      "id": "market",
+      "keywords": [
+        "market",
+        "listing",
+        "archetype",
+        "escrow"
+      ],
+      "native_tool": "covenant_marketplace",
+      "purpose": "Define a marketplace or reusable transaction type",
+      "required_parameters": [
+        "name",
+        "owner"
+      ],
+      "schema_command": [
+        "python",
+        "-m",
+        "covenant_chain.agent_server",
+        "--keyless",
+        "--list-tools",
+        "--tool",
+        "covenant_marketplace"
+      ]
+    },
+    {
+      "action": "prepare",
+      "boundary": "Preview only. Exact field and metadata consent from all principals, owner publication and separate HTTPS hosting are required. Unlisted is public; old copies may persist.",
+      "guide": "docs/PUBLIC_WEB.html",
+      "id": "publish-web",
+      "keywords": [
+        "SEO",
+        "public website",
+        "publish",
+        "search engine",
+        "social",
+        "profile",
+        "ledger"
+      ],
+      "native_tool": "covenant_public_web",
+      "purpose": "Prepare opt-in searchable marketplace, social, profile or ledger pages",
+      "required_parameters": [
+        "fields",
+        "kind",
+        "origin",
+        "source"
+      ],
+      "schema_command": [
+        "python",
+        "-m",
+        "covenant_chain.agent_server",
+        "--keyless",
+        "--list-tools",
+        "--tool",
+        "covenant_public_web"
+      ]
+    },
+    {
+      "action": "create",
+      "boundary": "A draft neither advances funds nor establishes collateral, creditworthiness or enforceability.",
+      "guide": "docs/ADVANCED_AGREEMENTS.html",
+      "id": "credit",
+      "keywords": [
+        "credit",
+        "loan",
+        "lending",
+        "collateral"
+      ],
+      "native_tool": "covenant_credit",
+      "purpose": "Draft a credit or lending agreement",
+      "required_parameters": [
+        "assets",
+        "name",
+        "participants",
+        "rules",
+        "settlement"
+      ],
+      "schema_command": [
+        "python",
+        "-m",
+        "covenant_chain.agent_server",
+        "--keyless",
+        "--list-tools",
+        "--tool",
+        "covenant_credit"
+      ]
+    },
+    {
+      "action": "create",
+      "boundary": "Allocation calculations do not prove bidder independence, funding, deadline compliance or award authority.",
+      "guide": "docs/COOPERATION_040.html",
+      "id": "auction",
+      "keywords": [
+        "auction",
+        "bid",
+        "procurement"
+      ],
+      "native_tool": "covenant_auction",
+      "purpose": "Define auction terms and compute an allocation proposal",
+      "required_parameters": [
+        "name",
+        "purpose",
+        "rules"
+      ],
+      "schema_command": [
+        "python",
+        "-m",
+        "covenant_chain.agent_server",
+        "--keyless",
+        "--list-tools",
+        "--tool",
+        "covenant_auction"
+      ]
+    },
+    {
+      "action": "suites",
+      "boundary": "Inspect the actual suite and owner key custody. Later privacy cannot retract earlier public disclosure.",
+      "guide": "docs/COOPERATION_040.html",
+      "id": "privacy",
+      "keywords": [
+        "private",
+        "public",
+        "encryption",
+        "disclosure"
+      ],
+      "native_tool": "covenant_privacy",
+      "purpose": "Choose a privacy scope or protection profile",
+      "required_parameters": [],
+      "schema_command": [
+        "python",
+        "-m",
+        "covenant_chain.agent_server",
+        "--keyless",
+        "--list-tools",
+        "--tool",
+        "covenant_privacy"
+      ]
+    },
+    {
+      "action": "search",
+      "boundary": "Ranking depends on selected requirements, context and adopted seeds; it is not universal trust or world truth.",
+      "guide": "docs/COOPERATION_040.html",
+      "id": "find-and-rank",
+      "keywords": [
+        "discovery",
+        "reputation",
+        "PageRank",
+        "recommend"
+      ],
+      "native_tool": "covenant_desire",
+      "purpose": "Find mechanisms or resources for an exact desire",
+      "required_parameters": [
+        "desire"
+      ],
+      "schema_command": [
+        "python",
+        "-m",
+        "covenant_chain.agent_server",
+        "--keyless",
+        "--list-tools",
+        "--tool",
+        "covenant_desire"
+      ]
+    }
+  ],
+  "source": {
+    "preview_branch": "codex/mainnet-launch-readiness",
+    "public_package_registry_publication": "NOT_CLAIMED",
+    "repository": "https://github.com/covenant-common/covenant",
+    "repository_visibility_observed_2026_10_21": "PRIVATE"
+  },
+  "summary": "Agentic Agreements Protocol (AAP) is for AI agents acting for their principals. Humans use the secondary pages.",
+  "trust_boundary": [
+    "Owner chooses/pins identities, authority, budgets, adapters and verifier assumptions.",
+    "Draft, assent, authority, execution, delivery, ledger certification and payment are separate facts.",
+    "Retain/reconcile the exact original request after an uncertain effect.",
+    "This catalog never grants permission to install, sign, transmit or spend."
+  ],
+  "version": "0.46.0"
+}

@@ -1,0 +1,33 @@
+# Agentic Agreements Protocol (AAP)
+
+> Agentic Agreements Protocol (AAP) is for AI agents acting for their principals. Human pages are secondary.
+
+Development preview. No public hosted endpoint or package-registry publication is claimed.
+Start from an owner-approved checkout. Discovery metadata does not grant trust or execution authority.
+
+## Agent path
+
+- Find a task: `covenant_onboard.guide` with `query` or exact `task`; returns the installed schema, missing fields and a validated next call. Visible on the first MCP tool page; no browser required.
+- Installed entry: `python -m covenant_chain.onboarding --query "I want to buy one report"`. Task catalog and schemas ship inside the wheel; no checkout needed.
+- First draft: `covenant_onboard.start`, then `preview` with the returned intent. Optional identity and sharing choices; no authority is granted.
+- MCP: `python -m covenant_chain.agent_server --keyless` (also `npx -y agentic-agreements` and `uvx --from agentic-agreements covenant-agent --keyless`).
+- SDK: console script `covenant-agent`, package `covenant_chain`.
+- A2A: `python -m covenant_chain.a2a_agreement_demo`. Owner deployment is required.
+- [Agent quickstart](docs/AGENT_START.html.md): install, request shape, negotiation, and recovery.
+- [Portable usage skill](skills/covenant-use/SKILL.md): task-specific instructions for compatible agent hosts.
+- [GitHub introduction](README.md): the same agent path, then human pages.
+
+## Human pages
+
+- [Local onboarding](docs/ONBOARDING.html): `python -m covenant_chain.welcome_app`, immediate drafts, optional identity and exact local review.
+- [Task catalog](covenant.json): route a human need to an installed tool family/action and its guide.
+
+## Optional
+
+- [Contributor instructions](AGENTS.md): work on this repository; not permission to act for a counterparty.
+- [Development history](DEVELOPMENT_HISTORY.md): earlier features and qualified boundaries; not the onboarding path.
+- [Launch plan](reports/GITHUB_AGENT_LAUNCH_2026_10_21.html): publication stages and measured checks.
+
+Preview source revision: dedf49f57a43cc7a438e9856e9d15e767c81d73a
+Resolve repository-relative references against https://github.com/covenant-common/covenant/blob/dedf49f57a43cc7a438e9856e9d15e767c81d73a/
+This is documentation. It supplies no service authority or public signup.
