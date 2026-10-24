@@ -5,22 +5,29 @@
   "deployed": true,
   "contains_runtime_data": false,
   "assets": {
+    ".github/ISSUE_TEMPLATE/commercial-inquiry.yml": "389adfc4c1c3b16e1f09240f3b9bab6c19fb1b98b8fd45a49724117942c953d1",
+    ".github/ISSUE_TEMPLATE/config.yml": "c1e5cdd4f8c18b0cec9133f4819450fb0ae10a289c6234c8ad6e25c85a52f415",
+    ".github/ISSUE_TEMPLATE/feedback.yml": "42c372944745da9eb4962dd0538047236431b307638de3022b77f9aecee2dea5",
+    ".github/ISSUE_TEMPLATE/integration-partner.yml": "6563f4ad1988971eb1cbd564754fe81f53f7394a4bc145b1ee9182880456b06d",
+    ".github/ISSUE_TEMPLATE/pilot-tester.yml": "815051721fd57bb58d8aca846f29b69fb80aa686c8312936f82a57730da20864",
+    ".nojekyll": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     "LICENSE": "a4d38acb959554692450b3e69e0b65ad4e13b525e0c5b32cbcb2e538a771f2b6",
+    "README.md": "2cdb5d784e0112b7f0682938482dc8cee1cf4aae917a197c6584a3f616515fe7",
     "covenant.json": "5b8581f46cac3e770649d417b57417a315b33ddc4f1de22434ad35f13692e672",
     "docs/AGENT_START.html": "16ada8e439f3ce8f1043dc2140ef96e2ea355eebd1872722fa7a5e52f8d1bf76",
     "docs/AGENT_START.html.md": "60c5a3b069c7ef5ec2ca361e99b12423c9c5e5d53abdbb0d548ff4896f0a71d5",
     "docs/BILATERAL_WORK_ORDERS_02.html": "8bfa943a9fe7083321a9671fb2a732fd7f95ea2e3eb34a0c9fcd91edaaffd956",
     "docs/DEVELOPER_PREVIEW.html": "8356483caf4de75000c80aeb284aa2f69e8c3c620821b8c3263d586a13238f0f",
     "docs/ONBOARDING.html": "5cf2b4fe9c15f0e78d18f45450231b04986a2131f328f805b9b754274dd09018",
+    "docs/OVERVIEW.html": "19b825f7f2b3e93f7b75453c9484f15bdaad7f17d6719e241172b495b2efc2b4",
     "docs/OWNER_SETUP.html": "9900f65444047ef387b6b63e5750bcc962296c587f0c5e9c51ea894b3aed4b79",
-    "index.html": "1f0d9daca587680124127fab89f74e9a330b12f57fcb6c5c3d7635b1e71e9a88",
+    "docs/WORK_WITH_US.html": "70c400b91876cef8eec988612734ae8a06a5ed06628146589519f47142892b33",
+    "index.html": "f985a85fc3e0afeb79cddc5fbab1c403dab9f442170b163e1357afeb0f0d6b8b",
     "llms.txt": "54423ca3dd5c7ffccbe4ef20a47bd52aa172bf2399c2f20f6561f2d6b09ebbbb",
     "robots.txt": "55900a9e1e453e7cb126d014691939208c2e7458dc6342d18ee7bdaceb74b1cd",
-    "sitemap.xml": "667189b84cb35ae013b8048695bf338e6708bf1612e23dce7244970d44243d3b",
+    "sitemap.xml": "05f4e0bc3d54849edd01e6f217d3f6a8c3b0d12da38acdac0893de5d6734510b",
     "skills/covenant-use/SKILL.md": "643c198fc4b531265fde2b64ab1f2be73321e15da87da570084c7ef070022b59",
-    "skills/covenant-use/references/QUICKSTART.md": "60c5a3b069c7ef5ec2ca361e99b12423c9c5e5d53abdbb0d548ff4896f0a71d5",
-    ".nojekyll": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-    "README.md": "0bba9f8ef55262625d07e842a8991a57f189ca04223efeef8489192a5738e2e3"
+    "skills/covenant-use/references/QUICKSTART.md": "60c5a3b069c7ef5ec2ca361e99b12423c9c5e5d53abdbb0d548ff4896f0a71d5"
   },
   "publication": {
     "status": "PUBLIC_PAGES_SITE_VERIFIED",
@@ -29,7 +36,10 @@
     "repository": "https://github.com/covenant-common/covenant-docs",
     "publisher_additions": [
       ".nojekyll",
-      "README.md"
+      "README.md",
+      "docs/OVERVIEW.html",
+      "docs/WORK_WITH_US.html",
+      ".github/ISSUE_TEMPLATE"
     ],
     "source_access": "PRIVATE_OWNER_REVIEWED_SOURCE_OR_SUPPLIED_WHEEL_REQUIRED",
     "mainnet_launched": false

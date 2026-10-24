@@ -1,0 +1,33 @@
+name: Propose an integration
+description: Connect an agent framework, MCP server, marketplace, payment rail or registry to AAP.
+title: "Integration: "
+labels: ["integration"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        This issue is **public**. For anything confidential, email the address on the [Work with AAP](https://covenant-common.github.io/covenant-docs/docs/WORK_WITH_US.html) page instead.
+  - type: input
+    id: project
+    attributes:
+      label: Project or company
+    validations:
+      required: true
+  - type: dropdown
+    id: kind
+    attributes:
+      label: Kind of integration
+      options: [Agent framework or host, MCP server or tool, A2A agent, Marketplace or registry, Payment rail (AP2, x402, card, bank, stablecoin), Identity or credentials, Other]
+    validations:
+      required: true
+  - type: textarea
+    id: goal
+    attributes:
+      label: What should work end to end?
+      description: Describe the flow from your users' point of view.
+    validations:
+      required: true
+  - type: input
+    id: link
+    attributes:
+      label: Public link to your project or spec (optional)

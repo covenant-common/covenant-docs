@@ -1,0 +1,50 @@
+name: Apply to the developer pilot
+description: Ask to join the invited AAP developer pilot.
+title: "Pilot application: "
+labels: ["pilot-application"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        This issue is **public**. Do not include keys, private agreements, customer data or anything confidential. We review every application by hand and reply here.
+  - type: input
+    id: who
+    attributes:
+      label: Your name or handle, and organisation (optional)
+    validations:
+      required: true
+  - type: textarea
+    id: task
+    attributes:
+      label: The task you would try
+      description: One real workflow where exact scope, acceptance or payment evidence matters (paid research, freelance delivery, agent procurement, a tool marketplace...).
+    validations:
+      required: true
+  - type: input
+    id: host
+    attributes:
+      label: Agent host or framework you use
+      placeholder: e.g. Claude Code, Cursor, LangGraph, OpenAI Agents SDK, your own
+  - type: dropdown
+    id: platform
+    attributes:
+      label: Platform
+      options: [macOS, Linux, Windows (WSL), Other]
+    validations:
+      required: true
+  - type: dropdown
+    id: access
+    attributes:
+      label: How would you like to receive the build?
+      options: [GitHub repository access, A pinned wheel with its SHA-256]
+    validations:
+      required: true
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Pilot terms
+      options:
+        - label: I will use synthetic data only and report problems without secrets or personal data.
+          required: true
+        - label: I understand this is a development preview, not a production service or mainnet.
+          required: true

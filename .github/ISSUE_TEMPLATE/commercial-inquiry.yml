@@ -1,0 +1,36 @@
+name: Commercial enquiry
+description: Ask about the Verified Agent Gateway, support, hosted verification, trust-mark use or commercial terms.
+title: "Commercial enquiry: "
+labels: ["commercial"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        This issue is **public**. Keep it to a first, non-confidential note and we will continue by email. For confidential details, email the address on the [Work with AAP](https://covenant-common.github.io/covenant-docs/docs/WORK_WITH_US.html) page instead.
+  - type: input
+    id: org
+    attributes:
+      label: Organisation
+    validations:
+      required: true
+  - type: checkboxes
+    id: interest
+    attributes:
+      label: Interested in
+      options:
+        - label: Verified Agent Gateway (admission policy, audit log, trust mark for agents dealing with ours)
+        - label: Hosted verification and evidence retention
+        - label: Support, deployment or a custom integration
+        - label: Trust-mark certification
+        - label: Negotiated commercial terms for a large deployment
+  - type: textarea
+    id: context
+    attributes:
+      label: What are your agents doing, and what do you need to be able to prove?
+    validations:
+      required: true
+  - type: input
+    id: contact
+    attributes:
+      label: How should we reach you privately? (optional)
+      description: A work email or a link to a public profile. Leave blank to continue on this issue.
