@@ -1,50 +1,56 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>AAP overview</title>
-<meta name="description" content="What Agentic Agreements Protocol does, where it fits beside MCP, A2A and agent payments, what exists today and how to reach the founders.">
+<title>Why AAP</title>
+<meta name="description" content="Agentic Agreements Protocol is the agreement layer for AI agents: exact terms, provable delivery, fair disputes and bounded authority. Its design principles, and an invitation to investors and patrons.">
 <link rel="canonical" href="https://covenant-common.github.io/covenant-docs/docs/OVERVIEW.html">
 <style>*{box-sizing:border-box}body{font-family:"Times New Roman",Times,serif;font-size:16px;line-height:1.16;color:#000;background:#fff;margin:1rem}main{max-width:52rem;margin:auto;border:1px solid #000;padding:1rem}h1,h2,h3,p,ul,ol,pre,table{font-size:inherit;margin:0 0 .618rem}h1,h2,h3,th{font-weight:bold}h2{margin-top:1rem}ul,ol{padding-left:1.618rem}li{margin-bottom:.236rem}table{border-collapse:collapse;width:100%}th,td{text-align:left;vertical-align:top;padding:.382rem 0;padding-right:.618rem}a{color:#000}code{font:inherit}</style>
 </head><body><main>
-<h1>AAP overview</h1>
-<p>For investors, partners and commercial users. Status as of October 2026.</p>
+<h1>Why AAP</h1>
+<p>Agentic Agreements Protocol (AAP) is the agreement layer for AI agents. When an agent buys, sells, hires or commits on someone's behalf, AAP makes the deal exact, the delivery provable and the dispute fair, and keeps the person behind the agent in control.</p>
 
-<h2>The problem</h2>
-<p>AI agents can now find each other, call tools and pay. Nothing records what they actually agreed, whether the work met that agreement, or what happens when it did not. When an agent buys a report, hires another agent or commits its principal's budget, the terms live in a chat log that neither side can prove later.</p>
+<h2>The gap</h2>
+<p>Agents can already find each other, call tools and move money. What they cannot do is make a promise that holds up. Terms live in a chat log. Nobody can show what was agreed, whether the work met it, or who is responsible when it did not. Once agents spend real budgets and deliver real work, that gap is the main thing stopping people trusting them with more.</p>
 
 <h2>What AAP does</h2>
-<ul>
-<li><strong>Exact terms.</strong> Both parties sign the same canonical bytes. Any later change needs fresh signatures; an old signature cannot approve a new price.</li>
-<li><strong>Checkable obligations.</strong> Deadlines, acceptance criteria and remedies in a typed form that can be checked before signing and replayed afterwards.</li>
-<li><strong>Delivery and outcome receipts.</strong> Signed evidence of what was delivered and how it was judged. Reputation is built from receipts, not reviews.</li>
-<li><strong>Disputes.</strong> A ladder from an optimistic claim through negotiation to an arbitrator or panel, with appeal bonds agreed up front.</li>
-<li><strong>Bounded authority.</strong> Delegations that can only narrow, with witnessed revocation, so a principal controls what its agent may commit to.</li>
-</ul>
-<p>Everything verifies offline from the record itself. A blockchain is optional: AAP has its own chain for settlement and public anchoring, but agreements, receipts and reputation also work peer to peer and through transparency-log witnesses.</p>
-
-<h2>Where it fits</h2>
 <table>
-<tr><th>Layer</th><th>Existing standards</th><th>AAP</th></tr>
-<tr><td>Tools</td><td>MCP</td><td>Calls MCP tools under owner-pinned descriptors and records signed tool-call receipts.</td></tr>
-<tr><td>Agent-to-agent messages</td><td>A2A</td><td>Carries the agreement hash in tasks; signs and verifies agent cards.</td></tr>
-<tr><td>Payments</td><td>AP2, x402, card and bank rails</td><td>Binds a payment to the agreement it pays for and supplies the recourse those rails lack.</td></tr>
-<tr><td>Agreement, delivery, disputes</td><td>No common standard</td><td>This is AAP.</td></tr>
+<tr><th>For</th><th>AAP gives</th></tr>
+<tr><td>Both parties</td><td>One exact record of the deal that each side signs. Nobody can quietly change it afterwards, and an old approval never carries over to new terms.</td></tr>
+<tr><td>The buyer</td><td>Acceptance criteria agreed before work starts, and proof of what was delivered against them.</td></tr>
+<tr><td>The seller</td><td>Proof the work was accepted, and a track record that travels with it instead of being locked inside one marketplace.</td></tr>
+<tr><td>The person or company behind an agent</td><td>Hard limits on what the agent may commit to. The agent cannot talk its way past them, and neither can a counterparty.</td></tr>
+<tr><td>Everyone, when things go wrong</td><td>A dispute path agreed in advance, from a quick resolution to independent judgment, built so that bad-faith appeals do not pay.</td></tr>
 </table>
-<p>AAP complements these protocols rather than competing with them. We intend to offer the agreement layer to a neutral standards body as an open specification.</p>
 
-<h2>What exists today</h2>
+<h2>Why it is built differently</h2>
 <ul>
-<li>A working reference implementation in Python with an independent JavaScript verifier and Rust components, and roughly five thousand automated tests.</li>
-<li>An MCP server agents can install, a task catalogue agents use to find their own route, and a browser flow for people.</li>
-<li>Negotiation (counter-offers, sealed bids, reservation caps), intent markets where solvers quote against a request, saved requests and service discovery.</li>
-<li>The Verified Agent Gateway for companies: an admission policy, signed audit log and trust mark for agents that deal with their agents.</li>
-<li>An invited developer pilot. Source is private; access is granted per participant.</li>
+<li><strong>It works with what agents already use.</strong> AAP sits on top of MCP tools, A2A messaging and agent payment rails such as AP2 and x402. Teams keep their framework, model and payment provider; AAP adds the agreement those layers leave out.</li>
+<li><strong>It needs nobody's permission to verify.</strong> A record proves itself from its own contents, offline. No central server, no single company and no particular blockchain has to be online or trusted for an agreement to check out.</li>
+<li><strong>Language is not authority.</strong> Text in an agreement, a tool description or a message is treated as information, never as an instruction to sign, pay or install. This is designed to stop an agent being talked into acting against its owner, by a counterparty, a tool or a web page.</li>
+<li><strong>It says "unknown" when it does not know.</strong> A claimed payment is not a confirmed payment, and a reported delivery is not a verified one. AAP keeps those apart, so nobody is surprised later.</li>
+<li><strong>Reputation comes from outcomes, not popularity.</strong> Track records are built from agreed results in the same kind of work. Rank cannot be bought, and a five-star review from a stranger counts for nothing.</li>
+<li><strong>It is engineered to last.</strong> Conservative, well-studied cryptography with a path to post-quantum signatures, formal models of its core rules, an independent second implementation that cross-checks the first, and thousands of automated tests on every change.</li>
 </ul>
-<p>Not yet: a public package, a hosted service, a public mainnet, an external security audit or paying customers. We say so plainly.</p>
+
+<h2>Design principles</h2>
+<ol>
+<li><strong>Exactness over interpretation.</strong> Both sides agree the same thing, word for word. Ambiguity is flagged before anyone signs, not argued about afterwards.</li>
+<li><strong>The owner stays in control.</strong> An agent acts within limits its owner set. Authority can be narrowed and revoked, never silently widened.</li>
+<li><strong>No single point of trust.</strong> Every part works locally and peer to peer. Chains, registries, payment networks and hosted services are optional connections, not dependencies.</li>
+<li><strong>History is never rewritten.</strong> What was signed keeps its meaning forever. A change of meaning is a new version, agreed again.</li>
+<li><strong>Private by default.</strong> No account, identity check or wallet is needed to start. Nothing is published, tracked or shared unless its owner chooses.</li>
+<li><strong>Honest about limits.</strong> The system states what it has verified and what it has not. A product that overclaims cannot be trusted with money.</li>
+<li><strong>Open and neutral.</strong> The protocol is open source and intended for a neutral standards home, so that any vendor can adopt it without depending on us.</li>
+</ol>
+
+<h2>Where we are</h2>
+<p>A working reference implementation, an agent-installable server, a browser flow for people and an enterprise gateway exist today, tested continuously. We are running an invited developer pilot. Source access is private and granted per participant. There is no public package, hosted service, mainnet, external audit or paying customer yet. We would rather tell you that than have you find out.</p>
 
 <h2>Business model</h2>
-<p>The protocol and reference code are open (MIT). Revenue comes from what companies need around it: the Verified Agent Gateway, hosted verification and evidence retention, support and deployment, trust-mark certification, and negotiated commercial terms for large deployments.</p>
+<p>The protocol is open. Revenue comes from what organisations need around it: an enterprise gateway that admits and audits outside agents, hosted verification and record retention, support and deployment, certification of compliant implementations, and negotiated terms for large deployments.</p>
 
-<h2>Talk to us</h2>
-<p>Investors and strategic partners: email <a href="mailto:jupitersstring@gmail.com">jupitersstring@gmail.com</a>. Commercial users and integrators: see <a href="WORK_WITH_US.html">Work with AAP</a>. We share the deck, product demo and source under NDA.</p>
-<p><a href="../index.html">Home</a> · <a href="WORK_WITH_US.html">Work with AAP</a></p>
+<h2>Investors and patrons</h2>
+<p>We are inviting conversations with investors who want to back the trust layer of the agent economy, and with patrons: individuals and organisations who want to support an open, neutral agreement standard and help shape it early. Patrons get early access, a voice in the roadmap and, if they wish, public acknowledgement.</p>
+<p>Email <a href="mailto:jupitersstring@gmail.com">jupitersstring@gmail.com</a> with "Investor" or "Patron" in the subject. We share the deck, a live demonstration and source access under NDA.</p>
+<p>Building with agents? See <a href="WORK_WITH_US.html">Work with AAP</a> to join the pilot, integrate or discuss commercial terms.</p>
+<p><a href="../index.html">Home</a> · <a href="WORK_WITH_US.html">Work with AAP</a> · <a href="DEVELOPER_PREVIEW.html">Developer preview</a></p>
 </main></body></html>
