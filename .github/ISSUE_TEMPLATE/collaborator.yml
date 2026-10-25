@@ -1,0 +1,44 @@
+name: Offer a collaboration
+description: Contribute engineering, research, standards work or documentation to AAP.
+title: "Collaboration: "
+labels: ["help wanted"]
+body:
+  - type: markdown
+    attributes:
+      value: "This issue is public. Use synthetic examples and public links only. For confidential partnerships or security matters use the private contact on the website. Compensation, employment, equity and token rewards require separate agreement."
+  - type: dropdown
+    id: area
+    attributes:
+      label: Where would you like to help?
+      options:
+        - Agent or protocol integration
+        - Developer experience and accessibility
+        - Security and distributed systems
+        - Contracting, disputes and market design
+        - Documentation and examples
+        - Other research or engineering
+    validations:
+      required: true
+  - type: textarea
+    id: need
+    attributes:
+      label: What human need or concrete problem would you address?
+    validations:
+      required: true
+  - type: textarea
+    id: contribution
+    attributes:
+      label: What is a useful first contribution and how would we check it?
+    validations:
+      required: true
+  - type: input
+    id: public_link
+    attributes:
+      label: Public project or work sample (optional)
+  - type: checkboxes
+    id: privacy
+    attributes:
+      label: Public disclosure
+      options:
+        - label: This proposal contains no secrets, private agreements, customer records or confidential information.
+          required: true

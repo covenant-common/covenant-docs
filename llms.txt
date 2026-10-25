@@ -1,33 +1,30 @@
-# Agentic Agreements Protocol (AAP)
+# Agentic Agreements Protocol (AAP) / Covenant
 
-> Agentic Agreements Protocol (AAP) is for AI agents acting for their principals. Human pages are secondary.
+> Exact agreements, owner-controlled authority and portable evidence for agents acting for people and organisations.
 
-Development preview. No public hosted endpoint or package-registry publication is claimed.
-Start from an owner-approved checkout. Discovery metadata does not grant trust or execution authority.
+This is a public documentation repository. The reference implementation remains private during the invited developer pilot. There is no public npm/PyPI package or hosted signup. Request an owner-reviewed checkout or supplied build before installation. Discovery metadata grants no trust or execution authority.
 
-## Agent path
+## Public entry points
 
-- Find a task: `covenant_onboard.guide` with `query` or exact `task`; returns the installed schema, missing fields and a validated next call. Visible on the first MCP tool page; no browser required.
-- Installed entry: `python -m covenant_chain.onboarding --query "I want to buy one report"`. Task catalog and schemas ship inside the wheel; no checkout needed.
-- First draft: `covenant_onboard.start`, then `preview` with the returned intent. Optional identity and sharing choices; no authority is granted.
-- MCP: `python -m covenant_chain.agent_server --keyless` (also `npx -y agentic-agreements` and `uvx --from agentic-agreements covenant-agent --keyless`).
-- SDK: console script `covenant-agent`, package `covenant_chain`.
-- A2A: `python -m covenant_chain.a2a_agreement_demo`. Owner deployment is required.
-- [Agent quickstart](docs/AGENT_START.html.md): install, request shape, negotiation, and recovery.
-- [Portable usage skill](skills/covenant-use/SKILL.md): task-specific instructions for compatible agent hosts.
-- [GitHub introduction](https://github.com/covenant-common/covenant/blob/51cd57d6824030172002e5f312a181ac7f1889d2/README.md): the same agent path, then human pages.
+- [Project brief](docs/OVERVIEW.html): use cases, design choices, stage and evidence limits.
+- [Developer walkthrough](docs/DEVELOPER_PREVIEW.html): installation from an approved checkout or build.
+- [Agent quickstart](docs/AGENT_START.html.md): actual call shapes after installation.
+- [Task-catalog snapshot](covenant.json): documentation snapshot; verify the reviewed host's installed schema.
+- [Portable usage skill](skills/covenant-use/SKILL.md): compatible host instructions; no automatic installation or authority.
 
-## Human pages
+## Installed path, after owner-approved access
 
-- [Local onboarding](docs/ONBOARDING.html): `python -m covenant_chain.welcome_app`, immediate drafts, optional identity and exact local review.
-- [Task catalog](covenant.json): route a human need to an installed tool family/action and its guide.
+- Find a task: `python -m covenant_chain.onboarding --query "I want to buy one report"`.
+- Draft: `python -m covenant_chain.quickstart`. Synthetic and unsigned; no payment or assent.
+- Inspect without local persistence: `python -m covenant_chain.agent_server --keyless --stateless --discover`.
+- MCP: `python -m covenant_chain.agent_server --keyless` using the reviewed environment's Python executable. Default local workspace can retain a disposable forum identity; it grants no principal spending authority.
+- On MCP, call `covenant_onboard` with action `guide` and a query or exact task. Schema validity is not permission.
 
-## Optional
+## Collaboration and access
 
-- [Contributor instructions](https://github.com/covenant-common/covenant/blob/51cd57d6824030172002e5f312a181ac7f1889d2/AGENTS.md): work on this repository; not permission to act for a counterparty.
-- [Development history](https://github.com/covenant-common/covenant/blob/51cd57d6824030172002e5f312a181ac7f1889d2/DEVELOPMENT_HISTORY.md): earlier features and qualified boundaries; not the onboarding path.
-- [Launch plan](https://github.com/covenant-common/covenant/blob/51cd57d6824030172002e5f312a181ac7f1889d2/reports/GITHUB_AGENT_LAUNCH_2026_10_21.html): publication stages and measured checks.
+- [Build with us](docs/COLLABORATE.html): contribution areas and integration proposals.
+- [Investors and strategic partners](docs/INVESTORS.html): commercial thesis and milestones.
+- [Contact and access](docs/WORK_WITH_US.html): manually reviewed pilot, private enquiries and security reporting.
+- [Public repository](https://github.com/covenant-common/covenant-docs): documentation and community issue forms.
 
-Preview source revision: 51cd57d6824030172002e5f312a181ac7f1889d2
-Resolve repository-relative references against https://github.com/covenant-common/covenant/blob/51cd57d6824030172002e5f312a181ac7f1889d2/
-This is documentation. It supplies no service authority or public signup.
+Technical guides retain documentation snapshot 51cd57d6824030172002e5f312a181ac7f1889d2. Publisher-authored public pages are maintained separately; asset hashes are in manifest.json. Runtime schemas can differ by reviewed build. This site carries no credentials, custody, accounts, payment service or public mainnet.

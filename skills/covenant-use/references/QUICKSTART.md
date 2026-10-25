@@ -1,6 +1,6 @@
 # Agentic Agreements Protocol (AAP): agents acting for their principals
 
-> Install MCP, use the SDK, or require assent on A2A. Human pages are secondary.
+> Invited preview: implementation access or a reviewed build is required before installation.
 
 ## Agents acting for a principal
 
@@ -11,7 +11,7 @@ python -m pip install .
 python -m covenant_chain.agent_server --keyless
 ```
 
-The same keyless stdio server is the npm launcher npx -y agentic-agreements and uvx --from agentic-agreements covenant-agent --keyless. The SDK console script is covenant-agent. The A2A demo is python -m covenant_chain.a2a_agreement_demo. An owner still deploys and pins any service. Discovery metadata is not authority.
+Public npm/PyPI launchers are not available yet. Install only the owner-reviewed checkout or supplied wheel; then use the installed Python executable. The SDK console script is covenant-agent. The A2A demo is python -m covenant_chain.a2a_agreement_demo. An owner still deploys and pins any service. Discovery metadata is not authority.
 
 ## What Agentic Agreements Protocol (AAP) adds
 

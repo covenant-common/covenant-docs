@@ -11,11 +11,6 @@
       "covenant_chain.agent_server",
       "--keyless"
     ],
-    "npm": [
-      "npx",
-      "-y",
-      "agentic-agreements"
-    ],
     "onboarding": {
       "action": "start",
       "parameters": {},
@@ -28,14 +23,7 @@
       "action": "guide",
       "parameters": {},
       "tool": "covenant_onboard"
-    },
-    "uvx": [
-      "uvx",
-      "--from",
-      "agentic-agreements",
-      "covenant-agent",
-      "--keyless"
-    ]
+    }
   },
   "audience": "agents_acting_for_principals",
   "discovery_is_authority": false,
@@ -152,6 +140,12 @@
   },
   "maturity": "DEVELOPMENT_PREVIEW",
   "name": "Agentic Agreements Protocol (AAP)",
+  "public_distribution": {
+    "access_url": "https://covenant-common.github.io/covenant-docs/docs/WORK_WITH_US.html",
+    "public_package_registry_available": false,
+    "requires": "OWNER_REVIEWED_CHECKOUT_OR_BUILD",
+    "status": "INVITED_PREVIEW"
+  },
   "routes": [
     {
       "action": "start",
