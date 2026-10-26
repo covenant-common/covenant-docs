@@ -8,9 +8,10 @@ import xml.etree.ElementTree as ET
 ROOT=Path(__file__).resolve().parents[1]
 BASE='https://covenant-common.github.io/covenant-docs'
 class Page(HTMLParser):
-    def __init__(self):super().__init__();self.links=[];self.meta={};self.canonical=[];self.scripts=[];self.current=None;self.main=0;self.title=False;self.titles=[]
+    def __init__(self):super().__init__();self.links=[];self.meta={};self.canonical=[];self.scripts=[];self.current=None;self.main=0;self.title=False;self.titles=[];self.ids=[]
     def handle_starttag(self,tag,attrs):
         a=dict(attrs)
+        if a.get('id'):self.ids.append(a['id'])
         if tag=='main':self.main+=1
         if tag=='title':self.title=True
         if tag=='meta':self.meta[a.get('name',a.get('property',''))]=a.get('content','')
@@ -64,6 +65,21 @@ def check():
             for key in ('og:title','og:description','og:url','og:image','twitter:card'):
                 if not page.meta.get(key):errors.append('Missing '+key+': '+name)
             if page.meta.get('og:url')!=expected_url:errors.append('Share URL: '+name)
+    # A surviving URL can still send visitors to the wrong or a missing step.
+    for name,page in pages.items():
+        if len(page.ids)!=len(set(page.ids)):errors.append('Duplicate page anchors: '+name)
+        for href in page.links:
+            u=urlsplit(href)
+            if u.scheme or not u.fragment:continue
+            target=((ROOT/name).parent/unquote(u.path)).resolve() if u.path else ROOT/name
+            relative=target.relative_to(ROOT).as_posix() if ROOT in target.parents else None
+            if relative in pages and unquote(u.fragment) not in pages[relative].ids:
+                errors.append('Missing page anchor: '+name+' -> '+href)
+    for route in json.loads((ROOT/'covenant.json').read_text()).get('routes',[]):
+        guide=route.get('guide','');u=urlsplit(guide)
+        if u.scheme:continue
+        if u.path not in pages or (u.fragment and unquote(u.fragment) not in pages[u.path].ids):
+            errors.append('Missing catalog guide: '+str(route.get('id'))+' -> '+guide)
     sitemap=ET.parse(ROOT/'sitemap.xml')
     urls=[node.text for node in sitemap.findall('.//{http://www.sitemaps.org/schemas/sitemap/0.9}loc')]
     wanted={BASE+'/' if p=='index.html' else BASE+'/'+p for p in pages if not p.startswith('docs/technical/')}

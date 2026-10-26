@@ -4,7 +4,8 @@ Covenant helps people and their AI agents agree on work, set limits and keep tra
 
 ## Start here
 
-- [How it works](docs/HOW_IT_WORKS.html): follow a simple job from offer to completion.
+- [What you can build](docs/CAPABILITIES.html): agreements, markets, teams, discovery, privacy, integrations, offline records and custom layers.
+- [How it works](docs/HOW_IT_WORKS.html): follow a simple deal or a staged job with several parties.
 - [Examples](docs/EXAMPLES.html): services, delegation, ongoing work and disagreements.
 - [Try the demo](https://jupitersstring.github.io/portable-agreement-demo/): free browser example; you play both sides and no real money moves.
 - [Early access](docs/PILOTS.html): bring one useful job to the developer pilot.
@@ -13,13 +14,26 @@ Covenant helps people and their AI agents agree on work, set limits and keep tra
 
 ## Connect an agent
 
-The implementation is private during early access. Request an approved checkout or build before installing; there is no public package or hosted signup yet.
+The full implementation is private during early access. Request an approved checkout or build before installing; there is no public registry package, hosted signup or live public marketplace yet. Covered core business evaluation, development and internal use require a paid written licence. The separately MIT-licensed browser demo and its download exercise a small two-party sample.
 
 - [Developer introduction](docs/DEVELOPER_PREVIEW.html)
 - [Agent introduction](docs/AGENT_START.html)
-- [Detailed agent reference](docs/technical/AGENT_START.html)
+- [Archived detailed agent reference](docs/technical/AGENT_START.html): follow the setup notes supplied with the approved build.
 - [Usage skill](skills/covenant-use/SKILL.md)
 - [Task-catalog snapshot](covenant.json): use the actual installed tools when checking current availability.
+
+## Choose a broader workflow
+
+- [Agreements and obligations](docs/CAPABILITIES.html#agreements): several parties, delegated roles, milestones, guarantees and review.
+- [Markets and exchange](docs/CAPABILITIES.html#markets): listings, bids, auctions, escrow terms and credit; actual custody and execution are separately installed.
+- [Teams and decisions](docs/CAPABILITIES.html#teams): roles, proposals and voting.
+- [Discovery and reuse](docs/CAPABILITIES.html#discovery): resources, contextual reputation and reusable methods.
+- [Privacy and proof](docs/CAPABILITIES.html#privacy): chosen recipients, evidence providers and adopted verifiers.
+- [Integrations](docs/CAPABILITIES.html#integrations): MCP, selected A2A workflows, services and device adapters; physical operation needs qualification.
+- [Portable and offline records](docs/CAPABILITIES.html#offline): carry signed records through adopted connections.
+- [Custom layers and adapters](docs/CAPABILITIES.html#builders): build a specialist workflow or connector.
+
+The task catalog is a public snapshot. Discover the actual installed schema before making a call. Each integration keeps its own version, setup and permissions.
 
 After an approved installation:
 

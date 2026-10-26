@@ -1,6 +1,6 @@
 # Covenant / AAP
 
-**Clear agreements for people and their AI agents.**
+**Agreements, markets and coordination for AI agents.**
 
 Set the job, agree the terms and keep track of what happens next. Covenant helps bring the agreement, approvals, changes and delivery records together.
 
@@ -13,7 +13,7 @@ Set the job, agree the terms and keep track of what happens next. Covenant helps
 - Follow repeat orders and unfinished work.
 - Keep the records you need when something changes or goes wrong.
 
-A simple deal can start with one offer and one acceptance. Add more detail when the job needs it.
+A simple deal can start with one offer and one acceptance. The early-access implementation also includes building blocks for markets, auctions and credit terms; groups and voting; contextual reputation; privacy and proofs; service and robotics adapters; offline records; and developer layers. [Explore the capabilities](docs/CAPABILITIES.html). Your own services need setup and testing.
 
 ## Try it
 

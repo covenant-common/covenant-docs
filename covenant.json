@@ -30,7 +30,9 @@
   "documents": {
     "explainer": "docs/AGENT_START.html",
     "skill": "skills/covenant-use/SKILL.md",
-    "start": "docs/AGENT_START.html.md"
+    "start": "docs/AGENT_START.html.md",
+    "capabilities": "docs/CAPABILITIES.html",
+    "developer_setup": "docs/DEVELOPER_PREVIEW.html"
   },
   "expected_first_result": {
     "automatic_assent": false,
@@ -49,7 +51,7 @@
     "a2a": {
       "deployment": "OWNER_DEPLOYED_SERVICE_REQUIRED",
       "discovery_path": "/.well-known/agent-card.json",
-      "guide": "docs/HOW_IT_WORKS.html#section_9"
+      "guide": "docs/CAPABILITIES.html#integrations"
     },
     "bilateral_work_orders": {
       "adoption": "OWNER_CONFIG_AND_EXACT_PARTY_ASSENT_REQUIRED",
@@ -142,7 +144,11 @@
     "access_url": "https://covenant-common.github.io/covenant-docs/docs/WORK_WITH_US.html",
     "public_package_registry_available": false,
     "requires": "OWNER_REVIEWED_CHECKOUT_OR_BUILD",
-    "status": "INVITED_PREVIEW"
+    "status": "INVITED_PREVIEW",
+    "licensing_guide": "docs/FAQ.html#licensing",
+    "covered_core_commercial_use": "PAID_WRITTEN_LICENCE_REQUIRED_INCLUDING_BUSINESS_EVALUATION_DEVELOPMENT_AND_INTERNAL_USE",
+    "standalone_demo": "https://jupitersstring.github.io/portable-agreement-demo/",
+    "standalone_demo_licence": "MIT"
   },
   "routes": [
     {
@@ -292,7 +298,7 @@
     {
       "action": "describe",
       "boundary": "Complete schemas and synthetic examples only. Exact module assent, current authority, collateral custody and execution remain separate.",
-      "guide": "docs/HOW_IT_WORKS.html#section_3",
+      "guide": "docs/CAPABILITIES.html#agreements",
       "id": "advanced-contract",
       "keywords": [
         "guarantor",
@@ -317,7 +323,7 @@
     {
       "action": "counter",
       "boundary": "Use complete selected replacement fields; changed terms require fresh assent.",
-      "guide": "docs/HOW_IT_WORKS.html#section_5",
+      "guide": "docs/CAPABILITIES.html#agreements",
       "id": "negotiate",
       "keywords": [
         "counteroffer",
@@ -344,7 +350,7 @@
     {
       "action": "simple",
       "boundary": "Drafting is keyless; prepare the meaning closure and review every required role assent.",
-      "guide": "docs/HOW_IT_WORKS.html#section_3",
+      "guide": "docs/CAPABILITIES.html#agreements",
       "id": "simple-agreement",
       "keywords": [
         "promise",
@@ -370,7 +376,7 @@
     {
       "action": "pack",
       "boundary": "Commit exact source bytes; adopting semantics, authority and execution is separate.",
-      "guide": "docs/HOW_IT_WORKS.html#section_3",
+      "guide": "docs/CAPABILITIES.html#agreements",
       "id": "external-draft",
       "keywords": [
         "file",
@@ -395,7 +401,7 @@
     {
       "action": "case",
       "boundary": "A case joins evidence; arbitration requires the separately adopted procedure and authority.",
-      "guide": "docs/HOW_IT_WORKS.html#section_7",
+      "guide": "docs/CAPABILITIES.html#agreements",
       "id": "review-dispute",
       "keywords": [
         "dispute",
@@ -422,7 +428,7 @@
     {
       "action": "draft",
       "boundary": "Local signing/custody uses the owner CLI. Delivery is not payment finality.",
-      "guide": "docs/HOW_IT_WORKS.html#section_12",
+      "guide": "docs/CAPABILITIES.html#offline",
       "id": "offline",
       "keywords": [
         "offline",
@@ -453,7 +459,7 @@
     {
       "action": "spec",
       "boundary": "Owner connects and adopts each carrier. Keyless tools do not transmit; hardware and satellite service are unqualified.",
-      "guide": "docs/HOW_IT_WORKS.html#section_12",
+      "guide": "docs/CAPABILITIES.html#offline",
       "id": "connectivity",
       "keywords": [
         "BLE",
@@ -479,7 +485,7 @@
     {
       "action": "prepare_request",
       "boundary": "An owner must deploy/pin the service, agreement, current scoped grant and authenticated caller.",
-      "guide": "docs/HOW_IT_WORKS.html#section_9",
+      "guide": "docs/CAPABILITIES.html#integrations",
       "id": "a2a",
       "keywords": [
         "A2A",
@@ -504,7 +510,7 @@
     {
       "action": "draft",
       "boundary": "Keyless preparation only. Owner installs authority checks and a controller adapter; hardware/safety are unqualified.",
-      "guide": "docs/HOW_IT_WORKS.html#section_9",
+      "guide": "docs/CAPABILITIES.html#integrations",
       "id": "robotics",
       "keywords": [
         "robot",
@@ -538,7 +544,7 @@
     {
       "action": "spec",
       "boundary": "Programmes and service quotes require owner adoption; drafting creates no revenue entitlement.",
-      "guide": "docs/BUILDERS.html",
+      "guide": "docs/CAPABILITIES.html#builders",
       "id": "builder",
       "keywords": [
         "developer",
@@ -561,7 +567,7 @@
     {
       "action": "scaffold",
       "boundary": "Generated starter source is not installed or executed; owner installation is explicit.",
-      "guide": "docs/BUILDERS.html#where-an-integration-can-help",
+      "guide": "docs/CAPABILITIES.html#builders",
       "id": "extend",
       "keywords": [
         "connector",
@@ -588,7 +594,7 @@
     {
       "action": "pack",
       "boundary": "A proof envelope does not prove its statement; use a pinned installed verifier and exact assumptions.",
-      "guide": "docs/HOW_IT_WORKS.html#section_11",
+      "guide": "docs/CAPABILITIES.html#privacy",
       "id": "proof",
       "keywords": [
         "proof",
@@ -616,7 +622,7 @@
     {
       "action": "market",
       "boundary": "Market terms are drafts. Listings, custody, escrow controllers and execution require separate adoption.",
-      "guide": "docs/HOW_IT_WORKS.html#section_14",
+      "guide": "docs/CAPABILITIES.html#markets",
       "id": "market",
       "keywords": [
         "market",
@@ -643,7 +649,7 @@
     {
       "action": "prepare",
       "boundary": "Preview only. Exact field and metadata consent from all principals, owner publication and separate HTTPS hosting are required. Unlisted is public; old copies may persist.",
-      "guide": "docs/HOW_IT_WORKS.html#section_11",
+      "guide": "docs/CAPABILITIES.html#privacy",
       "id": "publish-web",
       "keywords": [
         "SEO",
@@ -675,7 +681,7 @@
     {
       "action": "create",
       "boundary": "A draft neither advances funds nor establishes collateral, creditworthiness or enforceability.",
-      "guide": "docs/HOW_IT_WORKS.html#section_14",
+      "guide": "docs/CAPABILITIES.html#markets",
       "id": "credit",
       "keywords": [
         "credit",
@@ -705,7 +711,7 @@
     {
       "action": "create",
       "boundary": "Allocation calculations do not prove bidder independence, funding, deadline compliance or award authority.",
-      "guide": "docs/HOW_IT_WORKS.html#section_14",
+      "guide": "docs/CAPABILITIES.html#markets",
       "id": "auction",
       "keywords": [
         "auction",
@@ -732,7 +738,7 @@
     {
       "action": "suites",
       "boundary": "Inspect the actual suite and owner key custody. Later privacy cannot retract earlier public disclosure.",
-      "guide": "docs/HOW_IT_WORKS.html#section_11",
+      "guide": "docs/CAPABILITIES.html#privacy",
       "id": "privacy",
       "keywords": [
         "private",
@@ -756,7 +762,7 @@
     {
       "action": "search",
       "boundary": "Ranking depends on selected requirements, context and adopted seeds; it is not universal trust or world truth.",
-      "guide": "docs/HOW_IT_WORKS.html#section_10",
+      "guide": "docs/CAPABILITIES.html#discovery",
       "id": "find-and-rank",
       "keywords": [
         "discovery",
