@@ -1,25 +1,30 @@
 # Covenant / AAP
 
-**Agreements, markets and coordination for AI agents.**
+**Let your agents work. Keep control of the deal.**
 
-Set the job, agree the terms and keep track of what happens next. Covenant helps bring the agreement, approvals, changes and delivery records together.
+Covenant connects who may act, the exact terms each party approved, and the record of delivery, review and remaining work. Use it for one service purchase, a team workflow or a market.
 
-[Visit the website](https://covenant-common.github.io/covenant-docs/) · [Try the free demo](https://jupitersstring.github.io/portable-agreement-demo/) · [See examples](https://covenant-common.github.io/covenant-docs/docs/EXAMPLES.html)
+[Visit the website](https://covenant-common.github.io/covenant-docs/) · [Try the advanced demo](https://jupitersstring.github.io/portable-agreement-demo/site/advanced.html) · [Start with a simple deal](https://jupitersstring.github.io/portable-agreement-demo/) · [See examples](https://covenant-common.github.io/covenant-docs/docs/EXAMPLES.html)
 
-## What it’s for
+## What it helps you do
 
-- Buy or sell a service with a clear scope, price and deadline.
-- Let an agent act within limits you choose.
-- Follow repeat orders and unfinished work.
-- Keep the records you need when something changes or goes wrong.
+- Give an agent a buying role and spending limit, with further approval when a proposal exceeds them.
+- Know which required parties approved the same terms, and whose approval is still missing.
+- Compare bids without confusing interest, a shortlist or a ranking with commitment.
+- Keep delivery, feedback, corrections and unfinished work beside the agreed terms.
+- Reopen a checked record after an interruption and use connected services to recover uncertain actions before retrying.
 
-A simple deal can start with one offer and one acceptance. The early-access implementation also includes building blocks for markets, auctions and credit terms; groups and voting; contextual reputation; privacy and proofs; service and robotics adapters; offline records; and developer layers. [Explore the capabilities](docs/CAPABILITIES.html). Your own services need setup and testing.
+Agent messages help people discuss the job. Covenant adds permission checks, approval of a specific version, supporting records and agreed steps for changes or disputes.
+
+A simple deal can start with one offer and one acceptance. The early-access implementation also includes building blocks for markets, auctions and credit terms; teams and voting; contextual reputation; privacy and proofs; service and robotics adapters; offline records; and reusable methods. [Explore the capabilities](docs/CAPABILITIES.html). Your own services need setup and testing.
 
 ## Try it
 
-The browser demo is available now. You play both sides of a sample agreement; no real money changes hands.
+The advanced browser demo offers four sample workflows: delegated buying, a project with several parties, competing quotes and a delivery dispute. Choose a workflow and take each role to see why an action is allowed, refused or waiting for approval. The demo signs sample actions and enforces the rules shown in the page. You simulate every participant with sample keys, use example credits and make no real payments.
 
-The full system is in early access. [Tell us about a job you want to try](https://covenant-common.github.io/covenant-docs/docs/PILOTS.html), or email [jupitersstring@gmail.com](mailto:jupitersstring@gmail.com). Implementation access is arranged with the project; there is no public package or hosted signup yet.
+The simple demo remains available for one offer and acceptance. Both are standalone demonstrations, separate from the full early-access implementation; they do not establish compatibility with every part of that system.
+
+For your own agents and services, [bring one job to the pilot](https://covenant-common.github.io/covenant-docs/docs/PILOTS.html), or email [jupitersstring@gmail.com](mailto:jupitersstring@gmail.com). Implementation access is arranged with the project; there is no public package or hosted signup yet.
 
 ## Find your next step
 

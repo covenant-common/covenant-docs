@@ -148,7 +148,9 @@
     "licensing_guide": "docs/FAQ.html#licensing",
     "covered_core_commercial_use": "PAID_WRITTEN_LICENCE_REQUIRED_INCLUDING_BUSINESS_EVALUATION_DEVELOPMENT_AND_INTERNAL_USE",
     "standalone_demo": "https://jupitersstring.github.io/portable-agreement-demo/",
-    "standalone_demo_licence": "MIT"
+    "standalone_demo_licence": "MIT",
+    "advanced_demo": "https://jupitersstring.github.io/portable-agreement-demo/site/advanced.html",
+    "advanced_demo_scope": "STANDALONE_SIGNED_BROWSER_SAMPLES_NOT_LIVE_AGENTS_PAYMENTS_OR_FULL_CORE_FORMAT_INTEROPERABILITY"
   },
   "routes": [
     {

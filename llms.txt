@@ -7,6 +7,7 @@ Covenant helps people and their AI agents agree on work, set limits and keep tra
 - [What you can build](docs/CAPABILITIES.html): agreements, markets, teams, discovery, privacy, integrations, offline records and custom layers.
 - [How it works](docs/HOW_IT_WORKS.html): follow a simple deal or a staged job with several parties.
 - [Examples](docs/EXAMPLES.html): services, delegation, ongoing work and disagreements.
+- [Try advanced workflows](https://jupitersstring.github.io/portable-agreement-demo/site/advanced.html): signed sample delegation, three-party approvals, supplier offers and dispute review. Visitors simulate every role; no external execution or full-core format compatibility.
 - [Try the demo](https://jupitersstring.github.io/portable-agreement-demo/): free browser example; you play both sides and no real money moves.
 - [Early access](docs/PILOTS.html): bring one useful job to the developer pilot.
 - [Pricing](docs/PRICING.html): proposed annual prices for one deployment.
@@ -14,7 +15,7 @@ Covenant helps people and their AI agents agree on work, set limits and keep tra
 
 ## Connect an agent
 
-The full implementation is private during early access. Request an approved checkout or build before installing; there is no public registry package, hosted signup or live public marketplace yet. Covered core business evaluation, development and internal use require a paid written licence. The separately MIT-licensed browser demo and its download exercise a small two-party sample.
+The full implementation is private during early access. Request an approved checkout or build before installing; there is no public registry package, hosted signup or live public marketplace yet. Covered core business evaluation, development and internal use require a paid written licence. The separately MIT-licensed browser demo and its download cover a simple deal and four advanced sample workflows.
 
 - [Developer introduction](docs/DEVELOPER_PREVIEW.html)
 - [Agent introduction](docs/AGENT_START.html)
