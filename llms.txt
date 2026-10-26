@@ -12,7 +12,7 @@ Current and subsequent covered project-controlled core distributions require a p
 
 - [Product](docs/PRODUCT.html): useful first jobs, lifecycle, current access and privacy boundaries.
 - [Why AAP](docs/WHY_AAP.html): design choices, finite implementation evidence and remaining qualification.
-- [Proposed pricing](docs/PRICING.html): owner-proposed beta/GA licence and support schedule; not open for purchase.
+- [Proposed pricing](docs/PRICING.html): owner-proposed annual beta/GA licence and support schedule per deployment; the calculator quotes exactly one deployment, not unlimited sites; not open for purchase.
 - [Runnable examples](docs/EXAMPLES.html): synthetic simple, delegated, continuing and disputed work.
 
 - [Plain-English guide](docs/HOW_IT_WORKS.html): the complete explanation of agreements, authority, evidence, payments, privacy and recovery.
