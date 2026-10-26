@@ -53,11 +53,9 @@ Existing public keys are not proof of control. Local identity creation is a sepa
 
 ## First useful result
 
-Use Python 3.11 or later on a POSIX system for the complete reference runtime. Access to this preview repository is currently required. Install from a checkout/revision reviewed by your owner. The commands below name the current integration branch; a branch moves. A public release should provide an immutable reviewed commit or tag.
+Use Python 3.11 or later on a POSIX system for the complete reference runtime. Request access to an owner-reviewed checkout or supplied build. Confirm the exact revision with your owner, open a terminal in that checkout, then run the commands below.
 
 ```sh
-git clone --branch codex/mainnet-launch-readiness https://github.com/covenant-common/covenant.git
-cd covenant
 python3 -m venv .venv
 . .venv/bin/activate
 python -m pip install .
@@ -122,7 +120,7 @@ A2A and MCP are integration interfaces. No hosted public endpoint is supplied by
 
 Find the installed signed-work path with covenant_onboard work, or python -m covenant_chain.onboarding --task paid-work. The read-only result includes actual five-verb schemas and the owner-invoked synthetic setup command. After explicit owner choice, python -m covenant_agent.demo_setup --directory /a/new/private/directory creates separate one-key test hosts and a funded local reference authority; it prints a key-free manifest. It neither signs an agreement nor creates real money.
 
-For a complete local purchase, delivery, dispute or partial award, use the separate five-verb work-order host. The review-dispute route only assembles an evidence review; it does not decide or settle a case. docs/BILATERAL_WORK_ORDERS_02.html includes owner provider initialization, exact decision values and an executable separate-process exchange at examples/agent_native/shared_work_order.py. A marketplace draft and a work order require their own explicit terms and assent.
+For a complete local purchase, delivery, dispute or partial award, use the separate five-verb work-order host. The review-dispute route only assembles an evidence review; it does not decide or settle a case. The [public signed-work procedure](https://covenant-common.github.io/covenant-docs/docs/BILATERAL_WORK_ORDERS_02.html) includes owner provider initialization, exact decision values and an executable example using separate processes. A marketplace draft and a work order require their own explicit terms and assent.
 
 For the five-verb bilateral work-order interface, explicitly adopt covenant-bilateral/0.2 for new agreements; see docs/BILATERAL_WORK_ORDERS_02.html. It adds dated delivery, nonce-distinct orders, appeals and partial awards. The supplied shared provider is local synthetic reference custody, not an external payment or a decentralized ledger. Historical /0.1 signatures keep their meaning.
 

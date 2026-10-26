@@ -29,8 +29,6 @@
   "discovery_is_authority": false,
   "documents": {
     "explainer": "docs/AGENT_START.html",
-    "history": "https://github.com/covenant-common/covenant/blob/51cd57d6824030172002e5f312a181ac7f1889d2/DEVELOPMENT_HISTORY.md",
-    "repository_instructions": "https://github.com/covenant-common/covenant/blob/51cd57d6824030172002e5f312a181ac7f1889d2/AGENTS.md",
     "skill": "skills/covenant-use/SKILL.md",
     "start": "docs/AGENT_START.html.md"
   },
@@ -51,7 +49,7 @@
     "a2a": {
       "deployment": "OWNER_DEPLOYED_SERVICE_REQUIRED",
       "discovery_path": "/.well-known/agent-card.json",
-      "guide": "https://github.com/covenant-common/covenant/blob/51cd57d6824030172002e5f312a181ac7f1889d2/docs/REQUIRED_A2A_AGREEMENTS.html"
+      "guide": "docs/HOW_IT_WORKS.html#section_9"
     },
     "bilateral_work_orders": {
       "adoption": "OWNER_CONFIG_AND_EXACT_PARTY_ASSENT_REQUIRED",
@@ -176,7 +174,7 @@
     {
       "action": "quick_trade",
       "boundary": "One preparation call; explicit buyer/seller assent and settlement remain separate.",
-      "guide": "https://github.com/covenant-common/covenant/blob/51cd57d6824030172002e5f312a181ac7f1889d2/docs/PEOPLE_JOURNEYS_056.html",
+      "guide": "docs/AGENT_START.html",
       "id": "simple-trade",
       "keywords": [
         "buy",
@@ -294,7 +292,7 @@
     {
       "action": "describe",
       "boundary": "Complete schemas and synthetic examples only. Exact module assent, current authority, collateral custody and execution remain separate.",
-      "guide": "https://github.com/covenant-common/covenant/blob/51cd57d6824030172002e5f312a181ac7f1889d2/docs/ADVANCED_AGREEMENTS.html",
+      "guide": "docs/HOW_IT_WORKS.html#section_3",
       "id": "advanced-contract",
       "keywords": [
         "guarantor",
@@ -319,7 +317,7 @@
     {
       "action": "counter",
       "boundary": "Use complete selected replacement fields; changed terms require fresh assent.",
-      "guide": "https://github.com/covenant-common/covenant/blob/51cd57d6824030172002e5f312a181ac7f1889d2/docs/PEOPLE_JOURNEYS_056.html",
+      "guide": "docs/HOW_IT_WORKS.html#section_5",
       "id": "negotiate",
       "keywords": [
         "counteroffer",
@@ -346,7 +344,7 @@
     {
       "action": "simple",
       "boundary": "Drafting is keyless; prepare the meaning closure and review every required role assent.",
-      "guide": "https://github.com/covenant-common/covenant/blob/51cd57d6824030172002e5f312a181ac7f1889d2/docs/PROGRESSIVE_AGREEMENTS_043.html",
+      "guide": "docs/HOW_IT_WORKS.html#section_3",
       "id": "simple-agreement",
       "keywords": [
         "promise",
@@ -372,7 +370,7 @@
     {
       "action": "pack",
       "boundary": "Commit exact source bytes; adopting semantics, authority and execution is separate.",
-      "guide": "https://github.com/covenant-common/covenant/blob/51cd57d6824030172002e5f312a181ac7f1889d2/docs/EXTERNAL_DRAFTS_052.html",
+      "guide": "docs/HOW_IT_WORKS.html#section_3",
       "id": "external-draft",
       "keywords": [
         "file",
@@ -397,7 +395,7 @@
     {
       "action": "case",
       "boundary": "A case joins evidence; arbitration requires the separately adopted procedure and authority.",
-      "guide": "https://github.com/covenant-common/covenant/blob/51cd57d6824030172002e5f312a181ac7f1889d2/docs/PEOPLE_JOURNEYS_056.html",
+      "guide": "docs/HOW_IT_WORKS.html#section_7",
       "id": "review-dispute",
       "keywords": [
         "dispute",
@@ -424,7 +422,7 @@
     {
       "action": "draft",
       "boundary": "Local signing/custody uses the owner CLI. Delivery is not payment finality.",
-      "guide": "https://github.com/covenant-common/covenant/blob/51cd57d6824030172002e5f312a181ac7f1889d2/docs/OFFLINE_APPLICATION.html",
+      "guide": "docs/HOW_IT_WORKS.html#section_12",
       "id": "offline",
       "keywords": [
         "offline",
@@ -455,7 +453,7 @@
     {
       "action": "spec",
       "boundary": "Owner connects and adopts each carrier. Keyless tools do not transmit; hardware and satellite service are unqualified.",
-      "guide": "https://github.com/covenant-common/covenant/blob/51cd57d6824030172002e5f312a181ac7f1889d2/docs/INTERMITTENT_CONNECTIVITY.html",
+      "guide": "docs/HOW_IT_WORKS.html#section_12",
       "id": "connectivity",
       "keywords": [
         "BLE",
@@ -481,7 +479,7 @@
     {
       "action": "prepare_request",
       "boundary": "An owner must deploy/pin the service, agreement, current scoped grant and authenticated caller.",
-      "guide": "https://github.com/covenant-common/covenant/blob/51cd57d6824030172002e5f312a181ac7f1889d2/docs/REQUIRED_A2A_AGREEMENTS.html",
+      "guide": "docs/HOW_IT_WORKS.html#section_9",
       "id": "a2a",
       "keywords": [
         "A2A",
@@ -506,7 +504,7 @@
     {
       "action": "draft",
       "boundary": "Keyless preparation only. Owner installs authority checks and a controller adapter; hardware/safety are unqualified.",
-      "guide": "https://github.com/covenant-common/covenant/blob/51cd57d6824030172002e5f312a181ac7f1889d2/docs/ROBOTICS.html",
+      "guide": "docs/HOW_IT_WORKS.html#section_9",
       "id": "robotics",
       "keywords": [
         "robot",
@@ -540,7 +538,7 @@
     {
       "action": "spec",
       "boundary": "Programmes and service quotes require owner adoption; drafting creates no revenue entitlement.",
-      "guide": "https://github.com/covenant-common/covenant/blob/51cd57d6824030172002e5f312a181ac7f1889d2/docs/BUILDER_PROGRAMME.html",
+      "guide": "docs/BUILDERS.html",
       "id": "builder",
       "keywords": [
         "developer",
@@ -563,7 +561,7 @@
     {
       "action": "scaffold",
       "boundary": "Generated starter source is not installed or executed; owner installation is explicit.",
-      "guide": "https://github.com/covenant-common/covenant/blob/51cd57d6824030172002e5f312a181ac7f1889d2/docs/BUILDER_STANDARDS.html",
+      "guide": "docs/BUILDERS.html#where-an-integration-can-help",
       "id": "extend",
       "keywords": [
         "connector",
@@ -590,7 +588,7 @@
     {
       "action": "pack",
       "boundary": "A proof envelope does not prove its statement; use a pinned installed verifier and exact assumptions.",
-      "guide": "https://github.com/covenant-common/covenant/blob/51cd57d6824030172002e5f312a181ac7f1889d2/docs/COOPERATION_040.html",
+      "guide": "docs/HOW_IT_WORKS.html#section_11",
       "id": "proof",
       "keywords": [
         "proof",
@@ -618,7 +616,7 @@
     {
       "action": "market",
       "boundary": "Market terms are drafts. Listings, custody, escrow controllers and execution require separate adoption.",
-      "guide": "https://github.com/covenant-common/covenant/blob/51cd57d6824030172002e5f312a181ac7f1889d2/docs/MARKETPLACES_045.html",
+      "guide": "docs/HOW_IT_WORKS.html#section_14",
       "id": "market",
       "keywords": [
         "market",
@@ -645,7 +643,7 @@
     {
       "action": "prepare",
       "boundary": "Preview only. Exact field and metadata consent from all principals, owner publication and separate HTTPS hosting are required. Unlisted is public; old copies may persist.",
-      "guide": "https://github.com/covenant-common/covenant/blob/51cd57d6824030172002e5f312a181ac7f1889d2/docs/PUBLIC_WEB.html",
+      "guide": "docs/HOW_IT_WORKS.html#section_11",
       "id": "publish-web",
       "keywords": [
         "SEO",
@@ -677,7 +675,7 @@
     {
       "action": "create",
       "boundary": "A draft neither advances funds nor establishes collateral, creditworthiness or enforceability.",
-      "guide": "https://github.com/covenant-common/covenant/blob/51cd57d6824030172002e5f312a181ac7f1889d2/docs/ADVANCED_AGREEMENTS.html",
+      "guide": "docs/HOW_IT_WORKS.html#section_14",
       "id": "credit",
       "keywords": [
         "credit",
@@ -707,7 +705,7 @@
     {
       "action": "create",
       "boundary": "Allocation calculations do not prove bidder independence, funding, deadline compliance or award authority.",
-      "guide": "https://github.com/covenant-common/covenant/blob/51cd57d6824030172002e5f312a181ac7f1889d2/docs/COOPERATION_040.html",
+      "guide": "docs/HOW_IT_WORKS.html#section_14",
       "id": "auction",
       "keywords": [
         "auction",
@@ -734,7 +732,7 @@
     {
       "action": "suites",
       "boundary": "Inspect the actual suite and owner key custody. Later privacy cannot retract earlier public disclosure.",
-      "guide": "https://github.com/covenant-common/covenant/blob/51cd57d6824030172002e5f312a181ac7f1889d2/docs/COOPERATION_040.html",
+      "guide": "docs/HOW_IT_WORKS.html#section_11",
       "id": "privacy",
       "keywords": [
         "private",
@@ -758,7 +756,7 @@
     {
       "action": "search",
       "boundary": "Ranking depends on selected requirements, context and adopted seeds; it is not universal trust or world truth.",
-      "guide": "https://github.com/covenant-common/covenant/blob/51cd57d6824030172002e5f312a181ac7f1889d2/docs/COOPERATION_040.html",
+      "guide": "docs/HOW_IT_WORKS.html#section_10",
       "id": "find-and-rank",
       "keywords": [
         "discovery",
@@ -783,10 +781,7 @@
     }
   ],
   "source": {
-    "preview_branch": "codex/mainnet-launch-readiness",
-    "public_package_registry_publication": "NOT_CLAIMED",
-    "repository": "https://github.com/covenant-common/covenant",
-    "repository_visibility_observed_2026_10_21": "PRIVATE"
+    "public_package_registry_publication": "NOT_CLAIMED"
   },
   "summary": "Agentic Agreements Protocol (AAP) is for AI agents acting for their principals. Humans use the secondary pages.",
   "trust_boundary": [

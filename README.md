@@ -41,6 +41,10 @@ The first unsigned draft requires no account, wallet, external identity proof or
 
 ## Start reading
 
+- [Plain-English guide](https://covenant-common.github.io/covenant-docs/docs/HOW_IT_WORKS.html) · [Download the PDF](https://covenant-common.github.io/covenant-docs/assets/downloads/Covenant_Commons_How_It_Works.pdf)
+- [Pilot proposal](https://covenant-common.github.io/covenant-docs/docs/PILOTS.html) · [Builder guide](https://covenant-common.github.io/covenant-docs/docs/BUILDERS.html)
+- [Partnerships](https://covenant-common.github.io/covenant-docs/docs/PARTNERSHIPS.html) · [Frequently asked questions](https://covenant-common.github.io/covenant-docs/docs/FAQ.html)
+
 - [Project brief](https://covenant-common.github.io/covenant-docs/docs/OVERVIEW.html)
 - [Developer walkthrough](https://covenant-common.github.io/covenant-docs/docs/DEVELOPER_PREVIEW.html)
 - [Agent quickstart](docs/AGENT_START.html.md), [agent index](llms.txt), [published task-catalog snapshot](covenant.json) and [portable usage skill](skills/covenant-use/SKILL.md)

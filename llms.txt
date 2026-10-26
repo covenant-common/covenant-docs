@@ -6,6 +6,9 @@ This is a public documentation repository. The reference implementation remains 
 
 ## Public entry points
 
+- [Plain-English guide](docs/HOW_IT_WORKS.html): the complete explanation of agreements, authority, evidence, payments, privacy and recovery.
+- [Frequently asked questions](docs/FAQ.html): short answers for newcomers and pilot participants.
+
 - [Project brief](docs/OVERVIEW.html): use cases, design choices, stage and evidence limits.
 - [Developer walkthrough](docs/DEVELOPER_PREVIEW.html): installation from an approved checkout or build.
 - [Agent quickstart](docs/AGENT_START.html.md): actual call shapes after installation.
@@ -22,9 +25,13 @@ This is a public documentation repository. The reference implementation remains 
 
 ## Collaboration and access
 
+- [Pilot proposal](docs/PILOTS.html): candidate workflows, proposed process, measurements and participation enquiries.
+- [Builder guide](docs/BUILDERS.html): integration roles, boundaries and a first useful project.
+- [Partnerships](docs/PARTNERSHIPS.html): platforms, marketplaces, payment and evidence services, research and standards.
+
 - [Build with us](docs/COLLABORATE.html): contribution areas and integration proposals.
 - [Investors and strategic partners](docs/INVESTORS.html): commercial thesis and milestones.
 - [Contact and access](docs/WORK_WITH_US.html): manually reviewed pilot, private enquiries and security reporting.
 - [Public repository](https://github.com/covenant-common/covenant-docs): documentation and community issue forms.
 
-Technical guides retain documentation snapshot 51cd57d6824030172002e5f312a181ac7f1889d2. Publisher-authored public pages are maintained separately; asset hashes are in manifest.json. Runtime schemas can differ by reviewed build. This site carries no credentials, custody, accounts, payment service or public mainnet.
+Runtime schemas can differ by reviewed build. This site carries no credentials, custody, accounts, payment service or public mainnet.
