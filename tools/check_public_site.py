@@ -49,6 +49,12 @@ def check():
                 target=(path.parent/unquote(parsed.path)).resolve()
                 if ROOT not in target.parents or not target.is_file():errors.append('Missing/outside link: '+name+' -> '+url)
         for script in page.scripts:
+            allowed_controls={'docs/EXAMPLES.html':'../assets/example-controls.mjs',
+                              'docs/PRICING.html':'../assets/pricing-controls.mjs'}
+            if (script['type']=='module' and name in allowed_controls and
+                    script['src']==allowed_controls[name] and not script['data'].strip()):
+                if not (path.parent/script['src']).is_file():errors.append('Missing local-only controls: '+name)
+                continue
             if script['type']!='application/ld+json' or script['src']:errors.append('Unexpected executable script: '+name)
             else:
                 data=json.loads(script['data'])

@@ -6,6 +6,11 @@ This is a public documentation repository. The reference implementation remains 
 
 ## Public entry points
 
+- [Product](docs/PRODUCT.html): useful first jobs, lifecycle, current access and privacy boundaries.
+- [Why AAP](docs/WHY_AAP.html): design choices, finite implementation evidence and remaining qualification.
+- [Proposed pricing](docs/PRICING.html): owner-proposed beta/GA licence and support schedule; not open for purchase.
+- [Runnable examples](docs/EXAMPLES.html): synthetic simple, delegated, continuing and disputed work.
+
 - [Plain-English guide](docs/HOW_IT_WORKS.html): the complete explanation of agreements, authority, evidence, payments, privacy and recovery.
 - [Frequently asked questions](docs/FAQ.html): short answers for newcomers and pilot participants.
 
