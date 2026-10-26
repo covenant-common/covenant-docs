@@ -1,57 +1,22 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Build with AAP / Covenant</title><meta name="description" content="Practical integration paths for agent applications, tools, payment and evidence services, with clear authority and recovery boundaries."><meta name="robots" content="index,follow"><link rel="canonical" href="https://covenant-common.github.io/covenant-docs/docs/BUILDERS.html"><link rel="stylesheet" href="../assets/site.css"></head><body><main><nav aria-label="Main"><a href="../index.html">AAP / Covenant</a><a href="HOW_IT_WORKS.html">How it works</a><a href="EXAMPLES.html">Examples</a><a href="PILOTS.html">Pilots</a><a href="INVESTORS.html">Investors</a><a href="PARTNERSHIPS.html">Partners</a><a href="COLLABORATE.html">Build with us</a><a href="FAQ.html">FAQ</a><a href="WORK_WITH_US.html">Contact</a><a href="PRODUCT.html">Product</a><a href="WHY_AAP.html">Why AAP</a><a href="PRICING.html">Proposed pricing</a></nav><h1>Build around a clear agreement</h1><div class="actions"><a href="https://github.com/covenant-common/covenant-docs/issues/new?template=integration-partner.yml">Propose an integration</a><a href="https://github.com/covenant-common/covenant-docs/issues/new?template=collaborator.yml">Offer a contribution</a></div>
-<p>The Agentic Agreements Protocol, or AAP, gives developers a way to connect exact terms, approvals and evidence around a task. An agreement can move beyond its original conversation or application while retaining the information needed for supported checks.</p>
-<p>A useful integration starts with one question your application needs to answer: which proposal did the parties accept, may this agent perform this action, or what happened to an earlier request? These are related questions, but each needs its own evidence and authority.</p>
-<nav class="section-nav" aria-label="On this page"><p><strong>On this page</strong></p><ul><li><a href="#where-an-integration-can-help">Where an integration can help</a></li><li><a href="#work-with-existing-tools-and-payments">Work with existing tools and payments</a></li><li><a href="#capabilities-to-build-on-with-their-boundaries">Capabilities to build on, with their boundaries</a></li><li><a href="#a-first-useful-small-build">A first useful small build</a></li><li><a href="#useful-review-and-contribution-opportunities">Useful review and contribution opportunities</a></li><li><a href="#start-a-technical-conversation">Start a technical conversation</a></li></ul></nav><h2 id="where-an-integration-can-help">Where an integration can help</h2>
-<div class="table-wrap"><table>
-<thead>
-<tr>
-<th>Role</th>
-<th>What it contributes</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>Agreement interface</td>
-<td>Helps people review terms, compare revisions and approve the exact version in the relevant role</td>
-</tr>
-<tr>
-<td>Agent or service integration</td>
-<td>Connects a task to an agreement and checks the owner&#39;s permission before the selected action</td>
-</tr>
-<tr>
-<td>Delivery or payment connector</td>
-<td>Talks to an actual service, retains the request&#39;s identity and supplies observations about its outcome</td>
-</tr>
-<tr>
-<td>Evidence and review tool</td>
-<td>Presents a file, observation or judgment with its origin and limits, so the agreed reviewer can assess it</td>
-</tr>
-<tr>
-<td>Independent checking and preservation</td>
-<td>Checks supported records and keeps the terms, evidence and trust information needed for later review</td>
-</tr>
-</tbody></table></div>
-<p>The relationship between these parts matters. A valid signature authenticates particular data. Permission determines whether an actor may act. A payment observation answers a question about a payment. Combining their displays should preserve those distinctions.</p>
-<h2 id="work-with-existing-tools-and-payments">Work with existing tools and payments</h2>
-<p>AAP can sit alongside an existing model, application, delivery service or payment provider. Basic portable agreements do not require a blockchain or a project token. A particular service can still have its own charges, credentials and custody requirements.</p>
-<p>The available integration paths include local libraries and agent tool servers. MCP connects an AI application to tools; A2A supports exchanges between agents. A service can be configured to require acceptance of exact terms and current permission before carrying out a task. Its owner must choose the trusted identities, limits and executing service.</p>
-<p>Commerce tools also connect selected checkout, payment-request, mandate and receipt formats to an agreement. The named formats include ACP, UCP, MPP, AP2 and x402. Support for a particular format does not establish compatibility with every provider that uses its name. A payment mandate, a submitted instruction and a confirmed payment remain separate records.</p>
-<h2 id="capabilities-to-build-on-with-their-boundaries">Capabilities to build on, with their boundaries</h2>
-<p>Current components support exact portable documents, owner review and signing, revisions, structured service agreements, evidence review and several dispute procedures. Other components support limited delegation, repeated services, privacy, offline carriage and an optional shared ledger. These are parts to select and connect, rather than one universal workflow.</p>
-<p>The default agent interface offers a small entrance to a larger catalogue: start a task, find a capability, inspect its requirements and call the selected operation. Retrieve those requirements instead of inferring an interface from a short description.</p>
-<p>Some agreement tools require the named parties&#39; keys directly. A network permission cannot automatically substitute a representative&#39;s signature in every agreement format. Likewise, current service master agreements cover two parties; a wider organisational workflow needs explicit design and review.</p>
-<p>A connector also needs an honest recovery model. If a reply disappears, investigate the original request before issuing a replacement. When the provider cannot establish what happened, preserve the uncertainty. A local log alone cannot guarantee that a physical action happens exactly once. Owner-selected tools retain the operating-system privileges granted to them; an agreement wrapper is not a general security sandbox.</p>
-<h2 id="a-first-useful-small-build">A first useful small build</h2>
-<p>A proposed starting project is a viewer for one agreed job and its revision. Use a non-sensitive sample and keep delivery and payment outside the initial exercise.</p>
-<p>Let two participants review the same terms and supply the required approvals. Export the agreement, reopen it in another process and show which exact terms and roles the supported checks cover. Then change the price or deliverable and request fresh approvals.</p>
-<p>Keep both versions. The old signatures should still authenticate the old terms; they must not count as acceptance of the revision. A link to the earlier agreement does not reconstruct its missing contents, so retention is part of the exercise.</p>
-<p>Finally, attach a sample delivery record and show what it establishes. A received file is not necessarily satisfactory work. The interface should make missing approval, missing evidence and a conflicting observation understandable to a person.</p>
-<p>This creates a small, inspectable result. A next step could connect one owner-authorised service and test an interrupted request under that service&#39;s actual recovery rules. Each additional effect should have a clear owner and a measurable outcome.</p>
-<h2 id="useful-review-and-contribution-opportunities">Useful review and contribution opportunities</h2>
-<p>There is room for clearer agreement interfaces, narrowly scoped connectors, better explanations of evidence and stronger recovery exercises. Independent checking can test whether another implementation reaches the same result for an explicitly identified set of records. Testing should include changed content, wrong roles, stale information, missing dependencies and uncertain external outcomes where relevant.</p>
-<p>Preservation and privacy also need practical review: can a recipient obtain the information it needs without unnecessary disclosure, and can an operator restore the records and signing history needed to continue correctly? Findings are most useful when they distinguish observed behaviour, expected behaviour and the assumptions required for the claim.</p>
-<p>AAP remains a development preview. Existing tests and bounded independent checkers are useful evidence, while independent security review and qualification of the complete intended deployment remain outstanding.</p>
-<h2 id="start-a-technical-conversation">Start a technical conversation</h2>
-<p>Describe the workflow, the systems you want to connect and the exact question the integration should answer. Identify who signs, who may execute an action, who holds any funds and what the outside service can report after a timeout.</p>
-<p>Include the format or protocol you need to exchange, your intended runtime, representative non-sensitive inputs and the smallest result that would be useful. An integration discussion can then establish compatible rules, access, ownership and validation before expanding the scope.</p>
-<p class="status">Working reference implementation · Invited developer pilot · Implementation access is reviewed individually. Any trial, services or commercial terms require separate agreement.</p><footer><p>Invited developer pilot · Public documentation · Private reference implementation</p><p><a href="HOW_IT_WORKS.html">Read the guide</a> · <a href="../assets/downloads/Covenant_Commons_How_It_Works.pdf">Retained PDF</a> (<a href="FAQ.html#licensing">licensing update</a>) · <a href="WORK_WITH_US.html">Contact and access</a> · <a href="../LICENSE">MIT documentation licence</a></p><p>Read without an account. Public GitHub issues require sign-in. This static site has no accounts, payment collection, cookies or analytics.</p></footer></main></body></html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Build with AAP / Covenant</title><meta name="description" content="Add clear agreements, approvals and records to the software your customers already use. Start with one useful connection."><meta name="robots" content="index,follow"><link rel="canonical" href="https://covenant-common.github.io/covenant-docs/docs/BUILDERS.html"><link rel="stylesheet" href="../assets/site.css"></head><body><main><nav aria-label="Main"><a href="../index.html">Covenant</a><a href="../docs/PRODUCT.html">Product</a><a href="../docs/HOW_IT_WORKS.html">How it works</a><a href="../docs/EXAMPLES.html">Examples</a><a href="../docs/PRICING.html">Pricing</a><a href="../docs/WORK_WITH_US.html">Contact</a></nav><h1>Add agreements to your application.</h1><p><a href="DEVELOPER_PREVIEW.html">Connect your own agent</a> or <a href="WORK_WITH_US.html">ask for developer access</a>.</p>
+<p>AAP helps your users agree on work, approve changes and keep a record of what happened. Connect it to the tools they already use.</p>
+<div class="actions"><a href="https://github.com/covenant-common/covenant-docs/issues/new?template=integration-partner.yml">Propose an integration</a><a href="https://github.com/covenant-common/covenant-docs/issues/new?template=collaborator.yml">Offer a contribution</a></div>
+<h2 id="where-an-integration-can-help">Give your users one clear record.</h2>
+<p>For a research job, that means the brief, price, deadline, approvals and delivered report. If the brief changes or the report is late, both sides can return to the same record.</p>
+<ul><li>Show the terms before someone approves them.</li><li>Make changes easy to compare and approve.</li><li>Track work that is finished, awaiting review or still owed.</li><li>Keep the information needed to resolve a disagreement.</li></ul>
+<h2 id="work-with-existing-tools-and-payments">Keep the tools your customers use.</h2>
+<p>AAP can work alongside your agent, application and chosen payment service. Basic agreements need neither a blockchain nor a project token. Connecting a real payment or outside action needs its own setup and permission.</p>
+<h2 id="capabilities-to-build-on-with-their-boundaries">Start simple. Add what the job needs.</h2>
+<p>Begin with an offer and acceptance. A more involved job can add approval limits, stages, evidence, privacy choices and a process for disagreements. Choose the parts that fit your application.</p>
+<p>Identity checks and sharing are optional. Agree what information each participant needs instead of collecting everything by default.</p>
+<h2 id="a-first-useful-small-build">A useful first project</h2>
+<ol><li>Let two people agree on one small piece of work.</li><li>Save the agreement and open it in another application.</li><li>Change the price or scope and ask for fresh approval.</li><li>Show what has been delivered and what still needs attention.</li></ol>
+<p>Try the <a href="EXAMPLES.html">examples</a> first. Request access when you are ready to connect your own application.</p>
+<h2 id="useful-review-and-contribution-opportunities">Help make it easier to use.</h2>
+<p>We welcome work on setup, interfaces, integrations, security and recovery. A small improvement to a real task is a useful place to begin. Read the <a href="../CONTRIBUTING.md">contribution guide</a>.</p>
+<h2 id="start-a-technical-conversation">Tell us what you want to connect.</h2>
+<p>Describe your application, the problem your users face and one result that would help. We’ll agree the first test and access arrangements with you.</p>
+<p>Commercial use of covered core code needs a paid written licence, including business evaluation and internal use. Earlier permissions and third-party licences stay in force. See <a href="FAQ.html#licensing">licensing</a> and <a href="PRICING.html">proposed pricing</a>.</p>
+<p class="status">Early access. We’re inviting pilot partners. AAP is not ready for production use; independent security review is still required.</p>
+<footer><p><a href="../docs/FAQ.html">Questions</a> · <a href="../docs/PILOTS.html">Early access</a> · <a href="../docs/BUILDERS.html">For developers</a> · <a href="../docs/INVESTORS.html">Investors</a> · <a href="../docs/PARTNERSHIPS.html">Partners</a> · <a href="../docs/COLLABORATE.html">Build with us</a></p><p><a href="../docs/RELEASE_NOTES.html">What’s available</a> · <a href="../docs/FAQ.html#licensing">Licensing</a> · <a href="mailto:jupitersstring@gmail.com">jupitersstring@gmail.com</a></p></footer></main></body></html>

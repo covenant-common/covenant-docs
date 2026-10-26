@@ -37,12 +37,13 @@ def check():
     expected={p:hashlib.sha256((ROOT/p).read_bytes()).hexdigest() for p in files if (ROOT/p).is_file()}
     manifest=json.loads((ROOT/'manifest.json').read_text())
     if manifest.get('assets')!=expected:errors.append('Asset inventory stale; run --write-manifest')
-    for path in [ROOT/'index.html',*sorted((ROOT/'docs').glob('*.html'))]:
+    for path in [ROOT/'index.html',*sorted((ROOT/'docs').rglob('*.html'))]:
         name=path.relative_to(ROOT).as_posix();raw=path.read_text();page=Page();page.feed(raw);pages[name]=page
         expected_url=BASE+'/' if name=='index.html' else BASE+'/'+name
         if page.canonical!=[expected_url]:errors.append('Canonical URL: '+name)
         if page.main!=1 or not ''.join(page.titles).strip() or not page.meta.get('description'):errors.append('Page structure/description: '+name)
-        if page.meta.get('robots')!='index,follow':errors.append('Crawler directive: '+name)
+        technical=name.startswith('docs/technical/')
+        if page.meta.get('robots')!=('noindex,follow' if technical else 'index,follow'):errors.append('Crawler directive: '+name)
         for url in page.links:
             parsed=urlsplit(url);links+=1
             if not parsed.scheme and parsed.path:
@@ -65,7 +66,7 @@ def check():
             if page.meta.get('og:url')!=expected_url:errors.append('Share URL: '+name)
     sitemap=ET.parse(ROOT/'sitemap.xml')
     urls=[node.text for node in sitemap.findall('.//{http://www.sitemaps.org/schemas/sitemap/0.9}loc')]
-    wanted={BASE+'/' if p=='index.html' else BASE+'/'+p for p in pages}
+    wanted={BASE+'/' if p=='index.html' else BASE+'/'+p for p in pages if not p.startswith('docs/technical/')}
     if set(urls)!=wanted or len(urls)!=len(wanted):errors.append('Sitemap must contain every public HTML page once')
     robots=(ROOT/'robots.txt').read_text()
     if 'Allow: /' not in robots or 'Disallow:' in robots or 'Sitemap: '+BASE+'/sitemap.xml' not in robots:errors.append('robots.txt')
@@ -75,7 +76,8 @@ def check():
             if not u.scheme and u.path and not (p.parent/unquote(u.path)).is_file():errors.append('Markdown link: '+str(p.relative_to(ROOT))+' -> '+href)
     for path in (ROOT/'llms.txt',ROOT/'docs/AGENT_START.html.md',ROOT/'skills/covenant-use/references/QUICKSTART.md'):
         if 'npx -y' in path.read_text() or 'uvx --from' in path.read_text():errors.append('Unavailable launcher: '+str(path.relative_to(ROOT)))
-    return {'status':'FAIL' if errors else 'PASS','public_html_pages':len(pages),'local_and_external_links_examined':links,'assets':len(expected),'errors':errors,'browser_rendering':'SEPARATE','search_engine_indexing':'NOT_ESTABLISHED'}
+    technical_count=sum(p.startswith('docs/technical/') for p in pages)
+    return {'status':'FAIL' if errors else 'PASS','public_html_pages':len(pages)-technical_count,'technical_reference_pages':technical_count,'local_and_external_links_examined':links,'assets':len(expected),'errors':errors,'browser_rendering':'SEPARATE','search_engine_indexing':'NOT_ESTABLISHED'}
 
 def main():
     p=argparse.ArgumentParser(description=__doc__);p.add_argument('--write-manifest',action='store_true');args=p.parse_args()

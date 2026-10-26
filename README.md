@@ -1,53 +1,39 @@
-# Agentic Agreements Protocol (AAP) · Covenant
+# Covenant / AAP
 
-**Verifiable agreements for AI agents acting on behalf of people and organisations.**
+**Clear agreements for people and their AI agents.**
 
-Exact terms, owner-controlled authority and portable evidence—from a simple exchange to delegated work and an agreed dispute process.
+Set the job, agree the terms and keep track of what happens next. Covenant helps bring the agreement, approvals, changes and delivery records together.
 
-[Project website](https://covenant-common.github.io/covenant-docs/) · [Investors & strategic partners](https://covenant-common.github.io/covenant-docs/docs/INVESTORS.html) · [Build with us](https://covenant-common.github.io/covenant-docs/docs/COLLABORATE.html) · [Developer pilot](https://github.com/covenant-common/covenant-docs/issues/new?template=pilot-tester.yml)
+[Visit the website](https://covenant-common.github.io/covenant-docs/) · [Try the free demo](https://jupitersstring.github.io/portable-agreement-demo/) · [See examples](https://covenant-common.github.io/covenant-docs/docs/EXAMPLES.html)
 
-## Why this exists
+## What it’s for
 
-An agent can negotiate in one place, call a tool in another and pay through a third service. Teams still need a coherent record of what was authorised, what was agreed, what was delivered and what remains owed. Covenant / AAP connects those records and preserves exact revisions and assent.
+- Buy or sell a service with a clear scope, price and deadline.
+- Let an agent act within limits you choose.
+- Follow repeat orders and unfinished work.
+- Keep the records you need when something changes or goes wrong.
 
-The goal is practical interoperability: keep your models, agent framework and adopted payment providers while adding an agreement and evidence layer.
+A simple deal can start with one offer and one acceptance. Add more detail when the job needs it.
 
-## Where it can help
+## Try it
 
-| Workflow | Useful result |
-| --- | --- |
-| Paid research or freelance work | Exact scope, price, acceptance criteria and linked delivery evidence. |
-| Enterprise delegation | Explicit authority limits and an inspectable record of outside-agent work. |
-| Content and data licensing | Agreed purpose and rights, payment observations and per-use receipts. |
-| Disputes and recovery | Retained versions, agreed procedure, evidence and exact-request recovery. |
+The browser demo is available now. You play both sides of a sample agreement; no real money changes hands.
 
-These are target workflows for the pilot, not claims of customer deployments or guaranteed legal outcomes. A signature binds a statement; it does not establish world truth or delivery quality.
+The full system is in early access. [Tell us about a job you want to try](https://covenant-common.github.io/covenant-docs/docs/PILOTS.html), or email [jupitersstring@gmail.com](mailto:jupitersstring@gmail.com). Implementation access is arranged with the project; there is no public package or hosted signup yet.
 
-## Collaborate
+## Find your next step
 
-- **Developers and researchers:** [offer a concrete contribution](https://github.com/covenant-common/covenant-docs/issues/new?template=collaborator.yml)—integrations, usability, security review, contracting or documentation.
-- **Design partners:** [join the invited developer pilot](https://github.com/covenant-common/covenant-docs/issues/new?template=pilot-tester.yml) with one task your users need to complete.
-- **Integration partners:** [propose a framework, MCP/A2A, payment, identity or marketplace integration](https://github.com/covenant-common/covenant-docs/issues/new?template=integration-partner.yml).
-- **Investors and strategic partners:** [read the thesis and milestones](https://covenant-common.github.io/covenant-docs/docs/INVESTORS.html), then email [jupitersstring@gmail.com](mailto:jupitersstring@gmail.com?subject=AAP%20investor%20conversation).
-- **Security researchers:** use [the private reporting route](SECURITY.md); keep vulnerability details out of public issues.
+- [How it works](https://covenant-common.github.io/covenant-docs/docs/HOW_IT_WORKS.html)
+- [Why Covenant](https://covenant-common.github.io/covenant-docs/docs/WHY_AAP.html)
+- [Proposed pricing](https://covenant-common.github.io/covenant-docs/docs/PRICING.html)
+- [Questions and answers](https://covenant-common.github.io/covenant-docs/docs/FAQ.html)
+- [Build with us](https://covenant-common.github.io/covenant-docs/docs/COLLABORATE.html)
+- [Investors](https://covenant-common.github.io/covenant-docs/docs/INVESTORS.html) · [Partners](https://covenant-common.github.io/covenant-docs/docs/PARTNERSHIPS.html)
 
-Contribution, commercial, funding and compensation terms require separate agreement. This page offers no token sale, return or investment terms.
+## For developers and agents
 
-## Current stage
+Start with the [developer introduction](docs/DEVELOPER_PREVIEW.html), [agent index](llms.txt) or [usage skill](skills/covenant-use/SKILL.md). Detailed implementation references are available separately from the main product pages.
 
-Working reference implementation; invited developer pilot. **This public repository publishes documentation. The implementation repository remains private.** Request access or an owner-reviewed build through the pilot. No public package-registry install, hosted signup or qualified mainnet is offered here.
+This repository contains the public website and documentation, not the private core implementation. The site and standalone demo have separate MIT licences. Covered core code requires a paid written licence for commercial use, including business evaluation and internal development; earlier grants and third-party licences remain valid. [Licensing](https://covenant-common.github.io/covenant-docs/docs/FAQ.html#licensing) · [Documentation licence](LICENSE).
 
-The first unsigned draft requires no account, wallet, external identity proof or token purchase. Signing, external execution and payments need separate exact assent and owner adoption. Independent security review, deployment and market adoption remain to be established.
-
-## Start reading
-
-- [Plain-English guide](https://covenant-common.github.io/covenant-docs/docs/HOW_IT_WORKS.html) · [Download the PDF](https://covenant-common.github.io/covenant-docs/assets/downloads/Covenant_Commons_How_It_Works.pdf)
-- [Pilot proposal](https://covenant-common.github.io/covenant-docs/docs/PILOTS.html) · [Builder guide](https://covenant-common.github.io/covenant-docs/docs/BUILDERS.html)
-- [Partnerships](https://covenant-common.github.io/covenant-docs/docs/PARTNERSHIPS.html) · [Frequently asked questions](https://covenant-common.github.io/covenant-docs/docs/FAQ.html)
-
-- [Project brief](https://covenant-common.github.io/covenant-docs/docs/OVERVIEW.html)
-- [Developer walkthrough](https://covenant-common.github.io/covenant-docs/docs/DEVELOPER_PREVIEW.html)
-- [Agent quickstart](docs/AGENT_START.html.md), [agent index](llms.txt), [published task-catalog snapshot](covenant.json) and [portable usage skill](skills/covenant-use/SKILL.md)
-- [Contributing](CONTRIBUTING.md) · [Contact](https://covenant-common.github.io/covenant-docs/docs/WORK_WITH_US.html) · [Documentation licence](LICENSE)
-
-The technical documentation is a curated snapshot. Use the actual schemas of the reviewed implementation you receive. Asset provenance and hashes are in [manifest.json](manifest.json). This static site has no analytics, user accounts, agreement records or custody files.
+[Contributing](CONTRIBUTING.md) · [Private security reports](SECURITY.md)

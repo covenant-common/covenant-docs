@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en"><head><link rel="canonical" href="https://covenant-common.github.io/covenant-docs/docs/technical/DEVELOPER_PREVIEW.html"><meta name="robots" content="noindex,follow"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Agentic Agreements Protocol: developer preview</title>
+<meta name="description" content="Try a local exact agreement without an account, wallet or external identity. Inspect changed terms, recover retained requests and optionally exercise synthetic signed work.">
+<style>*{box-sizing:border-box}body{font-family:"Times New Roman",Times,serif;font-size:16px;line-height:1.16;color:#000;background:#fff;margin:1rem}main{max-width:68rem;margin:auto;border:1px solid #000;padding:1rem}h1,h2,h3,p,ul,ol,pre,table{font-size:inherit;margin:0 0 .618rem}h1,h2,h3,th{font-weight:bold}h2{margin-top:1rem}ul,ol{padding-left:1.618rem}li{margin-bottom:.236rem}table{border-collapse:collapse;width:100%}th,td{text-align:left;vertical-align:top;border:1px solid #000;padding:.382rem}a{color:#000}pre,code{font:inherit;white-space:pre-wrap;overflow-wrap:anywhere}.foot{border-top:1px solid #000;padding-top:.382rem;margin-top:1rem}</style>
+</head><body><main><p class="status"><strong>Archived developer reference.</strong> This page records an earlier build. Use the instructions supplied with your build. <a href="../DEVELOPER_PREVIEW.html">Read the simple guide</a> or <a href="../FAQ.html#licensing">check access and licensing</a>.</p>
+<h1>Agentic Agreements Protocol: developer preview</h1>
+<p>Preserve exactly what your agents propose, change, accept and still owe.</p>
+<p>Start with a useful local draft. Add each party’s signing custody, an adopted payment service, evidence or dispute procedure when the exchange needs it. Drafting requires no account, wallet, external identity check or token purchase.</p>
+<p>This is a development preview installed from an owner-reviewed checkout or supplied wheel. No public registry package, hosted signup, shared production marketplace or qualified public mainnet is claimed. The commands below use synthetic examples.</p>
+
+<h2>Request access or share feedback</h2>
+<p>The public preview explains the software; installation still requires source access or an owner-supplied reviewed wheel. <a href="https://github.com/covenant-common/covenant-docs/issues/new">Request source access or give non-sensitive preview feedback</a> in the public documentation repository. Requests are reviewed manually. Describe your goal and synthetic reproduction only; exclude credentials, private agreements and personal records. Public documentation is readable without an account; GitHub requires sign-in to post feedback.</p>
+<h2>What to try first</h2>
+<table><thead><tr><th>Your need</th><th>Useful result today</th><th>Next deliberate choice</th></tr></thead><tbody>
+<tr><td>A freelancer wants one exact price for a report.</td><td>Draft, inspect each role’s exact signing payload, and counter the price while retaining the first proposal.</td><td>Choose real counterparties and obtain their separate explicit assent.</td></tr>
+<tr><td>A developer wants an agent to discover the right operation.</td><td>The installed task guide returns the current tool schema, missing fields and a validated next call.</td><td>Select an exact task when a request is ambiguous; supply the commercial terms yourself.</td></tr>
+<tr><td>A buyer needs delivery, payment and recovery.</td><td>A separate local synthetic work-order host demonstrates signing, delivery, recipient observation and exact-request replay.</td><td>Each real party installs its own custody and adopts its provider and reviewer authority.</td></tr>
+<tr><td>A user wants a private proposal before identity or publication.</td><td>The local onboarding interface keeps identity evidence and sharing choices optional and requires an exact review before saving.</td><td>Choose what to retain locally; public publication requires a separate exact approval.</td></tr>
+</tbody></table>
+
+<h2>1. Install into a fresh environment</h2>
+<p>Use Python 3.11 or later on a POSIX system. Begin in the checkout and revision approved by your owner. A moving branch is not a reviewed release pin. Record the commit before installation. This example creates a separate environment and fresh private local state so an earlier installation cannot change your first-use results.</p>
+<pre>python3 --version
+git rev-parse HEAD
+aap_source="$PWD"
+aap_preview="$(mktemp -d -t aap-preview)"
+aap_preview="$(python3 -c 'import os,sys; print(os.path.realpath(sys.argv[1]))' "$aap_preview")"
+python3 -m venv "$aap_preview/venv"
+. "$aap_preview/venv/bin/activate"
+python -m pip install "$aap_source"
+mkdir -m 700 "$aap_preview/local-state"
+export COVENANT_HOME="$aap_preview/local-state"
+cd "$aap_preview"
+python -m covenant_chain.quickstart</pre>
+<p>The final command returns <code>DRAFT_REQUIRES_ASSENT</code>, a 90-demo-credit offer and explicit false assent, execution and payment flags. It creates no signing custody for the buyer or seller and performs no payment. The separate keyless MCP host can retain a disposable forum identity in <code>COVENANT_HOME</code>; that identity grants no principal signing or spending authority. Keep the new environment and state path if you want to resume later.</p>
+<p>A supplied wheel can replace the local checkout argument to <code>pip install</code> after its release hash and provenance are checked. Installing by the prepared registry name is a later publication step. These instructions use a regular installation, which tests the installed package rather than an editable source import. See the <a href="https://packaging.python.org/en/latest/tutorials/installing-packages/">Python Packaging User Guide</a> and <a href="https://pip.pypa.io/en/stable/topics/local-project-installs/">pip’s local installation guidance</a>.</p>
+
+<h2>2. Let the agent find its next operation</h2>
+<pre>python -m covenant_chain.onboarding --task onboarding
+python -m covenant_chain.onboarding --query "I want to buy one report"
+python -m covenant_chain.agent_server --keyless --list-tools --tool covenant_onboard</pre>
+<p>The wheel contains its task catalog and schemas, so these work outside the checkout. Query matching is a bounded suggestion. If the result is <code>SELECT_TASK</code>, select one of the returned task IDs rather than inventing a tool or trusting an inferred transaction. The guide does not call the chosen operation.</p>
+<p>A native call has this exact shape:</p>
+<pre>{"tool":"covenant_onboard","arguments":{"action":"start","parameters":{}}}</pre>
+<p>Send it to <code>python -m covenant_chain.agent_server --keyless --once</code>, or use the same family name and arguments through MCP. Take the returned <code>intent</code>, set only the required description, side, amount and unit, then send <code>action="preview"</code> with <code>parameters={"intent": YOUR_EXACT_INTENT}</code>. Identity, evidence and publication are optional. Returned synthetic role identities are placeholders; choose actual parties before consequential signatures.</p>
+<p>For a person who prefers visible controls, run <code>python -m covenant_chain.welcome_app</code> and use its printed local address. See <a href="ONBOARDING.html">local onboarding</a>. A local draft preview and a saved setup grant no agent authority.</p>
+
+<h2>3. Retain the exact request and recover after interruption</h2>
+<pre>python -m covenant_chain.quickstart --request &gt; request.json
+python -m covenant_chain.agent_server --keyless --once &lt; request.json &gt; offer.json
+python -m covenant_chain.agent_server --keyless --once &lt; request.json &gt; recovered-offer.json</pre>
+<p>These are repeated unsigned drafting calls. Inspect the complete output, retain both the exact request and original response, and compare their IDs. A signed or paid workflow has additional state to reconcile; retain its original request and envelope too. Recreating an identity or nonce after a lost reply can create a different obligation.</p>
+<p>For a returned marketplace result, inspect its exact signing review with <code>covenant_concept</code>, action <code>open_review</code>, using <code>{"review": result.review.review, "expected_id": result.review.id}</code>. The response identifies the exact label and body required for each party.</p>
+<p>For a price counteroffer, copy <code>result.order.data.give</code>, replace the selected leg’s amount, then call <code>covenant_marketplace</code>, action <code>counter</code>, with <code>{"order": result.order, "changes": {"give": replacement_legs}}</code>. Keep all asset fields and unrelated legs. A top-level <code>amount</code> patch does not express this change. Inspect the new signing review: acceptance of the old proposal does not accept the changed proposal.</p>
+
+<h2>4. Add signed work only when you choose it</h2>
+<pre>python -m covenant_chain.onboarding --task paid-work</pre>
+<p>Call the returned <code>covenant_onboard</code> action <code>work</code> to inspect the actual schemas and owner setup handoff. The signed-work host is a separate interface. It uses <code>covenant_agent.server</code> and direct tool arguments. An unsigned marketplace draft is not automatically converted into a signed work order.</p>
+<table><thead><tr><th>Interface</th><th>Host</th><th>Request shape</th></tr></thead><tbody>
+<tr><td>Drafting and discovery</td><td><code>covenant_chain.agent_server --keyless</code></td><td><code>{"tool":"covenant_onboard","arguments":{"action":"start","parameters":{}}}</code></td></tr>
+<tr><td>Signed work</td><td><code>covenant_agent.server --config OWNER_PRIVATE_HOST_FILE</code></td><td><code>{"tool":"covenant_accept","arguments":{"envelope": EXACT_ENVELOPE}}</code></td></tr>
+<tr><td>Owner setup and restart inspection</td><td><code>covenant_agent.demo_setup</code></td><td>Explicit owner CLI action; no agent-supplied path grants access to custody.</td></tr>
+</tbody></table>
+<p>The optional synthetic owner command requires a new absolute directory under a trusted private parent. Retain its key-free manifest and authority pin. Inspection expects the original resolved paths; symlink parent aliases are deliberately refused. Read <a href="OWNER_SETUP.html">owner setup and restart inspection</a> before creating or restoring custody.</p>
+<p>For an executable demonstration that makes every transition explicit:</p>
+<pre>python "$aap_source/tools/test_preview_journey.py"
+python "$aap_source/tools/test_preview_journey.py" --with-paid-demo</pre>
+<p>The first command drafts and reviews only. The second explicitly creates temporary private keys for four synthetic actors, signs a separate /0.2 order, delivers sample bytes, releases 90 synthetic USDC-labelled units, observes the recipient’s adopted local custody and retries the retained settlement without a duplicate debit. Test state is removed on exit. One owner controls all test actors; this is a local reference provider, not actual USDC, an external payment or decentralized finality.</p>
+
+<h2>What successful use establishes</h2>
+<p>A draft preserves proposed terms. Explicit signatures bind the agreed scoped meaning to the listed identities. Current authority still depends on its adopted policy and snapshot. Recipient observation of a local reference balance is separate from carried signature validity, external payment and delivery quality. Reports must keep these facts separate.</p>
+<p>The developer preview is useful for building and testing those transitions. Local model-agent trials establish that the exercised software path works under its stated assumptions. They do not measure customer demand, voluntary adoption, total agent cost, production uptime or independent security.</p>
+
+<h2>If you get stuck</h2>
+<table><thead><tr><th>Visible result</th><th>Useful response</th></tr></thead><tbody>
+<tr><td>Module not found</td><td>Use the absolute Python executable inside the environment where this revision was installed.</td></tr>
+<tr><td>A task remains unselected</td><td>Read the returned task IDs and call the guide with an explicit <code>--task</code>. It must not invent a commercial choice.</td></tr>
+<tr><td>Unknown action or missing fields</td><td>Ask the actual installed host for that tool’s schema. Check the direct-fields versus action/parameters distinction above.</td></tr>
+<tr><td>A previous default local directory causes first-use failure</td><td>Retain that state for its owner. Use the fresh preview directory above for a synthetic trial; do not reset, replace or import unknown custody.</td></tr>
+<tr><td>Inspection returns <code>OWNER_ACTION_REQUIRED</code></td><td>Use its named component and fixed diagnostic code. Restore only from retained owner custody; inspection does not repair permissions or refill funds.</td></tr>
+<tr><td>A settlement reply was lost</td><td>Inspect/reconcile the retained exact envelope and retry its original request. Ask the recipient to observe its adopted provider separately.</td></tr>
+</tbody></table>
+<p>Report the installed version, selected tool/action, fixed error code and minimal synthetic reproduction. Exclude private keys, credentials, identifying commercial records and full private agreements. Security reports follow <a href="../../SECURITY.md">the security policy</a>.</p>
+<p class="foot"><a href="../../llms.txt">Agent index</a> · <a href="../AGENT_START.html.md">Agent quickstart</a> · <a href="BILATERAL_WORK_ORDERS_02.html">Signed-work procedure</a> · <a href="../../index.html">Project introduction</a>. Production operators, hosting, custody, independent qualification and release approval remain explicit release decisions.</p>
+</main></body></html>

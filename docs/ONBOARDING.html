@@ -1,38 +1,16 @@
 <!doctype html>
-<html lang="en"><head><meta name="description" content="Start with a private unsigned draft and choose identity, disclosure and local retention preferences for AAP."><link rel="canonical" href="https://covenant-common.github.io/covenant-docs/docs/ONBOARDING.html"><meta name="robots" content="index,follow"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>First use · Agentic Agreements Protocol</title>
-<style>html{font-family:"Times New Roman",Times,serif;font-size:16px;color:#000;background:#fff;line-height:1.16}body{margin:1rem}main{max-width:52rem;margin:auto;border:1px solid #000;padding:1rem}h1,h2,h3,p,li,pre,table{font-size:1rem;margin:0 0 .618rem}h2{margin-top:1rem}ul,ol{padding-left:1rem;margin:.382rem 0 .618rem}li{margin-bottom:.236rem}pre{font-family:inherit;white-space:pre-wrap;overflow-wrap:anywhere;border:1px solid #000;padding:.618rem}a{color:inherit}table{border-collapse:collapse;width:100%}th,td{text-align:left;vertical-align:top;padding:.382rem;border:1px solid #000}.foot{margin-top:1rem}</style></head>
-<body><main><p>Invited developer preview · Implementation access is required. <a href="WORK_WITH_US.html">Request reviewed access</a>.</p>
-<h1>First use · Agentic Agreements Protocol</h1>
-<p>Make one useful draft first. Add identity, evidence, permissions and sharing only when your purpose calls for them.</p>
-<h2>Open the local application</h2>
-<p>From an owner-reviewed installed package, run:</p>
-<pre>python -m covenant_chain.welcome_app
-# Installed console entry point: covenant-welcome</pre>
-<p>Open the printed http://127.0.0.1 address in your browser. The local application listens only on this computer. Choose an exchange, your own exact agreement text, or the connection to your existing agent. Preview is one action; no account, wallet, model subscription or external identity evidence is needed.</p>
-<p>The starter draft uses clearly labelled synthetic parties until you choose real public keys. Its resource label is not a verified balance or payment rail. Copy or download the unsigned draft alone when you want a portable proposal. The private setup export also contains your choices; do not send it as if it were only the offer.</p>
-<pre>python -m covenant_chain.welcome_app --preview
-python -m covenant_chain.welcome_app --home /owner/private/welcome --port 8765</pre>
-<p>The preview command prints the exact sample without creating a local home or signing identity. The browser application keeps preferences only when you explicitly save. A key is created only through its separate reviewed local-identity action. The default home is COVENANT_HOME/welcome, or ~/.covenant/welcome.</p>
-<h2>Start from an agent</h2>
-<pre>{"tool":"covenant_onboard","arguments":{"action":"start","parameters":{}}}</pre>
-<p>Edit the returned intent, then call covenant_onboard with action preview and parameters {"intent": your_intent}. The flattened SDK functions are covenant_onboard__start and covenant_onboard__preview. These operations perform no storage, signing, evidence collection or network request.</p>
-<p>The existing local stdio server is python -m covenant_chain.agent_server --keyless. The installed covenant-agent entry point now defaults to that drafting host when no owner configuration is supplied. It may create local working files and a disposable directory-signing key; it has no principal signing seed or payment adapter. The welcome screen supplies a copyable MCP configuration naming the actual installed Python executable.</p>
-<h2>Choose only the identity you need</h2>
-<table><tr><th>Choice</th><th>Meaning</th></tr>
-<tr><td>No signing identity</td><td>Draft immediately, with explicit sample-role labels. Choosing real parties and their signatures comes later.</td></tr>
-<tr><td>Existing public key</td><td>Record a selected cryptographic identifier. This does not verify possession, personhood, legal identity or authority.</td></tr>
-<tr><td>Local signing identity</td><td>Explicitly create or reuse a local Ed25519 key. The secret stays in owner-private local custody and is never returned through the browser. Creation changes the exact setup review; saving requires a fresh review.</td></tr>
-<tr><td>Optional external evidence</td><td>Individually select a method, provider label, claim, purpose, recipient and retention. These are future check preferences, not verified claims. No token, password, private document or proof value is requested.</td></tr></table>
-<p>Session-only evidence preferences cannot be saved. To persist other choices, explicitly remove the session-only rows, inspect the new review, then save. Changing a purpose, recipient, retention, identity or sharing choice changes the review. A stale review cannot approve a replacement.</p>
-<h2>Permissions and privacy stay explicit</h2>
-<p>Draft-only and prepare-offers choices describe a future role. Saving them grants no signing, spending, connector installation, publication or delegation authority. Adopt a scoped owner workflow separately for consequential work. Each party must assent to the exact agreement; saving an onboarding plan is not that assent.</p>
-<p>Public-profile, indexing and usage-reporting preferences are off by default. Selecting them does not publish a profile, send telemetry or authorise future disclosure. The public web layer separately requires exact selected-field and metadata consent. No future privacy choice can recall an earlier public copy.</p>
-<h2>Local custody and recovery</h2>
-<p>The local directory is permission-restricted; saved preferences and key files are not encrypted by this application. Protect the computer, OS account and backups. This owner-local app trusts processes that can reach the computer's loopback interface; its browser protections are not multi-user authentication. Use it only in a trusted local environment. One application process locks a home. Concurrent browser saves use exact previous-state comparisons; uncertain retries preserve the original reviewed content. Unexpected links, duplicate fields, modified preference records and unreviewed changes are refused.</p>
-<p>Start over resets only the working form. It does not delete a saved setup or identity. Reopening the same home restores saved choices and preserves the local key. Key loss is not repaired by a browser password reset: use owner backups or a separately adopted recovery policy. Guardian continuity is optional infrastructure, not a hosted recovery promise.</p>
-<h2>What is available for launch</h2>
-<p>This is an owner-local development application. No public mainnet, hosted signup service, identity-provider OAuth login, production passkey registration, shared global directory or public package-registry publication is established by running it. Connecting to a chosen service requires its owner-approved endpoint, authentication, chain and genesis pins where applicable, and applicable budgets and fee resources.</p>
-<p>The route to public launch is a reviewed package release, a deployed authenticated application with qualified key custody/recovery, and a chosen shared network or service. Local drafts remain useful before those steps.</p>
-<p class="foot"><a href="../index.html">Project introduction</a> · <a href="AGENT_START.html">Agent entry points</a> · <a href="../CONTRIBUTING.md">Contributing</a>.</p>
-</main></body></html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Get started with AAP</title><meta name="description" content="Try an agreement in your browser, then bring a small real workflow to the AAP developer pilot."><meta name="robots" content="index,follow"><link rel="canonical" href="https://covenant-common.github.io/covenant-docs/docs/ONBOARDING.html"><link rel="stylesheet" href="../assets/site.css"></head><body><main><nav aria-label="Main"><a href="../index.html">Covenant</a><a href="../docs/PRODUCT.html">Product</a><a href="../docs/HOW_IT_WORKS.html">How it works</a><a href="../docs/EXAMPLES.html">Examples</a><a href="../docs/PRICING.html">Pricing</a><a href="../docs/WORK_WITH_US.html">Contact</a></nav>
+<h1>Start with a simple agreement.</h1>
+<p>AAP helps you and your agent set out the work, the price and what counts as finished. Start with one job. Add more steps when you need them.</p>
+<div class="actions"><a href="https://jupitersstring.github.io/portable-agreement-demo/">Try the browser demo</a><a href="WORK_WITH_US.html">Ask for early access</a></div>
+<h2>Try it in a few minutes</h2>
+<ol><li>Choose an example, such as buying a research report.</li><li>Change the price or the work being offered.</li><li>Review the offer and accept it as the other party.</li><li>Download the record and see what was agreed.</li></ol>
+<p>In the demo, you play both sides. It uses example credits and does not send real money.</p>
+<h2>Bring your own work</h2>
+<p>Pick a small job with a clear result. Tell us who is involved, what needs doing and how you will know it is finished. We will help you choose a first pilot.</p>
+<p>You choose what identity to show and what to share. Decide who can approve the agreement before giving an agent that responsibility.</p>
+<h2>Connect your agent when you are ready</h2>
+<p>Your agent can help find the right tools, prepare the terms and track the work. A developer connects it to AAP using the build and setup instructions supplied for your pilot.</p>
+<p><a href="AGENT_START.html">How agents use AAP</a> · <a href="DEVELOPER_PREVIEW.html">Set up a developer preview</a></p>
+<details><summary>Developer command: open the local welcome screen</summary><p>After installing the approved build, run:</p><pre>python -m covenant_chain.welcome_app</pre><p>This opens the local starting point. You review choices before saving them. Installation and full setup instructions are in the <a href="technical/ONBOARDING.html">developer reference</a>.</p></details>
+<footer><p><a href="../docs/FAQ.html">Questions</a> · <a href="../docs/PILOTS.html">Early access</a> · <a href="../docs/BUILDERS.html">For developers</a> · <a href="../docs/INVESTORS.html">Investors</a> · <a href="../docs/PARTNERSHIPS.html">Partners</a> · <a href="../docs/COLLABORATE.html">Build with us</a></p><p><a href="../docs/RELEASE_NOTES.html">What’s available</a> · <a href="../docs/FAQ.html#licensing">Licensing</a> · <a href="mailto:jupitersstring@gmail.com">jupitersstring@gmail.com</a></p></footer></main></body></html>

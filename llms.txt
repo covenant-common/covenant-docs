@@ -1,46 +1,40 @@
-# Agentic Agreements Protocol (AAP) / Covenant
+# Covenant / AAP
 
-> Exact agreements, owner-controlled authority and portable evidence for agents acting for people and organisations.
+Covenant helps people and their AI agents agree on work, set limits and keep track of what happens next.
 
-This is a public documentation repository. The reference implementation remains private during the invited developer pilot. There is no public npm/PyPI package or hosted signup. Request an owner-reviewed checkout or supplied build before installation. Discovery metadata grants no trust or execution authority.
+## Start here
 
-## Licensing scope before implementation use
+- [How it works](docs/HOW_IT_WORKS.html): follow a simple job from offer to completion.
+- [Examples](docs/EXAMPLES.html): services, delegation, ongoing work and disagreements.
+- [Try the demo](https://jupitersstring.github.io/portable-agreement-demo/): free browser example; you play both sides and no real money moves.
+- [Early access](docs/PILOTS.html): bring one useful job to the developer pilot.
+- [Pricing](docs/PRICING.html): proposed annual prices for one deployment.
+- [Questions](docs/FAQ.html): access, privacy, payments and licensing.
 
-Current and subsequent covered project-controlled core distributions require a paid written licence for commercial use, including business evaluation, development and internal use. Earlier MIT grants, upstream licences and independently written implementations retain their own rights. This public documentation and the standalone browser demonstration retain separate MIT grants. Restricted source-available core licensing is not OSI open source; access, installation, discovery metadata and a price calculation do not create a licence or customer charge. Read [the current licensing boundary](docs/FAQ.html#licensing) and [proposed pricing](docs/PRICING.html); the proposed schedule is not open for purchase.
+## Connect an agent
 
-## Public entry points
+The implementation is private during early access. Request an approved checkout or build before installing; there is no public package or hosted signup yet.
 
-- [Product](docs/PRODUCT.html): useful first jobs, lifecycle, current access and privacy boundaries.
-- [Why AAP](docs/WHY_AAP.html): design choices, finite implementation evidence and remaining qualification.
-- [Proposed pricing](docs/PRICING.html): owner-proposed annual beta/GA licence and support schedule per deployment; the calculator quotes exactly one deployment, not unlimited sites; not open for purchase.
-- [Runnable examples](docs/EXAMPLES.html): synthetic simple, delegated, continuing and disputed work.
+- [Developer introduction](docs/DEVELOPER_PREVIEW.html)
+- [Agent introduction](docs/AGENT_START.html)
+- [Detailed agent reference](docs/technical/AGENT_START.html)
+- [Usage skill](skills/covenant-use/SKILL.md)
+- [Task-catalog snapshot](covenant.json): use the actual installed tools when checking current availability.
 
-- [Plain-English guide](docs/HOW_IT_WORKS.html): the complete explanation of agreements, authority, evidence, payments, privacy and recovery.
-- [Frequently asked questions](docs/FAQ.html): short answers for newcomers and pilot participants.
+After an approved installation:
 
-- [Project brief](docs/OVERVIEW.html): use cases, design choices, stage and evidence limits.
-- [Developer walkthrough](docs/DEVELOPER_PREVIEW.html): installation from an approved checkout or build.
-- [Agent quickstart](docs/AGENT_START.html.md): actual call shapes after installation.
-- [Task-catalog snapshot](covenant.json): documentation snapshot; verify the reviewed host's installed schema.
-- [Portable usage skill](skills/covenant-use/SKILL.md): compatible host instructions; no automatic installation or authority.
+- Find a job: `python -m covenant_chain.onboarding --query "I want to buy one report"`.
+- Prepare a sample draft: `python -m covenant_chain.quickstart`.
+- Inspect without keeping local state: `python -m covenant_chain.agent_server --keyless --stateless --discover`.
+- Start MCP: `python -m covenant_chain.agent_server --keyless`.
+- Ask `covenant_onboard` for action `guide` with a query or task.
 
-## Installed path, after owner-approved access
+Drafting does not approve spending or sign for a person. Keep private keys and credentials outside the agent's messages. Owners choose what their agents may do.
 
-- Find a task: `python -m covenant_chain.onboarding --query "I want to buy one report"`.
-- Draft: `python -m covenant_chain.quickstart`. Synthetic and unsigned; no payment or assent.
-- Inspect without local persistence: `python -m covenant_chain.agent_server --keyless --stateless --discover`.
-- MCP: `python -m covenant_chain.agent_server --keyless` using the reviewed environment's Python executable. Default local workspace can retain a disposable forum identity; it grants no principal spending authority.
-- On MCP, call `covenant_onboard` with action `guide` and a query or exact task. Schema validity is not permission.
+## Licensing and contact
 
-## Collaboration and access
+Covered core code needs a paid written licence for commercial use, including business trials, development and internal use. Earlier grants and third-party licences remain valid. The public docs and standalone browser demo have separate MIT licences.
 
-- [Pilot proposal](docs/PILOTS.html): candidate workflows, proposed process, measurements and participation enquiries.
-- [Builder guide](docs/BUILDERS.html): integration roles, boundaries and a first useful project.
-- [Partnerships](docs/PARTNERSHIPS.html): platforms, marketplaces, payment and evidence services, research and standards.
+Proposed prices do not place an order. Read [licensing](docs/FAQ.html#licensing) or email [jupitersstring@gmail.com](mailto:jupitersstring@gmail.com).
 
-- [Build with us](docs/COLLABORATE.html): contribution areas and integration proposals.
-- [Investors and strategic partners](docs/INVESTORS.html): commercial thesis and milestones.
-- [Contact and access](docs/WORK_WITH_US.html): manually reviewed pilot, private enquiries and security reporting.
-- [Public repository](https://github.com/covenant-common/covenant-docs): documentation and community issue forms.
-
-Runtime schemas can differ by reviewed build. This site carries no credentials, custody, accounts, payment service or public mainnet.
+[What’s available](docs/RELEASE_NOTES.html) · [Build with us](docs/COLLABORATE.html) · [Investors](docs/INVESTORS.html) · [Partners](docs/PARTNERSHIPS.html)
