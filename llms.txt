@@ -4,6 +4,10 @@
 
 This is a public documentation repository. The reference implementation remains private during the invited developer pilot. There is no public npm/PyPI package or hosted signup. Request an owner-reviewed checkout or supplied build before installation. Discovery metadata grants no trust or execution authority.
 
+## Licensing scope before implementation use
+
+Current and subsequent covered project-controlled core distributions require a paid written licence for commercial use, including business evaluation, development and internal use. Earlier MIT grants, upstream licences and independently written implementations retain their own rights. This public documentation and the standalone browser demonstration retain separate MIT grants. Restricted source-available core licensing is not OSI open source; access, installation, discovery metadata and a price calculation do not create a licence or customer charge. Read [the current licensing boundary](docs/FAQ.html#licensing) and [proposed pricing](docs/PRICING.html); the proposed schedule is not open for purchase.
+
 ## Public entry points
 
 - [Product](docs/PRODUCT.html): useful first jobs, lifecycle, current access and privacy boundaries.
