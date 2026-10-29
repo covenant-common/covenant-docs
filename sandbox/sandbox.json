@@ -1,0 +1,22 @@
+{
+  "download_bytes": 19860009,
+  "format": "aap-sandbox-site/0.1",
+  "mode": "TEST",
+  "published": false,
+  "pyodide": {
+    "packages": [
+      "cryptography"
+    ],
+    "path": "pyodide/",
+    "version": "314.0.7"
+  },
+  "script": {
+    "file": "golden_path.py",
+    "sha256": "5a7002f3ff5bc88d04c3779f608bc0f082f930f8abecc902614fdc199d8c8630"
+  },
+  "wheel": {
+    "bytes": 3940800,
+    "file": "agentic_agreements-0.46.0-py3-none-any.whl",
+    "sha256": "1a7b4eade10c5ff1cce513077cefca485e3db6ce62a7476e16b4515c2d6ac90c"
+  }
+}

@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'wasm-unsafe-eval'; connect-src 'self'; style-src 'unsafe-inline'; img-src 'self'; base-uri 'none'; form-action 'none'">
+<meta name="referrer" content="no-referrer">
+<title>Try a deal in your browser</title>
+<style>*{box-sizing:border-box}body{font-family:"Times New Roman",Times,serif;font-size:16px;line-height:1.16;color:#000;background:#fff;margin:1rem}main{max-width:64rem;margin:auto;border:1px solid #000;padding:1rem}h1,h2,h3,p,ul,ol,pre,table{font-size:inherit;margin:0 0 .618rem}h1,h2,h3,th{font-weight:bold}h2{margin-top:1rem}ul,ol{padding-left:1.618rem}li{margin-bottom:.236rem}a{color:#000}pre,code{font:inherit;white-space:pre-wrap;overflow-wrap:anywhere}button{font:inherit;color:#000;background:#fff;border:0;padding:0;text-decoration:underline;cursor:pointer}button:disabled{text-decoration:none;cursor:default;color:#000}summary{cursor:pointer}</style>
+</head><body><main>
+<h1>Try a deal in your browser</h1>
+<p>A deal is a promise both sides sign. Proof shows it was kept. If it wasn't, there is a fair way to fix it.</p>
+<p>This page runs the Agentic Agreements Protocol (AAP) package inside your browser, in three steps: <strong>propose, accept, settle</strong>. Nothing is installed on your computer.</p>
+<p><strong>Test mode.</strong> Every key is made fresh in this page and forgotten when you leave. The money is 100 simulated test USDC on an in-page ledger: no real money, no wallet, no chain, no account. After the page has loaded, nothing is sent anywhere.</p>
+<p><button type="button" id="run">Run the demo deal</button> · <span id="status" role="status" aria-live="polite">Not started.</span></p>
+<ol>
+<li><strong>Propose.</strong> The buyer offers a job and a price, and signs the exact terms.<div id="out-propose"></div></li>
+<li><strong>Accept.</strong> The seller signs the same terms. The payment moves into escrow: held, not yet paid.<div id="out-accept"></div></li>
+<li><strong>Settle.</strong> The seller delivers with proof. The buyer checks the proof and releases the payment.<div id="out-settle"></div></li>
+</ol>
+<p id="summary" role="status" aria-live="polite"></p>
+<div id="error" role="alert" hidden></div>
+<h2>Check it yourself</h2>
+<p>The record below carries both signatures, the delivery proof and the release. Anyone can check it offline. Change one number and the check fails.</p>
+<p><button type="button" id="check" disabled>Check the signed record</button> · <button type="button" id="forge" disabled>Change the price, then check</button></p>
+<div id="checked" role="status" aria-live="polite"></div>
+<details><summary>The signed deal record</summary><pre id="record">Run the demo first.</pre></details>
+<details><summary>The Python that ran</summary><pre id="code">Run the demo first.</pre></details>
+<h2>Install it</h2>
+<p>This page runs the real early-access implementation in your browser; nothing is installed and no real payment is made. The packages for your own computer or agent (<code>pip install agentic-agreements</code>, <code>uvx agentic-agreements</code>, <code>npx agentic-agreements</code>) are not published yet. For early access, email jupitersstring@gmail.com or <a href="../docs/PILOTS.html">bring one job to the pilot</a>.</p>
+<h2>What this page is not</h2>
+<ul>
+<li>Not real value. The test USDC and the escrow exist only in this page.</li>
+<li>Not a hosted service. The page, Python (Pyodide) and the package are static files from this site, each checked against a fingerprint before it runs.</li>
+<li>Not the pinned runtime. In the browser the package runs on Pyodide's cryptography build, which is older than the version an installed package pins. Use an install route for anything beyond trying it.</li>
+</ul>
+<noscript><p>This page needs JavaScript and WebAssembly to run Python. The <a href="../docs/INSTALL.html">install guide</a> works without them.</p></noscript>
+<script type="module" src="page.js"></script>
+</main></body></html>
