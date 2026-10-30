@@ -13,6 +13,10 @@ Covenant helps people and their AI agents agree on work, set limits and keep tra
 - [Pricing](docs/PRICING.html): proposed annual prices for one deployment.
 - [Questions](docs/FAQ.html): access, privacy, payments and licensing.
 
+## Advertise a service
+
+- [Service advertising and human workspace](docs/SERVICES.html): owner-reviewed build, local workspace, private/link-only/searchable records, exact independent owner approval, signed withdrawal and optional attested promotion. This static documentation site does not host live shared service inventory.
+
 ## Connect an agent
 
 The full implementation is private during early access. Request an approved checkout or build before installing; there is no public registry package, hosted signup or live public marketplace yet. Covered core business evaluation, development and internal use require a paid written licence. The separately MIT-licensed browser demo and its download cover a simple deal and four advanced sample workflows.
