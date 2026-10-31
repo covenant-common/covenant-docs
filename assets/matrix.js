@@ -403,10 +403,14 @@
       text('h3', comparison.changes.length ? 'What changed' : 'No returned terms changed', target);
       text('p', comparison.requires_fresh_assent ? 'This is a new proposal. Both parties must approve this exact version.' : 'The returned proposal is unchanged. No approval is added by this comparison.', target);
       comparison.changes.forEach((change) => {
-        const item = document.createElement('section');
-        text('h4', change.title, item);
-        text('p', 'Before: ' + (change.before === null ? '(not included)' : change.before), item);
-        text('p', 'After: ' + (change.after === null ? '(removed)' : change.after), item);
+        const supporting = change.kind === 'field' && (change.title === 'extensions' ||
+          String(change.before).length + String(change.after).length > 480);
+        const item = document.createElement(supporting ? 'details' : 'section');
+        const labels = {parties:'Participants',conditions:'Conditions',settlement:'Payment arrangements',
+          dispute:'How disagreements are handled',supersedes:'Earlier version',title:'Title',version:'Record format'};
+        text(supporting ? 'summary' : 'h4', supporting ? 'Supporting record changed — inspect the exact fields' : (labels[change.title] || change.title), item);
+        text(supporting ? 'pre' : 'p', 'Before: ' + (change.before === null ? '(not included)' : change.before), item);
+        text(supporting ? 'pre' : 'p', 'After: ' + (change.after === null ? '(removed)' : change.after), item);
         target.appendChild(item);
       });
       text('p', comparison.boundary + ' Neither version is sent anywhere by this comparison.', target);
