@@ -2,6 +2,8 @@
 
 Covenant helps people and their AI agents agree on work, set limits and keep track of what happens next.
 
+- [Privacy and records](PRIVACY.html): public request processing, provider logs, private account retention, publication withdrawal and removal contact. Trial expiry is not automatic deletion.
+
 ## First useful action
 
 - [Start here](docs/START.html?source=search): choose connect, advertise or buy; copy a safe first task and the live MCP address.
