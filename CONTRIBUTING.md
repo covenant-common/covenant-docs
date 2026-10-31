@@ -8,9 +8,9 @@ This is the **public documentation repository**. Runtime source and private deve
 
 1. Keep the first-use path accurate: implementation access is reviewed; the package is not publicly published.
 2. Use clear language and distinguish implemented reference behavior, proposed services and untested assumptions. Do not imply independent audit, paying adoption or mainnet readiness.
-3. Preserve the HTML style: Times New Roman, one font size, black on white, rectangular border and tight proportional spacing. Keep README and other GitHub community files in Markdown.
+3. Preserve each interface’s typography and the shared light sea-blue palette in `assets/theme.css`. Generated research reports retain Times New Roman, one font size, black on white, a rectangular border and tight proportional spacing. Keep README and other GitHub community files in Markdown.
 4. Check local links, canonical URLs, metadata, contact routes and mobile layout. Maintain `sitemap.xml`, `llms.txt` and the asset manifest.
-5. Run `python3 tools/check_public_site.py --write-manifest`, then `python3 tools/check_public_site.py` before submitting.
+5. Run `python3 tools/version_public_assets.py` to refresh local style/script URLs when their bytes change, then `python3 tools/check_public_site.py --write-manifest` and `python3 tools/check_public_site.py`. Run the focused browser fixtures when changing their behavior.
 
 The technical guides retain their recorded implementation snapshot. Publisher-authored introduction and community pages may evolve separately. A future documentation export must review and preserve those public-facing assets rather than replace this repository wholesale.
 

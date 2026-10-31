@@ -4,6 +4,7 @@ import argparse,hashlib,json,re,subprocess,sys
 from html.parser import HTMLParser
 from pathlib import Path
 from urllib.parse import unquote,urlsplit
+from version_public_assets import outdated
 import xml.etree.ElementTree as ET
 ROOT=Path(__file__).resolve().parents[1]
 BASE='https://covenant-common.github.io/covenant-docs'
@@ -29,6 +30,7 @@ class Page(HTMLParser):
 
 def check():
     errors=[];pages={};links=0
+    if outdated():errors.append('Style/script versions stale; run tools/version_public_assets.py')
     paths=subprocess.check_output(['git','ls-files','-z'],cwd=ROOT).decode().split('\0')
     files=[p for p in paths if p and p!='manifest.json']
     for name in files:
@@ -51,18 +53,20 @@ def check():
                 target=(path.parent/unquote(parsed.path)).resolve()
                 if ROOT not in target.parents or not target.is_file():errors.append('Missing/outside link: '+name+' -> '+url)
         for script in page.scripts:
+            script_path=urlsplit(script['src']).path if script['src'] else None
+            local_script=script_path if not script['src'] or not urlsplit(script['src']).scheme and not urlsplit(script['src']).netloc else None
             allowed_live={'docs/MATRIX.html':{'../assets/matrix.js','../assets/deal-structures.js'},
                           'docs/TERMINAL.html':{'../assets/terminal.js','../assets/deal-structures.js'},
                           'docs/DEAL_STRUCTURES.html':{'../assets/deal-structures.js'}}
             if (name in allowed_live and script['type'] is None and script['defer'] and
-                    script['src'] in allowed_live[name] and not script['data'].strip()):
-                if not (path.parent/script['src']).is_file():errors.append('Missing public-directory controls: '+name)
+                    local_script in allowed_live[name] and not script['data'].strip()):
+                if not (path.parent/local_script).is_file():errors.append('Missing public-directory controls: '+name)
                 continue
             allowed_controls={'docs/EXAMPLES.html':'../assets/example-controls.mjs',
                               'docs/PRICING.html':'../assets/pricing-controls.mjs'}
             if (script['type']=='module' and name in allowed_controls and
-                    script['src']==allowed_controls[name] and not script['data'].strip()):
-                if not (path.parent/script['src']).is_file():errors.append('Missing local-only controls: '+name)
+                    local_script==allowed_controls[name] and not script['data'].strip()):
+                if not (path.parent/local_script).is_file():errors.append('Missing local-only controls: '+name)
                 continue
             if script['type']!='application/ld+json' or script['src']:errors.append('Unexpected executable script: '+name)
             else:
