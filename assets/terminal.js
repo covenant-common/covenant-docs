@@ -583,7 +583,7 @@
   const PROTOCOL = '2025-11-25';
   const $ = (id) => document.getElementById(id);
   const isObject = (value) => value !== null && typeof value === 'object' && !Array.isArray(value);
-  const accessName = {public: 'public tools', account: 'approved account', installed: 'private build'};
+  const accessName = {public: 'public tools', account: 'private account', installed: 'private build'};
   let initialization = null;
   let sequence = 0;
   let busy = false;
@@ -708,6 +708,11 @@
     if (card.wants && card.wants.length) node('p', 'Wants: ' + card.wants.join('; '), item);
     else if (card.wants !== null) node('p', 'No requested consideration is published here; do not infer that the service is free.', item);
     if (card.excerpted) node('p', 'Description excerpt; inspect the public advert for the complete terms.', item).className = 'record-meta';
+    const nextSteps = node('p', '', item);
+    const buy = node('a', 'How to commission this work', nextSteps); buy.href = 'START.html?task=buy&source=direct';
+    node('span', ' · ', nextSteps);
+    const sell = node('a', 'Advertise your service', nextSteps); sell.href = 'START.html?task=advertise&source=direct';
+    node('p', 'Confirm the supplier and availability before ordering. Demo adverts illustrate the format.', item).className = 'record-meta';
     const structure = node('button', 'Structure this deal', item); structure.type = 'button';
     structure.disabled = !window.AAPDealStructures;
     const handoffState = node('p', '', item); handoffState.setAttribute('role', 'status'); handoffState.setAttribute('aria-live', 'polite');

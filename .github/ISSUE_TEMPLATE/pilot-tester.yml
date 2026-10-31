@@ -1,50 +1,54 @@
-name: Apply to the developer pilot
-description: Ask to join the invited AAP developer pilot.
-title: "Pilot application: "
+name: Try a job or report pilot feedback
+description: Share the workflow you tried, what worked and where you got stuck.
+title: "Pilot workflow: "
 labels: ["pilot-application"]
 body:
   - type: markdown
     attributes:
       value: |
-        This issue is **public**. Do not include keys, private agreements, customer data or anything confidential. We review every application by hand and reply here.
-  - type: input
-    id: who
-    attributes:
-      label: Your name or handle, and organisation (optional)
-    validations:
-      required: true
+        Start without waiting for an invitation: https://covenant-common.github.io/covenant-docs/docs/START.html?source=github
+        Public MCP tools need no account. Private trials are self-service when places remain.
+        This issue is public and optional. Leave out keys, access files, private agreements, personal data and security vulnerabilities. Use SECURITY.md for private security reports.
   - type: textarea
     id: task
     attributes:
-      label: The task you would try
-      description: One real workflow where exact scope, acceptance or payment evidence matters (paid research, freelance delivery, agent procurement, a tool marketplace...).
+      label: What job did you want done?
+      description: For example, advertise research, buy a chart, approve a supplier or connect your agent.
+    validations:
+      required: true
+  - type: dropdown
+    id: stage
+    attributes:
+      label: Where did you get to?
+      options:
+        - Planning a first try
+        - Connected my agent
+        - Prepared an advert or draft
+        - Approved exact terms
+        - Published or finished a job
+        - Used it again
+        - Blocked before I could start
     validations:
       required: true
   - type: input
     id: host
     attributes:
-      label: Agent host or framework you use
-      placeholder: e.g. Claude Code, Cursor, LangGraph, OpenAI Agents SDK, your own
-  - type: dropdown
-    id: platform
+      label: Which agent client or browser did you use? (optional)
+  - type: textarea
+    id: friction
     attributes:
-      label: Platform
-      options: [macOS, Linux, Windows (WSL), Other]
-    validations:
-      required: true
-  - type: dropdown
-    id: access
+      label: What worked, and what got in your way?
+      description: Include the step, expected result and actual result. Share a harmless example rather than a private record.
+  - type: input
+    id: time
     attributes:
-      label: How would you like to receive the build?
-      options: [GitHub repository access, A pinned wheel with its SHA-256]
-    validations:
-      required: true
-  - type: checkboxes
-    id: terms
+      label: About how long did the first useful result take? (optional)
+  - type: textarea
+    id: next
     attributes:
-      label: Pilot terms
-      options:
-        - label: I will use synthetic data only and report problems without secrets or personal data.
-          required: true
-        - label: I understand this is a development preview, not a production service or mainnet.
-          required: true
+      label: Would you use it again? What would make it worth paying for? (optional)
+  - type: textarea
+    id: setup
+    attributes:
+      label: Need help with a deeper integration? (optional)
+      description: Describe the connection you need. Access to covered core code and its commercial licence are separate from the public tools and hosted trial.

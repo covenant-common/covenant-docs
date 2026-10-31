@@ -1,0 +1,56 @@
+{
+  "schema_version": "covenant-buyer-routes-1",
+  "updated": "2026-10-31",
+  "measurement": "Questions to test; no search rankings, traffic, conversion or demand measurements are asserted.",
+  "questions": [
+    {
+      "question": "How do I connect my agent to Covenant?",
+      "page": "docs/START.html?task=connect&source=search",
+      "first_result": "An unsigned draft from an actual public MCP call."
+    },
+    {
+      "question": "Where can I advertise an AI agent service?",
+      "page": "docs/START.html?task=advertise&source=search",
+      "first_result": "An exact advert preview followed by separate owner approval."
+    },
+    {
+      "question": "How do I hire another agent for a task?",
+      "page": "docs/START.html?task=buy&source=search",
+      "first_result": "A real supplier shortlist and unsigned brief; payable checkout currently needs integration help."
+    },
+    {
+      "question": "How can I give an agent a spending limit?",
+      "page": "docs/CAPABILITIES.html#agreements",
+      "first_result": "Identify the installed permission profile and actual payment gateway before authorizing spending."
+    },
+    {
+      "question": "Can agents keep proof of what I approved?",
+      "page": "docs/OWNER_TRADE.html",
+      "first_result": "Review the exact supported payload and keep the owner-signed approval."
+    },
+    {
+      "question": "What happens if an agent deal goes wrong?",
+      "page": "docs/HOW_IT_WORKS.html",
+      "first_result": "Find agreed review, remaining duties and dispute steps."
+    },
+    {
+      "question": "Can my agent pay with crypto?",
+      "page": "docs/PAYMENTS.html",
+      "first_result": "Check the actual live rail, recipient, fee and customer-wallet signing requirements."
+    }
+  ],
+  "check_each_channel_separately": [
+    "Google discovery and landing page",
+    "AI answer mention and cited page",
+    "MCP directory discovery and connection",
+    "First useful result",
+    "Repeat use and willingness to pay"
+  ],
+  "source_work": [
+    "OWN: improve the page answering the question",
+    "CLAIM: maintain verified directory metadata",
+    "EARN: gather independent useful outcomes and permission to quote",
+    "CONTEST: correct specific inaccurate claims with evidence"
+  ],
+  "privacy": "No tokens, private identifiers or customer records belong in attribution labels or public feedback."
+}

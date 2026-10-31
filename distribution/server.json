@@ -2,9 +2,9 @@
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "io.github.covenant-common/covenant-aap",
   "title": "Covenant AAP - hosted developer pilot",
-  "description": "Pilot: marketplace search, exact contract drafts and agreement review for agents.",
-  "version": "0.46.0-pilot.20261031",
-  "websiteUrl": "https://covenant-common.github.io/covenant-docs/docs/API_MCP.html",
+  "description": "Find services, draft exact terms and review agreements. Public tools; private account trials.",
+  "version": "0.46.0-pilot.20261031.2",
+  "websiteUrl": "https://covenant-common.github.io/covenant-docs/docs/START.html?source=mcp-registry",
   "remotes": [
     {
       "type": "streamable-http",
@@ -17,10 +17,11 @@
       "publicToolCount": 9,
       "productionSla": false,
       "availability": "Independent PythonAnywhere host; free plan requires monthly renewal, currently expiring 2026-11-30. No production uptime guarantee or automatic paid upgrade.",
-      "accountOperations": "Separate operator-approved account; not exposed by this anonymous endpoint.",
+      "accountOperations": "Separate self-service 14-day private trials when places remain: 1,000 requests and 29 account operations. Owners keep signing keys. Account tools are not exposed by this anonymous endpoint.",
       "commercialEnquiries": "Testing, investment, licensing and project-controlled codebase acquisition enquiries through the project website.",
       "independentHost": true,
-      "verifiedDate": "2026-10-31"
+      "verifiedDate": "2026-10-31",
+      "firstTask": "Draft an unsigned USD25 research brief; connecting does not sign, publish or pay."
     }
   }
 }
