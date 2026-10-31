@@ -149,12 +149,20 @@
       "published_connector_url": null
     },
     "google_connected_apps": {
-      "status": "INTEREST_APPLICATION_PREPARED_NOT_SUBMITTED",
+      "status": "WAITLIST_SUBMITTED_PENDING_SELECTION_AND_REVIEW",
       "application_url": "https://connected.google.com/console/help/?apply=",
       "domain_verification": "NOT_ESTABLISHED",
       "preview_is_approval": false,
       "verified_date": "2026-10-31",
-      "public_preview_endpoint": "https://jupie202020.pythonanywhere.com/mcp/google/v1"
+      "public_preview_endpoint": "https://jupie202020.pythonanywhere.com/mcp/google/v1",
+      "submitted_date": "2026-10-31",
+      "confirmed_submission": true,
+      "listing_live": false,
+      "category": "Productivity",
+      "requested_products": [
+        "Search",
+        "Gemini app"
+      ]
     },
     "smithery": {
       "status": "NOT_SUBMITTED",
