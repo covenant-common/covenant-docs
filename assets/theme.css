@@ -9,3 +9,5 @@ button:hover:not(:disabled),.examples button:hover:not(:disabled),.actions a:hov
 .actions a,.deal-preview,th,td,nav,.status,footer,.launch-section,.examples section{border-color:var(--aap-ink)}
 .skip,.skip-link{color:var(--aap-ink);background:var(--aap-panel)}
 ::selection{background:#b2dfe5;color:#102f3b}
+/* Keep the editable keyword step as usable as the main search field. */
+#terminal-keywords,#market-keywords{display:block;width:100%;min-width:0;max-width:100%;box-sizing:border-box;margin-top:.236rem}
