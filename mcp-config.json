@@ -1,8 +1,7 @@
 {
   "mcpServers": {
     "covenant-public": {
-      "type": "http",
-      "url": "https://virtual-limited-tribune-deutsch.trycloudflare.com/mcp"
+      "url": "https://jupie202020.pythonanywhere.com/mcp"
     }
   }
 }

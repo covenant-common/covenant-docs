@@ -15,21 +15,26 @@
     "portable evidence"
   ],
   "availability": {
-    "status": "TEMPORARY_PUBLIC_PILOT",
+    "status": "HOSTED_DEVELOPER_PILOT",
     "verified_date": "2026-10-31",
-    "live_endpoint": "https://virtual-limited-tribune-deutsch.trycloudflare.com",
-    "public_mcp_url": "https://virtual-limited-tribune-deutsch.trycloudflare.com/mcp",
-    "account_mcp_url": "https://virtual-limited-tribune-deutsch.trycloudflare.com/mcp/account/v1",
-    "api_url": "https://virtual-limited-tribune-deutsch.trycloudflare.com",
-    "discovery_url": "https://virtual-limited-tribune-deutsch.trycloudflare.com/.well-known/covenant-api.json",
-    "openapi_url": "https://virtual-limited-tribune-deutsch.trycloudflare.com/openapi.json",
-    "public_listings_url": "https://virtual-limited-tribune-deutsch.trycloudflare.com/v1/listings",
-    "requires_running_operator_computer_and_tunnel": true,
-    "hostname_changes_when_tunnel_recreated": true,
+    "live_endpoint": "https://jupie202020.pythonanywhere.com",
+    "public_mcp_url": "https://jupie202020.pythonanywhere.com/mcp",
+    "account_mcp_url": "https://jupie202020.pythonanywhere.com/mcp/account/v1",
+    "api_url": "https://jupie202020.pythonanywhere.com",
+    "discovery_url": "https://jupie202020.pythonanywhere.com/.well-known/covenant-api.json",
+    "openapi_url": "https://jupie202020.pythonanywhere.com/openapi.json",
+    "public_listings_url": "https://jupie202020.pythonanywhere.com/v1/listings",
     "uptime_guarantee": false,
-    "stable_hosting_status": "PENDING",
     "public_package_published": false,
-    "core_source_public": false
+    "core_source_public": false,
+    "independent_host": true,
+    "hosting_provider": "PythonAnywhere",
+    "hosting_plan": "Beginner free",
+    "workers": 1,
+    "private_storage_megabytes": 512,
+    "renewal_required": "MONTHLY",
+    "current_hosting_expiry": "2026-11-30",
+    "automatic_paid_upgrade": false
   },
   "trial": {
     "request_url": "mailto:jupitersstring@gmail.com?subject=Covenant%2014-day%20API%20MCP%20trial",
@@ -44,7 +49,7 @@
       "trades:read",
       "trades:write"
     ],
-    "availability_note": "Temporary pilot only; operator computer and tunnel must remain online. Approval, start, expiry and retention are confirmed separately."
+    "availability_note": "Hosted developer pilot on an independent free host with monthly renewal and no production uptime guarantee. Approval, start, expiry and retention are confirmed separately."
   },
   "public_tools": 9,
   "account_operations": 17,
@@ -56,5 +61,6 @@
     "acquisition": "mailto:jupitersstring@gmail.com?subject=Covenant%20codebase%20and%20IP%20acquisition%20offer"
   },
   "submission_notice": "Public marketing metadata only; not an MCP Registry server.json, installation manifest, proof of live hosting or independent qualification.",
-  "mcp_configuration_url": "https://covenant-common.github.io/covenant-docs/mcp-config.json"
+  "mcp_configuration_url": "https://covenant-common.github.io/covenant-docs/mcp-config.json",
+  "matrix_url": "https://covenant-common.github.io/covenant-docs/docs/MATRIX.html"
 }

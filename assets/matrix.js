@@ -1,7 +1,7 @@
 /* Public-only Matrix client. No credentials, local storage, signing or payment. */
 'use strict';
 (() => {
-  const ENDPOINT = 'https://virtual-limited-tribune-deutsch.trycloudflare.com/mcp';
+  const ENDPOINT = 'https://jupie202020.pythonanywhere.com/mcp';
   const PUBLIC_ORIGIN = new URL(ENDPOINT).origin;
   const PROTOCOL = '2025-11-25';
   const MAX_REPLY = 524288;
@@ -113,14 +113,14 @@
         headers, body: JSON.stringify({jsonrpc: '2.0', id, method, params})
       });
       if (response.status === 429) throw new Error('The pilot is busy. Wait a minute before trying again.');
-      if (!response.ok) throw new Error('The temporary service could not complete this request (HTTP ' + response.status + '). Check the API and MCP guide.');
+      if (!response.ok) throw new Error('The hosted pilot could not complete this request (HTTP ' + response.status + '). Check the API and MCP guide.');
       const value = JSON.parse(await replyText(response));
       if (!isObject(value) || value.jsonrpc !== '2.0' || value.id !== id) throw new Error('The service returned an unexpected reply. No result has been accepted.');
       if (value.error || !isObject(value.result)) throw new Error('The service refused the request. Check the published operation and connection instructions.');
       return value.result;
     } catch (error) {
-      if (error && error.name === 'AbortError') throw new Error('The temporary service did not reply in time. It may be offline. No automatic retry was made.');
-      if (error instanceof TypeError) throw new Error('The temporary endpoint could not be reached from this page. Check its availability in the API and MCP guide; stable hosting is pending.');
+      if (error && error.name === 'AbortError') throw new Error('The hosted pilot did not reply in time. It may be unavailable. No automatic retry was made.');
+      if (error instanceof TypeError) throw new Error('The hosted endpoint could not be reached from this page. Check its availability and connection instructions in the API and MCP guide.');
       if (error instanceof SyntaxError) throw new Error('The service did not return valid JSON. No result has been accepted.');
       throw error;
     } finally {

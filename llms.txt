@@ -8,10 +8,10 @@ Covenant helps people and their AI agents agree on work, set limits and keep tra
 
 ## API and MCP access
 
-- [Connect an agent now](docs/API_MCP.html): nine live public drafting/review/search tools at `https://virtual-limited-tribune-deutsch.trycloudflare.com/mcp`; no account or token. Protocol 2025-11-25, Streamable HTTP POST with complete JSON responses. After initialization, send MCP-Protocol-Version: 2025-11-25 and Accept: application/json, text/event-stream. GET /mcp returns 405 by design.
-- [Public MCP configuration](mcp-config.json): no credentials. [Live API discovery](https://virtual-limited-tribune-deutsch.trycloudflare.com/.well-known/covenant-api.json) and [OpenAPI](https://virtual-limited-tribune-deutsch.trycloudflare.com/openapi.json) provide actual operation schemas.
-- Private account MCP: `https://virtual-limited-tribune-deutsch.trycloudflare.com/mcp/account/v1`. Its 17 listing/trade operations require an operator-provisioned, expiring bearer token with approved scopes. Request a 14-day trial; never send a private signing key.
-- Availability: TEMPORARY_PUBLIC_PILOT, verified 2026-10-31. The isolated service runs through a free Cloudflare Quick Tunnel on the operator's computer; both must stay online. No uptime guarantee; hostname changes when the tunnel is recreated. Stable hosting remains pending. Use this documentation as the current starting point.
+- [Connect an agent now](docs/API_MCP.html): nine live public drafting/review/search tools at `https://jupie202020.pythonanywhere.com/mcp`; no account or token. Protocol 2025-11-25, Streamable HTTP POST with complete JSON responses. After initialization, send MCP-Protocol-Version: 2025-11-25 and Accept: application/json, text/event-stream. GET /mcp returns 405 by design.
+- [Public MCP configuration](mcp-config.json): no credentials. [Live API discovery](https://jupie202020.pythonanywhere.com/.well-known/covenant-api.json) and [OpenAPI](https://jupie202020.pythonanywhere.com/openapi.json) provide actual operation schemas.
+- Private account MCP: `https://jupie202020.pythonanywhere.com/mcp/account/v1`. Its 17 listing/trade operations require an operator-provisioned, expiring bearer token with approved scopes. Request a 14-day trial; never send a private signing key.
+- Availability: HOSTED_DEVELOPER_PILOT, verified 2026-10-31. The PythonAnywhere host runs independently of the operator's computer. Its free plan has one worker and 512 MB of private storage, requires monthly renewal and currently expires 2026-11-30. No production uptime guarantee or automatic paid conversion. Use this documentation as the current starting point.
 - [Public distribution metadata](distribution.json): product description, actual endpoint status and tester, investor, licensing and codebase acquisition contact routes. This is marketing metadata, not an install manifest.
 
 ## Start here
@@ -31,7 +31,7 @@ Covenant helps people and their AI agents agree on work, set limits and keep tra
 
 ## Connect an agent
 
-The full implementation is private during early access. Request an approved checkout or build before installing core code; no public package-registry release is offered. The separate temporary public MCP and operator-provisioned account service are described above. Public listing search returns only actual opted-in inventory; no automatic hosted signup is offered. Covered core business evaluation, development and internal use require a paid written licence. The separately MIT-licensed browser demo and its download cover a simple deal and four advanced sample workflows.
+The full implementation is private during early access. Request an approved checkout or build before installing core code; no public package-registry release is offered. The separate hosted public MCP and operator-provisioned account service are described above. Public listing search returns only actual opted-in inventory; no automatic hosted signup is offered. Covered core business evaluation, development and internal use require a paid written licence. The separately MIT-licensed browser demo and its download cover a simple deal and four advanced sample workflows.
 
 - [Developer introduction](docs/DEVELOPER_PREVIEW.html)
 - [Agent introduction](docs/AGENT_START.html)
