@@ -7,11 +7,11 @@
     "title": "Find a service",
     "summary": "Search actual owner-published services and resources.",
     "keywords": "service services supplier suppliers research editing software review hiring",
-    "href": "API_MCP.html#public",
+    "href": "#find",
     "access": "public",
     "group": "Work",
     "links": [],
-    "link_source": "API_MCP.html#public"
+    "link_source": "TERMINAL.html#find"
   },
   {
     "id": "advertise",
@@ -166,6 +166,17 @@
       "human"
     ],
     "link_source": "MATRIX.html#draft-work"
+  },
+  {
+    "id": "structured-draft",
+    "title": "Draft structured terms",
+    "summary": "Propose stages, review checks and approval before the next delivery. This drafts terms; it does not enforce them.",
+    "keywords": "stages staged milestone milestones outline approval before then final delivery brief",
+    "href": "MATRIX.html?structure=staged-milestones#draft-work",
+    "access": "public",
+    "group": "Agreements",
+    "links": ["draft", "services"],
+    "link_source": "MATRIX.html?structure=staged-milestones#draft-work"
   },
   {
     "id": "approval",
@@ -459,6 +470,8 @@
   ]);
   function taskIntent(need) {
     const tokens = need.toLowerCase().normalize('NFKC').match(/[a-z0-9]+/g) || [];
+    const staged = /\b(?:milestones?|stages?|staged)\b|\boutline\b[\s\S]*\b(?:final|approval|approve)\b|\bapproval\s+before\b/i.test(need);
+    const service = /\b(?:brief|research|service|supplier|provider|hire|hiring|commission)\b/i.test(need);
     const matches = [];
     INTENT_RULES.forEach((rule, order) => {
       const position = tokens.findIndex((token) => rule.actions.includes(token));
@@ -468,7 +481,11 @@
     // The first requested action wins: "hire a developer to build an adapter"
     // is a buying journey; "build a marketplace to hire developers" is building.
     matches.sort((a, b) => a.position - b.position || a.order - b.order);
-    return matches.length ? matches[0].rule : null;
+    const composePosition = tokens.findIndex((token) => ['draft', 'drafting', 'structure', 'prepare'].includes(token));
+    if (staged && service && composePosition >= 0 && (!matches.length || composePosition <= matches[0].position)) return {id: 'structured-proposal', primary: ['structured-draft'], related: ['draft', 'services', 'milestones']};
+    if (matches.length) return matches[0].rule;
+    if (staged && service && !/\b(?:resolve|arbitrate|check|verify|inspect|build|integrate|advertise|publish|sell)\b/i.test(need)) return {id: 'staged-service', primary: ['services'], next: ['structured-draft'], related: ['draft', 'milestones']};
+    return null;
   }
   function rankNavigation(catalogue, need, access = 'installed') {
     if (!Object.prototype.hasOwnProperty.call(ACCESS, access) || typeof need !== 'string' || need.length > 120) throw new Error('Navigation request');
@@ -488,7 +505,7 @@
       // Do not substitute an unrelated public task when the requested primary
       // operation requires an account/private installation the caller excluded.
       if (!eligible.some((node) => intent.primary.includes(node.id))) return empty('ACCESS_REQUIRED');
-      const relevant = new Set([...intent.primary, ...intent.related]);
+      const relevant = new Set([...intent.primary, ...(intent.next || []), ...intent.related]);
       candidates = eligible.filter((node) => relevant.has(node.id));
     } else {
       candidates = terms.length ? eligible.filter((node) => lexical[node.id] > 0) : eligible;
@@ -503,31 +520,13 @@
     const graph = personalizedPageRank(candidates, seedWeights);
     const routes = candidates.map((node) => ({...node, fit: graph.scores[node.id],
       directMatch: lexical[node.id] > 0,
-      taskPriority: intent ? intent.primary.includes(node.id) ? 0 : 1 : 0
+      taskPriority: intent ? intent.primary.includes(node.id) ? 0 : (intent.next || []).includes(node.id) ? 1 : 2 : 0
     })).sort((a, b) => a.taskPriority - b.taskPriority || b.fit - a.fit || (a.id < b.id ? -1 : a.id > b.id ? 1 : 0));
     return {routes, matched: true, eligible: eligible.length, graph, intent: intent ? intent.id : null, reason: null};
   }
-  function normalizeServiceQuery(need) {
-    const raw = typeof need === 'string' ? need.trim() : '';
-    if (!raw) return {raw, query: '', changed: false, notice: 'Search: all current public adverts.'};
-    const negative = /\b(?:no|not|never|without|except|excluding|exclude|avoid|neither|nor|cannot|don['’]t|can['’]t|isn['’]t)\b/i.test(raw) || /(^|\s)-\S/.test(raw);
-    const operator = /\b(?:AND|OR|NOT)\b/.test(raw);
-    if (negative || operator) return {raw, query: raw, changed: false,
-      notice: 'Literal keywords searched: “' + raw + '”. Negation and operator words are preserved; this endpoint does not apply exclusion or Boolean filters.'};
-    // Remove only a declared, anchored command prelude. Keep the object,
-    // qualifiers, spelling and capitalisation exactly as supplied after it.
-    const preludes = [
-      /^(?:please\s+)?(?:(?:i\s+(?:need|want|would\s+like)\s+to\s+)|(?:(?:can|could|would)\s+you\s+))?(?:find|hire|buy|book|source|commission|purchase|look\s+for|search\s+for)\s+(?:(?:me|us)\s+)?(?:(?:a|an|the|some)\s+)?/i,
-      /^(?:please\s+)?(?:i\s+(?:need|want|would\s+like)|we\s+(?:need|want))\s+(?:(?:a|an|the|some)\s+)?/i,
-      /^(?:i['’]m|i\s+am|we\s+are)\s+looking\s+for\s+(?:(?:a|an|the|some)\s+)?/i
-    ];
-    let query = raw;
-    for (const pattern of preludes) {
-      const match = raw.match(pattern);
-      if (match) {const rest = raw.slice(match[0].length).trim(); if (rest) query = rest; break;}
-    }
-    return {raw, query, changed: query !== raw,
-      notice: 'Keywords searched: “' + query + '”.' + (query !== raw ? ' Only the opening request phrase was removed.' : '')};
+  function normalizeServiceQuery(need, options) {
+    const shared = typeof window !== 'undefined' ? window.AAPDealStructures : require('./deal-structures.js');
+    return shared.normalizeServiceQuery(need, options);
   }
   function publicLeg(leg) {
     if (!leg || typeof leg !== 'object' || Array.isArray(leg) || !leg.asset || typeof leg.asset !== 'object' || Array.isArray(leg.asset)) return null;
@@ -588,6 +587,7 @@
   let nextOffset = null;
   let currentQuery = '';
   let currentQueryNotice = 'Search: all current public adverts.';
+  let keywordNeed = null;
   const displayed = new Set();
   const handoffUrls = new Set();
 
@@ -609,7 +609,7 @@
       const item = document.createElement('li');
       const link = node('a', route.title, item);
       link.href = route.href;
-      node('span', accessName[route.access] + (result.intent && route.taskPriority === 0 ? ' · matches your task' : result.intent ? ' · related step' : route.directMatch ? ' · direct word match' : ' · general route'), item).className = 'access';
+      node('span', accessName[route.access] + (result.intent && route.taskPriority === 0 ? ' · matches your task' : result.intent && route.taskPriority === 1 ? ' · next useful step' : result.intent ? ' · related step' : route.directMatch ? ' · direct word match' : ' · general route'), item).className = 'access';
       node('p', route.summary, item);
       $('terminal-routes').appendChild(item);
     });
@@ -734,7 +734,7 @@
         });
         handoffPanel.appendChild(inspect); item.appendChild(handoffPanel);
         handoffState.textContent = 'Public handoff ready. Choose a reusable structure in Matrix. Loading the file is local; fetch and verify the exact source before signing.';
-      } catch (error) {handoffState.textContent = 'This advert could not be handed off: ' + error.message;}
+      } catch (error) {handoffState.textContent = 'This advert could not be copied into the simple composer: ' + error.message + ' The advert remains available below.'; const fallback = node('a', url ? 'Open the original advert' : 'See advanced agreement options', handoffState); fallback.href = url || 'CAPABILITIES.html#agreements';}
       finally {structure.disabled = false;}
     });
     const details = document.createElement('details');
@@ -758,12 +758,16 @@
   async function search(append = false) {
     if (!liveSearchAllowed) {previewNotice(); return;}
     if (busy) return;
-    const normalised = append ? {query: currentQuery, notice: currentQueryNotice} : normalizeServiceQuery($('terminal-query').value);
+    const need = $('terminal-query').value;
+    const edited = keywordNeed === need && !$('terminal-keyword-assist').hidden;
+    if (!append && !edited) $('terminal-keyword-assist').hidden = true;
+    const normalised = append ? {query: currentQuery, notice: currentQueryNotice} : normalizeServiceQuery(edited ? $('terminal-keywords').value : need, {literal: edited});
     const query = normalised.query;
     const queryNotice = normalised.notice;
-    if (query.length > 120 || query.split(/\s+/).filter(Boolean).length > 8) {
-      $('terminal-market-state').textContent = 'Use up to eight literal search words; the typed need is unchanged. For a longer explanation, choose “map this need”. ' + queryNotice;
-      return;
+    if (normalised.requires_edit) {
+      keywordNeed = need; $('terminal-keyword-assist').hidden = false; $('terminal-keywords').value = query;
+      $('terminal-market-state').textContent = queryNotice + ' Your original need stays above. “Map this need” can suggest a workflow for the full sentence.';
+      $('terminal-keywords').focus(); return;
     }
     if (append && !Number.isSafeInteger(nextOffset)) return;
     const offset = append ? nextOffset : 0;
@@ -793,6 +797,7 @@
       $('terminal-more').disabled = false;
     }
   }
+  $('terminal-query').addEventListener('input', () => {keywordNeed = null; $('terminal-keyword-assist').hidden = true;});
   $('terminal-search').addEventListener('submit', (event) => {event.preventDefault(); search(false);});
   $('terminal-more').addEventListener('click', () => search(true));
   $('terminal-route').addEventListener('click', showRoutes);

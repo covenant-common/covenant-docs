@@ -10,6 +10,10 @@
   let requestId = 0;
   let initialization = null;
   let downloadUrl = null;
+  let handoffUrl = null;
+  let latestHandoffText = null;
+  let keywordNeed = null;
+  let searchNotice = '';
   let nextOffset = null;
   let currentSearch = {query: '', category: ''};
   const displayed = new Set();
@@ -146,6 +150,7 @@
     try {data = JSON.parse(raw);} catch (_) {throw new Error('The tool did not return a JSON record.');}
     if (result.isError === true) {
       const code = isObject(data) && typeof data.code === 'string' && /^[A-Z0-9_]{1,100}$/.test(data.code) ? ' (' + data.code + ')' : '';
+      if (isObject(data) && data.code === 'HOSTED_API_NOT_FOUND') throw new Error('There is no accessible current record for this request. Search for a fresh public version or check the identifier and your access. This response does not establish why a record is absent or whether any private record exists.');
       throw new Error('The tool refused this request' + code + '. Review the input or use the API and MCP guide.');
     }
     return {data, raw};
@@ -186,9 +191,10 @@
     const url = safePublicationUrl(publication.url);
     if (url) {const link = text('a', 'Open the public advert', article); link.href = url;}
     const arrange = text('button', 'Structure this deal', article); arrange.type = 'button'; arrange.disabled = !window.AAPDealStructures;
+    const arrangeState = text('p', '', article); arrangeState.setAttribute('role', 'status'); arrangeState.setAttribute('aria-live', 'polite');
     arrange.addEventListener('click', () => {
       try {selectAdvert(window.AAPDealStructures.advertFromPublication(publication)); $('draft-work').scrollIntoView({block: 'start'}); $('draft-structure').focus();}
-      catch (error) {$('draft-state').textContent = 'This advert could not be selected: ' + error.message;}
+      catch (error) {arrangeState.textContent = 'This advert could not be copied into the simple composer: ' + error.message + ' It has not been removed. '; const fallback = text('a', url ? 'Open the original advert' : 'See advanced agreement options', arrangeState); fallback.href = url || 'CAPABILITIES.html#agreements';}
     });
     const details = document.createElement('details');
     text('summary', 'Public record and identifier', details);
@@ -201,8 +207,8 @@
     return article;
   }
   function searchState(message) {
-    $('market-state').textContent = message;
-    $('creations-state').textContent = message + ' This shared view contains public service listings only.';
+    $('market-state').textContent = message + (searchNotice ? ' ' + searchNotice : '');
+    $('creations-state').textContent = message + (searchNotice ? ' ' + searchNotice : '') + ' This shared view contains public service listings only.';
   }
   let searching = false;
   async function search(append = false) {
@@ -210,12 +216,14 @@
     let selected;
     if (append) selected = {...currentSearch, offset: nextOffset};
     else {
-      const query = $('market-query').value.trim();
+      const original = $('market-query').value;
+      const edited = keywordNeed === original && !$('market-keyword-assist').hidden;
+      if (!edited) $('market-keyword-assist').hidden = true;
+      const normalised = structures.normalizeServiceQuery(edited ? $('market-keywords').value : original, {literal: edited});
+      const query = normalised.query; searchNotice = normalised.notice;
       const category = $('market-category').value.trim();
-      if (query.length > 120 || query.split(/\s+/).filter(Boolean).length > 8 || category.length > 64) {
-        searchState('Use up to eight search words, at most 120 characters, and a category of at most 64 characters.');
-        return;
-      }
+      if (normalised.requires_edit) {keywordNeed = original; $('market-keyword-assist').hidden = false; $('market-keywords').value = query; searchState('Your original need stays above. Edit the keywords below, then search again.'); $('market-keywords').focus(); return;}
+      if (category.length > 64) {searchState('Use a category of at most 64 characters.'); return;}
       currentSearch = {query, category};
       selected = {...currentSearch, offset: 0};
       displayed.clear();
@@ -265,6 +273,7 @@
       $('market-more').disabled = false;
     }
   }
+  $('market-query').addEventListener('input', () => {keywordNeed = null; $('market-keyword-assist').hidden = true;});
   $('market-search').addEventListener('submit', (event) => {event.preventDefault(); search(false);});
   $('market-more').addEventListener('click', () => search(true));
 
@@ -274,7 +283,15 @@
   let drafting = false;
   let latestDraftRaw = null;
   function clearDraftOutput(message) {
-    latestDraftRaw = null;
+    latestDraftRaw = null; latestHandoffText = null;
+    $('draft-review').replaceChildren();
+    $('proposal-copy').disabled = true;
+    $('proposal-copy-state').textContent = '';
+    $('proposal-handoff-details').open = false;
+    $('proposal-handoff-text').textContent = '';
+    $('proposal-download').removeAttribute('href');
+    $('proposal-download').removeAttribute('download');
+    if (handoffUrl) {URL.revokeObjectURL(handoffUrl); handoffUrl = null;}
     $('draft-result').hidden = true;
     $('draft-copy').disabled = true;
     $('draft-copy-state').textContent = '';
@@ -293,7 +310,7 @@
   async function showTemplate() {
     if (!structures) return;
     const id = $('draft-structure').value, chosen = structures.template(id), ticket = ++templatePreview;
-    $('structure-description').textContent = chosen.description + ' ' + chosen.native_composition;
+    $('structure-description').textContent = chosen.description + ' This records proposed terms. It does not start work or release payment.';
     $('structure-details-label').textContent = chosen.details_label;
     $('draft-structure-details').required = chosen.requires_details;
     $('specialist-ack-label').hidden = !chosen.specialist;
@@ -317,7 +334,7 @@
     const values = structures.proposedFields(advert);
     ['title', 'deliverable', 'price'].forEach((key) => {$('draft-' + key).value = values[key];});
     $('draft-supplier').value = '';
-    $('selected-advert-state').textContent = 'Selected public advert: ' + advert.snapshot.title + ' · ' + advert.id + '. Unverified search projection; no exact signed source pin is attached. Confirm both parties and fetch the exact source before signing.';
+    $('selected-advert-state').textContent = 'Selected advert: ' + advert.snapshot.title + '. This copies publicly displayed text; the exact original offer has not been checked. Confirm both parties and check that offer before signing.';
     $('clear-advert').hidden = false;
   }
   if (structures) {
@@ -350,6 +367,28 @@
     });
     showTemplate();
   } else $('draft-state').textContent = 'The shared structure catalogue could not load. Use the direct MCP connection guide or reload this page.';
+  function renderDraftReview(review) {
+    const target = $('draft-review'); target.replaceChildren();
+    text('h3', 'Review the returned proposal', target);
+    text('p', review.title, target);
+    text('p', 'Requesting party: ' + review.parties[0], target);
+    text('p', 'Performing party: ' + review.parties[1], target);
+    review.clauses.forEach((clause) => {const section = document.createElement('section'); text('h4', clause.title, section); text('p', clause.text, section); target.appendChild(section);});
+    if (review.conditions.length) {text('h4', 'Additional stated conditions', target); review.conditions.forEach((condition) => text('p', typeof condition === 'string' ? condition : JSON.stringify(condition), target));}
+    text('h4', 'Choices still to discuss', target);
+    if (review.missing.length) {const list = document.createElement('ul'); review.missing.forEach((item) => text('li', item, list)); target.appendChild(list);}
+    else text('p', 'Review the stated settlement and disagreement arrangements with the other party.', target);
+    if (review.source) text('p', 'Referenced advert: ' + review.source.title + '. Its exact source offer has not been verified.', target);
+    text('p', review.boundary, target);
+  }
+  $('proposal-copy').addEventListener('click', async () => {
+    const value = latestHandoffText;
+    if (drafting || value === null) return;
+    $('proposal-copy').disabled = true; $('proposal-copy-state').textContent = '';
+    try {if (!navigator.clipboard || typeof navigator.clipboard.writeText !== 'function') throw new Error('Clipboard unavailable'); await navigator.clipboard.writeText(value); if (!drafting && latestHandoffText === value) $('proposal-copy-state').textContent = 'Copied the cover note and exact unsigned draft attachment. Choose your own sharing channel; nothing was sent.';}
+    catch (_) {if (!drafting && latestHandoffText === value) {$('proposal-handoff-details').open = true; $('proposal-handoff-text').focus(); $('proposal-copy-state').textContent = 'Clipboard access was unavailable. Select and copy the proposal handoff below.';}}
+    finally {$('proposal-copy').disabled = drafting || latestHandoffText === null;}
+  });
   $('draft-copy').addEventListener('click', async () => {
     const raw = latestDraftRaw;
     if (drafting || raw === null) return;
@@ -387,18 +426,24 @@
       if (!isObject(data) || typeof data.id !== 'string' || !/^[0-9a-f]{64}$/.test(data.id) || data.status !== 'UNSIGNED_DRAFT' || data.binding !== false || data.execution_authorized !== false || !structures.responseRetains(prepared.request, data)) {
         throw new Error('The service did not preserve the exact structure and advert reference in an unsigned draft. No result has been accepted.');
       }
+      const review = structures.reviewDraft(prepared.request, data);
+      const handoff = structures.proposalHandoff(prepared.request, data, raw);
       selection.retain(revision, raw);
+      renderDraftReview(review);
+      latestHandoffText = handoff; $('proposal-handoff-text').textContent = handoff; $('proposal-copy').disabled = false;
+      handoffUrl = URL.createObjectURL(new Blob([structures.proposalHandoffHTML(prepared.request, data, raw)], {type: 'text/html;charset=utf-8'}));
+      $('proposal-download').href = handoffUrl; $('proposal-download').download = 'covenant-proposal-handoff-' + data.id.slice(0, 12) + '.html';
       $('draft-id').textContent = data.id; $('draft-json').textContent = raw;
       latestDraftRaw = raw; $('draft-copy').disabled = false;
       downloadUrl = URL.createObjectURL(new Blob([raw], {type: 'application/json;charset=utf-8'}));
       $('draft-download').href = downloadUrl;
       $('draft-download').download = 'covenant-unsigned-' + data.id.slice(0, 12) + '.json';
       $('draft-result').hidden = false;
-      $('draft-state').textContent = 'Unsigned buyer proposal prepared. It retains the exact template' + (selection.advert ? ' and selected public projection. Verify the exact source before signing.' : '; no advert was selected.') + ' Both parties’ approval remains separate; nothing has been signed, published or paid.';
+      $('draft-state').textContent = 'Unsigned proposal prepared. Review the returned terms below. It retains the chosen structure' + (selection.advert ? ' and advert reference. Check the exact original offer before signing.' : '; no advert was selected.') + ' Both parties’ approval remains separate; nothing has been signed, published or paid.';
     } catch (error) {$('draft-state').textContent = 'Drafting did not complete: ' + error.message + ' Your input remains; no automatic retry was made.';}
     finally {drafting = false; $('draft-submit').disabled = false;}
   });
-  window.addEventListener('pagehide', () => {if (downloadUrl) URL.revokeObjectURL(downloadUrl);});
+  window.addEventListener('pagehide', () => {if (downloadUrl) URL.revokeObjectURL(downloadUrl); if (handoffUrl) URL.revokeObjectURL(handoffUrl);});
   $('market-search-button').disabled = false;
   $('draft-submit').disabled = !structures;
   search(false);
