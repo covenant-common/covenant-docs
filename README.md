@@ -30,7 +30,7 @@ Add `https://jupie202020.pythonanywhere.com/mcp` to a client that supports remot
 
 Private trial accounts have 29 operations for listings, trades, market records and payment instructions. Your own wallet signs and submits connected USDC payments on Base or Ethereum. The posted 0.5% fee is optional for this launch’s first 14 calendar days, then applies to new deals in supported currencies; the exact quote appears before approval. Card payments remain disconnected. [See payment choices](https://covenant-common.github.io/covenant-docs/docs/PAYMENTS.html).
 
-[Official MCP Registry listing](https://registry.modelcontextprotocol.io/v0.1/servers/io.github.covenant-common%2Fcovenant-aap/versions/0.46.0-pilot.20261031) · [Pilot feedback and commercial enquiries](https://github.com/covenant-common/covenant-docs/issues/1)
+[Official MCP Registry listing](https://registry.modelcontextprotocol.io/v0.1/servers/io.github.covenant-common%2Fcovenant-aap/versions/0.46.0-pilot.20261031.2) · [Pilot feedback and commercial enquiries](https://github.com/covenant-common/covenant-docs/issues/1)
 
 ## See the problem in a story
 

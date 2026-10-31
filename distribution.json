@@ -132,12 +132,12 @@
   "channels": {
     "official_mcp_registry": {
       "name": "io.github.covenant-common/covenant-aap",
-      "version": "0.46.0-pilot.20261031",
-      "url": "https://registry.modelcontextprotocol.io/v0.1/servers/io.github.covenant-common%2Fcovenant-aap/versions/0.46.0-pilot.20261031",
+      "version": "0.46.0-pilot.20261031.2",
+      "url": "https://registry.modelcontextprotocol.io/v0.1/servers/io.github.covenant-common%2Fcovenant-aap/versions/0.46.0-pilot.20261031.2",
       "status": "active",
       "verified_date": "2026-10-31",
-      "next_version": "0.46.0-pilot.20261031.2",
-      "next_version_status": "PREPARED_NOT_PUBLISHED"
+      "is_latest": true,
+      "published_at": "2026-10-31T11:19:20.002309Z"
     },
     "public_tester_and_commercial_thread": "https://github.com/covenant-common/covenant-docs/issues/1",
     "public_documentation_repository": "https://github.com/covenant-common/covenant-docs",
@@ -147,6 +147,24 @@
       "name": "Covenant / Agentic Agreements Protocol (AAP)",
       "endpoint": "https://jupie202020.pythonanywhere.com/mcp",
       "published_connector_url": null
+    },
+    "google_connected_apps": {
+      "status": "REGISTRATION_NOT_ESTABLISHED",
+      "application_url": "https://connected.google.com/console/help/?apply=",
+      "domain_verification": "NOT_ESTABLISHED",
+      "preview_is_approval": false,
+      "verified_date": "2026-10-31"
+    },
+    "smithery": {
+      "status": "NOT_SUBMITTED",
+      "submission_url": "https://smithery.ai/new",
+      "free_listing_terms_verified": false,
+      "verified_date": "2026-10-31"
+    },
+    "mcp_so": {
+      "status": "NOT_SUBMITTED_PAID_ROUTE_OUTSIDE_BUDGET",
+      "advertised_submission_fee_usd": 39,
+      "verified_date": "2026-10-31"
     }
   },
   "terminal_url": "https://covenant-common.github.io/covenant-docs/docs/TERMINAL.html",
@@ -174,5 +192,6 @@
     "landing_page": "https://covenant-common.github.io/covenant-docs/docs/START.html?source=referral",
     "automatic_credit": false,
     "tracking": "Bounded public source labels; no background analytics or verified conversion attribution."
-  }
+  },
+  "buyer_question_routes": "https://covenant-common.github.io/covenant-docs/distribution/buyer-routes.json"
 }

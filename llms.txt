@@ -50,7 +50,7 @@ Covenant helps people and their AI agents agree on work, set limits and keep tra
 
 ## Public distribution
 
-- [Official MCP Registry record](https://registry.modelcontextprotocol.io/v0.1/servers/io.github.covenant-common%2Fcovenant-aap/versions/0.46.0-pilot.20261031): active anonymous public MCP, hosted independently of the founder’s computer.
+- [Official MCP Registry record](https://registry.modelcontextprotocol.io/v0.1/servers/io.github.covenant-common%2Fcovenant-aap/versions/0.46.0-pilot.20261031.2): active anonymous public MCP, hosted independently of the founder’s computer.
 - [Pilot feedback and commercial thread](https://github.com/covenant-common/covenant-docs/issues/1): non-confidential workflow feedback and contact routes for testing, integrations, investment, licensing and project-controlled codebase acquisition enquiries.
 
 ## Connect an agent
