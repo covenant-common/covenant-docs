@@ -2888,7 +2888,8 @@
     "structural_metadata_url": "assets/capability-catalog.json",
     "public_package_registry_publication": "NOT_CLAIMED",
     "note": "79 owner-installed task routes. Route availability is separate from hosted tool availability; this public projection does not install or authorize a tool.",
-    "review_status": "CANDIDATE_CATALOGUE_PENDING_PR184_RELEASE"
+    "review_status": "MERGED_PR184_NOT_DEPLOYED_TO_PUBLIC_SERVICE",
+    "core_main_commit": "7078404eba377df8ae2560441cf31bd417b95415"
   },
   "summary": "Find the right coordination, agreement or marketplace workflow; inspect the actual host before acting.",
   "trust_boundary": [
