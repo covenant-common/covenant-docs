@@ -72,6 +72,13 @@
       "verified_date": "2026-10-31"
     },
     "public_tester_and_commercial_thread": "https://github.com/covenant-common/covenant-docs/issues/1",
-    "public_documentation_repository": "https://github.com/covenant-common/covenant-docs"
+    "public_documentation_repository": "https://github.com/covenant-common/covenant-docs",
+    "glama": {
+      "status": "pending_review",
+      "submitted_date": "2026-10-31",
+      "name": "Covenant / Agentic Agreements Protocol (AAP)",
+      "endpoint": "https://jupie202020.pythonanywhere.com/mcp",
+      "published_connector_url": null
+    }
   }
 }
