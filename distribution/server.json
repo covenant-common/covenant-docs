@@ -1,0 +1,24 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.covenant-common/covenant-aap",
+  "title": "Covenant AAP - public pilot",
+  "description": "Pilot: marketplace search, exact contract drafts and agreement review for agents.",
+  "version": "0.46.0-pilot.20261031",
+  "websiteUrl": "https://covenant-common.github.io/covenant-docs/docs/API_MCP.html",
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://virtual-limited-tribune-deutsch.trycloudflare.com/mcp"
+    }
+  ],
+  "_meta": {
+    "io.modelcontextprotocol.registry/publisher-provided": {
+      "deploymentStage": "temporary-public-pilot",
+      "publicToolCount": 9,
+      "productionSla": false,
+      "availability": "Requires the operator computer and tunnel to stay running. Hostname changes when tunnel is recreated.",
+      "accountOperations": "Separate operator-approved account; not exposed by this anonymous endpoint.",
+      "commercialEnquiries": "Testing, investment, licensing and project-controlled codebase acquisition enquiries through the project website."
+    }
+  }
+}

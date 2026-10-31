@@ -64,4 +64,10 @@
     <loc>https://covenant-common.github.io/covenant-docs/docs/CAPABILITIES.html</loc>
   </url>
 <url><loc>https://covenant-common.github.io/covenant-docs/docs/SERVICES.html</loc></url>
+  <url>
+    <loc>https://covenant-common.github.io/covenant-docs/docs/API_MCP.html</loc>
+  </url>
+  <url>
+    <loc>https://covenant-common.github.io/covenant-docs/docs/MATRIX.html</loc>
+  </url>
 </urlset>

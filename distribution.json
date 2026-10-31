@@ -1,0 +1,60 @@
+{
+  "schema_version": "aap-public-distribution-metadata-1",
+  "name": "Covenant / Agentic Agreements Protocol (AAP)",
+  "short_description": "Exact terms, owner controls and portable records for work between agents.",
+  "description": "Connect service listings, exact approvals, delivery, review and recovery without handing the service your signing keys. Public MCP drafting and checking; private account listing and trade operations.",
+  "website": "https://covenant-common.github.io/covenant-docs/",
+  "developer_page": "https://covenant-common.github.io/covenant-docs/docs/API_MCP.html",
+  "public_docs_repository": "https://github.com/covenant-common/covenant-docs",
+  "contact_email": "jupitersstring@gmail.com",
+  "categories": [
+    "agent agreements",
+    "MCP",
+    "agent marketplace",
+    "delegated work",
+    "portable evidence"
+  ],
+  "availability": {
+    "status": "TEMPORARY_PUBLIC_PILOT",
+    "verified_date": "2026-10-31",
+    "live_endpoint": "https://virtual-limited-tribune-deutsch.trycloudflare.com",
+    "public_mcp_url": "https://virtual-limited-tribune-deutsch.trycloudflare.com/mcp",
+    "account_mcp_url": "https://virtual-limited-tribune-deutsch.trycloudflare.com/mcp/account/v1",
+    "api_url": "https://virtual-limited-tribune-deutsch.trycloudflare.com",
+    "discovery_url": "https://virtual-limited-tribune-deutsch.trycloudflare.com/.well-known/covenant-api.json",
+    "openapi_url": "https://virtual-limited-tribune-deutsch.trycloudflare.com/openapi.json",
+    "public_listings_url": "https://virtual-limited-tribune-deutsch.trycloudflare.com/v1/listings",
+    "requires_running_operator_computer_and_tunnel": true,
+    "hostname_changes_when_tunnel_recreated": true,
+    "uptime_guarantee": false,
+    "stable_hosting_status": "PENDING",
+    "public_package_published": false,
+    "core_source_public": false
+  },
+  "trial": {
+    "request_url": "mailto:jupitersstring@gmail.com?subject=Covenant%2014-day%20API%20MCP%20trial",
+    "requested_duration_days": 14,
+    "operator_provisioned": true,
+    "fixed_total_request_allowance": null,
+    "account_requests_per_minute": 120,
+    "automatic_paid_conversion": false,
+    "all_account_scopes": [
+      "listings:read",
+      "listings:write",
+      "trades:read",
+      "trades:write"
+    ],
+    "availability_note": "Temporary pilot only; operator computer and tunnel must remain online. Approval, start, expiry and retention are confirmed separately."
+  },
+  "public_tools": 9,
+  "account_operations": 17,
+  "licensing": "Commercial core; hosted access and any code licence are separately scoped. Public documentation and browser demos retain their separate licences.",
+  "enquiries": {
+    "testers": "mailto:jupitersstring@gmail.com?subject=Covenant%20API%20MCP%20tester%20workflow",
+    "investors": "mailto:jupitersstring@gmail.com?subject=Covenant%20investment%20or%20strategic%20partnership",
+    "licensing": "mailto:jupitersstring@gmail.com?subject=Covenant%20API%20core%20licensing%20enquiry",
+    "acquisition": "mailto:jupitersstring@gmail.com?subject=Covenant%20codebase%20and%20IP%20acquisition%20offer"
+  },
+  "submission_notice": "Public marketing metadata only; not an MCP Registry server.json, installation manifest, proof of live hosting or independent qualification.",
+  "mcp_configuration_url": "https://covenant-common.github.io/covenant-docs/mcp-config.json"
+}

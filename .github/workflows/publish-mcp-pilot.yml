@@ -1,0 +1,66 @@
+name: Publish public MCP pilot metadata
+on:
+  workflow_dispatch:
+    inputs:
+      confirmation:
+        description: 'Type publish to list only the public pilot metadata in the MCP Registry'
+        required: true
+        type: string
+permissions:
+  contents: read
+  id-token: write
+concurrency:
+  group: publish-public-mcp-pilot
+  cancel-in-progress: false
+jobs:
+  publish:
+    if: github.repository == 'covenant-common/covenant-docs' && github.ref == 'refs/heads/main' && inputs.confirmation == 'publish'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - name: Get the exact public metadata and pinned official publisher
+        shell: bash
+        env:
+          METADATA_COMMIT: ${{ github.sha }}
+        run: |
+          set -euo pipefail
+          umask 077
+          curl --proto '=https' --tlsv1.2 --fail --silent --show-error --location --retry 2 --max-time 60 "https://raw.githubusercontent.com/covenant-common/covenant-docs/${METADATA_COMMIT}/distribution/server.json" -o server.json
+          curl --proto '=https' --tlsv1.2 --fail --silent --show-error --location --retry 2 --max-time 60 https://github.com/modelcontextprotocol/registry/releases/download/v1.8.7/mcp-publisher_linux_amd64.tar.gz -o publisher.tar.gz
+          printf '%s  %s\n' 00b21004149a4ce66f0782508ae4a2bce67d1bea395a8da0bd8028159fb59579 publisher.tar.gz | sha256sum --check
+          tar -xzf publisher.tar.gz mcp-publisher
+          chmod 700 mcp-publisher
+      - name: Verify the live public service before listing it
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'VERIFY'
+          import json, urllib.request
+          from urllib.parse import urlsplit
+          record = json.load(open('server.json'))
+          assert record['name'] == 'io.github.covenant-common/covenant-aap'
+          assert not record.get('packages') and not record.get('repository')
+          assert len(record['remotes']) == 1
+          url = record['remotes'][0]['url']
+          assert urlsplit(url).scheme == 'https' and urlsplit(url).path == '/mcp'
+          headers = {'Content-Type':'application/json','Accept':'application/json, text/event-stream','MCP-Protocol-Version':'2025-11-25'}
+          def call(method, params, ident):
+              data=json.dumps({'jsonrpc':'2.0','id':ident,'method':method,'params':params}).encode()
+              with urllib.request.urlopen(urllib.request.Request(url,data,headers),timeout=20) as response:
+                  assert response.status == 200
+                  result=json.load(response)
+                  assert 'error' not in result
+                  return result['result']
+          result=call('initialize',{'protocolVersion':'2025-11-25','capabilities':{},'clientInfo':{'name':'aap-public-pilot-listing','version':'1'}},1)
+          assert result['protocolVersion']=='2025-11-25'
+          tools=call('tools/list',{},2)['tools']
+          assert len(tools)==9 and any(t['name']=='covenant_contract__draft' for t in tools)
+          print('Public MCP handshake and nine live tools verified from hosted runner.')
+          VERIFY
+          ./mcp-publisher validate server.json
+      - name: Publish metadata through short-lived GitHub identity
+        shell: bash
+        run: |
+          set -euo pipefail
+          ./mcp-publisher login github-oidc
+          ./mcp-publisher publish server.json

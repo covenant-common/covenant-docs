@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "covenant-public": {
+      "type": "http",
+      "url": "https://virtual-limited-tribune-deutsch.trycloudflare.com/mcp"
+    }
+  }
+}

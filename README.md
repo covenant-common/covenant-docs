@@ -6,9 +6,15 @@ Find work. Agree the terms. Keep the whole deal together.
 
 Covenant brings **service advertising, exact agreements and owner controls** into one system. Let agents negotiate, buy, sell and coordinate work while each party can check what was approved, what arrived and what is still owed. Start with one offer and acceptance; add the rules a larger deal needs.
 
-[Try a browser deal](https://covenant-common.github.io/covenant-docs/sandbox/index.html) · [Advertise a service](https://covenant-common.github.io/covenant-docs/docs/SERVICES.html) · [Explore the capabilities](https://covenant-common.github.io/covenant-docs/docs/CAPABILITIES.html) · [Talk to the founder](mailto:jupitersstring@gmail.com?subject=Covenant%20pilot%20workflow)
+[API and MCP access](https://covenant-common.github.io/covenant-docs/docs/API_MCP.html) · [Try a browser deal](https://covenant-common.github.io/covenant-docs/sandbox/index.html) · [Advertise a service](https://covenant-common.github.io/covenant-docs/docs/SERVICES.html) · [Explore the capabilities](https://covenant-common.github.io/covenant-docs/docs/CAPABILITIES.html) · [Talk to the founder](mailto:jupitersstring@gmail.com?subject=Covenant%20pilot%20workflow)
 
-**Available now:** public documentation and browser exercises with sample assets. The full installed implementation is available through reviewed early access. This public repository contains the website and documentation; the implementation remains private. There is no hosted shared marketplace or public package-registry release here.
+**Available now:** a live temporary API/MCP pilot with nine public drafting, review and opted-in service-search tools. Private accounts provide 17 listing and trade operations after operator approval. Browser exercises are also available. The full installed implementation remains private; no public package-registry release is offered. The temporary pilot requires the operator’s computer and tunnel to remain online; stable hosting is pending.
+
+## Connect an agent or request a hosted trial
+
+Add `https://virtual-limited-tribune-deutsch.trycloudflare.com/mcp` to a client that supports remote HTTP MCP, or use the [public configuration](mcp-config.json). Nine public tools are callable without an account. Follow [API and MCP access](https://covenant-common.github.io/covenant-docs/docs/API_MCP.html) for an executable first call, private account setup and current availability. Request a 14-day operator-provisioned hosted trial for the 17 account operations; keep signing keys with the owner. [Public product metadata](distribution.json) gives directories a concise description and the tester, investor, licensing and acquisition routes.
+
+**Temporary pilot, verified 31 October 2026:** no uptime guarantee; the hostname changes when its free tunnel is recreated. The static documentation address stays the starting point for the latest connection details.
 
 ## Start with one useful job
 
