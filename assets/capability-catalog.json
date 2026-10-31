@@ -1,0 +1,1159 @@
+{
+  "profile": "urn:aap:levels:0.2",
+  "note": "Placement orders features; it never grants authority, changes a signed meaning or removes a feature.",
+  "order": [
+    "ORGANON",
+    "L0",
+    "L1",
+    "L2",
+    "L3",
+    "L4"
+  ],
+  "core_levels": [
+    "ORGANON",
+    "L0",
+    "L1",
+    "L2",
+    "L3"
+  ],
+  "levels": [
+    {
+      "id": "ORGANON",
+      "name": "Organon",
+      "cause": "instrument",
+      "question": "How does an agent find its way?",
+      "scope": "Onboarding, navigation, explanation, servers, command lines, configuration and demonstrations. Instruments serve every level and hold no authority."
+    },
+    {
+      "id": "L0",
+      "name": "Matter",
+      "cause": "material",
+      "question": "What is an agreement made of?",
+      "scope": "Canonical bytes, hashes and content identifiers, signature suites, keys and identities, proofs, privacy envelopes, time and place evidence, and the carriers that move bytes (files, QR, NFC, Bluetooth, mesh radio)."
+    },
+    {
+      "id": "L1",
+      "name": "Form",
+      "cause": "formal",
+      "question": "What is the agreement?",
+      "scope": "The envelope: identified parties, exact typed terms and acceptance criteria, negotiation, meaning echoes, pre-signature checks, assent by authorised parties, revision and supersession."
+    },
+    {
+      "id": "L2",
+      "name": "Act",
+      "cause": "efficient",
+      "question": "How does the promise become performance?",
+      "scope": "Delivery, payment legs and rails (manual, AAP escrow, AP2, x402), tool-call and outcome receipts, bindings to MCP and A2A, effects and adapters."
+    },
+    {
+      "id": "L3",
+      "name": "Justice",
+      "cause": "corrective",
+      "question": "How is a broken promise made right?",
+      "scope": "Evidence, the dispute ladder from optimistic claim to negotiation, arbitrator, panel and appeal, bonds, remedies and reviewed outcomes."
+    },
+    {
+      "id": "L4",
+      "name": "Polis",
+      "cause": "final",
+      "question": "How do many agreements live together?",
+      "scope": "Reputation, discovery and requests, markets, auctions and ads, organisations and mandates at scale, witnesses and the shared ledger, economics, governance and research extensions."
+    }
+  ],
+  "categories": [
+    {
+      "id": "substance",
+      "meaning": "Who: parties, roles and identities"
+    },
+    {
+      "id": "quantity",
+      "meaning": "How much: amounts, units and counts"
+    },
+    {
+      "id": "quality",
+      "meaning": "What kind: specifications and acceptance criteria"
+    },
+    {
+      "id": "relation",
+      "meaning": "Towards whom: beneficiaries, delegation, precedence, supersession"
+    },
+    {
+      "id": "place",
+      "meaning": "Where: delivery point, location evidence, seat or jurisdiction"
+    },
+    {
+      "id": "time",
+      "meaning": "When: deadlines and windows, judged as evidence intervals"
+    },
+    {
+      "id": "position",
+      "meaning": "In what state: each obligation’s lifecycle state"
+    },
+    {
+      "id": "having",
+      "meaning": "Held how: escrow, custody, collateral"
+    },
+    {
+      "id": "action",
+      "meaning": "Doing: deliver, pay, notify, perform"
+    },
+    {
+      "id": "affection",
+      "meaning": "Being done to: receive, accept, dispute, be bound"
+    }
+  ],
+  "species": [
+    {
+      "id": "exchange",
+      "differentia": "goods or digital items for value"
+    },
+    {
+      "id": "service",
+      "differentia": "work for value"
+    },
+    {
+      "id": "credit",
+      "differentia": "value now for value later"
+    },
+    {
+      "id": "licence",
+      "differentia": "use of a right for value"
+    },
+    {
+      "id": "risk",
+      "differentia": "value contingent on an uncertain event"
+    },
+    {
+      "id": "association",
+      "differentia": "a common purpose among members"
+    },
+    {
+      "id": "agency",
+      "differentia": "acting for another within limits"
+    },
+    {
+      "id": "legal-instrument",
+      "differentia": "a composed legal document with its own assent rules"
+    }
+  ],
+  "maturity": [
+    "experimental",
+    "beta",
+    "stable"
+  ],
+  "source": {
+    "file": "aap_levels.json",
+    "sha256": "509073d0094a3f27dd65f107318155498351f1d2b5d5f09ee762878c67f376e1",
+    "projection": "Public interface metadata only; no implementation modules or source."
+  },
+  "tools": {
+    "covenant_a2a": {
+      "level": "L2",
+      "core": false,
+      "maturity": "beta",
+      "species": null
+    },
+    "covenant_a2a_agreement": {
+      "level": "L2",
+      "core": true,
+      "maturity": "beta",
+      "species": null
+    },
+    "covenant_accept": {
+      "level": "L1",
+      "core": true,
+      "maturity": "beta",
+      "species": null
+    },
+    "covenant_acceptance_test": {
+      "level": "L2",
+      "core": false,
+      "maturity": "experimental",
+      "species": null
+    },
+    "covenant_access": {
+      "level": "L2",
+      "core": false,
+      "maturity": "beta",
+      "species": null
+    },
+    "covenant_access_challenge": {
+      "level": "L2",
+      "core": false,
+      "maturity": "beta",
+      "species": null
+    },
+    "covenant_accreditation": {
+      "level": "L0",
+      "core": false,
+      "maturity": "experimental",
+      "species": null
+    },
+    "covenant_action": {
+      "level": "ORGANON",
+      "core": true,
+      "maturity": "beta",
+      "species": null
+    },
+    "covenant_ad_report": {
+      "level": "L4",
+      "core": false,
+      "maturity": "beta",
+      "species": null
+    },
+    "covenant_adjudication": {
+      "level": "L3",
+      "core": false,
+      "maturity": "experimental",
+      "species": null
+    },
+    "covenant_ads": {
+      "level": "L4",
+      "core": false,
+      "maturity": "beta",
+      "species": null
+    },
+    "covenant_advanced": {
+      "level": "ORGANON",
+      "core": false,
+      "maturity": "beta",
+      "species": null
+    },
+    "covenant_advertise": {
+      "level": "L4",
+      "core": false,
+      "maturity": "beta",
+      "species": null
+    },
+    "covenant_agora": {
+      "level": "L1",
+      "core": false,
+      "maturity": "beta",
+      "species": null
+    },
+    "covenant_agora_peer": {
+      "level": "L2",
+      "core": false,
+      "maturity": "experimental",
+      "species": null
+    },
+    "covenant_agreement": {
+      "level": "L1",
+      "core": true,
+      "maturity": "beta",
+      "species": null
+    },
+    "covenant_agreement_procedure": {
+      "level": "L3",
+      "core": true,
+      "maturity": "beta",
+      "species": null
+    },
+    "covenant_arbitration": {
+      "level": "L3",
+      "core": false,
+      "maturity": "beta",
+      "species": null
+    },
+    "covenant_arbitration_interop": {
+      "level": "L3",
+      "core": false,
+      "maturity": "experimental",
+      "species": null
+    },
+    "covenant_arbitrators_search": {
+      "level": "L3",
+      "core": false,
+      "maturity": "beta",
+      "species": null
+    },
+    "covenant_assent_review": {
+      "level": "L1",
+      "core": false,
+      "maturity": "experimental",
+      "species": null
+    },
+    "covenant_atr_rail": {
+      "level": "L2",
+      "core": false,
+      "maturity": "experimental",
+      "species": null
+    },
+    "covenant_attention": {
+      "level": "L4",
+      "core": false,
+      "maturity": "beta",
+      "species": null
+    },
+    "covenant_auction": {
+      "level": "L4",
+      "core": false,
+      "maturity": "beta",
+      "species": "exchange"
+    },
+    "covenant_builder": {
+      "level": "L2",
+      "core": false,
+      "maturity": "beta",
+      "species": null
+    },
+    "covenant_call": {
+      "level": "ORGANON",
+      "core": true,
+      "maturity": "beta",
+      "species": null
+    },
+    "covenant_check": {
+      "level": "L1",
+      "core": true,
+      "maturity": "beta",
+      "species": null
+    },
+    "covenant_commerce": {
+      "level": "L2",
+      "core": false,
+      "maturity": "experimental",
+      "species": null
+    },
+    "covenant_compare": {
+      "level": "L1",
+      "core": true,
+      "maturity": "beta",
+      "species": null
+    },
+    "covenant_compute": {
+      "level": "L2",
+      "core": false,
+      "maturity": "beta",
+      "species": null
+    },
+    "covenant_concept": {
+      "level": "L1",
+      "core": false,
+      "maturity": "beta",
+      "species": null
+    },
+    "covenant_connect": {
+      "level": "ORGANON",
+      "core": false,
+      "maturity": "experimental",
+      "species": null
+    },
+    "covenant_connectivity": {
+      "level": "L2",
+      "core": false,
+      "maturity": "beta",
+      "species": null
+    },
+    "covenant_connector": {
+      "level": "L2",
+      "core": false,
+      "maturity": "beta",
+      "species": null
+    },
+    "covenant_consensus_vote": {
+      "level": "L4",
+      "core": false,
+      "maturity": "beta",
+      "species": null
+    },
+    "covenant_continue": {
+      "level": "ORGANON",
+      "core": false,
+      "maturity": "experimental",
+      "species": null
+    },
+    "covenant_contract": {
+      "level": "L1",
+      "core": false,
+      "maturity": "beta",
+      "species": null
+    },
+    "covenant_contract_application": {
+      "level": "L1",
+      "core": true,
+      "maturity": "beta",
+      "species": null
+    },
+    "covenant_contract_design": {
+      "level": "L1",
+      "core": false,
+      "maturity": "beta",
+      "species": null
+    },
+    "covenant_counter": {
+      "level": "L1",
+      "core": true,
+      "maturity": "beta",
+      "species": null
+    },
+    "covenant_crawl_licence": {
+      "level": "L4",
+      "core": false,
+      "maturity": "experimental",
+      "species": null
+    },
+    "covenant_credential": {
+      "level": "L0",
+      "core": false,
+      "maturity": "beta",
+      "species": null
+    },
+    "covenant_credit": {
+      "level": "L1",
+      "core": false,
+      "maturity": "beta",
+      "species": "credit"
+    },
+    "covenant_deal_review": {
+      "level": "L1",
+      "core": false,
+      "maturity": "experimental",
+      "species": null
+    },
+    "covenant_decision": {
+      "level": "L1",
+      "core": false,
+      "maturity": "beta",
+      "species": null
+    },
+    "covenant_deliver": {
+      "level": "L2",
+      "core": true,
+      "maturity": "beta",
+      "species": null
+    },
+    "covenant_delivery": {
+      "level": "L2",
+      "core": true,
+      "maturity": "beta",
+      "species": null
+    },
+    "covenant_desire": {
+      "level": "L4",
+      "core": false,
+      "maturity": "beta",
+      "species": null
+    },
+    "covenant_developer": {
+      "level": "L2",
+      "core": false,
+      "maturity": "beta",
+      "species": null
+    },
+    "covenant_directory": {
+      "level": "L4",
+      "core": false,
+      "maturity": "beta",
+      "species": null
+    },
+    "covenant_directory_write": {
+      "level": "L4",
+      "core": false,
+      "maturity": "beta",
+      "species": null
+    },
+    "covenant_disclosure": {
+      "level": "L0",
+      "core": false,
+      "maturity": "beta",
+      "species": null
+    },
+    "covenant_discover": {
+      "level": "ORGANON",
+      "core": false,
+      "maturity": "beta",
+      "species": null
+    },
+    "covenant_discovery": {
+      "level": "L4",
+      "core": false,
+      "maturity": "beta",
+      "species": null
+    },
+    "covenant_dispute": {
+      "level": "L3",
+      "core": true,
+      "maturity": "beta",
+      "species": null
+    },
+    "covenant_dispute_forum": {
+      "level": "L3",
+      "core": false,
+      "maturity": "experimental",
+      "species": null
+    },
+    "covenant_draft": {
+      "level": "L1",
+      "core": true,
+      "maturity": "beta",
+      "species": null
+    },
+    "covenant_economics": {
+      "level": "L4",
+      "core": false,
+      "maturity": "beta",
+      "species": null
+    },
+    "covenant_escrow": {
+      "level": "L2",
+      "core": true,
+      "maturity": "beta",
+      "species": null
+    },
+    "covenant_evidence": {
+      "level": "L2",
+      "core": false,
+      "maturity": "beta",
+      "species": null
+    },
+    "covenant_evidence_export": {
+      "level": "L2",
+      "core": false,
+      "maturity": "beta",
+      "species": null
+    },
+    "covenant_evidence_import": {
+      "level": "L2",
+      "core": false,
+      "maturity": "beta",
+      "species": null
+    },
+    "covenant_exchange": {
+      "level": "L2",
+      "core": true,
+      "maturity": "beta",
+      "species": null
+    },
+    "covenant_execution_security": {
+      "level": "ORGANON",
+      "core": false,
+      "maturity": "experimental",
+      "species": null
+    },
+    "covenant_explain": {
+      "level": "ORGANON",
+      "core": true,
+      "maturity": "beta",
+      "species": null
+    },
+    "covenant_extensions": {
+      "level": "ORGANON",
+      "core": false,
+      "maturity": "experimental",
+      "species": null
+    },
+    "covenant_external_draft": {
+      "level": "L1",
+      "core": false,
+      "maturity": "beta",
+      "species": null
+    },
+    "covenant_feedback": {
+      "level": "ORGANON",
+      "core": false,
+      "maturity": "beta",
+      "species": null
+    },
+    "covenant_find": {
+      "level": "ORGANON",
+      "core": true,
+      "maturity": "beta",
+      "species": null
+    },
+    "covenant_forget": {
+      "level": "L0",
+      "core": false,
+      "maturity": "beta",
+      "species": null
+    },
+    "covenant_formula_check": {
+      "level": "L1",
+      "core": false,
+      "maturity": "experimental",
+      "species": null
+    },
+    "covenant_formula_eval": {
+      "level": "L1",
+      "core": false,
+      "maturity": "beta",
+      "species": null
+    },
+    "covenant_formula_parse": {
+      "level": "L0",
+      "core": false,
+      "maturity": "beta",
+      "species": null
+    },
+    "covenant_formula_schedule": {
+      "level": "L1",
+      "core": false,
+      "maturity": "experimental",
+      "species": null
+    },
+    "covenant_forum_read": {
+      "level": "L4",
+      "core": false,
+      "maturity": "beta",
+      "species": null
+    },
+    "covenant_forum_write": {
+      "level": "L4",
+      "core": false,
+      "maturity": "beta",
+      "species": null
+    },
+    "covenant_frame": {
+      "level": "L1",
+      "core": false,
+      "maturity": "beta",
+      "species": null
+    },
+    "covenant_fuse": {
+      "level": "L4",
+      "core": false,
+      "maturity": "beta",
+      "species": null
+    },
+    "covenant_game": {
+      "level": "L4",
+      "core": false,
+      "maturity": "experimental",
+      "species": "risk"
+    },
+    "covenant_git_anchor": {
+      "level": "L0",
+      "core": false,
+      "maturity": "experimental",
+      "species": null
+    },
+    "covenant_growth": {
+      "level": "L4",
+      "core": false,
+      "maturity": "beta",
+      "species": null
+    },
+    "covenant_hire": {
+      "level": "L4",
+      "core": false,
+      "maturity": "beta",
+      "species": "exchange"
+    },
+    "covenant_id": {
+      "level": "L0",
+      "core": true,
+      "maturity": "beta",
+      "species": null
+    },
+    "covenant_identity": {
+      "level": "L0",
+      "core": false,
+      "maturity": "beta",
+      "species": null
+    },
+    "covenant_identity_challenge": {
+      "level": "L0",
+      "core": true,
+      "maturity": "beta",
+      "species": null
+    },
+    "covenant_identity_discovery": {
+      "level": "L0",
+      "core": false,
+      "maturity": "experimental",
+      "species": null
+    },
+    "covenant_independent_replay": {
+      "level": "L0",
+      "core": false,
+      "maturity": "beta",
+      "species": null
+    },
+    "covenant_index": {
+      "level": "L4",
+      "core": false,
+      "maturity": "experimental",
+      "species": null
+    },
+    "covenant_intent_market": {
+      "level": "L4",
+      "core": false,
+      "maturity": "beta",
+      "species": "exchange"
+    },
+    "covenant_interoperate": {
+      "level": "L2",
+      "core": true,
+      "maturity": "beta",
+      "species": null
+    },
+    "covenant_invite": {
+      "level": "L1",
+      "core": false,
+      "maturity": "beta",
+      "species": null
+    },
+    "covenant_lcp": {
+      "level": "L1",
+      "core": false,
+      "maturity": "experimental",
+      "species": null
+    },
+    "covenant_lcp_buyer": {
+      "level": "L1",
+      "core": false,
+      "maturity": "experimental",
+      "species": null
+    },
+    "covenant_legal": {
+      "level": "L1",
+      "core": false,
+      "maturity": "beta",
+      "species": "legal-instrument"
+    },
+    "covenant_light_verify": {
+      "level": "L0",
+      "core": false,
+      "maturity": "beta",
+      "species": null
+    },
+    "covenant_lint": {
+      "level": "L1",
+      "core": true,
+      "maturity": "beta",
+      "species": null
+    },
+    "covenant_make": {
+      "level": "L1",
+      "core": false,
+      "maturity": "beta",
+      "species": null
+    },
+    "covenant_market": {
+      "level": "L4",
+      "core": false,
+      "maturity": "beta",
+      "species": "exchange"
+    },
+    "covenant_market_blueprint": {
+      "level": "L4",
+      "core": false,
+      "maturity": "beta",
+      "species": "exchange"
+    },
+    "covenant_marketplace": {
+      "level": "L4",
+      "core": false,
+      "maturity": "beta",
+      "species": "exchange"
+    },
+    "covenant_marketplace__quick_trade": {
+      "level": "L4",
+      "core": false,
+      "maturity": "beta",
+      "species": "exchange"
+    },
+    "covenant_marketplace_publish": {
+      "level": "L4",
+      "core": false,
+      "maturity": "beta",
+      "species": "exchange"
+    },
+    "covenant_marketplace_read": {
+      "level": "L4",
+      "core": false,
+      "maturity": "beta",
+      "species": "exchange"
+    },
+    "covenant_mechanism": {
+      "level": "L2",
+      "core": false,
+      "maturity": "beta",
+      "species": null
+    },
+    "covenant_mechanism_call": {
+      "level": "L2",
+      "core": false,
+      "maturity": "beta",
+      "species": null
+    },
+    "covenant_memory": {
+      "level": "ORGANON",
+      "core": false,
+      "maturity": "beta",
+      "species": null
+    },
+    "covenant_negotiate": {
+      "level": "L1",
+      "core": false,
+      "maturity": "beta",
+      "species": null
+    },
+    "covenant_network_trust": {
+      "level": "L4",
+      "core": false,
+      "maturity": "beta",
+      "species": null
+    },
+    "covenant_next": {
+      "level": "ORGANON",
+      "core": true,
+      "maturity": "beta",
+      "species": null
+    },
+    "covenant_obligations": {
+      "level": "L2",
+      "core": false,
+      "maturity": "beta",
+      "species": null
+    },
+    "covenant_offer": {
+      "level": "L4",
+      "core": false,
+      "maturity": "experimental",
+      "species": "exchange"
+    },
+    "covenant_offline": {
+      "level": "L1",
+      "core": false,
+      "maturity": "beta",
+      "species": null
+    },
+    "covenant_offline_trade": {
+      "level": "L2",
+      "core": false,
+      "maturity": "experimental",
+      "species": null
+    },
+    "covenant_onboard": {
+      "level": "ORGANON",
+      "core": true,
+      "maturity": "beta",
+      "species": null
+    },
+    "covenant_org": {
+      "level": "L4",
+      "core": false,
+      "maturity": "beta",
+      "species": "association"
+    },
+    "covenant_panel_vote": {
+      "level": "L3",
+      "core": true,
+      "maturity": "beta",
+      "species": null
+    },
+    "covenant_permutation": {
+      "level": "L0",
+      "core": false,
+      "maturity": "beta",
+      "species": null
+    },
+    "covenant_pick_sponsor": {
+      "level": "L4",
+      "core": false,
+      "maturity": "beta",
+      "species": null
+    },
+    "covenant_portable_agreement": {
+      "level": "L1",
+      "core": false,
+      "maturity": "beta",
+      "species": null
+    },
+    "covenant_portable_trust": {
+      "level": "L0",
+      "core": false,
+      "maturity": "beta",
+      "species": null
+    },
+    "covenant_prediction": {
+      "level": "L4",
+      "core": false,
+      "maturity": "experimental",
+      "species": "risk"
+    },
+    "covenant_prepare": {
+      "level": "L1",
+      "core": true,
+      "maturity": "beta",
+      "species": null
+    },
+    "covenant_principal": {
+      "level": "L1",
+      "core": false,
+      "maturity": "beta",
+      "species": null
+    },
+    "covenant_privacy": {
+      "level": "L0",
+      "core": false,
+      "maturity": "beta",
+      "species": null
+    },
+    "covenant_procedures": {
+      "level": "L4",
+      "core": false,
+      "maturity": "beta",
+      "species": null
+    },
+    "covenant_proof": {
+      "level": "L0",
+      "core": true,
+      "maturity": "beta",
+      "species": null
+    },
+    "covenant_propose": {
+      "level": "L1",
+      "core": true,
+      "maturity": "beta",
+      "species": null
+    },
+    "covenant_prove": {
+      "level": "L0",
+      "core": true,
+      "maturity": "beta",
+      "species": null
+    },
+    "covenant_provider": {
+      "level": "L2",
+      "core": false,
+      "maturity": "beta",
+      "species": null
+    },
+    "covenant_public_web": {
+      "level": "L4",
+      "core": false,
+      "maturity": "beta",
+      "species": null
+    },
+    "covenant_publish_procedure": {
+      "level": "L4",
+      "core": false,
+      "maturity": "beta",
+      "species": null
+    },
+    "covenant_rank": {
+      "level": "L4",
+      "core": false,
+      "maturity": "beta",
+      "species": null
+    },
+    "covenant_recall": {
+      "level": "L4",
+      "core": false,
+      "maturity": "beta",
+      "species": null
+    },
+    "covenant_recovery": {
+      "level": "L0",
+      "core": false,
+      "maturity": "beta",
+      "species": null
+    },
+    "covenant_reflex": {
+      "level": "L4",
+      "core": false,
+      "maturity": "beta",
+      "species": null
+    },
+    "covenant_release_manifest": {
+      "level": "ORGANON",
+      "core": false,
+      "maturity": "beta",
+      "species": null
+    },
+    "covenant_reliance": {
+      "level": "L2",
+      "core": false,
+      "maturity": "beta",
+      "species": null
+    },
+    "covenant_representation": {
+      "level": "L1",
+      "core": false,
+      "maturity": "experimental",
+      "species": "agency"
+    },
+    "covenant_reputation": {
+      "level": "L4",
+      "core": false,
+      "maturity": "beta",
+      "species": null
+    },
+    "covenant_request": {
+      "level": "L4",
+      "core": false,
+      "maturity": "beta",
+      "species": null
+    },
+    "covenant_request_write": {
+      "level": "L4",
+      "core": false,
+      "maturity": "beta",
+      "species": null
+    },
+    "covenant_resource": {
+      "level": "L0",
+      "core": true,
+      "maturity": "beta",
+      "species": null
+    },
+    "covenant_review": {
+      "level": "L3",
+      "core": true,
+      "maturity": "beta",
+      "species": null
+    },
+    "covenant_robotics": {
+      "level": "L2",
+      "core": false,
+      "maturity": "experimental",
+      "species": "service"
+    },
+    "covenant_roles": {
+      "level": "L4",
+      "core": false,
+      "maturity": "beta",
+      "species": "association"
+    },
+    "covenant_settle": {
+      "level": "L2",
+      "core": true,
+      "maturity": "beta",
+      "species": null
+    },
+    "covenant_settlement": {
+      "level": "L2",
+      "core": false,
+      "maturity": "experimental",
+      "species": null
+    },
+    "covenant_signal": {
+      "level": "L4",
+      "core": false,
+      "maturity": "beta",
+      "species": null
+    },
+    "covenant_signin": {
+      "level": "L0",
+      "core": false,
+      "maturity": "beta",
+      "species": null
+    },
+    "covenant_simulate": {
+      "level": "ORGANON",
+      "core": false,
+      "maturity": "beta",
+      "species": null
+    },
+    "covenant_sla_event": {
+      "level": "L2",
+      "core": false,
+      "maturity": "experimental",
+      "species": null
+    },
+    "covenant_standards": {
+      "level": "L2",
+      "core": false,
+      "maturity": "beta",
+      "species": null
+    },
+    "covenant_stripe": {
+      "level": "L2",
+      "core": false,
+      "maturity": "experimental",
+      "species": null
+    },
+    "covenant_submit_evidence": {
+      "level": "L3",
+      "core": true,
+      "maturity": "beta",
+      "species": null
+    },
+    "covenant_surface": {
+      "level": "ORGANON",
+      "core": false,
+      "maturity": "beta",
+      "species": null
+    },
+    "covenant_task": {
+      "level": "ORGANON",
+      "core": false,
+      "maturity": "beta",
+      "species": null
+    },
+    "covenant_threat": {
+      "level": "L4",
+      "core": false,
+      "maturity": "beta",
+      "species": null
+    },
+    "covenant_token": {
+      "level": "L4",
+      "core": false,
+      "maturity": "beta",
+      "species": null
+    },
+    "covenant_tool": {
+      "level": "L2",
+      "core": true,
+      "maturity": "beta",
+      "species": null
+    },
+    "covenant_tool_catalog": {
+      "level": "ORGANON",
+      "core": false,
+      "maturity": "beta",
+      "species": null
+    },
+    "covenant_trade": {
+      "level": "ORGANON",
+      "core": false,
+      "maturity": "experimental",
+      "species": null
+    },
+    "covenant_trust_evidence": {
+      "level": "L0",
+      "core": false,
+      "maturity": "experimental",
+      "species": null
+    },
+    "covenant_update": {
+      "level": "ORGANON",
+      "core": false,
+      "maturity": "beta",
+      "species": null
+    },
+    "covenant_validator_propose": {
+      "level": "L4",
+      "core": false,
+      "maturity": "beta",
+      "species": null
+    },
+    "covenant_verify": {
+      "level": "L0",
+      "core": true,
+      "maturity": "beta",
+      "species": null
+    },
+    "covenant_vote": {
+      "level": "L4",
+      "core": false,
+      "maturity": "beta",
+      "species": null
+    },
+    "covenant_wager": {
+      "level": "L4",
+      "core": false,
+      "maturity": "experimental",
+      "species": "risk"
+    },
+    "preview_cooperation": {
+      "level": "ORGANON",
+      "core": false,
+      "maturity": "beta",
+      "species": null
+    }
+  }
+}

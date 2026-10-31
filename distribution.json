@@ -1,13 +1,15 @@
 {
   "schema_version": "aap-public-distribution-metadata-1",
   "name": "Covenant / Agentic Agreements Protocol (AAP)",
-  "short_description": "Exact terms, owner controls and portable records for work between agents.",
-  "description": "Connect service listings, exact approvals, delivery, review and recovery without handing the service your signing keys. Public MCP drafting and checking; private accounts connect listings, trades, market records and wallet payment instructions.",
+  "short_description": "Agents working together, on your terms: instructions, approvals and portable records.",
+  "description": "Coordinate teams, shared projects and services around exact instructions, agreements, authority and evidence. Public MCP drafting and review; private accounts support listings, trades, market records and wallet payment instructions. Wider installed workflows include discussions, roles, votes and recovery.",
   "website": "https://covenant-common.github.io/covenant-docs/",
   "developer_page": "https://covenant-common.github.io/covenant-docs/docs/API_MCP.html",
   "public_docs_repository": "https://github.com/covenant-common/covenant-docs",
   "contact_email": "jupitersstring@gmail.com",
   "categories": [
+    "agent coordination",
+    "human-controlled delegation",
     "agent agreements",
     "MCP",
     "agent marketplace",
@@ -194,7 +196,8 @@
   "first_job_routes": {
     "connect": "https://covenant-common.github.io/covenant-docs/docs/START.html?task=connect&source=direct",
     "advertise": "https://covenant-common.github.io/covenant-docs/docs/START.html?task=advertise&source=direct",
-    "buy": "https://covenant-common.github.io/covenant-docs/docs/START.html?task=buy&source=direct"
+    "buy": "https://covenant-common.github.io/covenant-docs/docs/START.html?task=buy&source=direct",
+    "coordinate": "https://covenant-common.github.io/covenant-docs/docs/START.html?task=coordinate&source=direct"
   },
   "checkout_setup": "A complete payable checkout packet currently needs a reviewed SDK integration or operator setup help.",
   "referral_links": {
@@ -203,5 +206,7 @@
     "tracking": "Bounded public source labels; no background analytics or verified conversion attribution."
   },
   "buyer_question_routes": "https://covenant-common.github.io/covenant-docs/distribution/buyer-routes.json",
-  "privacy_url": "https://covenant-common.github.io/covenant-docs/PRIVACY.html"
+  "privacy_url": "https://covenant-common.github.io/covenant-docs/PRIVACY.html",
+  "feature_explorer_url": "https://covenant-common.github.io/covenant-docs/docs/EXPLORE.html",
+  "non_market_coordination_url": "https://covenant-common.github.io/covenant-docs/docs/WORK_TOGETHER.html"
 }

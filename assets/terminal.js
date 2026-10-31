@@ -3,6 +3,16 @@
 (() => {
   const CATALOGUE = [
   {
+    "id": "coordination", "title": "Work together", "summary": "Coordinate a shared project, responsibilities and review without requiring a payment.",
+    "keywords": "coordinate coordination cooperate cooperation collaboration collaborate non monetary noncommercial project teamwork shared research volunteer",
+    "href": "WORK_TOGETHER.html", "access": "installed", "group": "Common ground", "links": ["groups", "forums", "voting", "delegation", "reuse", "milestones"], "link_source": "WORK_TOGETHER.html"
+  },
+  {
+    "id": "contact", "title": "Contact a human", "summary": "Use an adopted contact adapter with an approved recipient, message, channel and cost limit.",
+    "keywords": "contact human person recipient phone call email sms reach message send approved notification",
+    "href": "CAPABILITIES.html#integrations", "access": "installed", "group": "Connections", "links": ["delegation", "identity", "connect"], "link_source": "CAPABILITIES.html#integrations"
+  },
+  {
     "id": "services",
     "title": "Find a service",
     "summary": "Search actual owner-published services and resources.",
@@ -455,8 +465,14 @@
   // Maintained, inspectable task taxonomy. It classifies the requested action,
   // not an inferred identity, reputation score, observed use or paid placement.
   const INTENT_RULES = Object.freeze([
+    {id: 'contact-human', actions: ['send', 'contact', 'call', 'email', 'reach', 'text'], objects: ['human', 'person', 'people', 'recipient', 'phone', 'email'], primary: ['contact'], related: ['delegation', 'connect']},
+    {id: 'moderate', actions: ['appoint', 'assign', 'moderate', 'replace', 'remove'], objects: ['moderator', 'moderation'], primary: ['forums'], related: ['groups', 'delegation']},
+    {id: 'discussion', actions: ['post', 'reply', 'discuss', 'create', 'start', 'open'], objects: ['thread', 'discussion', 'forum', 'conversation'], primary: ['forums'], related: ['groups', 'coordination']},
+    {id: 'group', actions: ['organise', 'organize', 'create', 'form', 'start', 'manage'], objects: ['group', 'guild', 'team', 'organisation', 'organization', 'community', 'volunteer'], primary: ['groups'], related: ['forums', 'voting', 'coordination']},
+    {id: 'group-vote', actions: ['vote', 'voting', 'tally'], objects: [], primary: ['voting'], related: ['groups', 'coordination']},
+    {id: 'coordinate', actions: ['coordinate', 'cooperate', 'collaborate'], objects: [], primary: ['coordination'], related: ['groups', 'forums', 'voting']},
     {id: 'advertise', actions: ['advertise', 'advertising', 'post', 'publish', 'sell', 'selling', 'promote'], objects: [], primary: ['advertise'], related: ['services', 'offers']},
-    {id: 'reuse', actions: ['reuse', 'adapt', 'save', 'find'], objects: ['template', 'templates', 'method', 'methods', 'pattern', 'patterns'], primary: ['reuse'], related: ['groups', 'builders']},
+    {id: 'reuse', actions: ['reuse', 'adapt', 'save', 'find', 'record'], objects: ['template', 'templates', 'method', 'methods', 'pattern', 'patterns'], primary: ['reuse'], related: ['groups', 'builders']},
     {id: 'resolve', actions: ['resolve', 'settle', 'arbitrate', 'appeal', 'challenge'], objects: ['dispute', 'disputes', 'arbitration', 'arbitrator', 'arbitrators', 'panel', 'appeal', 'bias'], primary: ['arbitration'], related: ['approval', 'proofs']},
     {id: 'build', actions: ['build', 'building', 'develop', 'implement', 'integrate', 'create', 'make'], objects: ['adapter', 'adapters', 'connector', 'connectors', 'integration', 'integrations', 'layer', 'layers', 'protocol', 'sdk', 'marketplace'], primary: ['builders'], related: ['connect']},
     {id: 'delegate', actions: ['delegate', 'delegating', 'authorise', 'authorize', 'limit'], objects: [], primary: ['delegation'], related: ['parties', 'milestones', 'identity']},
@@ -487,6 +503,7 @@
       const rule = matches[0].rule;
       return staged ? {...rule, related: [...new Set([...rule.related, 'structured-draft', 'milestones'])]} : rule;
     }
+    if (/\b(?:non[ -]?monetary|noncommercial|non-commercial|shared)\s+(?:collaboration|project|work)\b|\bteamwork\b/i.test(need)) return {id: 'shared-work', primary: ['coordination'], related: ['groups', 'forums', 'voting']};
     if (staged && service && !/\b(?:resolve|arbitrate|check|verify|inspect|build|integrate|advertise|publish|sell)\b/i.test(need)) return {id: 'staged-service', primary: ['services'], next: ['structured-draft'], related: ['draft', 'milestones']};
     return null;
   }

@@ -5,14 +5,14 @@ const path = require('node:path');
 const vm = require('node:vm');
 const start = require('../assets/start.js');
 
-test('all three first-job routes use the current public connection and preserve owner approval', () => {
-  for (const name of ['connect', 'advertise', 'buy']) {
+test('all first-job routes use the current public connection and preserve owner approval', () => {
+  for (const name of ['connect', 'advertise', 'buy', 'coordinate']) {
     const r = start.route(name);
     assert.ok(r.prompt.includes(start.MCP));
     assert.match(r.prompt, /discover the actual (?:public )?tools/i);
     assert.match(r.prompt, /private.*(?:key|access file)|private signing keys/i);
     assert.ok(r.steps.length >= 3);
-    assert.match(r.outcome, /draft|advert|job/i);
+    assert.match(r.outcome, /draft|advert|job|plan|workflow/i);
     assert.ok(!r.prompt.includes('aap_wallet_'));
     assert.ok(!r.prompt.includes('pip install agentic-agreements'));
   }
@@ -31,6 +31,7 @@ test('only bounded public source tags and closed task choices survive hostile qu
     '?' + 'x'.repeat(5000)
   ]) assert.deepEqual(start.tags(input), {});
   assert.equal(start.task('?task=buy'), 'buy');
+  assert.equal(start.task('?task=coordinate'), 'coordinate');
   assert.equal(start.task('?task=__proto__'), 'connect');
   assert.equal(start.task('?task=buy&task=advertise'), 'connect');
 });
@@ -110,7 +111,7 @@ function browserRig({ clipboardFailure = false, search = '?task=advertise&source
   }
   const nodes = new Map();
   const get = id => { if (!nodes.has(id)) nodes.set(id, new Element(id)); return nodes.get(id); };
-  const routes = ['connect', 'advertise', 'buy'].map(route => { const el = new Element(); el.dataset.startRoute = route; return el; });
+  const routes = ['connect', 'advertise', 'buy', 'coordinate'].map(route => { const el = new Element(); el.dataset.startRoute = route; return el; });
   const stages = start.stages.map(stage => { const el = new Element(); el.dataset.startStage = stage; el.value = 'not-tried'; return el; });
   const tags = ['start-primary', 'start-secondary'].map((id, index) => { const el = get(id); el.attributes.href = index ? 'TRIAL.html' : 'API_MCP.html#connect'; return el; });
   const writes = [], external = [];

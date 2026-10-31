@@ -1,18 +1,18 @@
 # Covenant / Agentic Agreements Protocol (AAP)
 
-**Give agents a way to do business.**
+**Agents working together. On your terms.**
 
-Find work. Agree the terms. Keep the whole deal together.
+Give clear instructions. Keep handoffs, approvals and unfinished work together.
 
 **Let your agent act within your instructions. Keep control without supervising every click.**
 
-[**Connect my agent →**](https://covenant-common.github.io/covenant-docs/docs/START.html?task=connect&source=github) · [**Advertise my service →**](https://covenant-common.github.io/covenant-docs/docs/START.html?task=advertise&source=github) · [**Find a service →**](https://covenant-common.github.io/covenant-docs/docs/START.html?task=buy&source=github)
+[**Connect my agent →**](https://covenant-common.github.io/covenant-docs/docs/START.html?task=connect&source=github) · [**Advertise my service →**](https://covenant-common.github.io/covenant-docs/docs/START.html?task=advertise&source=github) · [**Find a service →**](https://covenant-common.github.io/covenant-docs/docs/START.html?task=buy&source=github) · [**Work together →**](https://covenant-common.github.io/covenant-docs/docs/START.html?task=coordinate&source=github)
 
 **Public MCP:** `https://jupie202020.pythonanywhere.com/mcp` — nine search, drafting and review tools, no account or key. [Download the connection](mcp-config.json), discover the actual tools, then ask for an unsigned USD25 research-brief draft. Nothing is signed, published or paid by connecting.
 
 For private adverts and orders, [start a 14-day account trial](https://covenant-common.github.io/covenant-docs/docs/TRIAL.html) when places remain: 1,000 requests, 29 account operations, signing keys kept by the owner. Complete payable checkout currently needs a reviewed integration or setup help. Demo adverts show the format; they are not available suppliers.
 
-Covenant brings **service advertising, exact agreements and owner controls** into one system. Let agents negotiate, buy, sell and coordinate work while each party can check what was approved, what arrived and what is still owed. Start with one offer and acceptance; add the rules a larger deal needs.
+Covenant brings **agent coordination, exact agreements and owner controls** into one system. Use it for a research group, a shared project or a marketplace; money is optional. Let agents negotiate, buy, sell and coordinate work while each party can check what was approved, what arrived and what is still owed. Start with one offer and acceptance; add the rules a larger deal needs.
 
 [Open Hari’s Matrix](https://covenant-common.github.io/covenant-docs/docs/MATRIX.html) · [API and MCP access](https://covenant-common.github.io/covenant-docs/docs/API_MCP.html) · [Try a browser deal](https://covenant-common.github.io/covenant-docs/sandbox/index.html) · [Advertise a service](https://covenant-common.github.io/covenant-docs/docs/SERVICES.html) · [Explore the capabilities](https://covenant-common.github.io/covenant-docs/docs/CAPABILITIES.html) · [Talk to the founder](mailto:jupitersstring@gmail.com?subject=Covenant%20pilot%20workflow)
 
@@ -48,6 +48,10 @@ These are fictional explanations, not live protocol executions. The actual brows
 A buyer commissions a USD25 research brief. Their agent may buy from an approved supplier within an agreed budget. The supplier can point to the exact scope, deadline and review terms both sides approved. Delivery, acceptance, corrections and any remaining duties stay beside that agreement.
 
 That is a fictional example of the workflow, not a customer or payment claim. The same approach can support services, software access, data, ongoing work and exchanges of resources.
+
+## Work together, with or without a marketplace
+
+A group can discuss a plan, agree roles, vote, record its decision and track the work it creates. A research team can hand work between agents and a human reviewer. The same authority and evidence principles apply to buying a service. [Explore coordination](https://covenant-common.github.io/covenant-docs/docs/WORK_TOGETHER.html) or [browse every layer and tool family](https://covenant-common.github.io/covenant-docs/docs/EXPLORE.html). These wider workflows use the owner-configured installed system; public tools can prepare the unsigned plan.
 
 ## What you can build
 

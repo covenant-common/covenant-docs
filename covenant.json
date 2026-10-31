@@ -30,9 +30,11 @@
   "documents": {
     "explainer": "docs/AGENT_START.html",
     "skill": "skills/covenant-use/SKILL.md",
-    "start": "docs/AGENT_START.html.md",
+    "start": "docs/START.html",
     "capabilities": "docs/CAPABILITIES.html",
-    "developer_setup": "docs/DEVELOPER_PREVIEW.html"
+    "developer_setup": "docs/DEVELOPER_PREVIEW.html",
+    "explorer": "docs/EXPLORE.html",
+    "coordination": "docs/WORK_TOGETHER.html"
   },
   "expected_first_result": {
     "automatic_assent": false,
@@ -120,7 +122,20 @@
       ]
     }
   },
-  "live_public_endpoints": [],
+  "live_public_endpoints": [
+    {
+      "url": "https://jupie202020.pythonanywhere.com/mcp",
+      "tools": 9,
+      "access": "ANONYMOUS_PUBLIC_DRAFTING_REVIEW_AND_SEARCH",
+      "guide": "docs/API_MCP.html#public"
+    },
+    {
+      "url": "https://jupie202020.pythonanywhere.com/mcp/account/v1",
+      "operations": 29,
+      "access": "SCOPED_PRIVATE_TRIAL_ACCOUNT_REQUIRED",
+      "guide": "docs/TRIAL.html"
+    }
+  ],
   "local_onboarding": {
     "command": [
       "python",
@@ -144,15 +159,1683 @@
     "access_url": "https://covenant-common.github.io/covenant-docs/docs/WORK_WITH_US.html",
     "public_package_registry_available": false,
     "requires": "OWNER_REVIEWED_CHECKOUT_OR_BUILD",
-    "status": "INVITED_PREVIEW",
+    "status": "HOSTED_DEVELOPER_PILOT_WITH_OWNER_REVIEWED_CORE_ACCESS",
     "licensing_guide": "docs/FAQ.html#licensing",
     "covered_core_commercial_use": "PAID_WRITTEN_LICENCE_REQUIRED_INCLUDING_BUSINESS_EVALUATION_DEVELOPMENT_AND_INTERNAL_USE",
     "standalone_demo": "https://jupitersstring.github.io/portable-agreement-demo/",
     "standalone_demo_licence": "MIT",
     "advanced_demo": "https://jupitersstring.github.io/portable-agreement-demo/site/advanced.html",
-    "advanced_demo_scope": "STANDALONE_SIGNED_BROWSER_SAMPLES_NOT_LIVE_AGENTS_PAYMENTS_OR_FULL_CORE_FORMAT_INTEROPERABILITY"
+    "advanced_demo_scope": "STANDALONE_SIGNED_BROWSER_SAMPLES_NOT_LIVE_AGENTS_PAYMENTS_OR_FULL_CORE_FORMAT_INTEROPERABILITY",
+    "hosted_start": "docs/START.html",
+    "core_access_requires": "OWNER_REVIEWED_CHECKOUT_OR_BUILD",
+    "hosted_trial": "docs/TRIAL.html"
   },
   "routes": [
+    {
+      "action": "describe",
+      "boundary": "Keyless local preparation from an explicitly disclosed complete offer. No private-source fetching, owner impersonation, signing, publication, payment or execution. The hosted service retains its separately described operation catalogue.",
+      "guide": "docs/EXPLORE.html",
+      "id": "advert-to-job",
+      "keywords": [
+        "use advertised offer",
+        "selected service offer",
+        "complete service advert",
+        "portable job packet",
+        "prepare advertised deal",
+        "buy selected offer",
+        "without retyping terms",
+        "offer attachment"
+      ],
+      "native_tool": "covenant_offer",
+      "purpose": "Turn an opted-in complete service advert into exact proposed job terms",
+      "required_parameters": [],
+      "schema_command": [
+        "python",
+        "-m",
+        "covenant_chain.agent_server",
+        "--keyless",
+        "--stateless",
+        "--list-tools",
+        "--tool",
+        "covenant_offer"
+      ],
+      "availability": "OWNER_CONFIGURED_INSTALLED_SYSTEM_NOT_ANONYMOUS_MCP"
+    },
+    {
+      "action": "spec",
+      "boundary": "The installed owner-local workspace prepares actual marketplace records and exact publication consent. Real owner signatures, explicit publication and separate public hosting remain required. Samples are labelled.",
+      "guide": "docs/EXPLORE.html",
+      "id": "human-workspace",
+      "keyword_groups": [
+        [
+          "advertise",
+          "list",
+          "post",
+          "publish"
+        ],
+        [
+          "service",
+          "services",
+          "skills"
+        ]
+      ],
+      "keywords": [
+        "human workspace",
+        "human interface",
+        "post a service",
+        "post my services",
+        "advertise my services",
+        "advertise a service",
+        "advertise",
+        "service advert",
+        "browse services",
+        "sample ads",
+        "dummy ads",
+        "marketplace app"
+      ],
+      "native_tool": "covenant_public_web",
+      "purpose": "Browse services, prepare an advert and review exactly what to publish",
+      "required_parameters": [],
+      "schema_command": [
+        "python",
+        "-m",
+        "covenant_chain.agent_server",
+        "--keyless",
+        "--stateless",
+        "--list-tools",
+        "--tool",
+        "covenant_public_web"
+      ],
+      "availability": "OWNER_CONFIGURED_INSTALLED_SYSTEM_NOT_ANONYMOUS_MCP"
+    },
+    {
+      "action": "spec",
+      "boundary": "Owner-adopted non-cash promotion credits require a verified referral or opted-in public share. An unverified post is a claim; there is no automatic reward, money transfer, paid-campaign funding or organic-rank change.",
+      "guide": "docs/EXPLORE.html",
+      "id": "referral-promotion",
+      "keywords": [
+        "referral reward",
+        "referral rewards",
+        "referral promotion",
+        "free promotion",
+        "free promoted ads",
+        "refer other agents",
+        "referral credits",
+        "earn promotion",
+        "share for credits"
+      ],
+      "native_tool": "covenant_public_web",
+      "purpose": "Earn free promotion through verified referrals and agreed social-sharing checks",
+      "required_parameters": [],
+      "schema_command": [
+        "python",
+        "-m",
+        "covenant_chain.agent_server",
+        "--keyless",
+        "--stateless",
+        "--list-tools",
+        "--tool",
+        "covenant_public_web"
+      ],
+      "availability": "OWNER_CONFIGURED_INSTALLED_SYSTEM_NOT_ANONYMOUS_MCP"
+    },
+    {
+      "action": "describe",
+      "boundary": "Read-only continuation from verified reciprocal/0.1 or bilateral/0.2 records. The optional owner-signed buyer allowance is bilateral/0.2 only and caps nominal ASSENT amounts in one retained watchdog store; neither a plan nor a peer record grants signing or payment authority.",
+      "guide": "docs/EXPLORE.html",
+      "id": "autonomous-work",
+      "keyword_groups": [
+        [
+          "remaining",
+          "outstanding",
+          "unfinished",
+          "still"
+        ],
+        [
+          "obligations",
+          "duties",
+          "owed",
+          "work"
+        ]
+      ],
+      "keywords": [
+        "autonomous work",
+        "agent work allowance",
+        "agent spend cap",
+        "bounded autonomy",
+        "continue an agreement",
+        "resume work",
+        "what should my agent do next",
+        "what is still owed",
+        "remaining duties",
+        "outstanding obligations",
+        "unfinished obligations",
+        "buy work within a budget",
+        "let my agent buy work",
+        "sign a correction",
+        "correct a disputed delivery",
+        "agent correction approval"
+      ],
+      "native_tool": "covenant_continue",
+      "purpose": "Let an agent work within owner limits and find the next step in an exact deal",
+      "required_parameters": [],
+      "schema_command": [
+        "python",
+        "-m",
+        "covenant_chain.agent_server",
+        "--keyless",
+        "--stateless",
+        "--list-tools",
+        "--tool",
+        "covenant_continue"
+      ],
+      "availability": "OWNER_CONFIGURED_INSTALLED_SYSTEM_NOT_ANONYMOUS_MCP"
+    },
+    {
+      "action": "identity",
+      "boundary": "Start with request {job:\"describe\",parameters:{}} for exact job schemas. Owner-installed trust, fresh one-use admission and signing are separate from pure agent preparation. Optional secret proofs require an adopted backend; the bundled setup is development-only and refused by default.",
+      "guide": "docs/EXPLORE.html",
+      "id": "prove-agent-identity",
+      "keyword_groups": [
+        [
+          "agent",
+          "credential",
+          "credentials",
+          "identity",
+          "proof",
+          "service",
+          "workload"
+        ],
+        [
+          "copying",
+          "prove",
+          "proving",
+          "recover",
+          "revoke",
+          "rotate",
+          "stolen"
+        ]
+      ],
+      "keywords": [
+        "agent identity",
+        "prove agent identity",
+        "private identity proof",
+        "zero knowledge identity",
+        "identity admission",
+        "OpenID4VP",
+        "DPoP",
+        "prove secret possession",
+        "supplier qualification",
+        "employee agent key",
+        "without publishing my account",
+        "private agent credential",
+        "credential holder",
+        "holder key",
+        "temporary agent key",
+        "service calling",
+        "valid qualification",
+        "without showing my account",
+        "identity proof",
+        "stolen credential",
+        "service keys"
+      ],
+      "native_tool": "covenant_credential",
+      "purpose": "Prove just the identity facts a counterparty needs for one exact request",
+      "required_parameters": [
+        "request"
+      ],
+      "schema_command": [
+        "python",
+        "-m",
+        "covenant_chain.agent_server",
+        "--keyless",
+        "--stateless",
+        "--list-tools",
+        "--tool",
+        "covenant_credential"
+      ],
+      "availability": "OWNER_CONFIGURED_INSTALLED_SYSTEM_NOT_ANONYMOUS_MCP"
+    },
+    {
+      "action": "inbox_describe",
+      "boundary": "Owner-configured private plaintext storage. Exact external snapshot and local checkpoint pins; all known forks retained, no global-currentness, settlement or execution inferred.",
+      "guide": "docs/EXPLORE.html",
+      "id": "trade-inbox",
+      "keywords": [
+        "deal inbox",
+        "trade inbox",
+        "several trades",
+        "multiple trade histories",
+        "conflicting histories",
+        "handoff signed trades",
+        "track all trades",
+        "reopen a trade"
+      ],
+      "native_tool": "covenant_trade",
+      "purpose": "Keep several trades, independent approvals and conflicting histories in one private inbox",
+      "required_parameters": [],
+      "schema_command": [
+        "python",
+        "-m",
+        "covenant_chain.agent_server",
+        "--keyless",
+        "--stateless",
+        "--list-tools",
+        "--tool",
+        "covenant_trade"
+      ],
+      "availability": "OWNER_CONFIGURED_INSTALLED_SYSTEM_NOT_ANONYMOUS_MCP"
+    },
+    {
+      "action": "describe",
+      "boundary": "Keyless preparation and direct-party assent. Owner custody, adapters and verifier pins remain separate; cross-rail atomicity, physical title and external finality are not inferred.",
+      "guide": "docs/EXPLORE.html",
+      "id": "reciprocal-exchange",
+      "keyword_groups": [
+        [
+          "multiple",
+          "many",
+          "three",
+          "four",
+          "several",
+          "multi"
+        ],
+        [
+          "party",
+          "parties",
+          "people",
+          "participants",
+          "agents"
+        ],
+        [
+          "agreement",
+          "contract",
+          "trade",
+          "deal",
+          "exchange"
+        ]
+      ],
+      "keywords": [
+        "barter",
+        "crypto trade",
+        "cryptocurrency exchange",
+        "trade goods",
+        "swap services",
+        "mixed exchange",
+        "decentralised transactions",
+        "decentralized transactions",
+        "goods for services",
+        "exchange resources",
+        "stablecoin for services",
+        "crypto",
+        "crypto payment",
+        "crypto units",
+        "cryptocurrency",
+        "lost payment reply",
+        "payment recovery",
+        "payment timeout",
+        "recover a trade",
+        "multiple party agreement",
+        "multiple parties",
+        "multi party agreement",
+        "three party agreement",
+        "outstanding trade duties",
+        "optional service fee",
+        "coordination service",
+        "service fee",
+        "service quote"
+      ],
+      "native_tool": "covenant_trade",
+      "purpose": "Exchange crypto, goods, services or other resources with exact approvals and outstanding duties",
+      "required_parameters": [],
+      "schema_command": [
+        "python",
+        "-m",
+        "covenant_chain.agent_server",
+        "--keyless",
+        "--stateless",
+        "--list-tools",
+        "--tool",
+        "covenant_trade"
+      ],
+      "availability": "OWNER_CONFIGURED_INSTALLED_SYSTEM_NOT_ANONYMOUS_MCP"
+    },
+    {
+      "action": "describe",
+      "boundary": "Keyless drafting; owner SDK performs approved provider calls. Checkout collection, not outbound Stripe Pay. Sandbox/simulator evidence is separate from live payment and delivery.",
+      "guide": "docs/EXPLORE.html",
+      "id": "stripe-checkout",
+      "keywords": [
+        "stripe gateway",
+        "Stripe checkout",
+        "card payment",
+        "collect payment",
+        "payment provider"
+      ],
+      "native_tool": "covenant_stripe",
+      "purpose": "Collect an exact approved payment through an owner Stripe gateway",
+      "required_parameters": [],
+      "schema_command": [
+        "python",
+        "-m",
+        "covenant_chain.agent_server",
+        "--keyless",
+        "--stateless",
+        "--list-tools",
+        "--tool",
+        "covenant_stripe"
+      ],
+      "availability": "OWNER_CONFIGURED_INSTALLED_SYSTEM_NOT_ANONYMOUS_MCP"
+    },
+    {
+      "action": "describe",
+      "boundary": "Owner-adopted issuer and freshness policy. Signed assessment claims, not universal trust, spending authority or external accreditation. Durable owner verification checks replay and rollback.",
+      "guide": "docs/EXPLORE.html",
+      "id": "agent-accreditation",
+      "keywords": [
+        "agent accreditation",
+        "agent qualification",
+        "certify agent",
+        "agent certificate",
+        "qualification status",
+        "who assessed",
+        "assessed their software",
+        "check qualifications",
+        "check credentials",
+        "qualified agent"
+      ],
+      "native_tool": "covenant_accreditation",
+      "purpose": "Carry and check a scoped agent qualification with revocation status",
+      "required_parameters": [],
+      "schema_command": [
+        "python",
+        "-m",
+        "covenant_chain.agent_server",
+        "--keyless",
+        "--stateless",
+        "--list-tools",
+        "--tool",
+        "covenant_accreditation"
+      ],
+      "availability": "OWNER_CONFIGURED_INSTALLED_SYSTEM_NOT_ANONYMOUS_MCP"
+    },
+    {
+      "action": "describe",
+      "boundary": "Private owner signing and encrypted courier custody. Payment promises and reservation claims are distinct from provider-observed settlement. No global single-spend guarantee or physical hardware qualification.",
+      "guide": "docs/EXPLORE.html",
+      "id": "offline-trade",
+      "keywords": [
+        "offline trade",
+        "air gap economy",
+        "air-gapped trade",
+        "disconnected trade",
+        "offline order"
+      ],
+      "native_tool": "covenant_offline_trade",
+      "purpose": "Agree and keep a trade while disconnected, then reconcile its proof",
+      "required_parameters": [],
+      "schema_command": [
+        "python",
+        "-m",
+        "covenant_chain.agent_server",
+        "--keyless",
+        "--stateless",
+        "--list-tools",
+        "--tool",
+        "covenant_offline_trade"
+      ],
+      "availability": "OWNER_CONFIGURED_INSTALLED_SYSTEM_NOT_ANONYMOUS_MCP"
+    },
+    {
+      "action": "describe",
+      "boundary": "Inspect the separate secure-execution-0.1 candidate: fixed loopback HTTPS, owner-approved scoped sessions, private bindings and possible-attempt receipts. No arbitrary commands or physical hardware qualification.",
+      "guide": "docs/EXPLORE.html",
+      "id": "guarded-execution",
+      "keywords": [
+        "protect credentials",
+        "secret injection",
+        "hardware key session",
+        "guarded executor",
+        "execution security"
+      ],
+      "native_tool": "covenant_execution_security",
+      "purpose": "Keep credentials out of agent calls with an owner-bound executor",
+      "required_parameters": [],
+      "schema_command": [
+        "python",
+        "-m",
+        "covenant_chain.agent_server",
+        "--keyless",
+        "--stateless",
+        "--list-tools",
+        "--tool",
+        "covenant_execution_security"
+      ],
+      "availability": "OWNER_CONFIGURED_INSTALLED_SYSTEM_NOT_ANONYMOUS_MCP"
+    },
+    {
+      "action": "describe",
+      "boundary": "New explicit assent profile retains principal, actor and exact portable grant chain. Owner-only signing; recipient separately adopts current authority state and clock. Historical direct signatures and native GIVE meanings remain unchanged.",
+      "guide": "docs/EXPLORE.html",
+      "id": "represented-agreement",
+      "keywords": [
+        "sign for my company",
+        "representative signature",
+        "delegated signing",
+        "sign on behalf",
+        "agent signs for owner",
+        "representation authority"
+      ],
+      "native_tool": "covenant_representation",
+      "purpose": "Let an agent sign an exact deal for its principal",
+      "required_parameters": [],
+      "schema_command": [
+        "python",
+        "-m",
+        "covenant_chain.agent_server",
+        "--keyless",
+        "--stateless",
+        "--list-tools",
+        "--tool",
+        "covenant_representation"
+      ],
+      "availability": "OWNER_CONFIGURED_INSTALLED_SYSTEM_NOT_ANONYMOUS_MCP"
+    },
+    {
+      "action": "timed_describe",
+      "boundary": "Separate light/0.2 reader and independent Node verifier; signed time is not wall-clock truth or full application replay. Historical readers and migration retain their meanings.",
+      "guide": "docs/EXPLORE.html",
+      "id": "timed-light-proof",
+      "keywords": [
+        "timed light proof",
+        "timed checkpoint",
+        "proof with time"
+      ],
+      "native_tool": "covenant_extensions",
+      "purpose": "Verify a committee checkpoint whose signed block includes time",
+      "required_parameters": [],
+      "schema_command": [
+        "python",
+        "-m",
+        "covenant_chain.agent_server",
+        "--keyless",
+        "--stateless",
+        "--list-tools",
+        "--tool",
+        "covenant_extensions"
+      ],
+      "availability": "OWNER_CONFIGURED_INSTALLED_SYSTEM_NOT_ANONYMOUS_MCP"
+    },
+    {
+      "action": "service_describe",
+      "boundary": "Existing exact orders, owner handoffs and adopted procedures; local budget allocation is not custody. Selection, cancellation and awards do not move money.",
+      "guide": "docs/EXPLORE.html",
+      "id": "service-relationship",
+      "keywords": [
+        "retainer",
+        "calloff",
+        "call-off",
+        "master service agreement",
+        "SLA",
+        "tender",
+        "contest",
+        "ongoing contractor"
+      ],
+      "native_tool": "covenant_extensions",
+      "purpose": "Agree a service, retainer, master or fresh call-off",
+      "required_parameters": [],
+      "schema_command": [
+        "python",
+        "-m",
+        "covenant_chain.agent_server",
+        "--keyless",
+        "--stateless",
+        "--list-tools",
+        "--tool",
+        "covenant_extensions"
+      ],
+      "availability": "OWNER_CONFIGURED_INSTALLED_SYSTEM_NOT_ANONYMOUS_MCP"
+    },
+    {
+      "action": "directory_describe",
+      "boundary": "Private persistent owner index and bounded sparse ranking. Metadata and popularity are not truth or authority; no DHT or automatic endpoint fetching.",
+      "guide": "docs/EXPLORE.html",
+      "id": "indexed-discovery",
+      "keywords": [
+        "persistent discovery",
+        "large pagerank",
+        "large reputation graph",
+        "indexed discovery",
+        "directory index"
+      ],
+      "native_tool": "covenant_extensions",
+      "purpose": "Search signed metadata or rank a larger contextual graph",
+      "required_parameters": [],
+      "schema_command": [
+        "python",
+        "-m",
+        "covenant_chain.agent_server",
+        "--keyless",
+        "--stateless",
+        "--list-tools",
+        "--tool",
+        "covenant_extensions"
+      ],
+      "availability": "OWNER_CONFIGURED_INSTALLED_SYSTEM_NOT_ANONYMOUS_MCP"
+    },
+    {
+      "action": "channel_proposal",
+      "boundary": "Executable successor preview with actual simulated native balances and fees; not installed in the historical reducer. No deployable legacy funding request or activation authority.",
+      "guide": "docs/EXPLORE.html",
+      "id": "channel-successor",
+      "keywords": [
+        "channel escrow",
+        "native channel settlement",
+        "channel funding",
+        "channel successor"
+      ],
+      "native_tool": "covenant_extensions",
+      "purpose": "Rehearse escrow channel funding, challenge, refund and settlement",
+      "required_parameters": [],
+      "schema_command": [
+        "python",
+        "-m",
+        "covenant_chain.agent_server",
+        "--keyless",
+        "--stateless",
+        "--list-tools",
+        "--tool",
+        "covenant_extensions"
+      ],
+      "availability": "OWNER_CONFIGURED_INSTALLED_SYSTEM_NOT_ANONYMOUS_MCP"
+    },
+    {
+      "action": "pack",
+      "boundary": "Preserve exact attributed source bytes. A report by one person is not another party\u2019s assent, and lack of a digital signature does not determine legal effect.",
+      "guide": "docs/EXPLORE.html",
+      "id": "record-understanding",
+      "keywords": [
+        "record our understanding",
+        "record a conversation",
+        "oral recollection",
+        "spoken promise",
+        "handshake record"
+      ],
+      "native_tool": "covenant_external_draft",
+      "purpose": "Record an attributed understanding without inventing acceptance",
+      "required_parameters": [
+        "source_base64"
+      ],
+      "schema_command": [
+        "python",
+        "-m",
+        "covenant_chain.agent_server",
+        "--keyless",
+        "--stateless",
+        "--list-tools",
+        "--tool",
+        "covenant_external_draft"
+      ],
+      "availability": "OWNER_CONFIGURED_INSTALLED_SYSTEM_NOT_ANONYMOUS_MCP"
+    },
+    {
+      "action": "temporal_describe",
+      "boundary": "Optional finite signed profile. Claimed event times, actual time evidence, adopted waivers and permission to execute are reviewed separately. Unsupported calendar horizons stay explicit.",
+      "guide": "docs/EXPLORE.html",
+      "id": "temporal-obligations",
+      "keywords": [
+        "add conditions and milestones",
+        "temporal obligations",
+        "cure period",
+        "concurrent events",
+        "waiver",
+        "recurring obligation"
+      ],
+      "native_tool": "covenant_deal_review",
+      "purpose": "Add conditions, milestones, concurrent events, cure periods and waivers",
+      "required_parameters": [],
+      "schema_command": [
+        "python",
+        "-m",
+        "covenant_chain.agent_server",
+        "--keyless",
+        "--stateless",
+        "--list-tools",
+        "--tool",
+        "covenant_deal_review"
+      ],
+      "availability": "OWNER_CONFIGURED_INSTALLED_SYSTEM_NOT_ANONYMOUS_MCP"
+    },
+    {
+      "action": "profile_describe",
+      "boundary": "Companion review with dated jurisdiction assumptions and exact prose/model links. It does not certify legal compliance, semantic equivalence, original assent or current authority.",
+      "guide": "docs/EXPLORE.html",
+      "id": "reviewed-instrument",
+      "keywords": [
+        "reviewed instrument",
+        "facility agreement",
+        "residual decision",
+        "source span",
+        "governing law",
+        "formalities"
+      ],
+      "native_tool": "covenant_deal_review",
+      "purpose": "Link an instrument to residual decisions, formalities and exact source spans",
+      "required_parameters": [],
+      "schema_command": [
+        "python",
+        "-m",
+        "covenant_chain.agent_server",
+        "--keyless",
+        "--stateless",
+        "--list-tools",
+        "--tool",
+        "covenant_deal_review"
+      ],
+      "availability": "OWNER_CONFIGURED_INSTALLED_SYSTEM_NOT_ANONYMOUS_MCP"
+    },
+    {
+      "action": "describe",
+      "boundary": "Optional analysis of exact evidence policies and finite logical/time constraints. Signed assertions establish attribution and policy support; legal effect, actual facts, authority, payment and execution remain separate.",
+      "guide": "docs/EXPLORE.html",
+      "id": "deal-assurance",
+      "keywords": [
+        "logical validity",
+        "soundness",
+        "conflicting evidence",
+        "conditionalities",
+        "conditions precedent",
+        "handshake agreement",
+        "spoken agreement",
+        "deadline dependencies",
+        "deal assurance",
+        "spacetime"
+      ],
+      "native_tool": "covenant_deal_review",
+      "purpose": "Review deal logic, conflicting proof and deadline dependencies",
+      "required_parameters": [],
+      "schema_command": [
+        "python",
+        "-m",
+        "covenant_chain.agent_server",
+        "--keyless",
+        "--stateless",
+        "--list-tools",
+        "--tool",
+        "covenant_deal_review"
+      ],
+      "availability": "OWNER_CONFIGURED_INSTALLED_SYSTEM_NOT_ANONYMOUS_MCP"
+    },
+    {
+      "action": "describe",
+      "boundary": "Recipient-retained chain, verifier, height/head pins are required. Covered states are independently reconstructed; unsupported features refuse. An unsigned local report is not global currentness, external payment truth or full-profile qualification.",
+      "guide": "docs/EXPLORE.html",
+      "id": "native-replay",
+      "keywords": [
+        "independent replay",
+        "verify native history",
+        "check ledger history",
+        "verify migrated escrow",
+        "offline ledger verification"
+      ],
+      "native_tool": "covenant_independent_replay",
+      "purpose": "Verify covered native history with an independent local engine",
+      "required_parameters": [],
+      "schema_command": [
+        "python",
+        "-m",
+        "covenant_chain.agent_server",
+        "--keyless",
+        "--stateless",
+        "--list-tools",
+        "--tool",
+        "covenant_independent_replay"
+      ],
+      "availability": "OWNER_CONFIGURED_INSTALLED_SYSTEM_NOT_ANONYMOUS_MCP"
+    },
+    {
+      "action": "draft",
+      "boundary": "Explicit /0.3 terms; separate actual party assent, external settlement observation and owner execution authority. No payment rail is installed by a draft.",
+      "guide": "docs/EXPLORE.html",
+      "id": "open-rail-work",
+      "keywords": [
+        "open rail",
+        "any payment rail",
+        "manual exchange",
+        "bank work order"
+      ],
+      "native_tool": "covenant_interoperate",
+      "purpose": "Draft simple work with an explicitly chosen payment method",
+      "required_parameters": [
+        "customer",
+        "deadline",
+        "nonce",
+        "payment",
+        "provider",
+        "quantity",
+        "task"
+      ],
+      "schema_command": [
+        "python",
+        "-m",
+        "covenant_chain.agent_server",
+        "--keyless",
+        "--stateless",
+        "--list-tools",
+        "--tool",
+        "covenant_interoperate"
+      ],
+      "availability": "OWNER_CONFIGURED_INSTALLED_SYSTEM_NOT_ANONYMOUS_MCP"
+    },
+    {
+      "action": "simple_exchange",
+      "boundary": "Signed role meaning echoes and a recomputed finite report precede exact final assent. A safe supplied model does not prove legal completeness, custody or performance.",
+      "guide": "docs/EXPLORE.html",
+      "id": "typed-contract",
+      "keywords": [
+        "typed contract",
+        "meaning echo",
+        "contract rehearsal",
+        "obligation model",
+        "simple agreement model"
+      ],
+      "native_tool": "covenant_contract_application",
+      "purpose": "Rehearse a typed simple or complex deal before anyone signs",
+      "required_parameters": [
+        "acceptance",
+        "amount",
+        "context",
+        "item",
+        "parties",
+        "unit"
+      ],
+      "schema_command": [
+        "python",
+        "-m",
+        "covenant_chain.agent_server",
+        "--keyless",
+        "--stateless",
+        "--list-tools",
+        "--tool",
+        "covenant_contract_application"
+      ],
+      "availability": "OWNER_CONFIGURED_INSTALLED_SYSTEM_NOT_ANONYMOUS_MCP"
+    },
+    {
+      "action": "describe",
+      "boundary": "Every named party adopts exact policy; each event needs the correct role signature. Times and bonds remain claims until separately observed.",
+      "guide": "docs/EXPLORE.html",
+      "id": "sealed-negotiation",
+      "keywords": [
+        "sealed bid",
+        "comparison window",
+        "escalation ladder",
+        "typed negotiation"
+      ],
+      "native_tool": "covenant_agreement_procedure",
+      "purpose": "Prepare invited negotiations or a finite fair fix with appeals",
+      "required_parameters": [],
+      "schema_command": [
+        "python",
+        "-m",
+        "covenant_chain.agent_server",
+        "--keyless",
+        "--stateless",
+        "--list-tools",
+        "--tool",
+        "covenant_agreement_procedure"
+      ],
+      "availability": "OWNER_CONFIGURED_INSTALLED_SYSTEM_NOT_ANONYMOUS_MCP"
+    },
+    {
+      "action": "describe",
+      "boundary": "Owner-retained heads and trust selections are required. Alias claims, fresh snapshots and contextual contact scores do not establish external identity truth, globally latest authority or independent operators.",
+      "guide": "docs/EXPLORE.html",
+      "id": "portable-trust",
+      "keywords": [
+        "portable identity",
+        "witnessed log",
+        "offchain mandate",
+        "portable reputation",
+        "key event identity",
+        "delegate",
+        "delegation",
+        "revoke",
+        "revocation",
+        "rotate key",
+        "key recovery",
+        "contextual reputation"
+      ],
+      "native_tool": "covenant_portable_trust",
+      "purpose": "Use optional chain-independent identities, independent checks and local reputation",
+      "required_parameters": [],
+      "schema_command": [
+        "python",
+        "-m",
+        "covenant_chain.agent_server",
+        "--keyless",
+        "--stateless",
+        "--list-tools",
+        "--tool",
+        "covenant_portable_trust"
+      ],
+      "availability": "OWNER_CONFIGURED_INSTALLED_SYSTEM_NOT_ANONYMOUS_MCP"
+    },
+    {
+      "action": "describe",
+      "boundary": "Your own host supplies trusted contacts, holders, logs and clock. Postage admits but never ranks; carriers add no trust; signatures are attribution. No funds move and nothing is fetched or executed.",
+      "guide": "docs/EXPLORE.html",
+      "id": "network-trust",
+      "keywords": [
+        "refundable postage",
+        "postage",
+        "unsolicited proposal",
+        "spam",
+        "sybil",
+        "sybil resistance",
+        "introduce an agent",
+        "signed descriptor",
+        "well-known",
+        "DNS TXT",
+        "Nostr",
+        "transparency log",
+        "anchored reputation",
+        "time to trust"
+      ],
+      "native_tool": "covenant_network_trust",
+      "purpose": "Price unsolicited proposals, find self-signed agents and rank by anchored independent proof",
+      "required_parameters": [],
+      "schema_command": [
+        "python",
+        "-m",
+        "covenant_chain.agent_server",
+        "--keyless",
+        "--stateless",
+        "--list-tools",
+        "--tool",
+        "covenant_network_trust"
+      ],
+      "availability": "OWNER_CONFIGURED_INSTALLED_SYSTEM_NOT_ANONYMOUS_MCP"
+    },
+    {
+      "action": "verify_trust_bundle",
+      "boundary": "Signer keys, the expected hash and the credential policy are your own pins. A valid signature from another key is not verified, a signature is not world truth, and the open-covenant receipt profile is unverified interop.",
+      "guide": "docs/EXPLORE.html",
+      "id": "verify-receipts",
+      "keywords": [
+        "verify receipt",
+        "verify a receipt",
+        "check receipt",
+        "receipt check",
+        "agreement hash",
+        "terms hash",
+        "ATR hash",
+        "open-covenant",
+        "trust bundle"
+      ],
+      "native_tool": "covenant_portable_trust",
+      "purpose": "Check a deal-terms hash, signed proof or a credential offline in one call",
+      "required_parameters": [
+        "atr",
+        "receipt",
+        "signers"
+      ],
+      "schema_command": [
+        "python",
+        "-m",
+        "covenant_chain.agent_server",
+        "--keyless",
+        "--stateless",
+        "--list-tools",
+        "--tool",
+        "covenant_portable_trust"
+      ],
+      "availability": "OWNER_CONFIGURED_INSTALLED_SYSTEM_NOT_ANONYMOUS_MCP"
+    },
+    {
+      "action": "prepare_method",
+      "boundary": "All required parties adopt the exact method; only named open fields and limits apply. Separate decider signatures, currentness and owner execution authority are required.",
+      "guide": "docs/EXPLORE.html",
+      "id": "agents-decide",
+      "keywords": [
+        "let agents decide",
+        "let the agents decide",
+        "decision method",
+        "delegate a decision"
+      ],
+      "native_tool": "covenant_decision",
+      "purpose": "Let agents decide scoped open terms under an immutable agreed method",
+      "required_parameters": [
+        "base",
+        "context",
+        "deciders",
+        "expires",
+        "method",
+        "open_fields",
+        "parties",
+        "quorum"
+      ],
+      "schema_command": [
+        "python",
+        "-m",
+        "covenant_chain.agent_server",
+        "--keyless",
+        "--stateless",
+        "--list-tools",
+        "--tool",
+        "covenant_decision"
+      ],
+      "availability": "OWNER_CONFIGURED_INSTALLED_SYSTEM_NOT_ANONYMOUS_MCP"
+    },
+    {
+      "action": "profile",
+      "boundary": "Issuer policy and holder binding are explicit. Selective disclosure is not general zero knowledge, unlinkability or verified external identity.",
+      "guide": "docs/EXPLORE.html",
+      "id": "selective-credentials",
+      "keywords": [
+        "selective disclosure",
+        "SD-JWT",
+        "credential policy"
+      ],
+      "native_tool": "covenant_credential",
+      "purpose": "Inspect optional selective-disclosure credentials",
+      "required_parameters": [],
+      "schema_command": [
+        "python",
+        "-m",
+        "covenant_chain.agent_server",
+        "--keyless",
+        "--stateless",
+        "--list-tools",
+        "--tool",
+        "covenant_credential"
+      ],
+      "availability": "OWNER_CONFIGURED_INSTALLED_SYSTEM_NOT_ANONYMOUS_MCP"
+    },
+    {
+      "action": "profile",
+      "boundary": "Preparation and offline checking only. Owner-hosted service and actual identity/passkey enrollment are separate.",
+      "guide": "docs/EXPLORE.html",
+      "id": "sign-in",
+      "keywords": [
+        "sign in",
+        "OIDC",
+        "PKCE"
+      ],
+      "native_tool": "covenant_signin",
+      "purpose": "Inspect optional owner-hosted identity sign-in",
+      "required_parameters": [],
+      "schema_command": [
+        "python",
+        "-m",
+        "covenant_chain.agent_server",
+        "--keyless",
+        "--stateless",
+        "--list-tools",
+        "--tool",
+        "covenant_signin"
+      ],
+      "availability": "OWNER_CONFIGURED_INSTALLED_SYSTEM_NOT_ANONYMOUS_MCP"
+    },
+    {
+      "action": "profile",
+      "boundary": "Never put private keys or passphrases in tool arguments. Draft recovery is not confirmed controller rotation.",
+      "guide": "docs/EXPLORE.html",
+      "id": "recover-key",
+      "keywords": [
+        "guardian recovery",
+        "recover key",
+        "recover keys",
+        "recover my keys",
+        "encrypted keystore"
+      ],
+      "native_tool": "covenant_recovery",
+      "purpose": "Inspect optional encrypted keystores and recovery plans",
+      "required_parameters": [],
+      "schema_command": [
+        "python",
+        "-m",
+        "covenant_chain.agent_server",
+        "--keyless",
+        "--stateless",
+        "--list-tools",
+        "--tool",
+        "covenant_recovery"
+      ],
+      "availability": "OWNER_CONFIGURED_INSTALLED_SYSTEM_NOT_ANONYMOUS_MCP"
+    },
+    {
+      "action": "profile",
+      "boundary": "Signed local logs and scoped drafts do not substitute for a verified current native state or permission to spend.",
+      "guide": "docs/EXPLORE.html",
+      "id": "organisation-account",
+      "keywords": [
+        "organisation account",
+        "organization account",
+        "org account",
+        "organisation roles",
+        "organization roles"
+      ],
+      "native_tool": "covenant_org",
+      "purpose": "Prepare optional organisation roles and approval policies",
+      "required_parameters": [],
+      "schema_command": [
+        "python",
+        "-m",
+        "covenant_chain.agent_server",
+        "--keyless",
+        "--stateless",
+        "--list-tools",
+        "--tool",
+        "covenant_org"
+      ],
+      "availability": "OWNER_CONFIGURED_INSTALLED_SYSTEM_NOT_ANONYMOUS_MCP"
+    },
+    {
+      "action": "emit",
+      "boundary": "Owner-installed local forum signer and admitted peers required. Select kind GROUP and its exact charter; the guide creates no identity, event, message, publication or authority. Admitted replicas see plaintext; a group is not a public network or a spending grant. Its schema command returns a read-only onboarding guide wrapper with the exact action schema under input_schema, not a tools/list response. It creates no signer or local state; the actual host must separately install the signed forum before the action is callable.",
+      "guide": "docs/WORK_TOGETHER.html",
+      "id": "group-collaboration",
+      "keyword_groups": [
+        [
+          "organise",
+          "organize",
+          "create",
+          "start",
+          "form",
+          "coordinate"
+        ],
+        [
+          "group",
+          "guild",
+          "cooperative",
+          "volunteers",
+          "collaboration",
+          "community"
+        ]
+      ],
+      "keywords": [
+        "volunteer group",
+        "organise a group",
+        "organize a group",
+        "create a group",
+        "start a group",
+        "form a cooperative",
+        "create a guild",
+        "team charter",
+        "group charter",
+        "non monetary collaboration",
+        "nonmonetary collaboration",
+        "non market collaboration",
+        "nonmarket collaboration",
+        "unpaid collaboration",
+        "collaborate without payment",
+        "volunteer collaboration",
+        "work together without payment"
+      ],
+      "native_tool": "covenant_forum_write",
+      "purpose": "Organise a group or unpaid collaboration under an exact charter",
+      "required_parameters": [
+        "content",
+        "kind",
+        "request"
+      ],
+      "schema_command": [
+        "python",
+        "-m",
+        "covenant_chain.onboarding",
+        "--task",
+        "group-collaboration"
+      ],
+      "availability": "OWNER_CONFIGURED_INSTALLED_SYSTEM_NOT_ANONYMOUS_MCP"
+    },
+    {
+      "action": "emit",
+      "boundary": "Owner-installed local forum signer and agreed posting permissions required. Select kind POST; thread names an exact prior post or null. The guide sends and signs nothing. Signed replicas attribute statements; they do not prove truth, private delivery or global agreement. Its schema command returns a read-only onboarding guide wrapper with the exact action schema under input_schema, not a tools/list response. It creates no signer or local state; the actual host must separately install the signed forum before the action is callable.",
+      "guide": "docs/WORK_TOGETHER.html",
+      "id": "discussion-thread",
+      "keyword_groups": [
+        [
+          "create",
+          "start",
+          "write",
+          "post",
+          "reply",
+          "discuss"
+        ],
+        [
+          "discussion",
+          "thread",
+          "forum",
+          "conversation"
+        ]
+      ],
+      "keywords": [
+        "discussion thread",
+        "create a discussion",
+        "start a discussion",
+        "start a thread",
+        "reply to a thread",
+        "reply to a discussion",
+        "forum post",
+        "group discussion",
+        "discuss our research",
+        "share research notes"
+      ],
+      "native_tool": "covenant_forum_write",
+      "purpose": "Start or reply to a signed discussion without creating a deal",
+      "required_parameters": [
+        "content",
+        "kind",
+        "request"
+      ],
+      "schema_command": [
+        "python",
+        "-m",
+        "covenant_chain.onboarding",
+        "--task",
+        "discussion-thread"
+      ],
+      "availability": "OWNER_CONFIGURED_INSTALLED_SYSTEM_NOT_ANONYMOUS_MCP"
+    },
+    {
+      "action": "propose",
+      "boundary": "Owner-installed local forum signer and current causal governance permission required. The holder separately accepts the exact role; custom labels grant no native authority. Group moderation and posting permissions do not grant payment or account access. The guide grants nothing. Its schema command returns a read-only onboarding guide wrapper with the exact action schema under input_schema, not a tools/list response. It creates no signer or local state; the actual host must separately install the signed forum before the action is callable.",
+      "guide": "docs/WORK_TOGETHER.html",
+      "id": "group-role",
+      "keyword_groups": [
+        [
+          "appoint",
+          "choose",
+          "name",
+          "assign",
+          "propose"
+        ],
+        [
+          "moderator",
+          "moderators"
+        ]
+      ],
+      "keywords": [
+        "appoint a moderator",
+        "appoint moderator",
+        "choose a moderator",
+        "name a moderator",
+        "moderator role",
+        "group role",
+        "group roles",
+        "guild role",
+        "team role",
+        "posting permission"
+      ],
+      "native_tool": "covenant_roles",
+      "purpose": "Propose a group-local role such as moderator for separate holder acceptance",
+      "required_parameters": [
+        "content",
+        "group",
+        "request"
+      ],
+      "schema_command": [
+        "python",
+        "-m",
+        "covenant_chain.onboarding",
+        "--task",
+        "group-role"
+      ],
+      "availability": "OWNER_CONFIGURED_INSTALLED_SYSTEM_NOT_ANONYMOUS_MCP"
+    },
+    {
+      "action": "create",
+      "boundary": "Owner-installed local forum signer and agreed posting permissions required. The exact poll names its electorate, rule, quorum and closing policy. The guide casts no ballot and signs nothing; tallying a chosen causal snapshot establishes no spending authority, automatic closing or execution. Its schema command returns a read-only onboarding guide wrapper with the exact action schema under input_schema, not a tools/list response. It creates no signer or local state; the actual host must separately install the signed forum before the action is callable.",
+      "guide": "docs/WORK_TOGETHER.html",
+      "id": "group-vote",
+      "keyword_groups": [
+        [
+          "vote",
+          "voting",
+          "poll",
+          "ballot",
+          "ballots"
+        ],
+        [
+          "group",
+          "team",
+          "guild",
+          "community",
+          "proposal",
+          "approach"
+        ]
+      ],
+      "keywords": [
+        "group vote",
+        "team vote",
+        "guild vote",
+        "community vote",
+        "create a poll",
+        "hold a vote",
+        "vote on a proposal",
+        "vote on our approach",
+        "plurality voting",
+        "approval voting",
+        "ranked choice vote"
+      ],
+      "native_tool": "covenant_vote",
+      "purpose": "Prepare a group proposal and an explicit voting procedure",
+      "required_parameters": [
+        "group",
+        "poll",
+        "request"
+      ],
+      "schema_command": [
+        "python",
+        "-m",
+        "covenant_chain.onboarding",
+        "--task",
+        "group-vote"
+      ],
+      "availability": "OWNER_CONFIGURED_INSTALLED_SYSTEM_NOT_ANONYMOUS_MCP"
+    },
+    {
+      "action": "describe",
+      "boundary": "Owner SDK or separately adopted ConnectorHarness required. Keyless tools cannot select commands, install processes or perform privileged calls.",
+      "guide": "docs/EXPLORE.html",
+      "id": "external-mcp",
+      "keywords": [
+        "MCP client",
+        "call an MCP",
+        "external MCP"
+      ],
+      "native_tool": "covenant_connector",
+      "purpose": "Use an owner-installed MCP client through a guarded connector",
+      "required_parameters": [],
+      "schema_command": [
+        "python",
+        "-m",
+        "covenant_chain.agent_server",
+        "--keyless",
+        "--stateless",
+        "--list-tools",
+        "--tool",
+        "covenant_connector"
+      ],
+      "availability": "OWNER_CONFIGURED_INSTALLED_SYSTEM_NOT_ANONYMOUS_MCP"
+    },
+    {
+      "action": "describe",
+      "boundary": "Owner-private directory and installed adapter required. Discovery grants no permission to contact; the owner separately approves the exact recipient, message, channel and cost ceiling. The HumanContacts SDK retains uncertain sends without retry.",
+      "guide": "docs/EXPLORE.html",
+      "id": "contact-human",
+      "keyword_groups": [
+        [
+          "ask",
+          "call",
+          "contact",
+          "email",
+          "message",
+          "notify",
+          "phone",
+          "reach",
+          "sms",
+          "text"
+        ],
+        [
+          "human",
+          "humans",
+          "people",
+          "person",
+          "reviewer",
+          "seller",
+          "supplier"
+        ]
+      ],
+      "keywords": [
+        "contact a human",
+        "call a human",
+        "reach a person",
+        "human contact",
+        "email a supplier",
+        "phone a supplier",
+        "contact the seller",
+        "reach out to a human",
+        "human who opted in",
+        "email the person",
+        "contacting my reviewer",
+        "lost the reply",
+        "human reviewer",
+        "send an email",
+        "send a text",
+        "voice call",
+        "call someone",
+        "opted in to review"
+      ],
+      "native_tool": "covenant_connector",
+      "purpose": "Find an opted-in human and prepare a separately approved message or call",
+      "required_parameters": [],
+      "schema_command": [
+        "python",
+        "-m",
+        "covenant_chain.agent_server",
+        "--keyless",
+        "--stateless",
+        "--list-tools",
+        "--tool",
+        "covenant_connector"
+      ],
+      "availability": "OWNER_CONFIGURED_INSTALLED_SYSTEM_NOT_ANONYMOUS_MCP"
+    },
+    {
+      "action": "directory",
+      "boundary": "Preparing a listing does not start a campaign or collect fees. The separate sponsored-slot SDK requires signed campaigns, bounded budgets and an explicitly configured destination; paid priority never changes organic rank or reputation.",
+      "guide": "docs/EXPLORE.html",
+      "id": "sponsored-offer",
+      "keyword_groups": [
+        [
+          "auction",
+          "bid",
+          "bids",
+          "budget",
+          "fee",
+          "fees",
+          "paid",
+          "placement",
+          "placements",
+          "priority",
+          "promote",
+          "spending",
+          "sponsored"
+        ],
+        [
+          "ad",
+          "ads",
+          "advert",
+          "advertise",
+          "advertising",
+          "listing",
+          "listings",
+          "marketplace",
+          "offer",
+          "offers",
+          "service",
+          "services"
+        ]
+      ],
+      "keywords": [
+        "sponsored offer",
+        "advertising auction",
+        "paid placement",
+        "paid placements",
+        "promote my listing",
+        "sponsored listing",
+        "advertise my listing",
+        "advertising budget",
+        "daily budget",
+        "sponsored offers",
+        "paid priority",
+        "prioritise my advert",
+        "prioritize my advert",
+        "fee recipient"
+      ],
+      "native_tool": "covenant_ads",
+      "purpose": "Prepare a labelled advert and an owner-approved placement budget",
+      "required_parameters": [
+        "market",
+        "price",
+        "seller",
+        "title"
+      ],
+      "schema_command": [
+        "python",
+        "-m",
+        "covenant_chain.agent_server",
+        "--keyless",
+        "--stateless",
+        "--list-tools",
+        "--tool",
+        "covenant_ads"
+      ],
+      "availability": "OWNER_CONFIGURED_INSTALLED_SYSTEM_NOT_ANONYMOUS_MCP"
+    },
+    {
+      "action": "create",
+      "boundary": "Private local keyless host or owner-configured requests directory required. A saved need, selected bid and prepared agreement grant no assent, publication or execution.",
+      "guide": "docs/EXPLORE.html",
+      "id": "request-service",
+      "keywords": [
+        "need an MCP",
+        "need a service",
+        "need a server",
+        "need an agent",
+        "need a tool",
+        "RFP",
+        "request for proposals",
+        "request a quote",
+        "save task",
+        "saved request"
+      ],
+      "native_tool": "covenant_request_write",
+      "purpose": "Save a plain-language need and compare exact proposals without a chain",
+      "required_parameters": [
+        "goal"
+      ],
+      "schema_command": [
+        "python",
+        "-m",
+        "covenant_chain.agent_server",
+        "--keyless",
+        "--stateless",
+        "--list-tools",
+        "--tool",
+        "covenant_request_write"
+      ],
+      "availability": "OWNER_CONFIGURED_INSTALLED_SYSTEM_NOT_ANONYMOUS_MCP"
+    },
+    {
+      "action": "search",
+      "boundary": "Import an owner-selected metadata page or local catalog. Claims, freshness, ranking and namespace ownership do not prove safety, capability or authority.",
+      "guide": "docs/EXPLORE.html",
+      "id": "discover-services",
+      "keywords": [
+        "find an MCP",
+        "find a server",
+        "find an agent",
+        "find agents",
+        "find a service",
+        "find a tool",
+        "discover agents",
+        "search for",
+        "find a supplier",
+        "find suppliers",
+        "need a supplier",
+        "supplier of",
+        "find a seller",
+        "find goods"
+      ],
+      "native_tool": "covenant_request",
+      "purpose": "Find agents, MCP servers, tools and services in selected metadata",
+      "required_parameters": [
+        "goal",
+        "records"
+      ],
+      "schema_command": [
+        "python",
+        "-m",
+        "covenant_chain.agent_server",
+        "--keyless",
+        "--stateless",
+        "--list-tools",
+        "--tool",
+        "covenant_request"
+      ],
+      "availability": "OWNER_CONFIGURED_INSTALLED_SYSTEM_NOT_ANONYMOUS_MCP"
+    },
+    {
+      "action": "pack",
+      "boundary": "Exact document packing stays offline. An owner-installed covenant_agora_peer adds HTTPS exchange and retained-reply recovery; changed meaning requires fresh agreement.",
+      "guide": "docs/EXPLORE.html",
+      "id": "reusable-protocol",
+      "keywords": [
+        "Agora",
+        "reusable protocol",
+        "protocol document",
+        "negotiated methodology"
+      ],
+      "native_tool": "covenant_agora",
+      "purpose": "Pin and reuse a negotiated protocol such as Agora",
+      "required_parameters": [
+        "document_text"
+      ],
+      "schema_command": [
+        "python",
+        "-m",
+        "covenant_chain.agent_server",
+        "--keyless",
+        "--stateless",
+        "--list-tools",
+        "--tool",
+        "covenant_agora"
+      ],
+      "availability": "OWNER_CONFIGURED_INSTALLED_SYSTEM_NOT_ANONYMOUS_MCP"
+    },
+    {
+      "action": "templates",
+      "boundary": "Private owner workspace required. Templates are untrusted method bytes; reuse needs new selection, context and role signatures.",
+      "guide": "docs/CAPABILITIES.html#discovery",
+      "id": "reuse-method",
+      "keyword_groups": [
+        [
+          "save",
+          "record",
+          "reuse",
+          "find",
+          "adapt"
+        ],
+        [
+          "method",
+          "methods",
+          "workflow",
+          "workflows",
+          "template",
+          "templates",
+          "checklist"
+        ]
+      ],
+      "keywords": [
+        "reuse an agreement",
+        "save a template",
+        "find a template",
+        "adapt a protocol",
+        "reuse a method",
+        "shared research method",
+        "shared method",
+        "save a research method",
+        "record a method",
+        "save a workflow",
+        "research checklist"
+      ],
+      "native_tool": "covenant_request",
+      "purpose": "Find and adapt a saved method or deal, signed afresh",
+      "required_parameters": [],
+      "schema_command": [
+        "python",
+        "-m",
+        "covenant_chain.agent_server",
+        "--keyless",
+        "--stateless",
+        "--list-tools",
+        "--tool",
+        "covenant_request"
+      ],
+      "availability": "OWNER_CONFIGURED_INSTALLED_SYSTEM_NOT_ANONYMOUS_MCP"
+    },
+    {
+      "action": "taxonomy",
+      "boundary": "Structural classification is versioned and separate from contextual route ranking. Neither metadata nor popularity grants authority.",
+      "guide": "docs/EXPLORE.html",
+      "id": "taxonomy",
+      "keywords": [
+        "Aristotelian",
+        "taxonomy",
+        "levels",
+        "Russian doll",
+        "layering",
+        "navigation graph",
+        "adaptive onboarding",
+        "pagerank routes"
+      ],
+      "native_tool": "covenant_onboard",
+      "purpose": "Inspect the structural levels and parallel learned navigation",
+      "required_parameters": [],
+      "schema_command": [
+        "python",
+        "-m",
+        "covenant_chain.agent_server",
+        "--keyless",
+        "--stateless",
+        "--list-tools",
+        "--tool",
+        "covenant_onboard"
+      ],
+      "availability": "OWNER_CONFIGURED_INSTALLED_SYSTEM_NOT_ANONYMOUS_MCP"
+    },
+    {
+      "action": "action",
+      "boundary": "Installed metadata only. A schema grants no authority; call the tool by name or through covenant_call, which validates and refuses exactly as a direct call.",
+      "guide": "docs/EXPLORE.html",
+      "id": "tool-schema",
+      "keywords": [
+        "exact schema",
+        "tool schema",
+        "input schema",
+        "describe a tool",
+        "describe tool",
+        "explain a tool",
+        "explain tool"
+      ],
+      "native_tool": "covenant_explain",
+      "purpose": "Explain the exact input schema of any installed tool or action",
+      "required_parameters": [
+        "id"
+      ],
+      "schema_command": [
+        "python",
+        "-m",
+        "covenant_chain.agent_server",
+        "--keyless",
+        "--stateless",
+        "--list-tools",
+        "--tool",
+        "covenant_explain"
+      ],
+      "availability": "OWNER_CONFIGURED_INSTALLED_SYSTEM_NOT_ANONYMOUS_MCP"
+    },
+    {
+      "action": "list",
+      "boundary": "Names and summaries only; reach any listed tool through covenant_call. Listing installs, enables or authorizes nothing.",
+      "guide": "docs/EXPLORE.html",
+      "id": "tool-list",
+      "keywords": [
+        "list tools",
+        "all tools",
+        "which tools",
+        "installed tools",
+        "tool list",
+        "full tool list"
+      ],
+      "native_tool": "covenant_tool_catalog",
+      "purpose": "List every installed tool with one-line summaries",
+      "required_parameters": [],
+      "schema_command": [
+        "python",
+        "-m",
+        "covenant_chain.agent_server",
+        "--keyless",
+        "--stateless",
+        "--list-tools",
+        "--tool",
+        "covenant_tool_catalog"
+      ],
+      "availability": "OWNER_CONFIGURED_INSTALLED_SYSTEM_NOT_ANONYMOUS_MCP"
+    },
     {
       "action": "start",
       "boundary": "Local preview only. Identity evidence, publication and consequential owner authority are separately adopted; no public signup or package publication is implied.",
@@ -174,15 +1857,17 @@
         "-m",
         "covenant_chain.agent_server",
         "--keyless",
+        "--stateless",
         "--list-tools",
         "--tool",
         "covenant_onboard"
-      ]
+      ],
+      "availability": "OWNER_CONFIGURED_INSTALLED_SYSTEM_NOT_ANONYMOUS_MCP"
     },
     {
       "action": "quick_trade",
       "boundary": "One preparation call; explicit buyer/seller assent and settlement remain separate.",
-      "guide": "docs/AGENT_START.html",
+      "guide": "docs/EXPLORE.html",
       "id": "simple-trade",
       "keywords": [
         "buy",
@@ -209,10 +1894,91 @@
         "-m",
         "covenant_chain.agent_server",
         "--keyless",
+        "--stateless",
         "--list-tools",
         "--tool",
         "covenant_marketplace"
-      ]
+      ],
+      "availability": "OWNER_CONFIGURED_INSTALLED_SYSTEM_NOT_ANONYMOUS_MCP"
+    },
+    {
+      "action": "draft",
+      "boundary": "Checkout, order, payment and receipt messages are evidence. Both roles echo and assent outside the tool; escrow release needs its own quorum. No signing, card data, secrets or fetching.",
+      "guide": "docs/EXPLORE.html",
+      "id": "agentic-checkout",
+      "keywords": [
+        "agentic commerce",
+        "ACP",
+        "UCP",
+        "checkout",
+        "AP2",
+        "MPP",
+        "HTTP 402",
+        "machine payments",
+        "delivery receipt",
+        "order webhook",
+        "refund after purchase"
+      ],
+      "native_tool": "covenant_commerce",
+      "purpose": "Bind an ACP or UCP checkout, MPP 402 payment or AP2 payment permission to one deal and its aftermath",
+      "required_parameters": [
+        "acceptance",
+        "checkout",
+        "context",
+        "merchant",
+        "parties",
+        "protocol",
+        "remedy"
+      ],
+      "schema_command": [
+        "python",
+        "-m",
+        "covenant_chain.agent_server",
+        "--keyless",
+        "--stateless",
+        "--list-tools",
+        "--tool",
+        "covenant_commerce"
+      ],
+      "availability": "OWNER_CONFIGURED_INSTALLED_SYSTEM_NOT_ANONYMOUS_MCP"
+    },
+    {
+      "action": "describe",
+      "boundary": "Owner installs the optional desk and public pins. Exact rights, scope, expiry, prices and dual-party receipts remain assertions; no fetching, crawling, signing, payment or inferred legal title.",
+      "guide": "docs/EXPLORE.html",
+      "id": "publisher-crawler-licensing",
+      "keywords": [
+        "publisher",
+        "crawler",
+        "licence",
+        "license",
+        "crawl",
+        "license one article",
+        "licence one article",
+        "license an article",
+        "licence an article",
+        "publisher crawler licence",
+        "crawler licensing",
+        "content licensing",
+        "licensing market",
+        "pay per crawl",
+        "TDMRep",
+        "ai.txt"
+      ],
+      "native_tool": "covenant_commerce",
+      "purpose": "Inspect the owner setup for exact publisher/crawler content licences",
+      "required_parameters": [],
+      "schema_command": [
+        "python",
+        "-m",
+        "covenant_chain.agent_server",
+        "--keyless",
+        "--stateless",
+        "--list-tools",
+        "--tool",
+        "covenant_commerce"
+      ],
+      "availability": "OWNER_CONFIGURED_INSTALLED_SYSTEM_NOT_ANONYMOUS_MCP"
     },
     {
       "action": "work",
@@ -231,7 +1997,13 @@
         "settle",
         "logo",
         "corrections",
-        "support duty"
+        "support duty",
+        "what do i owe",
+        "what am i owed",
+        "purchase summary",
+        "obligation summary",
+        "export evidence",
+        "import evidence"
       ],
       "native_tool": "covenant_onboard",
       "purpose": "Complete signed work, staged payments, delivery, partial awards and appeals",
@@ -241,10 +2013,12 @@
         "-m",
         "covenant_chain.agent_server",
         "--keyless",
+        "--stateless",
         "--list-tools",
         "--tool",
         "covenant_onboard"
-      ]
+      ],
+      "availability": "OWNER_CONFIGURED_INSTALLED_SYSTEM_NOT_ANONYMOUS_MCP"
     },
     {
       "action": "work",
@@ -256,7 +2030,11 @@
         "safe local demo",
         "restart",
         "inspect who controls",
-        "custody setup"
+        "custody setup",
+        "builder setup",
+        "publisher trust",
+        "payment rail",
+        "external rail"
       ],
       "native_tool": "covenant_onboard",
       "purpose": "Set up or inspect owner-controlled synthetic hosts after restart",
@@ -266,10 +2044,12 @@
         "-m",
         "covenant_chain.agent_server",
         "--keyless",
+        "--stateless",
         "--list-tools",
         "--tool",
         "covenant_onboard"
-      ]
+      ],
+      "availability": "OWNER_CONFIGURED_INSTALLED_SYSTEM_NOT_ANONYMOUS_MCP"
     },
     {
       "action": "describe",
@@ -292,15 +2072,17 @@
         "-m",
         "covenant_chain.agent_server",
         "--keyless",
+        "--stateless",
         "--list-tools",
         "--tool",
         "covenant_principal"
-      ]
+      ],
+      "availability": "OWNER_CONFIGURED_INSTALLED_SYSTEM_NOT_ANONYMOUS_MCP"
     },
     {
       "action": "describe",
       "boundary": "Complete schemas and synthetic examples only. Exact module assent, current authority, collateral custody and execution remain separate.",
-      "guide": "docs/CAPABILITIES.html#agreements",
+      "guide": "docs/EXPLORE.html",
       "id": "advanced-contract",
       "keywords": [
         "guarantor",
@@ -317,15 +2099,17 @@
         "-m",
         "covenant_chain.agent_server",
         "--keyless",
+        "--stateless",
         "--list-tools",
         "--tool",
         "covenant_legal"
-      ]
+      ],
+      "availability": "OWNER_CONFIGURED_INSTALLED_SYSTEM_NOT_ANONYMOUS_MCP"
     },
     {
       "action": "counter",
       "boundary": "Use complete selected replacement fields; changed terms require fresh assent.",
-      "guide": "docs/CAPABILITIES.html#agreements",
+      "guide": "docs/EXPLORE.html",
       "id": "negotiate",
       "keywords": [
         "counteroffer",
@@ -344,15 +2128,17 @@
         "-m",
         "covenant_chain.agent_server",
         "--keyless",
+        "--stateless",
         "--list-tools",
         "--tool",
         "covenant_marketplace"
-      ]
+      ],
+      "availability": "OWNER_CONFIGURED_INSTALLED_SYSTEM_NOT_ANONYMOUS_MCP"
     },
     {
       "action": "simple",
       "boundary": "Drafting is keyless; prepare the meaning closure and review every required role assent.",
-      "guide": "docs/CAPABILITIES.html#agreements",
+      "guide": "docs/EXPLORE.html",
       "id": "simple-agreement",
       "keywords": [
         "promise",
@@ -361,7 +2147,7 @@
         "roles"
       ],
       "native_tool": "covenant_concept",
-      "purpose": "Record a simple or nested exact agreement",
+      "purpose": "Record a simple or nested exact deal",
       "required_parameters": [
         "terms"
       ],
@@ -370,15 +2156,17 @@
         "-m",
         "covenant_chain.agent_server",
         "--keyless",
+        "--stateless",
         "--list-tools",
         "--tool",
         "covenant_concept"
-      ]
+      ],
+      "availability": "OWNER_CONFIGURED_INSTALLED_SYSTEM_NOT_ANONYMOUS_MCP"
     },
     {
       "action": "pack",
       "boundary": "Commit exact source bytes; adopting semantics, authority and execution is separate.",
-      "guide": "docs/CAPABILITIES.html#agreements",
+      "guide": "docs/EXPLORE.html",
       "id": "external-draft",
       "keywords": [
         "file",
@@ -395,25 +2183,119 @@
         "-m",
         "covenant_chain.agent_server",
         "--keyless",
+        "--stateless",
         "--list-tools",
         "--tool",
         "covenant_external_draft"
-      ]
+      ],
+      "availability": "OWNER_CONFIGURED_INSTALLED_SYSTEM_NOT_ANONYMOUS_MCP"
+    },
+    {
+      "action": "inspect",
+      "boundary": "Use the complete package and an independently retained package ID. Inspect without retrieval or owner custody; source opening, current authority and settlement remain separate.",
+      "guide": "docs/EXPLORE.html",
+      "id": "portable-agreement",
+      "keywords": [
+        "portable agreement",
+        "agreement package",
+        "move agreement",
+        "verify offline",
+        "recipient",
+        "export agreement",
+        "import agreement"
+      ],
+      "native_tool": "covenant_portable_agreement",
+      "purpose": "Carry and verify a complete deal on another agent or offline machine",
+      "required_parameters": [
+        "expected_id",
+        "package"
+      ],
+      "schema_command": [
+        "python",
+        "-m",
+        "covenant_chain.agent_server",
+        "--keyless",
+        "--stateless",
+        "--list-tools",
+        "--tool",
+        "covenant_portable_agreement"
+      ],
+      "availability": "OWNER_CONFIGURED_INSTALLED_SYSTEM_NOT_ANONYMOUS_MCP"
+    },
+    {
+      "action": "owner_handoff",
+      "boundary": "Static owner instructions only. Each owner controls a separate local key, reviews exact roles and terms, and explicitly signs. MCP cannot sign. Independently authenticate package fingerprints.",
+      "guide": "docs/EXPLORE.html",
+      "id": "sign-and-handoff",
+      "keywords": [
+        "sign agreement",
+        "owner signing",
+        "countersign",
+        "signed handoff",
+        "send signed agreement",
+        "sign",
+        "hand off",
+        "handoff"
+      ],
+      "native_tool": "covenant_portable_agreement",
+      "purpose": "Review and sign your deal locally, then exchange it with another party",
+      "required_parameters": [],
+      "schema_command": [
+        "python",
+        "-m",
+        "covenant_chain.agent_server",
+        "--keyless",
+        "--stateless",
+        "--list-tools",
+        "--tool",
+        "covenant_portable_agreement"
+      ],
+      "availability": "OWNER_CONFIGURED_INSTALLED_SYSTEM_NOT_ANONYMOUS_MCP"
+    },
+    {
+      "action": "owner_approval",
+      "boundary": "Static instructions only. An owner separately installs the policy and selects protected roles; agent discovery cannot approve or sign.",
+      "guide": "docs/EXPLORE.html",
+      "id": "owner-approval",
+      "keywords": [
+        "owner approval",
+        "approval threshold",
+        "approve spending",
+        "human approval",
+        "spending threshold"
+      ],
+      "native_tool": "covenant_portable_agreement",
+      "purpose": "Require separate owner approval above a spending limit",
+      "required_parameters": [],
+      "schema_command": [
+        "python",
+        "-m",
+        "covenant_chain.agent_server",
+        "--keyless",
+        "--stateless",
+        "--list-tools",
+        "--tool",
+        "covenant_portable_agreement"
+      ],
+      "availability": "OWNER_CONFIGURED_INSTALLED_SYSTEM_NOT_ANONYMOUS_MCP"
     },
     {
       "action": "case",
       "boundary": "A case joins evidence; arbitration requires the separately adopted procedure and authority.",
-      "guide": "docs/CAPABILITIES.html#agreements",
+      "guide": "docs/EXPLORE.html",
       "id": "review-dispute",
       "keywords": [
         "dispute",
         "arbitration",
         "evidence",
         "obligations",
-        "payment failed"
+        "payment failed",
+        "review a dispute",
+        "review dispute",
+        "disputed obligations"
       ],
       "native_tool": "covenant_review",
-      "purpose": "Review agreements, authority, evidence, payments and remaining work together",
+      "purpose": "Review deals, authority, proof, payments and remaining work together",
       "required_parameters": [
         "title"
       ],
@@ -422,15 +2304,91 @@
         "-m",
         "covenant_chain.agent_server",
         "--keyless",
+        "--stateless",
         "--list-tools",
         "--tool",
         "covenant_review"
-      ]
+      ],
+      "availability": "OWNER_CONFIGURED_INSTALLED_SYSTEM_NOT_ANONYMOUS_MCP"
+    },
+    {
+      "action": "describe",
+      "boundary": "Both disputants sign interop terms first. An external award is evidence for the agreed stage; AAP deciders, finalization or the panel threshold decide escrow. No legal recognition or enforceability is established.",
+      "guide": "docs/EXPLORE.html",
+      "id": "arbitration-interop",
+      "keywords": [
+        "arbitration service",
+        "external arbitration",
+        "arbitration award",
+        "award pdf",
+        "dual format award",
+        "custody chain",
+        "arbitrator conflict",
+        "conflict of interest",
+        "Agentic Arbitration Protocol"
+      ],
+      "native_tool": "covenant_arbitration_interop",
+      "purpose": "Use an outside arbitration service, verify its award, or issue a court-ready AAP award",
+      "required_parameters": [],
+      "schema_command": [
+        "python",
+        "-m",
+        "covenant_chain.agent_server",
+        "--keyless",
+        "--stateless",
+        "--list-tools",
+        "--tool",
+        "covenant_arbitration_interop"
+      ],
+      "availability": "OWNER_CONFIGURED_INSTALLED_SYSTEM_NOT_ANONYMOUS_MCP"
+    },
+    {
+      "action": "terms_draft",
+      "boundary": "Both disputants sign the terms first. A ruling, job event or delegation is evidence for the agreed stage; the AAP ladder and signed terms decide escrow, and appeals stay open where the procedure allows. No signing, bonding, payment, redemption, fetching or filing.",
+      "guide": "docs/EXPLORE.html",
+      "id": "outside-adjudicator",
+      "keywords": [
+        "Kleros",
+        "UMA",
+        "optimistic oracle",
+        "Internet Court",
+        "GenLayer",
+        "AI jury",
+        "ERC-8183",
+        "agentic commerce job",
+        "evaluator",
+        "ERC-7710",
+        "delegation",
+        "MetaMask delegation",
+        "AAA",
+        "American Arbitration Association",
+        "filing packet"
+      ],
+      "native_tool": "covenant_adjudication",
+      "purpose": "Name Kleros, UMA or Internet Court as a ladder stage, appeal an ERC-8183 evaluator, map an ERC-7710 delegation or prepare an AAA filing aid",
+      "required_parameters": [
+        "adjudicator",
+        "case",
+        "ladder",
+        "options",
+        "parties"
+      ],
+      "schema_command": [
+        "python",
+        "-m",
+        "covenant_chain.agent_server",
+        "--keyless",
+        "--stateless",
+        "--list-tools",
+        "--tool",
+        "covenant_adjudication"
+      ],
+      "availability": "OWNER_CONFIGURED_INSTALLED_SYSTEM_NOT_ANONYMOUS_MCP"
     },
     {
       "action": "draft",
       "boundary": "Local signing/custody uses the owner CLI. Delivery is not payment finality.",
-      "guide": "docs/CAPABILITIES.html#offline",
+      "guide": "docs/EXPLORE.html",
       "id": "offline",
       "keywords": [
         "offline",
@@ -439,7 +2397,7 @@
         "local"
       ],
       "native_tool": "covenant_offline",
-      "purpose": "Co-sign and carry agreements without Internet access",
+      "purpose": "Co-sign and carry deals without Internet access",
       "required_parameters": [
         "nonce",
         "parties",
@@ -453,15 +2411,17 @@
         "-m",
         "covenant_chain.agent_server",
         "--keyless",
+        "--stateless",
         "--list-tools",
         "--tool",
         "covenant_offline"
-      ]
+      ],
+      "availability": "OWNER_CONFIGURED_INSTALLED_SYSTEM_NOT_ANONYMOUS_MCP"
     },
     {
       "action": "spec",
       "boundary": "Owner connects and adopts each carrier. Keyless tools do not transmit; hardware and satellite service are unqualified.",
-      "guide": "docs/CAPABILITIES.html#offline",
+      "guide": "docs/EXPLORE.html",
       "id": "connectivity",
       "keywords": [
         "BLE",
@@ -479,15 +2439,46 @@
         "-m",
         "covenant_chain.agent_server",
         "--keyless",
+        "--stateless",
         "--list-tools",
         "--tool",
         "covenant_connectivity"
-      ]
+      ],
+      "availability": "OWNER_CONFIGURED_INSTALLED_SYSTEM_NOT_ANONYMOUS_MCP"
+    },
+    {
+      "action": "describe",
+      "boundary": "Caller-supplied trusted state and bundle are inputs. VERIFIED is not installation and STALE is not VERIFIED; applying stays the owner command covenant-update apply.",
+      "guide": "docs/EXPLORE.html",
+      "id": "secure-update",
+      "keywords": [
+        "software update",
+        "update bundle",
+        "secure update",
+        "offline update",
+        "verify an update",
+        "TUF",
+        "protocol profile update"
+      ],
+      "native_tool": "covenant_update",
+      "purpose": "Verify a software or protocol-version update from a mirror, USB, QR or mesh",
+      "required_parameters": [],
+      "schema_command": [
+        "python",
+        "-m",
+        "covenant_chain.agent_server",
+        "--keyless",
+        "--stateless",
+        "--list-tools",
+        "--tool",
+        "covenant_update"
+      ],
+      "availability": "OWNER_CONFIGURED_INSTALLED_SYSTEM_NOT_ANONYMOUS_MCP"
     },
     {
       "action": "prepare_request",
       "boundary": "An owner must deploy/pin the service, agreement, current scoped grant and authenticated caller.",
-      "guide": "docs/CAPABILITIES.html#integrations",
+      "guide": "docs/EXPLORE.html",
       "id": "a2a",
       "keywords": [
         "A2A",
@@ -495,7 +2486,7 @@
         "authorise"
       ],
       "native_tool": "covenant_a2a_agreement",
-      "purpose": "Require exact assent before an A2A service performs work",
+      "purpose": "Require exact signatures before an A2A service performs work",
       "required_parameters": [
         "params"
       ],
@@ -504,15 +2495,17 @@
         "-m",
         "covenant_chain.agent_server",
         "--keyless",
+        "--stateless",
         "--list-tools",
         "--tool",
         "covenant_a2a_agreement"
-      ]
+      ],
+      "availability": "OWNER_CONFIGURED_INSTALLED_SYSTEM_NOT_ANONYMOUS_MCP"
     },
     {
       "action": "draft",
       "boundary": "Keyless preparation only. Owner installs authority checks and a controller adapter; hardware/safety are unqualified.",
-      "guide": "docs/CAPABILITIES.html#integrations",
+      "guide": "docs/EXPLORE.html",
       "id": "robotics",
       "keywords": [
         "robot",
@@ -538,15 +2531,17 @@
         "-m",
         "covenant_chain.agent_server",
         "--keyless",
+        "--stateless",
         "--list-tools",
         "--tool",
         "covenant_robotics"
-      ]
+      ],
+      "availability": "OWNER_CONFIGURED_INSTALLED_SYSTEM_NOT_ANONYMOUS_MCP"
     },
     {
       "action": "spec",
       "boundary": "Programmes and service quotes require owner adoption; drafting creates no revenue entitlement.",
-      "guide": "docs/CAPABILITIES.html#builders",
+      "guide": "docs/EXPLORE.html",
       "id": "builder",
       "keywords": [
         "developer",
@@ -561,15 +2556,17 @@
         "-m",
         "covenant_chain.agent_server",
         "--keyless",
+        "--stateless",
         "--list-tools",
         "--tool",
         "covenant_builder"
-      ]
+      ],
+      "availability": "OWNER_CONFIGURED_INSTALLED_SYSTEM_NOT_ANONYMOUS_MCP"
     },
     {
       "action": "scaffold",
       "boundary": "Generated starter source is not installed or executed; owner installation is explicit.",
-      "guide": "docs/CAPABILITIES.html#builders",
+      "guide": "docs/EXPLORE.html",
       "id": "extend",
       "keywords": [
         "connector",
@@ -588,15 +2585,17 @@
         "-m",
         "covenant_chain.agent_server",
         "--keyless",
+        "--stateless",
         "--list-tools",
         "--tool",
         "covenant_developer"
-      ]
+      ],
+      "availability": "OWNER_CONFIGURED_INSTALLED_SYSTEM_NOT_ANONYMOUS_MCP"
     },
     {
       "action": "pack",
       "boundary": "A proof envelope does not prove its statement; use a pinned installed verifier and exact assumptions.",
-      "guide": "docs/CAPABILITIES.html#privacy",
+      "guide": "docs/EXPLORE.html",
       "id": "proof",
       "keywords": [
         "proof",
@@ -616,15 +2615,17 @@
         "-m",
         "covenant_chain.agent_server",
         "--keyless",
+        "--stateless",
         "--list-tools",
         "--tool",
         "covenant_proof"
-      ]
+      ],
+      "availability": "OWNER_CONFIGURED_INSTALLED_SYSTEM_NOT_ANONYMOUS_MCP"
     },
     {
       "action": "market",
       "boundary": "Market terms are drafts. Listings, custody, escrow controllers and execution require separate adoption.",
-      "guide": "docs/CAPABILITIES.html#markets",
+      "guide": "docs/EXPLORE.html",
       "id": "market",
       "keywords": [
         "market",
@@ -643,15 +2644,61 @@
         "-m",
         "covenant_chain.agent_server",
         "--keyless",
+        "--stateless",
         "--list-tools",
         "--tool",
         "covenant_marketplace"
-      ]
+      ],
+      "availability": "OWNER_CONFIGURED_INSTALLED_SYSTEM_NOT_ANONYMOUS_MCP"
+    },
+    {
+      "action": "create",
+      "boundary": "Provider-independent local request, quote comparison and exact order preparation. Selection is not assent, performance evidence, funding or an automatic payment.",
+      "guide": "docs/EXPLORE.html",
+      "id": "solve-problem",
+      "keywords": [
+        "solver",
+        "solvers",
+        "intent market",
+        "solve a problem",
+        "request for proposal",
+        "competing bids",
+        "AITP",
+        "job",
+        "quotes",
+        "quote",
+        "problem",
+        "several people"
+      ],
+      "native_tool": "covenant_intent_market",
+      "purpose": "Request solutions, compare solver quotes and prepare the selected exact deal",
+      "required_parameters": [
+        "asset",
+        "bid_deadline",
+        "context",
+        "criteria",
+        "deliver_by",
+        "maximum_price",
+        "objective",
+        "procedure",
+        "sponsor"
+      ],
+      "schema_command": [
+        "python",
+        "-m",
+        "covenant_chain.agent_server",
+        "--keyless",
+        "--stateless",
+        "--list-tools",
+        "--tool",
+        "covenant_intent_market"
+      ],
+      "availability": "OWNER_CONFIGURED_INSTALLED_SYSTEM_NOT_ANONYMOUS_MCP"
     },
     {
       "action": "prepare",
       "boundary": "Preview only. Exact field and metadata consent from all principals, owner publication and separate HTTPS hosting are required. Unlisted is public; old copies may persist.",
-      "guide": "docs/CAPABILITIES.html#privacy",
+      "guide": "docs/EXPLORE.html",
       "id": "publish-web",
       "keywords": [
         "SEO",
@@ -663,7 +2710,7 @@
         "ledger"
       ],
       "native_tool": "covenant_public_web",
-      "purpose": "Prepare opt-in searchable marketplace, social, profile or ledger pages",
+      "purpose": "Prepare opt-in searchable marketplace, social, personal or ledger pages",
       "required_parameters": [
         "fields",
         "kind",
@@ -675,15 +2722,17 @@
         "-m",
         "covenant_chain.agent_server",
         "--keyless",
+        "--stateless",
         "--list-tools",
         "--tool",
         "covenant_public_web"
-      ]
+      ],
+      "availability": "OWNER_CONFIGURED_INSTALLED_SYSTEM_NOT_ANONYMOUS_MCP"
     },
     {
       "action": "create",
       "boundary": "A draft neither advances funds nor establishes collateral, creditworthiness or enforceability.",
-      "guide": "docs/CAPABILITIES.html#markets",
+      "guide": "docs/EXPLORE.html",
       "id": "credit",
       "keywords": [
         "credit",
@@ -692,7 +2741,7 @@
         "collateral"
       ],
       "native_tool": "covenant_credit",
-      "purpose": "Draft a credit or lending agreement",
+      "purpose": "Draft a credit or lending deal",
       "required_parameters": [
         "assets",
         "name",
@@ -705,15 +2754,17 @@
         "-m",
         "covenant_chain.agent_server",
         "--keyless",
+        "--stateless",
         "--list-tools",
         "--tool",
         "covenant_credit"
-      ]
+      ],
+      "availability": "OWNER_CONFIGURED_INSTALLED_SYSTEM_NOT_ANONYMOUS_MCP"
     },
     {
       "action": "create",
       "boundary": "Allocation calculations do not prove bidder independence, funding, deadline compliance or award authority.",
-      "guide": "docs/CAPABILITIES.html#markets",
+      "guide": "docs/EXPLORE.html",
       "id": "auction",
       "keywords": [
         "auction",
@@ -732,15 +2783,17 @@
         "-m",
         "covenant_chain.agent_server",
         "--keyless",
+        "--stateless",
         "--list-tools",
         "--tool",
         "covenant_auction"
-      ]
+      ],
+      "availability": "OWNER_CONFIGURED_INSTALLED_SYSTEM_NOT_ANONYMOUS_MCP"
     },
     {
       "action": "suites",
       "boundary": "Inspect the actual suite and owner key custody. Later privacy cannot retract earlier public disclosure.",
-      "guide": "docs/CAPABILITIES.html#privacy",
+      "guide": "docs/EXPLORE.html",
       "id": "privacy",
       "keywords": [
         "private",
@@ -749,22 +2802,24 @@
         "disclosure"
       ],
       "native_tool": "covenant_privacy",
-      "purpose": "Choose a privacy scope or protection profile",
+      "purpose": "Choose a privacy scope or a way to protect data",
       "required_parameters": [],
       "schema_command": [
         "python",
         "-m",
         "covenant_chain.agent_server",
         "--keyless",
+        "--stateless",
         "--list-tools",
         "--tool",
         "covenant_privacy"
-      ]
+      ],
+      "availability": "OWNER_CONFIGURED_INSTALLED_SYSTEM_NOT_ANONYMOUS_MCP"
     },
     {
       "action": "search",
       "boundary": "Ranking depends on selected requirements, context and adopted seeds; it is not universal trust or world truth.",
-      "guide": "docs/CAPABILITIES.html#discovery",
+      "guide": "docs/EXPLORE.html",
       "id": "find-and-rank",
       "keywords": [
         "discovery",
@@ -782,21 +2837,71 @@
         "-m",
         "covenant_chain.agent_server",
         "--keyless",
+        "--stateless",
         "--list-tools",
         "--tool",
         "covenant_desire"
-      ]
+      ],
+      "availability": "OWNER_CONFIGURED_INSTALLED_SYSTEM_NOT_ANONYMOUS_MCP"
+    },
+    {
+      "action": "exchange_describe",
+      "boundary": "Offers bind to the exact request digest and rank only by the award rule signed before offers opened; the award, checklist and close records are prepared for both parties to sign. No lending, payment, contact or legal advice.",
+      "guide": "docs/EXPLORE.html",
+      "id": "demand-exchange",
+      "keywords": [
+        "business loan",
+        "loan offers",
+        "compare loan offers",
+        "lenders compete",
+        "compare lenders",
+        "firm offers",
+        "demand exchange",
+        "brokerage",
+        "broker",
+        "term sheet",
+        "APR",
+        "sealed offers",
+        "RFQ",
+        "agent work bids"
+      ],
+      "native_tool": "covenant_request",
+      "purpose": "Post one demand and let eligible offerors compete with firm signed offers",
+      "required_parameters": [],
+      "schema_command": [
+        "python",
+        "-m",
+        "covenant_chain.agent_server",
+        "--keyless",
+        "--stateless",
+        "--list-tools",
+        "--tool",
+        "covenant_request"
+      ],
+      "availability": "OWNER_CONFIGURED_INSTALLED_SYSTEM_NOT_ANONYMOUS_MCP"
     }
   ],
   "source": {
-    "public_package_registry_publication": "NOT_CLAIMED"
+    "type": "PUBLIC_ROUTE_METADATA_PROJECTION",
+    "installed_catalogue_sha256": "af55ec916af5977c830615c752bc1cdf368e543fb5dbc4d85306c4500190b826",
+    "structural_profile": "urn:aap:levels:0.2",
+    "structural_metadata_url": "assets/capability-catalog.json",
+    "public_package_registry_publication": "NOT_CLAIMED",
+    "note": "79 owner-installed task routes. Route availability is separate from hosted tool availability; this public projection does not install or authorize a tool.",
+    "review_status": "CANDIDATE_CATALOGUE_PENDING_PR184_RELEASE"
   },
-  "summary": "Agentic Agreements Protocol (AAP) is for AI agents acting for their principals. Humans use the secondary pages.",
+  "summary": "Find the right coordination, agreement or marketplace workflow; inspect the actual host before acting.",
   "trust_boundary": [
     "Owner chooses/pins identities, authority, budgets, adapters and verifier assumptions.",
     "Draft, assent, authority, execution, delivery, ledger certification and payment are separate facts.",
     "Retain/reconcile the exact original request after an uncertain effect.",
     "This catalog never grants permission to install, sign, transmit or spend."
   ],
-  "version": "0.46.0"
+  "version": "0.46.0",
+  "hosted_first_action": {
+    "connection": "mcp-config.json",
+    "guide": "docs/START.html",
+    "installation_required": false,
+    "signing_authority_granted": false
+  }
 }
