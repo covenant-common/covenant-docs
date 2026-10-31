@@ -185,10 +185,18 @@
     if (resources) text('p', 'Offered resources: ' + resources, article);
     const url = safePublicationUrl(publication.url);
     if (url) {const link = text('a', 'Open the public advert', article); link.href = url;}
+    const arrange = text('button', 'Structure this deal', article); arrange.type = 'button'; arrange.disabled = !window.AAPDealStructures;
+    arrange.addEventListener('click', () => {
+      try {selectAdvert(window.AAPDealStructures.advertFromPublication(publication)); $('draft-work').scrollIntoView({block: 'start'}); $('draft-structure').focus();}
+      catch (error) {$('draft-state').textContent = 'This advert could not be selected: ' + error.message;}
+    });
     const details = document.createElement('details');
     text('summary', 'Public record and identifier', details);
     text('p', 'Publication ID: ' + publication.id, details);
-    text('pre', JSON.stringify(publication, null, 2), details);
+    if (window.AAPDealStructures) {
+      try {text('pre', JSON.stringify(window.AAPDealStructures.advertFromPublication(publication), null, 2), details);}
+      catch (_) {text('p', 'Open the original public advert for the complete publication.', details);}
+    }
     article.appendChild(details);
     return article;
   }
@@ -260,8 +268,88 @@
   $('market-search').addEventListener('submit', (event) => {event.preventDefault(); search(false);});
   $('market-more').addEventListener('click', () => search(true));
 
+  const structures = window.AAPDealStructures;
+  const selection = structures ? new structures.SelectionSession() : null;
+  let templatePreview = 0;
   let drafting = false;
   let latestDraftRaw = null;
+  function clearDraftOutput(message) {
+    latestDraftRaw = null;
+    $('draft-result').hidden = true;
+    $('draft-copy').disabled = true;
+    $('draft-copy-state').textContent = '';
+    $('draft-json-details').open = false;
+    $('draft-json').textContent = '';
+    $('draft-id').textContent = '';
+    $('draft-download').removeAttribute('href');
+    $('draft-download').removeAttribute('download');
+    if (downloadUrl) {URL.revokeObjectURL(downloadUrl); downloadUrl = null;}
+    if (message) $('draft-state').textContent = message;
+  }
+  function invalidateDraft(message) {
+    if (selection) selection.invalidate();
+    clearDraftOutput(message || 'Terms changed. Prepare a fresh unsigned draft when ready.');
+  }
+  async function showTemplate() {
+    if (!structures) return;
+    const id = $('draft-structure').value, chosen = structures.template(id), ticket = ++templatePreview;
+    $('structure-description').textContent = chosen.description + ' ' + chosen.native_composition;
+    $('structure-details-label').textContent = chosen.details_label;
+    $('draft-structure-details').required = chosen.requires_details;
+    $('specialist-ack-label').hidden = !chosen.specialist;
+    $('specialist-ack').checked = false;
+    $('structure-hash').textContent = 'Computing the exact template snapshot hash…';
+    $('structure-snapshot').textContent = JSON.stringify(chosen, null, 2);
+    try {
+      const pin = await structures.templatePin(id);
+      if (ticket === templatePreview) $('structure-hash').textContent = 'Revision ' + chosen.revision + ' · SHA-256 ' + pin.hash + ' · template digest only, not a source-offer pin';
+    } catch (error) {if (ticket === templatePreview) $('structure-hash').textContent = error.message;}
+  }
+  function selectAdvert(advert) {
+    if (!selection) throw new Error('The shared structure catalogue could not load.');
+    selection.select(advert);
+    clearDraftOutput('Advert selection changed. Review the proposed terms before preparing a fresh draft.');
+    if (advert === null) {
+      $('selected-advert-state').textContent = 'No advert selected. You can structure a deal without a listing.';
+      $('clear-advert').hidden = true;
+      return;
+    }
+    const values = structures.proposedFields(advert);
+    ['title', 'deliverable', 'price'].forEach((key) => {$('draft-' + key).value = values[key];});
+    $('draft-supplier').value = '';
+    $('selected-advert-state').textContent = 'Selected public advert: ' + advert.snapshot.title + ' · ' + advert.id + '. Unverified search projection; no exact signed source pin is attached. Confirm both parties and fetch the exact source before signing.';
+    $('clear-advert').hidden = false;
+  }
+  if (structures) {
+    $('draft-structure').replaceChildren();
+    structures.catalogue().forEach((item) => {const option = document.createElement('option'); option.value = item.id; option.textContent = item.title; $('draft-structure').appendChild(option);});
+    $('draft-structure').disabled = false;
+    const requested = new URL(window.location.href).searchParams.get('structure');
+    if (requested && structures.catalogue().some((item) => item.id === requested)) $('draft-structure').value = requested;
+    $('draft-structure').addEventListener('change', () => {invalidateDraft(); showTemplate();});
+    $('matrix-draft').addEventListener('input', () => invalidateDraft());
+    $('clear-advert').addEventListener('click', () => selectAdvert(null));
+    async function loadHandoff(raw) {
+      const revision = selection.invalidate();
+      clearDraftOutput('Loading a public handoff locally; no request has been sent.');
+      const advert = await structures.readHandoff(raw);
+      if (!selection.accepts(revision)) throw new Error('The selection changed while loading. Choose the handoff again.');
+      selectAdvert(advert);
+      $('advert-handoff-state').textContent = 'Public advert handoff loaded. Its file hash checks integrity only; source provenance remains unverified.';
+    }
+    $('advert-handoff-file').addEventListener('change', async (event) => {
+      const file = event.target.files && event.target.files[0];
+      if (!file) return;
+      invalidateDraft('A new handoff file was chosen. The earlier draft is no longer current.');
+      try {if (file.size > 65536) throw new Error('Choose a public handoff of at most 64 KiB.'); await loadHandoff(await file.text());}
+      catch (error) {$('advert-handoff-state').textContent = 'The handoff was not loaded: ' + error.message;}
+    });
+    $('load-advert-handoff').addEventListener('click', async () => {
+      try {await loadHandoff($('advert-handoff-text').value);}
+      catch (error) {$('advert-handoff-state').textContent = 'The handoff was not loaded: ' + error.message;}
+    });
+    showTemplate();
+  } else $('draft-state').textContent = 'The shared structure catalogue could not load. Use the direct MCP connection guide or reload this page.';
   $('draft-copy').addEventListener('click', async () => {
     const raw = latestDraftRaw;
     if (drafting || raw === null) return;
@@ -277,61 +365,41 @@
         $('draft-copy-state').textContent = 'Clipboard access was unavailable. The exact JSON is open below; select and copy it manually.';
         $('draft-json').focus();
       }
-    } finally {
-      $('draft-copy').disabled = drafting || latestDraftRaw === null;
-    }
+    } finally {$('draft-copy').disabled = drafting || latestDraftRaw === null;}
   });
   $('matrix-draft').addEventListener('submit', async (event) => {
     event.preventDefault();
-    if (drafting || !event.currentTarget.reportValidity()) return;
+    if (!structures || !selection || drafting || !event.currentTarget.reportValidity()) return;
     const values = {};
     ['title', 'buyer', 'supplier', 'deliverable', 'price'].forEach((key) => {values[key] = $('draft-' + key).value.trim();});
-    if (Object.values(values).some((value) => !value)) {$('draft-state').textContent = 'Fill in each field before preparing the draft.'; return;}
-    if (values.buyer === values.supplier) {$('draft-state').textContent = 'Give the buyer and supplier distinct names or public identifiers.'; return;}
-    drafting = true;
-    $('draft-submit').disabled = true;
-    $('draft-result').hidden = true;
-    latestDraftRaw = null;
-    $('draft-copy').disabled = true;
-    $('draft-copy-state').textContent = '';
-    $('draft-json-details').open = false;
-    $('draft-json').textContent = '';
-    $('draft-id').textContent = '';
-    $('draft-download').removeAttribute('href');
-    $('draft-download').removeAttribute('download');
-    if (downloadUrl) {URL.revokeObjectURL(downloadUrl); downloadUrl = null;}
-    $('draft-state').textContent = 'Sending these terms for an unsigned draft…';
+    const input = {template_id: $('draft-structure').value, fields: values,
+      details: $('draft-structure-details').value, selected_advert: selection.advert,
+      specialist_acknowledged: $('specialist-ack').checked};
+    const revision = selection.capture();
+    drafting = true; $('draft-submit').disabled = true;
+    clearDraftOutput('Preparing the chosen structure and advert reference…');
     try {
-      const {data, raw} = await callTool('covenant_contract__draft', {
-        title: values.title, parties: [values.buyer, values.supplier],
-        clauses: [
-          {id: 'scope', title: 'Work and review', text: values.deliverable},
-          {id: 'exchange', title: 'Price or exchange', text: values.price},
-          {id: 'approval', title: 'Approval', text: 'This is an unsigned draft. Approval, acceptance, payment and any dispute procedure still need to be agreed by the participants.'}
-        ]
-      });
-      if (!isObject(data) || typeof data.id !== 'string' || !/^[0-9a-f]{64}$/.test(data.id) || data.status !== 'UNSIGNED_DRAFT' || data.binding !== false || !isObject(data.draft)) {
-        throw new Error('The service did not return the expected unsigned draft. No signing or payment has been performed by this page.');
+      const prepared = await structures.buildDraft(input);
+      if (!selection.accepts(revision)) throw new Error('Terms changed before sending. Prepare the current terms again.');
+      $('draft-state').textContent = 'Sending the proposed terms and exact template snapshot for an unsigned draft…';
+      const {data, raw} = await callTool('covenant_contract__draft', prepared.request);
+      if (!selection.accepts(revision)) throw new Error('Terms or selection changed while drafting. The earlier reply was not accepted; prepare the current terms again.');
+      if (!isObject(data) || typeof data.id !== 'string' || !/^[0-9a-f]{64}$/.test(data.id) || data.status !== 'UNSIGNED_DRAFT' || data.binding !== false || data.execution_authorized !== false || !structures.responseRetains(prepared.request, data)) {
+        throw new Error('The service did not preserve the exact structure and advert reference in an unsigned draft. No result has been accepted.');
       }
-      $('draft-id').textContent = data.id;
-      $('draft-json').textContent = raw;
-      latestDraftRaw = raw;
-      $('draft-copy').disabled = false;
-      if (downloadUrl) URL.revokeObjectURL(downloadUrl);
+      selection.retain(revision, raw);
+      $('draft-id').textContent = data.id; $('draft-json').textContent = raw;
+      latestDraftRaw = raw; $('draft-copy').disabled = false;
       downloadUrl = URL.createObjectURL(new Blob([raw], {type: 'application/json;charset=utf-8'}));
       $('draft-download').href = downloadUrl;
       $('draft-download').download = 'covenant-unsigned-' + data.id.slice(0, 12) + '.json';
       $('draft-result').hidden = false;
-      $('draft-state').textContent = 'Unsigned draft prepared. Review every term; nothing has been signed, published or paid.';
-    } catch (error) {
-      $('draft-state').textContent = 'Drafting did not complete. ' + error.message + ' Your input remains in the form; no automatic retry was made.';
-    } finally {
-      drafting = false;
-      $('draft-submit').disabled = false;
-    }
+      $('draft-state').textContent = 'Unsigned buyer proposal prepared. It retains the exact template' + (selection.advert ? ' and selected public projection. Verify the exact source before signing.' : '; no advert was selected.') + ' Both parties’ approval remains separate; nothing has been signed, published or paid.';
+    } catch (error) {$('draft-state').textContent = 'Drafting did not complete: ' + error.message + ' Your input remains; no automatic retry was made.';}
+    finally {drafting = false; $('draft-submit').disabled = false;}
   });
   window.addEventListener('pagehide', () => {if (downloadUrl) URL.revokeObjectURL(downloadUrl);});
   $('market-search-button').disabled = false;
-  $('draft-submit').disabled = false;
+  $('draft-submit').disabled = !structures;
   search(false);
 })();

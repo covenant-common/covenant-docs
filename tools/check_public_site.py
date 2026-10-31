@@ -51,10 +51,11 @@ def check():
                 target=(path.parent/unquote(parsed.path)).resolve()
                 if ROOT not in target.parents or not target.is_file():errors.append('Missing/outside link: '+name+' -> '+url)
         for script in page.scripts:
-            allowed_live={'docs/MATRIX.html':'../assets/matrix.js',
-                          'docs/TERMINAL.html':'../assets/terminal.js'}
+            allowed_live={'docs/MATRIX.html':{'../assets/matrix.js','../assets/deal-structures.js'},
+                          'docs/TERMINAL.html':{'../assets/terminal.js','../assets/deal-structures.js'},
+                          'docs/DEAL_STRUCTURES.html':{'../assets/deal-structures.js'}}
             if (name in allowed_live and script['type'] is None and script['defer'] and
-                    script['src']==allowed_live[name] and not script['data'].strip()):
+                    script['src'] in allowed_live[name] and not script['data'].strip()):
                 if not (path.parent/script['src']).is_file():errors.append('Missing public-directory controls: '+name)
                 continue
             allowed_controls={'docs/EXAMPLES.html':'../assets/example-controls.mjs',

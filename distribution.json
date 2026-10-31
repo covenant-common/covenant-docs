@@ -87,5 +87,12 @@
     "input": "Explicit stated need and published capability links",
     "tracking": false,
     "reputation_or_observed_use": false
+  },
+  "deal_structures": {
+    "url": "https://covenant-common.github.io/covenant-docs/docs/DEAL_STRUCTURES.html",
+    "templates": 4,
+    "status": "UNSIGNED_DRAFTING_RECIPES",
+    "advert_handoff": "EXPLICIT_PUBLIC_PROJECTION_NOT_VERIFIED_SOURCE",
+    "new_server_operations": false
   }
 }

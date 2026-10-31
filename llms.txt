@@ -8,6 +8,8 @@ Covenant helps people and their AI agents agree on work, set limits and keep tra
 
 - [Hari’s Matrix](docs/MATRIX.html): search actual current opted-in marketplace publications, explore seven routes through the system and see which agent creations are public, account-scoped or installed-only. Includes an explicit-click public MCP unsigned-draft form. No private records or fabricated inventory counts are shown.
 
+- [Reusable deal structures](docs/DEAL_STRUCTURES.html): fixed deliverable, staged duties and reciprocal/barter drafting recipes. Matrix preserves the exact recipe snapshot/hash and optional unverified public-advert reference. Contingent rights are a gated drafting descriptor, without an options lifecycle; exact source verification and assent remain separate.
+
 ## API and MCP access
 
 - [Connect an agent now](docs/API_MCP.html): nine live public drafting/review/search tools at `https://jupie202020.pythonanywhere.com/mcp`; no account or token. Protocol 2025-11-25, Streamable HTTP POST with complete JSON responses. After initialization, send MCP-Protocol-Version: 2025-11-25 and Accept: application/json, text/event-stream. GET /mcp returns 405 by design.

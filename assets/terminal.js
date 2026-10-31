@@ -589,6 +589,7 @@
   let currentQuery = '';
   let currentQueryNotice = 'Search: all current public adverts.';
   const displayed = new Set();
+  const handoffUrls = new Set();
 
   function node(tag, value, parent) {
     const element = document.createElement(tag);
@@ -704,6 +705,38 @@
     if (card.wants && card.wants.length) node('p', 'Wants: ' + card.wants.join('; '), item);
     else if (card.wants !== null) node('p', 'No requested consideration is published here; do not infer that the service is free.', item);
     if (card.excerpted) node('p', 'Description excerpt; inspect the public advert for the complete terms.', item).className = 'record-meta';
+    const structure = node('button', 'Structure this deal', item); structure.type = 'button';
+    structure.disabled = !window.AAPDealStructures;
+    const handoffState = node('p', '', item); handoffState.setAttribute('role', 'status'); handoffState.setAttribute('aria-live', 'polite');
+    let handoffPanel = null;
+    structure.addEventListener('click', async () => {
+      structure.disabled = true;
+      handoffState.textContent = 'Preparing an explicit public advert handoff locally…';
+      try {
+        const handoff = await window.AAPDealStructures.makeHandoff(publication);
+        const raw = JSON.stringify(handoff, null, 2);
+        if (handoffPanel) handoffPanel.remove();
+        handoffPanel = document.createElement('div');
+        const url = URL.createObjectURL(new Blob([raw], {type: 'application/json;charset=utf-8'}));
+        handoffUrls.add(url);
+        const download = node('a', '1. Download public advert handoff', handoffPanel);
+        download.href = url; download.download = 'aap-public-advert-' + handoff.advert.id.slice(0, 12) + '.json';
+        node('span', ' · ', handoffPanel);
+        const composer = node('a', '2. Open the Matrix composer and load the file', handoffPanel);
+        composer.href = 'MATRIX.html#draft-work';
+        const inspect = document.createElement('details'); node('summary', 'Copy or inspect the public handoff instead', inspect);
+        node('p', 'This contains only selected public advert fields. It is not the exact signed source offer; provenance remains unverified.', inspect);
+        const pre = node('pre', raw, inspect); pre.tabIndex = 0;
+        const copy = node('button', 'Copy public handoff JSON', inspect); copy.type = 'button';
+        copy.addEventListener('click', async () => {
+          try {if (!navigator.clipboard || !navigator.clipboard.writeText) throw new Error('Clipboard unavailable'); await navigator.clipboard.writeText(raw); handoffState.textContent = 'Public handoff copied. Paste it into the Matrix handoff loader.';}
+          catch (_) {inspect.open = true; pre.focus(); handoffState.textContent = 'Select and copy the handoff JSON below, then paste it into the Matrix loader.';}
+        });
+        handoffPanel.appendChild(inspect); item.appendChild(handoffPanel);
+        handoffState.textContent = 'Public handoff ready. Choose a reusable structure in Matrix. Loading the file is local; fetch and verify the exact source before signing.';
+      } catch (error) {handoffState.textContent = 'This advert could not be handed off: ' + error.message;}
+      finally {structure.disabled = false;}
+    });
     const details = document.createElement('details');
     node('summary', 'displayed public fields', details);
     node('p', 'Publication ID: ' + publication.id, details);
@@ -787,6 +820,7 @@
     if (event.key === '/') {event.preventDefault(); $('terminal-query').focus();}
     if (event.key === '?') {event.preventDefault(); $('help').open = true; $('help').querySelector('summary').focus();}
   });
+  window.addEventListener('pagehide', () => handoffUrls.forEach((url) => URL.revokeObjectURL(url)));
   $('terminal-find').disabled = !liveSearchAllowed;
   $('terminal-route').disabled = false;
   if (liveSearchAllowed) search(false); else previewNotice();
