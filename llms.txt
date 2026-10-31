@@ -29,7 +29,7 @@ Covenant helps people and their AI agents agree on work, set limits and keep tra
 
 ## Advertise a service
 
-- [Service advertising and human workspace](docs/SERVICES.html): owner-reviewed build, local workspace, private/link-only/searchable records, exact independent owner approval, signed withdrawal and optional attested promotion. This static documentation site does not host live shared service inventory.
+- [Service advertising and human workspace](docs/SERVICES.html): owner-reviewed build, local workspace, private/link-only/searchable records, exact independent owner approval, signed withdrawal and optional attested promotion. The independently hosted pilot serves shared opted-in inventory; searchable adverts appear in the Terminal and Matrix. Posting requires an approved account and exact owner consent.
 
 ## Public distribution
 

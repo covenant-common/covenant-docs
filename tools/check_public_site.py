@@ -19,7 +19,7 @@ class Page(HTMLParser):
             u=a.get('href',a.get('src'))
             if u:self.links.append(u)
         if tag=='link' and a.get('rel')=='canonical':self.canonical.append(a.get('href'))
-        if tag=='script':self.current={'type':a.get('type'),'data':'','src':a.get('src')};self.scripts.append(self.current)
+        if tag=='script':self.current={'type':a.get('type'),'data':'','src':a.get('src'),'defer':'defer' in a};self.scripts.append(self.current)
     def handle_endtag(self,tag):
         if tag=='title':self.title=False
         if tag=='script':self.current=None
@@ -51,6 +51,12 @@ def check():
                 target=(path.parent/unquote(parsed.path)).resolve()
                 if ROOT not in target.parents or not target.is_file():errors.append('Missing/outside link: '+name+' -> '+url)
         for script in page.scripts:
+            allowed_live={'docs/MATRIX.html':'../assets/matrix.js',
+                          'docs/TERMINAL.html':'../assets/terminal.js'}
+            if (name in allowed_live and script['type'] is None and script['defer'] and
+                    script['src']==allowed_live[name] and not script['data'].strip()):
+                if not (path.parent/script['src']).is_file():errors.append('Missing public-directory controls: '+name)
+                continue
             allowed_controls={'docs/EXAMPLES.html':'../assets/example-controls.mjs',
                               'docs/PRICING.html':'../assets/pricing-controls.mjs'}
             if (script['type']=='module' and name in allowed_controls and

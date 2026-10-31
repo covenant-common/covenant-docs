@@ -507,7 +507,70 @@
     })).sort((a, b) => a.taskPriority - b.taskPriority || b.fit - a.fit || (a.id < b.id ? -1 : a.id > b.id ? 1 : 0));
     return {routes, matched: true, eligible: eligible.length, graph, intent: intent ? intent.id : null, reason: null};
   }
-  const exported = {personalizedPageRank, rankNavigation, taskIntent, intentRules: INTENT_RULES, catalogue: CATALOGUE};
+  function normalizeServiceQuery(need) {
+    const raw = typeof need === 'string' ? need.trim() : '';
+    if (!raw) return {raw, query: '', changed: false, notice: 'Search: all current public adverts.'};
+    const negative = /\b(?:no|not|never|without|except|excluding|exclude|avoid|neither|nor|cannot|don['’]t|can['’]t|isn['’]t)\b/i.test(raw) || /(^|\s)-\S/.test(raw);
+    const operator = /\b(?:AND|OR|NOT)\b/.test(raw);
+    if (negative || operator) return {raw, query: raw, changed: false,
+      notice: 'Literal keywords searched: “' + raw + '”. Negation and operator words are preserved; this endpoint does not apply exclusion or Boolean filters.'};
+    // Remove only a declared, anchored command prelude. Keep the object,
+    // qualifiers, spelling and capitalisation exactly as supplied after it.
+    const preludes = [
+      /^(?:please\s+)?(?:(?:i\s+(?:need|want|would\s+like)\s+to\s+)|(?:(?:can|could|would)\s+you\s+))?(?:find|hire|buy|book|source|commission|purchase|look\s+for|search\s+for)\s+(?:(?:me|us)\s+)?(?:(?:a|an|the|some)\s+)?/i,
+      /^(?:please\s+)?(?:i\s+(?:need|want|would\s+like)|we\s+(?:need|want))\s+(?:(?:a|an|the|some)\s+)?/i,
+      /^(?:i['’]m|i\s+am|we\s+are)\s+looking\s+for\s+(?:(?:a|an|the|some)\s+)?/i
+    ];
+    let query = raw;
+    for (const pattern of preludes) {
+      const match = raw.match(pattern);
+      if (match) {const rest = raw.slice(match[0].length).trim(); if (rest) query = rest; break;}
+    }
+    return {raw, query, changed: query !== raw,
+      notice: 'Keywords searched: “' + query + '”.' + (query !== raw ? ' Only the opening request phrase was removed.' : '')};
+  }
+  function publicLeg(leg) {
+    if (!leg || typeof leg !== 'object' || Array.isArray(leg) || !leg.asset || typeof leg.asset !== 'object' || Array.isArray(leg.asset)) return null;
+    const asset = leg.asset;
+    if (!['namespace', 'identifier', 'unit'].every((key) => typeof asset[key] === 'string')) return null;
+    const amount = leg.amount;
+    if (!Number.isSafeInteger(amount) || amount < 0) return null;
+    const view = {amount, asset: {namespace: asset.namespace, identifier: asset.identifier, unit: asset.unit}};
+    const denominations = {USD: 'cents', GBP: 'pence', EUR: 'cents'};
+    let label;
+    if (asset.namespace === 'fiat' && Object.prototype.hasOwnProperty.call(denominations, asset.identifier) && asset.unit === denominations[asset.identifier]) {
+      const exact = BigInt(amount);
+      label = asset.identifier + ' ' + (exact / 100n).toString() + '.' + (exact % 100n).toString().padStart(2, '0');
+    } else label = String(amount) + ' ' + asset.unit + ' · ' + asset.identifier + ' [' + asset.namespace + ']';
+    return {label, view};
+  }
+  function publicListingDisplay(fields) {
+    const object = (value) => value !== null && typeof value === 'object' && !Array.isArray(value);
+    if (!object(fields)) throw new Error('Public listing fields');
+    const selected = {};
+    ['title', 'category', 'summary', 'description'].forEach((key) => {if (typeof fields[key] === 'string') selected[key] = fields[key];});
+    const custom = object(fields.custom) ? fields.custom : null;
+    // No private_note, terms, contact details, adapter options or other custom
+    // keys are read or copied into this card's display projection.
+    const publicCustom = {};
+    if (custom) ['description', 'scope'].forEach((key) => {if (typeof custom[key] === 'string') publicCustom[key] = custom[key];});
+    if (Object.keys(publicCustom).length) selected.custom = publicCustom;
+    const descriptions = [...new Set([selected.summary, selected.description, publicCustom.description].filter((value) => typeof value === 'string' && value.trim()))];
+    const summary = descriptions.join(' ');
+    const scope = typeof publicCustom.scope === 'string' ? publicCustom.scope : '';
+    const excerpt = (value) => value.length > 420 ? value.slice(0, 417) + '...' : value;
+    const legs = {};
+    ['offer', 'want'].forEach((key) => {
+      if (!Array.isArray(fields[key])) {legs[key] = null; return;}
+      legs[key] = fields[key].map(publicLeg).filter((value) => value !== null);
+      selected[key] = legs[key].map((value) => value.view);
+    });
+    return {title: selected.title || 'Public service advert', category: selected.category || '',
+      summary: excerpt(summary), scope: excerpt(scope), excerpted: summary.length > 420 || scope.length > 420,
+      offers: legs.offer === null ? null : legs.offer.map((value) => value.label),
+      wants: legs.want === null ? null : legs.want.map((value) => value.label), selectedFields: selected};
+  }
+  const exported = {personalizedPageRank, rankNavigation, taskIntent, intentRules: INTENT_RULES, catalogue: CATALOGUE, normalizeServiceQuery, publicLeg, publicListingDisplay};
   if (typeof module !== 'undefined' && module.exports) module.exports = exported;
   if (typeof document === 'undefined') return;
 
@@ -524,6 +587,7 @@
   let busy = false;
   let nextOffset = null;
   let currentQuery = '';
+  let currentQueryNotice = 'Search: all current public adverts.';
   const displayed = new Set();
 
   function node(tag, value, parent) {
@@ -628,17 +692,23 @@
     } catch (_) {return null;}
   }
   function renderListing(publication) {
+    const card = publicListingDisplay(publication.fields);
     const item = document.createElement('li');
-    const title = typeof publication.fields.title === 'string' ? publication.fields.title : 'Public service advert';
     const heading = node('h3', '', item);
     const url = typeof publication.url === 'string' ? listingUrl(publication.url) : null;
-    if (url) {const a = node('a', title, heading); a.href = url;} else heading.textContent = title;
-    if (typeof publication.fields.category === 'string') node('p', publication.fields.category + ' · owner-published', item).className = 'record-meta';
-    const summary = ['summary', 'description'].map((key) => typeof publication.fields[key] === 'string' ? publication.fields[key] : '').filter(Boolean).join(' ');
-    if (summary) node('p', summary, item);
+    if (url) {const a = node('a', card.title, heading); a.href = url;} else heading.textContent = card.title;
+    if (card.category) node('p', card.category + ' · owner-published', item).className = 'record-meta';
+    if (card.summary) node('p', card.summary, item);
+    if (card.scope) node('p', 'Scope: ' + card.scope, item);
+    if (card.offers && card.offers.length) node('p', 'Offers: ' + card.offers.join('; '), item);
+    if (card.wants && card.wants.length) node('p', 'Wants: ' + card.wants.join('; '), item);
+    else if (card.wants !== null) node('p', 'No requested consideration is published here; do not infer that the service is free.', item);
+    if (card.excerpted) node('p', 'Description excerpt; inspect the public advert for the complete terms.', item).className = 'record-meta';
     const details = document.createElement('details');
-    node('summary', 'public record', details);
-    node('pre', JSON.stringify(publication, null, 2), details);
+    node('summary', 'displayed public fields', details);
+    node('p', 'Publication ID: ' + publication.id, details);
+    node('p', 'This is the card display, not the exact signed publication. Open the public advert to inspect the original record.', details);
+    node('pre', JSON.stringify(card.selectedFields, null, 2), details);
     item.appendChild(details);
     return item;
   }
@@ -655,19 +725,21 @@
   async function search(append = false) {
     if (!liveSearchAllowed) {previewNotice(); return;}
     if (busy) return;
-    const query = append ? currentQuery : $('terminal-query').value.trim();
+    const normalised = append ? {query: currentQuery, notice: currentQueryNotice} : normalizeServiceQuery($('terminal-query').value);
+    const query = normalised.query;
+    const queryNotice = normalised.notice;
     if (query.length > 120 || query.split(/\s+/).filter(Boolean).length > 8) {
-      $('terminal-market-state').textContent = 'Use up to eight words to search service adverts. For a longer explanation, choose “map this need”.';
+      $('terminal-market-state').textContent = 'Use up to eight literal search words; the typed need is unchanged. For a longer explanation, choose “map this need”. ' + queryNotice;
       return;
     }
     if (append && !Number.isSafeInteger(nextOffset)) return;
     const offset = append ? nextOffset : 0;
-    if (!append) {currentQuery = query; displayed.clear(); $('terminal-listings').replaceChildren();}
+    if (!append) {currentQuery = query; currentQueryNotice = queryNotice; displayed.clear(); $('terminal-listings').replaceChildren();}
     busy = true;
     $('terminal-find').disabled = true;
     $('terminal-more').disabled = true;
     $('terminal-more').hidden = true;
-    $('terminal-market-state').textContent = 'Reading current public adverts...';
+    $('terminal-market-state').textContent = 'Reading current public adverts... ' + queryNotice;
     try {
       const result = await publicSearch(query, offset);
       result.items.forEach(({publication}) => {
@@ -678,10 +750,10 @@
       nextOffset = Number.isSafeInteger(result.next_offset) && result.next_offset >= 0 && result.next_offset <= 5000 ? result.next_offset : null;
       $('terminal-more').hidden = nextOffset === null;
       const checked = new Date().toISOString().slice(11, 19) + ' UTC';
-      $('terminal-market-state').textContent = result.total === 0 ? 'No public adverts matched. Try another search, or be among the first to advertise your service. Checked ' + checked + '.' : displayed.size + ' displayed; ' + result.total + ' matched this public search. Checked ' + checked + '. Listings can change between pages.';
+      $('terminal-market-state').textContent = (result.total === 0 ? 'No public adverts matched. Try another search, or be among the first to advertise your service. Checked ' + checked + '.' : displayed.size + ' displayed; ' + result.total + ' matched this public search. Checked ' + checked + '. Listings can change between pages.') + ' ' + queryNotice;
     } catch (error) {
       nextOffset = null;
-      $('terminal-market-state').textContent = 'Public search unavailable: ' + error.message + (displayed.size ? ' Previously loaded adverts remain below; they have not been refreshed.' : ' This is not an empty-inventory result.');
+      $('terminal-market-state').textContent = 'Public search unavailable: ' + error.message + (displayed.size ? ' Previously loaded adverts remain below; they have not been refreshed.' : ' This is not an empty-inventory result.') + ' ' + queryNotice;
     } finally {
       busy = false;
       $('terminal-find').disabled = false;
