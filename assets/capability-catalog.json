@@ -143,10 +143,16 @@
   ],
   "source": {
     "file": "aap_levels.json",
-    "sha256": "509073d0094a3f27dd65f107318155498351f1d2b5d5f09ee762878c67f376e1",
+    "sha256": "1a52b3038c821ed16d665b15a26cbdf9d40ffc0c00130a11b9b51b5945423c32",
     "projection": "Public interface metadata only; no implementation modules or source."
   },
   "tools": {
+    "commit_cooperation": {
+      "level": "L2",
+      "core": false,
+      "maturity": "experimental",
+      "species": null
+    },
     "covenant_a2a": {
       "level": "L2",
       "core": false,
@@ -255,6 +261,12 @@
       "maturity": "beta",
       "species": null
     },
+    "covenant_arbitration_design": {
+      "level": "ORGANON",
+      "core": false,
+      "maturity": "experimental",
+      "species": null
+    },
     "covenant_arbitration_interop": {
       "level": "L3",
       "core": false,
@@ -307,6 +319,12 @@
       "level": "L1",
       "core": true,
       "maturity": "beta",
+      "species": null
+    },
+    "covenant_collaboration": {
+      "level": "ORGANON",
+      "core": false,
+      "maturity": "experimental",
       "species": null
     },
     "covenant_commerce": {
@@ -379,6 +397,12 @@
       "level": "L1",
       "core": false,
       "maturity": "beta",
+      "species": null
+    },
+    "covenant_correction_assent": {
+      "level": "L1",
+      "core": false,
+      "maturity": "experimental",
       "species": null
     },
     "covenant_counter": {
@@ -547,6 +571,12 @@
       "level": "L1",
       "core": false,
       "maturity": "beta",
+      "species": null
+    },
+    "covenant_features": {
+      "level": "ORGANON",
+      "core": false,
+      "maturity": "experimental",
       "species": null
     },
     "covenant_feedback": {
@@ -829,6 +859,12 @@
       "level": "ORGANON",
       "core": true,
       "maturity": "beta",
+      "species": null
+    },
+    "covenant_once": {
+      "level": "L2",
+      "core": false,
+      "maturity": "experimental",
       "species": null
     },
     "covenant_org": {
@@ -1149,10 +1185,22 @@
       "maturity": "experimental",
       "species": "risk"
     },
+    "inspect_cooperation": {
+      "level": "ORGANON",
+      "core": false,
+      "maturity": "experimental",
+      "species": null
+    },
     "preview_cooperation": {
       "level": "ORGANON",
       "core": false,
       "maturity": "beta",
+      "species": null
+    },
+    "resume_cooperation": {
+      "level": "L2",
+      "core": false,
+      "maturity": "experimental",
       "species": null
     }
   }

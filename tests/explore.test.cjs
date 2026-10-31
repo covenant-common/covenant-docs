@@ -11,7 +11,7 @@ const html = fs.readFileSync(path.join(root, 'docs/EXPLORE.html'), 'utf8');
 const script = fs.readFileSync(path.join(root, 'assets/explore.js'), 'utf8');
 const explorer = require('../assets/explore.js');
 const names = Object.keys(catalog.tools).sort();
-const sourceHash = '509073d0094a3f27dd65f107318155498351f1d2b5d5f09ee762878c67f376e1';
+const sourceHash = '1a52b3038c821ed16d665b15a26cbdf9d40ffc0c00130a11b9b51b5945423c32';
 
 class Element {
   constructor(tag) { this.tagName = tag; this.children = []; this.value = ''; this.dataset = {}; this.events = {}; this.hidden = true; this._text = ''; }
@@ -41,8 +41,8 @@ function renderedNames(node) {
   return (node.tagName === 'code' ? [node.textContent] : []).concat(node.children.flatMap(renderedNames));
 }
 
-test('metadata projection has exactly 168 unique families and six intact layers', () => {
-  assert.equal(names.length, 168);
+test('metadata projection has exactly 176 unique families and six intact layers', () => {
+  assert.equal(names.length, 176);
   assert.deepEqual(catalog.order, ['ORGANON', 'L0', 'L1', 'L2', 'L3', 'L4']);
   assert.deepEqual(catalog.levels.map((level) => level.id), catalog.order);
   assert.deepEqual(catalog.core_levels, ['ORGANON', 'L0', 'L1', 'L2', 'L3']);
@@ -63,8 +63,8 @@ test('metadata projection has exactly 168 unique families and six intact layers'
     assert.ok(['beta', 'experimental'].includes(tool.maturity), name);
   });
   assert.equal(names.filter((name) => catalog.tools[name].maturity === 'beta').length, 134);
-  assert.equal(names.filter((name) => catalog.tools[name].maturity === 'experimental').length, 34);
-  assert.deepEqual(catalog.order.map((level) => names.filter((name) => catalog.tools[name].level === level).length), [22, 22, 33, 34, 10, 47]);
+  assert.equal(names.filter((name) => catalog.tools[name].maturity === 'experimental').length, 42);
+  assert.deepEqual(catalog.order.map((level) => names.filter((name) => catalog.tools[name].level === level).length), [26, 22, 34, 37, 10, 47]);
   assert.ok(!/module_rules|module_overrides|covenant_chain\//.test(catalogText));
 });
 
@@ -78,17 +78,17 @@ test('embedded catalog is identical to the downloadable projection and static ro
   });
   ['START.html', 'CAPABILITIES.html', 'MATRIX.html', 'API_MCP.html#public', 'API_MCP.html#trial', '../assets/capability-catalog.json'].forEach((route) => assert.ok(html.includes('href="' + route + '"'), route));
   assert.match(html, /<noscript>[\s\S]*?complete public metadata catalog[\s\S]*?<\/noscript>/);
-  assert.match(html, /134 tool families are labelled beta and 34 experimental/);
+  assert.match(html, /134 tool families are labelled beta and 42 experimental/);
   assert.match(html, /none is stable/);
   assert.ok(!html.includes('MODULE_RULES'));
 });
 
 test('empty query, exhaustive family lookup, and disjoint filters preserve complete coverage', () => {
   assert.deepEqual(explorer.filterCatalog(catalog, {}).map((tool) => tool.name).sort(), names);
-  assert.equal(explorer.filterCatalog(catalog, {query: '   '}).length, 168);
+  assert.equal(explorer.filterCatalog(catalog, {query: '   '}).length, 176);
   names.forEach((name) => assert.deepEqual(explorer.filterCatalog(catalog, {query: name}).map((tool) => tool.name), [name], name));
   const union = catalog.order.flatMap((level) => explorer.filterCatalog(catalog, {level}).map((tool) => tool.name));
-  assert.equal(new Set(union).size, 168);
+  assert.equal(new Set(union).size, 176);
   assert.deepEqual(union.sort(), names);
   const readiness = ['beta', 'experimental'].flatMap((maturity) => explorer.filterCatalog(catalog, {maturity}).map((tool) => tool.name));
   assert.deepEqual(readiness.sort(), names);
@@ -96,7 +96,7 @@ test('empty query, exhaustive family lookup, and disjoint filters preserve compl
   const assigned = catalog.species.map((kind) => kind.id).concat('unassigned').flatMap((species) => explorer.filterCatalog(catalog, {species}).map((tool) => tool.name));
   assert.deepEqual(assigned.sort(), names);
   const formal = explorer.filterCatalog(catalog, {query: 'formal'});
-  assert.equal(formal.length, 33);
+  assert.equal(formal.length, 34);
   assert.ok(formal.every((tool) => tool.level === 'L1'));
   assert.ok(explorer.filterCatalog(catalog, {query: 'ESCROW', level: 'L2', maturity: 'beta', core: 'core'}).some((tool) => tool.name === 'covenant_escrow'));
   assert.equal(explorer.filterCatalog(catalog, {maturity: 'stable'}).length, 0);
@@ -151,6 +151,19 @@ test('navigation aliases are explicit public copy and natural queries keep const
   assert.equal(JSON.stringify(catalog), snapshot);
 });
 
+test('current collaboration, reviewer and supplier-evidence needs reach the retained families', () => {
+  for (const [query, family] of [
+    ['organise a volunteer group', 'covenant_collaboration'],
+    ['choose independent reviewers', 'covenant_arbitration_design'],
+    ['compare suppliers', 'covenant_network_trust'],
+    ['resume cooperation plan', 'resume_cooperation']
+  ]) {
+    const found = explorer.filterCatalog(catalog, { query }).map(row => row.name);
+    assert.ok(found.includes(family), query + ' → ' + family);
+  }
+  assert.equal(explorer.filterCatalog(catalog, { query: 'grant everyone unlimited authority' }).length, 0);
+});
+
 test('the rendered search explains alias matches and returns no invented result for unknown needs', () => {
   const {doc, ids} = documentFixture();
   explorer.mount(doc);
@@ -160,7 +173,7 @@ test('the rendered search explains alias matches and returns no invented result 
   assert.ok(renderedNames(ids['explore-results']).includes('covenant_forum_read'));
   ids['explore-query'].value = 'unrecognised quokka capability';
   ids['explore-query'].events.input();
-  assert.equal(ids['explore-count'].textContent, 'Showing 0 of 168 installed tool families.');
+  assert.equal(ids['explore-count'].textContent, 'Showing 0 of 176 installed tool families.');
   assert.match(ids['explore-results'].textContent, /No tool families match/);
   assert.equal(renderedNames(ids['explore-results']).length, 0);
 });
@@ -185,13 +198,13 @@ test('mounted controls show all, update honest counts and clear every active fil
   explorer.mount(doc);
   assert.equal(ids['explore-controls'].hidden, false);
   assert.equal(ids['explore-live'].hidden, false);
-  assert.equal(ids['explore-count'].textContent, 'Showing 168 of 168 installed tool families.');
+  assert.equal(ids['explore-count'].textContent, 'Showing 176 of 176 installed tool families.');
   assert.deepEqual(renderedNames(ids['explore-results']).sort(), names);
   ids['explore-query'].value = 'escrow';
   ids['explore-query'].events.input();
   const count = renderedNames(ids['explore-results']).length;
   assert.equal(counts.reduce((sum, node) => sum + Number(node.textContent), 0), count);
-  assert.equal(ids['explore-count'].textContent, 'Showing ' + count + ' of 168 installed tool families.');
+  assert.equal(ids['explore-count'].textContent, 'Showing ' + count + ' of 176 installed tool families.');
   buttons.find((button) => button.dataset.exploreLayer === 'L4').events.click();
   assert.equal(ids['explore-level'].value, 'L4');
   ids['explore-maturity'].value = 'experimental';
@@ -199,7 +212,7 @@ test('mounted controls show all, update honest counts and clear every active fil
   ids['explore-species'].value = 'risk';
   ids['explore-clear'].events.click();
   ['explore-query', 'explore-level', 'explore-maturity', 'explore-core', 'explore-species'].forEach((id) => assert.equal(ids[id].value, ''));
-  assert.equal(renderedNames(ids['explore-results']).length, 168);
+  assert.equal(renderedNames(ids['explore-results']).length, 176);
   assert.equal(ids['explore-query'].focused, true);
 });
 

@@ -4,9 +4,9 @@
   var ORIGIN = 'https://covenant-common.github.io/covenant-docs/';
   var MCP = 'https://jupie202020.pythonanywhere.com/mcp';
   var SOURCES = ['github', 'mcp-registry', 'glama', 'search', 'community', 'direct', 'referral'];
-  var STAGES = ['connection', 'draft', 'approval', 'outcome', 'repeat'];
+  var STAGES = ['connection', 'draft', 'approval', 'outcome', 'review', 'reopen', 'repeat'];
   var STATES = ['not-tried', 'completed', 'blocked', 'not-needed'];
-  var LABELS = { connection: 'Connect an agent', draft: 'Prepare an advert or order', approval: 'Approve and retain exact terms', outcome: 'Complete and reopen the job', repeat: 'Use it for another job' };
+  var LABELS = { connection: 'Connect an agent', draft: 'Prepare an advert or order', approval: 'Approve and retain exact terms', outcome: 'Deliver the agreed work', review: 'Review or accept the delivery', reopen: 'Reopen the retained record', repeat: 'Choose it for another genuine job' };
   var STATE_LABELS = { 'not-tried': 'Not tried', completed: 'Self-reported completed', blocked: 'Self-reported blocked', 'not-needed': 'Not needed for this job' };
   function publicLabel(value) {
     return typeof value === 'string' && /^[A-Za-z][A-Za-z0-9_-]{2,31}$/.test(value) &&
@@ -90,7 +90,7 @@
     route(name);
     if (typeof goal !== 'string' || !goal.trim() || goal.length > 600 || typeof friction !== 'string' || friction.length > 1200 || /[\u0000-\u0008\u000b\u000c\u000e-\u001f\u007f]/.test(goal + friction)) throw new Error('Describe your job in 1–600 characters and keep the feedback within 1,200 characters.');
     if (/(?:\b(?:sk_|rk_|whsec_|Bearer\s+)|\b[a-f0-9]{64}\b|"(?:private_seed|private_key|token)"\s*:)/i.test(goal + '\n' + friction)) throw new Error('Leave keys, tokens and private records out of the feedback. Describe the step that failed instead.');
-    if (!answers || typeof answers !== 'object' || Object.keys(answers).some(function (key) { return !STAGES.includes(key); })) throw new Error('Use the five displayed checklist steps.');
+    if (!answers || typeof answers !== 'object' || Object.keys(answers).some(function (key) { return !STAGES.includes(key); })) throw new Error('Use the displayed checklist steps.');
     var safe = tags(new URLSearchParams(sourceTags || {}).toString());
     var lines = ['Covenant first-job feedback', '', 'Starting route: ' + ROUTES[name].title, 'My job: ' + goal.trim(), '', 'My checklist (self-reported; not independently verified):'];
     STAGES.forEach(function (stage) {

@@ -4,7 +4,16 @@
     <loc>https://covenant-common.github.io/covenant-docs/</loc>
   </url>
   <url>
+    <loc>https://covenant-common.github.io/covenant-docs/PRIVACY.html</loc>
+  </url>
+  <url>
+    <loc>https://covenant-common.github.io/covenant-docs/docs/AD_CONNECTIONS.html</loc>
+  </url>
+  <url>
     <loc>https://covenant-common.github.io/covenant-docs/docs/AGENT_START.html</loc>
+  </url>
+  <url>
+    <loc>https://covenant-common.github.io/covenant-docs/docs/API_MCP.html</loc>
   </url>
   <url>
     <loc>https://covenant-common.github.io/covenant-docs/docs/BILATERAL_WORK_ORDERS_02.html</loc>
@@ -13,13 +22,22 @@
     <loc>https://covenant-common.github.io/covenant-docs/docs/BUILDERS.html</loc>
   </url>
   <url>
+    <loc>https://covenant-common.github.io/covenant-docs/docs/CAPABILITIES.html</loc>
+  </url>
+  <url>
     <loc>https://covenant-common.github.io/covenant-docs/docs/COLLABORATE.html</loc>
+  </url>
+  <url>
+    <loc>https://covenant-common.github.io/covenant-docs/docs/DEAL_STRUCTURES.html</loc>
   </url>
   <url>
     <loc>https://covenant-common.github.io/covenant-docs/docs/DEVELOPER_PREVIEW.html</loc>
   </url>
   <url>
     <loc>https://covenant-common.github.io/covenant-docs/docs/EXAMPLES.html</loc>
+  </url>
+  <url>
+    <loc>https://covenant-common.github.io/covenant-docs/docs/EXPLORE.html</loc>
   </url>
   <url>
     <loc>https://covenant-common.github.io/covenant-docs/docs/FAQ.html</loc>
@@ -31,6 +49,9 @@
     <loc>https://covenant-common.github.io/covenant-docs/docs/INVESTORS.html</loc>
   </url>
   <url>
+    <loc>https://covenant-common.github.io/covenant-docs/docs/MATRIX.html</loc>
+  </url>
+  <url>
     <loc>https://covenant-common.github.io/covenant-docs/docs/ONBOARDING.html</loc>
   </url>
   <url>
@@ -40,10 +61,19 @@
     <loc>https://covenant-common.github.io/covenant-docs/docs/OWNER_SETUP.html</loc>
   </url>
   <url>
+    <loc>https://covenant-common.github.io/covenant-docs/docs/OWNER_TRADE.html</loc>
+  </url>
+  <url>
     <loc>https://covenant-common.github.io/covenant-docs/docs/PARTNERSHIPS.html</loc>
   </url>
   <url>
+    <loc>https://covenant-common.github.io/covenant-docs/docs/PAYMENTS.html</loc>
+  </url>
+  <url>
     <loc>https://covenant-common.github.io/covenant-docs/docs/PILOTS.html</loc>
+  </url>
+  <url>
+    <loc>https://covenant-common.github.io/covenant-docs/docs/PILOT_WORKSPACE.html</loc>
   </url>
   <url>
     <loc>https://covenant-common.github.io/covenant-docs/docs/PRICING.html</loc>
@@ -55,30 +85,24 @@
     <loc>https://covenant-common.github.io/covenant-docs/docs/RELEASE_NOTES.html</loc>
   </url>
   <url>
-    <loc>https://covenant-common.github.io/covenant-docs/docs/WHY_AAP.html</loc>
+    <loc>https://covenant-common.github.io/covenant-docs/docs/SERVICES.html</loc>
   </url>
   <url>
-    <loc>https://covenant-common.github.io/covenant-docs/docs/WORK_WITH_US.html</loc>
-  </url>
-  <url>
-    <loc>https://covenant-common.github.io/covenant-docs/docs/CAPABILITIES.html</loc>
-  </url>
-<url><loc>https://covenant-common.github.io/covenant-docs/docs/SERVICES.html</loc></url>
-  <url>
-    <loc>https://covenant-common.github.io/covenant-docs/docs/API_MCP.html</loc>
-  </url>
-  <url>
-    <loc>https://covenant-common.github.io/covenant-docs/docs/MATRIX.html</loc>
+    <loc>https://covenant-common.github.io/covenant-docs/docs/START.html</loc>
   </url>
   <url>
     <loc>https://covenant-common.github.io/covenant-docs/docs/TERMINAL.html</loc>
   </url>
-  <url><loc>https://covenant-common.github.io/covenant-docs/docs/DEAL_STRUCTURES.html</loc></url>
-<url><loc>https://covenant-common.github.io/covenant-docs/docs/TRIAL.html</loc></url><url><loc>https://covenant-common.github.io/covenant-docs/docs/PAYMENTS.html</loc><lastmod>2026-10-31</lastmod></url>
-<url><loc>https://covenant-common.github.io/covenant-docs/docs/START.html</loc><lastmod>2026-10-31</lastmod></url>
-<url><loc>https://covenant-common.github.io/covenant-docs/docs/OWNER_TRADE.html</loc><lastmod>2026-10-31</lastmod></url>
-<url><loc>https://covenant-common.github.io/covenant-docs/PRIVACY.html</loc><lastmod>2026-10-31</lastmod></url>
-<url><loc>https://covenant-common.github.io/covenant-docs/docs/EXPLORE.html</loc><lastmod>2026-10-31</lastmod></url>
-<url><loc>https://covenant-common.github.io/covenant-docs/docs/WORK_TOGETHER.html</loc><lastmod>2026-10-31</lastmod></url>
-<url><loc>https://covenant-common.github.io/covenant-docs/docs/AD_CONNECTIONS.html</loc><lastmod>2026-10-31</lastmod></url>
+  <url>
+    <loc>https://covenant-common.github.io/covenant-docs/docs/TRIAL.html</loc>
+  </url>
+  <url>
+    <loc>https://covenant-common.github.io/covenant-docs/docs/WHY_AAP.html</loc>
+  </url>
+  <url>
+    <loc>https://covenant-common.github.io/covenant-docs/docs/WORK_TOGETHER.html</loc>
+  </url>
+  <url>
+    <loc>https://covenant-common.github.io/covenant-docs/docs/WORK_WITH_US.html</loc>
+  </url>
 </urlset>

@@ -83,6 +83,17 @@ test('pilot reports identify self-reported progress without inventing server obs
   assert.equal(email.searchParams.get('body'), report);
 });
 
+test('delivery, review, reopening and voluntary reuse stay separate observations', () => {
+  const report = start.note('buy', {}, 'Buy a report', '', { outcome: 'completed', review: 'blocked' });
+  assert.match(report, /Deliver the agreed work: Self-reported completed/);
+  assert.match(report, /Review or accept the delivery: Self-reported blocked/);
+  assert.match(report, /Reopen the retained record: Not tried/);
+  assert.match(report, /Choose it for another genuine job: Not tried/);
+  const laterOnly = start.note('buy', {}, 'Review an old order', '', { reopen: 'completed' });
+  assert.match(laterOnly, /Deliver the agreed work: Not tried/);
+  assert.match(laterOnly, /Reopen the retained record: Self-reported completed/);
+});
+
 test('new page retains no-script routes, all capabilities and a private owner handoff', () => {
   const root = path.resolve(__dirname, '..');
   const html = fs.readFileSync(path.join(root, 'docs/START.html'), 'utf8');

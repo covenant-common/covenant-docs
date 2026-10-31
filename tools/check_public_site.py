@@ -20,7 +20,7 @@ class Page(HTMLParser):
             u=a.get('href',a.get('src'))
             if u:self.links.append(u)
         if tag=='link' and a.get('rel')=='canonical':self.canonical.append(a.get('href'))
-        if tag=='script':self.current={'type':a.get('type'),'data':'','src':a.get('src'),'defer':'defer' in a};self.scripts.append(self.current)
+        if tag=='script':self.current={'id':a.get('id'),'type':a.get('type'),'data':'','src':a.get('src'),'defer':'defer' in a};self.scripts.append(self.current)
     def handle_endtag(self,tag):
         if tag=='title':self.title=False
         if tag=='script':self.current=None
@@ -40,7 +40,7 @@ def check():
     expected={p:hashlib.sha256((ROOT/p).read_bytes()).hexdigest() for p in files if (ROOT/p).is_file()}
     manifest=json.loads((ROOT/'manifest.json').read_text())
     if manifest.get('assets')!=expected:errors.append('Asset inventory stale; run --write-manifest')
-    for path in [ROOT/'index.html',*sorted((ROOT/'docs').rglob('*.html'))]:
+    for path in [ROOT/'index.html',ROOT/'PRIVACY.html',*sorted((ROOT/'docs').rglob('*.html'))]:
         name=path.relative_to(ROOT).as_posix();raw=path.read_text();page=Page();page.feed(raw);pages[name]=page
         expected_url=BASE+'/' if name=='index.html' else BASE+'/'+name
         if page.canonical!=[expected_url]:errors.append('Canonical URL: '+name)
@@ -60,10 +60,20 @@ def check():
                           'docs/PAYMENTS.html':{'../assets/payment-options.js'},
                           'docs/MATRIX.html':{'../assets/matrix.js','../assets/deal-structures.js'},
                           'docs/TERMINAL.html':{'../assets/terminal.js','../assets/deal-structures.js'},
-                          'docs/DEAL_STRUCTURES.html':{'../assets/deal-structures.js'}}
+                          'docs/DEAL_STRUCTURES.html':{'../assets/deal-structures.js'},
+                          'docs/START.html':{'../assets/start.js'},
+                          'docs/EXPLORE.html':{'../assets/explore.js'},
+                          'docs/PILOT_WORKSPACE.html':{'../assets/pilot-workspace.js'}}
             if (name in allowed_live and script['type'] is None and script['defer'] and
                     local_script in allowed_live[name] and not script['data'].strip()):
                 if not (path.parent/local_script).is_file():errors.append('Missing public-directory controls: '+name)
+                continue
+            if (name=='docs/EXPLORE.html' and script['type']=='application/json' and
+                    script['id']=='capability-catalog' and not script['src']):
+                try:
+                    if json.loads(script['data'])!=json.loads((ROOT/'assets/capability-catalog.json').read_text()):
+                        errors.append('Capability catalog projection changed: '+name)
+                except (ValueError,OSError):errors.append('Invalid capability catalog: '+name)
                 continue
             allowed_controls={'docs/EXAMPLES.html':'../assets/example-controls.mjs',
                               'docs/PRICING.html':'../assets/pricing-controls.mjs'}

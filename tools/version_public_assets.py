@@ -24,7 +24,7 @@ def rewrite(text, page, root=ROOT):
 
 
 def pages(root=ROOT):
-    return [root / 'index.html', *sorted((root / 'docs').rglob('*.html')),
+    return [root / 'index.html', root / 'PRIVACY.html', *sorted((root / 'docs').rglob('*.html')),
             *sorted((root / 'sandbox').rglob('*.html'))]
 
 
