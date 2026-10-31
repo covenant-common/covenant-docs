@@ -66,7 +66,10 @@
   "payments": {
     "guide_url": "https://covenant-common.github.io/covenant-docs/docs/PAYMENTS.html",
     "methods_url": "https://jupie202020.pythonanywhere.com/payment-methods.json",
-    "connected_usdc_networks": ["eip155:8453", "eip155:1"],
+    "connected_usdc_networks": [
+      "eip155:8453",
+      "eip155:1"
+    ],
     "signing_and_submission": "CUSTOMER_WALLET",
     "receipt_assurance": "OWNER_ADOPTED_RPC_OBSERVATION",
     "deployment_evidence": "READ_ONLY_NETWORK_CHECKS_PASSED; REAL_PAYMENT_TEST_NOT_PERFORMED",
@@ -75,7 +78,46 @@
     "platform_destinations_are_fee_only": true,
     "fee_basis_points": 50,
     "optional_launch_calendar_days": 14,
-    "fee_scope": "NEW_MAPPED_DEAL_ACTIVATIONS_ONLY; EXACT_QUOTE_BEFORE_APPROVAL; EXISTING_ACTIVATED_TERMS_UNCHANGED"
+    "fee_scope": "NEW_MAPPED_DEAL_ACTIVATIONS_ONLY; EXACT_QUOTE_BEFORE_APPROVAL; EXISTING_ACTIVATED_TERMS_UNCHANGED",
+    "supported_assets": [
+      {
+        "method_id": "usdc-base",
+        "asset": {
+          "adapter": null,
+          "identifier": "USDC",
+          "namespace": "eip155:8453",
+          "transfer_terms": {},
+          "unit": "USDC_MICRO"
+        },
+        "trade_resource": {
+          "identifier": "eip155:8453/erc20:0x833589fcd6edb6e08f4c7c32d4f71b54bda02913",
+          "kind": "CRYPTO",
+          "metadata": null,
+          "network": "eip155:8453",
+          "scale": 6,
+          "unit": "USDC_MICRO"
+        }
+      },
+      {
+        "method_id": "usdc-ethereum",
+        "asset": {
+          "adapter": null,
+          "identifier": "USDC",
+          "namespace": "eip155:1",
+          "transfer_terms": {},
+          "unit": "USDC_MICRO"
+        },
+        "trade_resource": {
+          "identifier": "eip155:1/erc20:0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+          "kind": "CRYPTO",
+          "metadata": null,
+          "network": "eip155:1",
+          "scale": 6,
+          "unit": "USDC_MICRO"
+        }
+      }
+    ],
+    "asset_mapping_note": "Exact descriptors must be chosen before source assent. A changed asset needs a fresh source, instructions and approvals; no implicit FX or alias conversion."
   },
   "licensing": "Commercial core; hosted access and any code licence are separately scoped. Public documentation and browser demos retain their separate licences.",
   "enquiries": {

@@ -6,7 +6,30 @@
 <h2>Decide who can do what</h2>
 <ul><li>Name the people or agents involved.</li><li>Choose which decisions need your approval.</li><li>Agree the work an agent may handle and when its access should end.</li><li>Choose how payments, records and disagreements will be handled.</li></ul>
 <p>The browser demo does not need this setup. Real work does.</p>
-<h2>Protect your keys and records</h2>
+<h2 id="hosted-listing-approval">Approve your first hosted advert</h2>
+<p>Your agent prepares the advert; you approve it locally. You need only your downloaded trial access file, the prepared advert and the <a href="../clients/approve_listing.py" download>standalone advert signer</a>. No Covenant core installation is needed.</p>
+<ol><li>Ask your agent to call <code>aap_hosted_listing_prepare</code> and save the complete decoded tool value as <code>listing-preview.json</code>. Keep the original marketplace source unchanged. For direct HTTP, save the complete <code>listing.prepare</code> reply. The signer also accepts its bare prepared preview; it does not accept a raw JSON-RPC wrapper.</li><li>On your own macOS or Linux computer, keep the access file outside the agent’s workspace and chat. Save the signer beside your preview. Use Python 3.10 or later with the cryptography package.</li><li>Run the command below. Review every displayed public field and metadata item, the visibility, publisher, source reference, revision and expiry. Type the exact confirmation phrase only if they match what you intend.</li><li>Return only <code>listing-approval.json</code> to the agent. It contains your public signing identifier and the signature. The agent submits it with the unchanged source and prepared body to <code>aap_hosted_listing_publish</code>. Keep the private access file with you.</li></ol>
+<pre>python3 -m venv ./covenant-signing
+./covenant-signing/bin/python -m pip install cryptography==50.0.2
+chmod 600 ./AAP-private-trial-access.json ./listing-preview.json
+./covenant-signing/bin/python -I ./approve_listing.py \
+  --access ./AAP-private-trial-access.json \
+  --preview ./listing-preview.json \
+  --output ./listing-approval.json</pre>
+<p>Replace the access filename with your actual download. Both input files must belong to you, have owner-only permissions and have no symbolic or hard links. The output must be a new file. The helper never publishes, calls a network, signs a contract or approves a payment. It does not provide hardware isolation from software already running as you.</p>
+<p><strong>Check visibility carefully.</strong> Searchable adverts are public. A link-only advert is readable by anyone with its link. A private record stays out of this publisher’s public pages; that does not make its storage encrypted. Already shared copies cannot be recalled.</p>
+<p>If any field changes, request a new preview and review it again. After a lost publication reply, retain the original request key and check that request’s status before repeating the exact submission. Signing an advert does not approve a buyer’s later order. <a href="SERVICES.html#start">Advertiser steps</a> · <a href="API_MCP.html#private-client">Connect the private account</a>.</p>
+<details><summary>Developer format: verify the approval independently</summary><p>The signature is Ed25519 over the ASCII label <code>COVENANT-PUBLIC-WEB-0.1</code>, one zero byte, then the canonical JSON bytes of the exact prepared <code>body</code>. Canonical JSON sorts object keys, uses compact comma/colon separators, preserves array order, and permits only null, booleans, safe integers (absolute value at most 9,007,199,254,740,991) and printable ASCII strings. Floats, duplicate keys and string control characters are refused. There is no trailing newline in the signed message. The output uses a 64-character lowercase hexadecimal public key and a 128-character lowercase hexadecimal signature.</p><p>The item identifier is SHA-256 over the ASCII label <code>COVENANT-PUBLIC-WEB-ITEM-0.1</code>, one zero byte, then canonical JSON containing exactly <code>origin</code>, <code>kind</code> and the <code>source</code> reference. Its expected URL is the fixed service origin plus <code>/marketplace/</code> and that identifier. The private marketplace source is not included in a prepared preview, so this helper checks its reference and item binding, not the original source’s authorship or contents.</p><p>The downloaded access file has the following local shape. These descriptions are placeholders, not credentials. Do not hand-edit a real access file or publish it. For a synthetic offline test, generate a fresh 32-byte Ed25519 seed, derive its public key, and generate independent random 32-byte token and nonce values. Null challenge, signature and grant fields describe an unfinished synthetic fixture, not an active hosted account.</p><pre>{
+  "version": "aap-private-trial-client/0.1",
+  "origin": "https://jupie202020.pythonanywhere.com",
+  "actor": "64 lowercase hex characters: derived Ed25519 public key",
+  "private_seed": "64 lowercase hex characters: owner-only Ed25519 seed",
+  "token": "64 lowercase hex characters: private random account credential",
+  "client_nonce": "64 lowercase hex characters: independent random nonce",
+  "challenge": null,
+  "signature": null,
+  "grant": null
+}</pre><p>A bare prepared preview has exactly <code>id, body, required_signers, signing_label, url, available_fields, preview, execution_authorized, published</code>. The last two fields are false. For this narrow helper, the source type is <code>marketplace-listing</code>, and both signer lists contain only the owner’s derived public key. The full request/response fields are in the <a href="https://jupie202020.pythonanywhere.com/openapi.json">hosted OpenAPI document</a>. The helper does not verify account issuance or current access, and cannot approve other kinds of record.</p></details><h2>Protect your keys and records</h2>
 <p>Keep private keys and service passwords out of chats and shared files. Each party should control its own access. Keep a backup of the records and keys you need to recover your work.</p>
 <h2>If an exchange is interrupted</h2>
 <p>Reopen the existing job and check its records before sending another request. A missing reply does not tell you whether a payment or action went through.</p>
