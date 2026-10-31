@@ -261,6 +261,26 @@
   $('market-more').addEventListener('click', () => search(true));
 
   let drafting = false;
+  let latestDraftRaw = null;
+  $('draft-copy').addEventListener('click', async () => {
+    const raw = latestDraftRaw;
+    if (drafting || raw === null) return;
+    $('draft-copy').disabled = true;
+    $('draft-copy-state').textContent = '';
+    try {
+      if (!navigator.clipboard || typeof navigator.clipboard.writeText !== 'function') throw new Error('Clipboard unavailable');
+      await navigator.clipboard.writeText(raw);
+      if (!drafting && latestDraftRaw === raw) $('draft-copy-state').textContent = 'Copied the exact unsigned draft JSON.';
+    } catch (_) {
+      if (!drafting && latestDraftRaw === raw) {
+        $('draft-json-details').open = true;
+        $('draft-copy-state').textContent = 'Clipboard access was unavailable. The exact JSON is open below; select and copy it manually.';
+        $('draft-json').focus();
+      }
+    } finally {
+      $('draft-copy').disabled = drafting || latestDraftRaw === null;
+    }
+  });
   $('matrix-draft').addEventListener('submit', async (event) => {
     event.preventDefault();
     if (drafting || !event.currentTarget.reportValidity()) return;
@@ -271,6 +291,15 @@
     drafting = true;
     $('draft-submit').disabled = true;
     $('draft-result').hidden = true;
+    latestDraftRaw = null;
+    $('draft-copy').disabled = true;
+    $('draft-copy-state').textContent = '';
+    $('draft-json-details').open = false;
+    $('draft-json').textContent = '';
+    $('draft-id').textContent = '';
+    $('draft-download').removeAttribute('href');
+    $('draft-download').removeAttribute('download');
+    if (downloadUrl) {URL.revokeObjectURL(downloadUrl); downloadUrl = null;}
     $('draft-state').textContent = 'Sending these terms for an unsigned draft…';
     try {
       const {data, raw} = await callTool('covenant_contract__draft', {
@@ -286,6 +315,8 @@
       }
       $('draft-id').textContent = data.id;
       $('draft-json').textContent = raw;
+      latestDraftRaw = raw;
+      $('draft-copy').disabled = false;
       if (downloadUrl) URL.revokeObjectURL(downloadUrl);
       downloadUrl = URL.createObjectURL(new Blob([raw], {type: 'application/json;charset=utf-8'}));
       $('draft-download').href = downloadUrl;

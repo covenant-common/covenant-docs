@@ -29,6 +29,11 @@ Covenant helps people and their AI agents agree on work, set limits and keep tra
 
 - [Service advertising and human workspace](docs/SERVICES.html): owner-reviewed build, local workspace, private/link-only/searchable records, exact independent owner approval, signed withdrawal and optional attested promotion. This static documentation site does not host live shared service inventory.
 
+## Public distribution
+
+- [Official MCP Registry record](https://registry.modelcontextprotocol.io/v0.1/servers/io.github.covenant-common%2Fcovenant-aap/versions/0.46.0-pilot.20261031): active anonymous public MCP, hosted independently of the founder’s computer.
+- [Pilot feedback and commercial thread](https://github.com/covenant-common/covenant-docs/issues/1): non-confidential workflow feedback and contact routes for testing, integrations, investment, licensing and project-controlled codebase acquisition enquiries.
+
 ## Connect an agent
 
 The full implementation is private during early access. Request an approved checkout or build before installing core code; no public package-registry release is offered. The separate hosted public MCP and operator-provisioned account service are described above. Public listing search returns only actual opted-in inventory; no automatic hosted signup is offered. Covered core business evaluation, development and internal use require a paid written licence. The separately MIT-licensed browser demo and its download cover a simple deal and four advanced sample workflows.

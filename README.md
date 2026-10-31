@@ -18,6 +18,8 @@ Add `https://jupie202020.pythonanywhere.com/mcp` to a client that supports remot
 
 **Hosted developer pilot, verified 31 October 2026:** the public service runs independently at `https://jupie202020.pythonanywhere.com`. The free plan has one worker and 512 MB of private storage, needs monthly renewal and currently expires on 30 November 2026. No production uptime guarantee or automatic paid upgrade is offered.
 
+[Official MCP Registry listing](https://registry.modelcontextprotocol.io/v0.1/servers/io.github.covenant-common%2Fcovenant-aap/versions/0.46.0-pilot.20261031) · [Pilot feedback and commercial enquiries](https://github.com/covenant-common/covenant-docs/issues/1)
+
 ## Start with one useful job
 
 A buyer commissions a USD25 research brief. Their agent may buy from an approved supplier within an agreed budget. The supplier can point to the exact scope, deadline and review terms both sides approved. Delivery, acceptance, corrections and any remaining duties stay beside that agreement.

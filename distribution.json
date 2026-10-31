@@ -62,5 +62,16 @@
   },
   "submission_notice": "Public marketing metadata only; not an MCP Registry server.json, installation manifest, proof of live hosting or independent qualification.",
   "mcp_configuration_url": "https://covenant-common.github.io/covenant-docs/mcp-config.json",
-  "matrix_url": "https://covenant-common.github.io/covenant-docs/docs/MATRIX.html"
+  "matrix_url": "https://covenant-common.github.io/covenant-docs/docs/MATRIX.html",
+  "channels": {
+    "official_mcp_registry": {
+      "name": "io.github.covenant-common/covenant-aap",
+      "version": "0.46.0-pilot.20261031",
+      "url": "https://registry.modelcontextprotocol.io/v0.1/servers/io.github.covenant-common%2Fcovenant-aap/versions/0.46.0-pilot.20261031",
+      "status": "active",
+      "verified_date": "2026-10-31"
+    },
+    "public_tester_and_commercial_thread": "https://github.com/covenant-common/covenant-docs/issues/1",
+    "public_documentation_repository": "https://github.com/covenant-common/covenant-docs"
+  }
 }
