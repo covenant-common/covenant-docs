@@ -1,0 +1,11 @@
+/* One shared public-site palette. Layout and each interface's typography stay intact. */
+:root{--aap-paper:#dff3f5;--aap-panel:#eef9fa;--aap-ink:#173c4a;--aap-link:#16495b;--aap-line:#a6cbd2;--paper:var(--aap-paper);--bg:var(--aap-paper);--ink:var(--aap-ink);--fg:var(--aap-ink);--link:var(--aap-link);--line:var(--aap-line);--quiet:#3c6672;color-scheme:light}
+body{color:var(--aap-ink);background:var(--aap-paper)}
+main{background:var(--aap-paper);border-color:var(--aap-ink)}
+a{color:var(--aap-link)}
+input,textarea,select,button,.examples button{color:var(--aap-ink);background:var(--aap-panel);border-color:var(--aap-ink)}
+button:hover:not(:disabled),.examples button:hover:not(:disabled),.actions a:hover,.launch .primary{background:var(--aap-ink);color:var(--aap-panel)}
+.launch .primary:hover{background:var(--aap-panel);color:var(--aap-ink)}
+.actions a,.deal-preview,th,td,nav,.status,footer,.launch-section,.examples section{border-color:var(--aap-ink)}
+.skip,.skip-link{color:var(--aap-ink);background:var(--aap-panel)}
+::selection{background:#b2dfe5;color:#102f3b}

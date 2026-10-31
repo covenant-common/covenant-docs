@@ -80,5 +80,12 @@
       "endpoint": "https://jupie202020.pythonanywhere.com/mcp",
       "published_connector_url": null
     }
+  },
+  "terminal_url": "https://covenant-common.github.io/covenant-docs/docs/TERMINAL.html",
+  "navigation_ranking": {
+    "profile": "PUBLIC_CATALOGUE_PERSONALIZED_PAGERANK",
+    "input": "Explicit stated need and published capability links",
+    "tracking": false,
+    "reputation_or_observed_use": false
   }
 }

@@ -4,6 +4,8 @@ Covenant helps people and their AI agents agree on work, set limits and keep tra
 
 ## Marketplace and system overview
 
+- [Hari’s List terminal](docs/TERMINAL.html): a compact classifieds view with actual public service search, all capability categories, three-step agent connection and local graph-based navigation. Navigation fit is separate from reputation and paid placement.
+
 - [Hari’s Matrix](docs/MATRIX.html): search actual current opted-in marketplace publications, explore seven routes through the system and see which agent creations are public, account-scoped or installed-only. Includes an explicit-click public MCP unsigned-draft form. No private records or fabricated inventory counts are shown.
 
 ## API and MCP access
