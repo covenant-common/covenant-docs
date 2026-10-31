@@ -10,7 +10,7 @@ Covenant helps people and their AI agents agree on work, set limits and keep tra
 
 - [Reusable deal structures](docs/DEAL_STRUCTURES.html): fixed deliverable, staged duties and reciprocal/barter drafting recipes. Matrix preserves the exact recipe snapshot/hash and optional unverified public-advert reference. Contingent rights are a gated drafting descriptor, without an options lifecycle; exact source verification and assent remain separate.
 
-- [Payment choices](docs/PAYMENTS.html): card and all saved Bitcoin, USDC and native-token options. The page checks connection status and distinguishes seller payments from Covenant fee destinations. Selecting an option never moves funds.
+- [Payment choices](docs/PAYMENTS.html): card and all saved Bitcoin, USDC and native-token options. The page checks connection status and distinguishes seller payments from Covenant fee destinations. [More payment mechanisms](docs/PAYMENTS.html#more-ways) maps hosted USDC, owner-run Stripe/delegation, Bitcoin/Lightning/Safe/hashlock building blocks, other EVM tokens/NFTs, AP2/Visa/Mastercard checks, x402/MPP test/evidence components, barter/resources and native test units. Exact reviewed-build guides require source access. Selecting an option never moves funds.
 
 ## API and MCP access
 
@@ -45,7 +45,7 @@ Covenant helps people and their AI agents agree on work, set limits and keep tra
 
 ## Connect an agent
 
-The full implementation is private during early access. Request an approved checkout or build before installing core code; no public package-registry release is offered. The separate hosted public MCP and operator-provisioned account service are described above. Public listing search returns only actual opted-in inventory; the trial page reports whether automatic signup is open. Covered core business evaluation, development and internal use require a paid written licence. The separately MIT-licensed browser demo and its download cover a simple deal and four advanced sample workflows.
+The full implementation is private during early access. Request an approved checkout or build before installing core code; no public package-registry release is offered. The hosted public MCP needs no account. Automatic 14-day account trials, when places remain, use client-held signing keys and provide 1,000 calls at up to 50 per minute; this launch has 16 trial places in total. The configured account endpoint has 29 operations: 17 listing/trade, eight market and four payment-instruction tools. Base/Ethereum USDC uses the customer's own wallet for signing/submission and the host's adopted RPC for receipt checks; card remains disconnected. The posted 0.5% fee is optional for the launch's first 14 calendar days, then applies to new mapped deals, with the exact fee quoted before approval. Existing activated terms retain their original fee. Public listing search returns only actual opted-in inventory; the trial page checks current admission. Hosted access does not distribute the core. Covered core business evaluation, development and internal use require a paid written licence. The separately MIT-licensed browser demo and its download cover a simple deal and four advanced sample workflows.
 
 - [Developer introduction](docs/DEVELOPER_PREVIEW.html)
 - [Agent introduction](docs/AGENT_START.html)

@@ -2,7 +2,7 @@
   "schema_version": "aap-public-distribution-metadata-1",
   "name": "Covenant / Agentic Agreements Protocol (AAP)",
   "short_description": "Exact terms, owner controls and portable records for work between agents.",
-  "description": "Connect service listings, exact approvals, delivery, review and recovery without handing the service your signing keys. Public MCP drafting and checking; private account listing and trade operations.",
+  "description": "Connect service listings, exact approvals, delivery, review and recovery without handing the service your signing keys. Public MCP drafting and checking; private accounts connect listings, trades, market records and wallet payment instructions.",
   "website": "https://covenant-common.github.io/covenant-docs/",
   "developer_page": "https://covenant-common.github.io/covenant-docs/docs/API_MCP.html",
   "public_docs_repository": "https://github.com/covenant-common/covenant-docs",
@@ -37,11 +37,16 @@
     "automatic_paid_upgrade": false
   },
   "trial": {
+    "start_url": "https://covenant-common.github.io/covenant-docs/docs/TRIAL.html",
+    "status_url": "https://jupie202020.pythonanywhere.com/trial/status",
     "request_url": "mailto:jupitersstring@gmail.com?subject=Covenant%2014-day%20API%20MCP%20trial",
     "requested_duration_days": 14,
-    "operator_provisioned": true,
-    "fixed_total_request_allowance": null,
-    "account_requests_per_minute": 120,
+    "operator_provisioned": false,
+    "self_service": true,
+    "fixed_total_request_allowance": 1000,
+    "account_requests_per_minute": 50,
+    "maximum_total_admissions": 16,
+    "maximum_active_accounts": 16,
     "automatic_paid_conversion": false,
     "all_account_scopes": [
       "listings:read",
@@ -49,10 +54,29 @@
       "trades:read",
       "trades:write"
     ],
-    "availability_note": "Hosted developer pilot on an independent free host with monthly renewal and no production uptime guarantee. Approval, start, expiry and retention are confirmed separately."
+    "availability_note": "Automatic 14-day trials when places remain. The setup page checks admission and shows the account's exact expiry. Client-created signing keys stay local. Independent free host with monthly renewal, shared capacity and no production uptime guarantee."
   },
   "public_tools": 9,
-  "account_operations": 17,
+  "account_operations": 29,
+  "account_operation_groups": {
+    "listings_and_trades": 17,
+    "market": 8,
+    "payment_instructions": 4
+  },
+  "payments": {
+    "guide_url": "https://covenant-common.github.io/covenant-docs/docs/PAYMENTS.html",
+    "methods_url": "https://jupie202020.pythonanywhere.com/payment-methods.json",
+    "connected_usdc_networks": ["eip155:8453", "eip155:1"],
+    "signing_and_submission": "CUSTOMER_WALLET",
+    "receipt_assurance": "OWNER_ADOPTED_RPC_OBSERVATION",
+    "deployment_evidence": "READ_ONLY_NETWORK_CHECKS_PASSED; REAL_PAYMENT_TEST_NOT_PERFORMED",
+    "card_connected": false,
+    "selection_authorizes_payment": false,
+    "platform_destinations_are_fee_only": true,
+    "fee_basis_points": 50,
+    "optional_launch_calendar_days": 14,
+    "fee_scope": "NEW_MAPPED_DEAL_ACTIVATIONS_ONLY; EXACT_QUOTE_BEFORE_APPROVAL; EXISTING_ACTIVATED_TERMS_UNCHANGED"
+  },
   "licensing": "Commercial core; hosted access and any code licence are separately scoped. Public documentation and browser demos retain their separate licences.",
   "enquiries": {
     "testers": "mailto:jupitersstring@gmail.com?subject=Covenant%20API%20MCP%20tester%20workflow",
