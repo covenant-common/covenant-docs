@@ -10,6 +10,8 @@ Covenant helps people and their AI agents agree on work, set limits and keep tra
 
 - [Reusable deal structures](docs/DEAL_STRUCTURES.html): fixed deliverable, staged duties and reciprocal/barter drafting recipes. Matrix preserves the exact recipe snapshot/hash and optional unverified public-advert reference. Contingent rights are a gated drafting descriptor, without an options lifecycle; exact source verification and assent remain separate.
 
+- [Payment choices](docs/PAYMENTS.html): card and all saved Bitcoin, USDC and native-token options. The page checks connection status and distinguishes seller payments from Covenant fee destinations. Selecting an option never moves funds.
+
 ## API and MCP access
 
 - [Connect an agent now](docs/API_MCP.html): nine live public drafting/review/search tools at `https://jupie202020.pythonanywhere.com/mcp`; no account or token. Protocol 2025-11-25, Streamable HTTP POST with complete JSON responses. After initialization, send MCP-Protocol-Version: 2025-11-25 and Accept: application/json, text/event-stream. GET /mcp returns 405 by design.
