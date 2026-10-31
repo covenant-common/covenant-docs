@@ -11,3 +11,8 @@ button:hover:not(:disabled),.examples button:hover:not(:disabled),.actions a:hov
 ::selection{background:#b2dfe5;color:#102f3b}
 /* Keep the editable keyword step as usable as the main search field. */
 #terminal-keywords,#market-keywords{display:block;width:100%;min-width:0;max-width:100%;box-sizing:border-box;margin-top:.236rem}
+
+/* Preserve full identifiers and exact JSON at narrow widths. */
+#draft-id,#draft-result,#draft-result pre,#draft-result code,.draft-review,.recipe-pins{min-width:0;overflow-wrap:anywhere;word-break:break-word}
+
+#baseline-id,#draft-baseline,#draft-differences{min-width:0;overflow-wrap:anywhere;word-break:break-word}#draft-baseline,#draft-differences{border:1px solid var(--aap-line);padding:.618rem;margin:.618rem 0}#draft-differences section{border-top:1px solid var(--aap-line);padding-top:.382rem;margin-top:.382rem}#draft-differences h4{font:inherit;font-weight:bold;margin:0 0 .236rem}

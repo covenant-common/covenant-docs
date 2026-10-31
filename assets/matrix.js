@@ -282,8 +282,10 @@
   let templatePreview = 0;
   let drafting = false;
   let latestDraftRaw = null;
+  let comparisonBaseline = null;
   function clearDraftOutput(message) {
     latestDraftRaw = null; latestHandoffText = null;
+    $('draft-differences').replaceChildren(); $('draft-differences').hidden = true; $('draft-compare').hidden = true;
     $('draft-review').replaceChildren();
     $('proposal-copy').disabled = true;
     $('proposal-copy-state').textContent = '';
@@ -381,6 +383,36 @@
     if (review.source) text('p', 'Referenced advert: ' + review.source.title + '. Its exact source offer has not been verified.', target);
     text('p', review.boundary, target);
   }
+  $('draft-keep').addEventListener('click', () => {
+    if (drafting || latestDraftRaw === null) return;
+    comparisonBaseline = JSON.parse(latestDraftRaw);
+    $('baseline-id').textContent = comparisonBaseline.id;
+    $('draft-baseline').hidden = false;
+    $('draft-compare').hidden = false;
+    $('draft-state').textContent = 'Version kept on this page. Edit the terms and prepare a new proposal, then compare them. No approval was carried forward.';
+  });
+  $('baseline-forget').addEventListener('click', () => {
+    comparisonBaseline = null; $('baseline-id').textContent = ''; $('draft-baseline').hidden = true;
+    $('draft-compare').hidden = true; $('draft-differences').replaceChildren(); $('draft-differences').hidden = true;
+  });
+  $('draft-compare').addEventListener('click', () => {
+    if (drafting || latestDraftRaw === null || comparisonBaseline === null) return;
+    const target = $('draft-differences'); target.replaceChildren();
+    try {
+      const comparison = structures.compareProposals(comparisonBaseline, JSON.parse(latestDraftRaw));
+      text('h3', comparison.changes.length ? 'What changed' : 'No returned terms changed', target);
+      text('p', comparison.requires_fresh_assent ? 'This is a new proposal. Both parties must approve this exact version.' : 'The returned proposal is unchanged. No approval is added by this comparison.', target);
+      comparison.changes.forEach((change) => {
+        const item = document.createElement('section');
+        text('h4', change.title, item);
+        text('p', 'Before: ' + (change.before === null ? '(not included)' : change.before), item);
+        text('p', 'After: ' + (change.after === null ? '(removed)' : change.after), item);
+        target.appendChild(item);
+      });
+      text('p', comparison.boundary + ' Neither version is sent anywhere by this comparison.', target);
+      target.hidden = false;
+    } catch (error) {text('p', error.message, target); target.hidden = false;}
+  });
   $('proposal-copy').addEventListener('click', async () => {
     const value = latestHandoffText;
     if (drafting || value === null) return;
@@ -434,7 +466,7 @@
       handoffUrl = URL.createObjectURL(new Blob([structures.proposalHandoffHTML(prepared.request, data, raw)], {type: 'text/html;charset=utf-8'}));
       $('proposal-download').href = handoffUrl; $('proposal-download').download = 'covenant-proposal-handoff-' + data.id.slice(0, 12) + '.html';
       $('draft-id').textContent = data.id; $('draft-json').textContent = raw;
-      latestDraftRaw = raw; $('draft-copy').disabled = false;
+      latestDraftRaw = raw; $('draft-copy').disabled = false; $('draft-compare').hidden = comparisonBaseline === null;
       downloadUrl = URL.createObjectURL(new Blob([raw], {type: 'application/json;charset=utf-8'}));
       $('draft-download').href = downloadUrl;
       $('draft-download').download = 'covenant-unsigned-' + data.id.slice(0, 12) + '.json';

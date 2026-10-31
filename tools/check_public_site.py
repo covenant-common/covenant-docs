@@ -55,7 +55,9 @@ def check():
         for script in page.scripts:
             script_path=urlsplit(script['src']).path if script['src'] else None
             local_script=script_path if not script['src'] or not urlsplit(script['src']).scheme and not urlsplit(script['src']).netloc else None
-            allowed_live={'docs/MATRIX.html':{'../assets/matrix.js','../assets/deal-structures.js'},
+            allowed_live={'index.html':{'assets/story-scripts.js','assets/story-characters.js','assets/story-player.js','assets/public-feedback.js'},
+                          'docs/TRIAL.html':{'../assets/trial-client.js'},
+                          'docs/MATRIX.html':{'../assets/matrix.js','../assets/deal-structures.js'},
                           'docs/TERMINAL.html':{'../assets/terminal.js','../assets/deal-structures.js'},
                           'docs/DEAL_STRUCTURES.html':{'../assets/deal-structures.js'}}
             if (name in allowed_live and script['type'] is None and script['defer'] and

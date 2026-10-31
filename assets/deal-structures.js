@@ -253,6 +253,32 @@
     try {return canonical(record.draft) === canonical(expected);}
     catch (_) {return false;}
   }
+  function compareProposals(before, after) {
+    for (const record of [before, after]) {
+      need(object(record) && /^[0-9a-f]{64}$/.test(record.id) && record.status === 'UNSIGNED_DRAFT' &&
+        record.binding === false && record.execution_authorized === false && object(record.draft) &&
+        record.draft.version === 'covenant-contract-draft/0.1' && Array.isArray(record.draft.clauses), 'Use two returned unsigned proposals.');
+      const ids = record.draft.clauses.map((clause) => {
+        need(object(clause) && typeof clause.id === 'string' && typeof clause.title === 'string' && typeof clause.text === 'string', 'A clause is incomplete.');
+        return clause.id;
+      });
+      need(new Set(ids).size === ids.length, 'Clause identifiers must be unique.');
+    }
+    const changes = [], old = new Map(before.draft.clauses.map((c) => [c.id, c])), fresh = new Map(after.draft.clauses.map((c) => [c.id, c]));
+    for (const id of new Set([...old.keys(), ...fresh.keys()])) {
+      const a = old.get(id), b = fresh.get(id);
+      if (canonical(a || null) !== canonical(b || null)) changes.push({kind:'clause', id,
+        title:(b || a).title, before:a ? a.title + ': ' + a.text : null, after:b ? b.title + ': ' + b.text : null});
+    }
+    if (canonical([...old.keys()]) !== canonical([...fresh.keys()])) changes.push({kind:'order',title:'Clause order',before:[...old.keys()].join(', '),after:[...fresh.keys()].join(', ')});
+    for (const key of new Set([...Object.keys(before.draft), ...Object.keys(after.draft)])) {
+      if (key === 'clauses') continue;
+      const a = Object.hasOwn(before.draft,key) ? before.draft[key] : null, b = Object.hasOwn(after.draft,key) ? after.draft[key] : null;
+      if (canonical(a) !== canonical(b)) changes.push({kind:'field',title:key,before:canonical(a),after:canonical(b)});
+    }
+    return {before:before.id,after:after.id,changes,requires_fresh_assent:changes.length > 0 || before.id !== after.id,
+      boundary:'This compares the returned fields locally. It does not verify signatures or transfer an approval.'};
+  }
   class SelectionSession {
     constructor() {this.revision = 0; this.advert = null; this.output = null;}
     invalidate() {this.revision++; this.output = null; return this.revision;}
@@ -263,7 +289,7 @@
   }
   const api = Object.freeze({VERSION, HASH_PROFILE, catalogue, template, templatePin, canonical,
     advertFromPublication, validateAdvert, makeHandoff, readHandoff, proposedFields,
-    formatLegs, buildDraft, responseRetains, reviewDraft, proposalHandoff, proposalHandoffHTML, normalizeServiceQuery, SelectionSession});
+    formatLegs, buildDraft, responseRetains, reviewDraft, proposalHandoff, proposalHandoffHTML, normalizeServiceQuery, compareProposals, SelectionSession});
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
   if (typeof window !== 'undefined') window.AAPDealStructures = api;
   if (typeof document !== 'undefined') {

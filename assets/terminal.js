@@ -471,7 +471,7 @@
   function taskIntent(need) {
     const tokens = need.toLowerCase().normalize('NFKC').match(/[a-z0-9]+/g) || [];
     const staged = /\b(?:milestones?|stages?|staged)\b|\boutline\b[\s\S]*\b(?:final|approval|approve)\b|\bapproval\s+before\b/i.test(need);
-    const service = /\b(?:brief|research|service|supplier|provider|hire|hiring|commission)\b/i.test(need);
+    const service = /\b(?:brief|research|service|supplier|provider|hire|hiring|commission|review|report|csv|analysis|editing)\b/i.test(need);
     const matches = [];
     INTENT_RULES.forEach((rule, order) => {
       const position = tokens.findIndex((token) => rule.actions.includes(token));
@@ -483,7 +483,10 @@
     matches.sort((a, b) => a.position - b.position || a.order - b.order);
     const composePosition = tokens.findIndex((token) => ['draft', 'drafting', 'structure', 'prepare'].includes(token));
     if (staged && service && composePosition >= 0 && (!matches.length || composePosition <= matches[0].position)) return {id: 'structured-proposal', primary: ['structured-draft'], related: ['draft', 'services', 'milestones']};
-    if (matches.length) return matches[0].rule;
+    if (matches.length) {
+      const rule = matches[0].rule;
+      return staged ? {...rule, related: [...new Set([...rule.related, 'structured-draft', 'milestones'])]} : rule;
+    }
     if (staged && service && !/\b(?:resolve|arbitrate|check|verify|inspect|build|integrate|advertise|publish|sell)\b/i.test(need)) return {id: 'staged-service', primary: ['services'], next: ['structured-draft'], related: ['draft', 'milestones']};
     return null;
   }

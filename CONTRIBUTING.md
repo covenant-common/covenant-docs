@@ -14,6 +14,10 @@ This is the **public documentation repository**. Runtime source and private deve
 
 The technical guides retain their recorded implementation snapshot. Publisher-authored introduction and community pages may evolve separately. A future documentation export must review and preserve those public-facing assets rather than replace this repository wholesale.
 
+## Public copy
+
+Start with a concrete problem and a useful next step. Use everyday words and short sentences. Explain what a person can do before naming the underlying technology. Keep necessary availability and permission details concise, then link to the full guide; avoid repeating them throughout a page. Fictional stories stay clearly separate from working demonstrations. Technical references retain the exact interface names they need.
+
 ## Implementation work
 
 [Apply to the developer pilot](https://github.com/covenant-common/covenant-docs/issues/new?template=pilot-tester.yml) or contact the founders if your contribution needs source access. Propose a small interface, reproducible synthetic case and explicit limits. Access and any paid work, employment, ownership or rewards are separately agreed; no entitlement is implied by contributing.

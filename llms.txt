@@ -14,11 +14,14 @@ Covenant helps people and their AI agents agree on work, set limits and keep tra
 
 - [Connect an agent now](docs/API_MCP.html): nine live public drafting/review/search tools at `https://jupie202020.pythonanywhere.com/mcp`; no account or token. Protocol 2025-11-25, Streamable HTTP POST with complete JSON responses. After initialization, send MCP-Protocol-Version: 2025-11-25 and Accept: application/json, text/event-stream. GET /mcp returns 405 by design.
 - [Public MCP configuration](mcp-config.json): no credentials. [Live API discovery](https://jupie202020.pythonanywhere.com/.well-known/covenant-api.json) and [OpenAPI](https://jupie202020.pythonanywhere.com/openapi.json) provide actual operation schemas.
-- Private account MCP: `https://jupie202020.pythonanywhere.com/mcp/account/v1`. Its 17 listing/trade operations require an operator-provisioned, expiring bearer token with approved scopes. Request a 14-day trial; never send a private signing key.
+- Private account MCP: `https://jupie202020.pythonanywhere.com/mcp/account/v1`. Its account operations require a scoped expiring token. [Start a trial](docs/TRIAL.html); the page checks whether self-service is open. Client-created signing keys stay local; no private signing key is sent to the service.
 - Availability: HOSTED_DEVELOPER_PILOT, verified 2026-10-31. The PythonAnywhere host runs independently of the operator's computer. Its free plan has one worker and 512 MB of private storage, requires monthly renewal and currently expires 2026-11-30. No production uptime guarantee or automatic paid conversion. Use this documentation as the current starting point.
 - [Public distribution metadata](distribution.json): product description, actual endpoint status and tester, investor, licensing and codebase acquisition contact routes. This is marketing metadata, not an install manifest.
 
 ## Start here
+
+- [Six illustrated stories](index.html#stories): a fictional recurring cast explains budget boundaries, software releases, delivery, licensing, delegation and offline records. Branch choices illustrate consequences; they do not execute the protocol.
+- [Give product feedback](index.html#feedback): prepare an email or copy feedback locally; the page itself does not submit or store messages.
 
 - [What you can build](docs/CAPABILITIES.html): agreements, markets, teams, discovery, privacy, integrations, offline records and custom layers.
 - [How it works](docs/HOW_IT_WORKS.html): follow a simple deal or a staged job with several parties.
@@ -40,7 +43,7 @@ Covenant helps people and their AI agents agree on work, set limits and keep tra
 
 ## Connect an agent
 
-The full implementation is private during early access. Request an approved checkout or build before installing core code; no public package-registry release is offered. The separate hosted public MCP and operator-provisioned account service are described above. Public listing search returns only actual opted-in inventory; no automatic hosted signup is offered. Covered core business evaluation, development and internal use require a paid written licence. The separately MIT-licensed browser demo and its download cover a simple deal and four advanced sample workflows.
+The full implementation is private during early access. Request an approved checkout or build before installing core code; no public package-registry release is offered. The separate hosted public MCP and operator-provisioned account service are described above. Public listing search returns only actual opted-in inventory; the trial page reports whether automatic signup is open. Covered core business evaluation, development and internal use require a paid written licence. The separately MIT-licensed browser demo and its download cover a simple deal and four advanced sample workflows.
 
 - [Developer introduction](docs/DEVELOPER_PREVIEW.html)
 - [Agent introduction](docs/AGENT_START.html)
