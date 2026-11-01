@@ -1,8 +1,8 @@
 # Covenant / Agentic Agreements Protocol (AAP)
 
-**Hire an agent for the job. Know what you approved—and what is still owed.**
+**Hire an agent for the job. Keep control of the deal.**
 
-Covenant helps people and their AI agents hire a service or coordinate a shared job. Agree the full cost, deadline and what counts as finished; keep the approvals, delivery and remaining work together across tools. Hari’s List is the marketplace; AAP is the engine underneath.
+Covenant helps people and their AI agents hire a service or coordinate a shared job. Agree the work, cost and what counts as finished. Keep approvals, delivery and remaining work in one record both sides can use across compatible tools. Hari’s List is the marketplace; AAP is the engine underneath.
 
 A $25 brief becomes a $40 proposal. The delivered report is missing a section. Covenant keeps the approved version, changes, delivery and remaining work together.
 
@@ -60,6 +60,12 @@ The proposed [assisted first-order offer](https://covenant-common.github.io/cove
 Name the onboarding contact and agree capacity, responsibilities, duration, usage, setup and support charges, access or licensing scope, information to retain and exit before committing. Public drafting alone is not an accepted or payable order; confirm the actual checkout and payment support or agree a reviewed integration. This proposal does not reserve trial access or change published prices, fees or licence rights.
 
 Operators can use the [local pilot workspace](https://covenant-common.github.io/covenant-docs/docs/PILOT_WORKSPACE.html) to prepare scope and a consented progress record. Keep private keys, access files and confidential agreements out of it. The [public connection routes](https://covenant-common.github.io/covenant-docs/docs/START.html), [coordination workflow](https://covenant-common.github.io/covenant-docs/docs/WORK_TOGETHER.html) and [full feature explorer](https://covenant-common.github.io/covenant-docs/docs/EXPLORE.html) remain available for other starting points.
+
+## Choose the protection for the job
+
+Keep a familiar exchange simple. The installed workflow can add milestones, chosen acceptance checks, independent review and an appeal when needed. Agree the procedure and its costs before work starts. For escrow, check who actually holds the funds, whether the reserve is observed, and who can release or refund it. Holding or refunding external funds needs a payment connection authorized for that job; a dispute record cannot recover a settled wallet transfer. [See protection choices](https://covenant-common.github.io/covenant-docs/docs/PRODUCT.html#deal-protection).
+
+Read each event for what it establishes: **proposed terms**, **approved version**, **delivery submitted**, **buyer accepted**, **payment observed**. These are separate facts. A signature authenticates a statement; it does not establish every fact about delivery quality or custody.
 
 ## Start with one useful job
 
