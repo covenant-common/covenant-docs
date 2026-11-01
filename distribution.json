@@ -1,8 +1,8 @@
 {
   "schema_version": "aap-public-distribution-metadata-1",
   "name": "Covenant / Agentic Agreements Protocol (AAP)",
-  "short_description": "Agents working together, on your terms: instructions, approvals and portable records.",
-  "description": "Coordinate teams, shared projects and services around exact instructions, agreements, authority and evidence. Public MCP drafting and review; private accounts support listings, trades, market records and wallet payment instructions. Wider installed workflows include discussions, roles, votes and recovery.",
+  "short_description": "Find a provider. Agree the exact job. Keep approvals, delivery and remaining work together.",
+  "description": "Find or advertise a service, prepare clear terms and retain a record both sides can reopen. Public MCP tools support search, unsigned drafting and supplied-record review. Private account trials add listing and trade records. Configured installed workflows add delegation, teams, chosen review procedures, privacy and recovery.",
   "website": "https://covenant-common.github.io/covenant-docs/",
   "developer_page": "https://covenant-common.github.io/covenant-docs/docs/API_MCP.html",
   "public_docs_repository": "https://github.com/covenant-common/covenant-docs",
@@ -18,7 +18,7 @@
   ],
   "availability": {
     "status": "HOSTED_DEVELOPER_PILOT",
-    "verified_date": "2026-10-31",
+    "verified_date": "2026-11-01",
     "live_endpoint": "https://jupie202020.pythonanywhere.com",
     "public_mcp_url": "https://jupie202020.pythonanywhere.com/mcp",
     "account_mcp_url": "https://jupie202020.pythonanywhere.com/mcp/account/v1",
@@ -137,7 +137,7 @@
       "version": "0.46.0-pilot.20261031.2",
       "url": "https://registry.modelcontextprotocol.io/v0.1/servers/io.github.covenant-common%2Fcovenant-aap/versions/0.46.0-pilot.20261031.2",
       "status": "active",
-      "verified_date": "2026-10-31",
+      "verified_date": "2026-11-01",
       "is_latest": true,
       "published_at": "2026-10-31T11:19:20.002309Z"
     },
@@ -208,5 +208,28 @@
   "buyer_question_routes": "https://covenant-common.github.io/covenant-docs/distribution/buyer-routes.json",
   "privacy_url": "https://covenant-common.github.io/covenant-docs/PRIVACY.html",
   "feature_explorer_url": "https://covenant-common.github.io/covenant-docs/docs/EXPLORE.html",
-  "non_market_coordination_url": "https://covenant-common.github.io/covenant-docs/docs/WORK_TOGETHER.html"
+  "non_market_coordination_url": "https://covenant-common.github.io/covenant-docs/docs/WORK_TOGETHER.html",
+  "buyer_comparison": {
+    "url": "https://covenant-common.github.io/covenant-docs/docs/PILOT_WORKSPACE.html#buyer-comparison",
+    "status": "OPTIONAL_BROWSER_LOCAL_ADVISORY",
+    "whole_job_costs": [
+      "supplier quote",
+      "fees",
+      "review",
+      "coordination",
+      "repair range"
+    ],
+    "unknown_inputs": "REMAIN_UNKNOWN",
+    "automatic_winner": false,
+    "automatic_execution": false,
+    "draft_handoff": "Explicit selected unsigned note import; editable proposal; separate user submission."
+  },
+  "feature_discovery": {
+    "url": "https://covenant-common.github.io/covenant-docs/docs/EXPLORE.html",
+    "installed_families": 179,
+    "installed_task_routes": 86,
+    "source_main_commit": "ba76a50bf4ac26a52bdf6244ef6a368529221ff3",
+    "installed_metadata_is_hosted_exposure": false
+  },
+  "research_url": "https://covenant-common.github.io/covenant-docs/docs/RESEARCH.html"
 }

@@ -283,6 +283,7 @@
   let drafting = false;
   let latestDraftRaw = null;
   let comparisonBaseline = null;
+  let handoffInputGeneration = 0;
   function clearDraftOutput(message) {
     latestDraftRaw = null; latestHandoffText = null;
     $('draft-differences').replaceChildren(); $('draft-differences').hidden = true; $('draft-compare').hidden = true;
@@ -306,6 +307,7 @@
     if (message) $('draft-state').textContent = message;
   }
   function invalidateDraft(message) {
+    handoffInputGeneration++;
     if (selection) selection.invalidate();
     clearDraftOutput(message || 'Terms changed. Prepare a fresh unsigned draft when ready.');
   }
@@ -326,6 +328,7 @@
   }
   function selectAdvert(advert) {
     if (!selection) throw new Error('The shared structure catalogue could not load.');
+    handoffInputGeneration++;
     selection.select(advert);
     clearDraftOutput('Advert selection changed. Review the proposed terms before preparing a fresh draft.');
     if (advert === null) {
@@ -348,11 +351,12 @@
     $('draft-structure').addEventListener('change', () => {invalidateDraft(); showTemplate();});
     $('matrix-draft').addEventListener('input', () => invalidateDraft());
     $('clear-advert').addEventListener('click', () => selectAdvert(null));
-    async function loadHandoff(raw) {
+    async function loadHandoff(raw, generation) {
+      if (generation !== handoffInputGeneration) throw new Error('A newer choice replaced this handoff.');
       const revision = selection.invalidate();
       clearDraftOutput('Loading a public handoff locally; no request has been sent.');
       const advert = await structures.readHandoff(raw);
-      if (!selection.accepts(revision)) throw new Error('The selection changed while loading. Choose the handoff again.');
+      if (generation !== handoffInputGeneration || !selection.accepts(revision)) throw new Error('The selection changed while loading. Choose the handoff again.');
       selectAdvert(advert);
       $('advert-handoff-state').textContent = 'Public advert handoff loaded. Its file hash checks integrity only; source provenance remains unverified.';
     }
@@ -360,12 +364,54 @@
       const file = event.target.files && event.target.files[0];
       if (!file) return;
       invalidateDraft('A new handoff file was chosen. The earlier draft is no longer current.');
-      try {if (file.size > 65536) throw new Error('Choose a public handoff of at most 64 KiB.'); await loadHandoff(await file.text());}
+      const generation = ++handoffInputGeneration;
+      try {if (file.size > 65536) throw new Error('Choose a public handoff of at most 64 KiB.'); const raw = await file.text(); if (generation !== handoffInputGeneration) return; await loadHandoff(raw, generation);}
       catch (error) {$('advert-handoff-state').textContent = 'The handoff was not loaded: ' + error.message;}
     });
+    $('advert-handoff-text').addEventListener('input', () => {handoffInputGeneration++;});
     $('load-advert-handoff').addEventListener('click', async () => {
-      try {await loadHandoff($('advert-handoff-text').value);}
+      const generation = ++handoffInputGeneration;
+      try {await loadHandoff($('advert-handoff-text').value, generation);}
       catch (error) {$('advert-handoff-state').textContent = 'The handoff was not loaded: ' + error.message;}
+    });
+    // Optional planning handoff. A local comparison is not an offer, assent,
+    // authority grant or supplier obligation. Only an explicit click edits this
+    // form; the existing separate submit button is still the network boundary.
+    const comparison = window.AAPPilotWorkspace;
+    $('buyer-note-text').addEventListener('input', () => {handoffInputGeneration++;});
+    $('buyer-note-file').addEventListener('change', async (event) => {
+      const generation = ++handoffInputGeneration;
+      const file = event.target.files && event.target.files[0];
+      if (!file) return;
+      try {
+        if (!comparison) throw new Error('The local comparison reader did not load. Reload the page.');
+        if (file.size > 16384) throw new Error('Choose a comparison note no larger than 16 KiB.');
+        const raw = await file.text();
+        comparison.readBuyerComparisonNote(raw);
+        if (generation !== handoffInputGeneration) return;
+        $('buyer-note-text').value = raw;
+        $('buyer-note-state').textContent = 'Comparison note ready. Review it, then choose Replace editable draft fields. Nothing has been sent.';
+      } catch (error) {
+        if (generation === handoffInputGeneration) $('buyer-note-state').textContent = 'The file was not loaded: ' + error.message;
+      }
+    });
+    $('buyer-note-load').addEventListener('click', () => {
+      handoffInputGeneration++;
+      try {
+        if (drafting) throw new Error('Wait for the current draft request to finish before changing the form.');
+        if (!comparison) throw new Error('The local comparison reader did not load. Reload the page.');
+        const note = comparison.readBuyerComparisonNote($('buyer-note-text').value);
+        const fields = comparison.buyerComparisonDraftFields(note);
+        selectAdvert(null);
+        $('draft-structure').value = 'fixed-deliverable';
+        ['title', 'deliverable', 'price'].forEach((key) => {$('draft-' + key).value = fields[key];});
+        $('draft-buyer').value = ''; $('draft-supplier').value = '';
+        $('draft-structure-details').value = fields.details;
+        showTemplate();
+        $('buyer-note-state').textContent = 'Planning note loaded locally. Old advert and party names were cleared. Buyer-only estimates remain labelled; check every term and name both parties before preparing a draft. No supplier was verified, and nothing was accepted or sent.';
+        $('draft-state').textContent = 'Optional comparison loaded. Review the visible fields; choose Prepare my unsigned draft only when ready.';
+        $('draft-title').focus();
+      } catch (error) {$('buyer-note-state').textContent = 'The draft was not changed: ' + error.message;}
     });
     showTemplate();
   } else $('draft-state').textContent = 'The shared structure catalogue could not load. Use the direct MCP connection guide or reload this page.';

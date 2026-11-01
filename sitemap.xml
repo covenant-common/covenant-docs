@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://covenant-common.github.io/covenant-docs/</loc>
@@ -109,4 +108,4 @@
     <loc>https://covenant-common.github.io/covenant-docs/docs/WORK_WITH_US.html</loc>
   </url>
   <url><loc>https://covenant-common.github.io/covenant-docs/docs/ABOUT.html</loc></url>
-</urlset>
+<url><loc>https://covenant-common.github.io/covenant-docs/docs/RESEARCH.html</loc></url></urlset>

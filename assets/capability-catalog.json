@@ -143,8 +143,9 @@
   ],
   "source": {
     "file": "aap_levels.json",
-    "sha256": "1a52b3038c821ed16d665b15a26cbdf9d40ffc0c00130a11b9b51b5945423c32",
-    "projection": "Public interface metadata only; no implementation modules or source."
+    "sha256": "8d39081ff54759816a812de44a89fbd97ddf4b1bdee3e6914843c9b8b2adf5e9",
+    "projection": "Public interface metadata only; no implementation modules or source.",
+    "commit": "ba76a50bf4ac26a52bdf6244ef6a368529221ff3"
   },
   "tools": {
     "commit_cooperation": {
@@ -873,6 +874,12 @@
       "maturity": "beta",
       "species": "association"
     },
+    "covenant_panel_successor": {
+      "level": "L3",
+      "core": true,
+      "maturity": "beta",
+      "species": null
+    },
     "covenant_panel_vote": {
       "level": "L3",
       "core": true,
@@ -1118,6 +1125,18 @@
       "core": false,
       "maturity": "beta",
       "species": null
+    },
+    "covenant_tender": {
+      "level": "L4",
+      "core": false,
+      "maturity": "experimental",
+      "species": "service"
+    },
+    "covenant_tender_write": {
+      "level": "L4",
+      "core": false,
+      "maturity": "experimental",
+      "species": "service"
     },
     "covenant_threat": {
       "level": "L4",
