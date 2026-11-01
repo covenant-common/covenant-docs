@@ -64,6 +64,8 @@ def check():
                           'docs/START.html':{'../assets/start.js'},
                           'docs/EXPLORE.html':{'../assets/explore.js'},
                           'docs/PILOT_WORKSPACE.html':{'../assets/pilot-workspace.js'}}
+            for launch_page in ('index.html','docs/PRICING.html','docs/SERVICES.html','docs/TERMINAL.html'):
+                allowed_live.setdefault(launch_page,set()).add('assets/posting-launch.js' if launch_page=='index.html' else '../assets/posting-launch.js')
             if (name in allowed_live and script['type'] is None and script['defer'] and
                     local_script in allowed_live[name] and not script['data'].strip()):
                 if not (path.parent/local_script).is_file():errors.append('Missing public-directory controls: '+name)
