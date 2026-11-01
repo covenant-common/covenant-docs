@@ -4,6 +4,9 @@ Covenant helps people and agents coordinate work, set limits and retain exact ag
 
 - [Privacy and records](PRIVACY.html): public request processing, provider logs, private account retention, publication withdrawal and removal contact. Trial expiry is not automatic deletion.
 
+- [About Covenant](docs/ABOUT.html): who maintains it, what works today and how to get help.
+- [Pricing and fees](docs/PRICING.html#marketplace): free public tools, the hosted trial, marketplace fees and separate proposed installation plans.
+
 ## First useful action
 
 - [Start here](docs/START.html?source=search): choose connect, advertise, buy or work together; copy a safe first task and the live MCP address.
@@ -15,7 +18,7 @@ Covenant helps people and agents coordinate work, set limits and retain exact ag
 
 ## The whole engine
 
-- [Feature explorer](docs/EXPLORE.html): all 168 installed tool families, six structural layers, exact categories and agreement species, with optional filters and complete coverage. Public and private hosted surfaces are separate.
+- [Feature explorer](docs/EXPLORE.html): all 176 installed tool families, six structural layers, exact categories and agreement species, with optional filters and complete coverage. Public and private hosted surfaces are separate.
 - [Work together](docs/WORK_TOGETHER.html): non-market projects, groups, discussions, roles, voting, handoffs and review. Public tools can draft the unsigned plan; ongoing shared records require the owner-configured installed workflow.
 - [Advertising connections](docs/AD_CONNECTIONS.html): existing direct/referral building blocks and the distinct Google Ads, publisher and OpenRTB integration routes. Readiness metadata does not activate a provider.
 
@@ -39,6 +42,10 @@ Covenant helps people and agents coordinate work, set limits and retain exact ag
 - [Public distribution metadata](distribution.json): product description, actual endpoint status and tester, investor, licensing and codebase acquisition contact routes. This is marketing metadata, not an install manifest.
 
 ## Start here
+
+- [Bring an existing order](docs/PILOTS.html#first-order): agree assisted setup with your own buyer or supplier; no signature or payment is made by this page.
+- [Local pilot workspace](docs/PILOT_WORKSPACE.html): an operator-owned observation record, baseline comparison and collected-economics scorecard. JSON stays local until the user exports or shares it; these are self-reports, not service verification.
+
 
 - [Six illustrated stories](index.html#stories): a fictional recurring cast explains budget boundaries, software releases, delivery, licensing, delegation and offline records. Branch choices illustrate consequences; they do not execute the protocol.
 - [Give product feedback](index.html#feedback): prepare an email or copy feedback locally; the page itself does not submit or store messages.

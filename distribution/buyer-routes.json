@@ -37,6 +37,11 @@
       "question": "Can my agent pay with crypto?",
       "page": "docs/PAYMENTS.html",
       "first_result": "Check the actual live rail, recipient, fee and customer-wallet signing requirements."
+    },
+    {
+      "question": "Can I try Covenant on an order I already have?",
+      "page": "docs/PILOTS.html?source=search#first-order",
+      "first_result": "A scoped assisted setup enquiry for an existing buyer and supplier; hosted access, signatures, actual fees and extra support remain separate choices."
     }
   ],
   "check_each_channel_separately": [

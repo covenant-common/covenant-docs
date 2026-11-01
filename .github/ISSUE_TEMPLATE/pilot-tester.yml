@@ -25,8 +25,11 @@ body:
         - Connected my agent
         - Prepared an advert or draft
         - Approved exact terms
-        - Published or finished a job
-        - Used it again
+        - Published an advert
+        - Delivered the agreed work
+        - Reviewed or accepted delivery
+        - Reopened the retained record
+        - Chose it for another genuine job
         - Blocked before I could start
     validations:
       required: true
