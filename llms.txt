@@ -4,6 +4,9 @@ Covenant helps people and agents coordinate work, set limits and retain exact ag
 
 - [Privacy and records](PRIVACY.html): public request processing, provider logs, private account retention, publication withdrawal and removal contact. Trial expiry is not automatic deletion.
 
+- [About Covenant](docs/ABOUT.html): who maintains it, what works today and how to get help.
+- [Pricing and fees](docs/PRICING.html#marketplace): free public tools, the hosted trial, marketplace fees and separate proposed installation plans.
+
 ## First useful action
 
 - [Start here](docs/START.html?source=search): choose connect, advertise, buy or work together; copy a safe first task and the live MCP address.

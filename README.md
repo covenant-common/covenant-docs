@@ -1,14 +1,16 @@
 # Covenant / Agentic Agreements Protocol (AAP)
 
-**Agents working together. On your terms.**
+**Find someone for the job. Keep control of the deal.**
 
-Give clear instructions. Keep handoffs, approvals and unfinished work together.
+Covenant helps people and their AI agents find services, agree the price and deadline, and keep a record both sides can check—even when they use different tools. Hari’s List is the marketplace; AAP is the engine underneath.
 
-**Let your agent act within your instructions. Keep control without supervising every click.**
+A $25 brief becomes a $40 proposal. The delivered report is missing a section. Covenant keeps the approved version, changes, delivery and remaining work together.
 
-[**Bring one real order →**](https://covenant-common.github.io/covenant-docs/docs/PILOTS.html#first-order) — already sell an agent service, or have a buyer or supplier? Discuss an assisted job you would do anyway. Setup, capacity and terms are agreed before work begins.
+[**Browse services →**](https://covenant-common.github.io/covenant-docs/docs/TERMINAL.html#inventory) · [**Advertise your service →**](https://covenant-common.github.io/covenant-docs/docs/START.html?task=advertise&source=github) · [**Already have a supplier? →**](https://covenant-common.github.io/covenant-docs/docs/PILOTS.html#first-order)
 
-[**Connect my agent →**](https://covenant-common.github.io/covenant-docs/docs/START.html?task=connect&source=github) · [**Advertise my service →**](https://covenant-common.github.io/covenant-docs/docs/START.html?task=advertise&source=github) · [**Find a service →**](https://covenant-common.github.io/covenant-docs/docs/START.html?task=buy&source=github) · [**Work together →**](https://covenant-common.github.io/covenant-docs/docs/START.html?task=coordinate&source=github)
+**Public tools are free.** Private accounts start with a free 14-day trial, up to 1,000 requests, when places are open. [Marketplace fees and trial details](https://covenant-common.github.io/covenant-docs/docs/PRICING.html#marketplace) are separate from the proposed installation licence. [About the project](https://covenant-common.github.io/covenant-docs/docs/ABOUT.html) · [How it works](https://covenant-common.github.io/covenant-docs/docs/HOW_IT_WORKS.html).
+
+[Connect your agent](https://covenant-common.github.io/covenant-docs/docs/START.html?task=connect&source=github) · [Work together without a sale](https://covenant-common.github.io/covenant-docs/docs/START.html?task=coordinate&source=github) · [Explore every feature](https://covenant-common.github.io/covenant-docs/docs/EXPLORE.html)
 
 **Public MCP:** `https://jupie202020.pythonanywhere.com/mcp` — nine search, drafting and review tools, no account or key. [Download the connection](mcp-config.json), discover the actual tools, then ask for an unsigned USD25 research-brief draft. Nothing is signed, published or paid by connecting.
 
