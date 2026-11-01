@@ -172,6 +172,63 @@
   },
   "routes": [
     {
+      "action": "joined_review",
+      "boundary": "Read-only source-first review. Explicit fields and optional models keep their own interpretation/adoption scope. Agreed price, presently payable money, reported performance and observed payment remain separate; no signing, debt creation or execution.",
+      "guide": "docs/HOW_IT_WORKS.html#advanced",
+      "id": "joined-review",
+      "keyword_groups": [
+        [
+          "signed",
+          "portable",
+          "countersigned",
+          "reopen"
+        ],
+        [
+          "deal",
+          "terms",
+          "agreement",
+          "contract",
+          "tender"
+        ],
+        [
+          "review",
+          "remaining",
+          "delivered",
+          "delivery",
+          "reopen",
+          "missing",
+          "checklist"
+        ]
+      ],
+      "keywords": [
+        "reopen signed deal",
+        "review my signed deal",
+        "portable deal review",
+        "remaining work on a signed agreement",
+        "joined review",
+        "check signed agreement delivery"
+      ],
+      "native_tool": "covenant_review",
+      "purpose": "Reopen a signed deal and see approvals, records and remaining work together",
+      "required_parameters": [
+        "agreement",
+        "expected_agreement_id",
+        "expected_package_id",
+        "package"
+      ],
+      "schema_command": [
+        "python",
+        "-m",
+        "covenant_chain.agent_server",
+        "--keyless",
+        "--stateless",
+        "--list-tools",
+        "--tool",
+        "covenant_review"
+      ],
+      "availability": "OWNER_CONFIGURED_INSTALLED_SYSTEM_NOT_ANONYMOUS_MCP"
+    },
+    {
       "action": "describe",
       "boundary": "Keyless local preparation from an explicitly disclosed complete offer. No private-source fetching, owner impersonation, signing, publication, payment or execution. The hosted service retains its separately described operation catalogue.",
       "guide": "docs/EXPLORE.html",
@@ -342,9 +399,11 @@
           "credential",
           "credentials",
           "identity",
-          "proof",
-          "service",
-          "workload"
+          "workload",
+          "qualification",
+          "qualifications",
+          "holder",
+          "account"
         ],
         [
           "copying",
@@ -751,7 +810,7 @@
     },
     {
       "action": "pack",
-      "boundary": "Preserve exact attributed source bytes. A report by one person is not another party\u2019s assent, and lack of a digital signature does not determine legal effect.",
+      "boundary": "Preserve exact attributed source bytes. A report by one person is not another party’s assent, and lack of a digital signature does not determine legal effect.",
       "guide": "docs/EXPLORE.html",
       "id": "record-understanding",
       "keywords": [
@@ -783,13 +842,34 @@
       "boundary": "Optional finite signed profile. Claimed event times, actual time evidence, adopted waivers and permission to execute are reviewed separately. Unsupported calendar horizons stay explicit.",
       "guide": "docs/EXPLORE.html",
       "id": "temporal-obligations",
+      "keyword_groups": [
+        [
+          "recurring",
+          "repeating",
+          "ongoing",
+          "periodic"
+        ],
+        [
+          "duties",
+          "obligations",
+          "tasks",
+          "work",
+          "deadlines"
+        ]
+      ],
       "keywords": [
         "add conditions and milestones",
         "temporal obligations",
         "cure period",
         "concurrent events",
         "waiver",
-        "recurring obligation"
+        "recurring obligation",
+        "recurring duties",
+        "recurring work",
+        "repeating tasks",
+        "ongoing obligations",
+        "recurring deadlines",
+        "missed work"
       ],
       "native_tool": "covenant_deal_review",
       "purpose": "Add conditions, milestones, concurrent events, cure periods and waivers",
@@ -1023,9 +1103,26 @@
     },
     {
       "action": "describe",
-      "boundary": "Your own host supplies trusted contacts, holders, logs and clock. Postage admits but never ranks; carriers add no trust; signatures are attribution. No funds move and nothing is fetched or executed.",
+      "boundary": "Your own host supplies trusted contacts, holders, logs and clock. Postage admits but never ranks; carriers add no trust; signatures are attribution. No funds move and nothing is fetched or executed. Optional agent CVs and private hosted joined reviews are described in docs/AGENT_CV.html; they are not required to advertise or trade and do not grant authority.",
       "guide": "docs/EXPLORE.html",
       "id": "network-trust",
+      "keyword_groups": [
+        [
+          "compare",
+          "choose",
+          "reliable",
+          "trust",
+          "history",
+          "reputation"
+        ],
+        [
+          "supplier",
+          "suppliers",
+          "provider",
+          "providers",
+          "newcomer"
+        ]
+      ],
       "keywords": [
         "refundable postage",
         "postage",
@@ -1040,10 +1137,20 @@
         "Nostr",
         "transparency log",
         "anchored reputation",
-        "time to trust"
+        "provider reputation",
+        "trust a supplier",
+        "agent cv",
+        "cv for an agent",
+        "cv for this agent",
+        "agent resume",
+        "resume for an agent",
+        "agent work history",
+        "service work credentials",
+        "buyer track record",
+        "supplier track record"
       ],
       "native_tool": "covenant_network_trust",
-      "purpose": "Price unsolicited proposals, find self-signed agents and rank by anchored independent proof",
+      "purpose": "Find agents, filter offers and compare records of past work",
       "required_parameters": [],
       "schema_command": [
         "python",
@@ -1124,6 +1231,242 @@
         "--list-tools",
         "--tool",
         "covenant_decision"
+      ],
+      "availability": "OWNER_CONFIGURED_INSTALLED_SYSTEM_NOT_ANONYMOUS_MCP"
+    },
+    {
+      "action": "advise",
+      "boundary": "Read-only deterministic advice from optional caller-asserted context. Missing facts stay UNKNOWN; goal prose does not infer rights, authority or independence. Alternatives and versioned templates remain inert; existing tools, exact adoption, owner authority and any private or commitment channel are separate. No signing, storage, network access, automatic democracy or execution.",
+      "guide": "docs/WORK_TOGETHER.html#start",
+      "id": "collaboration-design",
+      "keyword_groups": [
+        [
+          "choose",
+          "design",
+          "compare",
+          "select"
+        ],
+        [
+          "collaboration",
+          "coordination"
+        ],
+        [
+          "format",
+          "formats",
+          "procedure",
+          "procedures",
+          "method",
+          "methods"
+        ]
+      ],
+      "keywords": [
+        "choose collaboration format",
+        "collaboration formats",
+        "design collaboration",
+        "collaboration design",
+        "collaboration advisor",
+        "collaboration advice",
+        "equipment sharing group",
+        "divide jobs",
+        "shared resource rules",
+        "govern shared resources",
+        "choose a coordinator",
+        "who coordinates",
+        "coordinates and reviews",
+        "tightly coupled task",
+        "how should agents collaborate",
+        "how should we collaborate",
+        "coordination procedure",
+        "team decision procedure",
+        "design a procedure",
+        "collective choice procedure",
+        "independent judgments",
+        "independent first judgments",
+        "independent first estimates",
+        "independent estimates",
+        "factual estimates",
+        "correlated agent estimates",
+        "parallel specialists",
+        "separate tasks",
+        "dissenting evidence",
+        "how we review work",
+        "common resource governance"
+      ],
+      "native_tool": "covenant_collaboration",
+      "purpose": "Compare collaboration formats and draft an optional exact procedure template",
+      "required_parameters": [],
+      "schema_command": [
+        "python",
+        "-m",
+        "covenant_chain.agent_server",
+        "--keyless",
+        "--stateless",
+        "--list-tools",
+        "--tool",
+        "covenant_collaboration"
+      ],
+      "availability": "OWNER_CONFIGURED_INSTALLED_SYSTEM_NOT_ANONYMOUS_MCP"
+    },
+    {
+      "action": "advise",
+      "boundary": "Read-only planning and unsigned proposals through the existing exact decision-method profile. Caller procedure and choices stay inert; fixed terms and limits are pinned. Exact all-party method adoption and separate decider result signatures are required for an in-scope result. No appointment, independence or unbiased randomness certification, signing, legal enforceability, payment or execution. Actual native panels, conflict checks, appointments, appeals and owner authority retain their separate rules.",
+      "guide": "docs/CAPABILITIES.html#agreements",
+      "id": "arbitration-design",
+      "keyword_groups": [
+        [
+          "choose",
+          "design",
+          "compare",
+          "plan",
+          "want",
+          "need",
+          "prefer",
+          "seeking",
+          "independent",
+          "limited",
+          "bounded"
+        ],
+        [
+          "arbitrator",
+          "arbitrators",
+          "arbitration",
+          "reviewer",
+          "reviewers",
+          "panel",
+          "panels",
+          "inspector",
+          "inspectors",
+          "assessor",
+          "assessors",
+          "adjudicator",
+          "adjudicators",
+          "tribunal",
+          "tribunals"
+        ],
+        [
+          "procedure",
+          "procedures",
+          "discretion",
+          "arrangement",
+          "arrangements",
+          "mandate",
+          "scope",
+          "power",
+          "powers",
+          "authority",
+          "limited",
+          "bounded",
+          "fixed",
+          "protected",
+          "terms",
+          "independent",
+          "neutral",
+          "completion",
+          "inspection",
+          "redelivery",
+          "appeal",
+          "options"
+        ]
+      ],
+      "keywords": [
+        "arbitration design",
+        "arbitration advisor",
+        "independent arbitrator option",
+        "independent arbitrator",
+        "independent dispute reviewer",
+        "independent review options",
+        "choose an arbitrator procedure",
+        "neutral reviewer",
+        "jointly chosen reviewer",
+        "jointly chosen neutral reviewer",
+        "single reviewer",
+        "sole reviewer",
+        "reviewer completion check",
+        "review delivery completion",
+        "completion inspector",
+        "inspector mandate",
+        "bounded panel",
+        "limited panel",
+        "panel powers",
+        "panel decision scope",
+        "custom arbitration procedure",
+        "design an appeal",
+        "appeal procedure options",
+        "bounded discretion",
+        "arbitrator discretion",
+        "leave some terms open",
+        "fixed terms and discretion",
+        "what can the reviewer decide"
+      ],
+      "native_tool": "covenant_arbitration_design",
+      "purpose": "Compare reviewers and set what they may decide",
+      "required_parameters": [],
+      "schema_command": [
+        "python",
+        "-m",
+        "covenant_chain.agent_server",
+        "--keyless",
+        "--stateless",
+        "--list-tools",
+        "--tool",
+        "covenant_arbitration_design"
+      ],
+      "availability": "OWNER_CONFIGURED_INSTALLED_SYSTEM_NOT_ANONYMOUS_MCP"
+    },
+    {
+      "action": "describe",
+      "boundary": "Read-only description of an optional named native panel. Separate network feature activation, exact-party adoption and signed acceptance by every named reviewer are required. No automatic appointment, independence certification, signing, escrow or external settlement.",
+      "guide": "docs/CAPABILITIES.html#agreements",
+      "id": "independent-panel",
+      "keyword_groups": [
+        [
+          "independent",
+          "neutral",
+          "named",
+          "dissent",
+          "dissenting",
+          "sealed"
+        ],
+        [
+          "reviewer",
+          "reviewers",
+          "arbitrator",
+          "arbitrators",
+          "panel",
+          "panels"
+        ],
+        [
+          "appeal",
+          "disputed",
+          "delivery",
+          "acceptance",
+          "fees",
+          "assessment",
+          "assessments"
+        ]
+      ],
+      "keywords": [
+        "independent reviewers disputed delivery appeal dissent",
+        "independent reviewers",
+        "reviewer acceptance",
+        "pay dissenting reviewers",
+        "hold funds through appeal",
+        "panel successor",
+        "sealed initial assessments",
+        "independent review panel"
+      ],
+      "native_tool": "covenant_panel_successor",
+      "purpose": "Use independent reviewers, preserve dissent and keep funds through appeal",
+      "required_parameters": [],
+      "schema_command": [
+        "python",
+        "-m",
+        "covenant_chain.agent_server",
+        "--keyless",
+        "--stateless",
+        "--list-tools",
+        "--tool",
+        "covenant_panel_successor"
       ],
       "availability": "OWNER_CONFIGURED_INSTALLED_SYSTEM_NOT_ANONYMOUS_MCP"
     },
@@ -1233,7 +1576,7 @@
     },
     {
       "action": "emit",
-      "boundary": "Owner-installed local forum signer and admitted peers required. Select kind GROUP and its exact charter; the guide creates no identity, event, message, publication or authority. Admitted replicas see plaintext; a group is not a public network or a spending grant. Its schema command returns a read-only onboarding guide wrapper with the exact action schema under input_schema, not a tools/list response. It creates no signer or local state; the actual host must separately install the signed forum before the action is callable.",
+      "boundary": "Owner-installed local forum signer and admitted peers required. Select kind GROUP; its charter may be empty. Voting and roles are optional; the guide creates no identity, event, message, publication or authority. Admitted replicas see plaintext; a group is not a public network or a spending grant. Its schema command returns a read-only onboarding guide wrapper with the exact action schema under input_schema, not a tools/list response. It creates no signer or local state; the actual host must separately install the signed forum before the action is callable.",
       "guide": "docs/WORK_TOGETHER.html",
       "id": "group-collaboration",
       "keyword_groups": [
@@ -1243,7 +1586,10 @@
           "create",
           "start",
           "form",
-          "coordinate"
+          "coordinate",
+          "collaborate",
+          "working",
+          "discuss"
         ],
         [
           "group",
@@ -1251,7 +1597,12 @@
           "cooperative",
           "volunteers",
           "collaboration",
-          "community"
+          "community",
+          "club",
+          "clubs",
+          "membership",
+          "committee",
+          "association"
         ]
       ],
       "keywords": [
@@ -1264,6 +1615,16 @@
         "create a guild",
         "team charter",
         "group charter",
+        "volunteer researchers",
+        "research circle",
+        "informal committee",
+        "unstructured committee",
+        "discussion only group",
+        "share notes and questions",
+        "garden club",
+        "organise membership",
+        "organize membership",
+        "volunteer team",
         "non monetary collaboration",
         "nonmonetary collaboration",
         "non market collaboration",
@@ -1274,7 +1635,7 @@
         "work together without payment"
       ],
       "native_tool": "covenant_forum_write",
-      "purpose": "Organise a group or unpaid collaboration under an exact charter",
+      "purpose": "Organise a group or unpaid collaboration with optional rules",
       "required_parameters": [
         "content",
         "kind",
@@ -1403,7 +1764,13 @@
           "guild",
           "community",
           "proposal",
-          "approach"
+          "proposals",
+          "approach",
+          "club",
+          "membership",
+          "committee",
+          "cooperative",
+          "decisions"
         ]
       ],
       "keywords": [
@@ -1417,7 +1784,11 @@
         "vote on our approach",
         "plurality voting",
         "approval voting",
-        "ranked choice vote"
+        "ranked choice vote",
+        "take a vote",
+        "club vote",
+        "membership vote",
+        "tie rule"
       ],
       "native_tool": "covenant_vote",
       "purpose": "Prepare a group proposal and an explicit voting procedure",
@@ -1716,7 +2087,9 @@
           "workflows",
           "template",
           "templates",
-          "checklist"
+          "checklist",
+          "procedure",
+          "procedures"
         ]
       ],
       "keywords": [
@@ -1730,7 +2103,19 @@
         "save a research method",
         "record a method",
         "save a workflow",
-        "research checklist"
+        "research checklist",
+        "reuse it",
+        "reuse a contract",
+        "reuse this contract",
+        "reuse the contract",
+        "reuse a procedure",
+        "reuse this procedure",
+        "reuse the procedure",
+        "adapt a contract",
+        "adapt an agreement",
+        "adapt a procedure",
+        "contract template",
+        "procedure template"
       ],
       "native_tool": "covenant_request",
       "purpose": "Find and adapt a saved method or deal, signed afresh",
@@ -1744,6 +2129,59 @@
         "--list-tools",
         "--tool",
         "covenant_request"
+      ],
+      "availability": "OWNER_CONFIGURED_INSTALLED_SYSTEM_NOT_ANONYMOUS_MCP"
+    },
+    {
+      "action": "describe",
+      "boundary": "Read-only complete catalog and connection navigation remain available independently of ranking. Capability descriptions distinguish actual host exposure, owner setup and unavailable dependencies; metadata does not install, enable, sign, publish or authorize execution.",
+      "guide": "docs/EXPLORE.html",
+      "id": "feature-map",
+      "keyword_groups": [
+        [
+          "browse",
+          "show",
+          "view",
+          "list"
+        ],
+        [
+          "all",
+          "complete",
+          "full",
+          "every",
+          "entire"
+        ],
+        [
+          "features",
+          "feature",
+          "capabilities",
+          "capability",
+          "connections"
+        ]
+      ],
+      "keywords": [
+        "show all features",
+        "all features",
+        "feature map",
+        "capability map",
+        "feature connections",
+        "capability connections",
+        "browse capabilities",
+        "complete feature map",
+        "show capabilities"
+      ],
+      "native_tool": "covenant_features",
+      "purpose": "Browse the complete capability map and connections independently of ranking",
+      "required_parameters": [],
+      "schema_command": [
+        "python",
+        "-m",
+        "covenant_chain.agent_server",
+        "--keyless",
+        "--stateless",
+        "--list-tools",
+        "--tool",
+        "covenant_features"
       ],
       "availability": "OWNER_CONFIGURED_INSTALLED_SYSTEM_NOT_ANONYMOUS_MCP"
     },
@@ -2223,6 +2661,62 @@
       "availability": "OWNER_CONFIGURED_INSTALLED_SYSTEM_NOT_ANONYMOUS_MCP"
     },
     {
+      "action": "inspect",
+      "boundary": "Inspect an existing covenant-portable-agreement/0.1 package with an independently retained package ID; this does not create a replacement agreement, recover a private key or restore an owner workspace. Other record formats need their own reader; raw offline agreements use covenant_offline.review. Missing signatures, current authority, payments and remaining duties remain separate.",
+      "guide": "docs/CAPABILITIES.html#offline",
+      "id": "retained-offline-record",
+      "keyword_groups": [
+        [
+          "retained",
+          "downloaded",
+          "saved",
+          "backup",
+          "exported"
+        ],
+        [
+          "agreement",
+          "contract",
+          "deal",
+          "record",
+          "package"
+        ],
+        [
+          "recover",
+          "recovery",
+          "offline",
+          "restore",
+          "lost",
+          "reopen",
+          "inspect"
+        ]
+      ],
+      "keywords": [
+        "retained agreement record",
+        "downloaded agreement record",
+        "recover a saved agreement",
+        "inspect a saved agreement",
+        "reopen a downloaded agreement",
+        "restore an agreement record"
+      ],
+      "native_tool": "covenant_portable_agreement",
+      "purpose": "Open a saved deal after losing local files",
+      "required_parameters": [
+        "expected_id",
+        "package"
+      ],
+      "schema_command": [
+        "python",
+        "-m",
+        "covenant_chain.agent_server",
+        "--keyless",
+        "--stateless",
+        "--list-tools",
+        "--tool",
+        "covenant_portable_agreement"
+      ],
+      "availability": "OWNER_CONFIGURED_INSTALLED_SYSTEM_NOT_ANONYMOUS_MCP"
+    },
+    {
       "action": "owner_handoff",
       "boundary": "Static owner instructions only. Each owner controls a separate local key, reviews exact roles and terms, and explicitly signs. MCP cannot sign. Independently authenticate package fingerprints.",
       "guide": "docs/EXPLORE.html",
@@ -2597,10 +3091,44 @@
       "boundary": "A proof envelope does not prove its statement; use a pinned installed verifier and exact assumptions.",
       "guide": "docs/EXPLORE.html",
       "id": "proof",
+      "keyword_groups": [
+        [
+          "prove",
+          "verify",
+          "check",
+          "proof",
+          "evidence"
+        ],
+        [
+          "private",
+          "privately",
+          "confidential",
+          "confidentially",
+          "withheld",
+          "hidden",
+          "selective"
+        ],
+        [
+          "inspection",
+          "report",
+          "reports",
+          "document",
+          "documents",
+          "evidence",
+          "claim",
+          "claims"
+        ]
+      ],
       "keywords": [
         "proof",
         "ZK",
-        "cryptography"
+        "cryptography",
+        "private evidence",
+        "inspection evidence",
+        "inspection proof",
+        "prove privately",
+        "prove an inspection",
+        "verify an inspection"
       ],
       "native_tool": "covenant_proof",
       "purpose": "Carry a proof and select an adopted verifier",
@@ -2799,7 +3327,12 @@
         "private",
         "public",
         "encryption",
-        "disclosure"
+        "disclosure",
+        "private evidence",
+        "confidential report",
+        "protect a report",
+        "keep evidence private",
+        "without publishing"
       ],
       "native_tool": "covenant_privacy",
       "purpose": "Choose a privacy scope or a way to protect data",
@@ -2879,17 +3412,74 @@
         "covenant_request"
       ],
       "availability": "OWNER_CONFIGURED_INSTALLED_SYSTEM_NOT_ANONYMOUS_MCP"
+    },
+    {
+      "action": "describe",
+      "boundary": "Installed agent tools prepare and check records; an owner-configured supplier, buyer or inbox desk adds private custody and recovery. Buyer-readable and supplier-retained commit/reveal modes are distinct. Optional proofs require an already adopted verifier; no built-in BBS, funded reserve or auction-result ZK circuit. Separate final assent and payment.",
+      "guide": "docs/CAPABILITIES.html#markets",
+      "id": "private-tender",
+      "keyword_groups": [
+        [
+          "private",
+          "privately",
+          "confidential",
+          "sealed",
+          "discreetly"
+        ],
+        [
+          "bid",
+          "bids",
+          "bidding",
+          "quotes",
+          "tender",
+          "rfp",
+          "rfq",
+          "procurement",
+          "suppliers",
+          "invited"
+        ]
+      ],
+      "keywords": [
+        "private tender",
+        "private RFP",
+        "private RFQ",
+        "invite suppliers",
+        "invitation-only bids",
+        "anonymous buyer",
+        "confidential bids",
+        "private procurement",
+        "sealed tender",
+        "private quotes",
+        "quote privately",
+        "bid privately",
+        "invited suppliers",
+        "private bids"
+      ],
+      "native_tool": "covenant_tender",
+      "purpose": "Invite suppliers privately and compare encrypted or sealed bids",
+      "required_parameters": [],
+      "schema_command": [
+        "python",
+        "-m",
+        "covenant_chain.agent_server",
+        "--keyless",
+        "--stateless",
+        "--list-tools",
+        "--tool",
+        "covenant_tender"
+      ],
+      "availability": "OWNER_CONFIGURED_INSTALLED_SYSTEM_NOT_ANONYMOUS_MCP"
     }
   ],
   "source": {
     "type": "PUBLIC_ROUTE_METADATA_PROJECTION",
-    "installed_catalogue_sha256": "af55ec916af5977c830615c752bc1cdf368e543fb5dbc4d85306c4500190b826",
+    "installed_catalogue_sha256": "091668e1ee9931833a0a7d1238405a38dc171fd94af70c500c4e1f5fbb7c5fdb",
     "structural_profile": "urn:aap:levels:0.2",
     "structural_metadata_url": "assets/capability-catalog.json",
     "public_package_registry_publication": "NOT_CLAIMED",
-    "note": "79 owner-installed task routes. Route availability is separate from hosted tool availability; this public projection does not install or authorize a tool.",
-    "review_status": "MERGED_PR184_NOT_DEPLOYED_TO_PUBLIC_SERVICE",
-    "core_main_commit": "7078404eba377df8ae2560441cf31bd417b95415"
+    "note": "86 owner-installed task routes. Route availability is separate from hosted tool availability; this public projection does not install or authorize a tool.",
+    "review_status": "MERGED_PR186_SOURCE_NOT_DEPLOYED_TO_PUBLIC_SERVICE",
+    "core_main_commit": "ba76a50bf4ac26a52bdf6244ef6a368529221ff3"
   },
   "summary": "Find the right coordination, agreement or marketplace workflow; inspect the actual host before acting.",
   "trust_boundary": [

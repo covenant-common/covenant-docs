@@ -17,7 +17,8 @@
     covenant_forum_write: ['forum forums discussion discussions', 'group groups team teams community', 'collaborate collaboration', 'research discussion', 'write shared messages'],
     covenant_vote: ['vote votes voting ballot ballots', 'group groups team teams decision decisions'],
     covenant_consensus_vote: ['vote votes voting ballot ballots', 'group groups consensus decision decisions'],
-    covenant_panel_vote: ['vote votes voting ballot ballots', 'review panel decision decisions'],
+    covenant_panel_vote: ['vote votes voting ballot ballots', 'review panel decision decisions', 'review panel panels votes'],
+    covenant_panel_successor: ['replace review panel panels successor replacement continuity', 'continue panel review'],
     covenant_decision: ['group decision decisions', 'choose compare alternatives'],
     covenant_invite: ['invite invitation invitations', 'join group groups team teams', 'collaborate collaboration'],
     covenant_obligations: ['coordinate coordination coordinating work', 'handoff handoffs', 'responsibility responsibilities', 'remaining unfinished work tasks progress'],
@@ -29,7 +30,7 @@
     inspect_cooperation: ['inspect cooperation plan', 'inspect shared work plan'],
     commit_cooperation: ['adopt cooperation plan', 'agree shared work plan'],
     resume_cooperation: ['resume cooperation plan', 'continue shared work plan'],
-    covenant_network_trust: ['compare supplier suppliers provider providers', 'contextual reputation evidence', 'trusted contacts independent outcomes'],
+    covenant_network_trust: ['compare supplier suppliers provider providers', 'contextual reputation evidence', 'trusted contacts independent outcomes', 'agent cv cvs curriculum vitae contextual qualifications', 'inspect optional supplier evidence'],
     covenant_arbitration_design: ['choose independent reviewer reviewers', 'design dispute review procedure', 'arbitrator panel panels'],
     covenant_evidence: ['research evidence', 'delivery evidence', 'inspect supporting records'],
     covenant_evidence_export: ['handoff handoffs', 'export share evidence records'],
@@ -44,13 +45,13 @@
     covenant_escrow: ['payment payments pay funds', 'escrow custody terms'],
     covenant_settle: ['payment payments pay settlement settle'],
     covenant_settlement: ['payment payments pay settlement settle'],
-    covenant_stripe: ['payment payments pay stripe gateway'],
+    covenant_stripe: ['payment payments pay stripe gateway', 'owner limit limits spending budget gateway per order allowance'],
     covenant_commerce: ['payment payments commerce checkout'],
     covenant_exchange: ['payment payments exchange barter reciprocal trade'],
     covenant_atr_rail: ['payment payments rail rails transfer'],
     covenant_offline_trade: ['offline payment payments trade'],
-    covenant_principal: ['delegation delegate delegated owner principal'],
-    covenant_representation: ['delegation delegate delegated represent representation'],
+    covenant_principal: ['delegation delegate delegated owner principal', 'owner limit limits spending budget allowance approval permissions expiry', 'set give agent spending limit limits'],
+    covenant_representation: ['delegation delegate delegated represent representation', 'owner limit limits delegated approval scope spending permission permissions'],
     covenant_credential: ['credential credentials qualification qualifications'],
     covenant_identity: ['identity identities identify'],
     covenant_privacy: ['private privacy confidential disclosure'],
@@ -64,6 +65,8 @@
     covenant_marketplace_read: ['market markets marketplace services offers search'],
     covenant_marketplace_publish: ['market markets marketplace services offers publish'],
     covenant_hire: ['hire hiring supplier suppliers services'],
+    covenant_tender: ['tender tenders procurement request requests work requirements', 'private procurement compare proposals suppliers'],
+    covenant_tender_write: ['tender tenders procurement prepare request work', 'invite proposals submit proposal proposals'],
     covenant_arbitration: ['dispute disputes arbitration remedy remedies'],
     covenant_dispute_forum: ['dispute disputes discussion discussions forum'],
     covenant_connector: ['connect integration integrations adapter adapters'],
@@ -140,7 +143,7 @@
         const item = doc.createElement('li');
         const label = familyLabel(tool.name);
         appendText(doc, item, 'strong', label.charAt(0).toUpperCase() + label.slice(1));
-        appendText(doc, item, 'span', tool.maturity + ' · ' + (tool.core ? 'core interface' : 'extended interface'), 'explore-readiness');
+        appendText(doc, item, 'span', 'installed preview · ' + tool.maturity + ' · ' + (tool.core ? 'core interface' : 'extended interface'), 'explore-readiness');
         if (tool.matchReason) appendText(doc, item, 'p', tool.matchReason, 'explore-match');
         const details = doc.createElement('details');
         appendText(doc, details, 'summary', 'Exact tool family and placement');

@@ -417,3 +417,209 @@ test('HTML form has every schema field, explicit privacy/recovery notices and a 
   for (const field of pilot.fields) assert.ok(html.includes('name="' + field + '"'), field);
   for (const notice of ['unencrypted JSON', 'no cloud sync', 'personal data', 'not establish', 'UNKNOWN', '<noscript>', 'Print saved scorecard and records']) assert.ok(html.includes(notice), notice);
 });
+
+function buyerAlternative(label, overrides = {}) {
+  return Object.assign(pilot.defaultBuyerAlternative(), { label, acceptance: 'meets', basis: 'Buyer checked the proposed scope',
+    delivery: 4, quoteMinor: 1000, feesMinor: 25, reviewMinor: 100, coordinationMinor: 50, repairLowMinor: 0, repairHighMinor: 100 }, overrides);
+}
+function buyerComparison(alternatives) {
+  return Object.assign(pilot.emptyBuyerComparison(), { criteria: 'One short report with primary-source links; buyer checks accuracy.', capMinor: 1500, maxDelivery: 8, alternatives });
+}
+
+test('whole-job comparison exposes a low quote with higher declared cost, cap risk and faster delivery without choosing a winner', () => {
+  const plan = buyerComparison([
+    buyerAlternative('Cheap quote', { quoteMinor: 6000, feesMinor: 500, reviewMinor: 2000, coordinationMinor: 1500, repairLowMinor: 1000, repairHighMinor: 4000, delivery: 4 }),
+    buyerAlternative('Higher quote', { quoteMinor: 8000, feesMinor: 500, reviewMinor: 500, coordinationMinor: 500, repairLowMinor: 0, repairHighMinor: 1000, delivery: 8 })
+  ]); plan.capMinor = 12000;
+  const result = pilot.compareBuyerAlternatives(plan);
+  assert.deepEqual(result.rows.map(row => [row.cost.lowMinor, row.cost.highMinor, row.budget]), [[11000, 14000, 'range-crosses-cap'], [9500, 10500, 'within-declared-range']]);
+  assert.equal(result.rows[0].check, 'unresolved');
+  assert.equal(result.pairs[0].cost, 'right-lower-throughout');
+  assert.equal(result.pairs[0].delivery, 'left-sooner');
+  assert.equal(result.winner, null);
+  assert.equal(plan.capMinor, 12000); // A hard cap is not relaxed to fit an alternative.
+});
+
+test('unknown components stay unknown, while known costs alone can disprove budget feasibility', () => {
+  for (const field of pilot.buyerCostFields) {
+    const plan = buyerComparison([buyerAlternative('Partial', { [field]: null })]);
+    const row = pilot.compareBuyerAlternatives(plan).rows[0];
+    assert.equal(row.cost.lowMinor, null, field); assert.equal(row.cost.highMinor, null, field);
+    assert.equal(row.budget, 'unknown', field); assert.equal(row.check, 'unresolved', field);
+    assert.deepEqual(row.cost.missing, [field]);
+  }
+  const plan = buyerComparison([buyerAlternative('Already over', { quoteMinor: 1501, reviewMinor: null, coordinationMinor: null, repairHighMinor: null })]);
+  const row = pilot.compareBuyerAlternatives(plan).rows[0];
+  assert.equal(row.budget, 'over-cap'); assert.equal(row.cost.highMinor, null);
+  assert.equal(row.check, 'outside-declared-checks');
+  plan.alternatives = [buyerAlternative('Confirmed zero', Object.fromEntries(pilot.buyerCostFields.map(key => [key, 0])))]; plan.capMinor = 0;
+  assert.equal(pilot.compareBuyerAlternatives(plan).rows[0].budget, 'within-declared-range');
+  assert.equal(pilot.compareBuyerAlternatives(plan).rows[0].cost.highMinor, 0);
+});
+
+test('separate assets, networks and delivery units never acquire an invented conversion or cap approval', () => {
+  for (const currency of ['GBP', 'EUR', 'USDC_BASE', 'USDC_ETHEREUM']) {
+    const plan = buyerComparison([buyerAlternative('Dollar quote'), buyerAlternative('Other quote', { currency, timeUnit: 'business-days', delivery: 1 })]);
+    const result = pilot.compareBuyerAlternatives(plan);
+    assert.equal(result.pairs[0].cost, 'different-assets'); assert.equal(result.pairs[0].delivery, 'different-units');
+    assert.equal(result.rows[1].budget, 'different-asset'); assert.equal(result.rows[1].delivery, 'different-unit');
+    assert.equal(result.rows[1].check, 'unresolved');
+  }
+  const plan = buyerComparison([buyerAlternative('Base', { currency: 'USDC_BASE' }), buyerAlternative('Ethereum', { currency: 'USDC_ETHEREUM' })]);
+  assert.equal(pilot.compareBuyerAlternatives(plan).pairs[0].cost, 'different-assets');
+});
+
+test('input order cannot select a winner or change pairwise comparisons; overlapping and touching ranges remain unresolved cost orders', () => {
+  const rows = [buyerAlternative('Charlie', { repairHighMinor: 150 }), buyerAlternative('Alpha', { quoteMinor: 1100, repairHighMinor: 200 }), buyerAlternative('Beta', { quoteMinor: 1200, repairHighMinor: 250 })];
+  const expected = pilot.compareBuyerAlternatives(buyerComparison(rows));
+  for (const permutation of [[0, 2, 1], [1, 0, 2], [1, 2, 0], [2, 0, 1], [2, 1, 0]]) {
+    assert.deepEqual(pilot.compareBuyerAlternatives(buyerComparison(permutation.map(index => rows[index]))), expected);
+  }
+  const touching = buyerComparison([buyerAlternative('First', { repairHighMinor: 100 }), buyerAlternative('Second', { quoteMinor: 1100, repairHighMinor: 0 })]);
+  assert.equal(pilot.compareBuyerAlternatives(touching).pairs[0].cost, 'overlapping-ranges');
+});
+
+test('acceptance evidence and hard delivery failures stay visible regardless of cost', () => {
+  const plan = buyerComparison([buyerAlternative('Wrong result', { acceptance: 'does-not-meet', quoteMinor: 0 }), buyerAlternative('Too slow', { delivery: 9 })]);
+  assert.deepEqual(pilot.compareBuyerAlternatives(plan).rows.map(row => row.check), ['outside-declared-checks', 'outside-declared-checks']);
+  plan.criteria = '';
+  assert.equal(pilot.compareBuyerAlternatives(plan).rows[0].acceptance, 'unknown');
+  const extra = buyerComparison([buyerAlternative('No invented probability')]); extra.alternatives[0].reputationProbability = 0.99;
+  assert.throws(() => pilot.compareBuyerAlternatives(extra), /Unexpected/);
+});
+
+test('maximum six-decimal amounts total exactly and invalid quantities, labels and repair bounds are refused', () => {
+  const maximum = buyerAlternative('USDC maximum', { currency: 'USDC_BASE' });
+  pilot.buyerCostFields.forEach(key => { maximum[key] = 1000000000000; });
+  const plan = buyerComparison([maximum]); plan.capCurrency = 'USDC_BASE'; plan.capMinor = 1000000000000;
+  const result = pilot.compareBuyerAlternatives(plan).rows[0];
+  assert.equal(result.cost.lowMinor, 5000000000000); assert.equal(result.cost.highMinor, 5000000000000);
+  assert.equal(pilot.formatMoney(result.cost.highMinor * 60, 'USDC_BASE'), 'USDC_BASE 5000000.000000');
+  for (const amount of [-0, -1, 0.1, NaN, Infinity, Number.MAX_SAFE_INTEGER]) {
+    const invalid = buyerComparison([buyerAlternative('Invalid', { quoteMinor: amount })]);
+    assert.throws(() => pilot.compareBuyerAlternatives(invalid), /whole number/);
+  }
+  assert.throws(() => pilot.compareBuyerAlternatives(buyerComparison([buyerAlternative('Backwards', { repairLowMinor: 101 })])), /low to high/);
+  assert.throws(() => pilot.compareBuyerAlternatives(buyerComparison([buyerAlternative('Duplicate'), buyerAlternative('DUPLICATE')])), /unique/);
+  assert.throws(() => pilot.compareBuyerAlternatives(buyerComparison(Array.from({ length: 9 }, (_, i) => buyerAlternative('Quote ' + i)))), /eight/);
+});
+
+test('selected buyer note round-trips through strict bounded import, retaining failed checks without conveying assent', () => {
+  const plan = buyerComparison([buyerAlternative('Chosen', { quoteMinor: 2000 }), buyerAlternative('Other')]);
+  const note = pilot.buyerComparisonNote(plan, 'Chosen');
+  assert.equal(note.binding, false); assert.equal(note.execution_authorized, false); assert.equal(note.alternative.label, 'Chosen');
+  assert.equal(Object.hasOwn(note, 'alternatives'), false);
+  const text = JSON.stringify(note);
+  assert.deepEqual(pilot.readBuyerComparisonNote(text), note);
+  for (const mutation of [
+    value => { value.binding = true; }, value => { value.execution_authorized = true; },
+    value => { value.alternative.private_seed = 'hidden'; }, value => { value.alternative.quoteMinor = -1; },
+    value => { value.criteria = 'private_key: hidden'; }
+  ]) { const changed = copy(note); mutation(changed); assert.throws(() => pilot.readBuyerComparisonNote(JSON.stringify(changed))); }
+  assert.throws(() => pilot.readBuyerComparisonNote(text.replace('"binding":false', '"binding":true,"binding":false')), /Duplicate JSON/);
+  assert.throws(() => pilot.readBuyerComparisonNote(text.replace('"quoteMinor":2000', '"quoteMinor":1,"quote\\u004dinor":2000')), /Duplicate JSON/);
+  assert.throws(() => pilot.readBuyerComparisonNote(' '.repeat(16385)), /16 KiB/);
+  assert.throws(() => pilot.buyerComparisonNote(plan, 'No such choice'), /Choose/);
+});
+
+test('draft handoff separates supplier consideration from buyer-only estimates and never turns an unknown price into zero', async () => {
+  const plan = buyerComparison([buyerAlternative('Draft choice', { quoteMinor: 2500, reviewMinor: 1000 })]);
+  const note = pilot.buyerComparisonNote(plan, 'Draft choice');
+  const fields = pilot.buyerComparisonDraftFields(note);
+  assert.match(fields.price, /USD 25\.00 quoted consideration/);
+  assert.doesNotMatch(fields.price, /USD 10\.00/);
+  assert.match(fields.details, /Buyer-only modeled costs, not supplier payment obligations/);
+  assert.match(fields.details, /Budget check: over-cap/);
+  assert.match(fields.details, /NOT AGREED TERMS/);
+  const structures = require('../assets/deal-structures.js');
+  const built = await structures.buildDraft({ template_id: 'fixed-deliverable', fields: { title: fields.title, buyer: 'buyer-alias', supplier: 'supplier-alias', deliverable: fields.deliverable, price: fields.price }, details: fields.details, selected_advert: null, specialist_acknowledged: false });
+  assert.equal(built.request.clauses.find(row => row.id === 'exchange').text, fields.price);
+  assert.equal(built.extension.execution_authorized, false);
+  note.alternative.quoteMinor = null;
+  assert.match(pilot.buyerComparisonDraftFields(note).price, /UNKNOWN/);
+});
+
+function buttonsWithin(node) { return node.children.flatMap(child => (child.tagName === 'BUTTON' ? [child] : []).concat(buttonsWithin(child))); }
+
+test('optional DOM comparison produces an explicitly chosen note, keeps pilot export unchanged and uses no network or storage', async () => {
+  const rig = browserRig(); rig.get('buyer-sample-comparison').click();
+  const results = rig.get('buyer-comparison-results');
+  assert.match(results.textContent, /USD 110\.00 to USD 140\.00/);
+  assert.match(results.textContent, /Repair range can exceed cap/);
+  assert.match(results.textContent, /No winner is selected/);
+  assert.equal(rig.blobs.length, 0); // Comparison alone neither exports nor chooses.
+  buttonsWithin(results).find(button => button.textContent === 'Choose SYNTHETIC Alpha for draft review').click();
+  assert.equal(rig.blobs.length, 1);
+  const note = pilot.readBuyerComparisonNote(await rig.blobs[0].text());
+  assert.equal(note.alternative.label, 'SYNTHETIC Alpha');
+  assert.match(rig.get('buyer-comparison-status').textContent, /not approval or acceptance/);
+  rig.get('workspace-export').click();
+  const workbook = pilot.parseWorkbook(await rig.blobs[1].text());
+  assert.equal(workbook.pilots.length, 0); assert.deepEqual(Object.keys(workbook), ['version', 'currency', 'window', 'pilots']);
+  rig.get('workspace-sample').click(); rig.get('buyer-clear-comparison').click();
+  assert.match(rig.get('workspace-records').textContent, /sample-operator/);
+  assert.deepEqual(rig.effects, []);
+});
+
+test('editing applied criteria resets stale acceptance declarations, and literal markup stays inert in comparison results', async () => {
+  const rig = browserRig(); rig.get('buyer-sample-comparison').click();
+  rig.get('buyer-criteria').value = '<img src=x onerror=alert(1)> A changed useful result'; rig.submit('buyer-settings-form');
+  assert.match(rig.get('buyer-comparison-status').textContent, /reset to UNKNOWN/);
+  const result = rig.get('buyer-comparison-results');
+  assert.match(result.textContent, /<img src=x onerror=alert\(1\)>/);
+  assert.doesNotMatch(result.textContent, /Meets — buyer declaration/);
+  buttonsWithin(result).find(button => button.textContent === 'Edit SYNTHETIC Alpha').click();
+  rig.get('alternative-label').value = '<svg onload=alert(1)>';
+  rig.get('alternative-acceptance').value = 'meets'; rig.submit('buyer-comparison-form');
+  assert.match(result.textContent, /<svg onload=alert\(1\)>/);
+  assert.deepEqual(rig.effects, []);
+});
+
+test('applying changed criteria invalidates acceptance in both an open editor and an unsaved alternative before unchanged save', async () => {
+  for (const mode of ['edit-saved', 'unsaved']) {
+    const rig = browserRig(); rig.get('buyer-sample-comparison').click();
+    const results = rig.get('buyer-comparison-results');
+    const label = mode === 'edit-saved' ? 'SYNTHETIC Alpha' : 'Unsaved alternative';
+    if (mode === 'edit-saved') {
+      buttonsWithin(results).find(button => button.textContent === 'Edit SYNTHETIC Alpha').click();
+    } else {
+      const row = buyerAlternative(label);
+      for (const key of pilot.buyerAlternativeFields) rig.get('alternative-' + key).value = row[key] === null ? '' : String(row[key]);
+    }
+    assert.equal(rig.get('alternative-acceptance').value, 'meets', mode);
+    const originalQuote = rig.get('alternative-quoteMinor').value;
+    rig.get('buyer-criteria').value = 'An unrelated result: deliver a tested source-code patch.';
+    rig.submit('buyer-settings-form');
+    assert.equal(rig.get('alternative-acceptance').value, 'unknown', mode);
+    assert.equal(rig.get('alternative-label').value, label, mode);
+    assert.equal(rig.get('alternative-quoteMinor').value, originalQuote, mode);
+    rig.submit('buyer-comparison-form');
+    buttonsWithin(results).find(button => button.textContent === 'Choose ' + label + ' for draft review').click();
+    const note = pilot.readBuyerComparisonNote(await rig.blobs[0].text());
+    assert.equal(note.criteria, 'An unrelated result: deliver a tested source-code patch.', mode);
+    assert.equal(note.alternative.acceptance, 'unknown', mode);
+    assert.match(pilot.buyerComparisonDraftFields(note).details, /Declared acceptance evidence: unknown/, mode);
+    assert.deepEqual(rig.effects, [], mode);
+  }
+});
+
+test('comparison HTML exposes every input, local-planning boundaries and an unsigned draft-review route', () => {
+  const html = fs.readFileSync(path.resolve(__dirname, '../docs/PILOT_WORKSPACE.html'), 'utf8');
+  for (const key of pilot.buyerAlternativeFields) assert.ok(html.includes('id="alternative-' + key + '"'), key);
+  for (const notice of ['excluded from pilot workbook JSON', 'not confidence intervals', 'MATRIX.html#draft-work', 'No CV, vote, rating or real name', 'Simple deals']) assert.ok(html.includes(notice), notice);
+});
+
+test('quote and cap asset controls expand USDC bounds before browser form validation without converting entered amounts', () => {
+  const rig = browserRig();
+  rig.get('buyer-capCurrency').value = 'USDC_BASE';
+  rig.get('buyer-capCurrency').handlers.change.call(rig.get('buyer-capCurrency'));
+  assert.equal(rig.get('buyer-capMinor').max, '1000000000000');
+  rig.get('buyer-capMinor').value = '7200000000'; rig.submit('buyer-settings-form');
+  assert.match(rig.get('buyer-comparison-results').textContent, /USDC_BASE 7200\.000000/);
+  rig.get('alternative-currency').value = 'USDC_ETHEREUM';
+  rig.get('alternative-quoteMinor').value = '25000000';
+  rig.get('alternative-currency').handlers.change();
+  assert.equal(rig.get('alternative-quoteMinor').max, '1000000000000');
+  assert.equal(rig.get('alternative-quoteMinor').value, '25000000');
+  assert.match(rig.get('buyer-alternative-units').textContent, /micro-units on Ethereum/);
+});

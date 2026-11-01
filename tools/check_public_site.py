@@ -58,7 +58,7 @@ def check():
             allowed_live={'index.html':{'assets/story-scripts.js','assets/story-characters.js','assets/story-player.js','assets/public-feedback.js'},
                           'docs/TRIAL.html':{'../assets/trial-client.js'},
                           'docs/PAYMENTS.html':{'../assets/payment-options.js'},
-                          'docs/MATRIX.html':{'../assets/matrix.js','../assets/deal-structures.js'},
+                          'docs/MATRIX.html':{'../assets/pilot-workspace.js','../assets/matrix.js','../assets/deal-structures.js'},
                           'docs/TERMINAL.html':{'../assets/terminal.js','../assets/deal-structures.js'},
                           'docs/DEAL_STRUCTURES.html':{'../assets/deal-structures.js'},
                           'docs/START.html':{'../assets/start.js'},

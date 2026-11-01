@@ -11,7 +11,22 @@ const html = fs.readFileSync(path.join(root, 'docs/EXPLORE.html'), 'utf8');
 const script = fs.readFileSync(path.join(root, 'assets/explore.js'), 'utf8');
 const explorer = require('../assets/explore.js');
 const names = Object.keys(catalog.tools).sort();
-const sourceHash = '1a52b3038c821ed16d665b15a26cbdf9d40ffc0c00130a11b9b51b5945423c32';
+const sourceHash = '8d39081ff54759816a812de44a89fbd97ddf4b1bdee3e6914843c9b8b2adf5e9';
+const sourceCommit = 'ba76a50bf4ac26a52bdf6244ef6a368529221ff3';
+// Reviewed metadata-only disposition: three additions; every earlier family
+// and public navigation alias is retained unchanged. No runtime is exported.
+const addedFamilies = ['covenant_panel_successor', 'covenant_tender', 'covenant_tender_write'];
+const addedAliases = {
+  covenant_panel_vote: ['review panel panels votes'],
+  covenant_panel_successor: ['replace review panel panels successor replacement continuity', 'continue panel review'],
+  covenant_network_trust: ['agent cv cvs curriculum vitae contextual qualifications', 'inspect optional supplier evidence'],
+  covenant_stripe: ['owner limit limits spending budget gateway per order allowance'],
+  covenant_principal: ['owner limit limits spending budget allowance approval permissions expiry', 'set give agent spending limit limits'],
+  covenant_representation: ['owner limit limits delegated approval scope spending permission permissions'],
+  covenant_tender: ['tender tenders procurement request requests work requirements', 'private procurement compare proposals suppliers'],
+  covenant_tender_write: ['tender tenders procurement prepare request work', 'invite proposals submit proposal proposals']
+};
+function sha256(value) { return crypto.createHash('sha256').update(value).digest('hex'); }
 
 class Element {
   constructor(tag) { this.tagName = tag; this.children = []; this.value = ''; this.dataset = {}; this.events = {}; this.hidden = true; this._text = ''; }
@@ -41,13 +56,16 @@ function renderedNames(node) {
   return (node.tagName === 'code' ? [node.textContent] : []).concat(node.children.flatMap(renderedNames));
 }
 
-test('metadata projection has exactly 176 unique families and six intact layers', () => {
-  assert.equal(names.length, 176);
+test('metadata projection has exactly 179 unique families and six intact layers', () => {
+  assert.equal(names.length, 179);
   assert.deepEqual(catalog.order, ['ORGANON', 'L0', 'L1', 'L2', 'L3', 'L4']);
   assert.deepEqual(catalog.levels.map((level) => level.id), catalog.order);
   assert.deepEqual(catalog.core_levels, ['ORGANON', 'L0', 'L1', 'L2', 'L3']);
   assert.equal(catalog.profile, 'urn:aap:levels:0.2');
   assert.equal(catalog.source.sha256, sourceHash);
+  assert.equal(catalog.source.commit, sourceCommit);
+  assert.equal(catalog.source.file, 'aap_levels.json');
+  assert.deepEqual(Object.keys(catalog.source).sort(), ['commit', 'file', 'projection', 'sha256']);
   assert.deepEqual(Object.keys(catalog).sort(), ['categories', 'core_levels', 'levels', 'maturity', 'note', 'order', 'profile', 'source', 'species', 'tools']);
   assert.equal(catalog.categories.length, 10);
   assert.equal(catalog.species.length, 8);
@@ -62,10 +80,30 @@ test('metadata projection has exactly 176 unique families and six intact layers'
     assert.equal(typeof tool.core, 'boolean');
     assert.ok(['beta', 'experimental'].includes(tool.maturity), name);
   });
-  assert.equal(names.filter((name) => catalog.tools[name].maturity === 'beta').length, 134);
-  assert.equal(names.filter((name) => catalog.tools[name].maturity === 'experimental').length, 42);
-  assert.deepEqual(catalog.order.map((level) => names.filter((name) => catalog.tools[name].level === level).length), [26, 22, 34, 37, 10, 47]);
+  assert.equal(names.filter((name) => catalog.tools[name].maturity === 'beta').length, 135);
+  assert.equal(names.filter((name) => catalog.tools[name].maturity === 'experimental').length, 44);
+  assert.deepEqual(catalog.order.map((level) => names.filter((name) => catalog.tools[name].level === level).length), [26, 22, 34, 37, 11, 49]);
   assert.ok(!/module_rules|module_overrides|covenant_chain\//.test(catalogText));
+});
+
+test('reviewed refresh adds only three families and preserves all 176 earlier records and aliases', () => {
+  assert.deepEqual(addedFamilies.map((name) => [name, catalog.tools[name]]), [
+    ['covenant_panel_successor', {level: 'L3', core: true, maturity: 'beta', species: null}],
+    ['covenant_tender', {level: 'L4', core: false, maturity: 'experimental', species: 'service'}],
+    ['covenant_tender_write', {level: 'L4', core: false, maturity: 'experimental', species: 'service'}]
+  ]);
+  const retained = names.filter((name) => !addedFamilies.includes(name));
+  assert.equal(retained.length, 176);
+  assert.equal(sha256(retained.join('\n') + '\n'), '1f5d121b38d86e4c77d11fa79f88305e0bd964d855c359c32bb5afec6036fd79');
+  assert.equal(sha256(JSON.stringify(retained.map((name) => [name, ...['level', 'core', 'maturity', 'species'].map((key) => catalog.tools[name][key])]))), '6124c5fcef8c46dae392c7e7a64e2185badf4f090c836c4b982f4824932ad027');
+  Object.entries(addedAliases).forEach(([name, aliases]) => aliases.forEach((alias) => assert.ok(explorer.navigationAliases[name].includes(alias), name + ': ' + alias)));
+  const retainedAliases = Object.fromEntries(Object.entries(explorer.navigationAliases)
+    .filter(([name]) => !addedFamilies.includes(name))
+    .sort(([a], [b]) => a.localeCompare(b, 'en'))
+    .map(([name, aliases]) => [name, aliases.filter((alias) => !(addedAliases[name] || []).includes(alias))]));
+  assert.equal(sha256(JSON.stringify(retainedAliases)), '3efeb937e39700d6ff32757f0be860a12deb520a68f4e4fa6feb12debad94425');
+  addedFamilies.forEach((name) => assert.ok(html.includes('<code>' + name + '</code>')));
+  assert.ok(html.includes(sourceHash) && html.includes(sourceCommit));
 });
 
 test('embedded catalog is identical to the downloadable projection and static routes remain available', () => {
@@ -76,19 +114,19 @@ test('embedded catalog is identical to the downloadable projection and static ro
     assert.ok(html.includes('id="layer-' + id.toLowerCase() + '"'));
     assert.ok(html.includes('data-explore-layer="' + id + '"'));
   });
-  ['START.html', 'CAPABILITIES.html', 'MATRIX.html', 'API_MCP.html#public', 'API_MCP.html#trial', '../assets/capability-catalog.json'].forEach((route) => assert.ok(html.includes('href="' + route + '"'), route));
+  ['START.html', 'CAPABILITIES.html', 'MATRIX.html', 'API_MCP.html#public', 'API_MCP.html#trial', 'RESEARCH.html', '../assets/capability-catalog.json'].forEach((route) => assert.ok(html.includes('href="' + route + '"'), route));
   assert.match(html, /<noscript>[\s\S]*?complete public metadata catalog[\s\S]*?<\/noscript>/);
-  assert.match(html, /134 tool families are labelled beta and 42 experimental/);
+  assert.match(html, /135 tool families are labelled beta and 44 experimental/);
   assert.match(html, /none is stable/);
   assert.ok(!html.includes('MODULE_RULES'));
 });
 
 test('empty query, exhaustive family lookup, and disjoint filters preserve complete coverage', () => {
   assert.deepEqual(explorer.filterCatalog(catalog, {}).map((tool) => tool.name).sort(), names);
-  assert.equal(explorer.filterCatalog(catalog, {query: '   '}).length, 176);
+  assert.equal(explorer.filterCatalog(catalog, {query: '   '}).length, 179);
   names.forEach((name) => assert.deepEqual(explorer.filterCatalog(catalog, {query: name}).map((tool) => tool.name), [name], name));
   const union = catalog.order.flatMap((level) => explorer.filterCatalog(catalog, {level}).map((tool) => tool.name));
-  assert.equal(new Set(union).size, 176);
+  assert.equal(new Set(union).size, 179);
   assert.deepEqual(union.sort(), names);
   const readiness = ['beta', 'experimental'].flatMap((maturity) => explorer.filterCatalog(catalog, {maturity}).map((tool) => tool.name));
   assert.deepEqual(readiness.sort(), names);
@@ -164,6 +202,29 @@ test('current collaboration, reviewer and supplier-evidence needs reach the reta
   assert.equal(explorer.filterCatalog(catalog, { query: 'grant everyone unlimited authority' }).length, 0);
 });
 
+test('CVs, owner limits, panels and tenders find actual installed families without invented interfaces', () => {
+  for (const [query, expected] of [
+    ['agent CV', ['covenant_network_trust']],
+    ['inspect optional supplier evidence', ['covenant_network_trust']],
+    ['owner limits', ['covenant_principal', 'covenant_representation', 'covenant_stripe']],
+    ['give my agent a spending limit', ['covenant_principal']],
+    ['panels', ['covenant_panel_vote', 'covenant_panel_successor', 'covenant_arbitration_design']],
+    ['replace a review panel', ['covenant_panel_successor']],
+    ['tenders', ['covenant_tender', 'covenant_tender_write']]
+  ]) {
+    const found = explorer.filterCatalog(catalog, {query}).map((row) => row.name);
+    expected.forEach((name) => assert.ok(found.includes(name), query + ' → ' + name));
+    assert.ok(found.length < 12, query + ' must stay a bounded navigation match');
+    assert.ok(!found.includes('covenant_ads'));
+  }
+  assert.ok(!Object.hasOwn(catalog.tools, 'covenant_cv'));
+  assert.equal(explorer.filterCatalog(catalog, {query: 'covenant_cv'}).length, 0);
+  const fixture = documentFixture();
+  explorer.renderResults(fixture.ids['explore-results'], catalog, {query: 'panels'}, fixture.doc);
+  assert.match(fixture.ids['explore-results'].textContent, /installed preview · beta/);
+  assert.ok(!fixture.ids['explore-results'].textContent.includes('public tool'));
+});
+
 test('the rendered search explains alias matches and returns no invented result for unknown needs', () => {
   const {doc, ids} = documentFixture();
   explorer.mount(doc);
@@ -173,7 +234,7 @@ test('the rendered search explains alias matches and returns no invented result 
   assert.ok(renderedNames(ids['explore-results']).includes('covenant_forum_read'));
   ids['explore-query'].value = 'unrecognised quokka capability';
   ids['explore-query'].events.input();
-  assert.equal(ids['explore-count'].textContent, 'Showing 0 of 176 installed tool families.');
+  assert.equal(ids['explore-count'].textContent, 'Showing 0 of 179 installed tool families.');
   assert.match(ids['explore-results'].textContent, /No tool families match/);
   assert.equal(renderedNames(ids['explore-results']).length, 0);
 });
@@ -198,13 +259,13 @@ test('mounted controls show all, update honest counts and clear every active fil
   explorer.mount(doc);
   assert.equal(ids['explore-controls'].hidden, false);
   assert.equal(ids['explore-live'].hidden, false);
-  assert.equal(ids['explore-count'].textContent, 'Showing 176 of 176 installed tool families.');
+  assert.equal(ids['explore-count'].textContent, 'Showing 179 of 179 installed tool families.');
   assert.deepEqual(renderedNames(ids['explore-results']).sort(), names);
   ids['explore-query'].value = 'escrow';
   ids['explore-query'].events.input();
   const count = renderedNames(ids['explore-results']).length;
   assert.equal(counts.reduce((sum, node) => sum + Number(node.textContent), 0), count);
-  assert.equal(ids['explore-count'].textContent, 'Showing ' + count + ' of 176 installed tool families.');
+  assert.equal(ids['explore-count'].textContent, 'Showing ' + count + ' of 179 installed tool families.');
   buttons.find((button) => button.dataset.exploreLayer === 'L4').events.click();
   assert.equal(ids['explore-level'].value, 'L4');
   ids['explore-maturity'].value = 'experimental';
@@ -212,7 +273,7 @@ test('mounted controls show all, update honest counts and clear every active fil
   ids['explore-species'].value = 'risk';
   ids['explore-clear'].events.click();
   ['explore-query', 'explore-level', 'explore-maturity', 'explore-core', 'explore-species'].forEach((id) => assert.equal(ids[id].value, ''));
-  assert.equal(renderedNames(ids['explore-results']).length, 176);
+  assert.equal(renderedNames(ids['explore-results']).length, 179);
   assert.equal(ids['explore-query'].focused, true);
 });
 

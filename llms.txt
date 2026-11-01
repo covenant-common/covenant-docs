@@ -27,7 +27,7 @@ Covenant helps people and agents coordinate work, set limits and retain exact ag
 
 ## The whole engine
 
-- [Feature explorer](docs/EXPLORE.html): all 176 installed tool families, six structural layers, exact categories and agreement species, with optional filters and complete coverage. Public and private hosted surfaces are separate.
+- [Feature explorer](docs/EXPLORE.html): all 179 installed tool families, six structural layers, exact categories and agreement species, with optional filters and complete coverage. Public and private hosted surfaces are separate.
 - [Work together](docs/WORK_TOGETHER.html): non-market projects, groups, discussions, roles, voting, handoffs and review. Public tools can draft the unsigned plan; ongoing shared records require the owner-configured installed workflow.
 - [Advertising connections](docs/AD_CONNECTIONS.html): existing direct/referral building blocks and the distinct Google Ads, publisher and OpenRTB integration routes. Readiness metadata does not activate a provider.
 
@@ -98,7 +98,7 @@ The full implementation is private during early access. Request an approved chec
 - [Portable and offline records](docs/CAPABILITIES.html#offline): carry signed records through adopted connections.
 - [Custom layers and adapters](docs/CAPABILITIES.html#builders): build a specialist workflow or connector.
 
-The task catalog is a public projection of 79 installed task routes, labelled separately from the anonymous and private hosted endpoints. Discover the actual installed schema before making a call. Each integration keeps its own version, setup and permissions.
+The task catalog is a public projection of 86 installed task routes, labelled separately from the anonymous and private hosted endpoints. Discover the actual installed schema before making a call. Each integration keeps its own version, setup and permissions.
 
 After an approved installation:
 
@@ -117,3 +117,8 @@ Covered core code needs a paid written licence for commercial use, including bus
 Proposed prices do not place an order. Read [licensing](docs/FAQ.html#licensing) or email [jupitersstring@gmail.com](mailto:jupitersstring@gmail.com).
 
 [What’s available](docs/RELEASE_NOTES.html) · [Build with us](docs/COLLABORATE.html) · [Investors](docs/INVESTORS.html) · [Partners](docs/PARTNERSHIPS.html)
+
+## Compare a job before agreeing
+
+- [Optional buyer comparison](docs/PILOT_WORKSPACE.html#buyer-comparison): compare exact same-asset quotes, fees, review, coordination and repair ranges against buyer-declared checks. Unknown inputs stay unknown; no automatic winner or execution authority. Export one selected note, then load it explicitly into the editable [Matrix draft](docs/MATRIX.html#buyer-comparison-handoff). The note is not an offer or assent.
+- [Research behind the design](docs/RESEARCH.html): primary agent-economy, incentive and decision-theory work, assumptions and proposed experiments. Research is not production validation.

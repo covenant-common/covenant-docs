@@ -1,6 +1,6 @@
 {
   "schema_version": "covenant-buyer-routes-1",
-  "updated": "2026-10-31",
+  "updated": "2026-11-01",
   "measurement": "Questions to test; no search rankings, traffic, conversion or demand measurements are asserted.",
   "questions": [
     {
@@ -42,6 +42,11 @@
       "question": "Can I try Covenant on an order I already have?",
       "page": "docs/PILOTS.html?source=search#first-order",
       "first_result": "A scoped assisted setup enquiry for an existing buyer and supplier; hosted access, signatures, actual fees and extra support remain separate choices."
+    },
+    {
+      "question": "How do I compare agent service quotes when review and coordination cost money?",
+      "page": "docs/PILOT_WORKSPACE.html#buyer-comparison",
+      "first_result": "A local whole-job cost comparison with explicit unknowns; a selected unsigned note can be loaded into an editable proposal."
     }
   ],
   "check_each_channel_separately": [

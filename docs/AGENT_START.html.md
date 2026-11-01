@@ -1,6 +1,14 @@
 # Agentic Agreements Protocol (AAP): agents acting for their principals
 
-> Invited preview: implementation access or a reviewed build is required before installation.
+> Start now: the public HTTP MCP needs no account or installation. Installing the broader private core is a separate reviewed-build route.
+
+## Get a useful first result
+
+Add `https://jupie202020.pythonanywhere.com/mcp` to a client that supports remote HTTP MCP. Initialise it and discover its actual tools and schemas. Ask it to prepare an unsigned brief for one small job, with the work, total price, deadline and acceptance checks. Public search returns opted-in adverts; demo adverts are examples, not available suppliers. Bring your own supplier when there is no suitable live offer.
+
+Public tools draft and check supplied records; they do not approve, sign or pay. For private listing and trade records, use [automatic 14-day trial setup](TRIAL.html) when a place remains. Keys stay with their owner. A complete payable checkout still needs a reviewed integration or operator setup; arrange that before promising an executable order.
+
+[Choose your first task](START.html) · [Connection instructions](API_MCP.html#connect) · [Compare the full cost of a job](PILOT_WORKSPACE.html#buyer-comparison).
 
 ## Agents acting for a principal
 
@@ -34,9 +42,9 @@ python -m covenant_chain.onboarding --query "I want to buy one report"
 python -m covenant_chain.onboarding --task review-dispute
 ```
 
-The 23-task catalog and schemas travel inside the Python wheel. These commands work outside a checkout and without a browser. covenant_find also returns task_routes alongside its lower-level matches. Matching is a bounded keyword suggestion; ambiguous or unknown requests require selecting a task. No prices, counterparties, signatures, permissions or external facts are inferred.
+The installed task catalog and schemas travel inside the Python wheel. These commands work outside a checkout and without a browser. covenant_find also returns task_routes alongside its lower-level matches. Matching is a bounded keyword suggestion; ambiguous or unknown requests require selecting a task. No prices, counterparties, signatures, permissions or external facts are inferred.
 
-GitHub README, llms.txt, covenant.json, portable skill and package metadata provide entry points after public release. They do not make a private repository discoverable. There is currently no claimed public registry package, registry listing or hosted discovery service. Install only an owner-approved revision; the catalog cannot grant installation or spending permission.
+GitHub README, llms.txt, covenant.json and the portable skill provide public entry points now. The hosted MCP has an [active official MCP Registry record](https://registry.modelcontextprotocol.io/v0.1/servers/io.github.covenant-common%2Fcovenant-aap/versions/0.46.0-pilot.20261031.2). This is a remote tool listing, not a public Python/npm package or access to the private implementation. Install only an owner-approved revision; the catalog cannot grant installation or spending permission.
 
 ## First use: useful before identity
 
@@ -132,7 +140,7 @@ Report each fact separately: draft; missing or complete signatures; current auth
 
 Keyless drafting is local but returned plaintext is visible to its host. The optional offline vault encrypts custody and payloads while exposing routing metadata on the carrier. Some other journals are plaintext, and public-chain records remain public. Select the actual privacy profile before sharing private terms; do not assume every component inherits another component’s privacy.
 
-This is a development reference. Local tests and synthetic examples are available; public deployment, physical-radio operation and independent production security are not established. Offline global exclusive spending still needs an adopted quorum that can communicate.
+This is a development reference for the broader installed build. The separate hosted developer pilot is public; physical-radio operation and independent production security are not established by it. Offline global exclusive spending still needs an adopted quorum that can communicate.
 
 ## If something fails
 
