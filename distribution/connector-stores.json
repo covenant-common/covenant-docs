@@ -105,12 +105,11 @@
     {
       "id": "muse",
       "name": "Meta Muse Connector Platform",
-      "status": "SUBMITTED_IN_REVIEW_TECHNICAL_COMPLETE",
+      "status": "SUBMITTED_IN_REVIEW_ALL_INTAKE_REQUIREMENTS_COMPLETE",
       "submission_url": "https://platform.muse.ai/submission",
       "remaining": [
-        "Truthful publisher/business verification",
-        "Data-processing questionnaire with verified operational/privacy facts",
-        "Platform review and approval; successful endpoint test is not approval"
+        "Provider review of the submitted technical details, publisher/email verification and data-processing questionnaire",
+        "Approval, public listing and Verified status remain unconfirmed; intake completion is not approval"
       ],
       "sources": [
         "https://platform.muse.ai/",
@@ -126,9 +125,19 @@
         "tool_count": 9,
         "authentication": "Unauthenticated",
         "credentials_submitted": true,
-        "requirements_completed": 1,
+        "requirements_completed": 3,
         "requirements_total": 3
-      }
+      },
+      "intake_requirements": {
+        "completed": 3,
+        "total": 3,
+        "technical_details": "SUBMITTED_IN_REVIEW",
+        "publisher_email_verification": "SUBMITTED_IN_REVIEW",
+        "data_processing_questionnaire": "SUBMITTED_IN_REVIEW"
+      },
+      "approval_confirmed": false,
+      "live_listing_confirmed": false,
+      "verified_status_confirmed": false
     },
     {
       "id": "microsoft-365-copilot",
