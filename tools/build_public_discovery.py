@@ -101,8 +101,10 @@ def documents(source):
                 'note': 'Legacy runtime name retained. Verify the actual connection; this card is advisory.'},
             'io.github.covenant-common/access': {'authentication': 'none', 'privateAccountToolsIncluded': False}}}
     card_bytes = wire(card)
-    catalog = {'specVersion': '1.0', 'entries': [{
+    catalog = {'specVersion': '1.0', 'host': {'displayName': 'Covenant',
+        'documentationUrl': WEBSITE + '/docs/CONNECTORS.html'}, 'entries': [{
         'identifier': 'urn:air:jupie202020.pythonanywhere.com:mcp:covenant-aap',
+        'displayName': 'Covenant public tools',
         'type': 'application/mcp-server-card+json', 'data': card}]}
     api = {'linkset': [
         {'anchor': ORIGIN + '/.well-known/api-catalog', 'item': [{'href': ENDPOINT}]},
