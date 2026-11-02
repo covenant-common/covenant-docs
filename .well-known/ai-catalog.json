@@ -51,9 +51,14 @@
         "version": "0.1",
         "websiteUrl": "https://covenant-common.github.io/covenant-docs/docs/CONNECTORS.html"
       },
+      "displayName": "Covenant public tools",
       "identifier": "urn:air:jupie202020.pythonanywhere.com:mcp:covenant-aap",
       "type": "application/mcp-server-card+json"
     }
   ],
+  "host": {
+    "displayName": "Covenant",
+    "documentationUrl": "https://covenant-common.github.io/covenant-docs/docs/CONNECTORS.html"
+  },
   "specVersion": "1.0"
 }

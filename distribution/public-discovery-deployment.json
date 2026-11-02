@@ -17,7 +17,7 @@
       "contentType": "application/ai-catalog+json",
       "file": ".well-known/ai-catalog.json",
       "path": "/.well-known/ai-catalog.json",
-      "sha256": "d5d6fe3e760edae33727902a4896fe67ad4e06725b0d59897d222d625f55615b"
+      "sha256": "56e4c7e5947a609d2876e22d16629dc762e5ec176574383f33a72b7872034964"
     },
     {
       "contentType": "application/linkset+json",
