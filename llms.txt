@@ -19,6 +19,8 @@ Covenant helps people and agents coordinate work, set limits and retain exact ag
 - [Connect from your agent client](docs/CONNECTORS.html): free public connector settings, downloadable wrapper and dated store-distribution status.
 - [Public tool use](docs/PUBLIC_TOOL_USE.html): free anonymous scope, privacy, limits and support; paid core and private accounts are separate.
 
+- [Machine discovery](docs/MCP_DISCOVERY.html): prepared public server-card aliases, complete nine-tool schema snapshot, catalogues and host activation requirements. A project path is not the hostname root.
+
 ## First useful action
 
 - [Start here](docs/START.html?source=search): choose connect, advertise, buy or work together; copy a safe first task and the live MCP address.
