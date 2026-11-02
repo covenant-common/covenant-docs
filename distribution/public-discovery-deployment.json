@@ -5,19 +5,19 @@
       "contentType": "application/mcp-server-card+json",
       "file": "mcp/server-card",
       "path": "/mcp/server-card",
-      "sha256": "275391ff4c8d46d99669908d1e7fa8b770989d95f557c4c7db049dac3ae433f5"
+      "sha256": "dd0d1174199f5b4322517e6d33a85b81a414801df54caa05a8559cb4f9970fcf"
     },
     {
       "contentType": "application/mcp-server-card+json",
       "file": ".well-known/mcp/server-card.json",
       "path": "/.well-known/mcp/server-card.json",
-      "sha256": "275391ff4c8d46d99669908d1e7fa8b770989d95f557c4c7db049dac3ae433f5"
+      "sha256": "dd0d1174199f5b4322517e6d33a85b81a414801df54caa05a8559cb4f9970fcf"
     },
     {
       "contentType": "application/ai-catalog+json",
       "file": ".well-known/ai-catalog.json",
       "path": "/.well-known/ai-catalog.json",
-      "sha256": "56e4c7e5947a609d2876e22d16629dc762e5ec176574383f33a72b7872034964"
+      "sha256": "f65481378e2eddbd435f649a9449a4506c2ecf3528b490cad8aeb632fca237aa"
     },
     {
       "contentType": "application/linkset+json",
@@ -29,7 +29,7 @@
       "contentType": "application/json",
       "file": "mcp/tool-inventory.json",
       "path": "/mcp/tool-inventory.json",
-      "sha256": "76a1317f18869f50c058fbf8e96b851a3e4e3b7a3000f0d1332afc27da56f23d"
+      "sha256": "bf8bf934d1136a24efec496fa8d6a2fe1034c7ffe0972229d7f589b7890600ad"
     },
     {
       "contentType": "text/markdown; charset=utf-8",
@@ -40,7 +40,7 @@
   ],
   "format": "aap-public-discovery-deployment/0.1",
   "githubPagesProjectPrefixIsNotDomainRoot": true,
-  "observedAt": "2026-11-02T09:09:15.487420+00:00",
+  "observedAt": "2026-11-02T14:10:26.123173+00:00",
   "origin": "https://jupie202020.pythonanywhere.com",
   "runtimeIdentityMatchesCard": false
 }

@@ -2,7 +2,7 @@
   "endpoint": "https://jupie202020.pythonanywhere.com/mcp",
   "format": "aap-public-tool-inventory/0.1",
   "liveAuthority": "Discover the current tools with MCP tools/list before calling.",
-  "observedAt": "2026-11-02T09:09:15.487420+00:00",
+  "observedAt": "2026-11-02T14:10:26.123173+00:00",
   "protocolVersion": "2025-11-25",
   "scope": "Anonymous public tools only; no account access, signing, publication or payment.",
   "serverInfo": {
@@ -16,51 +16,60 @@
         "destructiveHint": false,
         "idempotentHint": true,
         "openWorldHint": true,
-        "readOnlyHint": true
+        "readOnlyHint": true,
+        "title": "Find public services"
       },
-      "description": "Search this shared marketplace for current active INDEXED public listings. Only explicitly published fields are returned; PRIVATE and UNLISTED records are excluded, including from totals. Ranking matches the existing public listing API. Price, inventory, identity, performance and payment are not verified. No account, signing, publication or provider call.",
+      "description": "Find currently searchable service listings in this shared marketplace. Search this shared marketplace for current active INDEXED public listings. Only explicitly published fields are returned; PRIVATE and UNLISTED records are excluded, including from totals. Ranking matches the existing public listing API. Price, inventory, identity, performance and payment are not verified. No account, signing, publication or provider call.",
       "inputSchema": {
         "additionalProperties": false,
         "properties": {
           "category": {
+            "description": "Optional category filter; it does not broaden access to unlisted or private records.",
             "maxLength": 64,
             "type": "string"
           },
           "limit": {
+            "description": "Maximum public results to return in this page; use the advertised bound.",
             "maximum": 50,
             "minimum": 1,
             "type": "integer"
           },
           "offset": {
+            "description": "Zero-based offset into the current public result page.",
             "maximum": 5000,
             "minimum": 0,
             "type": "integer"
           },
           "query": {
+            "description": "Optional words describing the service needed; searches only current public listings.",
             "maxLength": 120,
             "type": "string"
           }
         },
         "type": "object"
       },
-      "name": "aap_public_listing_search"
+      "name": "aap_public_listing_search",
+      "title": "Find public services"
     },
     {
       "annotations": {
         "destructiveHint": false,
         "idempotentHint": false,
         "openWorldHint": false,
-        "readOnlyHint": true
+        "readOnlyHint": true,
+        "title": "Compare changed terms"
       },
-      "description": "Draft arbitrary clauses, preserve amendment ancestry, compare exact changes, and render an escaped HTML draft. Never supplies assent. Selected action: compare.",
+      "description": "Compare two contract bodies and show the changes that need fresh approval. Draft arbitrary clauses, preserve amendment ancestry, compare exact changes, and render an escaped HTML draft. Never supplies assent. Selected action: compare.",
       "inputSchema": {
         "additionalProperties": false,
         "properties": {
           "after": {
+            "description": "The complete proposed replacement raw contract body; changed terms need fresh assent.",
             "maxProperties": 20000,
             "type": "object"
           },
           "before": {
+            "description": "The complete original raw contract body; keep its exact bytes and identifier.",
             "maxProperties": 20000,
             "type": "object"
           }
@@ -71,20 +80,23 @@
         ],
         "type": "object"
       },
-      "name": "covenant_contract__compare"
+      "name": "covenant_contract__compare",
+      "title": "Compare changed terms"
     },
     {
       "annotations": {
         "destructiveHint": false,
         "idempotentHint": false,
         "openWorldHint": false,
-        "readOnlyHint": true
+        "readOnlyHint": true,
+        "title": "Draft work terms"
       },
-      "description": "Draft arbitrary clauses, preserve amendment ancestry, compare exact changes, and render an escaped HTML draft. Never supplies assent. Selected action: draft.",
+      "description": "Draft an agreement from the exact parties, clauses, conditions and dispute terms you supply. Draft arbitrary clauses, preserve amendment ancestry, compare exact changes, and render an escaped HTML draft. Never supplies assent. Selected action: draft.",
       "inputSchema": {
         "additionalProperties": false,
         "properties": {
           "clauses": {
+            "description": "The exact obligations and terms to include in the unsigned draft.",
             "items": {
               "additionalProperties": false,
               "properties": {
@@ -113,18 +125,22 @@
             "type": "array"
           },
           "conditions": {
+            "description": "Optional exact conditions governing the proposed obligations.",
             "maxItems": 128,
             "type": "array"
           },
           "dispute": {
+            "description": "Optional proposed review or dispute procedure; no arbitrator is appointed.",
             "maxProperties": 20000,
             "type": "object"
           },
           "extensions": {
+            "description": "Optional exact additional terms or adopted profile references supplied by the caller.",
             "maxProperties": 20000,
             "type": "object"
           },
           "parties": {
+            "description": "The declared parties and roles for this draft; no assent is inferred.",
             "items": {
               "maxLength": 128,
               "minLength": 1,
@@ -134,10 +150,12 @@
             "type": "array"
           },
           "settlement": {
+            "description": "Optional proposed payment or settlement terms; no payment occurs.",
             "maxProperties": 20000,
             "type": "object"
           },
           "title": {
+            "description": "A short name for the proposed agreement.",
             "maxLength": 128,
             "minLength": 1,
             "type": "string"
@@ -150,20 +168,23 @@
         ],
         "type": "object"
       },
-      "name": "covenant_contract__draft"
+      "name": "covenant_contract__draft",
+      "title": "Draft work terms"
     },
     {
       "annotations": {
         "destructiveHint": false,
         "idempotentHint": false,
         "openWorldHint": false,
-        "readOnlyHint": true
+        "readOnlyHint": true,
+        "title": "Inspect contract terms"
       },
-      "description": "Draft arbitrary clauses, preserve amendment ancestry, compare exact changes, and render an escaped HTML draft. Never supplies assent. Selected action: inspect.",
+      "description": "Inspect one exact contract body and return its identifier and structure. Covenant public API and MCP reference: https://covenant-common.github.io/covenant-docs/docs/API_MCP.html. Draft arbitrary clauses, preserve amendment ancestry, compare exact changes, and render an escaped HTML draft. Never supplies assent. Selected action: inspect.",
       "inputSchema": {
         "additionalProperties": false,
         "properties": {
           "body": {
+            "description": "The raw contract body from the draft response; supply the contract body rather than the complete response wrapper.",
             "maxProperties": 20000,
             "type": "object"
           }
@@ -173,20 +194,23 @@
         ],
         "type": "object"
       },
-      "name": "covenant_contract__inspect"
+      "name": "covenant_contract__inspect",
+      "title": "Inspect contract terms"
     },
     {
       "annotations": {
         "destructiveHint": false,
         "idempotentHint": false,
         "openWorldHint": false,
-        "readOnlyHint": true
+        "readOnlyHint": true,
+        "title": "Read contract terms"
       },
-      "description": "Draft arbitrary clauses, preserve amendment ancestry, compare exact changes, and render an escaped HTML draft. Never supplies assent. Selected action: render.",
+      "description": "Render one exact contract body as readable HTML without changing its terms. Covenant public API and MCP reference: https://covenant-common.github.io/covenant-docs/docs/API_MCP.html. Draft arbitrary clauses, preserve amendment ancestry, compare exact changes, and render an escaped HTML draft. Never supplies assent. Selected action: render.",
       "inputSchema": {
         "additionalProperties": false,
         "properties": {
           "body": {
+            "description": "The raw contract body to display; a readable copy does not create assent.",
             "maxProperties": 20000,
             "type": "object"
           }
@@ -196,47 +220,55 @@
         ],
         "type": "object"
       },
-      "name": "covenant_contract__render"
+      "name": "covenant_contract__render",
+      "title": "Read contract terms"
     },
     {
       "annotations": {
         "destructiveHint": false,
         "idempotentHint": false,
         "openWorldHint": false,
-        "readOnlyHint": true
+        "readOnlyHint": true,
+        "title": "Prepare a service offer"
       },
-      "description": "Create a general market, listing or reusable transaction archetype. quick_trade prepares the complete simple agreement in one call. Every record carries seven question dimensions. Credit/escrow/custom terms require adopted execution; no funds or inventory are inferred. Selected action: quick_trade.",
+      "description": "Prepare an unsigned service offer with a buyer, seller, price and optional deal structure. Create a general market, listing or reusable transaction archetype. quick_trade prepares the complete simple agreement in one call. Every record carries seven question dimensions. Credit/escrow/custom terms require adopted execution; no funds or inventory are inferred. Selected action: quick_trade.",
       "inputSchema": {
         "additionalProperties": false,
         "properties": {
           "amount": {
+            "description": "Integer price in the payment asset's exact stated unit. For USD cents, 25 dollars is 2500 cents; never infer a currency conversion.",
             "maximum": 9007199254740991,
             "minimum": 0,
             "type": "integer"
           },
           "archetype": {
+            "description": "Optional exact reusable deal structure supplied by the caller; preparation does not execute it.",
             "maxProperties": 20000,
             "type": "object"
           },
           "buyer": {
+            "description": "The proposed buyer role and identifier; a role label does not prove authority.",
             "pattern": "^[0-9a-f]{64}$",
             "type": "string"
           },
           "compact": {
+            "description": "Return the supported compact view; retain the complete exact packet when approving.",
             "type": "boolean"
           },
           "context": {
+            "description": "Caller-chosen exact context for this unsigned proposal.",
             "pattern": "^[0-9a-f]{64}$",
             "type": "string"
           },
           "description": {
+            "description": "The work or resource being offered, including the intended deliverable.",
             "maxLength": 128,
             "minLength": 1,
             "type": "string"
           },
           "payment_asset": {
             "additionalProperties": false,
-            "description": "Named resource; adapter and transfer_terms default to null and {}. Naming never proves title, custody or transfer.",
+            "description": "The exact namespace, identifier and unit of the proposed payment asset. Named resource; adapter and transfer_terms default to null and {}. Naming never proves title, custody or transfer.",
             "properties": {
               "adapter": {
                 "pattern": "^[0-9a-f]{64}$",
@@ -273,16 +305,17 @@
             "type": "object"
           },
           "seller": {
+            "description": "The proposed seller role and identifier; a label does not verify the supplier.",
             "pattern": "^[0-9a-f]{64}$",
             "type": "string"
           },
           "settlement": {
-            "description": "Optional explicit settlement terms. A pinned archetype settlement may be repeated exactly, but cannot be silently replaced.",
+            "description": "Optional proposed settlement terms; no rail is connected or payment sent. Optional explicit settlement terms. A pinned archetype settlement may be repeated exactly, but cannot be silently replaced.",
             "maxProperties": 20000,
             "type": "object"
           },
           "terms": {
-            "description": "Optional exact inspection, correction, return or other terms adopted in this first offer.",
+            "description": "Optional exact additional terms to preserve in this unsigned offer. Optional exact inspection, correction, return or other terms adopted in this first offer.",
             "maxProperties": 20000,
             "type": "object"
           }
@@ -297,20 +330,23 @@
         ],
         "type": "object"
       },
-      "name": "covenant_marketplace__quick_trade"
+      "name": "covenant_marketplace__quick_trade",
+      "title": "Prepare a service offer"
     },
     {
       "annotations": {
         "destructiveHint": false,
         "idempotentHint": false,
         "openWorldHint": false,
-        "readOnlyHint": true
+        "readOnlyHint": true,
+        "title": "Check declared authority"
       },
-      "description": "Inspect caller-supplied role summaries and any supported local authority evidence. Each agreements row has exactly id, kind and parties (role to direct Ed25519 public key). Do not pass a contract-draft wrapper. Read https://jupie202020.pythonanywhere.com/review-reference.json for examples. A declared role is not verified permission; this does not authorize signing, payment or execution.",
+      "description": "Inspect supplied role summaries and any supported owner-local authority evidence. Inspect caller-supplied role summaries and any supported local authority evidence. Each agreements row has exactly id, kind and parties (role to direct Ed25519 public key). Do not pass a contract-draft wrapper. Read https://jupie202020.pythonanywhere.com/review-reference.json for examples. A declared role is not verified permission; this does not authorize signing, payment or execution.",
       "inputSchema": {
         "additionalProperties": false,
         "properties": {
           "agreements": {
+            "description": "Caller-declared role summaries. Each row has exactly id, kind and parties; parties maps role names to supported public verification keys. These are not signed contract wrappers.",
             "items": {
               "maxProperties": 20000,
               "type": "object"
@@ -319,6 +355,7 @@
             "type": "array"
           },
           "expected_heads": {
+            "description": "Optional retained sorted causal heads for the group review.",
             "items": {
               "pattern": "^[0-9a-f]{64}$",
               "type": "string"
@@ -327,6 +364,7 @@
             "type": "array"
           },
           "grants": {
+            "description": "Optional exact grant records for owner-local access review; do not provide private keys or credentials.",
             "items": {
               "maxProperties": 20000,
               "type": "object"
@@ -335,10 +373,12 @@
             "type": "array"
           },
           "group": {
+            "description": "Optional exact group reference; it does not appoint a controller or grant authority.",
             "pattern": "^[0-9a-f]{64}$",
             "type": "string"
           },
           "policies": {
+            "description": "Optional exact policy records; declarations are separate from installed authority.",
             "items": {
               "maxProperties": 20000,
               "type": "object"
@@ -352,20 +392,23 @@
         ],
         "type": "object"
       },
-      "name": "covenant_review__authority"
+      "name": "covenant_review__authority",
+      "title": "Check declared authority"
     },
     {
       "annotations": {
         "destructiveHint": false,
         "idempotentHint": false,
         "openWorldHint": false,
-        "readOnlyHint": true
+        "readOnlyHint": true,
+        "title": "Check supplied proofs"
       },
-      "description": "Check supplied proof envelopes with the supported installed verifiers. Read https://jupie202020.pythonanywhere.com/review-reference.json for item fields. Empty input reports no proofs supplied. A verified proof covers its exact statement and assumptions, not outside truth or execution permission.",
+      "description": "Check supplied proof envelopes against the supported installed verifiers and exact expectations. Check supplied proof envelopes with the supported installed verifiers. Read https://jupie202020.pythonanywhere.com/review-reference.json for item fields. Empty input reports no proofs supplied. A verified proof covers its exact statement and assumptions, not outside truth or execution permission.",
       "inputSchema": {
         "additionalProperties": false,
         "properties": {
           "agreement_ids": {
+            "description": "Exact agreement identifiers already verified separately; a supplied identifier alone does not prove assent.",
             "items": {
               "pattern": "^[0-9a-f]{64}$",
               "type": "string"
@@ -374,6 +417,7 @@
             "type": "array"
           },
           "items": {
+            "description": "Supplied proof envelopes and exact verifier/context/statement expectations. Empty input means no proofs were supplied.",
             "items": {
               "maxProperties": 20000,
               "type": "object"
@@ -388,25 +432,28 @@
         ],
         "type": "object"
       },
-      "name": "covenant_review__evidence"
+      "name": "covenant_review__evidence",
+      "title": "Check supplied proofs"
     },
     {
       "annotations": {
         "destructiveHint": false,
         "idempotentHint": false,
         "openWorldHint": false,
-        "readOnlyHint": true
+        "readOnlyHint": true,
+        "title": "Review a work record"
       },
-      "description": "Review an exact coordination case, its supplied approvals and remaining obligations. Read https://jupie202020.pythonanywhere.com/review-reference.json for the case format and a complete empty example. A contract draft is not a verified agreement. Case builders such as start/case/spec are installed SDK helpers, not tools on this public endpoint. No signing or execution.",
+      "description": "Review a raw coordination case, its supplied agreements, approvals and remaining duties. Review an exact coordination case, its supplied approvals and remaining obligations. Read https://jupie202020.pythonanywhere.com/review-reference.json for the case format and a complete empty example. A contract draft is not a verified agreement. Case builders such as start/case/spec are installed SDK helpers, not tools on this public endpoint. No signing or execution.",
       "inputSchema": {
         "additionalProperties": false,
         "properties": {
           "case": {
-            "description": "Exact coordination case. Use start or case to construct it. Case0.4 adds explicit nonmonetary performance assertions; supplying performance selects it. Explicit case0.3 also admits BILATERAL rows with {id,kind,envelope,expected_id}, where expected_id is the exact envelope CID. Historical kinds retain their original hashes/approvals. Bilateral receipt claims are not observed funds; no automatic native mapping. links refer to section-local IDs. Unknown links confer no authority.",
+            "description": "A raw coordination case with version, title and agreements. A contract draft or prior review report is not a case. See the service review-reference.json. Exact coordination case. Use start or case to construct it. Case0.4 adds explicit nonmonetary performance assertions; supplying performance selects it. Explicit case0.3 also admits BILATERAL rows with {id,kind,envelope,expected_id}, where expected_id is the exact envelope CID. Historical kinds retain their original hashes/approvals. Bilateral receipt claims are not observed funds; no automatic native mapping. links refer to section-local IDs. Unknown links confer no authority.",
             "maxProperties": 20000,
             "type": "object"
           },
           "expected_id": {
+            "description": "Optional retained exact case SHA256 identifier. A mismatch refuses; never replace a trusted pin merely to pass.",
             "pattern": "^[0-9a-f]{64}$",
             "type": "string"
           }
@@ -416,7 +463,8 @@
         ],
         "type": "object"
       },
-      "name": "covenant_review__review"
+      "name": "covenant_review__review",
+      "title": "Review a work record"
     }
   ]
 }
