@@ -15,6 +15,10 @@ This is the **public documentation repository**. Runtime source and private deve
 
 The technical guides retain their recorded implementation snapshot. Publisher-authored introduction and community pages may evolve separately. A future documentation export must review and preserve those public-facing assets rather than replace this repository wholesale.
 
+## Signing-client fixtures
+
+The browser signer tests compare real WebCrypto output with the standalone Python signer. Use a Python interpreter with `cryptography` installed and pass it as `COVENANT_TEST_PYTHON` when running `node --test tests/*.cjs tests/*.mjs`. Run the standalone fixtures with that same interpreter: `python -m unittest discover -s tests -p 'test_approve*.py' -v`. Optional private-core interoperability and source-projection checks are labelled separately; the public site needs no core installation. Never use a real access file as a test fixture.
+
 ## Public copy
 
 Start with a concrete problem and a useful next step. Use everyday words and short sentences. Explain what a person can do before naming the underlying technology. Keep necessary availability and permission details concise, then link to the full guide; avoid repeating them throughout a page. Fictional stories stay clearly separate from working demonstrations. Technical references retain the exact interface names they need.

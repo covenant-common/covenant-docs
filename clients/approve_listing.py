@@ -23,6 +23,7 @@ LABEL = 'COVENANT-PUBLIC-WEB-0.1'
 ITEM_LABEL = 'COVENANT-PUBLIC-WEB-ITEM-0.1'
 PROFILE = 'covenant-public-web/0.1'
 ACCESS_VERSION = 'aap-private-trial-client/0.1'
+ADVERT_DRAFT_PROFILE = 'urn:aap:hosted-advert-draft:0.1'
 HEX = re.compile(r'[0-9a-f]{64}\Z')
 MAX_SAFE_INTEGER = 2**53 - 1
 BODY_FIELDS = frozenset(('version', 'origin', 'id', 'kind', 'source', 'principals',
@@ -174,8 +175,40 @@ def preview_value(value):
             value['payment_dispatched'] is False and value['external_execution'] is False,
             'PREPARE_RECEIPT')
         value = value['result']
-    shape(value, PREVIEW_FIELDS, 'PREVIEW_FIELDS')
+    if type(value) is dict and ('source' in value or 'draft_profile' in value):
+        shape(value, PREVIEW_FIELDS | {'source', 'draft_profile'}, 'PREVIEW_FIELDS')
+        require(value['draft_profile'] == ADVERT_DRAFT_PROFILE, 'ADVERT_DRAFT_PROFILE')
+    else:
+        shape(value, PREVIEW_FIELDS, 'PREVIEW_FIELDS')
     return value
+
+
+def checked_source_binding(prepared, actor):
+    """Bind an explicitly versioned returned source; never infer native validity."""
+    source = prepared['source']
+    shape(source, ('version', 'kind', 'author', 'title', 'data', 'frame', 'supersedes'),
+        'ADVERT_SOURCE_FIELDS')
+    require(source['version'] == 'covenant-marketplace/0.1' and source['kind'] == 'LISTING' and
+        source['author'] == actor and type(source['title']) is str and
+        0 < len(source['title']) <= 256 and type(source['frame']) is dict and
+        (source['supersedes'] is None or hex_key(source['supersedes'])), 'ADVERT_SOURCE_SHAPE')
+    data = source['data']
+    shape(data, ('market', 'offer', 'want', 'mechanism', 'category', 'quantity',
+        'settlement', 'archetype', 'custom', 'active'), 'ADVERT_SOURCE_FIELDS')
+    require(hex_key(data['market']) and type(data['offer']) is list and
+        type(data['want']) is list and type(data['mechanism']) is str and
+        0 < len(data['mechanism']) <= 128 and type(data['category']) is str and
+        0 < len(data['category']) <= 128 and integer(data['quantity'], True) and
+        type(data['settlement']) is dict and type(data['custom']) is dict and
+        type(data['active']) is bool and
+        (data['archetype'] is None or hex_key(data['archetype'])), 'ADVERT_SOURCE_SHAPE')
+    source_hash = hashlib.sha256(b'COVENANT-MARKETPLACE-0.1\0' + canonical(source)).hexdigest()
+    require(prepared['body']['source']['id'] == source_hash, 'ADVERT_SOURCE_HASH')
+    candidates = {'title': source['title'], 'record_kind': source['kind'], **data}
+    require(prepared['available_fields'] == sorted(candidates) and all(
+        name in candidates and canonical(value) == canonical(candidates[name])
+        for name, value in prepared['body']['fields'].items()), 'ADVERT_SOURCE_PROJECTION')
+    # Full native marketplace/frame validation and external truth remain separate.
 
 
 def checked_listing(value, actor, now):
@@ -225,6 +258,8 @@ def checked_listing(value, actor, now):
                    'expiry', 'explicit links', 'consent signatures']), 'PREVIEW_REVIEW')
     wire = canonical(body)
     require(len(wire) <= 64000, 'PUBLICATION_SIZE')
+    if 'draft_profile' in prepared:
+        checked_source_binding(prepared, actor)
     return body, LABEL.encode('ascii') + b'\0' + wire
 
 

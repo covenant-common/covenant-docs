@@ -1,0 +1,287 @@
+{
+  "expected_canonical_body": "{\"expires\":1793443600,\"fields\":{\"active\":true,\"category\":\"data-cleaning\",\"custom\":{\"description\":\"Fictional spreadsheet duplicate review; no live supplier or fulfilment.\",\"description_profile\":\"urn:aap:public-advert-description:0.1\"},\"offer\":[{\"amount\":1,\"asset\":{\"adapter\":null,\"identifier\":\"duplicate-review\",\"namespace\":\"service\",\"transfer_terms\":{},\"unit\":\"file\"}}],\"title\":\"PR188 SYNTHETIC advert fixture only\",\"want\":[{\"amount\":2000,\"asset\":{\"adapter\":null,\"identifier\":\"GBP\",\"namespace\":\"fiat\",\"transfer_terms\":{},\"unit\":\"pence\"}}]},\"id\":\"d863b7835337689daad87d7aaff484b0410919b9ed00487f1058689fa193441a\",\"kind\":\"marketplace\",\"links\":[],\"origin\":\"https://jupie202020.pythonanywhere.com\",\"previous\":null,\"principals\":[\"884b8857f4eaa1613c61504db34d4beaf346517a0e31de3cddd4d9b4201d9d0b\"],\"sequence\":1,\"source\":{\"id\":\"90f4a05eec0aa5e83c142d679e0f352d69f6cbe5cabe62add29223cd31c0dc2a\",\"type\":\"marketplace-listing\"},\"version\":\"covenant-public-web/0.1\",\"visibility\":\"INDEXED\"}",
+  "expected_message_hex": "434f56454e414e542d5055424c49432d5745422d302e31007b2265787069726573223a313739333434333630302c226669656c6473223a7b22616374697665223a747275652c2263617465676f7279223a22646174612d636c65616e696e67222c22637573746f6d223a7b226465736372697074696f6e223a2246696374696f6e616c207370726561647368656574206475706c6963617465207265766965773b206e6f206c69766520737570706c696572206f722066756c66696c6d656e742e222c226465736372697074696f6e5f70726f66696c65223a2275726e3a6161703a7075626c69632d6164766572742d6465736372697074696f6e3a302e31227d2c226f66666572223a5b7b22616d6f756e74223a312c226173736574223a7b2261646170746572223a6e756c6c2c226964656e746966696572223a226475706c69636174652d726576696577222c226e616d657370616365223a2273657276696365222c227472616e736665725f7465726d73223a7b7d2c22756e6974223a2266696c65227d7d5d2c227469746c65223a2250523138382053594e544845544943206164766572742066697874757265206f6e6c79222c2277616e74223a5b7b22616d6f756e74223a323030302c226173736574223a7b2261646170746572223a6e756c6c2c226964656e746966696572223a22474250222c226e616d657370616365223a2266696174222c227472616e736665725f7465726d73223a7b7d2c22756e6974223a2270656e6365227d7d5d7d2c226964223a2264383633623738333533333736383964616164383764376161666634383462303431303931396239656430303438376631303538363839666131393334343161222c226b696e64223a226d61726b6574706c616365222c226c696e6b73223a5b5d2c226f726967696e223a2268747470733a2f2f6a757069653230323032302e707974686f6e616e7977686572652e636f6d222c2270726576696f7573223a6e756c6c2c227072696e636970616c73223a5b2238383462383835376634656161313631336336313530346462333464346265616633343635313761306533316465336364646434643962343230316439643062225d2c2273657175656e6365223a312c22736f75726365223a7b226964223a2239306634613035656563306161356538336331343264363739653066333532643639663663626535636162653632616464323932323363643331633064633261222c2274797065223a226d61726b6574706c6163652d6c697374696e67227d2c2276657273696f6e223a22636f76656e616e742d7075626c69632d7765622f302e31222c227669736962696c697479223a22494e4445584544227d",
+  "expected_signature": "6c805e1076ce299cabc591d3a0b6ddc5b487b3e15f56b828534c50f77460f52c8ed194e88a3c42b50e1fafc4a80a54fd3e3989c42c4ea9d9f636d9d2007c7801",
+  "expected_source_sha256": "90f4a05eec0aa5e83c142d679e0f352d69f6cbe5cabe62add29223cd31c0dc2a",
+  "note": "Generated from the actual PR188 pure builder; known synthetic actor, no real access or publication. Native engine code is not included.",
+  "prepared": {
+    "available_fields": [
+      "active",
+      "archetype",
+      "category",
+      "custom",
+      "market",
+      "mechanism",
+      "offer",
+      "quantity",
+      "record_kind",
+      "settlement",
+      "title",
+      "want"
+    ],
+    "body": {
+      "expires": 1793443600,
+      "fields": {
+        "active": true,
+        "category": "data-cleaning",
+        "custom": {
+          "description": "Fictional spreadsheet duplicate review; no live supplier or fulfilment.",
+          "description_profile": "urn:aap:public-advert-description:0.1"
+        },
+        "offer": [
+          {
+            "amount": 1,
+            "asset": {
+              "adapter": null,
+              "identifier": "duplicate-review",
+              "namespace": "service",
+              "transfer_terms": {},
+              "unit": "file"
+            }
+          }
+        ],
+        "title": "PR188 SYNTHETIC advert fixture only",
+        "want": [
+          {
+            "amount": 2000,
+            "asset": {
+              "adapter": null,
+              "identifier": "GBP",
+              "namespace": "fiat",
+              "transfer_terms": {},
+              "unit": "pence"
+            }
+          }
+        ]
+      },
+      "id": "d863b7835337689daad87d7aaff484b0410919b9ed00487f1058689fa193441a",
+      "kind": "marketplace",
+      "links": [],
+      "origin": "https://jupie202020.pythonanywhere.com",
+      "previous": null,
+      "principals": [
+        "884b8857f4eaa1613c61504db34d4beaf346517a0e31de3cddd4d9b4201d9d0b"
+      ],
+      "sequence": 1,
+      "source": {
+        "id": "90f4a05eec0aa5e83c142d679e0f352d69f6cbe5cabe62add29223cd31c0dc2a",
+        "type": "marketplace-listing"
+      },
+      "version": "covenant-public-web/0.1",
+      "visibility": "INDEXED"
+    },
+    "draft_profile": "urn:aap:hosted-advert-draft:0.1",
+    "execution_authorized": false,
+    "id": "d863b7835337689daad87d7aaff484b0410919b9ed00487f1058689fa193441a",
+    "preview": {
+      "boundary": "Signed public projection; source hash is a reference, not a ledger inclusion proof, current authority, verified identity, stock reservation or payment finality. Visibility and freshness are local to this publisher. Previously public copies may persist.",
+      "indexable": true,
+      "private_source_exported": false,
+      "public_fields": {
+        "active": true,
+        "category": "data-cleaning",
+        "custom": {
+          "description": "Fictional spreadsheet duplicate review; no live supplier or fulfilment.",
+          "description_profile": "urn:aap:public-advert-description:0.1"
+        },
+        "offer": [
+          {
+            "amount": 1,
+            "asset": {
+              "adapter": null,
+              "identifier": "duplicate-review",
+              "namespace": "service",
+              "transfer_terms": {},
+              "unit": "file"
+            }
+          }
+        ],
+        "title": "PR188 SYNTHETIC advert fixture only",
+        "want": [
+          {
+            "amount": 2000,
+            "asset": {
+              "adapter": null,
+              "identifier": "GBP",
+              "namespace": "fiat",
+              "transfer_terms": {},
+              "unit": "pence"
+            }
+          }
+        ]
+      },
+      "public_metadata": [
+        "origin",
+        "source hash/type",
+        "signing identities",
+        "revision",
+        "visibility",
+        "expiry",
+        "explicit links",
+        "consent signatures"
+      ]
+    },
+    "published": false,
+    "required_signers": [
+      "884b8857f4eaa1613c61504db34d4beaf346517a0e31de3cddd4d9b4201d9d0b"
+    ],
+    "signing_label": "COVENANT-PUBLIC-WEB-0.1",
+    "source": {
+      "author": "884b8857f4eaa1613c61504db34d4beaf346517a0e31de3cddd4d9b4201d9d0b",
+      "data": {
+        "active": true,
+        "archetype": null,
+        "category": "data-cleaning",
+        "custom": {
+          "description": "Fictional spreadsheet duplicate review; no live supplier or fulfilment.",
+          "description_profile": "urn:aap:public-advert-description:0.1"
+        },
+        "market": "467732c44ffebd470f05c9ea7e4b054229b5088d807cf392387b8163c3fcba9f",
+        "mechanism": "FIXED",
+        "offer": [
+          {
+            "amount": 1,
+            "asset": {
+              "adapter": null,
+              "identifier": "duplicate-review",
+              "namespace": "service",
+              "transfer_terms": {},
+              "unit": "file"
+            }
+          }
+        ],
+        "quantity": 1,
+        "settlement": {
+          "delivery_acceptance": "SEPARATE_FROM_AGREEMENT_ACCEPTANCE",
+          "mode": "EXACT_ORDER_ADOPTION",
+          "payment_stage": "UNSPECIFIED_REQUIRES_EXPLICIT_ADOPTION"
+        },
+        "want": [
+          {
+            "amount": 2000,
+            "asset": {
+              "adapter": null,
+              "identifier": "GBP",
+              "namespace": "fiat",
+              "transfer_terms": {},
+              "unit": "pence"
+            }
+          }
+        ]
+      },
+      "frame": {
+        "extensions": {},
+        "links": [],
+        "slots": [
+          {
+            "answers": [
+              {
+                "evidence": [],
+                "stated_by": null,
+                "value": "884b8857f4eaa1613c61504db34d4beaf346517a0e31de3cddd4d9b4201d9d0b"
+              }
+            ],
+            "definition": "Actors, identities, roles, capacities or claimed attribution.",
+            "dimension": "who",
+            "id": "who",
+            "question": "who?",
+            "reason": null,
+            "status": "ASSERTED"
+          },
+          {
+            "answers": [
+              {
+                "evidence": [],
+                "stated_by": null,
+                "value": "PR188 SYNTHETIC advert fixture only"
+              }
+            ],
+            "definition": "Actions, objects, resources, obligations or claims being described.",
+            "dimension": "what",
+            "id": "what",
+            "question": "what?",
+            "reason": null,
+            "status": "ASSERTED"
+          },
+          {
+            "answers": [
+              {
+                "evidence": [],
+                "stated_by": null,
+                "value": {
+                  "archetype": null,
+                  "author": "884b8857f4eaa1613c61504db34d4beaf346517a0e31de3cddd4d9b4201d9d0b",
+                  "market": "467732c44ffebd470f05c9ea7e4b054229b5088d807cf392387b8163c3fcba9f",
+                  "title": "PR188 SYNTHETIC advert fixture only"
+                }
+              }
+            ],
+            "definition": "The exact selection, subset, version or referenced instance.",
+            "dimension": "which",
+            "id": "which",
+            "question": "which?",
+            "reason": null,
+            "status": "ASSERTED"
+          },
+          {
+            "answers": [],
+            "definition": "Physical, digital, jurisdictional or other explicitly named scope.",
+            "dimension": "where",
+            "id": "where",
+            "question": "where?",
+            "reason": null,
+            "status": "UNKNOWN"
+          },
+          {
+            "answers": [],
+            "definition": "Time, deadline, interval, sequence or event under a stated basis.",
+            "dimension": "when",
+            "id": "when",
+            "question": "when?",
+            "reason": null,
+            "status": "UNKNOWN"
+          },
+          {
+            "answers": [],
+            "definition": "Declared purpose, rationale or motivation; not an inferred motive.",
+            "dimension": "why",
+            "id": "why",
+            "question": "why?",
+            "reason": null,
+            "status": "UNKNOWN"
+          },
+          {
+            "answers": [
+              {
+                "evidence": [],
+                "stated_by": null,
+                "value": {
+                  "delivery_acceptance": "SEPARATE_FROM_AGREEMENT_ACCEPTANCE",
+                  "mode": "EXACT_ORDER_ADOPTION",
+                  "payment_stage": "UNSPECIFIED_REQUIRES_EXPLICIT_ADOPTION"
+                }
+              }
+            ],
+            "definition": "Method, procedure, logic, technology, evidence or protection choices.",
+            "dimension": "how",
+            "id": "how",
+            "question": "how?",
+            "reason": null,
+            "status": "ASSERTED"
+          }
+        ],
+        "supersedes": null,
+        "target": null,
+        "title": "PR188 SYNTHETIC advert fixture only",
+        "version": "covenant-question-frame/0.1"
+      },
+      "kind": "LISTING",
+      "supersedes": null,
+      "title": "PR188 SYNTHETIC advert fixture only",
+      "version": "covenant-marketplace/0.1"
+    },
+    "url": "https://jupie202020.pythonanywhere.com/marketplace/d863b7835337689daad87d7aaff484b0410919b9ed00487f1058689fa193441a"
+  },
+  "source_commit": "84f580ae",
+  "test_only": true
+}

@@ -548,47 +548,17 @@
     const shared = typeof window !== 'undefined' ? window.AAPDealStructures : require('./deal-structures.js');
     return shared.normalizeServiceQuery(need, options);
   }
-  function publicLeg(leg) {
-    if (!leg || typeof leg !== 'object' || Array.isArray(leg) || !leg.asset || typeof leg.asset !== 'object' || Array.isArray(leg.asset)) return null;
-    const asset = leg.asset;
-    if (!['namespace', 'identifier', 'unit'].every((key) => typeof asset[key] === 'string')) return null;
-    const amount = leg.amount;
-    if (!Number.isSafeInteger(amount) || amount < 0) return null;
-    const view = {amount, asset: {namespace: asset.namespace, identifier: asset.identifier, unit: asset.unit}};
-    const denominations = {USD: 'cents', GBP: 'pence', EUR: 'cents'};
-    let label;
-    if (asset.namespace === 'fiat' && Object.prototype.hasOwnProperty.call(denominations, asset.identifier) && asset.unit === denominations[asset.identifier]) {
-      const exact = BigInt(amount);
-      label = asset.identifier + ' ' + (exact / 100n).toString() + '.' + (exact % 100n).toString().padStart(2, '0');
-    } else label = String(amount) + ' ' + asset.unit + ' · ' + asset.identifier + ' [' + asset.namespace + ']';
-    return {label, view};
+  function listingViewModule() {
+    const shared = typeof window !== 'undefined' ? window.AAPDealStructures : require('./deal-structures.js');
+    if (!shared || typeof shared.publicLeg !== 'function' || typeof shared.publicListingDisplay !== 'function') {
+      const error = new Error('This page could not load its advert display.');
+      error.code = 'PUBLIC_LISTING_DISPLAY_UNAVAILABLE';
+      throw error;
+    }
+    return shared;
   }
-  function publicListingDisplay(fields) {
-    const object = (value) => value !== null && typeof value === 'object' && !Array.isArray(value);
-    if (!object(fields)) throw new Error('Public listing fields');
-    const selected = {};
-    ['title', 'category', 'summary', 'description'].forEach((key) => {if (typeof fields[key] === 'string') selected[key] = fields[key];});
-    const custom = object(fields.custom) ? fields.custom : null;
-    // No private_note, terms, contact details, adapter options or other custom
-    // keys are read or copied into this card's display projection.
-    const publicCustom = {};
-    if (custom) ['description', 'scope'].forEach((key) => {if (typeof custom[key] === 'string') publicCustom[key] = custom[key];});
-    if (Object.keys(publicCustom).length) selected.custom = publicCustom;
-    const descriptions = [...new Set([selected.summary, selected.description, publicCustom.description].filter((value) => typeof value === 'string' && value.trim()))];
-    const summary = descriptions.join(' ');
-    const scope = typeof publicCustom.scope === 'string' ? publicCustom.scope : '';
-    const excerpt = (value) => value.length > 420 ? value.slice(0, 417) + '...' : value;
-    const legs = {};
-    ['offer', 'want'].forEach((key) => {
-      if (!Array.isArray(fields[key])) {legs[key] = null; return;}
-      legs[key] = fields[key].map(publicLeg).filter((value) => value !== null);
-      selected[key] = legs[key].map((value) => value.view);
-    });
-    return {title: selected.title || 'Public service advert', category: selected.category || '',
-      summary: excerpt(summary), scope: excerpt(scope), excerpted: summary.length > 420 || scope.length > 420,
-      offers: legs.offer === null ? null : legs.offer.map((value) => value.label),
-      wants: legs.want === null ? null : legs.want.map((value) => value.label), selectedFields: selected};
-  }
+  function publicLeg(leg) {return listingViewModule().publicLeg(leg);}
+  function publicListingDisplay(fields) {return listingViewModule().publicListingDisplay(fields);}
   const exported = {personalizedPageRank, rankNavigation, taskIntent, intentRules: INTENT_RULES, catalogue: CATALOGUE, normalizeServiceQuery, publicLeg, publicListingDisplay};
   if (typeof module !== 'undefined' && module.exports) module.exports = exported;
   if (typeof document === 'undefined') return;
@@ -770,6 +740,13 @@
     item.appendChild(details);
     return item;
   }
+  function listingDisplayHelp(message) {
+    const state = $('terminal-market-state');
+    state.replaceChildren();
+    node('span', message + ' ', state);
+    const link = node('a', 'Open current adverts as a simple page', state);
+    link.href = PUBLIC_ORIGIN + '/marketplace/browse/';
+  }
   function previewNotice() {
     const state = $('terminal-market-state');
     state.replaceChildren();
@@ -784,6 +761,11 @@
     if (!liveSearchAllowed) {previewNotice(); return;}
     if (busy) return;
     const need = $('terminal-query').value;
+    if (!append && (!window.AAPDealStructures || typeof window.AAPDealStructures.normalizeServiceQuery !== 'function')) {
+      $('terminal-more').hidden = true;
+      listingDisplayHelp('This page could not load its search helper. No search was sent.' + (displayed.size ? ' Previously displayed adverts remain below.' : ''));
+      return;
+    }
     const edited = keywordNeed === need && !$('terminal-keyword-assist').hidden;
     if (!append && !edited) $('terminal-keyword-assist').hidden = true;
     const normalised = append ? {query: currentQuery, notice: currentQueryNotice} : normalizeServiceQuery(edited ? $('terminal-keywords').value : need, {literal: edited});
@@ -806,8 +788,9 @@
       const result = await publicSearch(query, offset);
       result.items.forEach(({publication}) => {
         if (displayed.has(publication.id)) return;
+        const card = renderListing(publication);
+        $('terminal-listings').appendChild(card);
         displayed.add(publication.id);
-        $('terminal-listings').appendChild(renderListing(publication));
       });
       nextOffset = Number.isSafeInteger(result.next_offset) && result.next_offset >= 0 && result.next_offset <= 5000 ? result.next_offset : null;
       $('terminal-more').hidden = nextOffset === null;
@@ -815,7 +798,11 @@
       $('terminal-market-state').textContent = (result.total === 0 ? 'No public adverts matched. Try another search, or be among the first to advertise your service. Checked ' + checked + '.' : displayed.size + ' displayed; ' + result.total + ' matched this public search. Checked ' + checked + '. Listings can change between pages.') + ' ' + queryNotice;
     } catch (error) {
       nextOffset = null;
-      $('terminal-market-state').textContent = 'Public search unavailable: ' + error.message + (displayed.size ? ' Previously loaded adverts remain below; they have not been refreshed.' : ' This is not an empty-inventory result.') + ' ' + queryNotice;
+      if (error && error.code === 'PUBLIC_LISTING_DISPLAY_UNAVAILABLE') {
+        listingDisplayHelp('Search succeeded, but this page could not display the returned adverts.' + (displayed.size ? ' Previously displayed adverts remain below.' : ' No adverts have been displayed.'));
+      } else {
+        $('terminal-market-state').textContent = 'Public search unavailable: ' + error.message + (displayed.size ? ' Previously loaded adverts remain below; they have not been refreshed.' : ' This is not an empty-inventory result.') + ' ' + queryNotice;
+      }
     } finally {
       busy = false;
       $('terminal-find').disabled = false;
