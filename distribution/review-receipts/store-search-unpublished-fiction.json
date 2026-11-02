@@ -1,0 +1,50 @@
+{
+  "observed_at": "2026-11-02T08:57:00.828567+00:00",
+  "method": "POST",
+  "url": "https://jupie202020.pythonanywhere.com/mcp",
+  "http_status": 200,
+  "request": {
+    "jsonrpc": "2.0",
+    "id": 302,
+    "method": "tools/call",
+    "params": {
+      "name": "aap_public_listing_search",
+      "arguments": {
+        "query": "unpublished-review-fixture-20261102-zero-inventory",
+        "limit": 3
+      }
+    }
+  },
+  "response": {
+    "id": 302,
+    "jsonrpc": "2.0",
+    "result": {
+      "content": [
+        {
+          "text": "{\"external_execution\":false,\"operation\":\"listing.search\",\"payment_dispatched\":false,\"result\":{\"availability_verified\":false,\"items\":[],\"limit\":3,\"next_offset\":null,\"offset\":0,\"payment_verified\":false,\"ranking\":\"DISTINCT_WORD_TITLE_5_SUMMARY_3_RESOURCE_1_THEN_ITEM_ID\",\"returned\":0,\"scope\":\"CURRENT_INDEXED_PUBLICATIONS_ONLY\",\"total\":0},\"signing_performed\":false,\"version\":\"urn:aap:hosted-api:0.1\"}",
+          "type": "text"
+        }
+      ],
+      "isError": false
+    }
+  },
+  "parsed_tool_result": {
+    "external_execution": false,
+    "operation": "listing.search",
+    "payment_dispatched": false,
+    "result": {
+      "availability_verified": false,
+      "items": [],
+      "limit": 3,
+      "next_offset": null,
+      "offset": 0,
+      "payment_verified": false,
+      "ranking": "DISTINCT_WORD_TITLE_5_SUMMARY_3_RESOURCE_1_THEN_ITEM_ID",
+      "returned": 0,
+      "scope": "CURRENT_INDEXED_PUBLICATIONS_ONLY",
+      "total": 0
+    },
+    "signing_performed": false,
+    "version": "urn:aap:hosted-api:0.1"
+  }
+}

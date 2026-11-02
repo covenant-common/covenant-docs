@@ -1,0 +1,50 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/v1/server-card.schema.json",
+  "_meta": {
+    "io.github.covenant-common/access": {
+      "authentication": "none",
+      "privateAccountToolsIncluded": false
+    },
+    "io.github.covenant-common/public-tools": {
+      "currentListingMethod": "tools/list",
+      "names": [
+        "aap_public_listing_search",
+        "covenant_contract__compare",
+        "covenant_contract__draft",
+        "covenant_contract__inspect",
+        "covenant_contract__render",
+        "covenant_marketplace__quick_trade",
+        "covenant_review__authority",
+        "covenant_review__evidence",
+        "covenant_review__review"
+      ],
+      "observedAt": "2026-11-02T09:09:15.487420+00:00",
+      "sha256": "76a1317f18869f50c058fbf8e96b851a3e4e3b7a3000f0d1332afc27da56f23d",
+      "snapshotOnly": true,
+      "toolCount": 9,
+      "url": "https://covenant-common.github.io/covenant-docs/mcp/tool-inventory.json"
+    },
+    "io.github.covenant-common/runtime-identity": {
+      "nameMatchesCard": false,
+      "note": "Legacy runtime name retained. Verify the actual connection; this card is advisory.",
+      "observedServerInfo": {
+        "name": "aap-public-directory",
+        "version": "0.1"
+      }
+    }
+  },
+  "description": "Find services, draft work terms and review supplied agreements. No signing or payment.",
+  "name": "io.github.covenant-common/covenant-aap",
+  "remotes": [
+    {
+      "supportedProtocolVersions": [
+        "2025-11-25"
+      ],
+      "type": "streamable-http",
+      "url": "https://jupie202020.pythonanywhere.com/mcp"
+    }
+  ],
+  "title": "Covenant public tools",
+  "version": "0.1",
+  "websiteUrl": "https://covenant-common.github.io/covenant-docs/docs/CONNECTORS.html"
+}

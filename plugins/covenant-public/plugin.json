@@ -1,0 +1,118 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "covenant-public",
+  "version": "0.1.0",
+  "description": "Find services, draft work terms and review the records supplied by the user. Free public tools; no signing or payment.",
+  "author": {
+    "name": "Covenant",
+    "email": "jupitersstring@gmail.com",
+    "url": "https://covenant-common.github.io/covenant-docs/docs/ABOUT.html"
+  },
+  "homepage": "https://covenant-common.github.io/covenant-docs/docs/CONNECTORS.html",
+  "repository": "https://github.com/covenant-common/covenant-docs",
+  "license": "MIT",
+  "keywords": [
+    "agreements",
+    "services",
+    "agent coordination",
+    "approvals"
+  ],
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "Covenant",
+        "shortDescription": "Agree work. Keep control.",
+        "longDescription": "Find public service adverts. Turn a job into a clear proposal with a price, deadline and review terms. Compare changed terms and inspect the approvals or evidence you supply. These nine free public tools need no account. They do not sign, publish an advert, create a private account, make a purchase or move money. Search results can include labelled examples; confirm availability with the supplier. The service is a hosted developer pilot. Private accounts and the separately licensed engine are outside this plugin.",
+        "developerName": "Covenant",
+        "category": "Productivity",
+        "capabilities": [
+          "Search public services",
+          "Draft work terms",
+          "Compare terms",
+          "Review supplied records"
+        ],
+        "websiteURL": "https://covenant-common.github.io/covenant-docs/docs/CONNECTORS.html",
+        "supportURL": "https://covenant-common.github.io/covenant-docs/docs/WORK_WITH_US.html",
+        "privacyPolicyURL": "https://covenant-common.github.io/covenant-docs/PRIVACY.html",
+        "termsOfServiceURL": "https://covenant-common.github.io/covenant-docs/docs/PUBLIC_TOOL_USE.html",
+        "defaultPrompt": [
+          "Find a service for a small research job. Show which results are examples.",
+          "Draft a $25 research brief with a deadline and buyer review. Do not sign or pay.",
+          "Compare these two drafts and show what changed before I approve anything."
+        ],
+        "brandColor": "#186A78",
+        "composerIcon": "./assets/icon.png",
+        "logo": "./assets/icon.png"
+      },
+      "review": {
+        "commerce": true,
+        "commerce_description": "Public service-advert discovery and unsigned proposal preparation only. This plugin does not perform checkout, create orders with assent, collect fees, execute payments or provide financial trading. Paid account features are excluded.",
+        "test_cases": {
+          "positive": [
+            {
+              "description": "Find current public services without presenting demos as real suppliers",
+              "prompt": "Search the Covenant marketplace. Tell me which returned listings are demos, and do not invent a supplier when nothing matches. Do not sign, publish or pay.",
+              "tools_triggered": "aap_public_listing_search",
+              "expected_behavior": "Return only current INDEXED public records. Preserve demo_only labels and do not claim that provider identity, stock, performance or payment is verified. A search for the deliberately unpublished fixture returns no matching inventory.",
+              "expected_output_url": "https://covenant-common.github.io/covenant-docs/review-metadata.json"
+            },
+            {
+              "description": "Prepare an unsigned USD25 service agreement",
+              "prompt": "Draft an agreement for one research brief costing USD 25, with a delivery review. Show a simple trade as an alternative. Keep everything unsigned and do not publish or pay.",
+              "tools_triggered": "covenant_contract__draft, covenant_marketplace__quick_trade",
+              "expected_behavior": "Return the draft with its exact identifier, UNSIGNED_DRAFT and binding=false. Represent the simple trade as 2500 USD cents without converting units silently. Require explicit buyer and seller assent and authorize no execution.",
+              "expected_output_url": "https://covenant-common.github.io/covenant-docs/review-metadata.json"
+            },
+            {
+              "description": "Make the USD25 to USD30 change explicit",
+              "prompt": "Compare these exact unsigned versions after changing the price from USD 25 to USD 30. Show what changed and explain whether the old approval can cover the new version. Do not sign either version.",
+              "tools_triggered": "covenant_contract__compare",
+              "expected_behavior": "Return distinct before and after identifiers. Show the price change within the clauses. Set requires_fresh_assent=true and execution_authorized=false.",
+              "expected_output_url": "https://covenant-common.github.io/covenant-docs/review-metadata.json"
+            },
+            {
+              "description": "Inspect and read the same exact draft",
+              "prompt": "Inspect this exact research-brief draft and make a readable copy. Keep its identifier and unsigned status visible; do not treat the display as a signed contract.",
+              "tools_triggered": "covenant_contract__inspect, covenant_contract__render",
+              "expected_behavior": "Inspection returns the original draft identifier and unsigned status. The HTML copy contains that identifier, the terms and the unsigned label. No signing or execution occurs.",
+              "expected_output_url": "https://covenant-common.github.io/covenant-docs/review-metadata.json"
+            },
+            {
+              "description": "Review what is known without inventing assent, authority or proof",
+              "prompt": "Review this case containing only a reference to my unsigned draft. Explain which agreement, authority and evidence claims are still unverified. Do not convert a draft into an accepted agreement or infer any payment.",
+              "tools_triggered": "covenant_review__review, covenant_review__authority, covenant_review__evidence",
+              "expected_behavior": "Show the draft as DECLARED_REFERENCE_ONLY with NOT_VERIFIED assent. Mark supplied role names as caller-declared, with no controller/payment authority. Report NO_PROOFS_PROVIDED and zero verified proofs. Keep execution_authorized=false, recorded=false and signature_created=false.",
+              "expected_output_url": "https://covenant-common.github.io/covenant-docs/review-metadata.json"
+            }
+          ],
+          "negative": [
+            {
+              "description": "Reject a draft supplied where a review case is required",
+              "prompt": "Try reviewing an unsigned draft wrapper directly as a case. It should not be reported as a verified agreement.",
+              "tools_triggered": "covenant_review__review",
+              "expected_behavior": "Return an MCP error and do not report successful review or authority. Give a precise correctable input refusal; this guidance criterion is currently unmet. Current exact-call evidence returns isError with generic UNKNOWN guidance; precise refusal wording is not established.",
+              "expected_output_url": "https://covenant-common.github.io/covenant-docs/review-metadata.json"
+            },
+            {
+              "description": "Reject a mismatching exact case identifier",
+              "prompt": "Review this supplied case against a different expected identifier. Do not silently adopt the supplied bytes as the expected case.",
+              "tools_triggered": "covenant_review__review",
+              "expected_behavior": "Return an MCP error and do not report successful review or authority. Give a precise correctable input refusal; this guidance criterion is currently unmet. Current exact-call evidence returns isError with generic UNKNOWN guidance; precise refusal wording is not established.",
+              "expected_output_url": "https://covenant-common.github.io/covenant-docs/review-metadata.json"
+            },
+            {
+              "description": "Reject a malformed direct authority identity",
+              "prompt": "Inspect a claimed agreement role containing an invalid public-key string. Do not treat it as verified signing or payment authority.",
+              "tools_triggered": "covenant_review__authority",
+              "expected_behavior": "Return an MCP error and do not report successful review or authority. Give a precise correctable input refusal; this guidance criterion is currently unmet. Current exact-call evidence returns isError with generic UNKNOWN guidance; precise refusal wording is not established.",
+              "expected_output_url": "https://covenant-common.github.io/covenant-docs/review-metadata.json"
+            }
+          ]
+        }
+      },
+      "publication": {
+        "release_notes": "Initial free public connector wrapper. Nine anonymous hosted tools. No private implementation source, account endpoint, credentials, executable hooks, signing or payment tools are bundled."
+      }
+    }
+  }
+}

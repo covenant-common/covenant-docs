@@ -1,0 +1,93 @@
+{
+  "observed_at": "2026-11-02T08:57:03.061820+00:00",
+  "method": "POST",
+  "url": "https://jupie202020.pythonanywhere.com/mcp",
+  "http_status": 200,
+  "request": {
+    "jsonrpc": "2.0",
+    "id": 303,
+    "method": "tools/call",
+    "params": {
+      "name": "covenant_contract__draft",
+      "arguments": {
+        "title": "Synthetic review: one research brief",
+        "parties": [
+          "buyer-example",
+          "supplier-example"
+        ],
+        "clauses": [
+          {
+            "id": "scope",
+            "title": "Work",
+            "text": "One page answering the agreed research question, with sources."
+          },
+          {
+            "id": "price",
+            "title": "Price",
+            "text": "USD 25. This is an unsigned synthetic exercise; no payment is authorised."
+          },
+          {
+            "id": "review",
+            "title": "Delivery review",
+            "text": "The buyer checks the brief against the exact agreed scope before accepting it."
+          }
+        ]
+      }
+    }
+  },
+  "response": {
+    "id": 303,
+    "jsonrpc": "2.0",
+    "result": {
+      "content": [
+        {
+          "text": "{\"binding\":false,\"draft\":{\"clauses\":[{\"id\":\"scope\",\"text\":\"One page answering the agreed research question, with sources.\",\"title\":\"Work\"},{\"id\":\"price\",\"text\":\"USD 25. This is an unsigned synthetic exercise; no payment is authorised.\",\"title\":\"Price\"},{\"id\":\"review\",\"text\":\"The buyer checks the brief against the exact agreed scope before accepting it.\",\"title\":\"Delivery review\"}],\"conditions\":[],\"dispute\":{},\"extensions\":{},\"parties\":[\"buyer-example\",\"supplier-example\"],\"settlement\":{},\"supersedes\":null,\"title\":\"Synthetic review: one research brief\",\"version\":\"covenant-contract-draft/0.1\"},\"execution_authorized\":false,\"id\":\"7c449e319157fde38a0f6a683f12554723fc0a508c24892c775acb576015b30d\",\"legal_effect\":\"NOT_DETERMINED\",\"machine_enforcement\":\"ONLY_SEPARATELY_INSTALLED_AND_ADOPTED_PROJECTIONS\",\"missing\":[\"SETTLEMENT_UNSPECIFIED\",\"DISPUTE_PROCEDURE_UNSPECIFIED\"],\"status\":\"UNSIGNED_DRAFT\"}",
+          "type": "text"
+        }
+      ],
+      "isError": false
+    }
+  },
+  "parsed_tool_result": {
+    "binding": false,
+    "draft": {
+      "clauses": [
+        {
+          "id": "scope",
+          "text": "One page answering the agreed research question, with sources.",
+          "title": "Work"
+        },
+        {
+          "id": "price",
+          "text": "USD 25. This is an unsigned synthetic exercise; no payment is authorised.",
+          "title": "Price"
+        },
+        {
+          "id": "review",
+          "text": "The buyer checks the brief against the exact agreed scope before accepting it.",
+          "title": "Delivery review"
+        }
+      ],
+      "conditions": [],
+      "dispute": {},
+      "extensions": {},
+      "parties": [
+        "buyer-example",
+        "supplier-example"
+      ],
+      "settlement": {},
+      "supersedes": null,
+      "title": "Synthetic review: one research brief",
+      "version": "covenant-contract-draft/0.1"
+    },
+    "execution_authorized": false,
+    "id": "7c449e319157fde38a0f6a683f12554723fc0a508c24892c775acb576015b30d",
+    "legal_effect": "NOT_DETERMINED",
+    "machine_enforcement": "ONLY_SEPARATELY_INSTALLED_AND_ADOPTED_PROJECTIONS",
+    "missing": [
+      "SETTLEMENT_UNSPECIFIED",
+      "DISPUTE_PROCEDURE_UNSPECIFIED"
+    ],
+    "status": "UNSIGNED_DRAFT"
+  }
+}

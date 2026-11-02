@@ -1,0 +1,45 @@
+{
+  "observed_at": "2026-11-02T08:51:59.766425+00:00",
+  "method": "POST",
+  "url": "https://jupie202020.pythonanywhere.com/mcp",
+  "http_status": 200,
+  "expected": "REFUSE_DRAFT_WRAPPER_AS_CASE",
+  "request": {
+    "jsonrpc": "2.0",
+    "id": 106,
+    "method": "tools/call",
+    "params": {
+      "name": "covenant_review__review",
+      "arguments": {
+        "case": {
+          "title": "Synthetic unsigned contract draft",
+          "parties": [
+            "buyer-example",
+            "supplier-example"
+          ],
+          "clauses": [],
+          "binding": false
+        }
+      }
+    }
+  },
+  "response": {
+    "id": 106,
+    "jsonrpc": "2.0",
+    "result": {
+      "content": [
+        {
+          "text": "{\"code\":\"MCP_CONNECTED_OUTCOME_UNKNOWN\",\"external_effects\":\"NOT_ESTABLISHED_BY_THIS_BRIDGE\",\"next_action\":\"The underlying call has no trustworthy completion result. Inspect and reconcile the same retained operation before acting again; do not automatically retry or replace its operation identifier.\",\"status\":\"UNKNOWN\"}",
+          "type": "text"
+        }
+      ],
+      "isError": true
+    }
+  },
+  "parsed_tool_result": {
+    "code": "MCP_CONNECTED_OUTCOME_UNKNOWN",
+    "external_effects": "NOT_ESTABLISHED_BY_THIS_BRIDGE",
+    "next_action": "The underlying call has no trustworthy completion result. Inspect and reconcile the same retained operation before acting again; do not automatically retry or replace its operation identifier.",
+    "status": "UNKNOWN"
+  }
+}

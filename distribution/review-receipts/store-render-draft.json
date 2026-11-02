@@ -1,0 +1,63 @@
+{
+  "observed_at": "2026-11-02T08:58:22.277791+00:00",
+  "method": "POST",
+  "url": "https://jupie202020.pythonanywhere.com/mcp",
+  "http_status": 200,
+  "request": {
+    "jsonrpc": "2.0",
+    "id": 312,
+    "method": "tools/call",
+    "params": {
+      "name": "covenant_contract__render",
+      "arguments": {
+        "body": {
+          "clauses": [
+            {
+              "id": "scope",
+              "text": "One page answering the agreed research question, with sources.",
+              "title": "Work"
+            },
+            {
+              "id": "price",
+              "text": "USD 25. This is an unsigned synthetic exercise; no payment is authorised.",
+              "title": "Price"
+            },
+            {
+              "id": "review",
+              "text": "The buyer checks the brief against the exact agreed scope before accepting it.",
+              "title": "Delivery review"
+            }
+          ],
+          "conditions": [],
+          "dispute": {},
+          "extensions": {},
+          "parties": [
+            "buyer-example",
+            "supplier-example"
+          ],
+          "settlement": {},
+          "supersedes": null,
+          "title": "Synthetic review: one research brief",
+          "version": "covenant-contract-draft/0.1"
+        }
+      }
+    }
+  },
+  "response": {
+    "id": 312,
+    "jsonrpc": "2.0",
+    "result": {
+      "content": [
+        {
+          "text": "{\"execution_authorized\":false,\"html\":\"<!doctype html><html lang=\\\"en\\\"><meta charset=\\\"utf-8\\\"><meta name=\\\"viewport\\\" content=\\\"width=device-width,initial-scale=1\\\"><title>Synthetic review: one research brief</title><style>body{font:16px/1.16 \\\"Times New Roman\\\",serif;color:#000;background:#fff;margin:1rem}main{max-width:65rem;margin:auto;border:1px solid #000;padding:1rem}h1,h2,pre{font:inherit}h1,h2{font-weight:bold;margin:1rem 0 .382rem}p{margin:.382rem 0 .618rem}pre{white-space:pre-wrap;overflow-wrap:anywhere}</style><main><h1>Synthetic review: one research brief</h1><p>Unsigned draft \\u00b7 7c449e319157fde38a0f6a683f12554723fc0a508c24892c775acb576015b30d</p><p>Parties: buyer-example, supplier-example</p><section><h2>scope \\u00b7 Work</h2><p>One page answering the agreed research question, with sources.</p></section><section><h2>price \\u00b7 Price</h2><p>USD 25. This is an unsigned synthetic exercise; no payment is authorised.</p></section><section><h2>review \\u00b7 Delivery review</h2><p>The buyer checks the brief against the exact agreed scope before accepting it.</p></section><h2>Exact structured conditions, settlement, dispute and extensions</h2><pre>{\\n  &quot;conditions&quot;: [],\\n  &quot;settlement&quot;: {},\\n  &quot;dispute&quot;: {},\\n  &quot;extensions&quot;: {},\\n  &quot;supersedes&quot;: null\\n}</pre><p>Exact drafting does not supply assent, legal effect, funding or external enforcement.</p></main></html>\"}",
+          "type": "text"
+        }
+      ],
+      "isError": false
+    }
+  },
+  "parsed_tool_result": {
+    "execution_authorized": false,
+    "html": "<!doctype html><html lang=\"en\"><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><title>Synthetic review: one research brief</title><style>body{font:16px/1.16 \"Times New Roman\",serif;color:#000;background:#fff;margin:1rem}main{max-width:65rem;margin:auto;border:1px solid #000;padding:1rem}h1,h2,pre{font:inherit}h1,h2{font-weight:bold;margin:1rem 0 .382rem}p{margin:.382rem 0 .618rem}pre{white-space:pre-wrap;overflow-wrap:anywhere}</style><main><h1>Synthetic review: one research brief</h1><p>Unsigned draft \u00b7 7c449e319157fde38a0f6a683f12554723fc0a508c24892c775acb576015b30d</p><p>Parties: buyer-example, supplier-example</p><section><h2>scope \u00b7 Work</h2><p>One page answering the agreed research question, with sources.</p></section><section><h2>price \u00b7 Price</h2><p>USD 25. This is an unsigned synthetic exercise; no payment is authorised.</p></section><section><h2>review \u00b7 Delivery review</h2><p>The buyer checks the brief against the exact agreed scope before accepting it.</p></section><h2>Exact structured conditions, settlement, dispute and extensions</h2><pre>{\n  &quot;conditions&quot;: [],\n  &quot;settlement&quot;: {},\n  &quot;dispute&quot;: {},\n  &quot;extensions&quot;: {},\n  &quot;supersedes&quot;: null\n}</pre><p>Exact drafting does not supply assent, legal effect, funding or external enforcement.</p></main></html>"
+  }
+}

@@ -1,0 +1,319 @@
+{
+  "observed_at": "2026-11-02T08:58:24.026532+00:00",
+  "method": "POST",
+  "url": "https://jupie202020.pythonanywhere.com/mcp",
+  "http_status": 200,
+  "request": {
+    "jsonrpc": "2.0",
+    "id": 313,
+    "method": "tools/call",
+    "params": {
+      "name": "covenant_review__review",
+      "arguments": {
+        "case": {
+          "agreements": [
+            {
+              "id": "draft-brief",
+              "kind": "REFERENCE",
+              "reference": {
+                "profile": "covenant-contract-draft/0.1",
+                "id": "7c449e319157fde38a0f6a683f12554723fc0a508c24892c775acb576015b30d",
+                "status": "UNSIGNED_DRAFT"
+              },
+              "description": "This is an unsigned draft reference, not an assented agreement or evidence of payment."
+            }
+          ],
+          "bindings": [],
+          "decisions": [],
+          "evidence": [],
+          "expected_heads": null,
+          "grants": [],
+          "group": null,
+          "links": [],
+          "notes": [],
+          "obligations": [],
+          "payments": [],
+          "policies": [],
+          "primary": "draft-brief",
+          "recoveries": [],
+          "title": "Synthetic store review of an unsigned research-brief draft",
+          "version": "covenant-coordination-case/0.1"
+        }
+      }
+    }
+  },
+  "response": {
+    "id": 313,
+    "jsonrpc": "2.0",
+    "result": {
+      "content": [
+        {
+          "text": "{\"agreements\":[{\"assent\":\"NOT_VERIFIED\",\"execution_authorized\":false,\"item\":\"draft-brief\",\"kind\":\"REFERENCE\",\"parties\":{},\"reference\":{\"id\":\"7c449e319157fde38a0f6a683f12554723fc0a508c24892c775acb576015b30d\",\"profile\":\"covenant-contract-draft/0.1\",\"status\":\"UNSIGNED_DRAFT\"},\"status\":\"DECLARED_REFERENCE_ONLY\"}],\"assurance\":{\"assumptions\":[\"Caller supplies the intended exact case and agreement references.\",\"Installed owner observations cover only their declared local scope and may change after review.\",\"Caller reference equality does not establish global currentness or current dispatch authority.\"],\"dimensions\":{\"assent\":{\"items\":[{\"assent\":\"NOT_VERIFIED\",\"item\":\"draft-brief\",\"status\":\"DECLARED_REFERENCE_ONLY\"}],\"status\":\"SEE_EACH_AGREEMENT\"},\"current_authority\":{\"scope\":\"OWNER_INSTALLED_GRANTS_AND_LOCAL_GROUP_ONLY; SIGNATURES_AND_ROLE_NAMES_ARE_NOT_DISPATCH_AUTHORITY\",\"status\":\"NOT_REQUESTED\"},\"execution\":{\"execution_authorized\":false,\"status\":\"NOT_AUTHORIZED\"},\"factual_support\":{\"scope\":\"PROOF_RELATIONS_NOT_PHYSICAL_TRUTH; INVALID_PROOF_DOES_NOT_REFUTE_SUBJECT_CLAIM\",\"status\":\"NOT_REQUESTED\",\"verified_proof_rows\":0},\"legal_review\":{\"scope\":\"APPLICABLE_LAW_CAPACITY_FORMALITIES_AND_DISCHARGE_UNDETERMINED\",\"status\":\"NOT_CHECKED\"},\"logical_checks\":{\"scope\":\"NO_SATISFIABILITY_TEMPORAL_OR_LEGAL_CONSISTENCY_PROOF\",\"status\":\"NOT_CHECKED\"},\"privacy\":{\"scope\":\"NO_ENCRYPTION_OR_DISCLOSURE_AUTHORITY_AUDIT; HASHES_MAY_REVEAL_LOW_ENTROPY_INPUTS\",\"status\":\"DEFAULT_REVIEW_REDACTION_ONLY\"},\"reference_closure\":{\"items\":[{\"item\":\"draft-brief\",\"scope\":\"NATIVE_DECLARED_REFERENCE_SCOPE_ONLY\",\"status\":\"NOT_CHECKED\"}],\"status\":\"SEE_EACH_AGREEMENT\"},\"syntax\":{\"scope\":\"BOUNDED_CASE_CARRIER; INDIVIDUAL_SOURCE_REFUSALS_REMAIN_VISIBLE\",\"status\":\"CHECKED\"}},\"execution_authorized\":false,\"pins\":{\"agreements\":[{\"context\":null,\"expected_id\":null,\"input_hash\":\"6fe598dd18df48f47785ec4752941a778256863e945a9f88e55457d38c55b326\",\"item\":\"draft-brief\",\"kind\":\"REFERENCE\",\"profile_version\":null}],\"case_id\":\"4f50d01c43428fc51bdc2979cebe405ac6a3735887b5ea7e59c12d771d21224c\",\"case_version\":\"covenant-coordination-case/0.1\",\"contexts\":[],\"data_heads_hash\":\"3383fd62e80cee333e4e0d15376f398714f8a4ce41654d8e2cb2e651e2c5bb50\",\"expected_data_heads\":null,\"implementation\":\"covenant_chain.coordination_review/assurance-0.1\",\"owner_observations_hash\":\"65b27b4e09edf282874d0af1344126aea0c7477535fbf4aa5b07da80c0838034\",\"policies_hash\":\"4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945\",\"verifier_inputs_hash\":\"4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945\",\"verifiers\":[]},\"unchecked_claims\":[\"Unlisted or other-host obligations\",\"Physical performance and external payment truth\",\"Legal validity enforceability and discharge\",\"Complete history and current global state\",\"Satisfiability and semantic agreement of prose with executable provisions\"],\"version\":\"covenant-coordination-assurance/0.1\"},\"authority\":{\"agreement_roles\":[],\"escrow_scopes\":[],\"execution_authorized\":false,\"grants\":[],\"group_authority\":{\"execution_authorized\":false,\"roles\":[],\"status\":\"NOT_REQUESTED\"},\"installed_access\":[],\"revocation_boundaries\":[\"AGREEMENT_REVISIONS_REQUIRE_THEIR_OWN_EXACT_ADOPTION\",\"ACCESS_GRANT_REVOCATION_IS_SEPARATE_OWNER_CURRENT_STATE\",\"GROUP_ROLE_REVOCATION_APPLIES_TO_LOCAL_GROUP_CAUSAL_POLICY\",\"PAYMENT_CONTROLLERS_REQUIRE_THEIR_OWN_EXACT_EFFECT_SIGNATURES\",\"PRIOR_PLAINTEXT_CANNOT_BE_RECALLED_BY_ANY_REVOCATION\"],\"state_changed\":false,\"version\":\"covenant-coordination-review/0.1\"},\"bindings\":[],\"connector_installed\":false,\"decisions\":[],\"evidence\":{\"all_provided_proofs_verified\":true,\"execution_authorized\":false,\"installed_verifier_boundary\":\"OWNER_INSTALLED_LOCAL_CALLBACKS_TRUSTED_AS_READ_ONLY\",\"items\":[],\"provided_proof_count\":0,\"state_changed\":false,\"statement_hash_metadata\":\"IDENTIFIES_EXACT_EXPECTATION; NOT_A_CONFIDENTIALITY_MECHANISM\",\"statement_values_returned\":false,\"verification_status\":\"NO_PROOFS_PROVIDED\",\"verified_proof_count\":0,\"version\":\"covenant-coordination-review/0.1\"},\"execution_authorized\":false,\"graph\":{\"edges\":[],\"nodes\":[{\"id\":\"agreement:draft-brief\",\"kind\":\"agreement\",\"label\":\"draft-brief\",\"outcome\":\"REVIEW_ASSOCIATION; INSPECT_THE_CHECKED_SECTION\",\"reference\":null}]},\"id\":\"4f50d01c43428fc51bdc2979cebe405ac6a3735887b5ea7e59c12d771d21224c\",\"links\":[],\"next_actions\":[{\"action\":\"This is an unsupported agreement kind or an unverified reference. Select a supported typed verification route; additional signatures do not establish that mapping.\",\"item\":\"draft-brief\",\"section\":\"agreements\",\"status\":\"DECLARED_REFERENCE_ONLY\"}],\"notes\":[],\"notices\":[],\"obligation_coverage\":{\"agreements\":[{\"agreement\":null,\"all_obligations_complete\":null,\"history\":\"EXACT_SUPPLIED_OBJECT_ONLY; OTHER_HOSTS_AND_GLOBAL_CURRENTNESS_UNKNOWN\",\"item\":\"draft-brief\",\"kind\":\"REFERENCE\",\"nonmonetary\":\"NOT_PROJECTED; AGREEMENT_NOT_FULLY_VERIFIED\",\"prose\":\"UNASSESSED; POSSIBLE_WRITTEN_DUTIES_NOT_EXTRACTED\",\"status\":\"UNASSESSED\"}],\"all_obligations_complete\":null,\"financial\":\"ONLY_EXPLICITLY_DECLARED_FINANCE_ROWS_AND_RECEIPT_ASSOCIATIONS\",\"history\":\"NO_COMPLETE_HISTORY_OR_SUPERSESSION_ASSERTION\",\"host\":\"SUPPLIED_CASE_ONLY; NO_GLOBAL_OBLIGATION_INDEX\",\"performance\":\"ONLY_EXPLICIT_CASE_0.4_CHECKLIST_AND_LOCAL_LEGAL_DECLARATIONS\",\"profiles\":{\"agreement_kinds\":[\"EXTERNAL\",\"CONCEPT\",\"ORDER\",\"LEGAL\",\"BILATERAL_0.1_0.2\"],\"portable_bilateral_0.3\":\"UNSUPPORTED_IN_THIS_CASE_PROFILE; USE_PORTABLE_OBLIGATION_SUMMARY\"},\"prose\":\"UNASSESSED; PAYMENT_AND_PROTOCOL_COMPLETION_DO_NOT_COMPLETE_WRITTEN_DUTIES\"},\"overview\":{\"assent\":[{\"item\":\"draft-brief\",\"status\":\"DECLARED_REFERENCE_ONLY\"}],\"authority_grants\":[],\"authority_grants_requiring_attention\":[],\"decisions\":[],\"escrow_policies\":[],\"evidence_count_scope\":\"TOP_LEVEL_ADOPTED_PROOF_ROWS_ONLY; PERFORMANCE_REFERENCES_COUNTED_SEPARATELY\",\"evidence_unverified\":0,\"evidence_verified\":0,\"execution_authorized\":false,\"group_roles\":{\"roles\":[],\"scope\":\"LOCAL_GROUP_ONLY; SEPARATE_FROM_GRANTS_AND_PAYMENT_AUTHORITY\",\"status\":\"NOT_REQUESTED\"},\"money\":[],\"recovery\":[],\"section_status\":{\"authority\":\"CHECKED_IN_SUPPLIED_SCOPE\",\"evidence\":\"CHECKED_IN_SUPPLIED_SCOPE\",\"payments\":\"CHECKED_IN_SUPPLIED_SCOPE\"},\"selected_agreement\":{\"item\":\"draft-brief\",\"status\":\"DECLARED_REFERENCE_ONLY\"},\"selection_basis\":\"EXPLICIT_CASE_PRIMARY; NO_GLOBAL_LATEST_INFERENCE\",\"unresolved_connections\":0,\"unverified_agreements\":1,\"verified_agreements\":0},\"payments\":{\"declared_obligations\":[],\"execution_authorized\":false,\"next_actions\":[\"RESOLVE_UNKNOWN_AUTHORITY_CONTEXT_ASSET_OR_OBSERVATION_LINKS\",\"OBTAIN_EXACT_ASSENT_FOR_ANY_NEW_PAYMENT_OR_REMAINING_OBLIGATION\"],\"observations\":[],\"scope\":\"ONLY_SUPPLIED_AGREEMENT_ALLOWLIST_OBLIGATIONS_AND_OWNER_OBSERVED_EFFECTS\",\"trust_boundary\":\"OWNER_INSTALLED_CODE_AND_LOCAL_CUSTODY; NO_GLOBAL_FRESHNESS_OR_EXTERNAL_SETTLEMENT_INFERRED\",\"version\":\"covenant-coordination-finance/0.1\",\"warnings\":[]},\"private_input_policy\":\"NO_RAW_SOURCE_PROOF_BYTES_SALTS_OR_WITNESSES_IN_THE_DEFAULT_RENDER; THIS_REVIEW_IS_NOT_ENCRYPTION\",\"provenance\":{\"agreements\":\"RECHECKED_EXACT_PROOFS_EACH_CALL\",\"case_id\":\"PINS_CALLER_INPUTS_NOT_TRUTH_OR_AUTHORITY\",\"financial_basis\":\"DECLARED_OBLIGATIONS_AND_EXPLICIT_RECEIPT_ASSOCIATIONS; OWNER_OBSERVATIONS_REPORTED_SEPARATELY\",\"snapshot\":\"SEPARATE_LOCAL_OWNER_OBSERVATIONS_NOT_A_GLOBAL_ATOMIC_OR_FINAL_VIEW\"},\"recorded\":false,\"recovery\":[],\"signature_created\":false,\"snapshot_id\":\"f147ec8586f3a7d5a44b66cc2551ecbd04dab7369181fc0f0cb49a99ba01c115\",\"status\":\"READ_ONLY_REVIEW\",\"title\":\"Synthetic store review of an unsigned research-brief draft\",\"version\":\"covenant-coordination-review/0.1\"}",
+          "type": "text"
+        }
+      ],
+      "isError": false
+    }
+  },
+  "parsed_tool_result": {
+    "agreements": [
+      {
+        "assent": "NOT_VERIFIED",
+        "execution_authorized": false,
+        "item": "draft-brief",
+        "kind": "REFERENCE",
+        "parties": {},
+        "reference": {
+          "id": "7c449e319157fde38a0f6a683f12554723fc0a508c24892c775acb576015b30d",
+          "profile": "covenant-contract-draft/0.1",
+          "status": "UNSIGNED_DRAFT"
+        },
+        "status": "DECLARED_REFERENCE_ONLY"
+      }
+    ],
+    "assurance": {
+      "assumptions": [
+        "Caller supplies the intended exact case and agreement references.",
+        "Installed owner observations cover only their declared local scope and may change after review.",
+        "Caller reference equality does not establish global currentness or current dispatch authority."
+      ],
+      "dimensions": {
+        "assent": {
+          "items": [
+            {
+              "assent": "NOT_VERIFIED",
+              "item": "draft-brief",
+              "status": "DECLARED_REFERENCE_ONLY"
+            }
+          ],
+          "status": "SEE_EACH_AGREEMENT"
+        },
+        "current_authority": {
+          "scope": "OWNER_INSTALLED_GRANTS_AND_LOCAL_GROUP_ONLY; SIGNATURES_AND_ROLE_NAMES_ARE_NOT_DISPATCH_AUTHORITY",
+          "status": "NOT_REQUESTED"
+        },
+        "execution": {
+          "execution_authorized": false,
+          "status": "NOT_AUTHORIZED"
+        },
+        "factual_support": {
+          "scope": "PROOF_RELATIONS_NOT_PHYSICAL_TRUTH; INVALID_PROOF_DOES_NOT_REFUTE_SUBJECT_CLAIM",
+          "status": "NOT_REQUESTED",
+          "verified_proof_rows": 0
+        },
+        "legal_review": {
+          "scope": "APPLICABLE_LAW_CAPACITY_FORMALITIES_AND_DISCHARGE_UNDETERMINED",
+          "status": "NOT_CHECKED"
+        },
+        "logical_checks": {
+          "scope": "NO_SATISFIABILITY_TEMPORAL_OR_LEGAL_CONSISTENCY_PROOF",
+          "status": "NOT_CHECKED"
+        },
+        "privacy": {
+          "scope": "NO_ENCRYPTION_OR_DISCLOSURE_AUTHORITY_AUDIT; HASHES_MAY_REVEAL_LOW_ENTROPY_INPUTS",
+          "status": "DEFAULT_REVIEW_REDACTION_ONLY"
+        },
+        "reference_closure": {
+          "items": [
+            {
+              "item": "draft-brief",
+              "scope": "NATIVE_DECLARED_REFERENCE_SCOPE_ONLY",
+              "status": "NOT_CHECKED"
+            }
+          ],
+          "status": "SEE_EACH_AGREEMENT"
+        },
+        "syntax": {
+          "scope": "BOUNDED_CASE_CARRIER; INDIVIDUAL_SOURCE_REFUSALS_REMAIN_VISIBLE",
+          "status": "CHECKED"
+        }
+      },
+      "execution_authorized": false,
+      "pins": {
+        "agreements": [
+          {
+            "context": null,
+            "expected_id": null,
+            "input_hash": "6fe598dd18df48f47785ec4752941a778256863e945a9f88e55457d38c55b326",
+            "item": "draft-brief",
+            "kind": "REFERENCE",
+            "profile_version": null
+          }
+        ],
+        "case_id": "4f50d01c43428fc51bdc2979cebe405ac6a3735887b5ea7e59c12d771d21224c",
+        "case_version": "covenant-coordination-case/0.1",
+        "contexts": [],
+        "data_heads_hash": "3383fd62e80cee333e4e0d15376f398714f8a4ce41654d8e2cb2e651e2c5bb50",
+        "expected_data_heads": null,
+        "implementation": "covenant_chain.coordination_review/assurance-0.1",
+        "owner_observations_hash": "65b27b4e09edf282874d0af1344126aea0c7477535fbf4aa5b07da80c0838034",
+        "policies_hash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "verifier_inputs_hash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "verifiers": []
+      },
+      "unchecked_claims": [
+        "Unlisted or other-host obligations",
+        "Physical performance and external payment truth",
+        "Legal validity enforceability and discharge",
+        "Complete history and current global state",
+        "Satisfiability and semantic agreement of prose with executable provisions"
+      ],
+      "version": "covenant-coordination-assurance/0.1"
+    },
+    "authority": {
+      "agreement_roles": [],
+      "escrow_scopes": [],
+      "execution_authorized": false,
+      "grants": [],
+      "group_authority": {
+        "execution_authorized": false,
+        "roles": [],
+        "status": "NOT_REQUESTED"
+      },
+      "installed_access": [],
+      "revocation_boundaries": [
+        "AGREEMENT_REVISIONS_REQUIRE_THEIR_OWN_EXACT_ADOPTION",
+        "ACCESS_GRANT_REVOCATION_IS_SEPARATE_OWNER_CURRENT_STATE",
+        "GROUP_ROLE_REVOCATION_APPLIES_TO_LOCAL_GROUP_CAUSAL_POLICY",
+        "PAYMENT_CONTROLLERS_REQUIRE_THEIR_OWN_EXACT_EFFECT_SIGNATURES",
+        "PRIOR_PLAINTEXT_CANNOT_BE_RECALLED_BY_ANY_REVOCATION"
+      ],
+      "state_changed": false,
+      "version": "covenant-coordination-review/0.1"
+    },
+    "bindings": [],
+    "connector_installed": false,
+    "decisions": [],
+    "evidence": {
+      "all_provided_proofs_verified": true,
+      "execution_authorized": false,
+      "installed_verifier_boundary": "OWNER_INSTALLED_LOCAL_CALLBACKS_TRUSTED_AS_READ_ONLY",
+      "items": [],
+      "provided_proof_count": 0,
+      "state_changed": false,
+      "statement_hash_metadata": "IDENTIFIES_EXACT_EXPECTATION; NOT_A_CONFIDENTIALITY_MECHANISM",
+      "statement_values_returned": false,
+      "verification_status": "NO_PROOFS_PROVIDED",
+      "verified_proof_count": 0,
+      "version": "covenant-coordination-review/0.1"
+    },
+    "execution_authorized": false,
+    "graph": {
+      "edges": [],
+      "nodes": [
+        {
+          "id": "agreement:draft-brief",
+          "kind": "agreement",
+          "label": "draft-brief",
+          "outcome": "REVIEW_ASSOCIATION; INSPECT_THE_CHECKED_SECTION",
+          "reference": null
+        }
+      ]
+    },
+    "id": "4f50d01c43428fc51bdc2979cebe405ac6a3735887b5ea7e59c12d771d21224c",
+    "links": [],
+    "next_actions": [
+      {
+        "action": "This is an unsupported agreement kind or an unverified reference. Select a supported typed verification route; additional signatures do not establish that mapping.",
+        "item": "draft-brief",
+        "section": "agreements",
+        "status": "DECLARED_REFERENCE_ONLY"
+      }
+    ],
+    "notes": [],
+    "notices": [],
+    "obligation_coverage": {
+      "agreements": [
+        {
+          "agreement": null,
+          "all_obligations_complete": null,
+          "history": "EXACT_SUPPLIED_OBJECT_ONLY; OTHER_HOSTS_AND_GLOBAL_CURRENTNESS_UNKNOWN",
+          "item": "draft-brief",
+          "kind": "REFERENCE",
+          "nonmonetary": "NOT_PROJECTED; AGREEMENT_NOT_FULLY_VERIFIED",
+          "prose": "UNASSESSED; POSSIBLE_WRITTEN_DUTIES_NOT_EXTRACTED",
+          "status": "UNASSESSED"
+        }
+      ],
+      "all_obligations_complete": null,
+      "financial": "ONLY_EXPLICITLY_DECLARED_FINANCE_ROWS_AND_RECEIPT_ASSOCIATIONS",
+      "history": "NO_COMPLETE_HISTORY_OR_SUPERSESSION_ASSERTION",
+      "host": "SUPPLIED_CASE_ONLY; NO_GLOBAL_OBLIGATION_INDEX",
+      "performance": "ONLY_EXPLICIT_CASE_0.4_CHECKLIST_AND_LOCAL_LEGAL_DECLARATIONS",
+      "profiles": {
+        "agreement_kinds": [
+          "EXTERNAL",
+          "CONCEPT",
+          "ORDER",
+          "LEGAL",
+          "BILATERAL_0.1_0.2"
+        ],
+        "portable_bilateral_0.3": "UNSUPPORTED_IN_THIS_CASE_PROFILE; USE_PORTABLE_OBLIGATION_SUMMARY"
+      },
+      "prose": "UNASSESSED; PAYMENT_AND_PROTOCOL_COMPLETION_DO_NOT_COMPLETE_WRITTEN_DUTIES"
+    },
+    "overview": {
+      "assent": [
+        {
+          "item": "draft-brief",
+          "status": "DECLARED_REFERENCE_ONLY"
+        }
+      ],
+      "authority_grants": [],
+      "authority_grants_requiring_attention": [],
+      "decisions": [],
+      "escrow_policies": [],
+      "evidence_count_scope": "TOP_LEVEL_ADOPTED_PROOF_ROWS_ONLY; PERFORMANCE_REFERENCES_COUNTED_SEPARATELY",
+      "evidence_unverified": 0,
+      "evidence_verified": 0,
+      "execution_authorized": false,
+      "group_roles": {
+        "roles": [],
+        "scope": "LOCAL_GROUP_ONLY; SEPARATE_FROM_GRANTS_AND_PAYMENT_AUTHORITY",
+        "status": "NOT_REQUESTED"
+      },
+      "money": [],
+      "recovery": [],
+      "section_status": {
+        "authority": "CHECKED_IN_SUPPLIED_SCOPE",
+        "evidence": "CHECKED_IN_SUPPLIED_SCOPE",
+        "payments": "CHECKED_IN_SUPPLIED_SCOPE"
+      },
+      "selected_agreement": {
+        "item": "draft-brief",
+        "status": "DECLARED_REFERENCE_ONLY"
+      },
+      "selection_basis": "EXPLICIT_CASE_PRIMARY; NO_GLOBAL_LATEST_INFERENCE",
+      "unresolved_connections": 0,
+      "unverified_agreements": 1,
+      "verified_agreements": 0
+    },
+    "payments": {
+      "declared_obligations": [],
+      "execution_authorized": false,
+      "next_actions": [
+        "RESOLVE_UNKNOWN_AUTHORITY_CONTEXT_ASSET_OR_OBSERVATION_LINKS",
+        "OBTAIN_EXACT_ASSENT_FOR_ANY_NEW_PAYMENT_OR_REMAINING_OBLIGATION"
+      ],
+      "observations": [],
+      "scope": "ONLY_SUPPLIED_AGREEMENT_ALLOWLIST_OBLIGATIONS_AND_OWNER_OBSERVED_EFFECTS",
+      "trust_boundary": "OWNER_INSTALLED_CODE_AND_LOCAL_CUSTODY; NO_GLOBAL_FRESHNESS_OR_EXTERNAL_SETTLEMENT_INFERRED",
+      "version": "covenant-coordination-finance/0.1",
+      "warnings": []
+    },
+    "private_input_policy": "NO_RAW_SOURCE_PROOF_BYTES_SALTS_OR_WITNESSES_IN_THE_DEFAULT_RENDER; THIS_REVIEW_IS_NOT_ENCRYPTION",
+    "provenance": {
+      "agreements": "RECHECKED_EXACT_PROOFS_EACH_CALL",
+      "case_id": "PINS_CALLER_INPUTS_NOT_TRUTH_OR_AUTHORITY",
+      "financial_basis": "DECLARED_OBLIGATIONS_AND_EXPLICIT_RECEIPT_ASSOCIATIONS; OWNER_OBSERVATIONS_REPORTED_SEPARATELY",
+      "snapshot": "SEPARATE_LOCAL_OWNER_OBSERVATIONS_NOT_A_GLOBAL_ATOMIC_OR_FINAL_VIEW"
+    },
+    "recorded": false,
+    "recovery": [],
+    "signature_created": false,
+    "snapshot_id": "f147ec8586f3a7d5a44b66cc2551ecbd04dab7369181fc0f0cb49a99ba01c115",
+    "status": "READ_ONLY_REVIEW",
+    "title": "Synthetic store review of an unsigned research-brief draft",
+    "version": "covenant-coordination-review/0.1"
+  }
+}
