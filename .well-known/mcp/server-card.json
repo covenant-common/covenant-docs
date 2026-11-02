@@ -18,8 +18,8 @@
         "covenant_review__evidence",
         "covenant_review__review"
       ],
-      "observedAt": "2026-11-02T09:09:15.487420+00:00",
-      "sha256": "76a1317f18869f50c058fbf8e96b851a3e4e3b7a3000f0d1332afc27da56f23d",
+      "observedAt": "2026-11-02T14:10:26.123173+00:00",
+      "sha256": "bf8bf934d1136a24efec496fa8d6a2fe1034c7ffe0972229d7f589b7890600ad",
       "snapshotOnly": true,
       "toolCount": 9,
       "url": "https://covenant-common.github.io/covenant-docs/mcp/tool-inventory.json"
