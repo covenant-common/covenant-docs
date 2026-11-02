@@ -1,6 +1,8 @@
-# Covenant public tools
+# Covenant public tools · 0.1.1
 
-Find published services. Draft exact terms. Check the approvals and records you supply.
+Find a published service. Turn a small job into an unsigned proposal with a clear
+deliverable, price, deadline and review. Compare changes and check what the supplied
+approvals and evidence establish.
 
 This free plugin connects only to the public Covenant MCP at:
 
@@ -10,14 +12,21 @@ No account, token or private key is needed. It installs no executable, hook or l
 
 ## Try it
 
-Ask: “Draft terms for a one-page research brief costing USD 25. Do not sign or pay.”
+Ask: “Find published research services and label any demos. Tell me if there is no
+matching supplier.”
 
-Or: “Find published research services. Tell me if there are no matching adverts.”
+Or: “Draft a one-page research brief for USD 25, due Friday, with buyer review. Keep
+it unsigned.”
+
+When the proposal changes: “Compare these two drafts: show the price and deadline
+changes and what needs fresh approval.”
 
 The public tools prepare and inspect records. They do not sign, publish an advert,
 create a private account record, reserve money, send a payment or decide a dispute.
-An empty search is not proof that a supplier exists. Supplied signatures and records
-are checked within the tool's stated scope.
+If there are no matching adverts, report that result. Demo adverts are labelled
+examples; confirm real availability with the supplier. Supplied signatures and
+records are checked within the tool's stated scope. A draft or caller-declared role
+does not establish assent, identity or permission.
 
 ## Claude Code
 
@@ -78,7 +87,23 @@ or credentials; your agent client and the hosted service have their own data han
 
 ## Reviewer cases
 
-[Five positive and three negative live cases](https://covenant-common.github.io/covenant-docs/review-metadata.json) retain exact requests and observed outputs. These were tool-call checks, not model-prompt or native-client tests. The current public bridge returns a generic outcome-unknown error for some invalid review inputs; do not interpret that as signing, payment or a completed job. Check the review schema before proceeding.
+The portable manifest contains exactly five positive and three negative reviewer
+cases. Together the positive cases cover all nine public tools. The negative cases
+require rejection or clarification for a draft passed as a review case, an exact
+case-identifier mismatch and a malformed direct authority public key. They describe
+the required safe result, not a new claim of prompt-level test execution.
+
+The [retained 2 November morning evidence](https://covenant-common.github.io/covenant-docs/review-metadata.json)
+preserves exact historical requests and observed outputs, including the original
+generic negative errors. It predates the later public presentation fix and remains
+unchanged. Reproduce the current reviewer cases in the target client and retain the
+actual results before submission. Do not treat old observations as a current live
+result or replace them with an expected answer.
+
+No review video URL is included because this package has no actual recording URL.
+Publisher identity, endpoint-origin domain verification, the portal tool scan,
+required review materials, policy attestations and approval/publication remain
+separate gates. Direct installation does not establish store approval.
 
 ## Licence
 
@@ -92,3 +117,9 @@ the core code. There is no fee for this wrapper or the anonymous public tools it
 Native manifest paths and endpoint configuration are checked against the official
 Cursor and Claude Code references. Actual host installation/review must be verified
 separately; this README does not claim store approval.
+
+The 0.1.1 ZIP is built from an eight-file configuration-only allowlist. It contains
+no local executable, credentials, account endpoint or private engine. The earlier
+0.1.0 download is retained unchanged. The version update changes package metadata,
+review expectations and this guide; it does not change hosted tool identifiers,
+schemas, annotations or endpoint behavior.
