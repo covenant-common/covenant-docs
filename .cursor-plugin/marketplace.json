@@ -1,0 +1,17 @@
+{
+  "name": "covenant-public-tools",
+  "owner": {
+    "name": "Covenant",
+    "email": "jupitersstring@gmail.com"
+  },
+  "plugins": [
+    {
+      "name": "covenant-public",
+      "source": "./plugins/covenant-public",
+      "description": "Connect to Covenant public search and exact agreement tools."
+    }
+  ],
+  "metadata": {
+    "description": "Free public service search and agreement drafting/checking tools."
+  }
+}

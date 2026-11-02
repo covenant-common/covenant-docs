@@ -1,0 +1,1878 @@
+{
+  "observed_at": "2026-11-02T08:57:06.352167+00:00",
+  "method": "POST",
+  "url": "https://jupie202020.pythonanywhere.com/mcp",
+  "http_status": 200,
+  "request": {
+    "jsonrpc": "2.0",
+    "id": 304,
+    "method": "tools/call",
+    "params": {
+      "name": "covenant_marketplace__quick_trade",
+      "arguments": {
+        "seller": "d75a980182b10ab7d54bfed3c964073a0ee172f3daa62325af021a68f707511a",
+        "buyer": "3d4017c3e843895a92b70aa74d1b7ebc9c982ccf2ec4968cc0cd55f12af4660c",
+        "description": "Synthetic review chart for USD 25; unsigned and not a service offer.",
+        "amount": 2500,
+        "payment_asset": {
+          "namespace": "fiat",
+          "identifier": "USD",
+          "unit": "cents"
+        },
+        "context": "1212121212121212121212121212121212121212121212121212121212121212"
+      }
+    }
+  },
+  "response": {
+    "id": 304,
+    "jsonrpc": "2.0",
+    "result": {
+      "content": [
+        {
+          "text": "{\"acceptance\":\"EXPLICIT_BUYER_AND_SELLER_SIGNATURES_REQUIRED\",\"automatic_assent\":false,\"cashflows\":{\"buyer_gives\":[{\"amount\":2500,\"asset\":{\"adapter\":null,\"identifier\":\"USD\",\"namespace\":\"fiat\",\"transfer_terms\":{},\"unit\":\"cents\"}}],\"buyer_receives\":[{\"amount\":1,\"asset\":{\"adapter\":null,\"identifier\":\"Synthetic review chart for USD 25; unsigned and not a service offer.\",\"namespace\":\"description\",\"transfer_terms\":{\"description\":\"Delivery is a separately verified obligation\"},\"unit\":\"delivery\"}}],\"fees\":\"SEPARATELY_ADOPTED_RAIL_QUOTE_REQUIRED\",\"unit_conversion\":\"NONE\"},\"custody\":\"NOT_ESTABLISHED\",\"execution_authorized\":false,\"id\":\"eb32589160a1cfb4464c51c443b1af2e6ff85571279b84eef308555d6116d351\",\"listing\":{\"binding\":false,\"custody\":\"NOT_ESTABLISHED\",\"custom_rules\":\"DATA_UNTIL_EXACT_IMPLEMENTATION_ADOPTED\",\"execution_authorized\":false,\"frame\":{\"attribution\":\"CLAIMED_NOT_AUTHENTICATED\",\"binding\":false,\"coverage_basis\":\"REQUESTED_QUESTIONS_ONLY_NOT_SUFFICIENCY_FOR_ACTION\",\"coverage_complete\":false,\"evidence\":\"REFERENCED_NOT_VERIFIED\",\"execution_authorized\":false,\"frame\":{\"extensions\":{},\"links\":[],\"slots\":[{\"answers\":[{\"evidence\":[],\"stated_by\":null,\"value\":\"d75a980182b10ab7d54bfed3c964073a0ee172f3daa62325af021a68f707511a\"}],\"definition\":\"Actors, identities, roles, capacities or claimed attribution.\",\"dimension\":\"who\",\"id\":\"who\",\"question\":\"who?\",\"reason\":null,\"status\":\"ASSERTED\"},{\"answers\":[{\"evidence\":[],\"stated_by\":null,\"value\":\"Synthetic review chart for USD 25; unsigned and not a service offer.\"}],\"definition\":\"Actions, objects, resources, obligations or claims being described.\",\"dimension\":\"what\",\"id\":\"what\",\"question\":\"what?\",\"reason\":null,\"status\":\"ASSERTED\"},{\"answers\":[{\"evidence\":[],\"stated_by\":null,\"value\":{\"archetype\":null,\"author\":\"d75a980182b10ab7d54bfed3c964073a0ee172f3daa62325af021a68f707511a\",\"market\":\"c5020b588d5e74ae7b235449fe2d0ef5121cb6d3f3f9e64cf4ce9280b79b9932\",\"title\":\"Synthetic review chart for USD 25; unsigned and not a service offer.\"}}],\"definition\":\"The exact selection, subset, version or referenced instance.\",\"dimension\":\"which\",\"id\":\"which\",\"question\":\"which?\",\"reason\":null,\"status\":\"ASSERTED\"},{\"answers\":[],\"definition\":\"Physical, digital, jurisdictional or other explicitly named scope.\",\"dimension\":\"where\",\"id\":\"where\",\"question\":\"where?\",\"reason\":null,\"status\":\"UNKNOWN\"},{\"answers\":[],\"definition\":\"Time, deadline, interval, sequence or event under a stated basis.\",\"dimension\":\"when\",\"id\":\"when\",\"question\":\"when?\",\"reason\":null,\"status\":\"UNKNOWN\"},{\"answers\":[],\"definition\":\"Declared purpose, rationale or motivation; not an inferred motive.\",\"dimension\":\"why\",\"id\":\"why\",\"question\":\"why?\",\"reason\":null,\"status\":\"UNKNOWN\"},{\"answers\":[{\"evidence\":[],\"stated_by\":null,\"value\":{\"delivery_acceptance\":\"SEPARATE_FROM_AGREEMENT_ACCEPTANCE\",\"mode\":\"EXACT_ORDER_ADOPTION\",\"payment_stage\":\"UNSPECIFIED_REQUIRES_EXPLICIT_ADOPTION\"}}],\"definition\":\"Method, procedure, logic, technology, evidence or protection choices.\",\"dimension\":\"how\",\"id\":\"how\",\"question\":\"how?\",\"reason\":null,\"status\":\"ASSERTED\"}],\"supersedes\":null,\"target\":null,\"title\":\"Synthetic review chart for USD 25; unsigned and not a service offer.\",\"version\":\"covenant-question-frame/0.1\"},\"id\":\"57fa5f9d72237d311bfdac1b793c168383ec5d8af6c321905edb72103902552a\",\"missing_dimensions\":[],\"required_dimensions\":[\"who\",\"what\",\"which\",\"where\",\"when\",\"why\",\"how\"],\"spatial_and_temporal_semantics\":\"EXACT_AS_DECLARED_NO_COORDINATE_CLOCK_OR_JURISDICTION_INFERENCE\",\"status_counts\":{\"ASSERTED\":4,\"DISPUTED\":0,\"EVIDENCE_LINKED\":0,\"NOT_APPLICABLE\":0,\"UNKNOWN\":3,\"WITHHELD\":0},\"unresolved_slots\":[\"where\",\"when\",\"why\"],\"world_truth\":\"NOT_ESTABLISHED\"},\"id\":\"f35a1daa278454ff98194bd5c265eee09266593128d114485d36640f4d29f7f9\",\"inventory\":\"ASSERTED_NOT_RESERVED\",\"record\":{\"author\":\"d75a980182b10ab7d54bfed3c964073a0ee172f3daa62325af021a68f707511a\",\"data\":{\"active\":true,\"archetype\":null,\"category\":\"General\",\"custom\":{},\"market\":\"c5020b588d5e74ae7b235449fe2d0ef5121cb6d3f3f9e64cf4ce9280b79b9932\",\"mechanism\":\"FIXED\",\"offer\":[{\"amount\":1,\"asset\":{\"adapter\":null,\"identifier\":\"Synthetic review chart for USD 25; unsigned and not a service offer.\",\"namespace\":\"description\",\"transfer_terms\":{\"description\":\"Delivery is a separately verified obligation\"},\"unit\":\"delivery\"}}],\"quantity\":1,\"settlement\":{\"delivery_acceptance\":\"SEPARATE_FROM_AGREEMENT_ACCEPTANCE\",\"mode\":\"EXACT_ORDER_ADOPTION\",\"payment_stage\":\"UNSPECIFIED_REQUIRES_EXPLICIT_ADOPTION\"},\"want\":[{\"amount\":2500,\"asset\":{\"adapter\":null,\"identifier\":\"USD\",\"namespace\":\"fiat\",\"transfer_terms\":{},\"unit\":\"cents\"}}]},\"frame\":{\"extensions\":{},\"links\":[],\"slots\":[{\"answers\":[{\"evidence\":[],\"stated_by\":null,\"value\":\"d75a980182b10ab7d54bfed3c964073a0ee172f3daa62325af021a68f707511a\"}],\"definition\":\"Actors, identities, roles, capacities or claimed attribution.\",\"dimension\":\"who\",\"id\":\"who\",\"question\":\"who?\",\"reason\":null,\"status\":\"ASSERTED\"},{\"answers\":[{\"evidence\":[],\"stated_by\":null,\"value\":\"Synthetic review chart for USD 25; unsigned and not a service offer.\"}],\"definition\":\"Actions, objects, resources, obligations or claims being described.\",\"dimension\":\"what\",\"id\":\"what\",\"question\":\"what?\",\"reason\":null,\"status\":\"ASSERTED\"},{\"answers\":[{\"evidence\":[],\"stated_by\":null,\"value\":{\"archetype\":null,\"author\":\"d75a980182b10ab7d54bfed3c964073a0ee172f3daa62325af021a68f707511a\",\"market\":\"c5020b588d5e74ae7b235449fe2d0ef5121cb6d3f3f9e64cf4ce9280b79b9932\",\"title\":\"Synthetic review chart for USD 25; unsigned and not a service offer.\"}}],\"definition\":\"The exact selection, subset, version or referenced instance.\",\"dimension\":\"which\",\"id\":\"which\",\"question\":\"which?\",\"reason\":null,\"status\":\"ASSERTED\"},{\"answers\":[],\"definition\":\"Physical, digital, jurisdictional or other explicitly named scope.\",\"dimension\":\"where\",\"id\":\"where\",\"question\":\"where?\",\"reason\":null,\"status\":\"UNKNOWN\"},{\"answers\":[],\"definition\":\"Time, deadline, interval, sequence or event under a stated basis.\",\"dimension\":\"when\",\"id\":\"when\",\"question\":\"when?\",\"reason\":null,\"status\":\"UNKNOWN\"},{\"answers\":[],\"definition\":\"Declared purpose, rationale or motivation; not an inferred motive.\",\"dimension\":\"why\",\"id\":\"why\",\"question\":\"why?\",\"reason\":null,\"status\":\"UNKNOWN\"},{\"answers\":[{\"evidence\":[],\"stated_by\":null,\"value\":{\"delivery_acceptance\":\"SEPARATE_FROM_AGREEMENT_ACCEPTANCE\",\"mode\":\"EXACT_ORDER_ADOPTION\",\"payment_stage\":\"UNSPECIFIED_REQUIRES_EXPLICIT_ADOPTION\"}}],\"definition\":\"Method, procedure, logic, technology, evidence or protection choices.\",\"dimension\":\"how\",\"id\":\"how\",\"question\":\"how?\",\"reason\":null,\"status\":\"ASSERTED\"}],\"supersedes\":null,\"target\":null,\"title\":\"Synthetic review chart for USD 25; unsigned and not a service offer.\",\"version\":\"covenant-question-frame/0.1\"},\"kind\":\"LISTING\",\"supersedes\":null,\"title\":\"Synthetic review chart for USD 25; unsigned and not a service offer.\",\"version\":\"covenant-marketplace/0.1\"},\"target\":{\"id\":\"f35a1daa278454ff98194bd5c265eee09266593128d114485d36640f4d29f7f9\",\"kind\":\"marketplace-listing\"}},\"market\":{\"binding\":false,\"custody\":\"NOT_ESTABLISHED\",\"custom_rules\":\"DATA_UNTIL_EXACT_IMPLEMENTATION_ADOPTED\",\"execution_authorized\":false,\"frame\":{\"attribution\":\"CLAIMED_NOT_AUTHENTICATED\",\"binding\":false,\"coverage_basis\":\"REQUESTED_QUESTIONS_ONLY_NOT_SUFFICIENCY_FOR_ACTION\",\"coverage_complete\":false,\"evidence\":\"REFERENCED_NOT_VERIFIED\",\"execution_authorized\":false,\"frame\":{\"extensions\":{},\"links\":[],\"slots\":[{\"answers\":[{\"evidence\":[],\"stated_by\":null,\"value\":\"d75a980182b10ab7d54bfed3c964073a0ee172f3daa62325af021a68f707511a\"}],\"definition\":\"Actors, identities, roles, capacities or claimed attribution.\",\"dimension\":\"who\",\"id\":\"who\",\"question\":\"who?\",\"reason\":null,\"status\":\"ASSERTED\"},{\"answers\":[{\"evidence\":[],\"stated_by\":null,\"value\":\"Direct trade\"}],\"definition\":\"Actions, objects, resources, obligations or claims being described.\",\"dimension\":\"what\",\"id\":\"what\",\"question\":\"what?\",\"reason\":null,\"status\":\"ASSERTED\"},{\"answers\":[{\"evidence\":[],\"stated_by\":null,\"value\":{\"author\":\"d75a980182b10ab7d54bfed3c964073a0ee172f3daa62325af021a68f707511a\",\"title\":\"Direct trade\"}}],\"definition\":\"The exact selection, subset, version or referenced instance.\",\"dimension\":\"which\",\"id\":\"which\",\"question\":\"which?\",\"reason\":null,\"status\":\"ASSERTED\"},{\"answers\":[],\"definition\":\"Physical, digital, jurisdictional or other explicitly named scope.\",\"dimension\":\"where\",\"id\":\"where\",\"question\":\"where?\",\"reason\":null,\"status\":\"UNKNOWN\"},{\"answers\":[],\"definition\":\"Time, deadline, interval, sequence or event under a stated basis.\",\"dimension\":\"when\",\"id\":\"when\",\"question\":\"when?\",\"reason\":null,\"status\":\"UNKNOWN\"},{\"answers\":[],\"definition\":\"Declared purpose, rationale or motivation; not an inferred motive.\",\"dimension\":\"why\",\"id\":\"why\",\"question\":\"why?\",\"reason\":null,\"status\":\"UNKNOWN\"},{\"answers\":[{\"evidence\":[],\"stated_by\":null,\"value\":\"Exact adopted record\"}],\"definition\":\"Method, procedure, logic, technology, evidence or protection choices.\",\"dimension\":\"how\",\"id\":\"how\",\"question\":\"how?\",\"reason\":null,\"status\":\"ASSERTED\"}],\"supersedes\":null,\"target\":null,\"title\":\"Direct trade\",\"version\":\"covenant-question-frame/0.1\"},\"id\":\"f24a67351d1220809f410fb7aab73c023c3b5fcce2738066db9f0ebda7a66810\",\"missing_dimensions\":[],\"required_dimensions\":[\"who\",\"what\",\"which\",\"where\",\"when\",\"why\",\"how\"],\"spatial_and_temporal_semantics\":\"EXACT_AS_DECLARED_NO_COORDINATE_CLOCK_OR_JURISDICTION_INFERENCE\",\"status_counts\":{\"ASSERTED\":4,\"DISPUTED\":0,\"EVIDENCE_LINKED\":0,\"NOT_APPLICABLE\":0,\"UNKNOWN\":3,\"WITHHELD\":0},\"unresolved_slots\":[\"where\",\"when\",\"why\"],\"world_truth\":\"NOT_ESTABLISHED\"},\"id\":\"c5020b588d5e74ae7b235449fe2d0ef5121cb6d3f3f9e64cf4ce9280b79b9932\",\"inventory\":\"ASSERTED_NOT_RESERVED\",\"record\":{\"author\":\"d75a980182b10ab7d54bfed3c964073a0ee172f3daa62325af021a68f707511a\",\"data\":{\"categories\":[\"General\"],\"description\":\"Agent-created market\",\"mechanisms\":[\"FIXED\",\"NEGOTIABLE\",\"AUCTION\",\"CREDIT\",\"RENTAL\",\"CUSTOM\"],\"members\":[],\"policy\":{\"admission\":\"OPEN\"}},\"frame\":{\"extensions\":{},\"links\":[],\"slots\":[{\"answers\":[{\"evidence\":[],\"stated_by\":null,\"value\":\"d75a980182b10ab7d54bfed3c964073a0ee172f3daa62325af021a68f707511a\"}],\"definition\":\"Actors, identities, roles, capacities or claimed attribution.\",\"dimension\":\"who\",\"id\":\"who\",\"question\":\"who?\",\"reason\":null,\"status\":\"ASSERTED\"},{\"answers\":[{\"evidence\":[],\"stated_by\":null,\"value\":\"Direct trade\"}],\"definition\":\"Actions, objects, resources, obligations or claims being described.\",\"dimension\":\"what\",\"id\":\"what\",\"question\":\"what?\",\"reason\":null,\"status\":\"ASSERTED\"},{\"answers\":[{\"evidence\":[],\"stated_by\":null,\"value\":{\"author\":\"d75a980182b10ab7d54bfed3c964073a0ee172f3daa62325af021a68f707511a\",\"title\":\"Direct trade\"}}],\"definition\":\"The exact selection, subset, version or referenced instance.\",\"dimension\":\"which\",\"id\":\"which\",\"question\":\"which?\",\"reason\":null,\"status\":\"ASSERTED\"},{\"answers\":[],\"definition\":\"Physical, digital, jurisdictional or other explicitly named scope.\",\"dimension\":\"where\",\"id\":\"where\",\"question\":\"where?\",\"reason\":null,\"status\":\"UNKNOWN\"},{\"answers\":[],\"definition\":\"Time, deadline, interval, sequence or event under a stated basis.\",\"dimension\":\"when\",\"id\":\"when\",\"question\":\"when?\",\"reason\":null,\"status\":\"UNKNOWN\"},{\"answers\":[],\"definition\":\"Declared purpose, rationale or motivation; not an inferred motive.\",\"dimension\":\"why\",\"id\":\"why\",\"question\":\"why?\",\"reason\":null,\"status\":\"UNKNOWN\"},{\"answers\":[{\"evidence\":[],\"stated_by\":null,\"value\":\"Exact adopted record\"}],\"definition\":\"Method, procedure, logic, technology, evidence or protection choices.\",\"dimension\":\"how\",\"id\":\"how\",\"question\":\"how?\",\"reason\":null,\"status\":\"ASSERTED\"}],\"supersedes\":null,\"target\":null,\"title\":\"Direct trade\",\"version\":\"covenant-question-frame/0.1\"},\"kind\":\"MARKET\",\"supersedes\":null,\"title\":\"Direct trade\",\"version\":\"covenant-marketplace/0.1\"},\"target\":{\"id\":\"c5020b588d5e74ae7b235449fe2d0ef5121cb6d3f3f9e64cf4ce9280b79b9932\",\"kind\":\"marketplace-market\"}},\"optional_complexity\":[\"archetype\",\"frames\",\"credit\",\"auction\",\"collateral\",\"escrow\",\"disputes\",\"privacy\"],\"order\":{\"author\":\"3d4017c3e843895a92b70aa74d1b7ebc9c982ccf2ec4968cc0cd55f12af4660c\",\"data\":{\"archetype\":null,\"buyer\":\"3d4017c3e843895a92b70aa74d1b7ebc9c982ccf2ec4968cc0cd55f12af4660c\",\"context\":\"1212121212121212121212121212121212121212121212121212121212121212\",\"give\":[{\"amount\":2500,\"asset\":{\"adapter\":null,\"identifier\":\"USD\",\"namespace\":\"fiat\",\"transfer_terms\":{},\"unit\":\"cents\"}}],\"listing\":\"f35a1daa278454ff98194bd5c265eee09266593128d114485d36640f4d29f7f9\",\"market\":\"c5020b588d5e74ae7b235449fe2d0ef5121cb6d3f3f9e64cf4ce9280b79b9932\",\"receive\":[{\"amount\":1,\"asset\":{\"adapter\":null,\"identifier\":\"Synthetic review chart for USD 25; unsigned and not a service offer.\",\"namespace\":\"description\",\"transfer_terms\":{\"description\":\"Delivery is a separately verified obligation\"},\"unit\":\"delivery\"}}],\"seller\":\"d75a980182b10ab7d54bfed3c964073a0ee172f3daa62325af021a68f707511a\",\"settlement\":{\"delivery_acceptance\":\"SEPARATE_FROM_AGREEMENT_ACCEPTANCE\",\"mode\":\"EXACT_ORDER_ADOPTION\",\"payment_stage\":\"UNSPECIFIED_REQUIRES_EXPLICIT_ADOPTION\"},\"terms\":{\"explicit_additions\":{},\"listing_terms\":{}},\"units\":1},\"frame\":{\"extensions\":{},\"links\":[],\"slots\":[{\"answers\":[{\"evidence\":[],\"stated_by\":null,\"value\":{\"buyer\":\"3d4017c3e843895a92b70aa74d1b7ebc9c982ccf2ec4968cc0cd55f12af4660c\",\"seller\":\"d75a980182b10ab7d54bfed3c964073a0ee172f3daa62325af021a68f707511a\"}}],\"definition\":\"Actors, identities, roles, capacities or claimed attribution.\",\"dimension\":\"who\",\"id\":\"who\",\"question\":\"who?\",\"reason\":null,\"status\":\"ASSERTED\"},{\"answers\":[{\"evidence\":[],\"stated_by\":null,\"value\":\"Synthetic review chart for USD 25; unsigned and not a service offer.\"}],\"definition\":\"Actions, objects, resources, obligations or claims being described.\",\"dimension\":\"what\",\"id\":\"what\",\"question\":\"what?\",\"reason\":null,\"status\":\"ASSERTED\"},{\"answers\":[{\"evidence\":[],\"stated_by\":null,\"value\":{\"archetype\":null,\"author\":\"3d4017c3e843895a92b70aa74d1b7ebc9c982ccf2ec4968cc0cd55f12af4660c\",\"listing\":\"f35a1daa278454ff98194bd5c265eee09266593128d114485d36640f4d29f7f9\",\"market\":\"c5020b588d5e74ae7b235449fe2d0ef5121cb6d3f3f9e64cf4ce9280b79b9932\",\"title\":\"Synthetic review chart for USD 25; unsigned and not a service offer.\"}}],\"definition\":\"The exact selection, subset, version or referenced instance.\",\"dimension\":\"which\",\"id\":\"which\",\"question\":\"which?\",\"reason\":null,\"status\":\"ASSERTED\"},{\"answers\":[],\"definition\":\"Physical, digital, jurisdictional or other explicitly named scope.\",\"dimension\":\"where\",\"id\":\"where\",\"question\":\"where?\",\"reason\":null,\"status\":\"UNKNOWN\"},{\"answers\":[],\"definition\":\"Time, deadline, interval, sequence or event under a stated basis.\",\"dimension\":\"when\",\"id\":\"when\",\"question\":\"when?\",\"reason\":null,\"status\":\"UNKNOWN\"},{\"answers\":[],\"definition\":\"Declared purpose, rationale or motivation; not an inferred motive.\",\"dimension\":\"why\",\"id\":\"why\",\"question\":\"why?\",\"reason\":null,\"status\":\"UNKNOWN\"},{\"answers\":[{\"evidence\":[],\"stated_by\":null,\"value\":{\"delivery_acceptance\":\"SEPARATE_FROM_AGREEMENT_ACCEPTANCE\",\"mode\":\"EXACT_ORDER_ADOPTION\",\"payment_stage\":\"UNSPECIFIED_REQUIRES_EXPLICIT_ADOPTION\"}}],\"definition\":\"Method, procedure, logic, technology, evidence or protection choices.\",\"dimension\":\"how\",\"id\":\"how\",\"question\":\"how?\",\"reason\":null,\"status\":\"ASSERTED\"}],\"supersedes\":null,\"target\":null,\"title\":\"Synthetic review chart for USD 25; unsigned and not a service offer.\",\"version\":\"covenant-question-frame/0.1\"},\"kind\":\"ORDER\",\"supersedes\":null,\"title\":\"Synthetic review chart for USD 25; unsigned and not a service offer.\",\"version\":\"covenant-marketplace/0.1\"},\"path\":\"ONE_PREPARATION_CALL_THEN_EXPLICIT_PARTY_ASSENTS\",\"prepared\":{\"assent_payload\":{\"body\":{\"closure\":\"876ef34266e1815eaf550bd44a1f82278fdddf2f07b0894260bd3172b1f6086d\",\"context\":\"1212121212121212121212121212121212121212121212121212121212121212\",\"root\":\"a5814a5b2c04b64a24e8ede7976adce0c07662c2c9b34ee4eadf06e14797509e\",\"semantics\":\"0f0d03813e4ba088b214941d78b6da26062b14f1d342ccc35ee0bea251e4dc44\"},\"evaluation_status\":\"UNKNOWN\",\"evaluation_value\":null,\"execution_authorized\":false,\"label\":\"COVENANT-FRAME-CONCEPT-ASSENT-0.1\",\"legal_effect\":\"NOT_DETERMINED\",\"required_assents\":[{\"body\":{\"closure\":\"876ef34266e1815eaf550bd44a1f82278fdddf2f07b0894260bd3172b1f6086d\",\"concept\":\"a5814a5b2c04b64a24e8ede7976adce0c07662c2c9b34ee4eadf06e14797509e\",\"context\":\"1212121212121212121212121212121212121212121212121212121212121212\",\"party\":\"buyer\",\"root\":\"a5814a5b2c04b64a24e8ede7976adce0c07662c2c9b34ee4eadf06e14797509e\",\"semantics\":\"0f0d03813e4ba088b214941d78b6da26062b14f1d342ccc35ee0bea251e4dc44\"},\"concept\":\"a5814a5b2c04b64a24e8ede7976adce0c07662c2c9b34ee4eadf06e14797509e\",\"identity\":\"3d4017c3e843895a92b70aa74d1b7ebc9c982ccf2ec4968cc0cd55f12af4660c\",\"party\":\"buyer\"},{\"body\":{\"closure\":\"876ef34266e1815eaf550bd44a1f82278fdddf2f07b0894260bd3172b1f6086d\",\"concept\":\"a5814a5b2c04b64a24e8ede7976adce0c07662c2c9b34ee4eadf06e14797509e\",\"context\":\"1212121212121212121212121212121212121212121212121212121212121212\",\"party\":\"seller\",\"root\":\"a5814a5b2c04b64a24e8ede7976adce0c07662c2c9b34ee4eadf06e14797509e\",\"semantics\":\"0f0d03813e4ba088b214941d78b6da26062b14f1d342ccc35ee0bea251e4dc44\"},\"concept\":\"a5814a5b2c04b64a24e8ede7976adce0c07662c2c9b34ee4eadf06e14797509e\",\"identity\":\"d75a980182b10ab7d54bfed3c964073a0ee172f3daa62325af021a68f707511a\",\"party\":\"seller\"}],\"root_has_parties\":true,\"scope\":\"ALL_DECLARED_PARTIES_IN_EXACT_TRANSITIVE_CLOSURE\",\"unsigned_concepts\":[]},\"automatic_assent\":false,\"builder\":\"covenant-agreement-builder/0.1\",\"bundle\":{\"artifacts\":[{\"kind\":\"marketplace-order\",\"value\":{\"author\":\"3d4017c3e843895a92b70aa74d1b7ebc9c982ccf2ec4968cc0cd55f12af4660c\",\"data\":{\"archetype\":null,\"buyer\":\"3d4017c3e843895a92b70aa74d1b7ebc9c982ccf2ec4968cc0cd55f12af4660c\",\"context\":\"1212121212121212121212121212121212121212121212121212121212121212\",\"give\":[{\"amount\":2500,\"asset\":{\"adapter\":null,\"identifier\":\"USD\",\"namespace\":\"fiat\",\"transfer_terms\":{},\"unit\":\"cents\"}}],\"listing\":\"f35a1daa278454ff98194bd5c265eee09266593128d114485d36640f4d29f7f9\",\"market\":\"c5020b588d5e74ae7b235449fe2d0ef5121cb6d3f3f9e64cf4ce9280b79b9932\",\"receive\":[{\"amount\":1,\"asset\":{\"adapter\":null,\"identifier\":\"Synthetic review chart for USD 25; unsigned and not a service offer.\",\"namespace\":\"description\",\"transfer_terms\":{\"description\":\"Delivery is a separately verified obligation\"},\"unit\":\"delivery\"}}],\"seller\":\"d75a980182b10ab7d54bfed3c964073a0ee172f3daa62325af021a68f707511a\",\"settlement\":{\"delivery_acceptance\":\"SEPARATE_FROM_AGREEMENT_ACCEPTANCE\",\"mode\":\"EXACT_ORDER_ADOPTION\",\"payment_stage\":\"UNSPECIFIED_REQUIRES_EXPLICIT_ADOPTION\"},\"terms\":{\"explicit_additions\":{},\"listing_terms\":{}},\"units\":1},\"frame\":{\"extensions\":{},\"links\":[],\"slots\":[{\"answers\":[{\"evidence\":[],\"stated_by\":null,\"value\":{\"buyer\":\"3d4017c3e843895a92b70aa74d1b7ebc9c982ccf2ec4968cc0cd55f12af4660c\",\"seller\":\"d75a980182b10ab7d54bfed3c964073a0ee172f3daa62325af021a68f707511a\"}}],\"definition\":\"Actors, identities, roles, capacities or claimed attribution.\",\"dimension\":\"who\",\"id\":\"who\",\"question\":\"who?\",\"reason\":null,\"status\":\"ASSERTED\"},{\"answers\":[{\"evidence\":[],\"stated_by\":null,\"value\":\"Synthetic review chart for USD 25; unsigned and not a service offer.\"}],\"definition\":\"Actions, objects, resources, obligations or claims being described.\",\"dimension\":\"what\",\"id\":\"what\",\"question\":\"what?\",\"reason\":null,\"status\":\"ASSERTED\"},{\"answers\":[{\"evidence\":[],\"stated_by\":null,\"value\":{\"archetype\":null,\"author\":\"3d4017c3e843895a92b70aa74d1b7ebc9c982ccf2ec4968cc0cd55f12af4660c\",\"listing\":\"f35a1daa278454ff98194bd5c265eee09266593128d114485d36640f4d29f7f9\",\"market\":\"c5020b588d5e74ae7b235449fe2d0ef5121cb6d3f3f9e64cf4ce9280b79b9932\",\"title\":\"Synthetic review chart for USD 25; unsigned and not a service offer.\"}}],\"definition\":\"The exact selection, subset, version or referenced instance.\",\"dimension\":\"which\",\"id\":\"which\",\"question\":\"which?\",\"reason\":null,\"status\":\"ASSERTED\"},{\"answers\":[],\"definition\":\"Physical, digital, jurisdictional or other explicitly named scope.\",\"dimension\":\"where\",\"id\":\"where\",\"question\":\"where?\",\"reason\":null,\"status\":\"UNKNOWN\"},{\"answers\":[],\"definition\":\"Time, deadline, interval, sequence or event under a stated basis.\",\"dimension\":\"when\",\"id\":\"when\",\"question\":\"when?\",\"reason\":null,\"status\":\"UNKNOWN\"},{\"answers\":[],\"definition\":\"Declared purpose, rationale or motivation; not an inferred motive.\",\"dimension\":\"why\",\"id\":\"why\",\"question\":\"why?\",\"reason\":null,\"status\":\"UNKNOWN\"},{\"answers\":[{\"evidence\":[],\"stated_by\":null,\"value\":{\"delivery_acceptance\":\"SEPARATE_FROM_AGREEMENT_ACCEPTANCE\",\"mode\":\"EXACT_ORDER_ADOPTION\",\"payment_stage\":\"UNSPECIFIED_REQUIRES_EXPLICIT_ADOPTION\"}}],\"definition\":\"Method, procedure, logic, technology, evidence or protection choices.\",\"dimension\":\"how\",\"id\":\"how\",\"question\":\"how?\",\"reason\":null,\"status\":\"ASSERTED\"}],\"supersedes\":null,\"target\":null,\"title\":\"Synthetic review chart for USD 25; unsigned and not a service offer.\",\"version\":\"covenant-question-frame/0.1\"},\"kind\":\"ORDER\",\"supersedes\":null,\"title\":\"Synthetic review chart for USD 25; unsigned and not a service offer.\",\"version\":\"covenant-marketplace/0.1\"}}],\"concepts\":[{\"artifacts\":{\"Order\":{\"id\":\"663c13a3f9e41f1b89c9441575d5ec800841ca1b899bc7fd5b9a298ba0176b38\",\"kind\":\"marketplace-order\"}},\"concepts\":{},\"extensions\":{},\"frames\":{\"Context\":\"98dc3383ecae99469e8a366896117e8903bac92dd4d486151d5cf2fdc3b1bb79\"},\"meaning\":\"Perform the exact marketplace order eb32589160a1cfb4464c51c443b1af2e6ff85571279b84eef308555d6116d351\",\"parties\":{\"buyer\":\"3d4017c3e843895a92b70aa74d1b7ebc9c982ccf2ec4968cc0cd55f12af4660c\",\"seller\":\"d75a980182b10ab7d54bfed3c964073a0ee172f3daa62325af021a68f707511a\"},\"relations\":{},\"root\":\"terms\",\"rules\":{\"terms\":{\"op\":\"VALUE\",\"value\":null}},\"semantics\":\"0f0d03813e4ba088b214941d78b6da26062b14f1d342ccc35ee0bea251e4dc44\",\"supersedes\":null,\"title\":\"Synthetic review chart for USD 25; unsigned and not a service offer.\",\"version\":\"covenant-frame-concept/0.1\"}],\"frames\":[{\"extensions\":{},\"links\":[],\"slots\":[{\"answers\":[{\"evidence\":[],\"stated_by\":null,\"value\":{\"buyer\":\"3d4017c3e843895a92b70aa74d1b7ebc9c982ccf2ec4968cc0cd55f12af4660c\",\"seller\":\"d75a980182b10ab7d54bfed3c964073a0ee172f3daa62325af021a68f707511a\"}}],\"definition\":\"Actors, identities, roles, capacities or claimed attribution.\",\"dimension\":\"who\",\"id\":\"who\",\"question\":\"who?\",\"reason\":null,\"status\":\"ASSERTED\"},{\"answers\":[{\"evidence\":[],\"stated_by\":null,\"value\":\"Synthetic review chart for USD 25; unsigned and not a service offer.\"}],\"definition\":\"Actions, objects, resources, obligations or claims being described.\",\"dimension\":\"what\",\"id\":\"what\",\"question\":\"what?\",\"reason\":null,\"status\":\"ASSERTED\"},{\"answers\":[{\"evidence\":[],\"stated_by\":null,\"value\":{\"archetype\":null,\"author\":\"3d4017c3e843895a92b70aa74d1b7ebc9c982ccf2ec4968cc0cd55f12af4660c\",\"listing\":\"f35a1daa278454ff98194bd5c265eee09266593128d114485d36640f4d29f7f9\",\"market\":\"c5020b588d5e74ae7b235449fe2d0ef5121cb6d3f3f9e64cf4ce9280b79b9932\",\"title\":\"Synthetic review chart for USD 25; unsigned and not a service offer.\"}}],\"definition\":\"The exact selection, subset, version or referenced instance.\",\"dimension\":\"which\",\"id\":\"which\",\"question\":\"which?\",\"reason\":null,\"status\":\"ASSERTED\"},{\"answers\":[],\"definition\":\"Physical, digital, jurisdictional or other explicitly named scope.\",\"dimension\":\"where\",\"id\":\"where\",\"question\":\"where?\",\"reason\":null,\"status\":\"UNKNOWN\"},{\"answers\":[],\"definition\":\"Time, deadline, interval, sequence or event under a stated basis.\",\"dimension\":\"when\",\"id\":\"when\",\"question\":\"when?\",\"reason\":null,\"status\":\"UNKNOWN\"},{\"answers\":[],\"definition\":\"Declared purpose, rationale or motivation; not an inferred motive.\",\"dimension\":\"why\",\"id\":\"why\",\"question\":\"why?\",\"reason\":null,\"status\":\"UNKNOWN\"},{\"answers\":[{\"evidence\":[],\"stated_by\":null,\"value\":{\"delivery_acceptance\":\"SEPARATE_FROM_AGREEMENT_ACCEPTANCE\",\"mode\":\"EXACT_ORDER_ADOPTION\",\"payment_stage\":\"UNSPECIFIED_REQUIRES_EXPLICIT_ADOPTION\"}}],\"definition\":\"Method, procedure, logic, technology, evidence or protection choices.\",\"dimension\":\"how\",\"id\":\"how\",\"question\":\"how?\",\"reason\":null,\"status\":\"ASSERTED\"}],\"supersedes\":null,\"target\":null,\"title\":\"Synthetic review chart for USD 25; unsigned and not a service offer.\",\"version\":\"covenant-question-frame/0.1\"}],\"root\":\"a5814a5b2c04b64a24e8ede7976adce0c07662c2c9b34ee4eadf06e14797509e\"},\"evaluation\":{\"basis\":\"DECLARED_CRITERIA_NOT_WORLD_TRUTH\",\"execution_authorized\":false,\"status\":\"UNKNOWN\",\"value\":null},\"execution_authorized\":false,\"status\":\"READY_FOR_EXPLICIT_SIGNATURES\",\"supplied_objects\":\"RESOLVE_DECLARED_PINS_WITHOUT_ADDING_REFERENCES_OR_PARTIES\"},\"review\":{\"assent_payload\":{\"body\":{\"closure\":\"876ef34266e1815eaf550bd44a1f82278fdddf2f07b0894260bd3172b1f6086d\",\"context\":\"1212121212121212121212121212121212121212121212121212121212121212\",\"root\":\"a5814a5b2c04b64a24e8ede7976adce0c07662c2c9b34ee4eadf06e14797509e\",\"semantics\":\"0f0d03813e4ba088b214941d78b6da26062b14f1d342ccc35ee0bea251e4dc44\"},\"evaluation_status\":\"UNKNOWN\",\"evaluation_value\":null,\"execution_authorized\":false,\"label\":\"COVENANT-FRAME-CONCEPT-ASSENT-0.1\",\"legal_effect\":\"NOT_DETERMINED\",\"required_assents\":[{\"body\":{\"closure\":\"876ef34266e1815eaf550bd44a1f82278fdddf2f07b0894260bd3172b1f6086d\",\"concept\":\"a5814a5b2c04b64a24e8ede7976adce0c07662c2c9b34ee4eadf06e14797509e\",\"context\":\"1212121212121212121212121212121212121212121212121212121212121212\",\"party\":\"buyer\",\"root\":\"a5814a5b2c04b64a24e8ede7976adce0c07662c2c9b34ee4eadf06e14797509e\",\"semantics\":\"0f0d03813e4ba088b214941d78b6da26062b14f1d342ccc35ee0bea251e4dc44\"},\"concept\":\"a5814a5b2c04b64a24e8ede7976adce0c07662c2c9b34ee4eadf06e14797509e\",\"identity\":\"3d4017c3e843895a92b70aa74d1b7ebc9c982ccf2ec4968cc0cd55f12af4660c\",\"party\":\"buyer\"},{\"body\":{\"closure\":\"876ef34266e1815eaf550bd44a1f82278fdddf2f07b0894260bd3172b1f6086d\",\"concept\":\"a5814a5b2c04b64a24e8ede7976adce0c07662c2c9b34ee4eadf06e14797509e\",\"context\":\"1212121212121212121212121212121212121212121212121212121212121212\",\"party\":\"seller\",\"root\":\"a5814a5b2c04b64a24e8ede7976adce0c07662c2c9b34ee4eadf06e14797509e\",\"semantics\":\"0f0d03813e4ba088b214941d78b6da26062b14f1d342ccc35ee0bea251e4dc44\"},\"concept\":\"a5814a5b2c04b64a24e8ede7976adce0c07662c2c9b34ee4eadf06e14797509e\",\"identity\":\"d75a980182b10ab7d54bfed3c964073a0ee172f3daa62325af021a68f707511a\",\"party\":\"seller\"}],\"root_has_parties\":true,\"scope\":\"ALL_DECLARED_PARTIES_IN_EXACT_TRANSITIVE_CLOSURE\",\"unsigned_concepts\":[]},\"assent_scope\":\"ONLY_DECLARED_TRANSITIVE_MEANING_CLOSURE\",\"automatic_assent\":false,\"bundle\":{\"artifacts\":[{\"kind\":\"marketplace-order\",\"value\":{\"author\":\"3d4017c3e843895a92b70aa74d1b7ebc9c982ccf2ec4968cc0cd55f12af4660c\",\"data\":{\"archetype\":null,\"buyer\":\"3d4017c3e843895a92b70aa74d1b7ebc9c982ccf2ec4968cc0cd55f12af4660c\",\"context\":\"1212121212121212121212121212121212121212121212121212121212121212\",\"give\":[{\"amount\":2500,\"asset\":{\"adapter\":null,\"identifier\":\"USD\",\"namespace\":\"fiat\",\"transfer_terms\":{},\"unit\":\"cents\"}}],\"listing\":\"f35a1daa278454ff98194bd5c265eee09266593128d114485d36640f4d29f7f9\",\"market\":\"c5020b588d5e74ae7b235449fe2d0ef5121cb6d3f3f9e64cf4ce9280b79b9932\",\"receive\":[{\"amount\":1,\"asset\":{\"adapter\":null,\"identifier\":\"Synthetic review chart for USD 25; unsigned and not a service offer.\",\"namespace\":\"description\",\"transfer_terms\":{\"description\":\"Delivery is a separately verified obligation\"},\"unit\":\"delivery\"}}],\"seller\":\"d75a980182b10ab7d54bfed3c964073a0ee172f3daa62325af021a68f707511a\",\"settlement\":{\"delivery_acceptance\":\"SEPARATE_FROM_AGREEMENT_ACCEPTANCE\",\"mode\":\"EXACT_ORDER_ADOPTION\",\"payment_stage\":\"UNSPECIFIED_REQUIRES_EXPLICIT_ADOPTION\"},\"terms\":{\"explicit_additions\":{},\"listing_terms\":{}},\"units\":1},\"frame\":{\"extensions\":{},\"links\":[],\"slots\":[{\"answers\":[{\"evidence\":[],\"stated_by\":null,\"value\":{\"buyer\":\"3d4017c3e843895a92b70aa74d1b7ebc9c982ccf2ec4968cc0cd55f12af4660c\",\"seller\":\"d75a980182b10ab7d54bfed3c964073a0ee172f3daa62325af021a68f707511a\"}}],\"definition\":\"Actors, identities, roles, capacities or claimed attribution.\",\"dimension\":\"who\",\"id\":\"who\",\"question\":\"who?\",\"reason\":null,\"status\":\"ASSERTED\"},{\"answers\":[{\"evidence\":[],\"stated_by\":null,\"value\":\"Synthetic review chart for USD 25; unsigned and not a service offer.\"}],\"definition\":\"Actions, objects, resources, obligations or claims being described.\",\"dimension\":\"what\",\"id\":\"what\",\"question\":\"what?\",\"reason\":null,\"status\":\"ASSERTED\"},{\"answers\":[{\"evidence\":[],\"stated_by\":null,\"value\":{\"archetype\":null,\"author\":\"3d4017c3e843895a92b70aa74d1b7ebc9c982ccf2ec4968cc0cd55f12af4660c\",\"listing\":\"f35a1daa278454ff98194bd5c265eee09266593128d114485d36640f4d29f7f9\",\"market\":\"c5020b588d5e74ae7b235449fe2d0ef5121cb6d3f3f9e64cf4ce9280b79b9932\",\"title\":\"Synthetic review chart for USD 25; unsigned and not a service offer.\"}}],\"definition\":\"The exact selection, subset, version or referenced instance.\",\"dimension\":\"which\",\"id\":\"which\",\"question\":\"which?\",\"reason\":null,\"status\":\"ASSERTED\"},{\"answers\":[],\"definition\":\"Physical, digital, jurisdictional or other explicitly named scope.\",\"dimension\":\"where\",\"id\":\"where\",\"question\":\"where?\",\"reason\":null,\"status\":\"UNKNOWN\"},{\"answers\":[],\"definition\":\"Time, deadline, interval, sequence or event under a stated basis.\",\"dimension\":\"when\",\"id\":\"when\",\"question\":\"when?\",\"reason\":null,\"status\":\"UNKNOWN\"},{\"answers\":[],\"definition\":\"Declared purpose, rationale or motivation; not an inferred motive.\",\"dimension\":\"why\",\"id\":\"why\",\"question\":\"why?\",\"reason\":null,\"status\":\"UNKNOWN\"},{\"answers\":[{\"evidence\":[],\"stated_by\":null,\"value\":{\"delivery_acceptance\":\"SEPARATE_FROM_AGREEMENT_ACCEPTANCE\",\"mode\":\"EXACT_ORDER_ADOPTION\",\"payment_stage\":\"UNSPECIFIED_REQUIRES_EXPLICIT_ADOPTION\"}}],\"definition\":\"Method, procedure, logic, technology, evidence or protection choices.\",\"dimension\":\"how\",\"id\":\"how\",\"question\":\"how?\",\"reason\":null,\"status\":\"ASSERTED\"}],\"supersedes\":null,\"target\":null,\"title\":\"Synthetic review chart for USD 25; unsigned and not a service offer.\",\"version\":\"covenant-question-frame/0.1\"},\"kind\":\"ORDER\",\"supersedes\":null,\"title\":\"Synthetic review chart for USD 25; unsigned and not a service offer.\",\"version\":\"covenant-marketplace/0.1\"}}],\"concepts\":[{\"artifacts\":{\"Order\":{\"id\":\"663c13a3f9e41f1b89c9441575d5ec800841ca1b899bc7fd5b9a298ba0176b38\",\"kind\":\"marketplace-order\"}},\"concepts\":{},\"extensions\":{},\"frames\":{\"Context\":\"98dc3383ecae99469e8a366896117e8903bac92dd4d486151d5cf2fdc3b1bb79\"},\"meaning\":\"Perform the exact marketplace order eb32589160a1cfb4464c51c443b1af2e6ff85571279b84eef308555d6116d351\",\"parties\":{\"buyer\":\"3d4017c3e843895a92b70aa74d1b7ebc9c982ccf2ec4968cc0cd55f12af4660c\",\"seller\":\"d75a980182b10ab7d54bfed3c964073a0ee172f3daa62325af021a68f707511a\"},\"relations\":{},\"root\":\"terms\",\"rules\":{\"terms\":{\"op\":\"VALUE\",\"value\":null}},\"semantics\":\"0f0d03813e4ba088b214941d78b6da26062b14f1d342ccc35ee0bea251e4dc44\",\"supersedes\":null,\"title\":\"Synthetic review chart for USD 25; unsigned and not a service offer.\",\"version\":\"covenant-frame-concept/0.1\"}],\"frames\":[{\"extensions\":{},\"links\":[],\"slots\":[{\"answers\":[{\"evidence\":[],\"stated_by\":null,\"value\":{\"buyer\":\"3d4017c3e843895a92b70aa74d1b7ebc9c982ccf2ec4968cc0cd55f12af4660c\",\"seller\":\"d75a980182b10ab7d54bfed3c964073a0ee172f3daa62325af021a68f707511a\"}}],\"definition\":\"Actors, identities, roles, capacities or claimed attribution.\",\"dimension\":\"who\",\"id\":\"who\",\"question\":\"who?\",\"reason\":null,\"status\":\"ASSERTED\"},{\"answers\":[{\"evidence\":[],\"stated_by\":null,\"value\":\"Synthetic review chart for USD 25; unsigned and not a service offer.\"}],\"definition\":\"Actions, objects, resources, obligations or claims being described.\",\"dimension\":\"what\",\"id\":\"what\",\"question\":\"what?\",\"reason\":null,\"status\":\"ASSERTED\"},{\"answers\":[{\"evidence\":[],\"stated_by\":null,\"value\":{\"archetype\":null,\"author\":\"3d4017c3e843895a92b70aa74d1b7ebc9c982ccf2ec4968cc0cd55f12af4660c\",\"listing\":\"f35a1daa278454ff98194bd5c265eee09266593128d114485d36640f4d29f7f9\",\"market\":\"c5020b588d5e74ae7b235449fe2d0ef5121cb6d3f3f9e64cf4ce9280b79b9932\",\"title\":\"Synthetic review chart for USD 25; unsigned and not a service offer.\"}}],\"definition\":\"The exact selection, subset, version or referenced instance.\",\"dimension\":\"which\",\"id\":\"which\",\"question\":\"which?\",\"reason\":null,\"status\":\"ASSERTED\"},{\"answers\":[],\"definition\":\"Physical, digital, jurisdictional or other explicitly named scope.\",\"dimension\":\"where\",\"id\":\"where\",\"question\":\"where?\",\"reason\":null,\"status\":\"UNKNOWN\"},{\"answers\":[],\"definition\":\"Time, deadline, interval, sequence or event under a stated basis.\",\"dimension\":\"when\",\"id\":\"when\",\"question\":\"when?\",\"reason\":null,\"status\":\"UNKNOWN\"},{\"answers\":[],\"definition\":\"Declared purpose, rationale or motivation; not an inferred motive.\",\"dimension\":\"why\",\"id\":\"why\",\"question\":\"why?\",\"reason\":null,\"status\":\"UNKNOWN\"},{\"answers\":[{\"evidence\":[],\"stated_by\":null,\"value\":{\"delivery_acceptance\":\"SEPARATE_FROM_AGREEMENT_ACCEPTANCE\",\"mode\":\"EXACT_ORDER_ADOPTION\",\"payment_stage\":\"UNSPECIFIED_REQUIRES_EXPLICIT_ADOPTION\"}}],\"definition\":\"Method, procedure, logic, technology, evidence or protection choices.\",\"dimension\":\"how\",\"id\":\"how\",\"question\":\"how?\",\"reason\":null,\"status\":\"ASSERTED\"}],\"supersedes\":null,\"target\":null,\"title\":\"Synthetic review chart for USD 25; unsigned and not a service offer.\",\"version\":\"covenant-question-frame/0.1\"}],\"root\":\"a5814a5b2c04b64a24e8ede7976adce0c07662c2c9b34ee4eadf06e14797509e\"},\"carrier_scope\":\"ALL_SUPPLIED_BYTES_AND_CONTEXT\",\"closure\":\"876ef34266e1815eaf550bd44a1f82278fdddf2f07b0894260bd3172b1f6086d\",\"context\":\"1212121212121212121212121212121212121212121212121212121212121212\",\"execution_authorized\":false,\"id\":\"c9ac52983a831d44bece1cf8cad40970d604c58249765941593bf5ebd9704d95\",\"review\":{\"bundle\":{\"artifacts\":[{\"kind\":\"marketplace-order\",\"value\":{\"author\":\"3d4017c3e843895a92b70aa74d1b7ebc9c982ccf2ec4968cc0cd55f12af4660c\",\"data\":{\"archetype\":null,\"buyer\":\"3d4017c3e843895a92b70aa74d1b7ebc9c982ccf2ec4968cc0cd55f12af4660c\",\"context\":\"1212121212121212121212121212121212121212121212121212121212121212\",\"give\":[{\"amount\":2500,\"asset\":{\"adapter\":null,\"identifier\":\"USD\",\"namespace\":\"fiat\",\"transfer_terms\":{},\"unit\":\"cents\"}}],\"listing\":\"f35a1daa278454ff98194bd5c265eee09266593128d114485d36640f4d29f7f9\",\"market\":\"c5020b588d5e74ae7b235449fe2d0ef5121cb6d3f3f9e64cf4ce9280b79b9932\",\"receive\":[{\"amount\":1,\"asset\":{\"adapter\":null,\"identifier\":\"Synthetic review chart for USD 25; unsigned and not a service offer.\",\"namespace\":\"description\",\"transfer_terms\":{\"description\":\"Delivery is a separately verified obligation\"},\"unit\":\"delivery\"}}],\"seller\":\"d75a980182b10ab7d54bfed3c964073a0ee172f3daa62325af021a68f707511a\",\"settlement\":{\"delivery_acceptance\":\"SEPARATE_FROM_AGREEMENT_ACCEPTANCE\",\"mode\":\"EXACT_ORDER_ADOPTION\",\"payment_stage\":\"UNSPECIFIED_REQUIRES_EXPLICIT_ADOPTION\"},\"terms\":{\"explicit_additions\":{},\"listing_terms\":{}},\"units\":1},\"frame\":{\"extensions\":{},\"links\":[],\"slots\":[{\"answers\":[{\"evidence\":[],\"stated_by\":null,\"value\":{\"buyer\":\"3d4017c3e843895a92b70aa74d1b7ebc9c982ccf2ec4968cc0cd55f12af4660c\",\"seller\":\"d75a980182b10ab7d54bfed3c964073a0ee172f3daa62325af021a68f707511a\"}}],\"definition\":\"Actors, identities, roles, capacities or claimed attribution.\",\"dimension\":\"who\",\"id\":\"who\",\"question\":\"who?\",\"reason\":null,\"status\":\"ASSERTED\"},{\"answers\":[{\"evidence\":[],\"stated_by\":null,\"value\":\"Synthetic review chart for USD 25; unsigned and not a service offer.\"}],\"definition\":\"Actions, objects, resources, obligations or claims being described.\",\"dimension\":\"what\",\"id\":\"what\",\"question\":\"what?\",\"reason\":null,\"status\":\"ASSERTED\"},{\"answers\":[{\"evidence\":[],\"stated_by\":null,\"value\":{\"archetype\":null,\"author\":\"3d4017c3e843895a92b70aa74d1b7ebc9c982ccf2ec4968cc0cd55f12af4660c\",\"listing\":\"f35a1daa278454ff98194bd5c265eee09266593128d114485d36640f4d29f7f9\",\"market\":\"c5020b588d5e74ae7b235449fe2d0ef5121cb6d3f3f9e64cf4ce9280b79b9932\",\"title\":\"Synthetic review chart for USD 25; unsigned and not a service offer.\"}}],\"definition\":\"The exact selection, subset, version or referenced instance.\",\"dimension\":\"which\",\"id\":\"which\",\"question\":\"which?\",\"reason\":null,\"status\":\"ASSERTED\"},{\"answers\":[],\"definition\":\"Physical, digital, jurisdictional or other explicitly named scope.\",\"dimension\":\"where\",\"id\":\"where\",\"question\":\"where?\",\"reason\":null,\"status\":\"UNKNOWN\"},{\"answers\":[],\"definition\":\"Time, deadline, interval, sequence or event under a stated basis.\",\"dimension\":\"when\",\"id\":\"when\",\"question\":\"when?\",\"reason\":null,\"status\":\"UNKNOWN\"},{\"answers\":[],\"definition\":\"Declared purpose, rationale or motivation; not an inferred motive.\",\"dimension\":\"why\",\"id\":\"why\",\"question\":\"why?\",\"reason\":null,\"status\":\"UNKNOWN\"},{\"answers\":[{\"evidence\":[],\"stated_by\":null,\"value\":{\"delivery_acceptance\":\"SEPARATE_FROM_AGREEMENT_ACCEPTANCE\",\"mode\":\"EXACT_ORDER_ADOPTION\",\"payment_stage\":\"UNSPECIFIED_REQUIRES_EXPLICIT_ADOPTION\"}}],\"definition\":\"Method, procedure, logic, technology, evidence or protection choices.\",\"dimension\":\"how\",\"id\":\"how\",\"question\":\"how?\",\"reason\":null,\"status\":\"ASSERTED\"}],\"supersedes\":null,\"target\":null,\"title\":\"Synthetic review chart for USD 25; unsigned and not a service offer.\",\"version\":\"covenant-question-frame/0.1\"},\"kind\":\"ORDER\",\"supersedes\":null,\"title\":\"Synthetic review chart for USD 25; unsigned and not a service offer.\",\"version\":\"covenant-marketplace/0.1\"}}],\"concepts\":[{\"artifacts\":{\"Order\":{\"id\":\"663c13a3f9e41f1b89c9441575d5ec800841ca1b899bc7fd5b9a298ba0176b38\",\"kind\":\"marketplace-order\"}},\"concepts\":{},\"extensions\":{},\"frames\":{\"Context\":\"98dc3383ecae99469e8a366896117e8903bac92dd4d486151d5cf2fdc3b1bb79\"},\"meaning\":\"Perform the exact marketplace order eb32589160a1cfb4464c51c443b1af2e6ff85571279b84eef308555d6116d351\",\"parties\":{\"buyer\":\"3d4017c3e843895a92b70aa74d1b7ebc9c982ccf2ec4968cc0cd55f12af4660c\",\"seller\":\"d75a980182b10ab7d54bfed3c964073a0ee172f3daa62325af021a68f707511a\"},\"relations\":{},\"root\":\"terms\",\"rules\":{\"terms\":{\"op\":\"VALUE\",\"value\":null}},\"semantics\":\"0f0d03813e4ba088b214941d78b6da26062b14f1d342ccc35ee0bea251e4dc44\",\"supersedes\":null,\"title\":\"Synthetic review chart for USD 25; unsigned and not a service offer.\",\"version\":\"covenant-frame-concept/0.1\"}],\"frames\":[{\"extensions\":{},\"links\":[],\"slots\":[{\"answers\":[{\"evidence\":[],\"stated_by\":null,\"value\":{\"buyer\":\"3d4017c3e843895a92b70aa74d1b7ebc9c982ccf2ec4968cc0cd55f12af4660c\",\"seller\":\"d75a980182b10ab7d54bfed3c964073a0ee172f3daa62325af021a68f707511a\"}}],\"definition\":\"Actors, identities, roles, capacities or claimed attribution.\",\"dimension\":\"who\",\"id\":\"who\",\"question\":\"who?\",\"reason\":null,\"status\":\"ASSERTED\"},{\"answers\":[{\"evidence\":[],\"stated_by\":null,\"value\":\"Synthetic review chart for USD 25; unsigned and not a service offer.\"}],\"definition\":\"Actions, objects, resources, obligations or claims being described.\",\"dimension\":\"what\",\"id\":\"what\",\"question\":\"what?\",\"reason\":null,\"status\":\"ASSERTED\"},{\"answers\":[{\"evidence\":[],\"stated_by\":null,\"value\":{\"archetype\":null,\"author\":\"3d4017c3e843895a92b70aa74d1b7ebc9c982ccf2ec4968cc0cd55f12af4660c\",\"listing\":\"f35a1daa278454ff98194bd5c265eee09266593128d114485d36640f4d29f7f9\",\"market\":\"c5020b588d5e74ae7b235449fe2d0ef5121cb6d3f3f9e64cf4ce9280b79b9932\",\"title\":\"Synthetic review chart for USD 25; unsigned and not a service offer.\"}}],\"definition\":\"The exact selection, subset, version or referenced instance.\",\"dimension\":\"which\",\"id\":\"which\",\"question\":\"which?\",\"reason\":null,\"status\":\"ASSERTED\"},{\"answers\":[],\"definition\":\"Physical, digital, jurisdictional or other explicitly named scope.\",\"dimension\":\"where\",\"id\":\"where\",\"question\":\"where?\",\"reason\":null,\"status\":\"UNKNOWN\"},{\"answers\":[],\"definition\":\"Time, deadline, interval, sequence or event under a stated basis.\",\"dimension\":\"when\",\"id\":\"when\",\"question\":\"when?\",\"reason\":null,\"status\":\"UNKNOWN\"},{\"answers\":[],\"definition\":\"Declared purpose, rationale or motivation; not an inferred motive.\",\"dimension\":\"why\",\"id\":\"why\",\"question\":\"why?\",\"reason\":null,\"status\":\"UNKNOWN\"},{\"answers\":[{\"evidence\":[],\"stated_by\":null,\"value\":{\"delivery_acceptance\":\"SEPARATE_FROM_AGREEMENT_ACCEPTANCE\",\"mode\":\"EXACT_ORDER_ADOPTION\",\"payment_stage\":\"UNSPECIFIED_REQUIRES_EXPLICIT_ADOPTION\"}}],\"definition\":\"Method, procedure, logic, technology, evidence or protection choices.\",\"dimension\":\"how\",\"id\":\"how\",\"question\":\"how?\",\"reason\":null,\"status\":\"ASSERTED\"}],\"supersedes\":null,\"target\":null,\"title\":\"Synthetic review chart for USD 25; unsigned and not a service offer.\",\"version\":\"covenant-question-frame/0.1\"}],\"root\":\"a5814a5b2c04b64a24e8ede7976adce0c07662c2c9b34ee4eadf06e14797509e\"},\"context\":\"1212121212121212121212121212121212121212121212121212121212121212\",\"version\":\"covenant-agreement-review/0.1\"},\"root\":\"a5814a5b2c04b64a24e8ede7976adce0c07662c2c9b34ee4eadf06e14797509e\"}}",
+          "type": "text"
+        }
+      ],
+      "isError": false
+    }
+  },
+  "parsed_tool_result": {
+    "acceptance": "EXPLICIT_BUYER_AND_SELLER_SIGNATURES_REQUIRED",
+    "automatic_assent": false,
+    "cashflows": {
+      "buyer_gives": [
+        {
+          "amount": 2500,
+          "asset": {
+            "adapter": null,
+            "identifier": "USD",
+            "namespace": "fiat",
+            "transfer_terms": {},
+            "unit": "cents"
+          }
+        }
+      ],
+      "buyer_receives": [
+        {
+          "amount": 1,
+          "asset": {
+            "adapter": null,
+            "identifier": "Synthetic review chart for USD 25; unsigned and not a service offer.",
+            "namespace": "description",
+            "transfer_terms": {
+              "description": "Delivery is a separately verified obligation"
+            },
+            "unit": "delivery"
+          }
+        }
+      ],
+      "fees": "SEPARATELY_ADOPTED_RAIL_QUOTE_REQUIRED",
+      "unit_conversion": "NONE"
+    },
+    "custody": "NOT_ESTABLISHED",
+    "execution_authorized": false,
+    "id": "eb32589160a1cfb4464c51c443b1af2e6ff85571279b84eef308555d6116d351",
+    "listing": {
+      "binding": false,
+      "custody": "NOT_ESTABLISHED",
+      "custom_rules": "DATA_UNTIL_EXACT_IMPLEMENTATION_ADOPTED",
+      "execution_authorized": false,
+      "frame": {
+        "attribution": "CLAIMED_NOT_AUTHENTICATED",
+        "binding": false,
+        "coverage_basis": "REQUESTED_QUESTIONS_ONLY_NOT_SUFFICIENCY_FOR_ACTION",
+        "coverage_complete": false,
+        "evidence": "REFERENCED_NOT_VERIFIED",
+        "execution_authorized": false,
+        "frame": {
+          "extensions": {},
+          "links": [],
+          "slots": [
+            {
+              "answers": [
+                {
+                  "evidence": [],
+                  "stated_by": null,
+                  "value": "d75a980182b10ab7d54bfed3c964073a0ee172f3daa62325af021a68f707511a"
+                }
+              ],
+              "definition": "Actors, identities, roles, capacities or claimed attribution.",
+              "dimension": "who",
+              "id": "who",
+              "question": "who?",
+              "reason": null,
+              "status": "ASSERTED"
+            },
+            {
+              "answers": [
+                {
+                  "evidence": [],
+                  "stated_by": null,
+                  "value": "Synthetic review chart for USD 25; unsigned and not a service offer."
+                }
+              ],
+              "definition": "Actions, objects, resources, obligations or claims being described.",
+              "dimension": "what",
+              "id": "what",
+              "question": "what?",
+              "reason": null,
+              "status": "ASSERTED"
+            },
+            {
+              "answers": [
+                {
+                  "evidence": [],
+                  "stated_by": null,
+                  "value": {
+                    "archetype": null,
+                    "author": "d75a980182b10ab7d54bfed3c964073a0ee172f3daa62325af021a68f707511a",
+                    "market": "c5020b588d5e74ae7b235449fe2d0ef5121cb6d3f3f9e64cf4ce9280b79b9932",
+                    "title": "Synthetic review chart for USD 25; unsigned and not a service offer."
+                  }
+                }
+              ],
+              "definition": "The exact selection, subset, version or referenced instance.",
+              "dimension": "which",
+              "id": "which",
+              "question": "which?",
+              "reason": null,
+              "status": "ASSERTED"
+            },
+            {
+              "answers": [],
+              "definition": "Physical, digital, jurisdictional or other explicitly named scope.",
+              "dimension": "where",
+              "id": "where",
+              "question": "where?",
+              "reason": null,
+              "status": "UNKNOWN"
+            },
+            {
+              "answers": [],
+              "definition": "Time, deadline, interval, sequence or event under a stated basis.",
+              "dimension": "when",
+              "id": "when",
+              "question": "when?",
+              "reason": null,
+              "status": "UNKNOWN"
+            },
+            {
+              "answers": [],
+              "definition": "Declared purpose, rationale or motivation; not an inferred motive.",
+              "dimension": "why",
+              "id": "why",
+              "question": "why?",
+              "reason": null,
+              "status": "UNKNOWN"
+            },
+            {
+              "answers": [
+                {
+                  "evidence": [],
+                  "stated_by": null,
+                  "value": {
+                    "delivery_acceptance": "SEPARATE_FROM_AGREEMENT_ACCEPTANCE",
+                    "mode": "EXACT_ORDER_ADOPTION",
+                    "payment_stage": "UNSPECIFIED_REQUIRES_EXPLICIT_ADOPTION"
+                  }
+                }
+              ],
+              "definition": "Method, procedure, logic, technology, evidence or protection choices.",
+              "dimension": "how",
+              "id": "how",
+              "question": "how?",
+              "reason": null,
+              "status": "ASSERTED"
+            }
+          ],
+          "supersedes": null,
+          "target": null,
+          "title": "Synthetic review chart for USD 25; unsigned and not a service offer.",
+          "version": "covenant-question-frame/0.1"
+        },
+        "id": "57fa5f9d72237d311bfdac1b793c168383ec5d8af6c321905edb72103902552a",
+        "missing_dimensions": [],
+        "required_dimensions": [
+          "who",
+          "what",
+          "which",
+          "where",
+          "when",
+          "why",
+          "how"
+        ],
+        "spatial_and_temporal_semantics": "EXACT_AS_DECLARED_NO_COORDINATE_CLOCK_OR_JURISDICTION_INFERENCE",
+        "status_counts": {
+          "ASSERTED": 4,
+          "DISPUTED": 0,
+          "EVIDENCE_LINKED": 0,
+          "NOT_APPLICABLE": 0,
+          "UNKNOWN": 3,
+          "WITHHELD": 0
+        },
+        "unresolved_slots": [
+          "where",
+          "when",
+          "why"
+        ],
+        "world_truth": "NOT_ESTABLISHED"
+      },
+      "id": "f35a1daa278454ff98194bd5c265eee09266593128d114485d36640f4d29f7f9",
+      "inventory": "ASSERTED_NOT_RESERVED",
+      "record": {
+        "author": "d75a980182b10ab7d54bfed3c964073a0ee172f3daa62325af021a68f707511a",
+        "data": {
+          "active": true,
+          "archetype": null,
+          "category": "General",
+          "custom": {},
+          "market": "c5020b588d5e74ae7b235449fe2d0ef5121cb6d3f3f9e64cf4ce9280b79b9932",
+          "mechanism": "FIXED",
+          "offer": [
+            {
+              "amount": 1,
+              "asset": {
+                "adapter": null,
+                "identifier": "Synthetic review chart for USD 25; unsigned and not a service offer.",
+                "namespace": "description",
+                "transfer_terms": {
+                  "description": "Delivery is a separately verified obligation"
+                },
+                "unit": "delivery"
+              }
+            }
+          ],
+          "quantity": 1,
+          "settlement": {
+            "delivery_acceptance": "SEPARATE_FROM_AGREEMENT_ACCEPTANCE",
+            "mode": "EXACT_ORDER_ADOPTION",
+            "payment_stage": "UNSPECIFIED_REQUIRES_EXPLICIT_ADOPTION"
+          },
+          "want": [
+            {
+              "amount": 2500,
+              "asset": {
+                "adapter": null,
+                "identifier": "USD",
+                "namespace": "fiat",
+                "transfer_terms": {},
+                "unit": "cents"
+              }
+            }
+          ]
+        },
+        "frame": {
+          "extensions": {},
+          "links": [],
+          "slots": [
+            {
+              "answers": [
+                {
+                  "evidence": [],
+                  "stated_by": null,
+                  "value": "d75a980182b10ab7d54bfed3c964073a0ee172f3daa62325af021a68f707511a"
+                }
+              ],
+              "definition": "Actors, identities, roles, capacities or claimed attribution.",
+              "dimension": "who",
+              "id": "who",
+              "question": "who?",
+              "reason": null,
+              "status": "ASSERTED"
+            },
+            {
+              "answers": [
+                {
+                  "evidence": [],
+                  "stated_by": null,
+                  "value": "Synthetic review chart for USD 25; unsigned and not a service offer."
+                }
+              ],
+              "definition": "Actions, objects, resources, obligations or claims being described.",
+              "dimension": "what",
+              "id": "what",
+              "question": "what?",
+              "reason": null,
+              "status": "ASSERTED"
+            },
+            {
+              "answers": [
+                {
+                  "evidence": [],
+                  "stated_by": null,
+                  "value": {
+                    "archetype": null,
+                    "author": "d75a980182b10ab7d54bfed3c964073a0ee172f3daa62325af021a68f707511a",
+                    "market": "c5020b588d5e74ae7b235449fe2d0ef5121cb6d3f3f9e64cf4ce9280b79b9932",
+                    "title": "Synthetic review chart for USD 25; unsigned and not a service offer."
+                  }
+                }
+              ],
+              "definition": "The exact selection, subset, version or referenced instance.",
+              "dimension": "which",
+              "id": "which",
+              "question": "which?",
+              "reason": null,
+              "status": "ASSERTED"
+            },
+            {
+              "answers": [],
+              "definition": "Physical, digital, jurisdictional or other explicitly named scope.",
+              "dimension": "where",
+              "id": "where",
+              "question": "where?",
+              "reason": null,
+              "status": "UNKNOWN"
+            },
+            {
+              "answers": [],
+              "definition": "Time, deadline, interval, sequence or event under a stated basis.",
+              "dimension": "when",
+              "id": "when",
+              "question": "when?",
+              "reason": null,
+              "status": "UNKNOWN"
+            },
+            {
+              "answers": [],
+              "definition": "Declared purpose, rationale or motivation; not an inferred motive.",
+              "dimension": "why",
+              "id": "why",
+              "question": "why?",
+              "reason": null,
+              "status": "UNKNOWN"
+            },
+            {
+              "answers": [
+                {
+                  "evidence": [],
+                  "stated_by": null,
+                  "value": {
+                    "delivery_acceptance": "SEPARATE_FROM_AGREEMENT_ACCEPTANCE",
+                    "mode": "EXACT_ORDER_ADOPTION",
+                    "payment_stage": "UNSPECIFIED_REQUIRES_EXPLICIT_ADOPTION"
+                  }
+                }
+              ],
+              "definition": "Method, procedure, logic, technology, evidence or protection choices.",
+              "dimension": "how",
+              "id": "how",
+              "question": "how?",
+              "reason": null,
+              "status": "ASSERTED"
+            }
+          ],
+          "supersedes": null,
+          "target": null,
+          "title": "Synthetic review chart for USD 25; unsigned and not a service offer.",
+          "version": "covenant-question-frame/0.1"
+        },
+        "kind": "LISTING",
+        "supersedes": null,
+        "title": "Synthetic review chart for USD 25; unsigned and not a service offer.",
+        "version": "covenant-marketplace/0.1"
+      },
+      "target": {
+        "id": "f35a1daa278454ff98194bd5c265eee09266593128d114485d36640f4d29f7f9",
+        "kind": "marketplace-listing"
+      }
+    },
+    "market": {
+      "binding": false,
+      "custody": "NOT_ESTABLISHED",
+      "custom_rules": "DATA_UNTIL_EXACT_IMPLEMENTATION_ADOPTED",
+      "execution_authorized": false,
+      "frame": {
+        "attribution": "CLAIMED_NOT_AUTHENTICATED",
+        "binding": false,
+        "coverage_basis": "REQUESTED_QUESTIONS_ONLY_NOT_SUFFICIENCY_FOR_ACTION",
+        "coverage_complete": false,
+        "evidence": "REFERENCED_NOT_VERIFIED",
+        "execution_authorized": false,
+        "frame": {
+          "extensions": {},
+          "links": [],
+          "slots": [
+            {
+              "answers": [
+                {
+                  "evidence": [],
+                  "stated_by": null,
+                  "value": "d75a980182b10ab7d54bfed3c964073a0ee172f3daa62325af021a68f707511a"
+                }
+              ],
+              "definition": "Actors, identities, roles, capacities or claimed attribution.",
+              "dimension": "who",
+              "id": "who",
+              "question": "who?",
+              "reason": null,
+              "status": "ASSERTED"
+            },
+            {
+              "answers": [
+                {
+                  "evidence": [],
+                  "stated_by": null,
+                  "value": "Direct trade"
+                }
+              ],
+              "definition": "Actions, objects, resources, obligations or claims being described.",
+              "dimension": "what",
+              "id": "what",
+              "question": "what?",
+              "reason": null,
+              "status": "ASSERTED"
+            },
+            {
+              "answers": [
+                {
+                  "evidence": [],
+                  "stated_by": null,
+                  "value": {
+                    "author": "d75a980182b10ab7d54bfed3c964073a0ee172f3daa62325af021a68f707511a",
+                    "title": "Direct trade"
+                  }
+                }
+              ],
+              "definition": "The exact selection, subset, version or referenced instance.",
+              "dimension": "which",
+              "id": "which",
+              "question": "which?",
+              "reason": null,
+              "status": "ASSERTED"
+            },
+            {
+              "answers": [],
+              "definition": "Physical, digital, jurisdictional or other explicitly named scope.",
+              "dimension": "where",
+              "id": "where",
+              "question": "where?",
+              "reason": null,
+              "status": "UNKNOWN"
+            },
+            {
+              "answers": [],
+              "definition": "Time, deadline, interval, sequence or event under a stated basis.",
+              "dimension": "when",
+              "id": "when",
+              "question": "when?",
+              "reason": null,
+              "status": "UNKNOWN"
+            },
+            {
+              "answers": [],
+              "definition": "Declared purpose, rationale or motivation; not an inferred motive.",
+              "dimension": "why",
+              "id": "why",
+              "question": "why?",
+              "reason": null,
+              "status": "UNKNOWN"
+            },
+            {
+              "answers": [
+                {
+                  "evidence": [],
+                  "stated_by": null,
+                  "value": "Exact adopted record"
+                }
+              ],
+              "definition": "Method, procedure, logic, technology, evidence or protection choices.",
+              "dimension": "how",
+              "id": "how",
+              "question": "how?",
+              "reason": null,
+              "status": "ASSERTED"
+            }
+          ],
+          "supersedes": null,
+          "target": null,
+          "title": "Direct trade",
+          "version": "covenant-question-frame/0.1"
+        },
+        "id": "f24a67351d1220809f410fb7aab73c023c3b5fcce2738066db9f0ebda7a66810",
+        "missing_dimensions": [],
+        "required_dimensions": [
+          "who",
+          "what",
+          "which",
+          "where",
+          "when",
+          "why",
+          "how"
+        ],
+        "spatial_and_temporal_semantics": "EXACT_AS_DECLARED_NO_COORDINATE_CLOCK_OR_JURISDICTION_INFERENCE",
+        "status_counts": {
+          "ASSERTED": 4,
+          "DISPUTED": 0,
+          "EVIDENCE_LINKED": 0,
+          "NOT_APPLICABLE": 0,
+          "UNKNOWN": 3,
+          "WITHHELD": 0
+        },
+        "unresolved_slots": [
+          "where",
+          "when",
+          "why"
+        ],
+        "world_truth": "NOT_ESTABLISHED"
+      },
+      "id": "c5020b588d5e74ae7b235449fe2d0ef5121cb6d3f3f9e64cf4ce9280b79b9932",
+      "inventory": "ASSERTED_NOT_RESERVED",
+      "record": {
+        "author": "d75a980182b10ab7d54bfed3c964073a0ee172f3daa62325af021a68f707511a",
+        "data": {
+          "categories": [
+            "General"
+          ],
+          "description": "Agent-created market",
+          "mechanisms": [
+            "FIXED",
+            "NEGOTIABLE",
+            "AUCTION",
+            "CREDIT",
+            "RENTAL",
+            "CUSTOM"
+          ],
+          "members": [],
+          "policy": {
+            "admission": "OPEN"
+          }
+        },
+        "frame": {
+          "extensions": {},
+          "links": [],
+          "slots": [
+            {
+              "answers": [
+                {
+                  "evidence": [],
+                  "stated_by": null,
+                  "value": "d75a980182b10ab7d54bfed3c964073a0ee172f3daa62325af021a68f707511a"
+                }
+              ],
+              "definition": "Actors, identities, roles, capacities or claimed attribution.",
+              "dimension": "who",
+              "id": "who",
+              "question": "who?",
+              "reason": null,
+              "status": "ASSERTED"
+            },
+            {
+              "answers": [
+                {
+                  "evidence": [],
+                  "stated_by": null,
+                  "value": "Direct trade"
+                }
+              ],
+              "definition": "Actions, objects, resources, obligations or claims being described.",
+              "dimension": "what",
+              "id": "what",
+              "question": "what?",
+              "reason": null,
+              "status": "ASSERTED"
+            },
+            {
+              "answers": [
+                {
+                  "evidence": [],
+                  "stated_by": null,
+                  "value": {
+                    "author": "d75a980182b10ab7d54bfed3c964073a0ee172f3daa62325af021a68f707511a",
+                    "title": "Direct trade"
+                  }
+                }
+              ],
+              "definition": "The exact selection, subset, version or referenced instance.",
+              "dimension": "which",
+              "id": "which",
+              "question": "which?",
+              "reason": null,
+              "status": "ASSERTED"
+            },
+            {
+              "answers": [],
+              "definition": "Physical, digital, jurisdictional or other explicitly named scope.",
+              "dimension": "where",
+              "id": "where",
+              "question": "where?",
+              "reason": null,
+              "status": "UNKNOWN"
+            },
+            {
+              "answers": [],
+              "definition": "Time, deadline, interval, sequence or event under a stated basis.",
+              "dimension": "when",
+              "id": "when",
+              "question": "when?",
+              "reason": null,
+              "status": "UNKNOWN"
+            },
+            {
+              "answers": [],
+              "definition": "Declared purpose, rationale or motivation; not an inferred motive.",
+              "dimension": "why",
+              "id": "why",
+              "question": "why?",
+              "reason": null,
+              "status": "UNKNOWN"
+            },
+            {
+              "answers": [
+                {
+                  "evidence": [],
+                  "stated_by": null,
+                  "value": "Exact adopted record"
+                }
+              ],
+              "definition": "Method, procedure, logic, technology, evidence or protection choices.",
+              "dimension": "how",
+              "id": "how",
+              "question": "how?",
+              "reason": null,
+              "status": "ASSERTED"
+            }
+          ],
+          "supersedes": null,
+          "target": null,
+          "title": "Direct trade",
+          "version": "covenant-question-frame/0.1"
+        },
+        "kind": "MARKET",
+        "supersedes": null,
+        "title": "Direct trade",
+        "version": "covenant-marketplace/0.1"
+      },
+      "target": {
+        "id": "c5020b588d5e74ae7b235449fe2d0ef5121cb6d3f3f9e64cf4ce9280b79b9932",
+        "kind": "marketplace-market"
+      }
+    },
+    "optional_complexity": [
+      "archetype",
+      "frames",
+      "credit",
+      "auction",
+      "collateral",
+      "escrow",
+      "disputes",
+      "privacy"
+    ],
+    "order": {
+      "author": "3d4017c3e843895a92b70aa74d1b7ebc9c982ccf2ec4968cc0cd55f12af4660c",
+      "data": {
+        "archetype": null,
+        "buyer": "3d4017c3e843895a92b70aa74d1b7ebc9c982ccf2ec4968cc0cd55f12af4660c",
+        "context": "1212121212121212121212121212121212121212121212121212121212121212",
+        "give": [
+          {
+            "amount": 2500,
+            "asset": {
+              "adapter": null,
+              "identifier": "USD",
+              "namespace": "fiat",
+              "transfer_terms": {},
+              "unit": "cents"
+            }
+          }
+        ],
+        "listing": "f35a1daa278454ff98194bd5c265eee09266593128d114485d36640f4d29f7f9",
+        "market": "c5020b588d5e74ae7b235449fe2d0ef5121cb6d3f3f9e64cf4ce9280b79b9932",
+        "receive": [
+          {
+            "amount": 1,
+            "asset": {
+              "adapter": null,
+              "identifier": "Synthetic review chart for USD 25; unsigned and not a service offer.",
+              "namespace": "description",
+              "transfer_terms": {
+                "description": "Delivery is a separately verified obligation"
+              },
+              "unit": "delivery"
+            }
+          }
+        ],
+        "seller": "d75a980182b10ab7d54bfed3c964073a0ee172f3daa62325af021a68f707511a",
+        "settlement": {
+          "delivery_acceptance": "SEPARATE_FROM_AGREEMENT_ACCEPTANCE",
+          "mode": "EXACT_ORDER_ADOPTION",
+          "payment_stage": "UNSPECIFIED_REQUIRES_EXPLICIT_ADOPTION"
+        },
+        "terms": {
+          "explicit_additions": {},
+          "listing_terms": {}
+        },
+        "units": 1
+      },
+      "frame": {
+        "extensions": {},
+        "links": [],
+        "slots": [
+          {
+            "answers": [
+              {
+                "evidence": [],
+                "stated_by": null,
+                "value": {
+                  "buyer": "3d4017c3e843895a92b70aa74d1b7ebc9c982ccf2ec4968cc0cd55f12af4660c",
+                  "seller": "d75a980182b10ab7d54bfed3c964073a0ee172f3daa62325af021a68f707511a"
+                }
+              }
+            ],
+            "definition": "Actors, identities, roles, capacities or claimed attribution.",
+            "dimension": "who",
+            "id": "who",
+            "question": "who?",
+            "reason": null,
+            "status": "ASSERTED"
+          },
+          {
+            "answers": [
+              {
+                "evidence": [],
+                "stated_by": null,
+                "value": "Synthetic review chart for USD 25; unsigned and not a service offer."
+              }
+            ],
+            "definition": "Actions, objects, resources, obligations or claims being described.",
+            "dimension": "what",
+            "id": "what",
+            "question": "what?",
+            "reason": null,
+            "status": "ASSERTED"
+          },
+          {
+            "answers": [
+              {
+                "evidence": [],
+                "stated_by": null,
+                "value": {
+                  "archetype": null,
+                  "author": "3d4017c3e843895a92b70aa74d1b7ebc9c982ccf2ec4968cc0cd55f12af4660c",
+                  "listing": "f35a1daa278454ff98194bd5c265eee09266593128d114485d36640f4d29f7f9",
+                  "market": "c5020b588d5e74ae7b235449fe2d0ef5121cb6d3f3f9e64cf4ce9280b79b9932",
+                  "title": "Synthetic review chart for USD 25; unsigned and not a service offer."
+                }
+              }
+            ],
+            "definition": "The exact selection, subset, version or referenced instance.",
+            "dimension": "which",
+            "id": "which",
+            "question": "which?",
+            "reason": null,
+            "status": "ASSERTED"
+          },
+          {
+            "answers": [],
+            "definition": "Physical, digital, jurisdictional or other explicitly named scope.",
+            "dimension": "where",
+            "id": "where",
+            "question": "where?",
+            "reason": null,
+            "status": "UNKNOWN"
+          },
+          {
+            "answers": [],
+            "definition": "Time, deadline, interval, sequence or event under a stated basis.",
+            "dimension": "when",
+            "id": "when",
+            "question": "when?",
+            "reason": null,
+            "status": "UNKNOWN"
+          },
+          {
+            "answers": [],
+            "definition": "Declared purpose, rationale or motivation; not an inferred motive.",
+            "dimension": "why",
+            "id": "why",
+            "question": "why?",
+            "reason": null,
+            "status": "UNKNOWN"
+          },
+          {
+            "answers": [
+              {
+                "evidence": [],
+                "stated_by": null,
+                "value": {
+                  "delivery_acceptance": "SEPARATE_FROM_AGREEMENT_ACCEPTANCE",
+                  "mode": "EXACT_ORDER_ADOPTION",
+                  "payment_stage": "UNSPECIFIED_REQUIRES_EXPLICIT_ADOPTION"
+                }
+              }
+            ],
+            "definition": "Method, procedure, logic, technology, evidence or protection choices.",
+            "dimension": "how",
+            "id": "how",
+            "question": "how?",
+            "reason": null,
+            "status": "ASSERTED"
+          }
+        ],
+        "supersedes": null,
+        "target": null,
+        "title": "Synthetic review chart for USD 25; unsigned and not a service offer.",
+        "version": "covenant-question-frame/0.1"
+      },
+      "kind": "ORDER",
+      "supersedes": null,
+      "title": "Synthetic review chart for USD 25; unsigned and not a service offer.",
+      "version": "covenant-marketplace/0.1"
+    },
+    "path": "ONE_PREPARATION_CALL_THEN_EXPLICIT_PARTY_ASSENTS",
+    "prepared": {
+      "assent_payload": {
+        "body": {
+          "closure": "876ef34266e1815eaf550bd44a1f82278fdddf2f07b0894260bd3172b1f6086d",
+          "context": "1212121212121212121212121212121212121212121212121212121212121212",
+          "root": "a5814a5b2c04b64a24e8ede7976adce0c07662c2c9b34ee4eadf06e14797509e",
+          "semantics": "0f0d03813e4ba088b214941d78b6da26062b14f1d342ccc35ee0bea251e4dc44"
+        },
+        "evaluation_status": "UNKNOWN",
+        "evaluation_value": null,
+        "execution_authorized": false,
+        "label": "COVENANT-FRAME-CONCEPT-ASSENT-0.1",
+        "legal_effect": "NOT_DETERMINED",
+        "required_assents": [
+          {
+            "body": {
+              "closure": "876ef34266e1815eaf550bd44a1f82278fdddf2f07b0894260bd3172b1f6086d",
+              "concept": "a5814a5b2c04b64a24e8ede7976adce0c07662c2c9b34ee4eadf06e14797509e",
+              "context": "1212121212121212121212121212121212121212121212121212121212121212",
+              "party": "buyer",
+              "root": "a5814a5b2c04b64a24e8ede7976adce0c07662c2c9b34ee4eadf06e14797509e",
+              "semantics": "0f0d03813e4ba088b214941d78b6da26062b14f1d342ccc35ee0bea251e4dc44"
+            },
+            "concept": "a5814a5b2c04b64a24e8ede7976adce0c07662c2c9b34ee4eadf06e14797509e",
+            "identity": "3d4017c3e843895a92b70aa74d1b7ebc9c982ccf2ec4968cc0cd55f12af4660c",
+            "party": "buyer"
+          },
+          {
+            "body": {
+              "closure": "876ef34266e1815eaf550bd44a1f82278fdddf2f07b0894260bd3172b1f6086d",
+              "concept": "a5814a5b2c04b64a24e8ede7976adce0c07662c2c9b34ee4eadf06e14797509e",
+              "context": "1212121212121212121212121212121212121212121212121212121212121212",
+              "party": "seller",
+              "root": "a5814a5b2c04b64a24e8ede7976adce0c07662c2c9b34ee4eadf06e14797509e",
+              "semantics": "0f0d03813e4ba088b214941d78b6da26062b14f1d342ccc35ee0bea251e4dc44"
+            },
+            "concept": "a5814a5b2c04b64a24e8ede7976adce0c07662c2c9b34ee4eadf06e14797509e",
+            "identity": "d75a980182b10ab7d54bfed3c964073a0ee172f3daa62325af021a68f707511a",
+            "party": "seller"
+          }
+        ],
+        "root_has_parties": true,
+        "scope": "ALL_DECLARED_PARTIES_IN_EXACT_TRANSITIVE_CLOSURE",
+        "unsigned_concepts": []
+      },
+      "automatic_assent": false,
+      "builder": "covenant-agreement-builder/0.1",
+      "bundle": {
+        "artifacts": [
+          {
+            "kind": "marketplace-order",
+            "value": {
+              "author": "3d4017c3e843895a92b70aa74d1b7ebc9c982ccf2ec4968cc0cd55f12af4660c",
+              "data": {
+                "archetype": null,
+                "buyer": "3d4017c3e843895a92b70aa74d1b7ebc9c982ccf2ec4968cc0cd55f12af4660c",
+                "context": "1212121212121212121212121212121212121212121212121212121212121212",
+                "give": [
+                  {
+                    "amount": 2500,
+                    "asset": {
+                      "adapter": null,
+                      "identifier": "USD",
+                      "namespace": "fiat",
+                      "transfer_terms": {},
+                      "unit": "cents"
+                    }
+                  }
+                ],
+                "listing": "f35a1daa278454ff98194bd5c265eee09266593128d114485d36640f4d29f7f9",
+                "market": "c5020b588d5e74ae7b235449fe2d0ef5121cb6d3f3f9e64cf4ce9280b79b9932",
+                "receive": [
+                  {
+                    "amount": 1,
+                    "asset": {
+                      "adapter": null,
+                      "identifier": "Synthetic review chart for USD 25; unsigned and not a service offer.",
+                      "namespace": "description",
+                      "transfer_terms": {
+                        "description": "Delivery is a separately verified obligation"
+                      },
+                      "unit": "delivery"
+                    }
+                  }
+                ],
+                "seller": "d75a980182b10ab7d54bfed3c964073a0ee172f3daa62325af021a68f707511a",
+                "settlement": {
+                  "delivery_acceptance": "SEPARATE_FROM_AGREEMENT_ACCEPTANCE",
+                  "mode": "EXACT_ORDER_ADOPTION",
+                  "payment_stage": "UNSPECIFIED_REQUIRES_EXPLICIT_ADOPTION"
+                },
+                "terms": {
+                  "explicit_additions": {},
+                  "listing_terms": {}
+                },
+                "units": 1
+              },
+              "frame": {
+                "extensions": {},
+                "links": [],
+                "slots": [
+                  {
+                    "answers": [
+                      {
+                        "evidence": [],
+                        "stated_by": null,
+                        "value": {
+                          "buyer": "3d4017c3e843895a92b70aa74d1b7ebc9c982ccf2ec4968cc0cd55f12af4660c",
+                          "seller": "d75a980182b10ab7d54bfed3c964073a0ee172f3daa62325af021a68f707511a"
+                        }
+                      }
+                    ],
+                    "definition": "Actors, identities, roles, capacities or claimed attribution.",
+                    "dimension": "who",
+                    "id": "who",
+                    "question": "who?",
+                    "reason": null,
+                    "status": "ASSERTED"
+                  },
+                  {
+                    "answers": [
+                      {
+                        "evidence": [],
+                        "stated_by": null,
+                        "value": "Synthetic review chart for USD 25; unsigned and not a service offer."
+                      }
+                    ],
+                    "definition": "Actions, objects, resources, obligations or claims being described.",
+                    "dimension": "what",
+                    "id": "what",
+                    "question": "what?",
+                    "reason": null,
+                    "status": "ASSERTED"
+                  },
+                  {
+                    "answers": [
+                      {
+                        "evidence": [],
+                        "stated_by": null,
+                        "value": {
+                          "archetype": null,
+                          "author": "3d4017c3e843895a92b70aa74d1b7ebc9c982ccf2ec4968cc0cd55f12af4660c",
+                          "listing": "f35a1daa278454ff98194bd5c265eee09266593128d114485d36640f4d29f7f9",
+                          "market": "c5020b588d5e74ae7b235449fe2d0ef5121cb6d3f3f9e64cf4ce9280b79b9932",
+                          "title": "Synthetic review chart for USD 25; unsigned and not a service offer."
+                        }
+                      }
+                    ],
+                    "definition": "The exact selection, subset, version or referenced instance.",
+                    "dimension": "which",
+                    "id": "which",
+                    "question": "which?",
+                    "reason": null,
+                    "status": "ASSERTED"
+                  },
+                  {
+                    "answers": [],
+                    "definition": "Physical, digital, jurisdictional or other explicitly named scope.",
+                    "dimension": "where",
+                    "id": "where",
+                    "question": "where?",
+                    "reason": null,
+                    "status": "UNKNOWN"
+                  },
+                  {
+                    "answers": [],
+                    "definition": "Time, deadline, interval, sequence or event under a stated basis.",
+                    "dimension": "when",
+                    "id": "when",
+                    "question": "when?",
+                    "reason": null,
+                    "status": "UNKNOWN"
+                  },
+                  {
+                    "answers": [],
+                    "definition": "Declared purpose, rationale or motivation; not an inferred motive.",
+                    "dimension": "why",
+                    "id": "why",
+                    "question": "why?",
+                    "reason": null,
+                    "status": "UNKNOWN"
+                  },
+                  {
+                    "answers": [
+                      {
+                        "evidence": [],
+                        "stated_by": null,
+                        "value": {
+                          "delivery_acceptance": "SEPARATE_FROM_AGREEMENT_ACCEPTANCE",
+                          "mode": "EXACT_ORDER_ADOPTION",
+                          "payment_stage": "UNSPECIFIED_REQUIRES_EXPLICIT_ADOPTION"
+                        }
+                      }
+                    ],
+                    "definition": "Method, procedure, logic, technology, evidence or protection choices.",
+                    "dimension": "how",
+                    "id": "how",
+                    "question": "how?",
+                    "reason": null,
+                    "status": "ASSERTED"
+                  }
+                ],
+                "supersedes": null,
+                "target": null,
+                "title": "Synthetic review chart for USD 25; unsigned and not a service offer.",
+                "version": "covenant-question-frame/0.1"
+              },
+              "kind": "ORDER",
+              "supersedes": null,
+              "title": "Synthetic review chart for USD 25; unsigned and not a service offer.",
+              "version": "covenant-marketplace/0.1"
+            }
+          }
+        ],
+        "concepts": [
+          {
+            "artifacts": {
+              "Order": {
+                "id": "663c13a3f9e41f1b89c9441575d5ec800841ca1b899bc7fd5b9a298ba0176b38",
+                "kind": "marketplace-order"
+              }
+            },
+            "concepts": {},
+            "extensions": {},
+            "frames": {
+              "Context": "98dc3383ecae99469e8a366896117e8903bac92dd4d486151d5cf2fdc3b1bb79"
+            },
+            "meaning": "Perform the exact marketplace order eb32589160a1cfb4464c51c443b1af2e6ff85571279b84eef308555d6116d351",
+            "parties": {
+              "buyer": "3d4017c3e843895a92b70aa74d1b7ebc9c982ccf2ec4968cc0cd55f12af4660c",
+              "seller": "d75a980182b10ab7d54bfed3c964073a0ee172f3daa62325af021a68f707511a"
+            },
+            "relations": {},
+            "root": "terms",
+            "rules": {
+              "terms": {
+                "op": "VALUE",
+                "value": null
+              }
+            },
+            "semantics": "0f0d03813e4ba088b214941d78b6da26062b14f1d342ccc35ee0bea251e4dc44",
+            "supersedes": null,
+            "title": "Synthetic review chart for USD 25; unsigned and not a service offer.",
+            "version": "covenant-frame-concept/0.1"
+          }
+        ],
+        "frames": [
+          {
+            "extensions": {},
+            "links": [],
+            "slots": [
+              {
+                "answers": [
+                  {
+                    "evidence": [],
+                    "stated_by": null,
+                    "value": {
+                      "buyer": "3d4017c3e843895a92b70aa74d1b7ebc9c982ccf2ec4968cc0cd55f12af4660c",
+                      "seller": "d75a980182b10ab7d54bfed3c964073a0ee172f3daa62325af021a68f707511a"
+                    }
+                  }
+                ],
+                "definition": "Actors, identities, roles, capacities or claimed attribution.",
+                "dimension": "who",
+                "id": "who",
+                "question": "who?",
+                "reason": null,
+                "status": "ASSERTED"
+              },
+              {
+                "answers": [
+                  {
+                    "evidence": [],
+                    "stated_by": null,
+                    "value": "Synthetic review chart for USD 25; unsigned and not a service offer."
+                  }
+                ],
+                "definition": "Actions, objects, resources, obligations or claims being described.",
+                "dimension": "what",
+                "id": "what",
+                "question": "what?",
+                "reason": null,
+                "status": "ASSERTED"
+              },
+              {
+                "answers": [
+                  {
+                    "evidence": [],
+                    "stated_by": null,
+                    "value": {
+                      "archetype": null,
+                      "author": "3d4017c3e843895a92b70aa74d1b7ebc9c982ccf2ec4968cc0cd55f12af4660c",
+                      "listing": "f35a1daa278454ff98194bd5c265eee09266593128d114485d36640f4d29f7f9",
+                      "market": "c5020b588d5e74ae7b235449fe2d0ef5121cb6d3f3f9e64cf4ce9280b79b9932",
+                      "title": "Synthetic review chart for USD 25; unsigned and not a service offer."
+                    }
+                  }
+                ],
+                "definition": "The exact selection, subset, version or referenced instance.",
+                "dimension": "which",
+                "id": "which",
+                "question": "which?",
+                "reason": null,
+                "status": "ASSERTED"
+              },
+              {
+                "answers": [],
+                "definition": "Physical, digital, jurisdictional or other explicitly named scope.",
+                "dimension": "where",
+                "id": "where",
+                "question": "where?",
+                "reason": null,
+                "status": "UNKNOWN"
+              },
+              {
+                "answers": [],
+                "definition": "Time, deadline, interval, sequence or event under a stated basis.",
+                "dimension": "when",
+                "id": "when",
+                "question": "when?",
+                "reason": null,
+                "status": "UNKNOWN"
+              },
+              {
+                "answers": [],
+                "definition": "Declared purpose, rationale or motivation; not an inferred motive.",
+                "dimension": "why",
+                "id": "why",
+                "question": "why?",
+                "reason": null,
+                "status": "UNKNOWN"
+              },
+              {
+                "answers": [
+                  {
+                    "evidence": [],
+                    "stated_by": null,
+                    "value": {
+                      "delivery_acceptance": "SEPARATE_FROM_AGREEMENT_ACCEPTANCE",
+                      "mode": "EXACT_ORDER_ADOPTION",
+                      "payment_stage": "UNSPECIFIED_REQUIRES_EXPLICIT_ADOPTION"
+                    }
+                  }
+                ],
+                "definition": "Method, procedure, logic, technology, evidence or protection choices.",
+                "dimension": "how",
+                "id": "how",
+                "question": "how?",
+                "reason": null,
+                "status": "ASSERTED"
+              }
+            ],
+            "supersedes": null,
+            "target": null,
+            "title": "Synthetic review chart for USD 25; unsigned and not a service offer.",
+            "version": "covenant-question-frame/0.1"
+          }
+        ],
+        "root": "a5814a5b2c04b64a24e8ede7976adce0c07662c2c9b34ee4eadf06e14797509e"
+      },
+      "evaluation": {
+        "basis": "DECLARED_CRITERIA_NOT_WORLD_TRUTH",
+        "execution_authorized": false,
+        "status": "UNKNOWN",
+        "value": null
+      },
+      "execution_authorized": false,
+      "status": "READY_FOR_EXPLICIT_SIGNATURES",
+      "supplied_objects": "RESOLVE_DECLARED_PINS_WITHOUT_ADDING_REFERENCES_OR_PARTIES"
+    },
+    "review": {
+      "assent_payload": {
+        "body": {
+          "closure": "876ef34266e1815eaf550bd44a1f82278fdddf2f07b0894260bd3172b1f6086d",
+          "context": "1212121212121212121212121212121212121212121212121212121212121212",
+          "root": "a5814a5b2c04b64a24e8ede7976adce0c07662c2c9b34ee4eadf06e14797509e",
+          "semantics": "0f0d03813e4ba088b214941d78b6da26062b14f1d342ccc35ee0bea251e4dc44"
+        },
+        "evaluation_status": "UNKNOWN",
+        "evaluation_value": null,
+        "execution_authorized": false,
+        "label": "COVENANT-FRAME-CONCEPT-ASSENT-0.1",
+        "legal_effect": "NOT_DETERMINED",
+        "required_assents": [
+          {
+            "body": {
+              "closure": "876ef34266e1815eaf550bd44a1f82278fdddf2f07b0894260bd3172b1f6086d",
+              "concept": "a5814a5b2c04b64a24e8ede7976adce0c07662c2c9b34ee4eadf06e14797509e",
+              "context": "1212121212121212121212121212121212121212121212121212121212121212",
+              "party": "buyer",
+              "root": "a5814a5b2c04b64a24e8ede7976adce0c07662c2c9b34ee4eadf06e14797509e",
+              "semantics": "0f0d03813e4ba088b214941d78b6da26062b14f1d342ccc35ee0bea251e4dc44"
+            },
+            "concept": "a5814a5b2c04b64a24e8ede7976adce0c07662c2c9b34ee4eadf06e14797509e",
+            "identity": "3d4017c3e843895a92b70aa74d1b7ebc9c982ccf2ec4968cc0cd55f12af4660c",
+            "party": "buyer"
+          },
+          {
+            "body": {
+              "closure": "876ef34266e1815eaf550bd44a1f82278fdddf2f07b0894260bd3172b1f6086d",
+              "concept": "a5814a5b2c04b64a24e8ede7976adce0c07662c2c9b34ee4eadf06e14797509e",
+              "context": "1212121212121212121212121212121212121212121212121212121212121212",
+              "party": "seller",
+              "root": "a5814a5b2c04b64a24e8ede7976adce0c07662c2c9b34ee4eadf06e14797509e",
+              "semantics": "0f0d03813e4ba088b214941d78b6da26062b14f1d342ccc35ee0bea251e4dc44"
+            },
+            "concept": "a5814a5b2c04b64a24e8ede7976adce0c07662c2c9b34ee4eadf06e14797509e",
+            "identity": "d75a980182b10ab7d54bfed3c964073a0ee172f3daa62325af021a68f707511a",
+            "party": "seller"
+          }
+        ],
+        "root_has_parties": true,
+        "scope": "ALL_DECLARED_PARTIES_IN_EXACT_TRANSITIVE_CLOSURE",
+        "unsigned_concepts": []
+      },
+      "assent_scope": "ONLY_DECLARED_TRANSITIVE_MEANING_CLOSURE",
+      "automatic_assent": false,
+      "bundle": {
+        "artifacts": [
+          {
+            "kind": "marketplace-order",
+            "value": {
+              "author": "3d4017c3e843895a92b70aa74d1b7ebc9c982ccf2ec4968cc0cd55f12af4660c",
+              "data": {
+                "archetype": null,
+                "buyer": "3d4017c3e843895a92b70aa74d1b7ebc9c982ccf2ec4968cc0cd55f12af4660c",
+                "context": "1212121212121212121212121212121212121212121212121212121212121212",
+                "give": [
+                  {
+                    "amount": 2500,
+                    "asset": {
+                      "adapter": null,
+                      "identifier": "USD",
+                      "namespace": "fiat",
+                      "transfer_terms": {},
+                      "unit": "cents"
+                    }
+                  }
+                ],
+                "listing": "f35a1daa278454ff98194bd5c265eee09266593128d114485d36640f4d29f7f9",
+                "market": "c5020b588d5e74ae7b235449fe2d0ef5121cb6d3f3f9e64cf4ce9280b79b9932",
+                "receive": [
+                  {
+                    "amount": 1,
+                    "asset": {
+                      "adapter": null,
+                      "identifier": "Synthetic review chart for USD 25; unsigned and not a service offer.",
+                      "namespace": "description",
+                      "transfer_terms": {
+                        "description": "Delivery is a separately verified obligation"
+                      },
+                      "unit": "delivery"
+                    }
+                  }
+                ],
+                "seller": "d75a980182b10ab7d54bfed3c964073a0ee172f3daa62325af021a68f707511a",
+                "settlement": {
+                  "delivery_acceptance": "SEPARATE_FROM_AGREEMENT_ACCEPTANCE",
+                  "mode": "EXACT_ORDER_ADOPTION",
+                  "payment_stage": "UNSPECIFIED_REQUIRES_EXPLICIT_ADOPTION"
+                },
+                "terms": {
+                  "explicit_additions": {},
+                  "listing_terms": {}
+                },
+                "units": 1
+              },
+              "frame": {
+                "extensions": {},
+                "links": [],
+                "slots": [
+                  {
+                    "answers": [
+                      {
+                        "evidence": [],
+                        "stated_by": null,
+                        "value": {
+                          "buyer": "3d4017c3e843895a92b70aa74d1b7ebc9c982ccf2ec4968cc0cd55f12af4660c",
+                          "seller": "d75a980182b10ab7d54bfed3c964073a0ee172f3daa62325af021a68f707511a"
+                        }
+                      }
+                    ],
+                    "definition": "Actors, identities, roles, capacities or claimed attribution.",
+                    "dimension": "who",
+                    "id": "who",
+                    "question": "who?",
+                    "reason": null,
+                    "status": "ASSERTED"
+                  },
+                  {
+                    "answers": [
+                      {
+                        "evidence": [],
+                        "stated_by": null,
+                        "value": "Synthetic review chart for USD 25; unsigned and not a service offer."
+                      }
+                    ],
+                    "definition": "Actions, objects, resources, obligations or claims being described.",
+                    "dimension": "what",
+                    "id": "what",
+                    "question": "what?",
+                    "reason": null,
+                    "status": "ASSERTED"
+                  },
+                  {
+                    "answers": [
+                      {
+                        "evidence": [],
+                        "stated_by": null,
+                        "value": {
+                          "archetype": null,
+                          "author": "3d4017c3e843895a92b70aa74d1b7ebc9c982ccf2ec4968cc0cd55f12af4660c",
+                          "listing": "f35a1daa278454ff98194bd5c265eee09266593128d114485d36640f4d29f7f9",
+                          "market": "c5020b588d5e74ae7b235449fe2d0ef5121cb6d3f3f9e64cf4ce9280b79b9932",
+                          "title": "Synthetic review chart for USD 25; unsigned and not a service offer."
+                        }
+                      }
+                    ],
+                    "definition": "The exact selection, subset, version or referenced instance.",
+                    "dimension": "which",
+                    "id": "which",
+                    "question": "which?",
+                    "reason": null,
+                    "status": "ASSERTED"
+                  },
+                  {
+                    "answers": [],
+                    "definition": "Physical, digital, jurisdictional or other explicitly named scope.",
+                    "dimension": "where",
+                    "id": "where",
+                    "question": "where?",
+                    "reason": null,
+                    "status": "UNKNOWN"
+                  },
+                  {
+                    "answers": [],
+                    "definition": "Time, deadline, interval, sequence or event under a stated basis.",
+                    "dimension": "when",
+                    "id": "when",
+                    "question": "when?",
+                    "reason": null,
+                    "status": "UNKNOWN"
+                  },
+                  {
+                    "answers": [],
+                    "definition": "Declared purpose, rationale or motivation; not an inferred motive.",
+                    "dimension": "why",
+                    "id": "why",
+                    "question": "why?",
+                    "reason": null,
+                    "status": "UNKNOWN"
+                  },
+                  {
+                    "answers": [
+                      {
+                        "evidence": [],
+                        "stated_by": null,
+                        "value": {
+                          "delivery_acceptance": "SEPARATE_FROM_AGREEMENT_ACCEPTANCE",
+                          "mode": "EXACT_ORDER_ADOPTION",
+                          "payment_stage": "UNSPECIFIED_REQUIRES_EXPLICIT_ADOPTION"
+                        }
+                      }
+                    ],
+                    "definition": "Method, procedure, logic, technology, evidence or protection choices.",
+                    "dimension": "how",
+                    "id": "how",
+                    "question": "how?",
+                    "reason": null,
+                    "status": "ASSERTED"
+                  }
+                ],
+                "supersedes": null,
+                "target": null,
+                "title": "Synthetic review chart for USD 25; unsigned and not a service offer.",
+                "version": "covenant-question-frame/0.1"
+              },
+              "kind": "ORDER",
+              "supersedes": null,
+              "title": "Synthetic review chart for USD 25; unsigned and not a service offer.",
+              "version": "covenant-marketplace/0.1"
+            }
+          }
+        ],
+        "concepts": [
+          {
+            "artifacts": {
+              "Order": {
+                "id": "663c13a3f9e41f1b89c9441575d5ec800841ca1b899bc7fd5b9a298ba0176b38",
+                "kind": "marketplace-order"
+              }
+            },
+            "concepts": {},
+            "extensions": {},
+            "frames": {
+              "Context": "98dc3383ecae99469e8a366896117e8903bac92dd4d486151d5cf2fdc3b1bb79"
+            },
+            "meaning": "Perform the exact marketplace order eb32589160a1cfb4464c51c443b1af2e6ff85571279b84eef308555d6116d351",
+            "parties": {
+              "buyer": "3d4017c3e843895a92b70aa74d1b7ebc9c982ccf2ec4968cc0cd55f12af4660c",
+              "seller": "d75a980182b10ab7d54bfed3c964073a0ee172f3daa62325af021a68f707511a"
+            },
+            "relations": {},
+            "root": "terms",
+            "rules": {
+              "terms": {
+                "op": "VALUE",
+                "value": null
+              }
+            },
+            "semantics": "0f0d03813e4ba088b214941d78b6da26062b14f1d342ccc35ee0bea251e4dc44",
+            "supersedes": null,
+            "title": "Synthetic review chart for USD 25; unsigned and not a service offer.",
+            "version": "covenant-frame-concept/0.1"
+          }
+        ],
+        "frames": [
+          {
+            "extensions": {},
+            "links": [],
+            "slots": [
+              {
+                "answers": [
+                  {
+                    "evidence": [],
+                    "stated_by": null,
+                    "value": {
+                      "buyer": "3d4017c3e843895a92b70aa74d1b7ebc9c982ccf2ec4968cc0cd55f12af4660c",
+                      "seller": "d75a980182b10ab7d54bfed3c964073a0ee172f3daa62325af021a68f707511a"
+                    }
+                  }
+                ],
+                "definition": "Actors, identities, roles, capacities or claimed attribution.",
+                "dimension": "who",
+                "id": "who",
+                "question": "who?",
+                "reason": null,
+                "status": "ASSERTED"
+              },
+              {
+                "answers": [
+                  {
+                    "evidence": [],
+                    "stated_by": null,
+                    "value": "Synthetic review chart for USD 25; unsigned and not a service offer."
+                  }
+                ],
+                "definition": "Actions, objects, resources, obligations or claims being described.",
+                "dimension": "what",
+                "id": "what",
+                "question": "what?",
+                "reason": null,
+                "status": "ASSERTED"
+              },
+              {
+                "answers": [
+                  {
+                    "evidence": [],
+                    "stated_by": null,
+                    "value": {
+                      "archetype": null,
+                      "author": "3d4017c3e843895a92b70aa74d1b7ebc9c982ccf2ec4968cc0cd55f12af4660c",
+                      "listing": "f35a1daa278454ff98194bd5c265eee09266593128d114485d36640f4d29f7f9",
+                      "market": "c5020b588d5e74ae7b235449fe2d0ef5121cb6d3f3f9e64cf4ce9280b79b9932",
+                      "title": "Synthetic review chart for USD 25; unsigned and not a service offer."
+                    }
+                  }
+                ],
+                "definition": "The exact selection, subset, version or referenced instance.",
+                "dimension": "which",
+                "id": "which",
+                "question": "which?",
+                "reason": null,
+                "status": "ASSERTED"
+              },
+              {
+                "answers": [],
+                "definition": "Physical, digital, jurisdictional or other explicitly named scope.",
+                "dimension": "where",
+                "id": "where",
+                "question": "where?",
+                "reason": null,
+                "status": "UNKNOWN"
+              },
+              {
+                "answers": [],
+                "definition": "Time, deadline, interval, sequence or event under a stated basis.",
+                "dimension": "when",
+                "id": "when",
+                "question": "when?",
+                "reason": null,
+                "status": "UNKNOWN"
+              },
+              {
+                "answers": [],
+                "definition": "Declared purpose, rationale or motivation; not an inferred motive.",
+                "dimension": "why",
+                "id": "why",
+                "question": "why?",
+                "reason": null,
+                "status": "UNKNOWN"
+              },
+              {
+                "answers": [
+                  {
+                    "evidence": [],
+                    "stated_by": null,
+                    "value": {
+                      "delivery_acceptance": "SEPARATE_FROM_AGREEMENT_ACCEPTANCE",
+                      "mode": "EXACT_ORDER_ADOPTION",
+                      "payment_stage": "UNSPECIFIED_REQUIRES_EXPLICIT_ADOPTION"
+                    }
+                  }
+                ],
+                "definition": "Method, procedure, logic, technology, evidence or protection choices.",
+                "dimension": "how",
+                "id": "how",
+                "question": "how?",
+                "reason": null,
+                "status": "ASSERTED"
+              }
+            ],
+            "supersedes": null,
+            "target": null,
+            "title": "Synthetic review chart for USD 25; unsigned and not a service offer.",
+            "version": "covenant-question-frame/0.1"
+          }
+        ],
+        "root": "a5814a5b2c04b64a24e8ede7976adce0c07662c2c9b34ee4eadf06e14797509e"
+      },
+      "carrier_scope": "ALL_SUPPLIED_BYTES_AND_CONTEXT",
+      "closure": "876ef34266e1815eaf550bd44a1f82278fdddf2f07b0894260bd3172b1f6086d",
+      "context": "1212121212121212121212121212121212121212121212121212121212121212",
+      "execution_authorized": false,
+      "id": "c9ac52983a831d44bece1cf8cad40970d604c58249765941593bf5ebd9704d95",
+      "review": {
+        "bundle": {
+          "artifacts": [
+            {
+              "kind": "marketplace-order",
+              "value": {
+                "author": "3d4017c3e843895a92b70aa74d1b7ebc9c982ccf2ec4968cc0cd55f12af4660c",
+                "data": {
+                  "archetype": null,
+                  "buyer": "3d4017c3e843895a92b70aa74d1b7ebc9c982ccf2ec4968cc0cd55f12af4660c",
+                  "context": "1212121212121212121212121212121212121212121212121212121212121212",
+                  "give": [
+                    {
+                      "amount": 2500,
+                      "asset": {
+                        "adapter": null,
+                        "identifier": "USD",
+                        "namespace": "fiat",
+                        "transfer_terms": {},
+                        "unit": "cents"
+                      }
+                    }
+                  ],
+                  "listing": "f35a1daa278454ff98194bd5c265eee09266593128d114485d36640f4d29f7f9",
+                  "market": "c5020b588d5e74ae7b235449fe2d0ef5121cb6d3f3f9e64cf4ce9280b79b9932",
+                  "receive": [
+                    {
+                      "amount": 1,
+                      "asset": {
+                        "adapter": null,
+                        "identifier": "Synthetic review chart for USD 25; unsigned and not a service offer.",
+                        "namespace": "description",
+                        "transfer_terms": {
+                          "description": "Delivery is a separately verified obligation"
+                        },
+                        "unit": "delivery"
+                      }
+                    }
+                  ],
+                  "seller": "d75a980182b10ab7d54bfed3c964073a0ee172f3daa62325af021a68f707511a",
+                  "settlement": {
+                    "delivery_acceptance": "SEPARATE_FROM_AGREEMENT_ACCEPTANCE",
+                    "mode": "EXACT_ORDER_ADOPTION",
+                    "payment_stage": "UNSPECIFIED_REQUIRES_EXPLICIT_ADOPTION"
+                  },
+                  "terms": {
+                    "explicit_additions": {},
+                    "listing_terms": {}
+                  },
+                  "units": 1
+                },
+                "frame": {
+                  "extensions": {},
+                  "links": [],
+                  "slots": [
+                    {
+                      "answers": [
+                        {
+                          "evidence": [],
+                          "stated_by": null,
+                          "value": {
+                            "buyer": "3d4017c3e843895a92b70aa74d1b7ebc9c982ccf2ec4968cc0cd55f12af4660c",
+                            "seller": "d75a980182b10ab7d54bfed3c964073a0ee172f3daa62325af021a68f707511a"
+                          }
+                        }
+                      ],
+                      "definition": "Actors, identities, roles, capacities or claimed attribution.",
+                      "dimension": "who",
+                      "id": "who",
+                      "question": "who?",
+                      "reason": null,
+                      "status": "ASSERTED"
+                    },
+                    {
+                      "answers": [
+                        {
+                          "evidence": [],
+                          "stated_by": null,
+                          "value": "Synthetic review chart for USD 25; unsigned and not a service offer."
+                        }
+                      ],
+                      "definition": "Actions, objects, resources, obligations or claims being described.",
+                      "dimension": "what",
+                      "id": "what",
+                      "question": "what?",
+                      "reason": null,
+                      "status": "ASSERTED"
+                    },
+                    {
+                      "answers": [
+                        {
+                          "evidence": [],
+                          "stated_by": null,
+                          "value": {
+                            "archetype": null,
+                            "author": "3d4017c3e843895a92b70aa74d1b7ebc9c982ccf2ec4968cc0cd55f12af4660c",
+                            "listing": "f35a1daa278454ff98194bd5c265eee09266593128d114485d36640f4d29f7f9",
+                            "market": "c5020b588d5e74ae7b235449fe2d0ef5121cb6d3f3f9e64cf4ce9280b79b9932",
+                            "title": "Synthetic review chart for USD 25; unsigned and not a service offer."
+                          }
+                        }
+                      ],
+                      "definition": "The exact selection, subset, version or referenced instance.",
+                      "dimension": "which",
+                      "id": "which",
+                      "question": "which?",
+                      "reason": null,
+                      "status": "ASSERTED"
+                    },
+                    {
+                      "answers": [],
+                      "definition": "Physical, digital, jurisdictional or other explicitly named scope.",
+                      "dimension": "where",
+                      "id": "where",
+                      "question": "where?",
+                      "reason": null,
+                      "status": "UNKNOWN"
+                    },
+                    {
+                      "answers": [],
+                      "definition": "Time, deadline, interval, sequence or event under a stated basis.",
+                      "dimension": "when",
+                      "id": "when",
+                      "question": "when?",
+                      "reason": null,
+                      "status": "UNKNOWN"
+                    },
+                    {
+                      "answers": [],
+                      "definition": "Declared purpose, rationale or motivation; not an inferred motive.",
+                      "dimension": "why",
+                      "id": "why",
+                      "question": "why?",
+                      "reason": null,
+                      "status": "UNKNOWN"
+                    },
+                    {
+                      "answers": [
+                        {
+                          "evidence": [],
+                          "stated_by": null,
+                          "value": {
+                            "delivery_acceptance": "SEPARATE_FROM_AGREEMENT_ACCEPTANCE",
+                            "mode": "EXACT_ORDER_ADOPTION",
+                            "payment_stage": "UNSPECIFIED_REQUIRES_EXPLICIT_ADOPTION"
+                          }
+                        }
+                      ],
+                      "definition": "Method, procedure, logic, technology, evidence or protection choices.",
+                      "dimension": "how",
+                      "id": "how",
+                      "question": "how?",
+                      "reason": null,
+                      "status": "ASSERTED"
+                    }
+                  ],
+                  "supersedes": null,
+                  "target": null,
+                  "title": "Synthetic review chart for USD 25; unsigned and not a service offer.",
+                  "version": "covenant-question-frame/0.1"
+                },
+                "kind": "ORDER",
+                "supersedes": null,
+                "title": "Synthetic review chart for USD 25; unsigned and not a service offer.",
+                "version": "covenant-marketplace/0.1"
+              }
+            }
+          ],
+          "concepts": [
+            {
+              "artifacts": {
+                "Order": {
+                  "id": "663c13a3f9e41f1b89c9441575d5ec800841ca1b899bc7fd5b9a298ba0176b38",
+                  "kind": "marketplace-order"
+                }
+              },
+              "concepts": {},
+              "extensions": {},
+              "frames": {
+                "Context": "98dc3383ecae99469e8a366896117e8903bac92dd4d486151d5cf2fdc3b1bb79"
+              },
+              "meaning": "Perform the exact marketplace order eb32589160a1cfb4464c51c443b1af2e6ff85571279b84eef308555d6116d351",
+              "parties": {
+                "buyer": "3d4017c3e843895a92b70aa74d1b7ebc9c982ccf2ec4968cc0cd55f12af4660c",
+                "seller": "d75a980182b10ab7d54bfed3c964073a0ee172f3daa62325af021a68f707511a"
+              },
+              "relations": {},
+              "root": "terms",
+              "rules": {
+                "terms": {
+                  "op": "VALUE",
+                  "value": null
+                }
+              },
+              "semantics": "0f0d03813e4ba088b214941d78b6da26062b14f1d342ccc35ee0bea251e4dc44",
+              "supersedes": null,
+              "title": "Synthetic review chart for USD 25; unsigned and not a service offer.",
+              "version": "covenant-frame-concept/0.1"
+            }
+          ],
+          "frames": [
+            {
+              "extensions": {},
+              "links": [],
+              "slots": [
+                {
+                  "answers": [
+                    {
+                      "evidence": [],
+                      "stated_by": null,
+                      "value": {
+                        "buyer": "3d4017c3e843895a92b70aa74d1b7ebc9c982ccf2ec4968cc0cd55f12af4660c",
+                        "seller": "d75a980182b10ab7d54bfed3c964073a0ee172f3daa62325af021a68f707511a"
+                      }
+                    }
+                  ],
+                  "definition": "Actors, identities, roles, capacities or claimed attribution.",
+                  "dimension": "who",
+                  "id": "who",
+                  "question": "who?",
+                  "reason": null,
+                  "status": "ASSERTED"
+                },
+                {
+                  "answers": [
+                    {
+                      "evidence": [],
+                      "stated_by": null,
+                      "value": "Synthetic review chart for USD 25; unsigned and not a service offer."
+                    }
+                  ],
+                  "definition": "Actions, objects, resources, obligations or claims being described.",
+                  "dimension": "what",
+                  "id": "what",
+                  "question": "what?",
+                  "reason": null,
+                  "status": "ASSERTED"
+                },
+                {
+                  "answers": [
+                    {
+                      "evidence": [],
+                      "stated_by": null,
+                      "value": {
+                        "archetype": null,
+                        "author": "3d4017c3e843895a92b70aa74d1b7ebc9c982ccf2ec4968cc0cd55f12af4660c",
+                        "listing": "f35a1daa278454ff98194bd5c265eee09266593128d114485d36640f4d29f7f9",
+                        "market": "c5020b588d5e74ae7b235449fe2d0ef5121cb6d3f3f9e64cf4ce9280b79b9932",
+                        "title": "Synthetic review chart for USD 25; unsigned and not a service offer."
+                      }
+                    }
+                  ],
+                  "definition": "The exact selection, subset, version or referenced instance.",
+                  "dimension": "which",
+                  "id": "which",
+                  "question": "which?",
+                  "reason": null,
+                  "status": "ASSERTED"
+                },
+                {
+                  "answers": [],
+                  "definition": "Physical, digital, jurisdictional or other explicitly named scope.",
+                  "dimension": "where",
+                  "id": "where",
+                  "question": "where?",
+                  "reason": null,
+                  "status": "UNKNOWN"
+                },
+                {
+                  "answers": [],
+                  "definition": "Time, deadline, interval, sequence or event under a stated basis.",
+                  "dimension": "when",
+                  "id": "when",
+                  "question": "when?",
+                  "reason": null,
+                  "status": "UNKNOWN"
+                },
+                {
+                  "answers": [],
+                  "definition": "Declared purpose, rationale or motivation; not an inferred motive.",
+                  "dimension": "why",
+                  "id": "why",
+                  "question": "why?",
+                  "reason": null,
+                  "status": "UNKNOWN"
+                },
+                {
+                  "answers": [
+                    {
+                      "evidence": [],
+                      "stated_by": null,
+                      "value": {
+                        "delivery_acceptance": "SEPARATE_FROM_AGREEMENT_ACCEPTANCE",
+                        "mode": "EXACT_ORDER_ADOPTION",
+                        "payment_stage": "UNSPECIFIED_REQUIRES_EXPLICIT_ADOPTION"
+                      }
+                    }
+                  ],
+                  "definition": "Method, procedure, logic, technology, evidence or protection choices.",
+                  "dimension": "how",
+                  "id": "how",
+                  "question": "how?",
+                  "reason": null,
+                  "status": "ASSERTED"
+                }
+              ],
+              "supersedes": null,
+              "target": null,
+              "title": "Synthetic review chart for USD 25; unsigned and not a service offer.",
+              "version": "covenant-question-frame/0.1"
+            }
+          ],
+          "root": "a5814a5b2c04b64a24e8ede7976adce0c07662c2c9b34ee4eadf06e14797509e"
+        },
+        "context": "1212121212121212121212121212121212121212121212121212121212121212",
+        "version": "covenant-agreement-review/0.1"
+      },
+      "root": "a5814a5b2c04b64a24e8ede7976adce0c07662c2c9b34ee4eadf06e14797509e"
+    }
+  }
+}

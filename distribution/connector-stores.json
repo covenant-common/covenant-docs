@@ -1,0 +1,184 @@
+{
+  "date": "2026-11-02",
+  "scope": "Free anonymous public connector only; no private implementation or account credentials distributed.",
+  "public_endpoint": "https://jupie202020.pythonanywhere.com/mcp",
+  "public_tool_count_observed": 9,
+  "social_post_counts_independently_verified": false,
+  "channels": [
+    {
+      "id": "openai",
+      "name": "ChatGPT and Codex",
+      "status": "PACKAGE_PREPARED_NOT_SUBMITTED",
+      "submission_url": "https://platform.openai.com/plugins",
+      "remaining": [
+        "Authenticated publishing account and verified developer identity",
+        "Domain challenge, live portal scans and review materials",
+        "Publisher attestations and review; publish only after approval"
+      ],
+      "sources": [
+        "https://developers.openai.com/plugins/deploy/submission"
+      ]
+    },
+    {
+      "id": "google",
+      "name": "Google Connected Apps",
+      "status": "PRIOR_SUBMISSION_RECEIPT_PENDING_REVIEW",
+      "receipt_date": "2026-10-31",
+      "submission_url": "https://connected.google.com/console/help/?apply=",
+      "submitted_endpoint": "https://jupie202020.pythonanywhere.com/mcp/google/v1",
+      "live_listing_confirmed": false,
+      "remaining": [
+        "Selection and review; no duplicate submission prepared"
+      ]
+    },
+    {
+      "id": "mcp-registry",
+      "name": "Official MCP Registry",
+      "status": "LIVE_ACTIVE_LATEST_VERIFIED",
+      "verified_date": "2026-11-02",
+      "listing_url": "https://registry.modelcontextprotocol.io/v0.1/servers/io.github.covenant-common%2Fcovenant-aap/versions/latest",
+      "version": "0.46.0-pilot.20261031.2",
+      "remaining": [],
+      "sources": [
+        "https://registry.modelcontextprotocol.io"
+      ]
+    },
+    {
+      "id": "claude",
+      "name": "Claude connectors",
+      "status": "PACKAGE_PREPARED_NOT_SUBMITTED",
+      "submission_url": "https://claude.ai/directory/manage",
+      "remaining": [
+        "Use a paid Claude account; owners submit for Team/Enterprise.",
+        "Submit the public HTTPS MCP; OAuth2 only if account access is included.",
+        "Provide tool titles/annotations, docs, privacy, support, icon and tested examples.",
+        "Complete directory acknowledgments; listing follows scanning/review, not upload."
+      ],
+      "sources": [
+        "https://claude.com/docs/directory/publish",
+        "https://claude.com/docs/connectors/building/submission"
+      ],
+      "pricing_constraint": "Paid Claude plan required; no separate listing fee established."
+    },
+    {
+      "id": "cursor",
+      "name": "Cursor Marketplace",
+      "status": "PUBLIC_WRAPPER_PREPARED_NOT_SUBMITTED",
+      "submission_url": "https://cursor.com/marketplace/publish",
+      "remaining": [
+        "Public open-source repository, valid plugin manifest, relative paths, README and local testing.",
+        "Manual review applies to initial listing and updates.",
+        "Publisher terms require free plugin access and permissive components."
+      ],
+      "sources": [
+        "https://cursor.com/docs/plugins",
+        "https://cursor.com/docs/reference/plugins",
+        "https://cursor.com/marketplace-publisher-terms"
+      ],
+      "pricing_constraint": "Marketplace listing is free; terms prohibit direct/indirect plugin-use fees."
+    },
+    {
+      "id": "grok",
+      "name": "Grok connectors",
+      "status": "CUSTOM_INSTALL_DOCUMENTED_CATALOG_ROUTE_UNVERIFIED",
+      "submission_url": "https://grok.com/connectors",
+      "remaining": [
+        "New Connector > Custom; supply public MCP URL and required authentication.",
+        "Business/Enterprise administrators first provision the connector for their team."
+      ],
+      "sources": [
+        "https://docs.x.ai/grok/connectors",
+        "https://docs.x.ai/grok/connector-management"
+      ],
+      "pricing_constraint": "No listing fee or public catalog-submission process established by reviewed docs."
+    },
+    {
+      "id": "muse",
+      "name": "Meta Muse Connector Platform",
+      "status": "AUTHENTICATED_SUBMISSION_NOT_COMPLETED",
+      "submission_url": "https://platform.muse.ai/submission",
+      "remaining": [
+        "Sign in/create developer account using work email.",
+        "Provide product/use-case details and pass functional, security, legal and end-to-end review.",
+        "Accept operational/content licensing, privacy and bounded-action obligations."
+      ],
+      "sources": [
+        "https://platform.muse.ai/",
+        "https://platform.muse.ai/login?return_to=/submission",
+        "https://platform.muse.ai/terms",
+        "https://developers.meta.com/blog/meta-connect-recap/"
+      ],
+      "pricing_constraint": "No public listing fee established; do not infer free payment processing."
+    },
+    {
+      "id": "microsoft-365-copilot",
+      "name": "Microsoft 365 Copilot Agent Store",
+      "status": "PREPARE_AGENT_PACKAGE_AND_VERIFY_PUBLISHER",
+      "remaining": [
+        "Microsoft Entra work account and Microsoft 365/Copilot publisher enrolment",
+        "Actual legal publisher profile and authority to accept publisher agreements",
+        "Tenant with Copilot access and custom app upload for sideload testing",
+        "Agent package, listing/privacy/support assets and Microsoft validation"
+      ],
+      "next": "Prepare pinned nine-tool declarative wrapper; verify actual publisher tenant and testing eligibility before submission. Do not invent a registered company.",
+      "sources": [
+        "https://learn.microsoft.com/en-us/microsoft-365/copilot/extensibility/build-mcp-plugins",
+        "https://learn.microsoft.com/en-us/microsoft-365/copilot/extensibility/overview-plugins?tabs=mcp",
+        "https://learn.microsoft.com/en-us/partner-center/marketplace-offers/open-a-developer-account",
+        "https://learn.microsoft.com/en-us/microsoft-agent-365/developer/submit-agent-partner-center",
+        "https://learn.microsoft.com/en-us/microsoft-365/copilot/extensibility/plugin-mcp-apps"
+      ],
+      "pricing_constraint": "Publisher verification is explicitly free. No blanket zero-cost development or operating claim: eligible tenant/Copilot access may require subscriptions. No paid benefits or Azure resources are needed merely to prepare the declarative package."
+    },
+    {
+      "id": "salesforce-agentexchange",
+      "name": "Salesforce AgentExchange",
+      "status": "PARTNER_AND_COMMERCIAL_REVIEW_REQUIRED",
+      "remaining": [
+        "Partner/provider profile and correct commercial classification",
+        "Appropriate integration or Agentforce extension package linked to listing",
+        "Security-review test environment, scan reports and manual security tests",
+        "Partner commercial agreement before security-review submission where required"
+      ],
+      "next": "Request/prepare Connect-model classification for the anonymous utility separately from paid deal services. Do not represent all Covenant services as fully free or accept paid partner terms.",
+      "sources": [
+        "https://www.salesforce.com/partners/isv-onboarding-guide/",
+        "https://developer.salesforce.com/docs/platform/isvforce/guide/security-review-how-it-works.html",
+        "https://help.salesforce.com/s/articleView?id=release-notes.rn_list_and_publish_mcp_servers_in_agentforce_extension_packages.htm&language=en_US&release=262&type=5",
+        "https://trailhead.salesforce.com/content/learn/modules/isv_security_review/isv_security_review_submit"
+      ],
+      "pricing_constraint": "Free security reviews are waived, but Free means no fees charged by partner or third parties. API-only Connector Program may charge a fixed annual fee; other routes can require revenue share. Paid security review is documented at USD 999 per attempt; checkout controls actual applicable terms."
+    },
+    {
+      "id": "aws-marketplace",
+      "name": "AWS Marketplace AI Agents & Tools",
+      "status": "PRODUCTION_READINESS_AND_SELLER_INTEGRATION_REQUIRED",
+      "remaining": [
+        "AWS customer in good standing, seller registration and seller terms",
+        "Publicly available full-feature production-ready software with defined support and updates",
+        "API-key or OAuth customer onboarding and credential invalidation",
+        "Functional endpoint and complete request/schema/rate/error instructions",
+        "Subscription/entitlement/fulfilment integrations as appropriate"
+      ],
+      "next": "Prepare MCP tool usage instructions now. Current pilot must not be labelled production-ready. Choose a permanently free utility product or separately priced offer deliberately, then integrate actual seller onboarding.",
+      "sources": [
+        "https://docs.aws.amazon.com/marketplace/latest/userguide/listing-saas-ai-agents.html",
+        "https://docs.aws.amazon.com/marketplace/latest/userguide/user-guide-for-sellers.html",
+        "https://docs.aws.amazon.com/marketplace/latest/userguide/integrating-api-ai-agents-tools.html"
+      ],
+      "pricing_constraint": "USD 0 customer-price listings exist and free-only sellers need no bank details. Listing fees are governed by seller terms; do not infer no provider cost. Once set free, that product cannot convert to paid. BYOL/paid products add tax,bank and eligible-jurisdiction requirements."
+    }
+  ],
+  "additional_directory": {
+    "name": "Glama",
+    "status": "PRIOR_SUBMISSION_RECEIPT_PENDING_REVIEW",
+    "receipt_date": "2026-10-31",
+    "live_listing_confirmed": false
+  },
+  "test_scope": {
+    "live_calls": "Harmless synthetic public requests; no account, signing, payment or advert creation",
+    "native_client_installation": "NOT_PERFORMED",
+    "store_approval": "NOT_ESTABLISHED_EXCEPT_EXISTING_REGISTRY_RECORD"
+  },
+  "known_issue": "Malformed public review input can return an opaque outcome-unknown bridge error. See the connection guide; do not infer that an action or payment happened."
+}

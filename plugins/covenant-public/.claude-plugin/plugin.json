@@ -1,0 +1,20 @@
+{
+  "name": "covenant-public",
+  "version": "0.1.0",
+  "description": "Find published services, draft exact terms and check supplied agreements. Free public tools; no signing or payments.",
+  "author": {
+    "name": "Covenant",
+    "email": "jupitersstring@gmail.com"
+  },
+  "homepage": "https://covenant-common.github.io/covenant-docs/docs/API_MCP.html#public",
+  "repository": "https://github.com/covenant-common/covenant-docs",
+  "license": "MIT",
+  "keywords": [
+    "agreements",
+    "agent-commerce",
+    "marketplace",
+    "contracts",
+    "mcp"
+  ],
+  "mcpServers": "./.mcp.json"
+}

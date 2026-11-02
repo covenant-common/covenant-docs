@@ -1,0 +1,44 @@
+{
+  "observed_at": "2026-11-02T08:58:26.655391+00:00",
+  "method": "POST",
+  "url": "https://jupie202020.pythonanywhere.com/mcp",
+  "http_status": 200,
+  "request": {
+    "jsonrpc": "2.0",
+    "id": 315,
+    "method": "tools/call",
+    "params": {
+      "name": "covenant_review__evidence",
+      "arguments": {
+        "items": [],
+        "agreement_ids": []
+      }
+    }
+  },
+  "response": {
+    "id": 315,
+    "jsonrpc": "2.0",
+    "result": {
+      "content": [
+        {
+          "text": "{\"all_provided_proofs_verified\":true,\"execution_authorized\":false,\"installed_verifier_boundary\":\"OWNER_INSTALLED_LOCAL_CALLBACKS_TRUSTED_AS_READ_ONLY\",\"items\":[],\"provided_proof_count\":0,\"state_changed\":false,\"statement_hash_metadata\":\"IDENTIFIES_EXACT_EXPECTATION; NOT_A_CONFIDENTIALITY_MECHANISM\",\"statement_values_returned\":false,\"verification_status\":\"NO_PROOFS_PROVIDED\",\"verified_proof_count\":0,\"version\":\"covenant-coordination-review/0.1\"}",
+          "type": "text"
+        }
+      ],
+      "isError": false
+    }
+  },
+  "parsed_tool_result": {
+    "all_provided_proofs_verified": true,
+    "execution_authorized": false,
+    "installed_verifier_boundary": "OWNER_INSTALLED_LOCAL_CALLBACKS_TRUSTED_AS_READ_ONLY",
+    "items": [],
+    "provided_proof_count": 0,
+    "state_changed": false,
+    "statement_hash_metadata": "IDENTIFIES_EXACT_EXPECTATION; NOT_A_CONFIDENTIALITY_MECHANISM",
+    "statement_values_returned": false,
+    "verification_status": "NO_PROOFS_PROVIDED",
+    "verified_proof_count": 0,
+    "version": "covenant-coordination-review/0.1"
+  }
+}

@@ -16,6 +16,9 @@ Covenant helps people and agents coordinate work, set limits and retain exact ag
 - [Can different agent tools share the same terms?](docs/FAQ.html#can-agents-on-different-tools-share-terms)
 - [Can I stop one agent without replacing my card?](docs/FAQ.html#can-i-stop-one-agent-without-replacing-my-card)
 
+- [Connect from your agent client](docs/CONNECTORS.html): free public connector settings, downloadable wrapper and dated store-distribution status.
+- [Public tool use](docs/PUBLIC_TOOL_USE.html): free anonymous scope, privacy, limits and support; paid core and private accounts are separate.
+
 ## First useful action
 
 - [Start here](docs/START.html?source=search): choose connect, advertise, buy or work together; copy a safe first task and the live MCP address.

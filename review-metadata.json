@@ -1,0 +1,782 @@
+{
+  "schema": "urn:aap:public-store-review-cases:0.1",
+  "generated_at": "2026-11-02T09:00:14.811259+00:00",
+  "name": "Covenant / Agentic Agreements Protocol (AAP)",
+  "endpoint": "https://jupie202020.pythonanywhere.com/mcp",
+  "protocol_version": "2025-11-25",
+  "transport": "streamable-http",
+  "authentication": "NONE_FOR_THIS_PUBLIC_ENDPOINT",
+  "review_reference": "https://jupie202020.pythonanywhere.com/review-reference.json",
+  "public_tool_count": 9,
+  "test_execution": {
+    "method": "ACTUAL_EXACT_MCP_CALLS_OVER_VERIFIED_HTTPS",
+    "model_prompt_level_tests_performed": false,
+    "prompt_text": "Reproduction prompts for a human/store reviewer; not evidence that a model autonomously chose these calls.",
+    "positive_cases": 5,
+    "positive_exact_call_checks_passed": 5,
+    "negative_cases": 3,
+    "negative_mcp_error_flags": 3,
+    "negative_precise_input_refusals": 0,
+    "created_accounts": false,
+    "started_trials": false,
+    "created_listings": false,
+    "signed": false,
+    "paid": false,
+    "listing_creation_scope": "No listing was published or retained by the service. quick_trade returned only unsigned in-memory market, listing and order structures."
+  },
+  "reviewer_instructions": [
+    "Add the public MCP URL to a client supporting remote HTTP MCP; no credential is needed.",
+    "Initialise with protocol 2025-11-25, then use that MCP-Protocol-Version header on subsequent requests and accept application/json plus text/event-stream.",
+    "Each test contains an exact request and observed result so it can be repeated independently. Parse the JSON text in result.content[0].text.",
+    "Prompts are suggested reviewer tasks. The recorded checks executed exact tool calls, without a model selecting actions.",
+    "Public inventory can change. Demo labels and unverified-provider boundaries must be retained regardless of result count.",
+    "No private account token, owner key, payment credential or real customer material is required.",
+    "The generic UNKNOWN errors in the three negative cases are a disclosed product limitation, not precise validation guidance."
+  ],
+  "test_cases": [
+    {
+      "id": "positive-search",
+      "type": "positive",
+      "title": "Find current public services without presenting demos as real suppliers",
+      "prompt": "Search the Covenant marketplace. Tell me which returned listings are demos, and do not invent a supplier when nothing matches. Do not sign, publish or pay.",
+      "steps": [
+        {
+          "receipt": "distribution/review-receipts/store-search-current-public.json",
+          "receipt_sha256": "a7980510ca7d990ae64ef5eff66a5cca18ddc7a966fc5e4e192056defa008a06",
+          "executed_at": "2026-11-02T08:57:00.418626+00:00",
+          "method": "POST",
+          "endpoint": "https://jupie202020.pythonanywhere.com/mcp",
+          "headers": {
+            "Content-Type": "application/json",
+            "Accept": "application/json, text/event-stream",
+            "MCP-Protocol-Version": "2025-11-25"
+          },
+          "request": {
+            "jsonrpc": "2.0",
+            "id": 301,
+            "method": "tools/call",
+            "params": {
+              "name": "aap_public_listing_search",
+              "arguments": {
+                "limit": 3
+              }
+            }
+          }
+        },
+        {
+          "receipt": "distribution/review-receipts/store-search-unpublished-fiction.json",
+          "receipt_sha256": "dcf3e0a62850b1f252f6f70d668f7b8cb98226da537eabb8bcd42239032829cd",
+          "executed_at": "2026-11-02T08:57:00.828567+00:00",
+          "method": "POST",
+          "endpoint": "https://jupie202020.pythonanywhere.com/mcp",
+          "headers": {
+            "Content-Type": "application/json",
+            "Accept": "application/json, text/event-stream",
+            "MCP-Protocol-Version": "2025-11-25"
+          },
+          "request": {
+            "jsonrpc": "2.0",
+            "id": 302,
+            "method": "tools/call",
+            "params": {
+              "name": "aap_public_listing_search",
+              "arguments": {
+                "query": "unpublished-review-fixture-20261102-zero-inventory",
+                "limit": 3
+              }
+            }
+          }
+        }
+      ],
+      "expected_outcome": [
+        "Return only current INDEXED public records.",
+        "Preserve demo_only labels and do not claim that provider identity, stock, performance or payment is verified.",
+        "A search for the deliberately unpublished fixture returns no matching inventory."
+      ],
+      "observed": {
+        "returned": 2,
+        "total": 2,
+        "scope": "CURRENT_INDEXED_PUBLICATIONS_ONLY",
+        "listings": [
+          {
+            "title": "DEMO - CSV cleanup in two milestones",
+            "demo_only": true,
+            "visibility": "INDEXED"
+          },
+          {
+            "title": "DEMO - Research brief with source review",
+            "demo_only": true,
+            "visibility": "INDEXED"
+          }
+        ],
+        "availability_verified": false,
+        "payment_verified": false,
+        "unpublished_fixture_total": 0,
+        "inventory_counts_may_change": true
+      },
+      "exact_call_checks_passed": true
+    },
+    {
+      "id": "positive-unsigned-usd25",
+      "type": "positive",
+      "title": "Prepare an unsigned USD25 service agreement",
+      "prompt": "Draft an agreement for one research brief costing USD 25, with a delivery review. Show a simple trade as an alternative. Keep everything unsigned and do not publish or pay.",
+      "steps": [
+        {
+          "receipt": "distribution/review-receipts/store-draft-usd25.json",
+          "receipt_sha256": "290d4eceec4216917ef3f4745ebbdea331ec8c7bc9bac4534840740954ab2500",
+          "executed_at": "2026-11-02T08:57:03.061820+00:00",
+          "method": "POST",
+          "endpoint": "https://jupie202020.pythonanywhere.com/mcp",
+          "headers": {
+            "Content-Type": "application/json",
+            "Accept": "application/json, text/event-stream",
+            "MCP-Protocol-Version": "2025-11-25"
+          },
+          "request": {
+            "jsonrpc": "2.0",
+            "id": 303,
+            "method": "tools/call",
+            "params": {
+              "name": "covenant_contract__draft",
+              "arguments": {
+                "title": "Synthetic review: one research brief",
+                "parties": [
+                  "buyer-example",
+                  "supplier-example"
+                ],
+                "clauses": [
+                  {
+                    "id": "scope",
+                    "title": "Work",
+                    "text": "One page answering the agreed research question, with sources."
+                  },
+                  {
+                    "id": "price",
+                    "title": "Price",
+                    "text": "USD 25. This is an unsigned synthetic exercise; no payment is authorised."
+                  },
+                  {
+                    "id": "review",
+                    "title": "Delivery review",
+                    "text": "The buyer checks the brief against the exact agreed scope before accepting it."
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "receipt": "distribution/review-receipts/store-quick-trade-usd25.json",
+          "receipt_sha256": "078ffbd5a53c8f21926677f633966a16a6b10a0645b86337e5ae14915f8822aa",
+          "executed_at": "2026-11-02T08:57:06.352167+00:00",
+          "method": "POST",
+          "endpoint": "https://jupie202020.pythonanywhere.com/mcp",
+          "headers": {
+            "Content-Type": "application/json",
+            "Accept": "application/json, text/event-stream",
+            "MCP-Protocol-Version": "2025-11-25"
+          },
+          "request": {
+            "jsonrpc": "2.0",
+            "id": 304,
+            "method": "tools/call",
+            "params": {
+              "name": "covenant_marketplace__quick_trade",
+              "arguments": {
+                "seller": "d75a980182b10ab7d54bfed3c964073a0ee172f3daa62325af021a68f707511a",
+                "buyer": "3d4017c3e843895a92b70aa74d1b7ebc9c982ccf2ec4968cc0cd55f12af4660c",
+                "description": "Synthetic review chart for USD 25; unsigned and not a service offer.",
+                "amount": 2500,
+                "payment_asset": {
+                  "namespace": "fiat",
+                  "identifier": "USD",
+                  "unit": "cents"
+                },
+                "context": "1212121212121212121212121212121212121212121212121212121212121212"
+              }
+            }
+          }
+        }
+      ],
+      "expected_outcome": [
+        "Return the draft with its exact identifier, UNSIGNED_DRAFT and binding=false.",
+        "Represent the simple trade as 2500 USD cents without converting units silently.",
+        "Require explicit buyer and seller assent and authorize no execution."
+      ],
+      "observed": {
+        "draft_id": "7c449e319157fde38a0f6a683f12554723fc0a508c24892c775acb576015b30d",
+        "status": "UNSIGNED_DRAFT",
+        "binding": false,
+        "quick_trade_id": "eb32589160a1cfb4464c51c443b1af2e6ff85571279b84eef308555d6116d351",
+        "buyer_gives": [
+          {
+            "amount": 2500,
+            "asset": {
+              "adapter": null,
+              "identifier": "USD",
+              "namespace": "fiat",
+              "transfer_terms": {},
+              "unit": "cents"
+            }
+          }
+        ],
+        "automatic_assent": false,
+        "acceptance": "EXPLICIT_BUYER_AND_SELLER_SIGNATURES_REQUIRED",
+        "execution_authorized": false
+      },
+      "exact_call_checks_passed": true
+    },
+    {
+      "id": "positive-price-change",
+      "type": "positive",
+      "title": "Make the USD25 to USD30 change explicit",
+      "prompt": "Compare these exact unsigned versions after changing the price from USD 25 to USD 30. Show what changed and explain whether the old approval can cover the new version. Do not sign either version.",
+      "steps": [
+        {
+          "receipt": "distribution/review-receipts/store-compare-price.json",
+          "receipt_sha256": "315c1a5f13cc62d4d395400f53ac898e06992a27b5810ff5219581d47e96f2dc",
+          "executed_at": "2026-11-02T08:58:19.053672+00:00",
+          "method": "POST",
+          "endpoint": "https://jupie202020.pythonanywhere.com/mcp",
+          "headers": {
+            "Content-Type": "application/json",
+            "Accept": "application/json, text/event-stream",
+            "MCP-Protocol-Version": "2025-11-25"
+          },
+          "request": {
+            "jsonrpc": "2.0",
+            "id": 310,
+            "method": "tools/call",
+            "params": {
+              "name": "covenant_contract__compare",
+              "arguments": {
+                "before": {
+                  "clauses": [
+                    {
+                      "id": "scope",
+                      "text": "One page answering the agreed research question, with sources.",
+                      "title": "Work"
+                    },
+                    {
+                      "id": "price",
+                      "text": "USD 25. This is an unsigned synthetic exercise; no payment is authorised.",
+                      "title": "Price"
+                    },
+                    {
+                      "id": "review",
+                      "text": "The buyer checks the brief against the exact agreed scope before accepting it.",
+                      "title": "Delivery review"
+                    }
+                  ],
+                  "conditions": [],
+                  "dispute": {},
+                  "extensions": {},
+                  "parties": [
+                    "buyer-example",
+                    "supplier-example"
+                  ],
+                  "settlement": {},
+                  "supersedes": null,
+                  "title": "Synthetic review: one research brief",
+                  "version": "covenant-contract-draft/0.1"
+                },
+                "after": {
+                  "clauses": [
+                    {
+                      "id": "scope",
+                      "text": "One page answering the agreed research question, with sources.",
+                      "title": "Work"
+                    },
+                    {
+                      "id": "price",
+                      "text": "USD 30. This is an unsigned synthetic exercise; no payment is authorised.",
+                      "title": "Price"
+                    },
+                    {
+                      "id": "review",
+                      "text": "The buyer checks the brief against the exact agreed scope before accepting it.",
+                      "title": "Delivery review"
+                    }
+                  ],
+                  "conditions": [],
+                  "dispute": {},
+                  "extensions": {},
+                  "parties": [
+                    "buyer-example",
+                    "supplier-example"
+                  ],
+                  "settlement": {},
+                  "supersedes": null,
+                  "title": "Synthetic review: one research brief",
+                  "version": "covenant-contract-draft/0.1"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "expected_outcome": [
+        "Return distinct before and after identifiers.",
+        "Show the price change within the clauses.",
+        "Set requires_fresh_assent=true and execution_authorized=false."
+      ],
+      "observed": {
+        "before": "7c449e319157fde38a0f6a683f12554723fc0a508c24892c775acb576015b30d",
+        "after": "c84b70228b890d2ca86b27ac909608efc46e0bb0ca8465cac8c1183096c3615f",
+        "changed_fields": [
+          "clauses"
+        ],
+        "requires_fresh_assent": true,
+        "execution_authorized": false
+      },
+      "exact_call_checks_passed": true
+    },
+    {
+      "id": "positive-inspect-render",
+      "type": "positive",
+      "title": "Inspect and read the same exact draft",
+      "prompt": "Inspect this exact research-brief draft and make a readable copy. Keep its identifier and unsigned status visible; do not treat the display as a signed contract.",
+      "steps": [
+        {
+          "receipt": "distribution/review-receipts/store-inspect-draft.json",
+          "receipt_sha256": "719df542433c224bf238aa43dbbb3901af6d6436c798c0480c569f58aae2d0f0",
+          "executed_at": "2026-11-02T08:58:20.670201+00:00",
+          "method": "POST",
+          "endpoint": "https://jupie202020.pythonanywhere.com/mcp",
+          "headers": {
+            "Content-Type": "application/json",
+            "Accept": "application/json, text/event-stream",
+            "MCP-Protocol-Version": "2025-11-25"
+          },
+          "request": {
+            "jsonrpc": "2.0",
+            "id": 311,
+            "method": "tools/call",
+            "params": {
+              "name": "covenant_contract__inspect",
+              "arguments": {
+                "body": {
+                  "clauses": [
+                    {
+                      "id": "scope",
+                      "text": "One page answering the agreed research question, with sources.",
+                      "title": "Work"
+                    },
+                    {
+                      "id": "price",
+                      "text": "USD 25. This is an unsigned synthetic exercise; no payment is authorised.",
+                      "title": "Price"
+                    },
+                    {
+                      "id": "review",
+                      "text": "The buyer checks the brief against the exact agreed scope before accepting it.",
+                      "title": "Delivery review"
+                    }
+                  ],
+                  "conditions": [],
+                  "dispute": {},
+                  "extensions": {},
+                  "parties": [
+                    "buyer-example",
+                    "supplier-example"
+                  ],
+                  "settlement": {},
+                  "supersedes": null,
+                  "title": "Synthetic review: one research brief",
+                  "version": "covenant-contract-draft/0.1"
+                }
+              }
+            }
+          }
+        },
+        {
+          "receipt": "distribution/review-receipts/store-render-draft.json",
+          "receipt_sha256": "046d2ff658f8b61f3b3148830bdd960eafb9654d1b4c7410fbead8aa3bc01e07",
+          "executed_at": "2026-11-02T08:58:22.277791+00:00",
+          "method": "POST",
+          "endpoint": "https://jupie202020.pythonanywhere.com/mcp",
+          "headers": {
+            "Content-Type": "application/json",
+            "Accept": "application/json, text/event-stream",
+            "MCP-Protocol-Version": "2025-11-25"
+          },
+          "request": {
+            "jsonrpc": "2.0",
+            "id": 312,
+            "method": "tools/call",
+            "params": {
+              "name": "covenant_contract__render",
+              "arguments": {
+                "body": {
+                  "clauses": [
+                    {
+                      "id": "scope",
+                      "text": "One page answering the agreed research question, with sources.",
+                      "title": "Work"
+                    },
+                    {
+                      "id": "price",
+                      "text": "USD 25. This is an unsigned synthetic exercise; no payment is authorised.",
+                      "title": "Price"
+                    },
+                    {
+                      "id": "review",
+                      "text": "The buyer checks the brief against the exact agreed scope before accepting it.",
+                      "title": "Delivery review"
+                    }
+                  ],
+                  "conditions": [],
+                  "dispute": {},
+                  "extensions": {},
+                  "parties": [
+                    "buyer-example",
+                    "supplier-example"
+                  ],
+                  "settlement": {},
+                  "supersedes": null,
+                  "title": "Synthetic review: one research brief",
+                  "version": "covenant-contract-draft/0.1"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "expected_outcome": [
+        "Inspection returns the original draft identifier and unsigned status.",
+        "The HTML copy contains that identifier, the terms and the unsigned label.",
+        "No signing or execution occurs."
+      ],
+      "observed": {
+        "id": "7c449e319157fde38a0f6a683f12554723fc0a508c24892c775acb576015b30d",
+        "status": "UNSIGNED_DRAFT",
+        "binding": false,
+        "render_contains_exact_id": true,
+        "render_contains_unsigned_label": true,
+        "execution_authorized": false
+      },
+      "exact_call_checks_passed": true
+    },
+    {
+      "id": "positive-review-summary",
+      "type": "positive",
+      "title": "Review what is known without inventing assent, authority or proof",
+      "prompt": "Review this case containing only a reference to my unsigned draft. Explain which agreement, authority and evidence claims are still unverified. Do not convert a draft into an accepted agreement or infer any payment.",
+      "steps": [
+        {
+          "receipt": "distribution/review-receipts/store-review-unsigned-summary.json",
+          "receipt_sha256": "0883f9278c4a63f972b86cd4c87eb121a0f460d2ffeeeb76742d3edcb80415ad",
+          "executed_at": "2026-11-02T08:58:24.026532+00:00",
+          "method": "POST",
+          "endpoint": "https://jupie202020.pythonanywhere.com/mcp",
+          "headers": {
+            "Content-Type": "application/json",
+            "Accept": "application/json, text/event-stream",
+            "MCP-Protocol-Version": "2025-11-25"
+          },
+          "request": {
+            "jsonrpc": "2.0",
+            "id": 313,
+            "method": "tools/call",
+            "params": {
+              "name": "covenant_review__review",
+              "arguments": {
+                "case": {
+                  "agreements": [
+                    {
+                      "id": "draft-brief",
+                      "kind": "REFERENCE",
+                      "reference": {
+                        "profile": "covenant-contract-draft/0.1",
+                        "id": "7c449e319157fde38a0f6a683f12554723fc0a508c24892c775acb576015b30d",
+                        "status": "UNSIGNED_DRAFT"
+                      },
+                      "description": "This is an unsigned draft reference, not an assented agreement or evidence of payment."
+                    }
+                  ],
+                  "bindings": [],
+                  "decisions": [],
+                  "evidence": [],
+                  "expected_heads": null,
+                  "grants": [],
+                  "group": null,
+                  "links": [],
+                  "notes": [],
+                  "obligations": [],
+                  "payments": [],
+                  "policies": [],
+                  "primary": "draft-brief",
+                  "recoveries": [],
+                  "title": "Synthetic store review of an unsigned research-brief draft",
+                  "version": "covenant-coordination-case/0.1"
+                }
+              }
+            }
+          }
+        },
+        {
+          "receipt": "distribution/review-receipts/store-authority-summary.json",
+          "receipt_sha256": "03234fbac36b6449cfe2da09d734c2d300e2ce3b470847a6b004350c387ef96e",
+          "executed_at": "2026-11-02T08:58:25.352143+00:00",
+          "method": "POST",
+          "endpoint": "https://jupie202020.pythonanywhere.com/mcp",
+          "headers": {
+            "Content-Type": "application/json",
+            "Accept": "application/json, text/event-stream",
+            "MCP-Protocol-Version": "2025-11-25"
+          },
+          "request": {
+            "jsonrpc": "2.0",
+            "id": 314,
+            "method": "tools/call",
+            "params": {
+              "name": "covenant_review__authority",
+              "arguments": {
+                "agreements": [
+                  {
+                    "id": "7c449e319157fde38a0f6a683f12554723fc0a508c24892c775acb576015b30d",
+                    "kind": "UNSIGNED_DRAFT_REFERENCE",
+                    "parties": {
+                      "buyer": "d75a980182b10ab7d54bfed3c964073a0ee172f3daa62325af021a68f707511a",
+                      "supplier": "3d4017c3e843895a92b70aa74d1b7ebc9c982ccf2ec4968cc0cd55f12af4660c"
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "receipt": "distribution/review-receipts/store-evidence-summary.json",
+          "receipt_sha256": "c4b6ea548f55701b86a84e4ed9ee7ed32d97b50bfa866389a446ac831c0e313e",
+          "executed_at": "2026-11-02T08:58:26.655391+00:00",
+          "method": "POST",
+          "endpoint": "https://jupie202020.pythonanywhere.com/mcp",
+          "headers": {
+            "Content-Type": "application/json",
+            "Accept": "application/json, text/event-stream",
+            "MCP-Protocol-Version": "2025-11-25"
+          },
+          "request": {
+            "jsonrpc": "2.0",
+            "id": 315,
+            "method": "tools/call",
+            "params": {
+              "name": "covenant_review__evidence",
+              "arguments": {
+                "items": [],
+                "agreement_ids": []
+              }
+            }
+          }
+        }
+      ],
+      "expected_outcome": [
+        "Show the draft as DECLARED_REFERENCE_ONLY with NOT_VERIFIED assent.",
+        "Mark supplied role names as caller-declared, with no controller/payment authority.",
+        "Report NO_PROOFS_PROVIDED and zero verified proofs.",
+        "Keep execution_authorized=false, recorded=false and signature_created=false."
+      ],
+      "observed": {
+        "case_id": "4f50d01c43428fc51bdc2979cebe405ac6a3735887b5ea7e59c12d771d21224c",
+        "review_status": "READ_ONLY_REVIEW",
+        "verified_agreements": 0,
+        "unverified_agreements": 1,
+        "assent": "NOT_VERIFIED",
+        "roles_basis": [
+          "CALLER_DECLARED_ROLE_NOT_REVERIFIED",
+          "CALLER_DECLARED_ROLE_NOT_REVERIFIED"
+        ],
+        "proof_status": "NO_PROOFS_PROVIDED",
+        "verified_proof_count": 0,
+        "execution_authorized": false,
+        "recorded": false,
+        "signature_created": false
+      },
+      "exact_call_checks_passed": true
+    },
+    {
+      "id": "negative-1-draft-wrapper-is-not-case",
+      "type": "negative",
+      "title": "Reject a draft supplied where a review case is required",
+      "prompt": "Try reviewing an unsigned draft wrapper directly as a case. It should not be reported as a verified agreement.",
+      "steps": [
+        {
+          "receipt": "distribution/review-receipts/negative-1-draft-wrapper-is-not-case.json",
+          "receipt_sha256": "97571bf9c9e4254ed5f99624deb3c9b8cd2ad01a957179b3e6626356c7a4e292",
+          "executed_at": "2026-11-02T08:51:59.766425+00:00",
+          "method": "POST",
+          "endpoint": "https://jupie202020.pythonanywhere.com/mcp",
+          "headers": {
+            "Content-Type": "application/json",
+            "Accept": "application/json, text/event-stream",
+            "MCP-Protocol-Version": "2025-11-25"
+          },
+          "request": {
+            "jsonrpc": "2.0",
+            "id": 106,
+            "method": "tools/call",
+            "params": {
+              "name": "covenant_review__review",
+              "arguments": {
+                "case": {
+                  "title": "Synthetic unsigned contract draft",
+                  "parties": [
+                    "buyer-example",
+                    "supplier-example"
+                  ],
+                  "clauses": [],
+                  "binding": false
+                }
+              }
+            }
+          }
+        }
+      ],
+      "expected_outcome": [
+        "Return an MCP error and do not report successful review or authority.",
+        "Give a precise correctable input refusal; this guidance criterion is currently unmet."
+      ],
+      "observed": {
+        "mcp_is_error": true,
+        "status": "UNKNOWN",
+        "code": "MCP_CONNECTED_OUTCOME_UNKNOWN",
+        "guidance": "The underlying call has no trustworthy completion result. Inspect and reconcile the same retained operation before acting again; do not automatically retry or replace its operation identifier."
+      },
+      "error_flag_check_passed": true,
+      "precise_input_refusal_check_passed": false,
+      "known_limitation": "Malformed public read-only inputs currently receive generic UNKNOWN-outcome reconciliation guidance rather than a precise validation refusal."
+    },
+    {
+      "id": "negative-2-wrong-case-pin",
+      "type": "negative",
+      "title": "Reject a mismatching exact case identifier",
+      "prompt": "Review this supplied case against a different expected identifier. Do not silently adopt the supplied bytes as the expected case.",
+      "steps": [
+        {
+          "receipt": "distribution/review-receipts/negative-2-wrong-case-pin.json",
+          "receipt_sha256": "2fb1c898f8c3e9167f72950f6ff800fd0e5f77c6fd9bdaae3ebf86ec18fd9473",
+          "executed_at": "2026-11-02T08:52:01.482647+00:00",
+          "method": "POST",
+          "endpoint": "https://jupie202020.pythonanywhere.com/mcp",
+          "headers": {
+            "Content-Type": "application/json",
+            "Accept": "application/json, text/event-stream",
+            "MCP-Protocol-Version": "2025-11-25"
+          },
+          "request": {
+            "jsonrpc": "2.0",
+            "id": 107,
+            "method": "tools/call",
+            "params": {
+              "name": "covenant_review__review",
+              "arguments": {
+                "case": {
+                  "agreements": [
+                    {
+                      "id": "unfetched-notice",
+                      "kind": "REFERENCE",
+                      "reference": {
+                        "uri": "https://example.invalid/never-fetched",
+                        "sha256": "abababababababababababababababababababababababababababababababab"
+                      },
+                      "description": "Synthetic reference only; no assent or truth is claimed."
+                    }
+                  ],
+                  "bindings": [],
+                  "decisions": [],
+                  "evidence": [],
+                  "expected_heads": null,
+                  "grants": [],
+                  "group": null,
+                  "links": [],
+                  "notes": [],
+                  "obligations": [],
+                  "payments": [],
+                  "policies": [],
+                  "primary": "unfetched-notice",
+                  "recoveries": [],
+                  "title": "Synthetic unfetched reference: not an agreed contract",
+                  "version": "covenant-coordination-case/0.1"
+                },
+                "expected_id": "0a76e75309128ac8cafd5e0b0dd42f87ca7ed8db16a729f994df17c684575f52"
+              }
+            }
+          }
+        }
+      ],
+      "expected_outcome": [
+        "Return an MCP error and do not report successful review or authority.",
+        "Give a precise correctable input refusal; this guidance criterion is currently unmet."
+      ],
+      "observed": {
+        "mcp_is_error": true,
+        "status": "UNKNOWN",
+        "code": "MCP_CONNECTED_OUTCOME_UNKNOWN",
+        "guidance": "The underlying call has no trustworthy completion result. Inspect and reconcile the same retained operation before acting again; do not automatically retry or replace its operation identifier."
+      },
+      "error_flag_check_passed": true,
+      "precise_input_refusal_check_passed": false,
+      "known_limitation": "Malformed public read-only inputs currently receive generic UNKNOWN-outcome reconciliation guidance rather than a precise validation refusal."
+    },
+    {
+      "id": "negative-3-invalid-authority-identity",
+      "type": "negative",
+      "title": "Reject a malformed direct authority identity",
+      "prompt": "Inspect a claimed agreement role containing an invalid public-key string. Do not treat it as verified signing or payment authority.",
+      "steps": [
+        {
+          "receipt": "distribution/review-receipts/negative-3-invalid-authority-identity.json",
+          "receipt_sha256": "ebfce04aacbf97d859b10be80a7636abbbb3aa756da62b31a8e260ce1d4d7a68",
+          "executed_at": "2026-11-02T08:52:02.983870+00:00",
+          "method": "POST",
+          "endpoint": "https://jupie202020.pythonanywhere.com/mcp",
+          "headers": {
+            "Content-Type": "application/json",
+            "Accept": "application/json, text/event-stream",
+            "MCP-Protocol-Version": "2025-11-25"
+          },
+          "request": {
+            "jsonrpc": "2.0",
+            "id": 108,
+            "method": "tools/call",
+            "params": {
+              "name": "covenant_review__authority",
+              "arguments": {
+                "agreements": [
+                  {
+                    "id": "abababababababababababababababababababababababababababababababab",
+                    "kind": "EXTERNAL",
+                    "parties": {
+                      "buyer": "not-an-ed25519-verification-key"
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        }
+      ],
+      "expected_outcome": [
+        "Return an MCP error and do not report successful review or authority.",
+        "Give a precise correctable input refusal; this guidance criterion is currently unmet."
+      ],
+      "observed": {
+        "mcp_is_error": true,
+        "status": "UNKNOWN",
+        "code": "MCP_CONNECTED_OUTCOME_UNKNOWN",
+        "guidance": "The underlying call has no trustworthy completion result. Inspect and reconcile the same retained operation before acting again; do not automatically retry or replace its operation identifier."
+      },
+      "error_flag_check_passed": true,
+      "precise_input_refusal_check_passed": false,
+      "known_limitation": "Malformed public read-only inputs currently receive generic UNKNOWN-outcome reconciliation guidance rather than a precise validation refusal."
+    }
+  ],
+  "evidence_boundaries": [
+    "A draft, displayed role or hash is not assent, identity proof or payment.",
+    "Current marketplace records include explicitly labelled project demos; these are not independently verified providers.",
+    "No security audit, real customer adoption, production SLA or payment execution is established by these calls.",
+    "These public review test cases do not exercise the 29 private account operations."
+  ]
+}
