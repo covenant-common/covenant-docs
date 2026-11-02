@@ -182,12 +182,23 @@
   function listingCard(publication) {
     const fields = publication.fields;
     const article = document.createElement('article');
-    text('h3', typeof fields.title === 'string' ? fields.title : 'Untitled public listing', article);
-    const summary = ['summary', 'description'].map((key) => typeof fields[key] === 'string' ? fields[key] : '').filter(Boolean).join(' ');
+    const views = window.AAPDealStructures;
+    const card = views && typeof views.publicListingDisplay === 'function' ? views.publicListingDisplay(fields) : null;
+    text('h3', card ? card.title : typeof fields.title === 'string' ? fields.title : 'Untitled public listing', article);
+    const summary = card ? card.summary : ['summary', 'description'].map((key) => typeof fields[key] === 'string' ? fields[key] : '').filter(Boolean).join(' ');
     if (summary) text('p', summary, article);
     if (typeof fields.category === 'string') text('p', 'Category: ' + fields.category, article);
-    const resources = resourceNames(fields);
-    if (resources) text('p', 'Offered resources: ' + resources, article);
+    if (card) {
+      if (card.scope) text('p', 'Scope: ' + card.scope, article);
+      if (card.offers && card.offers.length) text('p', 'Offers: ' + card.offers.join('; '), article);
+      if (card.wants && card.wants.length) text('p', 'Wants: ' + card.wants.join('; '), article);
+      else if (card.wants !== null) text('p', 'No requested consideration is published here; do not infer that the service is free.', article);
+      if (card.excerpted) text('p', 'Description excerpt; inspect the public advert for the complete terms.', article);
+    } else {
+      // Keep basic discovery usable with an older cached display helper.
+      const resources = resourceNames(fields);
+      if (resources) text('p', 'Offered resources: ' + resources, article);
+    }
     const url = safePublicationUrl(publication.url);
     if (url) {const link = text('a', 'Open the public advert', article); link.href = url;}
     const arrange = text('button', 'Structure this deal', article); arrange.type = 'button'; arrange.disabled = !window.AAPDealStructures;

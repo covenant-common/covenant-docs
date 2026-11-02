@@ -287,9 +287,51 @@
     accepts(revision) {return revision === this.revision;}
     retain(revision, value) {if (!this.accepts(revision)) return false; this.output = value; return true;}
   }
+  // Public display is separate from the stricter adopted-handoff validator.
+  function publicLeg(leg) {
+    if (!leg || typeof leg !== 'object' || Array.isArray(leg) || !leg.asset || typeof leg.asset !== 'object' || Array.isArray(leg.asset)) return null;
+    const asset = leg.asset;
+    if (!['namespace', 'identifier', 'unit'].every((key) => typeof asset[key] === 'string')) return null;
+    const amount = leg.amount;
+    if (!Number.isSafeInteger(amount) || amount < 0) return null;
+    const view = {amount, asset: {namespace: asset.namespace, identifier: asset.identifier, unit: asset.unit}};
+    const denominations = {USD: ['cents'], GBP: ['pence', 'penny'], EUR: ['cents']};
+    let label;
+    if (asset.namespace === 'fiat' && Object.prototype.hasOwnProperty.call(denominations, asset.identifier) && denominations[asset.identifier].includes(asset.unit)) {
+      const exact = BigInt(amount);
+      label = asset.identifier + ' ' + (exact / 100n).toString() + '.' + (exact % 100n).toString().padStart(2, '0');
+    } else label = String(amount) + ' ' + asset.unit + ' · ' + asset.identifier + ' [' + asset.namespace + ']';
+    return {label, view};
+  }
+  function publicListingDisplay(fields) {
+    const object = (value) => value !== null && typeof value === 'object' && !Array.isArray(value);
+    if (!object(fields)) throw new Error('Public listing fields');
+    const selected = {};
+    ['title', 'category', 'summary', 'description'].forEach((key) => {if (typeof fields[key] === 'string') selected[key] = fields[key];});
+    const custom = object(fields.custom) ? fields.custom : null;
+    // No private_note, terms, contact details, adapter options or other custom
+    // keys are read or copied into this card's display projection.
+    const publicCustom = {};
+    if (custom) ['description', 'scope'].forEach((key) => {if (typeof custom[key] === 'string') publicCustom[key] = custom[key];});
+    if (Object.keys(publicCustom).length) selected.custom = publicCustom;
+    const descriptions = [...new Set([selected.summary, selected.description, publicCustom.description].filter((value) => typeof value === 'string' && value.trim()))];
+    const summary = descriptions.join(' ');
+    const scope = typeof publicCustom.scope === 'string' ? publicCustom.scope : '';
+    const excerpt = (value) => value.length > 420 ? value.slice(0, 417) + '...' : value;
+    const legs = {};
+    ['offer', 'want'].forEach((key) => {
+      if (!Array.isArray(fields[key])) {legs[key] = null; return;}
+      legs[key] = fields[key].map(publicLeg).filter((value) => value !== null);
+      selected[key] = legs[key].map((value) => value.view);
+    });
+    return {title: selected.title || 'Public service advert', category: selected.category || '',
+      summary: excerpt(summary), scope: excerpt(scope), excerpted: summary.length > 420 || scope.length > 420,
+      offers: legs.offer === null ? null : legs.offer.map((value) => value.label),
+      wants: legs.want === null ? null : legs.want.map((value) => value.label), selectedFields: selected};
+  }
   const api = Object.freeze({VERSION, HASH_PROFILE, catalogue, template, templatePin, canonical,
     advertFromPublication, validateAdvert, makeHandoff, readHandoff, proposedFields,
-    formatLegs, buildDraft, responseRetains, reviewDraft, proposalHandoff, proposalHandoffHTML, normalizeServiceQuery, compareProposals, SelectionSession});
+    formatLegs, publicLeg, publicListingDisplay, buildDraft, responseRetains, reviewDraft, proposalHandoff, proposalHandoffHTML, normalizeServiceQuery, compareProposals, SelectionSession});
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
   if (typeof window !== 'undefined') window.AAPDealStructures = api;
   if (typeof document !== 'undefined') {
