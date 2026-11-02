@@ -21,6 +21,9 @@ Covenant helps people and agents coordinate work, set limits and retain exact ag
 
 - [Machine discovery](docs/MCP_DISCOVERY.html): prepared public server-card aliases, complete nine-tool schema snapshot, catalogues and host activation requirements. A project path is not the hostname root.
 
+- [Public task guide](docs/PUBLIC_TASKS.html): examples for choosing the nine public tools; signing, posting and payment need their separately configured workflows.
+- [Fixed public task prompts](distribution/ato-prompt-set.json): twenty versioned test prompts and explicit expected boundaries. This is an evaluation set, not a claim of ranking or retention.
+
 ## First useful action
 
 - [Start here](docs/START.html?source=search): choose connect, advertise, buy or work together; copy a safe first task and the live MCP address.

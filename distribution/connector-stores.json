@@ -8,16 +8,20 @@
     {
       "id": "openai",
       "name": "ChatGPT and Codex",
-      "status": "PACKAGE_PREPARED_NOT_SUBMITTED",
+      "status": "IDENTITY_GATE_BEFORE_UPLOAD",
       "submission_url": "https://platform.openai.com/plugins",
       "remaining": [
-        "Authenticated publishing account and verified developer identity",
-        "Domain challenge, live portal scans and review materials",
-        "Publisher attestations and review; publish only after approval"
+        "Verified individual or business publisher identity; portal refused upload before a package was received",
+        "Actual reviewer-accessible demonstration recording",
+        "Reconcile public developer-pilot readiness with no-demo submission policy; do not hide limitations",
+        "Endpoint-origin domain challenge, live portal scans and publisher review; publish only after approval"
       ],
       "sources": [
         "https://developers.openai.com/plugins/deploy/submission"
-      ]
+      ],
+      "verified_date": "2026-11-02",
+      "package_version": "0.1.1",
+      "proposed_display_name": "Covenant Work Agreements"
     },
     {
       "id": "google",
@@ -28,7 +32,9 @@
       "submitted_endpoint": "https://jupie202020.pythonanywhere.com/mcp/google/v1",
       "live_listing_confirmed": false,
       "remaining": [
-        "Selection and review; no duplicate submission prepared"
+        "Prior eight-tool waitlist receipt retained; no duplicate submission",
+        "Console signup route returned 404 on 2 November; confirm current eligibility/invitation",
+        "Assess the scoped connector against policies on autonomous A2A integrations, generic dispatch and third-party advertising; no disguised capabilities"
       ]
     },
     {
@@ -46,61 +52,65 @@
     {
       "id": "claude",
       "name": "Claude connectors",
-      "status": "PACKAGE_PREPARED_NOT_SUBMITTED",
+      "status": "PAID_PLAN_GATE_NOT_SUBMITTED",
       "submission_url": "https://claude.ai/directory/manage",
       "remaining": [
-        "Use a paid Claude account; owners submit for Team/Enterprise.",
-        "Submit the public HTTPS MCP; OAuth2 only if account access is included.",
-        "Provide tool titles/annotations, docs, privacy, support, icon and tested examples.",
-        "Complete directory acknowledgments; listing follows scanning/review, not upload."
+        "Current Free publisher account is blocked; user plans to address paid-account access on 5 November 2026; no purchase authorized",
+        "Submit the anonymous public endpoint, privacy/support materials and actual examples",
+        "Complete directory acknowledgements and automated scanning; provider determines any Verified status"
       ],
       "sources": [
         "https://claude.com/docs/directory/publish",
         "https://claude.com/docs/connectors/building/submission"
       ],
-      "pricing_constraint": "Paid Claude plan required; no separate listing fee established."
+      "pricing_constraint": "Paid Claude plan required; no separate listing fee established.",
+      "verified_date": "2026-11-02"
     },
     {
       "id": "cursor",
       "name": "Cursor Marketplace",
-      "status": "PUBLIC_WRAPPER_PREPARED_NOT_SUBMITTED",
+      "status": "APPLICATION_SUBMITTED_REVIEW_NOT_CONFIRMED",
       "submission_url": "https://cursor.com/marketplace/publish",
       "remaining": [
-        "Public open-source repository, valid plugin manifest, relative paths, README and local testing.",
-        "Manual review applies to initial listing and updates.",
-        "Publisher terms require free plugin access and permissive components."
+        "Retain existing submission; current publisher form is not a review-status dashboard",
+        "Provider review/approval; no duplicate application",
+        "Plugin remains free under accepted publisher terms; any private-source request requires separate review"
       ],
       "sources": [
         "https://cursor.com/docs/plugins",
         "https://cursor.com/docs/reference/plugins",
         "https://cursor.com/marketplace-publisher-terms"
       ],
-      "pricing_constraint": "Marketplace listing is free; terms prohibit direct/indirect plugin-use fees."
+      "pricing_constraint": "Marketplace listing is free; terms prohibit direct/indirect plugin-use fees.",
+      "receipt_date": "2026-11-02",
+      "verified_date": "2026-11-02"
     },
     {
       "id": "grok",
       "name": "Grok connectors",
-      "status": "CUSTOM_INSTALL_DOCUMENTED_CATALOG_ROUTE_UNVERIFIED",
+      "status": "CUSTOM_CONNECTION_FAILED_CATALOG_SUBMISSION_NOT_ESTABLISHED",
       "submission_url": "https://grok.com/connectors",
       "remaining": [
-        "New Connector > Custom; supply public MCP URL and required authentication.",
-        "Business/Enterprise administrators first provision the connector for their team."
+        "Current NoAuth custom connection attempt returned Connection failed; native compatibility needs diagnosis and retest",
+        "Main Grok public catalog route is separate from the Grok Bot/Cursor submission form",
+        "Do not mark in-app tests complete or claim a published connector"
       ],
       "sources": [
         "https://docs.x.ai/grok/connectors",
         "https://docs.x.ai/grok/connector-management"
       ],
-      "pricing_constraint": "No listing fee or public catalog-submission process established by reviewed docs."
+      "pricing_constraint": "No listing fee or public catalog-submission process established by reviewed docs.",
+      "verified_date": "2026-11-02"
     },
     {
       "id": "muse",
       "name": "Meta Muse Connector Platform",
-      "status": "AUTHENTICATED_SUBMISSION_NOT_COMPLETED",
+      "status": "SUBMITTED_IN_REVIEW_TECHNICAL_COMPLETE",
       "submission_url": "https://platform.muse.ai/submission",
       "remaining": [
-        "Sign in/create developer account using work email.",
-        "Provide product/use-case details and pass functional, security, legal and end-to-end review.",
-        "Accept operational/content licensing, privacy and bounded-action obligations."
+        "Truthful publisher/business verification",
+        "Data-processing questionnaire with verified operational/privacy facts",
+        "Platform review and approval; successful endpoint test is not approval"
       ],
       "sources": [
         "https://platform.muse.ai/",
@@ -108,7 +118,17 @@
         "https://platform.muse.ai/terms",
         "https://developers.meta.com/blog/meta-connect-recap/"
       ],
-      "pricing_constraint": "No public listing fee established; do not infer free payment processing."
+      "pricing_constraint": "No public listing fee established; do not infer free payment processing.",
+      "receipt_date": "2026-11-02",
+      "verified_date": "2026-11-02",
+      "technical_check": {
+        "status": "PASS",
+        "tool_count": 9,
+        "authentication": "Unauthenticated",
+        "credentials_submitted": true,
+        "requirements_completed": 1,
+        "requirements_total": 3
+      }
     },
     {
       "id": "microsoft-365-copilot",
@@ -126,7 +146,8 @@
         "https://learn.microsoft.com/en-us/microsoft-365/copilot/extensibility/overview-plugins?tabs=mcp",
         "https://learn.microsoft.com/en-us/partner-center/marketplace-offers/open-a-developer-account",
         "https://learn.microsoft.com/en-us/microsoft-agent-365/developer/submit-agent-partner-center",
-        "https://learn.microsoft.com/en-us/microsoft-365/copilot/extensibility/plugin-mcp-apps"
+        "https://learn.microsoft.com/en-us/microsoft-365/copilot/extensibility/plugin-mcp-apps",
+        "https://learn.microsoft.com/en-us/microsoft-copilot-studio/mcp-certification"
       ],
       "pricing_constraint": "Publisher verification is explicitly free. No blanket zero-cost development or operating claim: eligible tenant/Copilot access may require subscriptions. No paid benefits or Azure resources are needed merely to prepare the declarative package."
     },
@@ -171,14 +192,36 @@
   ],
   "additional_directory": {
     "name": "Glama",
-    "status": "PRIOR_SUBMISSION_RECEIPT_PENDING_REVIEW",
+    "status": "PUBLIC_LISTINGS_LIVE_HEALTHY",
     "receipt_date": "2026-10-31",
-    "live_listing_confirmed": false
+    "live_listing_confirmed": true,
+    "verified_date": "2026-11-02",
+    "listings": [
+      {
+        "url": "https://glama.ai/mcp/connectors/io.github.covenant-common/covenant-aap",
+        "tools": 9,
+        "health": "Healthy",
+        "metadata_grade": "B",
+        "metadata_score_out_of_5": 3.4
+      },
+      {
+        "url": "https://glama.ai/mcp/connectors/com.pythonanywhere.jupie202020/covenant-agentic-agreements-protocol-aap",
+        "tools": 9,
+        "health": "Healthy",
+        "metadata_grade": "B",
+        "metadata_score_out_of_5": 3.2
+      }
+    ]
   },
   "test_scope": {
     "live_calls": "Harmless synthetic public requests; no account, signing, payment or advert creation",
-    "native_client_installation": "NOT_PERFORMED",
-    "store_approval": "NOT_ESTABLISHED_EXCEPT_EXISTING_REGISTRY_RECORD"
+    "native_client_installation": "Prior personal ChatGPT/Claude tests are distinct from public approval; current Grok custom attempt failed; Muse endpoint checker listed nine tools",
+    "store_approval": "No new provider approval established by the execution tests or technical setup",
+    "live_execution": "14 predetermined positive tool calls passed; six harness controls dispatched nothing; three additional actual malformed-input calls returned precise refusals",
+    "model_selection": "NOT_MEASURED",
+    "organic_store_visibility": "NOT_MEASURED",
+    "retention": "NOT_MEASURED"
   },
-  "known_issue": "Malformed public review input can return an opaque outcome-unknown bridge error. See the connection guide; do not infer that an action or payment happened."
+  "known_issue": "Current Grok custom connection failed without a specific visible cause. Three previously opaque review-input cases now return precise refusals; other unknown outcomes must still be treated as unresolved.",
+  "observation_scope": "2 November evening: portal checks, fixed anonymous execution tests, and separately dated directory records. No organic ranking or retention measurement."
 }
