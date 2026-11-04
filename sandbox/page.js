@@ -104,9 +104,11 @@ function check(tamper) {
     const report = session.check(last.record, tamper);
     const out = $('checked');
     out.replaceChildren();
+    const price = last.record.terms.quantity;
     line(out, tamper
-      ? `After changing the price to ${last.record.terms.quantity * 100}: ${report.verdict}.`
-      : `The record checks out: ${report.verdict}.`);
+      ? `The price was changed from ${price} to ${price * 100} test USDC, so the signatures no longer match the record.`
+      : `The record checks out. The signatures still match the price of ${price} test USDC.`);
+    line(out, `Checker result: ${report.verdict}.`);
     for (const problem of report.problems) line(out, `${problem.code}: ${problem.fix}`);
     line(out, report.note);
   } catch (error) {

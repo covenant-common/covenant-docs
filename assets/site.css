@@ -10,3 +10,6 @@
 
 /* Keep the front door short; retain deeper routes in an explicit menu. */
 .launch nav .nav-more{margin:0;min-width:0}.launch nav .nav-more summary{cursor:pointer}.launch nav .nav-more[open]{flex-basis:100%}.launch nav .nav-more>div{display:flex;flex-wrap:wrap;gap:.382rem 1rem;padding-top:.618rem}.launch #available-today a,.launch #costs a{overflow-wrap:anywhere}
+/* Primary actions need a comfortable tap target. */
+a.primary,.actions a.primary,.actions button,button.primary{min-height:44px;padding:.7rem 1.1rem;display:inline-flex;align-items:center;justify-content:center;box-sizing:border-box}
+a.primary,button.primary{background:var(--aap-ink);color:var(--aap-panel);border:1px solid var(--aap-ink);text-decoration:none}
