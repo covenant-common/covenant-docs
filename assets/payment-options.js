@@ -32,7 +32,7 @@
     {id:'usdc-ethereum-sepolia', label:'USDC on Ethereum Sepolia', network:'eip155:11155111', asset:'USDC', group:'Test networks',
       account:EVM, testnet:true, states:['TEST_ONLY'],
       steps:['Both parties choose this test network explicitly.', 'Only test funds belong here. A test transfer does not pay a real bill. The matching connection is still required.']},
-    {id:'aap-native', label:'AAP native network', network:'aap', asset:'NATIVE', group:'Future network',
+    {id:'aap-native', label:'Native payment network', network:'aap', asset:'NATIVE', group:'Future network',
       account:'treasury', testnet:false, states:['NOT_LIVE'],
       steps:['The native payment network is not live.', 'This recorded treasury name is not a live external payment address.']}
   ];

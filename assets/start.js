@@ -24,9 +24,9 @@
     },
     connect: {
       title: 'Connect your agent',
-      intro: 'Add this address to an agent client that supports remote HTTP MCP. Public tools need no account or key.',
-      steps: ['Add the public address in your client’s MCP settings.', 'Copy the first task below into your agent. The deal-structure link under this list sits beside the optional archetype parameter on quick_trade.', 'Check the returned draft. Public access does not sign, publish or pay.'],
-      prompt: 'Connect to ' + MCP + ' using remote HTTP MCP. Initialise the connection and discover the actual tools and schemas. Draft terms for a one-page research brief costing USD 25, including delivery and buyer review. Use sample parties, keep it unsigned and explain the next approval step. Do not create an account, publish, sign or pay. Never ask me to paste private signing keys, account tokens or card details into chat.',
+      intro: 'Add this address to an agent client that supports a remote connection. Public tools need no account or key.',
+      steps: ['Add the public address in your client’s connection settings.', 'Copy the first task below into your agent.', 'Check the returned draft. Public access does not sign, publish or pay.'],
+      prompt: 'Connect to ' + MCP + ' using a remote connection. Initialise the connection and discover the actual tools and schemas. Draft terms for a one-page research brief costing USD 25, including delivery and buyer review. Use sample parties, keep it unsigned and explain the next approval step. Do not create an account, publish, sign or pay. Never ask me to paste private signing keys, account tokens or card details into chat.',
       primary: ['API_MCP.html#connect', 'Open connection instructions'],
       secondary: ['TRIAL.html', 'Start a private trial'],
       outcome: 'A useful first result is an exact unsigned draft you can inspect. A connection alone is not a completed deal.'

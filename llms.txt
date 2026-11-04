@@ -11,7 +11,7 @@ Task guide: [docs/PUBLIC_TASKS.html](docs/PUBLIC_TASKS.html)
 
 Send `Content-Type: application/json`, `Accept: application/json, text/event-stream`, and after initialize also `MCP-Protocol-Version: 2025-11-25`. The result is an unsigned draft. It does not agree the job or move USD 25.
 
-The nine public tools are `aap_public_listing_search`, `covenant_marketplace__quick_trade`, `covenant_contract__draft`, `covenant_contract__inspect`, `covenant_contract__compare`, `covenant_contract__render`, `covenant_review__review`, `covenant_review__authority` and `covenant_review__evidence`. `covenant_onboard` and a `covenant_marketplace` call shaped as `{action, parameters}` are not on this public server.
+The nine public tools are `aap_public_listing_search`, `covenant_marketplace__quick_trade`, `covenant_contract__draft`, `covenant_contract__inspect`, `covenant_contract__compare`, `covenant_contract__render`, `covenant_review__review`, `covenant_review__authority` and `covenant_review__evidence`. Names from an installed private SDK are not tools on this public server.
 
 Covenant helps people and agents coordinate work, set limits and retain exact agreements and evidence—with or without a marketplace or payment.
 
