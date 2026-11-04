@@ -55,8 +55,8 @@
   if(typeof document==='undefined'||!document.getElementById('trial-start'))return;
   let access=null,busy=false,urls=[],downloadAttempted=false;
   const el=id=>document.getElementById(id),say=value=>{el('trial-state').textContent=value;};
-  const STATUS_WAIT_MS=15000;
-  function unreachableMessage(){return 'Automatic setup could not be reached. Public tools may still be available. You can request setup help below.';}
+  const STATUS_WAIT_MS=10000;
+  function unreachableMessage(){return 'We could not check whether trials are open. You can try again, or request setup help below.';}
   function abortAfter(ms){
     if(global.AbortSignal&&typeof global.AbortSignal.timeout==='function')return global.AbortSignal.timeout(ms);
     const controller=new global.AbortController();
@@ -100,6 +100,6 @@
   global.addEventListener('beforeunload',event=>{if(access&&!downloadAttempted){event.preventDefault();event.returnValue='';}});
   global.addEventListener('pagehide',()=>urls.forEach(url=>URL.revokeObjectURL(url)));
   let statusDone=false;
-  global.setTimeout(function(){if(statusDone)return;el('trial-start').disabled=true;say(unreachableMessage());},STATUS_WAIT_MS);
-  call('/trial/status').then(status=>{statusDone=true;if(status.enabled&&status.signup_open){el('trial-start').disabled=false;say('Trials are open. Your trial lasts 14 days and includes up to '+status.limits.total_calls+' account requests. No email or card needed.');}else{el('trial-start').disabled=true;say('Automatic trial setup is not open on this host. Public tools still work; you can request help below.');}}).catch(()=>{statusDone=true;el('trial-start').disabled=true;say(unreachableMessage());});
+  global.setTimeout(function(){if(statusDone)return;statusDone=true;el('trial-start').disabled=false;say(unreachableMessage());},STATUS_WAIT_MS);
+  call('/trial/status').then(status=>{statusDone=true;if(status.enabled&&status.signup_open){el('trial-start').disabled=false;say('Trials are open. Your trial lasts 14 days and includes up to '+status.limits.total_calls+' account requests. No email or card needed.');}else{el('trial-start').disabled=true;say('Automatic trial setup is not open on this host. Public tools still work; you can request help below.');}}).catch(()=>{statusDone=true;el('trial-start').disabled=false;say(unreachableMessage());});
 })(typeof globalThis==='object'?globalThis:this);

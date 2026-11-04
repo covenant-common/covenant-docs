@@ -27,6 +27,8 @@ test('GBP penny and pence are display aliases without changing signed asset name
     assert.deepEqual(result.view, input); assert.equal(JSON.stringify(input), before);
   }
   assert.equal(T.publicLeg(leg('penny', 1)).label, 'GBP 0.01');
+  assert.equal(T.publicLeg({amount: 25000000, asset: {namespace: 'eip155:8453', identifier: 'USDC', unit: 'USDC_MICRO'}}).label, '25 USDC');
+  assert.equal(T.publicLeg({amount: 125000, asset: {namespace: 'eip155:8453', identifier: 'USDC', unit: 'USDC_MICRO'}}).label, '0.125 USDC');
   assert.equal(T.publicLeg(leg('penny', Number.MAX_SAFE_INTEGER)).label, 'GBP 90071992547409.91');
 });
 

@@ -66,7 +66,7 @@ python -m covenant_chain.agent_server --keyless --once &lt; request.json &gt; re
 <p>For an executable demonstration that makes every transition explicit:</p>
 <pre>python "$aap_source/tools/test_preview_journey.py"
 python "$aap_source/tools/test_preview_journey.py" --with-paid-demo</pre>
-<p>The first command drafts and reviews only. The second explicitly creates temporary private keys for four synthetic actors, signs a separate /0.2 order, delivers sample bytes, releases 90 synthetic USDC-labelled units, observes the recipient’s adopted local custody and retries the retained settlement without a duplicate debit. Test state is removed on exit. One owner controls all test actors; this is a local reference provider, not actual USDC, an external payment or decentralized finality.</p>
+<p>The first command drafts and reviews only. The second demo makes four test users, signs an order, delivers a file and pays with play money. Test state is removed on exit. One owner controls all test actors; this is a local reference provider, not actual USDC, an external payment or decentralized finality.</p>
 
 <h2>What successful use establishes</h2>
 <p>A draft preserves proposed terms. Explicit signatures bind the agreed scoped meaning to the listed identities. Current authority still depends on its adopted policy and snapshot. Recipient observation of a local reference balance is separate from carried signature validity, external payment and delivery quality. Reports must keep these facts separate.</p>

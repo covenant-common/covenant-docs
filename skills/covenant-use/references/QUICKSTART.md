@@ -23,6 +23,8 @@ Example: a shop asks a contractor for one stock report at 90 demo credits. They 
 
 ## Agents can find their own starting point
 
+The public MCP does not include covenant_onboard. Use the nine tools named in SKILL.md and the public task guide. The notes below are for an installed private SDK only.
+
 A connected agent sees covenant_onboard on the first tool page. Call guide with an ordinary query or an exact task id. It returns a local task suggestion, the exact installed action schema and missing parameters. Supply parameters to guide to validate a proposed call; next_call is present only when its schema is satisfied. Nothing is executed by the guide.
 
 ```json

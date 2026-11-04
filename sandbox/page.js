@@ -54,11 +54,18 @@ function render(result) {
     out.replaceChildren();
     line(out, step.said);
     line(out, `Result: ${step.verdict}. Signed by: ${step.signed_by.join(' and ')}. Balances: ${money(step.balances)}.`);
-    if (step.proof) line(out, `Proof: SHA-256 ${step.proof.content_sha256} over ${step.proof.content_bytes} bytes, signed by the ${step.proof.signed_by}.`);
-    line(out, `Record ID after this step: ${step.record_id}`);
+    const folded = document.createElement('details');
+    const summary = document.createElement('summary');
+    summary.textContent = 'Show the record identifiers';
+    folded.append(summary);
+    if (step.proof) line(folded, `Proof: SHA-256 ${step.proof.content_sha256} over ${step.proof.content_bytes} bytes, signed by the ${step.proof.signed_by}.`);
+    line(folded, `Record ID after this step: ${step.record_id}`);
+    out.append(folded);
   }
   $('record').textContent = JSON.stringify(result.record, null, 2);
-  $('summary').textContent = `Done in ${result.elapsed_ms} ms. Mode: ${result.mode}. Real value moved: no. Network used: no. Keys kept: no.`;
+  $('summary').textContent = `Done in ${result.elapsed_ms} ms. The demo finished in this page. No real money moved and nothing was sent. The long identifiers are folded under each step.`;
+  $('summary').tabIndex = -1;
+  $('summary').focus();
 }
 
 function fail(error) {

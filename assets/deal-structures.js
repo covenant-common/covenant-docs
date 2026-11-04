@@ -300,6 +300,11 @@
     if (asset.namespace === 'fiat' && Object.prototype.hasOwnProperty.call(denominations, asset.identifier) && denominations[asset.identifier].includes(asset.unit)) {
       const exact = BigInt(amount);
       label = asset.identifier + ' ' + (exact / 100n).toString() + '.' + (exact % 100n).toString().padStart(2, '0');
+    } else if (asset.unit === 'USDC_MICRO' && asset.identifier === 'USDC') {
+      const exact = BigInt(amount);
+      const whole = exact / 1000000n;
+      const fraction = (exact % 1000000n).toString().padStart(6, '0').replace(/0+$/, '');
+      label = fraction ? whole.toString() + '.' + fraction + ' USDC' : whole.toString() + ' USDC';
     } else label = String(amount) + ' ' + asset.unit + ' · ' + asset.identifier + ' [' + asset.namespace + ']';
     return {label, view};
   }

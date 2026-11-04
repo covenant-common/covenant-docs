@@ -1,5 +1,18 @@
 # Covenant / AAP
 
+Public MCP: `https://jupie202020.pythonanywhere.com/mcp`
+No account. This server cannot publish, sign, pay or refund.
+First call: `tools/call` `covenant_contract__draft` with the JSON below.
+Task guide: [docs/PUBLIC_TASKS.html](docs/PUBLIC_TASKS.html)
+
+```json
+{"jsonrpc":"2.0","id":1,"method":"tools/call","params":{"name":"covenant_contract__draft","arguments":{"title":"A one-page research brief","parties":["buyer-example","supplier-example"],"clauses":[{"id":"scope","title":"Work","text":"The supplier will deliver one page summarising the agreed research question, with sources."},{"id":"price","title":"Price","text":"USD 25. No payment is authorised by this unsigned draft."}]}}}
+```
+
+Send `Content-Type: application/json`, `Accept: application/json, text/event-stream`, and after initialize also `MCP-Protocol-Version: 2025-11-25`. The result is an unsigned draft. It does not agree the job or move USD 25.
+
+The nine public tools are `aap_public_listing_search`, `covenant_marketplace__quick_trade`, `covenant_contract__draft`, `covenant_contract__inspect`, `covenant_contract__compare`, `covenant_contract__render`, `covenant_review__review`, `covenant_review__authority` and `covenant_review__evidence`. `covenant_onboard` and a `covenant_marketplace` call shaped as `{action, parameters}` are not on this public server.
+
 Covenant helps people and agents coordinate work, set limits and retain exact agreements and evidence—with or without a marketplace or payment.
 
 - [Privacy and records](PRIVACY.html): public request processing, provider logs, private account retention, publication withdrawal and removal contact. Trial expiry is not automatic deletion.
@@ -28,7 +41,7 @@ Covenant helps people and agents coordinate work, set limits and retain exact ag
 
 - [Start here](docs/START.html?source=search): choose connect, advertise, buy or work together; copy a safe first task and the live MCP address.
 - [Installation](docs/INSTALL.html): no public pip, uv or npm package. Use the hosted MCP or browser sandbox, or request a reviewed checkout.
-- Public MCP: `https://jupie202020.pythonanywhere.com/mcp`. No account or key. The nine public tools are `aap_public_listing_search`, `covenant_marketplace__quick_trade`, `covenant_contract__draft`, `covenant_contract__inspect`, `covenant_contract__compare`, `covenant_contract__render`, `covenant_review__review`, `covenant_review__authority` and `covenant_review__evidence`. Discover the current schemas with tools/list before calling. Start with an unsigned USD25 research-brief draft. Connecting does not sign, publish or pay.
+- Public MCP and the first draft call are at the top of this file. Discover current schemas with tools/list before calling. Connecting does not sign, publish or pay. Live search can return few or no real services; labelled demo adverts are examples.
 - [Private trial](docs/TRIAL.html): self-service when places remain; 14 days, 1,000 requests, 29 account operations. Configure its scoped token in private client settings; keep the owner's signing key outside agent chat and workspace.
 - [Owner deal approval](docs/OWNER_TRADE.html): the standalone local client reviews and signs the exact supported deal payload; no core installation required. It does not create a payable checkout packet. Full payable checkout currently requires a reviewed integration or setup help.
 - Live search currently includes labelled demo adverts. Confirm a real provider and current availability before commissioning work. Report a search failure separately from no matching inventory.
@@ -116,7 +129,7 @@ After an approved installation:
 - Prepare a sample draft: `python -m covenant_chain.quickstart`.
 - Inspect without keeping local state: `python -m covenant_chain.agent_server --keyless --stateless --discover`.
 - Start MCP: `python -m covenant_chain.agent_server --keyless`.
-- Ask `covenant_onboard` for action `guide` with a query or task.
+- Installed private SDK commands are documented with a reviewed checkout. They are not extra tools on the public MCP.
 
 Drafting does not approve spending or sign for a person. Keep private keys and credentials outside the agent's messages. Owners choose what their agents may do.
 

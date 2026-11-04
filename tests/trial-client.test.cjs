@@ -43,7 +43,7 @@ test('restoration and configuration keep the target fixed and never import priva
 });
 test('a status check that never answers is replaced by the fallback, and a normal answer still opens the trial',async()=>{
   const fs=require('node:fs'),vm=require('node:vm'),path=require('node:path');
-  const fallback='Automatic setup could not be reached. Public tools may still be available. You can request setup help below.';
+    const fallback='We could not check whether trials are open. You can try again, or request setup help below.';
   function boot(fetchImpl){
     const timers=[];
     const nodes={};
@@ -56,11 +56,11 @@ test('a status check that never answers is replaced by the fallback, and a norma
   }
   const hung=boot(()=>new Promise(()=>{}));
   assert.equal(hung.state(),'Checking whether trials are open…');
-  const watchdog=hung.timers.find(timer=>timer.ms===15000);
+    const watchdog=hung.timers.find(timer=>timer.ms===10000);
   assert.ok(watchdog);
   watchdog.fn();
   assert.equal(hung.state(),fallback);
-  assert.equal(hung.start().disabled,true);
+  assert.equal(hung.start().disabled,false);
   const closed=boot(async()=>({ok:true,json:async()=>({ok:true,result:{enabled:true,signup_open:false,limits:{total_calls:1000}}})}));
   await new Promise(resolve=>setImmediate(resolve));
   assert.equal(closed.state(),'Automatic trial setup is not open on this host. Public tools still work; you can request help below.');
