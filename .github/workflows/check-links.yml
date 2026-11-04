@@ -23,6 +23,7 @@ jobs:
           python3 tools/check_registry_drift.py
           python3 tools/lint_jargon.py
           python3 tools/lint_tool_counts.py
+          python3 tools/check_agentic_claims.py
       - name: Install the browser used by the people checklist
         run: npm install --no-save --no-package-lock playwright@1.64.1 @axe-core/playwright@4.14.0 && npx playwright install --with-deps chromium
       - name: Run the people checklist

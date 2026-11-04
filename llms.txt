@@ -23,7 +23,7 @@ Discovery, from this site unless noted as planned:
 - Agent card `/.well-known/agent-card.json` is planned and is not published.
 - OAuth protected-resource metadata (RFC 9728, April 2025) is planned and is not published.
 - Web Bot Auth directory `/.well-known/http-message-signatures-directory` is planned and is not published.
-- What is published: [docs/MCP_DISCOVERY.html](docs/MCP_DISCOVERY.html). Paying: [docs/PAYING.html](docs/PAYING.html). Disputes: [docs/DISPUTES.html](docs/DISPUTES.html). Terms: [docs/TERMS.html](docs/TERMS.html).
+- What works today: [docs/AGENTIC_COMMERCE.html](docs/AGENTIC_COMMERCE.html). Approvals are planned: [docs/APPROVALS.html](docs/APPROVALS.html). Receipts: [docs/RECEIPTS.html](docs/RECEIPTS.html). Trust and legal: [docs/TRUST_AND_LEGAL.html](docs/TRUST_AND_LEGAL.html).
 
 Public protocol is MCP 2025-11-25. MCP 2026-07-28 and `server/discover` are in the server sandbox in test. The public host still uses `tools/list`. Planned scopes, not granted on the public server today: `deal:read`, `deal:offer`, `deal:fund:test`, `deal:release`, `deal:dispute`, `mandate:manage`. `can_pay` is false.
 

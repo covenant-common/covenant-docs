@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Approve your agent — Covenant</title><meta name="description" content="Planned: your agent asks, you approve the all-in summary on a Covenant page with your passkey, and the agent stays inside those limits."><meta name="robots" content="index,follow"><link rel="canonical" href="https://covenant-common.github.io/covenant-docs/docs/APPROVALS.html"><link rel="stylesheet" href="../assets/site.css?v=4cc56ea83103ce53"><link rel="stylesheet" href="../assets/theme.css?v=d619ec3067221a74"><link rel="icon" href="../favicon.ico" type="image/x-icon"><link rel="stylesheet" href="../assets/components.css?v=9eac10ecb0b27f9b"></head><body><main><!-- site-chrome:start -->
+<form class="nav-search" role="search" action="../docs/TERMINAL.html" method="get"><label class="sr-only" for="site-search">Find a service</label><input id="site-search" name="q" type="search" placeholder="Find a service" autocomplete="off"><button type="submit" class="btn">Search</button></form>
+<nav class="site-nav" aria-label="Main"><a class="nav-brand" href="../index.html">Covenant</a><input class="nav-toggle" type="checkbox" id="site-menu"><label class="nav-toggle-label" for="site-menu">Menu</label><div class="nav-links"><a href="../docs/PERSON.html">I'm a person</a><a href="../docs/AGENT.html">Connect an agent</a><a href="../docs/DISPUTES.html">Disputes &amp; refunds</a><a href="../docs/SELLER.html#how-you-get-paid">How you get paid</a><a href="../docs/TERMINAL.html">Find</a><a href="../docs/NEGOTIATION.html">Agree</a><a href="../docs/PAYING.html">Pay</a><a href="../docs/HOW_IT_WORKS.html#section_7">Deliver</a><a href="../docs/PAYING.html#refunds">Resolve</a><a href="../docs/START.html">Start</a><a href="../docs/BUYER.html">Buyer path</a><a href="../docs/SELLER.html">Seller path</a><a href="../docs/PRICING.html">Pricing</a><a href="../docs/ABOUT.html">About</a><a href="../docs/WORK_WITH_US.html">Contact</a></div></nav>
+<nav class="journey" aria-label="Deal steps"><p>The deal, in order:</p><ol><li><a href="../docs/TERMINAL.html">Find</a></li><li><a href="../docs/NEGOTIATION.html">Agree</a></li><li><a href="../docs/PAYING.html" aria-current="step">Pay</a></li><li><a href="../docs/HOW_IT_WORKS.html#section_7">Deliver</a></li><li><a href="../docs/PAYING.html#refunds">Resolve</a></li></ol><p class="journey-next">Next: <a href="../docs/HOW_IT_WORKS.html#section_7">See delivery</a></p></nav>
+<details class="lifecycle"><summary>Stage names</summary><p>The same stages on every page.</p><ol><li>Find</li><li>Agree <span class="badge badge-off">PROPOSED</span></li><li>Pay <span class="badge badge-off">BOUND</span></li><li>Deliver <span class="badge badge-off">DELIVERED</span></li><li>Resolve <span class="badge badge-off">SETTLED</span> or <span class="badge badge-soon">DISPUTED</span> then <span class="badge badge-off">RELEASED</span></li></ol><p>Those stage names are the installed work-order checks. The public host cannot settle, hold or <abbr class="term" title="Money sent back after capture. The sandbox can return test funds only.">refund</abbr>. A recorded <abbr class="term" title="A draft you swap by hand today. A recorded offer is coming soon.">offer</abbr> or <abbr class="term" title="A new draft that changes the price or the deadline. A recorded counter-offer is coming soon.">counter-offer</abbr> is coming soon. The browser sample uses test funds only.</p></details>
+<!-- site-chrome:end --><h1>Approve your agent</h1>
+<p><strong>This is planned.</strong> The public tools cannot take a passkey approval, and no hosted method can pay. The story below is how approval is meant to work once the registry says it is available.</p>
+<!-- funds-decision:start -->
+<div class="callout" id="never-holds"><p>Covenant never holds your money. In test mode, the test rail holds it; for real payments, the payment provider or an <abbr class="term" title="The browser sample can hold test funds. Hosted USDC does not. That payment is final.">escrow</abbr> contract will.</p><p>The seller is who you are buying from. Covenant provides the platform. The seller is the merchant of record.</p><p>Covenant’s platform fee is taken at payment time. <strong><span class="owner-pending"><span class="todo-marker" aria-hidden="true">TODO(owner)</span><span class="todo-label">Not set yet. The owner will confirm this</span></span>:</strong> the fee amount.</p></div>
+<!-- funds-decision:end -->
+<h2>The short version</h2>
+<ol>
+<li>Your agent asks for permission.</li>
+<li>You see the all-in summary on a Covenant page, not in the chat. That page is the <abbr class="term" title="The Covenant page where you approve. The chat is not that page.">Trusted Surface</abbr>.</li>
+<li>You approve with your passkey.</li>
+<li>Your agent can act only inside the limits you signed: who the seller is, the most you will pay, and when the permission ends.</li>
+</ol>
+<p>The seller is who you are buying from. Covenant provides the platform. A chat message is not an approval.</p>
+<h2>Open and closed</h2>
+<p>An open <abbr class="term" title="A signed limit on what your agent may do. Open or closed. Planned here.">mandate</abbr> is a limit you set before the exact basket exists. Example: this seller, at most £40, before Friday. A closed mandate is a yes to one exact checkout or one exact amount. AP2 v0.2 uses a Checkout Mandate and a Payment Mandate. Each one can be open or closed. IntentMandate and CartMandate are previous names.</p>
+<p>If you reject the summary, nothing is reserved and the agent cannot use that permission. You can also revoke a permission you already gave. Revocation stops a later use. It does not unwind a payment that has already left the payment provider or the escrow contract.</p>
+<h2>What you would see</h2>
+<ul>
+<li>The seller’s name.</li>
+<li>The work and the deadline.</li>
+<li>The all-in total, including the platform fee. <strong><span class="owner-pending"><span class="todo-marker" aria-hidden="true">TODO(owner)</span><span class="todo-label">Not set yet. The owner will confirm this</span></span>:</strong> the fee amount.</li>
+<li>The expiry.</li>
+<li>A button to approve with your passkey, and a button to reject.</li>
+</ul>
+<p class="callout"><strong><span class="owner-pending"><span class="todo-marker" aria-hidden="true">TODO(owner)</span><span class="todo-label">Not set yet. The owner will confirm this</span></span>:</strong> how long a mandate lasts, and how quickly a revocation takes effect. Do not invent those times.</p>
+<details>
+<summary>For agents: do not treat chat as a yes</summary>
+<p>There is no public tool that creates, signs or revokes a mandate. Do not invent a passkey result. When this is built, the signed mandate comes from the Trusted Surface, and a later call must stay inside it. A rejection returns no usable mandate.</p>
+</details>
+<p><a href="AGENTIC_COMMERCE.html">What works today</a> · <a href="PAYING.html">Paying</a>.</p>
+<!-- site-footer:start --><footer class="site-footer" aria-label="Site"><p><a href="../docs/TERMS.html">Terms</a><a href="../PRIVACY.html">Privacy</a><a href="../docs/WORK_WITH_US.html">Contact</a><a href="../docs/FAQ.html#is-this-legally-binding">Is this binding?</a></p></footer><!-- site-footer:end --></main></body></html>
