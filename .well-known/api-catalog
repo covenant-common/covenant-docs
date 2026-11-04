@@ -12,7 +12,7 @@
       "anchor": "https://jupie202020.pythonanywhere.com/mcp",
       "describedby": [
         {
-          "href": "https://jupie202020.pythonanywhere.com/mcp/server-card",
+          "href": "https://covenant-common.github.io/covenant-docs/.well-known/mcp/server-card.json",
           "type": "application/mcp-server-card+json"
         }
       ],

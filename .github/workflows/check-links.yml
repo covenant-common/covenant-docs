@@ -1,0 +1,18 @@
+name: Check public site links
+on:
+  pull_request:
+  push:
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  links:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Check out the site
+        uses: actions/checkout@v4
+      - name: Check page structure and the asset inventory
+        run: python3 tools/check_public_site.py
+      - name: Check links, anchors and private-repo URLs
+        run: python3 tools/check_links.py

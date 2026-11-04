@@ -23,7 +23,13 @@
       "contentType": "application/linkset+json",
       "file": ".well-known/api-catalog",
       "path": "/.well-known/api-catalog",
-      "sha256": "e5e3df2be015a39351304de9a6f9bcd974feb3836319506a232b43bc0fd628b2"
+      "sha256": "dcc1c0f3f254045873cdeaed9b613c5c75598f6aaf8357d01f52b3bc0766ead2"
+    },
+    {
+      "contentType": "application/json",
+      "file": ".well-known/api-catalog.json",
+      "path": "/.well-known/api-catalog.json",
+      "sha256": "dcc1c0f3f254045873cdeaed9b613c5c75598f6aaf8357d01f52b3bc0766ead2"
     },
     {
       "contentType": "application/json",
