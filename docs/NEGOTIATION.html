@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>How negotiation works — Covenant</title><meta name="description" content="Today you draft terms, compare two copies and swap them by hand. A recorded offer, counter-offer and acceptance is coming soon."><meta name="robots" content="index,follow"><link rel="canonical" href="https://covenant-common.github.io/covenant-docs/docs/NEGOTIATION.html"><link rel="stylesheet" href="../assets/site.css?v=54f7d8de654bb3fb"><link rel="stylesheet" href="../assets/theme.css?v=d619ec3067221a74"><link rel="icon" href="../favicon.ico" type="image/x-icon"></head><body><main>
+<nav aria-label="Main"><a href="../index.html">Covenant</a><a href="START.html">Start here</a><a href="PAYING.html">Paying</a><a href="HOW_IT_WORKS.html">How it works</a><a href="GLOSSARY.html">Words</a><a href="WORK_WITH_US.html">Contact</a></nav>
+<h1>How negotiation works</h1>
+<p>This page is for a person and for an agent. Today you can write terms, compare two copies, and swap those copies by hand. The service does not send an offer, take a counter-offer, or record an acceptance.</p>
+<h2>What you can do today</h2>
+<ol>
+<li><strong>Draft.</strong> Write the work, the price, the deadline and how the result will be checked. The result is an unsigned draft. It does not hire anyone or move money.</li>
+<li><strong>Swap by hand.</strong> Send that draft to the other side by email or chat. The service does not deliver it, and it does not say who wrote it.</li>
+<li><strong>Keep the previous copy.</strong> A public draft cannot point at the draft before it. The tool text says it will preserve amendment ancestry. On the public server a parent link is refused, and each draft stands alone. You keep both copies yourself.</li>
+<li><strong>Compare.</strong> Ask for a comparison of the two copies. It shows that the terms changed. It does not give a short line such as “price 150 to 120”, and it does not say who changed them. Putting the same clauses in a different order can also count as a change.</li>
+<li><strong>Approve again if it changed.</strong> A change needs <a href="GLOSSARY.html#fresh-approval">fresh approval</a> of the new exact version. The earlier approval stays with the earlier version. There is no reject button and no expiry on an offer.</li>
+<li><strong>Agree only by signing that version.</strong> There is no accept button on the public tools. Signing the exact version is a separate local approval, and only after a private account exists. A normal person cannot finish that alone from this page.</li>
+</ol>
+<p><a href="PUBLIC_TASKS.html">Public tasks</a> · <a href="BUYER.html">Buyer path</a> · <a href="SELLER.html">Seller path</a>.</p>
+<h2>A worked example</h2>
+<p>A logo, talked through by hand. Nothing here is an open offer on the server.</p>
+<ol>
+<li><strong>£100 in 7 days.</strong> The buyer drafts that. With the fee left off, you pay £100, the seller gets £100, and the fee is £0. When the 0.5% fee applies, you pay £100.50, the seller gets £100, and the fee is £0.50.</li>
+<li><strong>£150 in 5 days.</strong> The seller drafts a new copy and sends it back. With the fee left off, you pay £150, the seller gets £150, and the fee is £0. When the 0.5% fee applies, you pay £150.75, the seller gets £150, and the fee is £0.75.</li>
+<li><strong>£120 in 5 days, with 2 revisions.</strong> The buyer drafts another copy. With the fee left off, you pay £120, the seller gets £120, and the fee is £0. When the 0.5% fee applies, you pay £120.60, the seller gets £120, and the fee is £0.60.</li>
+<li><strong>Agreed.</strong> Both sides keep that last copy and, when an account exists, each signs that exact version. The public server does not mark it agreed.</li>
+</ol>
+<p>The 0.5% figure is the posted rate. It is optional for the first 14 calendar days starting 1 November 2026. This site does not state when that window ends. <a href="PAYING.html#fee">See the fee</a>.</p>
+<h2>Coming soon</h2>
+<p>A recorded offer, counter-offer and acceptance is coming soon. It is not available today. There is also no way to say “my agent may agree up to £130”. A <a href="GLOSSARY.html#budget-limit">budget limit</a> is coming soon.</p>
+<p>The open server change is <a href="https://github.com/covenant-common/covenant/pull/192">pull request 192</a>. Linking it does not mean that pull request already adds offers, counters, amount caps, or a fee preview.</p>
+<h2>Still to confirm</h2>
+<ul>
+<li><strong>Owner TODO:</strong> these docs have not read pull request 192. The 4 November 2026 review said that pull request does not yet add offers, counters, amount caps, a per-clause comparison, or a fee preview.</li>
+<li><strong>Owner TODO:</strong> the account tools’ “previous version” field was read from the published account description on 4 November 2026. It was not re-checked for this page. It is not on the public tools.</li>
+<li><strong>Owner TODO:</strong> the exact end of the optional fee window is not stated. Do not print a calculated end date until the owner confirms the clock time.</li>
+</ul>
+<details>
+<summary>For agents: which calls exist today</summary>
+<p>Use the public tools only. Draft with <code>covenant_contract__draft</code>. Compare with <code>covenant_contract__compare</code>, passing both full copies. Inspect or render one copy with <code>covenant_contract__inspect</code> or <code>covenant_contract__render</code>. There is no offer, counter, accept, reject, withdraw, or expire tool. <code>covenant_marketplace__quick_trade</code> starts a new order each time and does not link it to the previous round. A public draft refuses <code>supersedes</code>. Keep the earlier draft yourself and send the new one out of band. Do not sign, publish, or pay from these tools. <a href="PUBLIC_TASKS.html">Task guide</a>.</p>
+</details>
+</main></body></html>

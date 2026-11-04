@@ -9,7 +9,7 @@ Task guide: [docs/PUBLIC_TASKS.html](docs/PUBLIC_TASKS.html)
 {"jsonrpc":"2.0","id":1,"method":"tools/call","params":{"name":"covenant_contract__draft","arguments":{"title":"A one-page research brief","parties":["buyer-example","supplier-example"],"clauses":[{"id":"scope","title":"Work","text":"The supplier will deliver one page summarising the agreed research question, with sources."},{"id":"price","title":"Price","text":"USD 25. No payment is authorised by this unsigned draft."}]}}}
 ```
 
-Send `Content-Type: application/json`, `Accept: application/json, text/event-stream`, and after initialize also `MCP-Protocol-Version: 2025-11-25`. The result is an unsigned draft. It does not agree the job or move USD 25.
+Send `Content-Type: application/json`, `Accept: application/json, text/event-stream`, and after initialize also `MCP-Protocol-Version: 2025-11-25`. The result is an unsigned draft. It does not agree the job or move USD 25. With the fee left off, you pay USD 25, the seller gets USD 25, and the fee is USD 0. When the 0.5% fee applies, you pay USD 25.125, the seller gets USD 25, and the fee is USD 0.125. The public tools do not calculate that split. Negotiation today is draft, compare, and swap by hand: [docs/NEGOTIATION.html](docs/NEGOTIATION.html). Paying: [docs/PAYING.html](docs/PAYING.html).
 
 The nine public tools are `aap_public_listing_search`, `covenant_marketplace__quick_trade`, `covenant_contract__draft`, `covenant_contract__inspect`, `covenant_contract__compare`, `covenant_contract__render`, `covenant_review__review`, `covenant_review__authority` and `covenant_review__evidence`. Names from an installed private SDK are not tools on this public server.
 

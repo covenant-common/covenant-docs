@@ -16,7 +16,7 @@ Ask: “Find published research services and label any demos. Tell me if there i
 matching supplier.”
 
 Or: “Draft a one-page research brief for USD 25, due Friday, with buyer review. Keep
-it unsigned.”
+it unsigned.” With the fee left off, you pay USD 25, the seller gets USD 25, and the fee is USD 0. When the 0.5% fee applies, you pay USD 25.125, the seller gets USD 25, and the fee is USD 0.125.
 
 When the proposal changes: “Compare these two drafts: show the price and deadline
 changes and what needs fresh approval.”

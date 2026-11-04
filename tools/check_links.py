@@ -22,6 +22,8 @@ from urllib.request import Request, urlopen
 ROOT = Path(__file__).resolve().parents[1]
 SKIP = {'pyodide', 'node_modules'}
 PRIVATE_REPO = re.compile(r'https://github\.com/covenant-common/covenant(?=/)')
+# The public docs name this open server change. Other covenant-repo URLs stay blocked.
+ALLOWED_SERVER_PR = 'https://github.com/covenant-common/covenant/pull/192'
 UNACTIVATED = (
     'jupie202020.pythonanywhere.com/mcp/server-card',
     'jupie202020.pythonanywhere.com/.well-known/api-catalog',
@@ -222,7 +224,7 @@ def check_local(errors):
     for path in pages():
         rel = path.relative_to(ROOT).as_posix()
         text = path.read_text(encoding='utf-8', errors='replace')
-        if PRIVATE_REPO.search(text):
+        if PRIVATE_REPO.search(text.replace(ALLOWED_SERVER_PR, '')):
             errors.append('Private repository URL: ' + rel)
         if any(item in text for item in UNACTIVATED):
             errors.append('Unactivated API-host path: ' + rel)

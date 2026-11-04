@@ -36,7 +36,7 @@
       account:'treasury', testnet:false, states:['NOT_LIVE'],
       steps:['The native payment network is not live.', 'This recorded treasury name is not a live external payment address.']}
   ];
-  const LABELS = {NOT_CONNECTED:'Connection needed', CONFIGURED_UNVERIFIED:'Installed, not yet verified',
+  const LABELS = {NOT_CONNECTED:'Connection needed', CONFIGURED_UNVERIFIED:'Configured, not yet verified',
     TEST_ONLY:'Test funds only', NOT_LIVE:'Not live'};
   function readinessText(id, readiness) {
     return id === 'card' && readiness === 'NOT_CONNECTED' ? 'Coming soon (not connected)' : LABELS[readiness];

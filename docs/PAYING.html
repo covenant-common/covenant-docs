@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>How paying and getting paid works — Covenant</title><meta name="description" content="No hosted method can move money yet. See each method’s live status, where the money would sit, and the posted fee."><meta name="robots" content="index,follow"><link rel="canonical" href="https://covenant-common.github.io/covenant-docs/docs/PAYING.html"><link rel="stylesheet" href="../assets/site.css?v=54f7d8de654bb3fb"><link rel="stylesheet" href="../assets/theme.css?v=d619ec3067221a74"><link rel="icon" href="../favicon.ico" type="image/x-icon"></head><body><main>
+<nav aria-label="Main"><a href="../index.html">Covenant</a><a href="NEGOTIATION.html">Negotiation</a><a href="PAYMENTS.html">Payment choices</a><a href="BUYER.html">Buyer path</a><a href="SELLER.html">Seller path</a><a href="GLOSSARY.html">Words</a><a href="WORK_WITH_US.html">Contact</a></nav>
+<h1>How paying and getting paid works</h1>
+<p>No hosted method can move money today. A person cannot finish a real payment from this site. An agent cannot finish one with the public tools.</p>
+<p>The table matches the live payment catalogue read on 4 November 2026. Every method has settlement off, is not executable, and does not collect a fee. Every method is still marked selectable. Selectable does not take a payment.</p>
+<div class="table-wrap">
+<table>
+<thead><tr><th>Method</th><th>Live catalogue status</th><th>What that means today</th></tr></thead>
+<tbody>
+<tr><td>Card</td><td>Not connected</td><td>Not installed. Coming soon (not connected).</td></tr>
+<tr><td>Bitcoin</td><td>Not connected</td><td>Not installed. Signing and payment checking are not available on this host.</td></tr>
+<tr><td>USDC on Base</td><td>Connection installed; payment check required</td><td>Configured, not yet verified. Not connected, and settlement is off, so a payment cannot be completed here.</td></tr>
+<tr><td>USDC on Ethereum</td><td>Connection installed; payment check required</td><td>Configured, not yet verified. Same limit as Base.</td></tr>
+<tr><td>USDC on Base Sepolia</td><td>Test network only</td><td>Not installed. Test funds would not pay a real bill.</td></tr>
+<tr><td>USDC on Ethereum Sepolia</td><td>Test network only</td><td>Not installed. Test funds would not pay a real bill.</td></tr>
+<tr><td>USDC on Solana</td><td>Not connected</td><td>Not installed.</td></tr>
+<tr><td>Native payment network</td><td>Native treasury is not live</td><td>Not installed. Not live.</td></tr>
+</tbody>
+</table>
+</div>
+<p><a href="PAYMENTS.html">Payment choices</a> repeats the network names and the saved fee addresses.</p>
+<h2>Where the money sits</h2>
+<p>On the USDC routes, a completed payment would go from the buyer’s wallet straight to the address the seller signed. Covenant does not hold that money. There is no holding step on this host.</p>
+<p>The order price is the seller’s. A Covenant fee, when one is charged, is a separate transfer to a recorded fee wallet. Those fee wallets use a single signer. A 2-of-3 threshold is recorded and is not active. The catalogue says that fee-wallet list comes from server pull request 170, and that pull request is not merged.</p>
+<p>The browser sandbox is different. There, test money is held and then released. That is not real USDC, and it is not this host. <a href="GLOSSARY.html#hold-and-release">Hold and release</a>.</p>
+<h2>Refunds and disputes today</h2>
+<p>There is no escrow on the USDC route. Payment is final. A direct wallet transfer cannot be pulled back, and Covenant cannot refund it.</p>
+<p>A dispute is a signed record between the buyer and the seller. The fee recipient is not required to co-sign that buyer-and-seller dispute. A dispute record does not return money that has already been sent.</p>
+<p>Card refunds are not available here, because card is not connected. The sandbox does not show a refund.</p>
+<h2 id="fee">The fee</h2>
+<p>The posted marketplace fee is 0.5% of the order price, in the same currency. It is optional for the first 14 calendar days starting 1 November 2026. This site does not state the date or clock time that window ends. The 1 November 2026 to 1 December 2026 dates are the separate free-posting notice, not the end of the fee window.</p>
+<p>The payer chooses whether to add the fee. The default is off. While that choice is off and the fee is not required, the approval check expects no fee. Your wallet’s own network fee is separate. This site does not state that network amount.</p>
+<h3>A worked example</h3>
+<p>An agreed logo at £120.</p>
+<ul>
+<li><strong>Fee left off, the default while it is optional:</strong> you pay £120, the seller gets £120, and the fee is £0.</li>
+<li><strong>When the 0.5% fee applies:</strong> you pay £120.60, the seller gets £120, and the fee is £0.60.</li>
+</ul>
+<p>The same split on a USD 25 order: with the fee off, you pay USD 25, the seller gets USD 25, and the fee is USD 0. When the 0.5% fee applies, you pay USD 25.125, the seller gets USD 25, and the fee is USD 0.125.</p>
+<p>No public tool shows this split. The quote belongs to a private account step that ordinary visitors cannot run. <a href="PRICING.html#marketplace">Pricing</a>.</p>
+<h2>Still to confirm</h2>
+<ul>
+<li><strong>Owner TODO:</strong> the exact end of the optional 14-day fee window is not stated. Do not publish a calculated end date.</li>
+<li><strong>Owner TODO:</strong> the wallet network fee for a USDC transfer is not stated here.</li>
+<li><strong>Owner TODO:</strong> if a fee recipient is still listed as a party on a dispute bundle, the checker may still expect that party’s signature. The pages say the fee recipient is not required to co-sign. Confirm the party list matches that sentence.</li>
+<li><strong>Owner TODO:</strong> <a href="https://github.com/covenant-common/covenant/pull/192">server pull request 192</a> is the open server change. These docs have not read it, and the 4 November 2026 review said it does not add a public fee preview or payment checks.</li>
+</ul>
+<details>
+<summary>For agents: do not invent a payment</summary>
+<p>The public tools cannot pay, refund, or preview a fee. <code>covenant_marketplace__quick_trade</code> can echo payment words you supply, including a bad address or a made-up currency, and it does not check them. Its fee field asks for a separate quote. It does not return “you pay / seller gets / fee”. Do not describe a draft as paid. Receipt checks for USDC on Base and Ethereum are configured, not yet verified. The catalogue field is <code>CONFIGURED_UNVERIFIED</code>, with settlement disabled. The native method’s catalogue label uses the product acronym; this page calls it the native payment network. The payer’s opt-in field is <code>fee_opt_in</code>, default false. <a href="NEGOTIATION.html">How negotiation works</a>.</p>
+</details>
+</main></body></html>
