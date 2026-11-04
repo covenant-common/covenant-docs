@@ -505,22 +505,33 @@
   function showPriceError(message) {
     const error = $('draft-price-error');
     if (error) error.textContent = message || '';
-    $('draft-price').setCustomValidity(message || '');
+    if ($('draft-amount')) $('draft-amount').setCustomValidity(message || '');
   }
-  $('draft-price').addEventListener('input', () => {
+  function composePrice() {
+    const currency = $('draft-currency').value;
+    const amount = $('draft-amount').value.trim();
+    if (currency === 'none') return 'No payment';
+    if (!currency || !amount) return '';
+    return currency + ' ' + amount;
+  }
+  function checkPrice() {
     const deal = globalThis.CovenantDeal;
-    if (!deal) {showPriceError('The price check did not load. Nothing was sent.'); return;}
-    const result = deal.validatePrice($('draft-price').value);
+    if (!deal) {showPriceError('The price check did not load. Nothing was sent.'); return false;}
+    if (!$('draft-currency').value) {showPriceError('Choose a currency.'); return false;}
+    if ($('draft-currency').value !== 'none' && !/^[0-9]+(?:\.[0-9]{1,2})?$/.test($('draft-amount').value.trim())) {
+      showPriceError(deal.MESSAGES.NOT_A_PRICE); return false;
+    }
+    const result = deal.validatePrice(composePrice());
     showPriceError(result.ok ? '' : result.message);
     if (result.ok) $('draft-price').value = result.canonical;
-  });
+    return result.ok;
+  }
+  ['draft-currency', 'draft-amount'].forEach((id) => $(id).addEventListener('input', checkPrice));
+  $('draft-currency').addEventListener('change', checkPrice);
   $('matrix-draft').addEventListener('submit', async (event) => {
     event.preventDefault();
-    const deal = globalThis.CovenantDeal;
-    const price = deal ? deal.validatePrice($('draft-price').value) : {ok: false, message: 'The price check did not load. Nothing was sent.'};
-    showPriceError(price.ok ? '' : price.message);
-    if (!price.ok) {$('draft-price').focus(); return;}
-    $('draft-price').value = price.canonical;
+    if (!checkPrice()) {$('draft-amount').focus(); return;}
+    const role = (document.querySelector('input[name="draft-role"]:checked') || {}).value || 'buyer';
     if (!structures || !selection || drafting || !event.currentTarget.reportValidity()) return;
     const values = {};
     ['title', 'buyer', 'supplier', 'deliverable', 'price'].forEach((key) => {values[key] = $('draft-' + key).value.trim();});
@@ -552,12 +563,17 @@
       $('draft-download').href = downloadUrl;
       $('draft-download').download = 'covenant-unsigned-' + data.id.slice(0, 12) + '.json';
       $('draft-result').hidden = false;
-      $('draft-state').textContent = 'Unsigned proposal prepared. Review the returned terms below. It retains the chosen structure' + (selection.advert ? ' and advert reference. Check the exact original offer before signing.' : '; no advert was selected.') + ' Both parties’ approval remains separate; nothing has been signed, published or paid.';
+      $('draft-state').textContent = 'Unsigned ' + role + ' proposal prepared. The label matches who is writing it. Review the returned terms below. It retains the chosen structure' + (selection.advert ? ' and advert reference. Check the exact original offer before signing.' : '; no advert was selected.') + ' Both parties’ approval remains separate; nothing has been signed, published or paid.';
     } catch (error) {$('draft-state').textContent = 'Drafting did not complete: ' + error.message + ' Your input remains; no automatic retry was made.';}
     finally {drafting = false; $('draft-submit').disabled = false;}
   });
   window.addEventListener('pagehide', () => {if (downloadUrl) URL.revokeObjectURL(downloadUrl); if (handoffUrl) URL.revokeObjectURL(handoffUrl);});
   $('market-search-button').disabled = false;
   $('draft-submit').disabled = !structures;
+  const offerParams = new URLSearchParams(location.search);
+  if (offerParams.get('title') && $('draft-title')) $('draft-title').value = offerParams.get('title').slice(0, 128);
+  if (offerParams.get('currency') && $('draft-currency')) $('draft-currency').value = offerParams.get('currency');
+  if (offerParams.get('amount') && $('draft-amount')) $('draft-amount').value = offerParams.get('amount');
+  if (location.hash === '#draft-work' && $('draft-title')) $('draft-title').focus();
   search(false);
 })();

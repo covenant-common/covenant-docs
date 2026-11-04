@@ -688,6 +688,12 @@
     const heading = node('h3', '', item);
     const url = typeof publication.url === 'string' ? listingUrl(publication.url) : null;
     if (url) {const a = node('a', card.title, heading); a.href = url;} else heading.textContent = card.title;
+    const testListing = /\b(DEMO|TEST)\b|\[Test\]/.test([card.title, card.summary, publication.fields && publication.fields.mode, publication.fields && publication.fields.title].filter(Boolean).join(' '));
+    if (testListing) {
+      item.dataset.testListing = 'true';
+      const badge = node('span', 'Test', item);
+      badge.className = 'badge badge-test';
+    } else item.dataset.testListing = 'false';
     if (card.category) node('p', card.category + ' · owner-published', item).className = 'record-meta';
     if (card.summary) node('p', card.summary, item);
     if (card.scope) node('p', 'Scope: ' + card.scope, item);
@@ -696,7 +702,8 @@
     else if (card.wants !== null) node('p', 'No requested consideration is published here; do not infer that the service is free.', item);
     if (card.excerpted) node('p', 'Description excerpt; inspect the public advert for the complete terms.', item).className = 'record-meta';
     const nextSteps = node('p', '', item);
-    const buy = node('a', 'How to commission this work', nextSteps); buy.href = 'START.html?task=buy&source=direct';
+    const offer = node('a', 'Make an offer', nextSteps);
+    offer.href = 'MATRIX.html?title=' + encodeURIComponent(card.title || 'Service') + '#draft-work';
     node('span', ' · ', nextSteps);
     const sell = node('a', 'Advertise your service', nextSteps); sell.href = 'START.html?task=advertise&source=direct';
     node('p', 'Confirm the supplier and availability before ordering. Demo adverts illustrate the format.', item).className = 'record-meta';
@@ -795,7 +802,7 @@
       nextOffset = Number.isSafeInteger(result.next_offset) && result.next_offset >= 0 && result.next_offset <= 5000 ? result.next_offset : null;
       $('terminal-more').hidden = nextOffset === null;
       const checked = new Date().toISOString().slice(11, 19) + ' UTC';
-      $('terminal-market-state').textContent = (result.total === 0 ? 'No public adverts matched. Try another search, or be among the first to advertise your service. Checked ' + checked + '.' : displayed.size + ' displayed; ' + result.total + ' matched this public search. Checked ' + checked + '. Listings can change between pages.') + ' ' + queryNotice;
+      $('terminal-market-state').textContent = (result.total === 0 ? 'No public adverts matched. Try a broader word such as research, software, or review, or search with fewer words. Checked ' + checked + '.' : displayed.size + ' displayed; ' + result.total + ' matched this public search. Checked ' + checked + '. Listings can change between pages.') + ' ' + queryNotice;
     } catch (error) {
       nextOffset = null;
       if (error && error.code === 'PUBLIC_LISTING_DISPLAY_UNAVAILABLE') {
@@ -818,7 +825,8 @@
     try {
       if (!navigator.clipboard || typeof navigator.clipboard.writeText !== 'function') throw new Error('Clipboard unavailable');
       await navigator.clipboard.writeText(ENDPOINT);
-      $('terminal-copy-state').textContent = 'Public MCP address copied. No credential is included.';
+      $('terminal-copy').textContent = 'Copied';
+      $('terminal-copy-state').textContent = 'Copied';
     } catch (_) {
       $('terminal-mcp').focus();
       $('terminal-copy-state').textContent = 'Clipboard access was unavailable. Select and copy the address above.';
@@ -840,6 +848,18 @@
   window.addEventListener('pagehide', () => handoffUrls.forEach((url) => URL.revokeObjectURL(url)));
   $('terminal-find').disabled = !liveSearchAllowed;
   $('terminal-route').disabled = false;
+  const params = new URLSearchParams(location.search);
+  if (params.get('q')) $('terminal-query').value = params.get('q');
+  const filter = document.createElement('label');
+  filter.htmlFor = 'hide-test-listings';
+  const filterBox = document.createElement('input');
+  filterBox.id = 'hide-test-listings';
+  filterBox.type = 'checkbox';
+  filter.append('Hide test listings', filterBox);
+  $('terminal-listings').before(filter);
+  filterBox.addEventListener('change', () => {
+    document.querySelectorAll('#terminal-listings [data-test-listing="true"]').forEach((item) => { item.hidden = filterBox.checked; });
+  });
   if (liveSearchAllowed) search(false); else previewNotice();
 
 })();

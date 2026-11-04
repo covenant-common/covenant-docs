@@ -12,6 +12,9 @@
   const SERVER_STATES = ['PROPOSED', 'BOUND', 'DELIVERED', 'DISPUTED', 'DECIDED', 'SETTLED', 'RELEASED'];
   const MESSAGES = {
     COUNTERPARTY_ASSENT: 'The other person has not signed this version yet. Nothing is agreed and no test money has moved.',
+    AGENT_ASSENT: 'The buyer’s signature no longer matches, because the price was changed after it was signed.',
+    SIGNATURE: 'A signature no longer matches these exact terms.',
+    SETTLEMENT_BINDING: 'The held test funds no longer match the signed price.',
     NOT_DELIVERABLE: 'Delivery waits until both sides have accepted the same terms.',
     NOT_SETTLEABLE: 'Release waits until the work is delivered, or until a dispute has a decision.',
     DISPUTE_OPEN: 'A dispute is open. The test funds stay held until the resolver records a decision.',
@@ -49,7 +52,7 @@
   function moneyText(split, currency) {
     if (!split) return '';
     const unit = currency || 'test USDC';
-    return 'Fee left off: you pay ' + split.youPayOff + ' ' + unit + ', the seller gets ' + split.sellerGets + ' ' + unit + ', and the fee is ' + split.feeOff + '. When the 0.5% fee applies: you pay ' + split.youPayOn + ' ' + unit + ', the seller gets ' + split.sellerGets + ' ' + unit + ', and the fee is ' + split.feeOn + '. This sample ledger does not collect that fee.';
+    return 'Fee 0.5%. Waived while you leave it off: you pay ' + split.youPayOff + ' ' + unit + ', the seller gets ' + split.sellerGets + ' ' + unit + ', and the fee is ' + split.feeOff + '. When the 0.5% fee applies: you pay ' + split.youPayOn + ' ' + unit + ', the seller gets ' + split.sellerGets + ' ' + unit + ', and the fee is ' + split.feeOn + '. The waiver is the default. It is optional for the first 14 days from 1 November 2026. This site does not state when that window ends. This sample ledger does not collect the fee.';
   }
 
   function validatePrice(raw) {
@@ -118,11 +121,16 @@
         return view('agree', 'The price to sign is 25 test USDC. Still PROPOSED. Nothing is held until you accept.', 'PROPOSED');
       },
       accept: function () {
-        if (phase !== 'agree') return {error: MESSAGES.OUT_OF_ORDER};
+        if (phase !== 'agree' && phase !== 'counter' && phase !== 'offer') return {error: MESSAGES.OUT_OF_ORDER};
+        phase = 'accepted';
+        return view('accept', 'Accepted in this sample. Both sides have the same version. Test funds stay in the buyer’s balance until you fund the hold. This does not bind a real person.', 'PROPOSED');
+      },
+      fund: function () {
+        if (phase !== 'accepted') return {error: MESSAGES.OUT_OF_ORDER};
         phase = 'bound';
-        held = 25;
-        buyer = 75;
-        return view('accept', 'Accepted. Stage BOUND. 25 test USDC is held. It is not in the seller’s balance yet.', 'BOUND');
+        held = price;
+        buyer = 100 - price;
+        return view('fund', 'Funded. Stage BOUND. ' + price + ' test USDC is held. It is not in the seller’s balance yet.', 'BOUND');
       },
       deliver: function () {
         if (phase !== 'bound') return {error: MESSAGES.OUT_OF_ORDER};

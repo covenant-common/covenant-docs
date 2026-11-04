@@ -131,10 +131,28 @@
     var status = document.getElementById(statusId);
     try {
       if (!global.navigator.clipboard || typeof global.navigator.clipboard.writeText !== 'function') throw new Error('unavailable');
-      await global.navigator.clipboard.writeText(text); status.textContent = success;
+      await global.navigator.clipboard.writeText(text); status.textContent = success; if (statusId === 'start-copy-status') { var button = document.getElementById('start-copy-mcp'); if (button) button.textContent = 'Copied'; }
     } catch (error) { status.textContent = 'Automatic copy is unavailable. Select and copy the text shown below.'; var shown = document.createElement('pre'); shown.textContent = text; status.appendChild(shown); }
   }
-  document.getElementById('start-copy-mcp').addEventListener('click', function () { copy(MCP, 'start-copy-status', 'Copied the public MCP address. Add it to your client’s remote HTTP MCP settings.'); });
+  document.getElementById('start-copy-mcp').addEventListener('click', function () { copy(MCP, 'start-copy-status', 'Copied'); });
+  document.getElementById('start-check').addEventListener('click', async function () {
+    var status = document.getElementById('start-copy-status');
+    status.textContent = 'Checking the public connection…';
+    var headers = {'Content-Type': 'application/json', 'Accept': 'application/json, text/event-stream'};
+    try {
+      var init = await fetch(MCP, {method: 'POST', mode: 'cors', credentials: 'omit', headers: headers, body: JSON.stringify({jsonrpc: '2.0', id: 1, method: 'initialize', params: {protocolVersion: '2025-11-25', capabilities: {}, clientInfo: {name: 'covenant-docs-check', version: '1'}}})});
+      if (!init.ok) throw new Error('HTTP ' + init.status);
+      headers['MCP-Protocol-Version'] = '2025-11-25';
+      var list = await fetch(MCP, {method: 'POST', mode: 'cors', credentials: 'omit', headers: headers, body: JSON.stringify({jsonrpc: '2.0', id: 2, method: 'tools/list', params: {}})});
+      var raw = await list.text();
+      var match = raw.match(/\{[\s\S]*"tools"[\s\S]*\}/);
+      var parsed = JSON.parse(match ? match[0] : raw);
+      var tools = parsed.result && parsed.result.tools;
+      status.textContent = 'Connected. ' + (Array.isArray(tools) ? tools.length : 'The') + ' public tools answered. Nothing was signed or paid.';
+    } catch (error) {
+      status.textContent = 'The public connection did not answer from this page (' + error.message + '). You can still copy the address and try it in your agent.';
+    }
+  });
   document.getElementById('start-copy-prompt').addEventListener('click', function () { copy(route(chosen).prompt, 'start-prompt-status', 'Copied. Give this task to your agent after adding the connection. Nothing was sent by this page.'); });
   function report() {
     var answers = {};

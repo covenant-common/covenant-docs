@@ -11,20 +11,13 @@ const STAGES = {
   python: (manifest) => `Still loading Python (${(manifest.download_bytes / 1e6).toFixed(1)} MB the first time)...`,
   ready: 'Running the signed sample...',
 };
-const NEXT_STEP = { ready: 'quote', quote: 'offer', offer: 'counter', counter: 'agree', agree: 'accept', bound: 'deliver' };
-const NEXT_LABEL = {
-  ready: 'Show the quote',
-  quote: 'Send the buyer’s offer',
-  offer: 'Send the seller’s counter',
-  counter: 'Use 25 test USDC',
-  agree: 'Accept and hold the test funds',
-  bound: 'Mark the work delivered',
-};
 const CONFIRM = {
-  accept: 'Accepting holds 25 test USDC in this page. It does not bind a real person and it does not pay a hosted bill.',
+  accept: 'Accepting records this sample version. It does not bind a real person and it does not move test funds yet.',
+  fund: 'Funding holds the current test USDC in this page. It does not pay a hosted bill.',
   release: 'Release pays the seller in test USDC. It does not move real money.',
   refund: 'Refund returns the held test USDC to the buyer. Hosted USDC cannot do this.',
 };
+const AUTHORS = { quote: 'Buyer', offer: 'Buyer', counter: 'Seller', agree: 'Buyer', accept: 'Both', fund: 'Buyer', deliver: 'Seller', release: 'Buyer', dispute: 'Buyer', refund: 'Resolver' };
 let session = null;
 let last = null;
 let sample = createSample();
@@ -75,10 +68,22 @@ function show(result) {
   line($('money'), result.money);
   line($('money'), result.feeText);
   $('step-status').textContent = result.serverState + '. ' + result.said;
+  const row = document.createElement('li');
+  row.textContent = new Date().toISOString().slice(11, 19) + ' UTC · ' + (AUTHORS[result.step] || 'Sample') + ' · ' + result.said;
+  $('thread').append(row);
+  $('receipt').replaceChildren();
+  line($('receipt'), 'Receipt. ' + result.feeText);
+  if (result.step === 'accept') {
+    const id = crypto.randomUUID();
+    line($('receipt'), 'Sample record ' + id + '. Next: fund the test hold, then deliver. This is not a hosted agreement.');
+  }
   const phase = sample.phase();
-  $('next').hidden = phase === 'delivered' || phase === 'disputed' || phase === 'settled' || phase === 'released';
-  $('next').textContent = NEXT_LABEL[phase] || 'Next';
-  $('branch').hidden = phase !== 'delivered' && phase !== 'disputed';
+  $('propose').disabled = phase !== 'ready' && phase !== 'quote';
+  $('counter').disabled = phase !== 'offer';
+  $('agree').disabled = phase !== 'counter';
+  $('accept').disabled = phase !== 'agree' && phase !== 'offer' && phase !== 'counter';
+  $('fund').disabled = phase !== 'accepted';
+  $('deliver').disabled = phase !== 'bound';
   $('release').disabled = phase !== 'delivered';
   $('dispute').disabled = phase !== 'delivered';
   $('refund').disabled = phase !== 'disputed';
@@ -94,15 +99,14 @@ function act(name) {
   show(sample.step(name));
 }
 
-$('next').addEventListener('click', () => {
-  const name = NEXT_STEP[sample.phase()];
-  if (!name) return;
+function clickStep(name) {
+  if (name === 'propose') name = sample.phase() === 'ready' ? 'quote' : 'offer';
   if (CONFIRM[name]) ask(name);
   else act(name);
+}
+['propose', 'counter', 'agree', 'accept', 'fund', 'deliver', 'release', 'dispute', 'refund'].forEach((id) => {
+  $(id).addEventListener('click', () => clickStep(id === 'agree' ? 'agree' : id));
 });
-$('release').addEventListener('click', () => ask('release'));
-$('dispute').addEventListener('click', () => act('dispute'));
-$('refund').addEventListener('click', () => ask('refund'));
 $('confirm-no').addEventListener('click', () => { pending = null; $('confirm').hidden = true; });
 $('confirm-yes').addEventListener('click', () => {
   const name = pending;
@@ -157,7 +161,7 @@ function check(tamper) {
     line(out, tamper
       ? `The price was changed from ${original} to ${original * 100} test USDC. The check refused it.`
       : 'The signed record checks out.');
-    for (const problem of report.problems) line(out, (problem.code in globalThis.CovenantDeal.MESSAGES ? explain(problem.code) : (problem.fix || 'The check refused the record.')));
+    for (const problem of report.problems) line(out, explain(problem.code));
     line(out, 'Signatures were checked in this page. Escrow here is test money.');
   } catch (error) {
     fail(error);

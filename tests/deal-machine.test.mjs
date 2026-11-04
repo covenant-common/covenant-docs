@@ -17,7 +17,7 @@ test('a vague price and a negative price are refused', () => {
 
 test('the sample walks quote, offer, counter, hold, dispute and refund', () => {
   const sample = deal.createSample();
-  for (const name of ['quote', 'offer', 'counter', 'agree', 'accept', 'deliver', 'dispute', 'refund']) {
+  for (const name of ['quote', 'offer', 'counter', 'agree', 'accept', 'fund', 'deliver', 'dispute', 'refund']) {
     const row = sample.step(name);
     assert.equal(row.error, undefined, name);
     assert.match(row.feeText, /you pay/);
@@ -27,7 +27,7 @@ test('the sample walks quote, offer, counter, hold, dispute and refund', () => {
   const end = sample.step('refund');
   assert.ok(end.error);
   const happy = deal.createSample();
-  for (const name of ['quote', 'offer', 'counter', 'agree', 'accept', 'deliver', 'release']) happy.step(name);
+  for (const name of ['quote', 'offer', 'counter', 'agree', 'accept', 'fund', 'deliver', 'release']) happy.step(name);
   assert.equal(happy.phase(), 'settled');
 });
 

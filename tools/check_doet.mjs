@@ -37,7 +37,8 @@ let journeyFail = 0;
 for (const path of files) {
   const text = readFileSync(path, 'utf8');
   const rel = path.replace(ROOT + '/', '');
-  if (!text.includes('class="site-nav"') || !text.includes('I\'m a person') || !text.includes('I\'m connecting an agent')) navFail += 1;
+  const disputes = text.includes('Disputes &amp; refunds') || text.includes('Disputes & refunds');
+  if (!text.includes('class="site-nav"') || !text.includes('Connect an agent') || !disputes) navFail += 1;
   if (!text.includes('>Terms<') || !text.includes('>Privacy<') || !text.includes('>Contact<') || !text.includes('Is this binding?')) footerFail += 1;
   const journey = text.match(/aria-label="Deal steps"[\s\S]*?<\/ol>/);
   if (!journey || !/Find[\s\S]*Agree[\s\S]*Pay[\s\S]*Deliver[\s\S]*Resolve/.test(journey[0])) journeyFail += 1;
@@ -95,34 +96,40 @@ const paying = await page.locator('main').innerText();
 record('usdc-status', /Configured, not yet verified/.test(paying) && !/Connection installed/.test(paying), 'badge comes from the registry wording');
 
 await page.goto(BASE + '/sandbox/index.html', { waitUntil: 'domcontentloaded' });
-const buttonBox = await page.locator('#next').boundingBox();
+const buttonBox = await page.locator('#propose').boundingBox();
 record('sandbox-button', buttonBox && buttonBox.height >= 44 && buttonBox.width >= 44, JSON.stringify(buttonBox));
 const py = await page.locator('#py-status').innerText();
 record('download-progress', /19\.9 MB/.test(py), py.slice(0, 120));
-await page.locator('#next').click();
+await page.locator('#propose').click();
+await page.locator('#propose').click();
 const quoted = await page.locator('#money').innerText();
-record('fee-before-accept', /you pay/.test(quoted) && /seller gets/.test(quoted) && /fee is/.test(quoted), 'shown on the quote');
-for (const label of ['Send the buyer’s offer', 'Send the seller’s counter', 'Use 25 test USDC', 'Accept and hold the test funds']) {
-  await page.getByRole('button', { name: label }).click();
-}
+record('fee-before-accept', /you pay/.test(quoted) && /seller gets/.test(quoted) && /0\.5%/.test(quoted), 'shown on the quote');
+await page.locator('#counter').click();
+await page.locator('#agree').click();
+await page.locator('#accept').click();
 await page.getByRole('button', { name: 'Yes, use test funds only' }).click();
-await page.getByRole('button', { name: 'Mark the work delivered' }).click();
-await page.getByRole('button', { name: 'Open a dispute' }).click();
-await page.getByRole('button', { name: 'Refund the buyer' }).click();
+await page.locator('#fund').click();
+await page.getByRole('button', { name: 'Yes, use test funds only' }).click();
+await page.locator('#deliver').click();
+await page.locator('#dispute').click();
+await page.locator('#refund').click();
 await page.getByRole('button', { name: 'Yes, use test funds only' }).click();
 const done = await page.locator('#step-log').innerText();
 record('step-by-step', /Quote:/.test(done) && /counters at 30/.test(done) && /Stage BOUND/.test(done), 'one stage each click');
 record('dispute-refund', /REFUTED/.test(done) && /refunded/.test(done), 'dispute branch is on the page');
+const afterRun = await page.evaluate(() => document.documentElement.scrollWidth <= document.documentElement.clientWidth + 1);
+record('sandbox-no-overflow-after-run', afterRun, 'after the dispute branch');
 record('plain-errors', !/COUNTERPARTY_ASSENT/.test(done), 'engine code is not the message');
 
 await page.goto(BASE + '/docs/MATRIX.html', { waitUntil: 'domcontentloaded' });
-await page.locator('#draft-price').fill('a hundred quid maybe');
-await page.locator('#draft-price').dispatchEvent('input');
+await page.locator('#draft-currency').selectOption('USD');
+await page.locator('#draft-amount').fill('a hundred quid maybe');
+await page.locator('#draft-amount').dispatchEvent('input');
 const priceError = await page.locator('#draft-price-error').innerText();
 record('matrix-price', /not a price/.test(priceError), priceError);
-await page.locator('#draft-price').fill('USD -25');
-await page.locator('#draft-price').dispatchEvent('input');
-record('matrix-negative', /negative/.test(await page.locator('#draft-price-error').innerText()), 'negative refused');
+await page.locator('#draft-amount').fill('-25');
+await page.locator('#draft-amount').dispatchEvent('input');
+record('matrix-negative', /negative|not a price/.test(await page.locator('#draft-price-error').innerText()), 'negative refused');
 
 await browser.close();
 const failed = results.filter((row) => !row.pass);

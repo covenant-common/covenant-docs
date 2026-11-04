@@ -53,7 +53,9 @@ def chrome(page):
     current = CURRENT.get(page)
     links = [
         ('I\'m a person', 'docs/PERSON.html'),
-        ('I\'m connecting an agent', 'docs/AGENT.html'),
+        ('Connect an agent', 'docs/AGENT.html'),
+        ('Disputes & refunds', 'docs/DISPUTES.html'),
+        ('How you get paid', 'docs/SELLER.html#how-you-get-paid'),
         *[(label, target) for _step, label, target in STEPS],
         ('Start', 'docs/START.html'),
         ('Buyer path', 'docs/BUYER.html'),
@@ -68,11 +70,13 @@ def chrome(page):
         current_attr = ' aria-current="step"' if step == current else ''
         steps.append('<li><a href="%s"%s>%s</a></li>' % (html.escape(href(page, target), quote=True), current_attr, html.escape(label, quote=False)))
     nxt_label, nxt_target = NEXT.get(current, NEXT[None])
+    search = href(page, 'docs/TERMINAL.html')
     return '''%s
+<form class="nav-search" role="search" action="%s" method="get"><label class="sr-only" for="site-search">Find a service</label><input id="site-search" name="q" type="search" placeholder="Find a service" autocomplete="off"><button type="submit" class="btn">Search</button></form>
 <nav class="site-nav" aria-label="Main"><a class="nav-brand" href="%s">Covenant</a><input class="nav-toggle" type="checkbox" id="site-menu"><label class="nav-toggle-label" for="site-menu">Menu</label><div class="nav-links">%s</div></nav>
 <nav class="journey" aria-label="Deal steps"><p>The deal, in order:</p><ol>%s</ol><p class="journey-next">Next: <a href="%s">%s</a></p></nav>
-<figure class="lifecycle"><figcaption>The same stages on every page</figcaption><ol><li>Find</li><li>Agree <span class="badge badge-off">PROPOSED</span></li><li>Pay <span class="badge badge-off">BOUND</span></li><li>Deliver <span class="badge badge-off">DELIVERED</span></li><li>Resolve <span class="badge badge-off">SETTLED</span> or <span class="badge badge-soon">DISPUTED</span> then <span class="badge badge-off">RELEASED</span></li></ol><p>Those stage names are the installed work-order checks. The public host cannot settle, hold or refund. A recorded <abbr class="term" title="A draft you swap by hand today. A recorded offer is coming soon.">offer</abbr> or <abbr class="term" title="A new draft that changes the price or the deadline. A recorded counter-offer is coming soon.">counter-offer</abbr> is coming soon. The browser sample uses test funds only.</p></figure>
-%s''' % (CHROME_START, html.escape(href(page, 'index.html'), quote=True), items, ''.join(steps), html.escape(href(page, nxt_target), quote=True), html.escape(nxt_label), CHROME_END)
+<details class="lifecycle"><summary>Stage names</summary><p>The same stages on every page.</p><ol><li>Find</li><li>Agree <span class="badge badge-off">PROPOSED</span></li><li>Pay <span class="badge badge-off">BOUND</span></li><li>Deliver <span class="badge badge-off">DELIVERED</span></li><li>Resolve <span class="badge badge-off">SETTLED</span> or <span class="badge badge-soon">DISPUTED</span> then <span class="badge badge-off">RELEASED</span></li></ol><p>Those stage names are the installed work-order checks. The public host cannot settle, hold or refund. A recorded <abbr class="term" title="A draft you swap by hand today. A recorded offer is coming soon.">offer</abbr> or <abbr class="term" title="A new draft that changes the price or the deadline. A recorded counter-offer is coming soon.">counter-offer</abbr> is coming soon. The browser sample uses test funds only.</p></details>
+%s''' % (CHROME_START, html.escape(search, quote=True), html.escape(href(page, 'index.html'), quote=True), items, ''.join(steps), html.escape(href(page, nxt_target), quote=True), html.escape(nxt_label), CHROME_END)
 
 
 def footer(page):
