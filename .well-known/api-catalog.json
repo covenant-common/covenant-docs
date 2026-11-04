@@ -1,7 +1,7 @@
 {
   "linkset": [
     {
-      "anchor": "https://jupie202020.pythonanywhere.com/.well-known/api-catalog",
+      "anchor": "https://covenant-common.github.io/covenant-docs/.well-known/api-catalog.json",
       "item": [
         {
           "href": "https://jupie202020.pythonanywhere.com/mcp"

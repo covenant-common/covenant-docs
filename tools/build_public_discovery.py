@@ -107,7 +107,9 @@ def documents(source):
         'displayName': 'Covenant public tools',
         'type': 'application/mcp-server-card+json', 'data': card}]}
     api = {'linkset': [
-        {'anchor': ORIGIN + '/.well-known/api-catalog', 'item': [{'href': ENDPOINT}]},
+        # The API host does not serve this path (it 404s). Anchor the linkset
+        # on the website file that actually returns these bytes.
+        {'anchor': WEBSITE + '/.well-known/api-catalog.json', 'item': [{'href': ENDPOINT}]},
         {'anchor': ENDPOINT,
          'service-doc': [{'href': WEBSITE + '/docs/API_MCP.html', 'type': 'text/html'}],
          'describedby': [{'href': WEBSITE + '/.well-known/mcp/server-card.json',

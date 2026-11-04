@@ -25,7 +25,10 @@ class CompletePublicSnapshot(unittest.TestCase):
         self.assertEqual(output['.well-known/api-catalog.json'], ('application/json', output['.well-known/api-catalog'][1]))
         described = catalog['linkset'][1]['describedby'][0]['href']
         self.assertEqual(described, discovery.WEBSITE + '/.well-known/mcp/server-card.json')
-        self.assertNotIn(discovery.ORIGIN + '/mcp/server-card', output['.well-known/api-catalog'][1].decode())
+        self.assertEqual(catalog['linkset'][0]['anchor'], discovery.WEBSITE + '/.well-known/api-catalog.json')
+        body = output['.well-known/api-catalog'][1].decode()
+        self.assertNotIn(discovery.ORIGIN + '/mcp/server-card', body)
+        self.assertNotIn(discovery.ORIGIN + '/.well-known/api-catalog', body)
 
     def test_missing_tool_duplicate_private_tool_or_write_hint_cannot_publish(self):
         cases = []
