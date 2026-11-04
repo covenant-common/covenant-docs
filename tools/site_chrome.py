@@ -29,10 +29,12 @@ CURRENT = {
     'docs/PAYING.html': 'pay',
     'docs/PAY.html': 'pay',
     'docs/PAYMENTS.html': 'pay',
+    'docs/APPROVALS.html': 'pay',
     'docs/PRICING.html': 'pay',
     'docs/HOW_IT_WORKS.html': 'deliver',
     'docs/DELIVER.html': 'deliver',
     'docs/RESOLVE.html': 'resolve',
+    'docs/RECEIPTS.html': 'resolve',
     'docs/DISPUTES.html': 'resolve',
     'sandbox/index.html': 'resolve',
 }
