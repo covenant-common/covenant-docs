@@ -1,0 +1,35 @@
+name: Check public site links
+on:
+  pull_request:
+  push:
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  links:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - name: Check out the site
+        uses: actions/checkout@v4
+      - name: Check page structure and the asset inventory
+        run: python3 tools/check_public_site.py
+      - name: Check links, anchors and private-repo URLs
+        run: python3 tools/check_links.py
+      - name: Check the shared layout, registry and jargon
+        run: |
+          python3 tools/build_site.py --check
+          python3 tests/test_registry_view.py
+          python3 tools/check_registry_drift.py
+          python3 tools/lint_jargon.py
+          python3 tools/lint_tool_counts.py
+      - name: Install the browser used by the people checklist
+        run: npm install --no-save --no-package-lock playwright@1.64.1 @axe-core/playwright@4.14.0 && npx playwright install --with-deps chromium
+      - name: Run the people checklist
+        run: |
+          python3 -m http.server 8765 --bind 127.0.0.1 >/tmp/docs-server.log 2>&1 &
+          echo $! > /tmp/docs-server.pid
+          for i in 1 2 3 4 5 6 7 8 9 10; do curl -sf -o /dev/null http://127.0.0.1:8765/index.html && break; sleep 1; done
+          node --test tests/deal-machine.test.mjs tests/standards-cards.mjs tests/sandbox-flow.mjs
+          node tools/check_doet.mjs http://127.0.0.1:8765
+          kill $(cat /tmp/docs-server.pid) || true

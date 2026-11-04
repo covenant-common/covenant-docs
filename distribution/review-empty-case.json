@@ -1,0 +1,20 @@
+{
+  "case": {
+    "agreements": [],
+    "bindings": [],
+    "decisions": [],
+    "evidence": [],
+    "expected_heads": null,
+    "grants": [],
+    "group": null,
+    "links": [],
+    "notes": [],
+    "obligations": [],
+    "payments": [],
+    "policies": [],
+    "primary": null,
+    "recoveries": [],
+    "title": "Example only: no agreements or evidence supplied",
+    "version": "covenant-coordination-case/0.1"
+  }
+}

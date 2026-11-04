@@ -24,9 +24,9 @@
     },
     connect: {
       title: 'Connect your agent',
-      intro: 'Add this address to an agent client that supports remote HTTP MCP. Public tools need no account or key.',
-      steps: ['Add the public address in your client’s MCP settings.', 'Copy the first task below into your agent.', 'Check the returned draft. Public access does not sign, publish or pay.'],
-      prompt: 'Connect to ' + MCP + ' using remote HTTP MCP. Initialise the connection and discover the actual tools and schemas. Draft terms for a one-page research brief costing USD 25, including delivery and buyer review. Use sample parties, keep it unsigned and explain the next approval step. Do not create an account, publish, sign or pay. Never ask me to paste private signing keys, account tokens or card details into chat.',
+      intro: 'Add this address to an agent client that supports a remote connection. Public tools need no account or key.',
+      steps: ['Add the public address in your client’s connection settings.', 'Copy the first task below into your agent.', 'Check the returned draft. Public access does not sign, publish or pay.'],
+      prompt: 'Connect to ' + MCP + ' using a remote connection. Initialise the connection and discover the actual tools and schemas. Draft terms for a one-page research brief costing USD 25, including delivery and buyer review. Use sample parties, keep it unsigned and explain the next approval step. Do not create an account, publish, sign or pay. Never ask me to paste private signing keys, account tokens or card details into chat.',
       primary: ['API_MCP.html#connect', 'Open connection instructions'],
       secondary: ['TRIAL.html', 'Start a private trial'],
       outcome: 'A useful first result is an exact unsigned draft you can inspect. A connection alone is not a completed deal.'
@@ -105,7 +105,15 @@
     if (typeof text !== 'string' || text.length > 5000) throw new Error('Keep the feedback short.');
     return 'mailto:jupitersstring@gmail.com?subject=' + encodeURIComponent('Covenant first-job feedback') + '&body=' + encodeURIComponent(text);
   }
-  var api = { MCP: MCP, tags: tags, task: task, route: route, taggedLink: taggedLink, shareLink: shareLink, note: note, email: email, stages: STAGES.slice() };
+  function connectionFailure(error) {
+    var name = error && error.name;
+    var message = error && error.message ? String(error.message) : '';
+    if (name === 'TypeError' || /failed to fetch|networkerror|load failed|cors/i.test(message)) {
+      return 'This page could not reach the public connection. That usually means the browser blocked the request (CORS) or you are offline. Next: copy the address and add it in your agent, or open the published start page and try again.';
+    }
+    return 'The public connection did not answer from this page (' + (message || 'unknown error') + '). Next: copy the address and try it in your agent.';
+  }
+  var api = { MCP: MCP, tags: tags, task: task, route: route, taggedLink: taggedLink, shareLink: shareLink, note: note, email: email, stages: STAGES.slice(), connectionFailure: connectionFailure };
   if (typeof module === 'object' && module.exports) module.exports = api;
   if (typeof document === 'undefined') return;
   var panel = document.getElementById('start-route-panel');
@@ -131,10 +139,31 @@
     var status = document.getElementById(statusId);
     try {
       if (!global.navigator.clipboard || typeof global.navigator.clipboard.writeText !== 'function') throw new Error('unavailable');
-      await global.navigator.clipboard.writeText(text); status.textContent = success;
+      await global.navigator.clipboard.writeText(text); status.textContent = success; if (statusId === 'start-copy-status') { var button = document.getElementById('start-copy-mcp'); if (button) button.textContent = 'Copied'; }
     } catch (error) { status.textContent = 'Automatic copy is unavailable. Select and copy the text shown below.'; var shown = document.createElement('pre'); shown.textContent = text; status.appendChild(shown); }
   }
-  document.getElementById('start-copy-mcp').addEventListener('click', function () { copy(MCP, 'start-copy-status', 'Copied the public MCP address. Add it to your client’s remote HTTP MCP settings.'); });
+  document.getElementById('start-copy-mcp').addEventListener('click', function () {
+    if (global.CovenantControls) global.CovenantControls.copied(document.getElementById('start-copy-mcp'), document.getElementById('start-copy-status'), MCP);
+    else copy(MCP, 'start-copy-status', 'Copied');
+  });
+  document.getElementById('start-check').addEventListener('click', async function () {
+    var status = document.getElementById('start-copy-status');
+    status.textContent = 'Checking the public connection…';
+    var headers = {'Content-Type': 'application/json', 'Accept': 'application/json, text/event-stream'};
+    try {
+      var init = await fetch(MCP, {method: 'POST', mode: 'cors', credentials: 'omit', headers: headers, body: JSON.stringify({jsonrpc: '2.0', id: 1, method: 'initialize', params: {protocolVersion: '2025-11-25', capabilities: {}, clientInfo: {name: 'covenant-docs-check', version: '1'}}})});
+      if (!init.ok) throw new Error('HTTP ' + init.status);
+      headers['MCP-Protocol-Version'] = '2025-11-25';
+      var list = await fetch(MCP, {method: 'POST', mode: 'cors', credentials: 'omit', headers: headers, body: JSON.stringify({jsonrpc: '2.0', id: 2, method: 'tools/list', params: {}})});
+      var raw = await list.text();
+      var match = raw.match(/\{[\s\S]*"tools"[\s\S]*\}/);
+      var parsed = JSON.parse(match ? match[0] : raw);
+      var tools = parsed.result && parsed.result.tools;
+      status.textContent = 'Connected. ' + (Array.isArray(tools) ? tools.length : 'The') + ' public tools answered. Nothing was signed or paid.';
+    } catch (error) {
+      status.textContent = connectionFailure(error);
+    }
+  });
   document.getElementById('start-copy-prompt').addEventListener('click', function () { copy(route(chosen).prompt, 'start-prompt-status', 'Copied. Give this task to your agent after adding the connection. Nothing was sent by this page.'); });
   function report() {
     var answers = {};

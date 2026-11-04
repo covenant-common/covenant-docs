@@ -11,13 +11,15 @@ const S=require(path.join(root,'assets/deal-structures.js'));
 const publication=()=>({id:'a'.repeat(64),visibility:'INDEXED',url:'https://jupie202020.pythonanywhere.com/marketplace/'+'a'.repeat(64),
  fields:{title:'DEMO - exact public test',category:'research',custom:{description:'One synthetic brief; not accepting orders.'},want:[{amount:4000,asset:{namespace:'fiat',identifier:'GBP',unit:'penny'}}]}});
 const older=()=>{const value={...S};delete value.publicLeg;delete value.publicListingDisplay;return value;};
-function rig({structures=S,publications=[publication()],mcpError=false}={}) {
+function rig({structures=S,publications=[publication()],mcpError=false,origin='https://covenant-common.github.io'}={}) {
  class Element {
-  constructor(id='',tag='div'){this.id=id;this.tagName=tag.toUpperCase();this.children=[];this.handlers={};this.attributes={};this._text='';this.value='';this.disabled=false;this.hidden=false;}
+  constructor(id='',tag='div'){this.id=id;this.tagName=tag.toUpperCase();this.children=[];this.handlers={};this.attributes={};this.dataset={};this._text='';this.value='';this.disabled=false;this.hidden=false;this.className='';}
   set textContent(v){this._text=String(v);this.children=[];}
   get textContent(){return this._text+this.children.map(x=>x.textContent).join('');}
   set innerHTML(_){throw Error('Unexpected markup interpretation');}
   appendChild(v){this.children.push(v);return v;}
+  append(...items){items.forEach((item)=>{if(typeof item==='string')this._text+=item;else this.appendChild(item);});}
+  before(){}
   replaceChildren(...values){this.children=values;this._text='';}
   setAttribute(k,v){this.attributes[k]=String(v);}
   addEventListener(k,v){this.handlers[k]=v;}
@@ -28,8 +30,8 @@ function rig({structures=S,publications=[publication()],mcpError=false}={}) {
  const get=id=>{assert.ok(nodes.has(id),'Actual Terminal element missing: '+id);return nodes.get(id);};
  const calls=[];
  const document={getElementById:get,createElement:tag=>new Element('',tag),addEventListener(){}};
- const window={AAPDealStructures:structures,location:new URL('https://covenant-common.github.io/covenant-docs/docs/TERMINAL.html'),addEventListener(){}};
- const context={window,document,URL,Blob,TextEncoder,TextDecoder,Uint8Array,AbortController,setTimeout,clearTimeout,navigator:{},
+ const window={AAPDealStructures:structures,location:new URL(origin+'/covenant-docs/docs/TERMINAL.html'),addEventListener(){}};
+ const context={window,document,URL,URLSearchParams,location:window.location,Blob,TextEncoder,TextDecoder,Uint8Array,AbortController,setTimeout,clearTimeout,navigator:{},
  fetch:async(_url,opts)=>{const request=JSON.parse(opts.body);calls.push(request);
   const data={result:{items:publications.map(p=>({publication:p})),total:publications.length,next_offset:null,scope:'CURRENT_INDEXED_PUBLICATIONS_ONLY'}};
   const result=request.method==='initialize'?{protocolVersion:'2025-11-25'}:{isError:mcpError,content:[{type:'text',text:JSON.stringify(mcpError?{code:'TEST_REFUSAL'}:data)}]};
@@ -41,6 +43,16 @@ function rig({structures=S,publications=[publication()],mcpError=false}={}) {
 const flush=()=>new Promise(resolve=>setImmediate(resolve));
 async function loaded(options){const result=rig(options);for(let i=0;i<8;i++)await flush();return result;}
 const recoveryLink=state=>state.children.find(x=>x.tagName==='A'&&x.href==='https://jupie202020.pythonanywhere.com/marketplace/browse/');
+
+test('a local preview shows labelled fixture listings, a Test badge and Make an offer',async()=>{
+ const r=await loaded({origin:'http://127.0.0.1:8765'});
+ assert.equal(r.calls.length,0);
+ const text=r.get('terminal-listings').textContent;
+ assert.match(text,/\[Test\] Local preview research brief/);
+ assert.match(text,/Make an offer/);
+ assert.match(r.get('terminal-market-state').textContent,/Fixture listings/);
+ assert.match(r.get('terminal-market-state').textContent,/not live/);
+});
 
 test('current Terminal display renders real decoded publication fields after initialize and search',async()=>{
  const r=await loaded();assert.equal(r.calls.length,2);

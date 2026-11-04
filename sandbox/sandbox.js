@@ -34,6 +34,9 @@ export const ERRORS = {
   SANDBOX_DEMO_FAILED: {
     what: 'A step of the test deal failed.',
     fix: 'Run the demo again. If it fails twice, report the code and the detail shown.', retry: true },
+  SANDBOX_TIMEOUT: {
+    what: 'The Python download did not finish in time.',
+    fix: 'Try the signature check again. The steps on the page do not need it, and no real money moved.', retry: true },
 };
 
 export class SandboxError extends Error {

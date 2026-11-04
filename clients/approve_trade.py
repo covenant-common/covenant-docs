@@ -898,8 +898,8 @@ def display_review(stdout,mode,bundle,actor,label,body):
     stdout.write('These are direct party keys. This command does not check delegated authority, '+
         'live account status, outside evidence, wallet control or whether a supplied history is current.\n')
     if mode == 'event':
-        stdout.write('A claim or acceptance records your statement. A dispute resolution here '+
-            'needs the same resolution from every party; it does not appoint a court or arbitrator.\n')
+        stdout.write('A claim or acceptance records your statement. A buyer-and-seller dispute is a signed record. '+
+            'The fee recipient is not required to co-sign it. This command still asks every party listed on the agreement for the same resolution text. It does not appoint a court or arbitrator.\n')
     if mode == 'wallet':
         stdout.write('This approves an address instruction only. It does not approve the agreement, '+
             'authorize spending, sign a wallet transaction or prove control of the address.\n')
@@ -934,7 +934,7 @@ def run(access_path,bundle_path,payload_path,output_path,*,mode,expected_trade,
         stdout.write('Complete source, fee terms and payment request attachments:\n'+
             json.dumps(package,sort_keys=True,indent=2,ensure_ascii=True)+'\n')
         stdout.write('The named provider observes payments. Its code, live setup and launch-policy currentness are not checked here.\n')
-        stdout.write('Disputes: every named participant must sign a resolution under this profile. If the fee recipient is a third participant, its signature is also required for customer disputes.\n')
+        stdout.write('Disputes: a buyer-and-seller dispute does not require the fee recipient to co-sign. This command still completes a resolution when every party listed on the agreement has signed the same text.\n')
     approval_hash = digest('AAP-OWNER-LOCAL-REVIEW-0.1',
         {'mode':mode,'bundle':bundle,'action':action,'actor':actor,'package':package})
     phrase = 'APPROVE '+approval_hash[:12]

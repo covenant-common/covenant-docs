@@ -32,7 +32,7 @@
       "submitted_endpoint": "https://jupie202020.pythonanywhere.com/mcp/google/v1",
       "live_listing_confirmed": false,
       "remaining": [
-        "Prior eight-tool waitlist receipt retained; no duplicate submission",
+        "Prior waitlist receipt retained; no duplicate submission",
         "Console signup route returned 404 on 2 November; confirm current eligibility/invitation",
         "Assess the scoped connector against policies on autonomous A2A integrations, generic dispatch and third-party advertising; no disguised capabilities"
       ]
@@ -149,7 +149,7 @@
         "Tenant with Copilot access and custom app upload for sideload testing",
         "Agent package, listing/privacy/support assets and Microsoft validation"
       ],
-      "next": "Prepare pinned nine-tool declarative wrapper; verify actual publisher tenant and testing eligibility before submission. Do not invent a registered company.",
+      "next": "Prepare a pinned declarative wrapper for the public tools; verify actual publisher tenant and testing eligibility before submission. Do not invent a registered company.",
       "sources": [
         "https://learn.microsoft.com/en-us/microsoft-365/copilot/extensibility/build-mcp-plugins",
         "https://learn.microsoft.com/en-us/microsoft-365/copilot/extensibility/overview-plugins?tabs=mcp",
@@ -224,7 +224,7 @@
   },
   "test_scope": {
     "live_calls": "Harmless synthetic public requests; no account, signing, payment or advert creation",
-    "native_client_installation": "Prior personal ChatGPT/Claude tests are distinct from public approval; current Grok custom attempt failed; Muse endpoint checker listed nine tools",
+    "native_client_installation": "Prior personal ChatGPT/Claude tests are distinct from public approval; current Grok custom attempt failed; Muse endpoint checker listed public tools",
     "store_approval": "No new provider approval established by the execution tests or technical setup",
     "live_execution": "14 predetermined positive tool calls passed; six harness controls dispatched nothing; three additional actual malformed-input calls returned precise refusals",
     "model_selection": "NOT_MEASURED",

@@ -50,7 +50,8 @@ test('host catalogue is inspected without borrowing its labels or claiming payme
   assert.ok(!view.renderOptions(rows).includes('untrusted label'));
   assert.ok(!view.renderOptions(rows).includes('Pay now'));
   const installed = change('usdc-base', row => {row.readiness='CONFIGURED_UNVERIFIED';row.connection_installed=true;});
-  assert.match(view.inspectCatalog(installed).find(row=>row.id==='usdc-base').readinessLabel,/check the deal/);
+  assert.match(view.inspectCatalog(installed).find(row=>row.id==='usdc-base').readinessLabel,/Configured, not yet verified/);
+  assert.equal(view.inspectCatalog(installed).find(row=>row.id==='card').readinessLabel,'Coming soon (not connected)');
 });
 
 test('redirected fees, wrong networks and a principal default are refused', () => {
@@ -135,7 +136,10 @@ test('missing endpoint, malformed response and oversized body preserve the saved
 
 test('public page asks for no payment secrets and retains useful non-script routes', () => {
   const html=readFileSync(new URL('../docs/PAYMENTS.html',import.meta.url),'utf8');
-  assert.ok(!/<(?:input|form|iframe)\b/i.test(html));
+  const withoutSearch = html.replace(/<form class="nav-search"[\s\S]*?<\/form>/, '');
+  assert.ok(!/<(?:form|iframe)\b/i.test(withoutSearch));
+  const unexpectedInputs = [...html.matchAll(/<input\b[^>]*>/gi)].map((match) => match[0]).filter((tag) => !/class="nav-toggle"|id="site-search"/.test(tag));
+  assert.deepEqual(unexpectedInputs, []);
   assert.match(html,/<noscript>/);
   for (const target of ['MATRIX.html','TRIAL.html','API_MCP.html']) assert.ok(html.includes('href="'+target+'"'));
   assert.match(html,/Your agent should show you the seller, the amount, the network and any Covenant fee/);

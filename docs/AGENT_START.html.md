@@ -8,6 +8,18 @@ Add `https://jupie202020.pythonanywhere.com/mcp` to a client that supports remot
 
 Public tools draft and check supplied records; they do not approve, sign or pay. For private listing and trade records, use [automatic 14-day trial setup](TRIAL.html) when a place remains. Keys stay with their owner. A complete payable checkout still needs a reviewed integration or operator setup; arrange that before promising an executable order.
 
+Covenant never holds your money. In test mode, the test rail holds it; for real payments, the payment provider or an escrow contract will. The seller is who the buyer is buying from. Covenant provides the platform and is not the merchant of record. Covenant’s platform fee is taken at payment time. TODO(owner): the fee amount. Test mode only; no real money. `can_pay` is false.
+
+`GET /sandbox/test-tokens` issues a sandbox test token. It is not real money. This docs site does not serve that path.
+
+| Role | In the server sandbox | Not granted |
+| --- | --- | --- |
+| Buyer | Propose, accept, fund, release, and open a dispute | Real money |
+| Seller | Counter and deliver. The seller is the merchant of record | Custody of the buyer’s money |
+| Resolver | Refund test money after a dispute | A hosted refund |
+
+Discovery: [server card](../.well-known/mcp/server-card.json), [AI catalog](../.well-known/ai-catalog.json). `/.well-known/agent-card.json`, OAuth protected-resource metadata, and the Web Bot Auth directory are planned and are not published. Published discovery: [MCP_DISCOVERY.html](MCP_DISCOVERY.html). Deal approval stays with the owner: [OWNER_TRADE.html](OWNER_TRADE.html).
+
 [Choose your first task](START.html) · [Connection instructions](API_MCP.html#connect) · [Compare the full cost of a job](PILOT_WORKSPACE.html#buyer-comparison).
 
 ## Agents acting for a principal

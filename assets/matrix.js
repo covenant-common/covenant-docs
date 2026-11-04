@@ -200,8 +200,11 @@
       if (resources) text('p', 'Offered resources: ' + resources, article);
     }
     const url = safePublicationUrl(publication.url);
-    if (url) {const link = text('a', 'Open the public advert', article); link.href = url;}
-    const arrange = text('button', 'Structure this deal', article); arrange.type = 'button'; arrange.disabled = !window.AAPDealStructures;
+    const actions = document.createElement('div');
+    actions.className = 'card-actions';
+    if (url) {const link = text('a', 'Open the public advert', actions); link.href = url;}
+    const arrange = text('button', 'Structure this deal', actions); arrange.type = 'button'; arrange.disabled = !window.AAPDealStructures;
+    article.appendChild(actions);
     const arrangeState = text('p', '', article); arrangeState.setAttribute('role', 'status'); arrangeState.setAttribute('aria-live', 'polite');
     arrange.addEventListener('click', () => {
       try {selectAdvert(window.AAPDealStructures.advertFromPublication(publication)); $('draft-work').scrollIntoView({block: 'start'}); $('draft-structure').focus();}
@@ -499,8 +502,46 @@
       }
     } finally {$('draft-copy').disabled = drafting || latestDraftRaw === null;}
   });
+  function showFieldError(id, message) {
+    const error = $(id);
+    if (error) error.textContent = message || '';
+  }
+  function composePrice() {
+    const currency = $('draft-currency').value;
+    const amount = $('draft-amount').value.trim();
+    if (currency === 'none') return 'No payment';
+    if (!currency || !amount) return '';
+    return currency + ' ' + amount;
+  }
+  function checkPrice() {
+    const deal = globalThis.CovenantDeal;
+    if (!deal) {
+      showFieldError('draft-amount-error', 'The price check did not load. Nothing was sent.');
+      return false;
+    }
+    const fields = deal.priceFieldErrors($('draft-currency').value, $('draft-amount').value);
+    showFieldError('draft-currency-error', fields.currencyMessage);
+    showFieldError('draft-amount-error', fields.amountMessage);
+    if ($('draft-currency')) $('draft-currency').setCustomValidity(fields.currencyMessage);
+    if ($('draft-amount')) $('draft-amount').setCustomValidity(fields.amountMessage);
+    if (fields.currencyMessage || fields.amountMessage) return false;
+    const result = deal.validatePrice(composePrice());
+    showFieldError('draft-amount-error', result.ok ? '' : result.message);
+    if (result.ok) $('draft-price').value = result.canonical;
+    const preview = $('sample-lifecycle');
+    if (preview) {
+      if (result.ok && result.kind === 'money') {
+        preview.textContent = 'Sample stages, same machine as the browser sample: ' + deal.SERVER_STATES.join(' → ') + '. ' + deal.moneyText(deal.feeSplit(result.amount), result.currency);
+      } else preview.textContent = '';
+    }
+    return result.ok;
+  }
+  ['draft-currency', 'draft-amount'].forEach((id) => $(id).addEventListener('input', checkPrice));
+  $('draft-currency').addEventListener('change', checkPrice);
   $('matrix-draft').addEventListener('submit', async (event) => {
     event.preventDefault();
+    if (!checkPrice()) {$('draft-amount').focus(); return;}
+    const role = (document.querySelector('input[name="draft-role"]:checked') || {}).value || 'buyer';
     if (!structures || !selection || drafting || !event.currentTarget.reportValidity()) return;
     const values = {};
     ['title', 'buyer', 'supplier', 'deliverable', 'price'].forEach((key) => {values[key] = $('draft-' + key).value.trim();});
@@ -532,12 +573,17 @@
       $('draft-download').href = downloadUrl;
       $('draft-download').download = 'covenant-unsigned-' + data.id.slice(0, 12) + '.json';
       $('draft-result').hidden = false;
-      $('draft-state').textContent = 'Unsigned proposal prepared. Review the returned terms below. It retains the chosen structure' + (selection.advert ? ' and advert reference. Check the exact original offer before signing.' : '; no advert was selected.') + ' Both parties’ approval remains separate; nothing has been signed, published or paid.';
+      $('draft-state').textContent = 'Unsigned ' + role + ' proposal prepared. The label matches who is writing it. Review the returned terms below. It retains the chosen structure' + (selection.advert ? ' and advert reference. Check the exact original offer before signing.' : '; no advert was selected.') + ' Both parties’ approval remains separate; nothing has been signed, published or paid.';
     } catch (error) {$('draft-state').textContent = 'Drafting did not complete: ' + error.message + ' Your input remains; no automatic retry was made.';}
     finally {drafting = false; $('draft-submit').disabled = false;}
   });
   window.addEventListener('pagehide', () => {if (downloadUrl) URL.revokeObjectURL(downloadUrl); if (handoffUrl) URL.revokeObjectURL(handoffUrl);});
   $('market-search-button').disabled = false;
   $('draft-submit').disabled = !structures;
+  const offerParams = new URLSearchParams(location.search);
+  if (offerParams.get('title') && $('draft-title')) $('draft-title').value = offerParams.get('title').slice(0, 128);
+  if (offerParams.get('currency') && $('draft-currency')) $('draft-currency').value = offerParams.get('currency');
+  if (offerParams.get('amount') && $('draft-amount')) $('draft-amount').value = offerParams.get('amount');
+  if (location.hash === '#draft-work' && $('draft-title')) $('draft-title').focus();
   search(false);
 })();

@@ -16,7 +16,7 @@ Ask: “Find published research services and label any demos. Tell me if there i
 matching supplier.”
 
 Or: “Draft a one-page research brief for USD 25, due Friday, with buyer review. Keep
-it unsigned.”
+it unsigned.” With the fee left off, you pay USD 25, the seller gets USD 25, and the fee is USD 0. When the 0.5% fee applies, you pay USD 25.13, the seller gets USD 25, and the fee is USD 0.13.
 
 When the proposal changes: “Compare these two drafts: show the price and deadline
 changes and what needs fresh approval.”
@@ -58,7 +58,7 @@ processes. A repository marketplace is not an approved store listing.
 
 ## What this connects
 
-The public endpoint currently offers nine tools:
+The public endpoint currently offers public tools:
 
 - `aap_public_listing_search`
 - `covenant_marketplace__quick_trade`
@@ -88,7 +88,7 @@ or credentials; your agent client and the hosted service have their own data han
 ## Reviewer cases
 
 The portable manifest contains exactly five positive and three negative reviewer
-cases. Together the positive cases cover all nine public tools. The negative cases
+cases. Together the positive cases cover all the public tools. The negative cases
 require rejection or clarification for a draft passed as a review case, an exact
 case-identifier mismatch and a malformed direct authority public key. They describe
 the required safe result, not a new claim of prompt-level test execution.

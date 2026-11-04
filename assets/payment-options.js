@@ -32,18 +32,20 @@
     {id:'usdc-ethereum-sepolia', label:'USDC on Ethereum Sepolia', network:'eip155:11155111', asset:'USDC', group:'Test networks',
       account:EVM, testnet:true, states:['TEST_ONLY'],
       steps:['Both parties choose this test network explicitly.', 'Only test funds belong here. A test transfer does not pay a real bill. The matching connection is still required.']},
-    {id:'aap-native', label:'AAP native network', network:'aap', asset:'NATIVE', group:'Future network',
+    {id:'aap-native', label:'Native payment network', network:'aap', asset:'NATIVE', group:'Future network',
       account:'treasury', testnet:false, states:['NOT_LIVE'],
       steps:['The native payment network is not live.', 'This recorded treasury name is not a live external payment address.']}
   ];
-  const LABELS = {NOT_CONNECTED:'Connection needed', CONFIGURED_UNVERIFIED:'Connection installed · check the deal',
-    TEST_ONLY:'Test funds only', NOT_LIVE:'Not live'};
+  const LABELS = {NOT_CONNECTED:'Not connected', CONFIGURED_UNVERIFIED:'Configured, not yet verified', TEST_ONLY:'Test only', NOT_LIVE:'Not live', COMING_SOON:'Coming soon', LIVE:'Live'};
+  function readinessText(id, readiness) {
+    return id === 'card' && readiness === 'NOT_CONNECTED' ? 'Coming soon (not connected)' : LABELS[readiness];
+  }
   function need(value) { if (!value) throw new Error('PAYMENT_OPTIONS_UNRECOGNIZED'); }
   function plain(value) { return !!value && typeof value === 'object' && !Array.isArray(value); }
   function fallback() {
     return DEFINITIONS.map(d => ({...d, steps:d.steps.slice(), states:d.states.slice(),
       readiness:d.testnet?'TEST_ONLY':d.id==='aap-native'?'NOT_LIVE':'NOT_CONNECTED',
-      readinessLabel:LABELS[d.testnet?'TEST_ONLY':d.id==='aap-native'?'NOT_LIVE':'NOT_CONNECTED'],
+      readinessLabel:readinessText(d.id, d.testnet?'TEST_ONLY':d.id==='aap-native'?'NOT_LIVE':'NOT_CONNECTED'),
       connectionInstalled:false, feeAccount:d.account, source:'saved'}));
   }
   function inspectCatalog(value) {
@@ -82,7 +84,7 @@
         if (row.readiness === 'NOT_CONNECTED' || row.readiness === 'NOT_LIVE') need(row.connection_installed === false);
       }
       return {...d, steps:d.steps.slice(), states:d.states.slice(), readiness:row.readiness,
-        readinessLabel:LABELS[row.readiness], connectionInstalled:row.connection_installed,
+        readinessLabel:readinessText(row.id, row.readiness), connectionInstalled:row.connection_installed,
         feeAccount:account, source:'host'};
     });
   }
@@ -97,8 +99,11 @@
         const fee = row.id === 'aap-native' ? '<p><strong>Recorded treasury:</strong> treasury. No live payment address.</p>' :
           row.feeAccount === null ? '<p><strong>Covenant fee destination:</strong> not connected.</p>' :
           '<p><strong>Covenant fee destination only:</strong> <span class="payment-address">'+escape(row.feeAccount)+'</span></p>';
+        const badge = row.readinessLabel.indexOf('Coming soon') === 0 ? 'badge-soon' :
+          row.readinessLabel === 'Test only' ? 'badge-test' :
+          row.readinessLabel === 'Live' ? 'badge-live' : 'badge-off';
         return '<details class="payment-choice" data-payment-method="'+escape(row.id)+'"><summary>'+escape(row.label)+
-          '<span class="payment-readiness">'+escape(row.readinessLabel)+'</span></summary><div class="payment-detail">'+
+          '<span class="badge '+badge+'">'+escape(row.readinessLabel)+'</span> <span class="badge badge-off">You cannot pay with this yet</span></summary><div class="payment-detail">'+
           '<p><strong>Network:</strong> '+escape(row.network)+' · '+escape(row.asset==='EXACT_ADOPTED_FIAT_CURRENCY'?'agreed card currency':row.asset)+'</p>'+
           '<ol>'+row.steps.map(step => '<li>'+escape(step)+'</li>').join('')+'</ol>'+fee+
           (row.id==='aap-native'?'':'<p>The seller’s payment goes to the seller’s separately approved destination. Do not send the order price to the Covenant fee destination.</p>')+
