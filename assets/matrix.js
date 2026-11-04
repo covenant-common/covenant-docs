@@ -468,6 +468,10 @@
         text(supporting ? 'summary' : 'h4', supporting ? 'Supporting record changed — inspect the exact fields' : (labels[change.title] || change.title), item);
         text(supporting ? 'pre' : 'p', 'Before: ' + (change.before === null ? '(not included)' : change.before), item);
         text(supporting ? 'pre' : 'p', 'After: ' + (change.after === null ? '(removed)' : change.after), item);
+        const plain = String(change.before ?? '') + '\n' + String(change.after ?? '');
+        if (/price|amount|USD|cents/i.test(String(change.title) + plain) && String(change.before) !== String(change.after)) {
+          text('p', 'The price or amount is different, so earlier signatures no longer match this version.', item);
+        }
         target.appendChild(item);
       });
       text('p', comparison.boundary + ' Neither version is sent anywhere by this comparison.', target);

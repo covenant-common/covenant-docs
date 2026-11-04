@@ -26,6 +26,7 @@ Covenant helps people and agents coordinate work, set limits and retain exact ag
 
 ## First useful action
 
+- [First deal in 10 minutes](docs/FIRST_DEAL.html): copy-paste public MCP calls. Nothing is signed, paid or published. [Glossary](docs/GLOSSARY.html).
 - [Start here](docs/START.html?source=search): choose connect, advertise, buy or work together; copy a safe first task and the live MCP address.
 - Public MCP: `https://jupie202020.pythonanywhere.com/mcp`. No account or key; discover the nine actual tool schemas before calling. Start with an unsigned USD25 research-brief draft. Connecting does not sign, publish or pay.
 - [Private trial](docs/TRIAL.html): self-service when places remain; 14 days, 1,000 requests, 29 account operations. Configure its scoped token in private client settings; keep the owner's signing key outside agent chat and workspace.
