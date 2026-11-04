@@ -1,8 +1,13 @@
 {
   "format": "covenant-docs-capability-registry/0.1",
-  "note": "Vendored copy until server pull request 192 publishes a registry path this docs repo can read. Public tool names come from mcp/tool-inventory.json observed 2026-11-02. Payment rows match the live payment catalogue read on 2026-11-04. Do not describe a method as live or connected unless its badge says so.",
-  "server_pr": "https://github.com/covenant-common/covenant/pull/192",
-  "owner_todo": "Point this file at the server registry when that path exists, and refresh it when the live catalogue changes.",
+  "note": "Vendored projection of covenant_chain/data/capability_registry.json. Draft PR 200 was not readable from the docs agent (HTTP 404), so this projection still uses the 2 November 2026 tool inventory and the 4 November 2026 payment catalogue. Refresh it with tools/sync_capability_registry.py. Do not describe a method as live or connected unless its badge says so.",
+  "source_path": "covenant_chain/data/capability_registry.json",
+  "source_repo": "covenant-common/covenant",
+  "source_pr": 200,
+  "related_pr": 192,
+  "server_pr": "https://github.com/covenant-common/covenant/pull/200",
+  "related_server_pr": "https://github.com/covenant-common/covenant/pull/192",
+  "owner_todo": "Run tools/sync_capability_registry.py against a covenant checkout that contains PR 200, then commit the raw server JSON and the regenerated projection.",
   "public_tools": [
     "aap_public_listing_search",
     "covenant_marketplace__quick_trade",

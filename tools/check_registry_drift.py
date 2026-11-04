@@ -5,13 +5,26 @@ import re
 import sys
 from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from registry_view import PROJECTION, SERVER_COPY, SERVER_PATH, normalize, projection_source_ok
+
 ROOT = Path(__file__).resolve().parent.parent
-REGISTRY = json.loads((ROOT / 'distribution' / 'capability-registry.json').read_text())
+REGISTRY = json.loads(PROJECTION.read_text())
 INVENTORY = json.loads((ROOT / 'mcp' / 'tool-inventory.json').read_text())
 
 
 def main():
     errors = []
+    if not projection_source_ok(REGISTRY):
+        errors.append('Projection source_path is not ' + SERVER_PATH)
+    if SERVER_COPY.is_file():
+        server_view = normalize(json.loads(SERVER_COPY.read_text()))
+        if server_view['public_tools'] != REGISTRY['public_tools']:
+            errors.append('Projection tools differ from the saved server registry')
+        server_ids = [(row['id'], row.get('readiness'), row['badge']) for row in server_view['payments']]
+        projection_ids = [(row['id'], row.get('readiness'), row['badge']) for row in REGISTRY['payments']]
+        if server_ids != projection_ids:
+            errors.append('Projection payments differ from the saved server registry')
     tools = REGISTRY['public_tools']
     if set(tools) != {row['name'] for row in INVENTORY['tools']} or len(tools) != len(set(tools)):
         errors.append('Registry tool names differ from mcp/tool-inventory.json')

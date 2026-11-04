@@ -19,6 +19,7 @@ jobs:
       - name: Check the shared layout, registry and jargon
         run: |
           python3 tools/build_site.py --check
+          python3 tests/test_registry_view.py
           python3 tools/check_registry_drift.py
           python3 tools/lint_jargon.py
       - name: Install the browser used by the people checklist
