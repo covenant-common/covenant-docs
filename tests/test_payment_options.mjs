@@ -50,7 +50,8 @@ test('host catalogue is inspected without borrowing its labels or claiming payme
   assert.ok(!view.renderOptions(rows).includes('untrusted label'));
   assert.ok(!view.renderOptions(rows).includes('Pay now'));
   const installed = change('usdc-base', row => {row.readiness='CONFIGURED_UNVERIFIED';row.connection_installed=true;});
-  assert.match(view.inspectCatalog(installed).find(row=>row.id==='usdc-base').readinessLabel,/check the deal/);
+  assert.match(view.inspectCatalog(installed).find(row=>row.id==='usdc-base').readinessLabel,/Installed, not yet verified/);
+  assert.equal(view.inspectCatalog(installed).find(row=>row.id==='card').readinessLabel,'Coming soon (not connected)');
 });
 
 test('redirected fees, wrong networks and a principal default are refused', () => {

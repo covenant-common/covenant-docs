@@ -4,9 +4,9 @@
 <h1>Money-path words</h1>
 <p>These are the words a first payment path uses. Each meaning is the one already written on the linked page. 25 USDC = 25,000,000 micro-units.</p>
 <h2 id="access-file">Access file</h2>
-<p>The private file saved from the trial page. Keep it outside an agent chat and workspace, and do not upload it. <a href="OWNER_TRADE.html">Deal approval</a> · <a href="TRIAL.html">Trial</a>.</p>
+<p>The private trial file. In the terminal client it is <code>access.json</code>. It contains the signing seed and the account token. The MCP configuration is a second file, <code>mcp.json</code>, and contains the bearer token only. Keep both outside an agent chat. <a href="OWNER_TRADE.html">Deal approval</a> · <a href="TRIAL.html">Trial</a>.</p>
 <h2 id="bearer-token">Bearer token</h2>
-<p>The account credential for the private MCP connection. The API guide says it gives account access. It is not itself an approval of a deal or a payment. <a href="API_MCP.html#private-client">Private connection</a>.</p>
+<p>The account credential in the MCP configuration’s Authorization header. That file does not contain the signing seed. It is not itself an approval of a deal or a payment. <a href="API_MCP.html#private-client">Private connection</a>.</p>
 <h2 id="agreement-id">Agreement ID</h2>
 <p>The identifier of one exact agreement. Keep the expected agreement ID separately from any shortened summary. The source order and the final payment-enabled agreement have different IDs. <a href="OWNER_TRADE.html">Deal approval</a>.</p>
 <h2 id="request-key">Request key</h2>

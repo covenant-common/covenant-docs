@@ -36,14 +36,17 @@
       account:'treasury', testnet:false, states:['NOT_LIVE'],
       steps:['The native payment network is not live.', 'This recorded treasury name is not a live external payment address.']}
   ];
-  const LABELS = {NOT_CONNECTED:'Connection needed', CONFIGURED_UNVERIFIED:'Connection installed · check the deal',
+  const LABELS = {NOT_CONNECTED:'Connection needed', CONFIGURED_UNVERIFIED:'Installed, not yet verified',
     TEST_ONLY:'Test funds only', NOT_LIVE:'Not live'};
+  function readinessText(id, readiness) {
+    return id === 'card' && readiness === 'NOT_CONNECTED' ? 'Coming soon (not connected)' : LABELS[readiness];
+  }
   function need(value) { if (!value) throw new Error('PAYMENT_OPTIONS_UNRECOGNIZED'); }
   function plain(value) { return !!value && typeof value === 'object' && !Array.isArray(value); }
   function fallback() {
     return DEFINITIONS.map(d => ({...d, steps:d.steps.slice(), states:d.states.slice(),
       readiness:d.testnet?'TEST_ONLY':d.id==='aap-native'?'NOT_LIVE':'NOT_CONNECTED',
-      readinessLabel:LABELS[d.testnet?'TEST_ONLY':d.id==='aap-native'?'NOT_LIVE':'NOT_CONNECTED'],
+      readinessLabel:readinessText(d.id, d.testnet?'TEST_ONLY':d.id==='aap-native'?'NOT_LIVE':'NOT_CONNECTED'),
       connectionInstalled:false, feeAccount:d.account, source:'saved'}));
   }
   function inspectCatalog(value) {
@@ -82,7 +85,7 @@
         if (row.readiness === 'NOT_CONNECTED' || row.readiness === 'NOT_LIVE') need(row.connection_installed === false);
       }
       return {...d, steps:d.steps.slice(), states:d.states.slice(), readiness:row.readiness,
-        readinessLabel:LABELS[row.readiness], connectionInstalled:row.connection_installed,
+        readinessLabel:readinessText(row.id, row.readiness), connectionInstalled:row.connection_installed,
         feeAccount:account, source:'host'};
     });
   }
