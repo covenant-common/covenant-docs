@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="index,follow"><title>Covenant public tools — choose a task</title><meta name="description" content="Choose among the nine public tools for actual service search, unsigned terms and supplied-record checks. Required inputs, examples, result meanings and a reproducible test set."><link rel="canonical" href="https://covenant-common.github.io/covenant-docs/docs/PUBLIC_TASKS.html"><link rel="stylesheet" href="../assets/site.css?v=54f7d8de654bb3fb"><link rel="stylesheet" href="../assets/theme.css?v=d619ec3067221a74"><link rel="icon" href="../favicon.ico" type="image/x-icon"><link rel="stylesheet" href="../assets/components.css?v=d550a861878b3fe6"></head><body><main><!-- site-chrome:start -->
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="index,follow"><title>Covenant public tools — choose a task</title><meta name="description" content="Choose among the nine public tools for actual service search, unsigned terms and supplied-record checks. Required inputs, examples, result meanings and a reproducible test set."><link rel="canonical" href="https://covenant-common.github.io/covenant-docs/docs/PUBLIC_TASKS.html"><link rel="stylesheet" href="../assets/site.css?v=c3b14cbaca7e273f"><link rel="stylesheet" href="../assets/theme.css?v=d619ec3067221a74"><link rel="icon" href="../favicon.ico" type="image/x-icon"><link rel="stylesheet" href="../assets/components.css?v=d550a861878b3fe6"></head><body><main><!-- site-chrome:start -->
 <form class="nav-search" role="search" action="../docs/TERMINAL.html" method="get"><label class="sr-only" for="site-search">Find a service</label><input id="site-search" name="q" type="search" placeholder="Find a service" autocomplete="off"><button type="submit" class="btn">Search</button></form>
 <nav class="site-nav" aria-label="Main"><a class="nav-brand" href="../index.html">Covenant</a><input class="nav-toggle" type="checkbox" id="site-menu"><label class="nav-toggle-label" for="site-menu">Menu</label><div class="nav-links"><a href="../docs/PERSON.html">I'm a person</a><a href="../docs/AGENT.html">Connect an agent</a><a href="../docs/DISPUTES.html">Disputes &amp; refunds</a><a href="../docs/SELLER.html#how-you-get-paid">How you get paid</a><a href="../docs/TERMINAL.html">Find</a><a href="../docs/NEGOTIATION.html">Agree</a><a href="../docs/PAYING.html">Pay</a><a href="../docs/HOW_IT_WORKS.html#section_7">Deliver</a><a href="../docs/PAYING.html#refunds">Resolve</a><a href="../docs/START.html">Start</a><a href="../docs/BUYER.html">Buyer path</a><a href="../docs/SELLER.html">Seller path</a><a href="../docs/PRICING.html">Pricing</a><a href="../docs/ABOUT.html">About</a><a href="../docs/WORK_WITH_US.html">Contact</a></div></nav>
 <nav class="journey" aria-label="Deal steps"><p>The deal, in order:</p><ol><li><a href="../docs/TERMINAL.html">Find</a></li><li><a href="../docs/NEGOTIATION.html">Agree</a></li><li><a href="../docs/PAYING.html">Pay</a></li><li><a href="../docs/HOW_IT_WORKS.html#section_7">Deliver</a></li><li><a href="../docs/PAYING.html#refunds">Resolve</a></li></ol><p class="journey-next">Next: <a href="../docs/TERMINAL.html">Find a service</a></p></nav>
@@ -22,6 +22,28 @@
 </tbody></table>
 
 <h2 id="first-draft">A useful first draft</h2>
+<h2 id="review-empty-case">Review example</h2>
+<p><code>covenant_review__review</code> takes a wrapped case. This is the public review reference’s empty case. Send it as the tool arguments. It is not a contract draft.</p>
+<pre id="review-empty-case-json">{
+  "case": {
+    "agreements": [],
+    "bindings": [],
+    "decisions": [],
+    "evidence": [],
+    "expected_heads": null,
+    "grants": [],
+    "group": null,
+    "links": [],
+    "notes": [],
+    "obligations": [],
+    "payments": [],
+    "policies": [],
+    "primary": null,
+    "recoveries": [],
+    "title": "Example only: no agreements or evidence supplied",
+    "version": "covenant-coordination-case/0.1"
+  }
+}</pre>
 <p>Ask: “Draft proposed terms for a one-page source-linked research brief costing USD 25. When the 0.5% fee applies, you pay USD 25.125, the seller gets USD 25, and the fee is USD 0.125. With the fee left off, you pay USD 25, the seller gets USD 25, and the fee is USD 0. Buyer-example buys and supplier-example supplies. Delivery is within three business days after approval; the buyer reviews against the agreed scope. Leave it unsigned.” The agent can use <code>covenant_contract__draft</code> with explicit clauses, then return the result and any missing material details.</p>
 <p>For a revised price, pass the exact original and proposed replacement bodies to <code>covenant_contract__compare</code>. Keep the original proposal intact. A change from USD 25 to USD 30 requires fresh approval. At USD 30, with the fee left off, you pay USD 30, the seller gets USD 30, and the fee is USD 0. When the 0.5% fee applies, you pay USD 30.15, the seller gets USD 30, and the fee is USD 0.15. A changed price is not an existing payment authorization.</p>
 <p>For actual listing and deal records, follow the <a href="API_MCP.html#private-client">separate private account connection</a> and <a href="OWNER_SETUP.html#hosted-listing-approval">owner approval steps</a>. Do not send account tokens or signing material to the anonymous public endpoint.</p>

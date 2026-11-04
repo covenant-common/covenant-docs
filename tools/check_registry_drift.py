@@ -6,7 +6,7 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from registry_view import PROJECTION, SERVER_COPY, SERVER_PATH, normalize, projection_source_ok
+from registry_view import PROJECTION, SERVER_COPY, SERVER_PATH, normalize, projection_source_ok, server_registry_errors
 
 ROOT = Path(__file__).resolve().parent.parent
 REGISTRY = json.loads(PROJECTION.read_text())
@@ -14,7 +14,7 @@ INVENTORY = json.loads((ROOT / 'mcp' / 'tool-inventory.json').read_text())
 
 
 def main():
-    errors = []
+    errors = server_registry_errors()
     if not projection_source_ok(REGISTRY):
         errors.append('Projection source_path is not ' + SERVER_PATH)
     if SERVER_COPY.is_file():

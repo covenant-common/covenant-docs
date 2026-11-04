@@ -26,6 +26,7 @@ PRIVATE_REPO = re.compile(r'https://github\.com/covenant-common/covenant(?=/)')
 ALLOWED_SERVER_PRS = (
     'https://github.com/covenant-common/covenant/pull/192',
     'https://github.com/covenant-common/covenant/pull/200',
+    'https://github.com/covenant-common/covenant/pull/201',
 )
 UNACTIVATED = (
     'jupie202020.pythonanywhere.com/mcp/server-card',

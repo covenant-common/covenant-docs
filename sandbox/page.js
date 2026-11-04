@@ -17,7 +17,6 @@ const CONFIRM = {
   release: 'Release pays the seller in test USDC. It does not move real money.',
   refund: 'Refund returns the held test USDC to the buyer. Hosted USDC cannot do this.',
 };
-const AUTHORS = { quote: 'Buyer', offer: 'Buyer', counter: 'Seller', agree: 'Buyer', accept: 'Both', decline: 'Buyer', fund: 'Buyer', deliver: 'Seller', release: 'Buyer', dispute: 'Buyer', refund: 'Resolver' };
 let session = null;
 let last = null;
 let sample = createSample();
@@ -61,33 +60,32 @@ function show(result) {
     $('step-error').textContent = explain(result.error) || result.error;
     return;
   }
-  const item = document.createElement('li');
-  item.textContent = result.said + ' ' + result.money + ' ' + result.feeText;
-  $('step-log').append(item);
+  $('step-log').replaceChildren();
+  result.history.forEach((row) => {
+    const item = document.createElement('li');
+    item.textContent = row.text + ' ' + result.money + ' ' + result.feeText;
+    $('step-log').append(item);
+  });
   $('money').replaceChildren();
   line($('money'), result.money);
   line($('money'), result.feeText);
-  $('step-status').textContent = result.serverState + '. ' + result.said;
-  const row = document.createElement('li');
-  row.textContent = new Date().toISOString().slice(11, 19) + ' UTC · ' + (AUTHORS[result.step] || 'Sample') + ' · ' + result.said;
-  $('thread').append(row);
+  $('step-status').textContent = result.stage + '. ' + result.said;
+  $('thread').replaceChildren();
+  result.history.forEach((row) => {
+    const entry = document.createElement('li');
+    entry.textContent = row.at + ' · ' + row.author + ' · ' + row.text;
+    $('thread').append(entry);
+  });
   $('receipt').replaceChildren();
   line($('receipt'), 'Receipt. ' + result.feeText);
-  if (result.step === 'accept') {
-    const id = crypto.randomUUID();
-    line($('receipt'), 'Sample record ' + id + '. Next: fund the test hold, then deliver. This is not a hosted agreement.');
+  if (result.recordId) {
+    line($('receipt'), 'Sample record ' + result.recordId + '. Next: fund the test hold, then deliver. This is not a hosted agreement.');
   }
-  const phase = sample.phase();
-  $('propose').disabled = phase !== 'ready' && phase !== 'quote';
-  $('counter').disabled = phase !== 'offer';
-  $('agree').disabled = phase !== 'counter';
-  $('accept').disabled = phase !== 'agree' && phase !== 'offer' && phase !== 'counter';
-  $('decline').disabled = phase !== 'quote' && phase !== 'offer' && phase !== 'counter' && phase !== 'agree';
-  $('fund').disabled = phase !== 'accepted';
-  $('deliver').disabled = phase !== 'bound';
-  $('release').disabled = phase !== 'delivered';
-  $('dispute').disabled = phase !== 'delivered';
-  $('refund').disabled = phase !== 'disputed';
+  Object.entries(result.buttons).forEach(([id, spec]) => {
+    const button = $(id);
+    button.textContent = spec.label;
+    button.disabled = !spec.enabled;
+  });
 }
 
 function ask(action) {
@@ -101,7 +99,6 @@ function act(name) {
 }
 
 function clickStep(name) {
-  if (name === 'propose') name = sample.phase() === 'ready' ? 'quote' : 'offer';
   if (CONFIRM[name]) ask(name);
   else act(name);
 }
@@ -169,6 +166,7 @@ function check(tamper) {
   }
 }
 
+show(sample.state());
 $('run').addEventListener('click', run);
 $('check').addEventListener('click', () => check(false));
 $('forge').addEventListener('click', () => check(true));

@@ -502,10 +502,9 @@
       }
     } finally {$('draft-copy').disabled = drafting || latestDraftRaw === null;}
   });
-  function showPriceError(message) {
-    const error = $('draft-price-error');
+  function showFieldError(id, message) {
+    const error = $(id);
     if (error) error.textContent = message || '';
-    if ($('draft-amount')) $('draft-amount').setCustomValidity(message || '');
   }
   function composePrice() {
     const currency = $('draft-currency').value;
@@ -516,13 +515,18 @@
   }
   function checkPrice() {
     const deal = globalThis.CovenantDeal;
-    if (!deal) {showPriceError('The price check did not load. Nothing was sent.'); return false;}
-    if (!$('draft-currency').value) {showPriceError('Choose a currency.'); return false;}
-    if ($('draft-currency').value !== 'none' && !/^[0-9]+(?:\.[0-9]{1,2})?$/.test($('draft-amount').value.trim())) {
-      showPriceError(deal.MESSAGES.NOT_A_PRICE); return false;
+    if (!deal) {
+      showFieldError('draft-amount-error', 'The price check did not load. Nothing was sent.');
+      return false;
     }
+    const fields = deal.priceFieldErrors($('draft-currency').value, $('draft-amount').value);
+    showFieldError('draft-currency-error', fields.currencyMessage);
+    showFieldError('draft-amount-error', fields.amountMessage);
+    if ($('draft-currency')) $('draft-currency').setCustomValidity(fields.currencyMessage);
+    if ($('draft-amount')) $('draft-amount').setCustomValidity(fields.amountMessage);
+    if (fields.currencyMessage || fields.amountMessage) return false;
     const result = deal.validatePrice(composePrice());
-    showPriceError(result.ok ? '' : result.message);
+    showFieldError('draft-amount-error', result.ok ? '' : result.message);
     if (result.ok) $('draft-price').value = result.canonical;
     const preview = $('sample-lifecycle');
     if (preview) {

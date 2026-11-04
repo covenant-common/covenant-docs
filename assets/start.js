@@ -105,7 +105,15 @@
     if (typeof text !== 'string' || text.length > 5000) throw new Error('Keep the feedback short.');
     return 'mailto:jupitersstring@gmail.com?subject=' + encodeURIComponent('Covenant first-job feedback') + '&body=' + encodeURIComponent(text);
   }
-  var api = { MCP: MCP, tags: tags, task: task, route: route, taggedLink: taggedLink, shareLink: shareLink, note: note, email: email, stages: STAGES.slice() };
+  function connectionFailure(error) {
+    var name = error && error.name;
+    var message = error && error.message ? String(error.message) : '';
+    if (name === 'TypeError' || /failed to fetch|networkerror|load failed|cors/i.test(message)) {
+      return 'This page could not reach the public connection. That usually means the browser blocked the request (CORS) or you are offline. Next: copy the address and add it in your agent, or open the published start page and try again.';
+    }
+    return 'The public connection did not answer from this page (' + (message || 'unknown error') + '). Next: copy the address and try it in your agent.';
+  }
+  var api = { MCP: MCP, tags: tags, task: task, route: route, taggedLink: taggedLink, shareLink: shareLink, note: note, email: email, stages: STAGES.slice(), connectionFailure: connectionFailure };
   if (typeof module === 'object' && module.exports) module.exports = api;
   if (typeof document === 'undefined') return;
   var panel = document.getElementById('start-route-panel');
@@ -153,7 +161,7 @@
       var tools = parsed.result && parsed.result.tools;
       status.textContent = 'Connected. ' + (Array.isArray(tools) ? tools.length : 'The') + ' public tools answered. Nothing was signed or paid.';
     } catch (error) {
-      status.textContent = 'The public connection did not answer from this page (' + error.message + '). You can still copy the address and try it in your agent.';
+      status.textContent = connectionFailure(error);
     }
   });
   document.getElementById('start-copy-prompt').addEventListener('click', function () { copy(route(chosen).prompt, 'start-prompt-status', 'Copied. Give this task to your agent after adding the connection. Nothing was sent by this page.'); });

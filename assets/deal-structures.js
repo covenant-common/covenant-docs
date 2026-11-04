@@ -188,7 +188,7 @@
   function proposalHandoffHTML(request, record, raw) {
     const cover = proposalHandoff(request, record, raw);
     const escape = (value) => value.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
-    return '<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Unsigned proposal handoff</title><style>*{box-sizing:border-box}body{font:16px/1.16 "Times New Roman",Times,serif;color:#000;background:#fff;margin:1rem}main{border:1px solid #000;max-width:66rem;margin:auto;padding:1rem}h1,p,pre{font:inherit;margin:0 0 .618rem}h1{font-weight:bold}pre{white-space:pre-wrap;overflow-wrap:anywhere}</style></head><body><main><h1>Unsigned proposal handoff</h1><p>Review this proposal before sharing it. No approval or payment is supplied by this document.</p><pre>' + escape(cover) + '</pre></main></body></html>';
+    return '<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Unsigned proposal handoff</title><style>*{box-sizing:border-box}body{font:16px/1.16 system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;color:#000;background:#fff;margin:1rem}main{border:1px solid #000;max-width:66rem;margin:auto;padding:1rem}h1,p,pre{font:inherit;margin:0 0 .618rem}h1{font-weight:bold}pre{white-space:pre-wrap;overflow-wrap:anywhere}</style></head><body><main><h1>Unsigned proposal handoff</h1><p>Review this proposal before sharing it. No approval or payment is supplied by this document.</p><pre>' + escape(cover) + '</pre></main></body></html>';
   }
   function formatLegs(values) {
     if (!Array.isArray(values) || !values.length) return '';

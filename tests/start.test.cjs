@@ -5,6 +5,17 @@ const path = require('node:path');
 const vm = require('node:vm');
 const start = require('../assets/start.js');
 
+test('a failed connection check explains CORS or offline instead of Failed to fetch', () => {
+  const cors = start.connectionFailure(new TypeError('Failed to fetch'));
+  assert.match(cors, /CORS/);
+  assert.match(cors, /offline/);
+  assert.match(cors, /Next:/);
+  assert.doesNotMatch(cors, /Failed to fetch/);
+  const http = start.connectionFailure(new Error('HTTP 503'));
+  assert.match(http, /HTTP 503/);
+  assert.match(http, /Next:/);
+});
+
 test('all first-job routes use the current public connection and preserve owner approval', () => {
   for (const name of ['connect', 'advertise', 'buy', 'coordinate']) {
     const r = start.route(name);

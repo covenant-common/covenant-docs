@@ -754,18 +754,33 @@
     const link = node('a', 'Open current adverts as a simple page', state);
     link.href = PUBLIC_ORIGIN + '/marketplace/browse/';
   }
-  function previewNotice() {
+  const LOCAL_FIXTURE = [{
+    id: 'f'.repeat(64),
+    visibility: 'INDEXED',
+    fields: {
+      title: '[Test] Local preview research brief',
+      category: 'research',
+      mode: 'TEST',
+      custom: {description: 'Fixture advert so a local preview can show a Test badge and Make an offer. Not a live listing.'}
+    }
+  }];
+  function showFixture() {
     const state = $('terminal-market-state');
     state.replaceChildren();
-    node('span', 'Local preview: live listings are available on the published site. ', state);
+    node('span', 'Fixture listings for this local preview. They are not live adverts. ', state);
     const link = node('a', 'Open the live terminal', state);
     link.href = PUBLISHED_PAGE;
-    $('terminal-find').disabled = true;
-    $('terminal-find').textContent = 'live search: published site';
+    displayed.clear();
+    $('terminal-listings').replaceChildren();
+    LOCAL_FIXTURE.forEach((publication) => {
+      $('terminal-listings').appendChild(renderListing(publication));
+      displayed.add(publication.id);
+    });
+    $('terminal-find').disabled = false;
     $('terminal-more').hidden = true;
   }
   async function search(append = false) {
-    if (!liveSearchAllowed) {previewNotice(); return;}
+    if (!liveSearchAllowed) {showFixture(); return;}
     if (busy) return;
     const need = $('terminal-query').value;
     if (!append && (!window.AAPDealStructures || typeof window.AAPDealStructures.normalizeServiceQuery !== 'function')) {
@@ -859,6 +874,6 @@
   filterBox.addEventListener('change', () => {
     document.querySelectorAll('#terminal-listings [data-test-listing="true"]').forEach((item) => { item.hidden = filterBox.checked; });
   });
-  if (liveSearchAllowed) search(false); else previewNotice();
+  if (liveSearchAllowed) search(false); else showFixture();
 
 })();

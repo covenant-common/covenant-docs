@@ -15,20 +15,56 @@ test('a vague price and a negative price are refused', () => {
   assert.equal(deal.validatePrice('No payment').ok, true);
 });
 
-test('the sample walks quote, offer, counter, hold, dispute and refund', () => {
+test('one propose changes the label, and every later amount follows that state', () => {
+  const sample = deal.createSample({now: () => '2026-11-04T14:00:00.000Z'});
+  const start = sample.state();
+  assert.equal(start.buttons.propose.label, 'Propose');
+  assert.equal(start.buttons.propose.enabled, true);
+  const proposed = sample.step('propose');
+  assert.equal(proposed.buttons.propose.label, 'Proposed');
+  assert.equal(proposed.buttons.propose.enabled, false);
+  assert.equal(proposed.stage, 'PROPOSED');
+  assert.equal(proposed.price, 20);
+  const accepted = sample.step('accept');
+  assert.equal(accepted.stage, 'ACCEPTED');
+  assert.equal(accepted.recordId, 'rec-1');
+  assert.match(accepted.history[1].at, /2026-11-04/);
+  assert.equal(accepted.history[1].author, 'Both');
+  const funded = sample.step('fund');
+  assert.equal(funded.held, 20);
+  assert.equal(funded.stage, 'BOUND');
+  const delivered = sample.step('deliver');
+  assert.match(delivered.said, /20 test USDC/);
+  assert.doesNotMatch(delivered.said, /25/);
+  const disputed = sample.step('dispute');
+  assert.match(disputed.said, /20 test USDC/);
+  const refunded = sample.step('refund');
+  assert.equal(refunded.stage, 'RELEASED');
+  assert.equal(refunded.held, 0);
+  assert.equal(refunded.buyer, 100);
+  assert.match(refunded.said, /Refunded/);
+  assert.match(refunded.said, /20 test USDC/);
+  assert.doesNotMatch(refunded.said, /REFUTED/);
+});
+
+test('the priced path keeps 25 after counter and agree', () => {
   const sample = deal.createSample();
-  for (const name of ['quote', 'offer', 'counter', 'agree', 'accept', 'fund', 'deliver', 'dispute', 'refund']) {
+  for (const name of ['propose', 'counter', 'agree', 'accept', 'fund', 'deliver', 'release']) {
     const row = sample.step(name);
     assert.equal(row.error, undefined, name);
-    assert.match(row.feeText, /you pay/);
-    assert.match(row.feeText, /seller gets/);
-    assert.match(row.feeText, /fee is/);
+    assert.equal(row.buttons[name === 'propose' ? 'propose' : name].label.length > 0, true);
   }
-  const end = sample.step('refund');
-  assert.ok(end.error);
-  const happy = deal.createSample();
-  for (const name of ['quote', 'offer', 'counter', 'agree', 'accept', 'fund', 'deliver', 'release']) happy.step(name);
-  assert.equal(happy.phase(), 'settled');
+  assert.equal(sample.state().seller, 25);
+  assert.equal(sample.phase(), 'settled');
+});
+
+test('a non-numeric amount is its own field message', () => {
+  const both = deal.priceFieldErrors('', 'a hundred quid');
+  assert.equal(both.currencyMessage, 'Choose a currency.');
+  assert.match(both.amountMessage, /not a price/);
+  const amountOnly = deal.priceFieldErrors('USD', 'a hundred quid');
+  assert.equal(amountOnly.currencyMessage, '');
+  assert.match(amountOnly.amountMessage, /not a price/);
 });
 
 test('engine codes are not the words a person sees', () => {

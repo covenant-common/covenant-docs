@@ -1,7 +1,6 @@
 // One sample deal for the sandbox and the Matrix price check.
-// Stage names match the installed work-order checks:
-// PROPOSED, BOUND, DELIVERED, DISPUTED, DECIDED, SETTLED, RELEASED.
-// QUOTE is only a sample step before anyone signs.
+// Every label, button and amount comes from the state object this file returns.
+// Stage names match the installed work-order checks, plus ACCEPTED before a hold.
 // Test USDC only. This file does not move hosted money.
 (function (root, factory) {
   const api = factory();
@@ -9,7 +8,7 @@
   root.CovenantDeal = api;
 })(typeof globalThis !== 'undefined' ? globalThis : this, function () {
   const FEE_BPS = 50;
-  const SERVER_STATES = ['PROPOSED', 'BOUND', 'DELIVERED', 'DISPUTED', 'DECIDED', 'SETTLED', 'RELEASED'];
+  const SERVER_STATES = ['PROPOSED', 'ACCEPTED', 'BOUND', 'DELIVERED', 'DISPUTED', 'DECIDED', 'SETTLED', 'RELEASED'];
   const MESSAGES = {
     COUNTERPARTY_ASSENT: 'The other person has not signed this version yet. Nothing is agreed and no test money has moved.',
     AGENT_ASSENT: 'The buyer’s signature no longer matches, because the price was changed after it was signed.',
@@ -22,7 +21,12 @@
     NEGATIVE_PRICE: 'A price cannot be negative.',
     MISSING_CURRENCY: 'Add a currency, such as USD, GBP, EUR or USDC.',
     NOT_A_PRICE: 'Use a number and a currency, such as USD 25. “A hundred quid” is not a price.',
-    MISSING_PRICE: 'Enter a price, or type No payment.'
+    MISSING_PRICE: 'Enter a price, or type No payment.',
+    CHOOSE_CURRENCY: 'Choose a currency.'
+  };
+  const AUTHORS = {
+    propose: 'Buyer', counter: 'Seller', agree: 'Buyer', accept: 'Both', decline: 'Buyer',
+    fund: 'Buyer', deliver: 'Seller', release: 'Buyer', dispute: 'Buyer', refund: 'Resolver'
   };
 
   function formatThousandths(value) {
@@ -73,22 +77,62 @@
     return {ok: true, canonical: canonical, kind: 'money', currency: currency, amount: Number(money[2] + '.' + (money[3] || '0'))};
   }
 
-  function createSample() {
+  function priceFieldErrors(currency, amount) {
+    const raw = String(amount == null ? '' : amount).trim();
+    const chosen = String(currency == null ? '' : currency);
+    const currencyMessage = chosen ? '' : MESSAGES.CHOOSE_CURRENCY;
+    let amountMessage = '';
+    if (chosen === 'none') amountMessage = '';
+    else if (raw && !/^[0-9]+(?:\.[0-9]{1,2})?$/.test(raw)) amountMessage = MESSAGES.NOT_A_PRICE;
+    else if (chosen && chosen !== 'none' && !raw) amountMessage = MESSAGES.MISSING_PRICE;
+    return {currencyMessage: currencyMessage, amountMessage: amountMessage};
+  }
+
+  function createSample(options) {
+    const opts = options || {};
+    const now = opts.now || function () { return new Date().toISOString(); };
     let phase = 'ready';
+    let stage = 'READY';
     let price = 20;
     let buyer = 100;
     let seller = 0;
     let held = 0;
-    function view(step, said, serverState) {
+    let said = 'Not started. Propose when you are ready.';
+    let recordId = null;
+    let releasedAmount = 0;
+    const history = [];
+    let recordCount = 0;
+
+    function buttons() {
+      return {
+        propose: {label: phase === 'ready' ? 'Propose' : 'Proposed', enabled: phase === 'ready'},
+        counter: {label: 'Counter', enabled: phase === 'offer'},
+        agree: {label: 'Counter again', enabled: phase === 'counter'},
+        accept: {label: 'Accept', enabled: phase === 'offer' || phase === 'counter' || phase === 'agree'},
+        decline: {label: 'Decline', enabled: phase === 'offer' || phase === 'counter' || phase === 'agree'},
+        fund: {label: 'Fund', enabled: phase === 'accepted'},
+        deliver: {label: 'Deliver', enabled: phase === 'bound'},
+        release: {label: 'Release', enabled: phase === 'delivered'},
+        dispute: {label: 'Dispute', enabled: phase === 'delivered'},
+        refund: {label: 'Refund', enabled: phase === 'disputed'}
+      };
+    }
+
+    function view() {
       const split = feeSplit(price);
       return {
-        step: step,
-        serverState: serverState,
+        phase: phase,
+        step: phase,
+        stage: stage,
+        serverState: stage,
         said: said,
         buyer: buyer,
         seller: seller,
         held: held,
         price: price,
+        recordId: recordId,
+        history: history.map(function (row) { return Object.assign({}, row); }),
+        buttons: buttons(),
         split: split,
         money: 'Buyer has ' + buyer + ' test USDC. Held: ' + held + '. Seller has ' + seller + '.',
         feeText: moneyText(split, 'test USDC'),
@@ -96,78 +140,114 @@
         bindsRealPerson: false
       };
     }
+
+    function remember(step, text) {
+      history.push({at: now(), author: AUTHORS[step] || 'Sample', text: text, amount: price, held: held, stage: stage});
+    }
+
     const steps = {
-      quote: function () {
+      propose: function () {
         if (phase !== 'ready') return {error: MESSAGES.OUT_OF_ORDER};
-        phase = 'quote';
-        price = 20;
-        return view('quote', 'Quote: 20 test USDC. Nothing is signed and no test money has moved.', 'QUOTE');
-      },
-      offer: function () {
-        if (phase !== 'quote') return {error: MESSAGES.OUT_OF_ORDER};
         phase = 'offer';
-        return view('offer', 'The buyer offers 20 test USDC. Stage PROPOSED. The sample does not send this to the seller.', 'PROPOSED');
+        stage = 'PROPOSED';
+        price = 20;
+        said = 'Proposed. Stage PROPOSED. The price is 20 test USDC. Nothing is signed and no test money has moved.';
+        remember('propose', said);
+        return view();
       },
       counter: function () {
         if (phase !== 'offer') return {error: MESSAGES.OUT_OF_ORDER};
         phase = 'counter';
+        stage = 'PROPOSED';
         price = 30;
-        return view('counter', 'The seller counters at 30 test USDC. This is a new PROPOSED draft. It is not linked to the previous one.', 'PROPOSED');
+        said = 'The seller counters at 30 test USDC. Stage PROPOSED. This replaces the 20 test USDC proposal.';
+        remember('counter', said);
+        return view();
       },
       agree: function () {
         if (phase !== 'counter') return {error: MESSAGES.OUT_OF_ORDER};
         phase = 'agree';
+        stage = 'PROPOSED';
         price = 25;
-        return view('agree', 'The price to sign is 25 test USDC. Still PROPOSED. Nothing is held until you accept.', 'PROPOSED');
+        said = 'The price to sign is 25 test USDC. Stage PROPOSED. Nothing is held until you accept.';
+        remember('agree', said);
+        return view();
       },
       accept: function () {
         if (phase !== 'agree' && phase !== 'counter' && phase !== 'offer') return {error: MESSAGES.OUT_OF_ORDER};
         phase = 'accepted';
-        return view('accept', 'Accepted in this sample. Both sides have the same version. Test funds stay in the buyer’s balance until you fund the hold. This does not bind a real person.', 'PROPOSED');
+        stage = 'ACCEPTED';
+        recordCount += 1;
+        recordId = 'rec-' + recordCount;
+        said = 'Accepted. Stage ACCEPTED. The signed price is ' + price + ' test USDC. Test funds stay with the buyer until you fund the hold.';
+        remember('accept', said);
+        return view();
       },
       fund: function () {
         if (phase !== 'accepted') return {error: MESSAGES.OUT_OF_ORDER};
         phase = 'bound';
+        stage = 'BOUND';
         held = price;
         buyer = 100 - price;
-        return view('fund', 'Funded. Stage BOUND. ' + price + ' test USDC is held. It is not in the seller’s balance yet.', 'BOUND');
+        said = 'Funded. Stage BOUND. ' + held + ' test USDC is held. It is not in the seller’s balance yet.';
+        remember('fund', said);
+        return view();
       },
       deliver: function () {
         if (phase !== 'bound') return {error: MESSAGES.OUT_OF_ORDER};
         phase = 'delivered';
-        return view('deliver', 'Delivered. Stage DELIVERED. The 25 test USDC stays held.', 'DELIVERED');
+        stage = 'DELIVERED';
+        said = 'Delivered. Stage DELIVERED. The ' + held + ' test USDC stays held.';
+        remember('deliver', said);
+        return view();
       },
       release: function () {
         if (phase !== 'delivered') return {error: MESSAGES.OUT_OF_ORDER};
         phase = 'settled';
+        stage = 'SETTLED';
+        releasedAmount = held;
+        seller += held;
         held = 0;
-        seller = 25;
-        return view('release', 'Released. Stage SETTLED. The seller has the 25 test USDC. Test money only.', 'SETTLED');
+        said = 'Released. Stage SETTLED. The seller has the ' + releasedAmount + ' test USDC. Test money only.';
+        remember('release', said);
+        return view();
       },
       dispute: function () {
         if (phase !== 'delivered') return {error: MESSAGES.OUT_OF_ORDER};
         phase = 'disputed';
-        return view('dispute', 'Disputed. Stage DISPUTED. The 25 test USDC stays held while the resolver looks at the reason.', 'DISPUTED');
+        stage = 'DISPUTED';
+        said = 'Disputed. Stage DISPUTED. The ' + held + ' test USDC stays held.';
+        remember('dispute', said);
+        return view();
       },
       decline: function () {
-        if (phase !== 'offer' && phase !== 'counter' && phase !== 'agree' && phase !== 'quote') return {error: MESSAGES.OUT_OF_ORDER};
+        if (phase !== 'offer' && phase !== 'counter' && phase !== 'agree') return {error: MESSAGES.OUT_OF_ORDER};
         phase = 'declined';
-        return view('decline', 'Declined. No test funds moved. This sample does not notify the other side.', 'PROPOSED');
+        stage = 'PROPOSED';
+        said = 'Declined. Stage PROPOSED. No test funds moved.';
+        remember('decline', said);
+        return view();
       },
       refund: function () {
         if (phase !== 'disputed') return {error: MESSAGES.OUT_OF_ORDER};
         phase = 'released';
+        stage = 'RELEASED';
+        const returned = held;
+        buyer += held;
         held = 0;
-        buyer = 100;
-        return view('refund', 'The resolver records REFUTED. Stage RELEASED. The 25 test USDC is refunded to the buyer. Test money only. Hosted USDC has no refund.', 'RELEASED');
+        said = 'Refunded. Stage RELEASED. ' + returned + ' test USDC is back with the buyer. Test money only. Hosted USDC has no refund.';
+        remember('refund', said);
+        return view();
       }
     };
+
     return {
       step: function (name) {
         const fn = steps[name];
         if (!fn) return {error: MESSAGES.OUT_OF_ORDER};
         return fn();
       },
+      state: view,
       phase: function () { return phase; }
     };
   }
@@ -179,6 +259,7 @@
     feeSplit: feeSplit,
     moneyText: moneyText,
     validatePrice: validatePrice,
+    priceFieldErrors: priceFieldErrors,
     createSample: createSample,
     explain: function (code) { return MESSAGES[code] || 'Something in the sample stopped. Run the step again. No real money moved.'; }
   };

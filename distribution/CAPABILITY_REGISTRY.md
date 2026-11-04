@@ -4,7 +4,7 @@ The docs site does not invent payment status or the public tool list. Both are p
 
 - Repository: `covenant-common/covenant`
 - Path: `covenant_chain/data/capability_registry.json`
-- Draft pull request: https://github.com/covenant-common/covenant/pull/200
+- Draft pull request: https://github.com/covenant-common/covenant/pull/201
 - Related server work: https://github.com/covenant-common/covenant/pull/192
 
 `distribution/capability-registry.json` is the projection the site build reads. `distribution/capability-registry.server.json` is the raw server file, saved only after a sync. It is not in this checkout yet: the docs agent receives HTTP 404 for that private pull request.
@@ -36,4 +36,4 @@ A file with neither shape fails and prints its top-level keys. Do not fill the g
 
 ## CI
 
-`tools/check_registry_drift.py` checks the projection against `mcp/tool-inventory.json` and the generated pages. When the raw server copy is present, the projection's tools and payment ids must match `normalize()` of that copy.
+`tools/check_registry_drift.py` and `tools/check_agentic_claims.py` fail when `distribution/capability-registry.server.json` is missing or `normalize()` does not recognise it. A stale 9-tool note is not a pass. When the raw copy is present, the projection's tools and payment ids must match `normalize()` of that copy.
