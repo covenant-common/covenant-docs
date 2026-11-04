@@ -72,7 +72,7 @@
     if(!response.ok||result.ok!==true){const error=new Error(result.error&&result.error.fix||'Trial setup could not complete. Your current access file is unchanged.');error.code=result.error&&result.error.code;throw error;}
     return result.result;
   }
-  function update(){el('trial-start').disabled=busy||!!access;el('trial-restore').disabled=busy;el('trial-save').disabled=!access;el('trial-config').disabled=!access||!access.grant;el('trial-retry').hidden=!access||!!access.grant;el('trial-retry').disabled=busy;el('trial-ready').hidden=!access||!access.grant;if(access&&access.grant)el('trial-expiry').textContent=new Date(access.grant.expires*1000).toLocaleString();}
+  function update(){el('trial-start').disabled=busy||!!access;el('trial-restore').disabled=busy;el('trial-save').disabled=!access;el('trial-config').disabled=!access||!access.grant;el('trial-retry').hidden=!access||!!access.grant;el('trial-retry').disabled=busy;el('trial-ready').hidden=!access||!access.grant;if(access&&access.grant)el('trial-expiry').textContent='Trial ready. Expires: '+new Date(access.grant.expires*1000).toLocaleString()+'.';}
   function save(value,name,containsSigningKey){const url=URL.createObjectURL(new Blob([JSON.stringify(value,null,2)+'\n'],{type:'application/json'}));urls.push(url);const a=document.createElement('a');a.href=url;a.download=name;document.body.appendChild(a);a.click();a.remove();if(containsSigningKey)downloadAttempted=true;say('Download started. Check that the file was saved, and keep it private.');}
   async function activate(){
     if(busy||!access)return;busy=true;update();
