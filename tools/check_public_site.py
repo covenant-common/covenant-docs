@@ -63,6 +63,7 @@ def check():
                           'docs/TERMINAL.html':{'../assets/terminal.js','../assets/deal-structures.js'},
                           'docs/DEAL_STRUCTURES.html':{'../assets/deal-structures.js'},
                           'docs/START.html':{'../assets/start.js'},
+                          'docs/API_MCP.html':{'../assets/copy-mcp-config.js'},
                           'docs/EXPLORE.html':{'../assets/explore.js'},
                           'docs/PILOT_WORKSPACE.html':{'../assets/pilot-workspace.js'}}
             for launch_page in ('index.html','docs/PRICING.html','docs/SERVICES.html','docs/TERMINAL.html'):

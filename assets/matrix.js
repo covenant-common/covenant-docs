@@ -200,8 +200,11 @@
       if (resources) text('p', 'Offered resources: ' + resources, article);
     }
     const url = safePublicationUrl(publication.url);
-    if (url) {const link = text('a', 'Open the public advert', article); link.href = url;}
-    const arrange = text('button', 'Structure this deal', article); arrange.type = 'button'; arrange.disabled = !window.AAPDealStructures;
+    const actions = document.createElement('div');
+    actions.className = 'card-actions';
+    if (url) {const link = text('a', 'Open the public advert', actions); link.href = url;}
+    const arrange = text('button', 'Structure this deal', actions); arrange.type = 'button'; arrange.disabled = !window.AAPDealStructures;
+    article.appendChild(actions);
     const arrangeState = text('p', '', article); arrangeState.setAttribute('role', 'status'); arrangeState.setAttribute('aria-live', 'polite');
     arrange.addEventListener('click', () => {
       try {selectAdvert(window.AAPDealStructures.advertFromPublication(publication)); $('draft-work').scrollIntoView({block: 'start'}); $('draft-structure').focus();}

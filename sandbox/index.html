@@ -3,7 +3,7 @@
 <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'wasm-unsafe-eval'; connect-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self'; base-uri 'none'; form-action 'none'">
 <meta name="referrer" content="no-referrer">
 <title>Try a deal in your browser</title>
-<style>*{box-sizing:border-box}body{font-family:"Times New Roman",Times,serif;font-size:16px;line-height:1.16;color:#000;background:#fff;margin:1rem}main{max-width:64rem;margin:auto;border:1px solid #000;padding:1rem}h1,h2,h3,p,ul,ol,pre,table,nav{font-size:inherit;margin:0 0 .618rem}h1,h2,h3,th{font-weight:bold}h2{margin-top:1rem}ul,ol{padding-left:1.618rem}li{margin-bottom:.236rem}a{color:#000}pre,code{font:inherit;white-space:pre-wrap;overflow-wrap:anywhere}button{font:inherit;color:#000;background:#fff;border:0;padding:0;text-decoration:underline;cursor:pointer}button:disabled{text-decoration:none;cursor:default;color:#000}summary{cursor:pointer}nav{display:flex;flex-wrap:wrap;gap:.382rem 1rem;border-bottom:1px solid #000;padding-bottom:.618rem}</style>
+<style>*{box-sizing:border-box}body{font-family:"Times New Roman",Times,serif;font-size:16px;line-height:1.16;color:#000;background:#fff;margin:1rem}main{max-width:64rem;margin:auto;border:1px solid #000;padding:1rem}h1,h2,h3,p,ul,ol,pre,table,nav{font-size:inherit;margin:0 0 .618rem}h1,h2,h3,th{font-weight:bold}h2{margin-top:1rem}ul,ol{padding-left:1.618rem}li{margin-bottom:.236rem}a{color:#000}pre,code{font:inherit;white-space:pre-wrap;overflow-wrap:anywhere}button{font:inherit;color:#000;background:#fff;border:2px solid #000;min-height:44px;padding:.5rem 1rem;text-decoration:none;cursor:pointer;display:inline-flex;align-items:center;justify-content:center}button:disabled{cursor:default;opacity:.55}summary{cursor:pointer}nav,.controls{display:flex;flex-wrap:wrap;gap:.75rem 1rem;align-items:center}.controls{margin:0 0 .618rem}nav{border-bottom:1px solid #000;padding-bottom:.618rem}</style>
 <link rel="stylesheet" href="../assets/theme.css?v=d619ec3067221a74">
 <link rel="icon" href="../favicon.ico" type="image/x-icon"></head><body><main>
 <nav aria-label="Main"><a href="../index.html">Covenant</a><a href="../docs/START.html">Start here</a><a href="../docs/API_MCP.html">API and MCP</a><a href="../docs/WORK_WITH_US.html">Contact</a></nav>
@@ -11,7 +11,7 @@
 <p>A deal records the terms both sides sign. This sample checks submitted evidence against its rules and shows an agreed dispute process. Those checks do not establish outside truth, delivery quality or fairness in every case.</p>
 <p>This page runs the Agentic Agreements Protocol (AAP) package inside your browser, in three steps: <strong>propose, accept, settle</strong>. Nothing is installed on your computer.</p>
 <p><strong>Test mode.</strong> Every key is made fresh in this page and forgotten when you leave. The money is 100 simulated test USDC on an in-page ledger: no real money, no wallet, no chain, no account. After the page has loaded, nothing is sent anywhere.</p>
-<p><button type="button" id="run">Run the demo deal</button> · <span id="status" role="status" aria-live="polite">Not started.</span></p>
+<div class="controls"><button type="button" id="run">Run the demo deal</button><span id="status" role="status" aria-live="polite">Not started.</span></div>
 <ol>
 <li><strong>Propose.</strong> The buyer offers a job and a price, and signs the exact terms.<div id="out-propose"></div></li>
 <li><strong>Accept.</strong> The seller signs the same terms. The payment moves into escrow: held, not yet paid.<div id="out-accept"></div></li>
@@ -21,7 +21,7 @@
 <div id="error" role="alert" hidden></div>
 <h2>Check it yourself</h2>
 <p>The record below carries both signatures, the delivery proof and the release. Anyone can check it offline. Change one number and the check fails.</p>
-<p><button type="button" id="check" disabled>Check the signed record</button> · <button type="button" id="forge" disabled>Change the price, then check</button></p>
+<div class="controls"><button type="button" id="check" disabled>Check the signed record</button><button type="button" id="forge" disabled>Change the price, then check</button></div>
 <div id="checked" role="status" aria-live="polite"></div>
 <details><summary>The signed deal record</summary><pre id="record">Run the demo first.</pre></details>
 <details><summary>The Python that ran</summary><pre id="code">Run the demo first.</pre></details>
@@ -34,5 +34,5 @@
 <li>Not the pinned runtime. In the browser the package runs on Pyodide's cryptography build, which is older than the version an installed package pins. Use an install route for anything beyond trying it.</li>
 </ul>
 <noscript><p>This page needs JavaScript and WebAssembly to run Python. The <a href="../docs/INSTALL.html">install guide</a> works without them.</p></noscript>
-<script type="module" src="page.js?v=f743e17967cee4d9"></script>
+<script type="module" src="page.js?v=280ab5bcf9c309a2"></script>
 </main></body></html>

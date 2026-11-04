@@ -112,6 +112,8 @@ test('actual Matrix search cards show public custom description, scope and reque
     assert.ok(text.includes('Offers: 1 review · five-page-review [service]')); assert.ok(text.includes('Wants: GBP 40.00'));
     assert.ok(!r.get(id).textContent.includes('DO-NOT-DISPLAY'));
   }
+  const actions = r.get('market-results').children[0].children.find((node) => node.className === 'card-actions');
+  assert.deepEqual(actions.children.map((node) => node.tagName), ['A', 'BUTTON']);
   assert.equal(JSON.stringify(publication),before);
   assert.equal(r.calls.filter(c=>c.method==='tools/call').length,1);
   assert.ok(r.calls.every(c=>c.method==='initialize'||c.params.name==='aap_public_listing_search'));

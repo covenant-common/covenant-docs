@@ -55,9 +55,20 @@
   if(typeof document==='undefined'||!document.getElementById('trial-start'))return;
   let access=null,busy=false,urls=[],downloadAttempted=false;
   const el=id=>document.getElementById(id),say=value=>{el('trial-state').textContent=value;};
+  const STATUS_WAIT_MS=15000;
+  function unreachableMessage(){return 'Automatic setup could not be reached. Public tools may still be available. You can request setup help below.';}
+  function abortAfter(ms){
+    if(global.AbortSignal&&typeof global.AbortSignal.timeout==='function')return global.AbortSignal.timeout(ms);
+    const controller=new global.AbortController();
+    global.setTimeout(function(){controller.abort();},ms);
+    return controller.signal;
+  }
   async function call(path,body){
-    const response=await global.fetch(ORIGIN+path,{method:body?'POST':'GET',mode:'cors',credentials:'omit',cache:'no-store',redirect:'error',headers:body?{'Content-Type':'application/json'}:{},body:body?JSON.stringify(body):undefined});
-    const result=await response.json();
+    let response;
+    try{response=await global.fetch(ORIGIN+path,{method:body?'POST':'GET',mode:'cors',credentials:'omit',cache:'no-store',redirect:'error',signal:abortAfter(STATUS_WAIT_MS),headers:body?{'Content-Type':'application/json'}:{},body:body?JSON.stringify(body):undefined});}
+    catch(_){throw new Error(unreachableMessage());}
+    let result;
+    try{result=await response.json();}catch(_){throw new Error(unreachableMessage());}
     if(!response.ok||result.ok!==true){const error=new Error(result.error&&result.error.fix||'Trial setup could not complete. Your current access file is unchanged.');error.code=result.error&&result.error.code;throw error;}
     return result.result;
   }
@@ -88,5 +99,7 @@
   });
   global.addEventListener('beforeunload',event=>{if(access&&!downloadAttempted){event.preventDefault();event.returnValue='';}});
   global.addEventListener('pagehide',()=>urls.forEach(url=>URL.revokeObjectURL(url)));
-  call('/trial/status').then(status=>{if(status.enabled&&status.signup_open){el('trial-start').disabled=false;say('Trials are open. Your trial lasts 14 days and includes up to '+status.limits.total_calls+' account requests. No email or card needed.');}else{el('trial-start').disabled=true;say('Automatic trial setup is not open on this host. Public tools still work; you can request help below.');}}).catch(()=>{el('trial-start').disabled=true;say('Automatic setup could not be reached. Public tools may still be available. You can request setup help below.');});
+  let statusDone=false;
+  global.setTimeout(function(){if(statusDone)return;el('trial-start').disabled=true;say(unreachableMessage());},STATUS_WAIT_MS);
+  call('/trial/status').then(status=>{statusDone=true;if(status.enabled&&status.signup_open){el('trial-start').disabled=false;say('Trials are open. Your trial lasts 14 days and includes up to '+status.limits.total_calls+' account requests. No email or card needed.');}else{el('trial-start').disabled=true;say('Automatic trial setup is not open on this host. Public tools still work; you can request help below.');}}).catch(()=>{statusDone=true;el('trial-start').disabled=true;say(unreachableMessage());});
 })(typeof globalThis==='object'?globalThis:this);
