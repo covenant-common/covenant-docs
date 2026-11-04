@@ -178,10 +178,23 @@ def normalize(doc):
         raise ValueError('capability registry must be a JSON object')
     if _is_projection(doc):
         return doc
-    tools = find_tools(doc)
+    tool_source = 'document'
+    listed = doc.get('public_tools_list')
+    if isinstance(listed, list) and _tool_names(listed):
+        tools = _tool_names(listed)
+        tool_source = 'public_tools_list'
+    else:
+        tools = find_tools(doc)
+    mode = doc.get('public_tools') if isinstance(doc.get('public_tools'), str) else None
+    if mode and not tools:
+        tools = tool_names_from_card()
+        tool_source = 'server-card'
     payments = find_payments(doc)
+    recognised = mode or isinstance(doc.get('sandbox'), dict) or 'methods' in doc or 'payment_methods' in doc or 'public_tools_list' in doc
     if not tools or not payments:
-        raise ValueError('unrecognised capability registry shape; top-level keys: ' + ', '.join(sorted(doc)))
+        if not recognised:
+            raise ValueError(shape_error(doc))
+        raise ValueError(shape_error(doc))
     first = doc.get('first_public_tool') or doc.get('first_tool')
     if not isinstance(first, str) or first not in tools:
         first = 'covenant_contract__draft' if 'covenant_contract__draft' in tools else tools[0]
@@ -197,6 +210,16 @@ def normalize(doc):
         'source_pr': SERVER_PR,
         'related_pr': RELATED_PR,
         'public_tools': tools,
+        'public_tools_mode': mode,
+        'tool_name_source': tool_source,
+        'can_pay': doc.get('can_pay', False),
+        'can_sign': doc.get('can_sign', False),
+        'can_refund': doc.get('can_refund', False),
+        'can_dispute': doc.get('can_dispute', False),
+        'custody': doc.get('custody'),
+        'holds_funds': doc.get('holds_funds', False),
+        'merchant_of_record': doc.get('merchant_of_record'),
+        'sandbox': {'works_in_test': sandbox_works(doc)},
         'first_public_tool': first,
         'badges': dict(BADGES),
         'payments': [{
@@ -212,10 +235,67 @@ def normalize(doc):
     }
 
 
+def shape_error(doc):
+    keys = ', '.join(sorted(doc)) if isinstance(doc, dict) else type(doc).__name__
+    return 'unrecognised shape: keys ' + keys
+
+
+def tool_names_from_card(path=None):
+    card_path = Path(path) if path else ROOT / '.well-known' / 'mcp' / 'server-card.json'
+    if not card_path.is_file():
+        return []
+    try:
+        card = json.loads(card_path.read_text())
+    except (OSError, json.JSONDecodeError):
+        return []
+    meta = ((card.get('_meta') or {}).get('io.github.covenant-common/public-tools') or {})
+    return _tool_names(meta.get('names') or [])
+
+
+def sandbox_works(doc):
+    sandbox = doc.get('sandbox') if isinstance(doc, dict) else None
+    if not isinstance(sandbox, dict):
+        return []
+    works = sandbox.get('works_in_test') or []
+    if isinstance(works, dict):
+        return [key for key, value in works.items() if value]
+    if isinstance(works, list):
+        names = []
+        for item in works:
+            if isinstance(item, str):
+                names.append(item)
+            elif isinstance(item, dict) and isinstance(item.get('id'), str):
+                names.append(item['id'])
+        return names
+    return []
+
+
+def apply_works_in_test(standards, works):
+    known = set(works or [])
+    rows = []
+    for row in standards:
+        item = dict(row)
+        ids = set(item.get('sandbox_ids') or [])
+        ids.add(item.get('id'))
+        if item.get('id') == 'mcp-2026-07-28':
+            ids.add('server/discover')
+        if ids & known:
+            item['status'] = 'Test mode'
+            if item.get('id') == 'mcp-2026-07-28':
+                item['where'] = 'server/discover is offered in the server sandbox in test. The public host still speaks MCP 2025-11-25.'
+            elif item.get('id') in ('release', 'refund'):
+                item['where'] = 'Moves test money in the server sandbox. Not real funds, and not Live.'
+        elif item.get('id') == 'reclaim':
+            item['status'] = 'Planned'
+            item['where'] = 'Not in sandbox.works_in_test.'
+        rows.append(item)
+    return rows
+
+
 def server_registry_errors(path=SERVER_COPY):
-    """Fail closed when PR 201's registry is missing or not a known shape."""
+    """Fail closed when PR 201's registry is absent or not a known shape."""
     if not Path(path).is_file():
-        return ['missing server registry %s from draft PR %s' % (SERVER_PATH, SERVER_PR)]
+        return ['unrecognised shape: keys (registry file is not in the checkout)']
     try:
         raw = json.loads(Path(path).read_text())
     except (OSError, json.JSONDecodeError) as exc:

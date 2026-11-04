@@ -1,13 +1,13 @@
 {
   "format": "covenant-docs-capability-registry/0.1",
-  "note": "Vendored projection of covenant_chain/data/capability_registry.json. Draft PR 200 was not readable from the docs agent (HTTP 404), so this projection still uses the 2 November 2026 tool inventory and the 4 November 2026 payment catalogue. Refresh it with tools/sync_capability_registry.py. Do not describe a method as live or connected unless its badge says so.",
+  "note": "public_tools on covenant #201 commit 221df81e is the string read_only. That file was not readable here (HTTP 404, 10604 bytes reported). Tool names fall back to the docs server card until public_tools_list is synced. Status rows follow sandbox.works_in_test.",
   "source_path": "covenant_chain/data/capability_registry.json",
   "source_repo": "covenant-common/covenant",
-  "source_pr": 200,
+  "source_pr": 201,
   "related_pr": 192,
   "server_pr": "https://github.com/covenant-common/covenant/pull/200",
   "related_server_pr": "https://github.com/covenant-common/covenant/pull/192",
-  "owner_todo": "Run tools/sync_capability_registry.py against a covenant checkout that contains PR 200, then commit the raw server JSON and the regenerated projection.",
+  "owner_todo": "Run tools/sync_capability_registry.py where PR 201 is readable, then commit distribution/capability-registry.server.json and the regenerated projection.",
   "public_tools": [
     "aap_public_listing_search",
     "covenant_marketplace__quick_trade",
@@ -29,14 +29,78 @@
     "LIVE": "Live"
   },
   "payments": [
-    {"id": "card", "label": "Card", "readiness": "NOT_CONNECTED", "badge": "COMING_SOON", "settlement_enabled": false, "plain": "Coming soon (not connected). Not installed."},
-    {"id": "bitcoin", "label": "Bitcoin", "readiness": "NOT_CONNECTED", "badge": "NOT_CONNECTED", "settlement_enabled": false, "plain": "Not connected. Not installed."},
-    {"id": "usdc-base", "label": "USDC on Base", "readiness": "CONFIGURED_UNVERIFIED", "badge": "CONFIGURED_UNVERIFIED", "settlement_enabled": false, "plain": "Configured, not yet verified. Not connected. Settlement is off, so a payment cannot be completed here."},
-    {"id": "usdc-ethereum", "label": "USDC on Ethereum", "readiness": "CONFIGURED_UNVERIFIED", "badge": "CONFIGURED_UNVERIFIED", "settlement_enabled": false, "plain": "Configured, not yet verified. Same limit as Base."},
-    {"id": "usdc-base-sepolia", "label": "USDC on Base Sepolia", "readiness": "TEST_ONLY", "badge": "TEST_ONLY", "settlement_enabled": false, "plain": "Test only. Not installed. Test funds would not pay a real bill."},
-    {"id": "usdc-ethereum-sepolia", "label": "USDC on Ethereum Sepolia", "readiness": "TEST_ONLY", "badge": "TEST_ONLY", "settlement_enabled": false, "plain": "Test only. Not installed. Test funds would not pay a real bill."},
-    {"id": "usdc-solana", "label": "USDC on Solana", "readiness": "NOT_CONNECTED", "badge": "NOT_CONNECTED", "settlement_enabled": false, "plain": "Not connected. Not installed."},
-    {"id": "aap-native", "label": "Native payment network", "readiness": "NOT_LIVE", "badge": "NOT_LIVE", "settlement_enabled": false, "plain": "Not live. Not installed."}
+    {
+      "id": "card",
+      "label": "Card",
+      "readiness": "NOT_CONNECTED",
+      "badge": "COMING_SOON",
+      "settlement_enabled": false,
+      "plain": "Coming soon (not connected). Not installed.",
+      "fund_holder": null
+    },
+    {
+      "id": "bitcoin",
+      "label": "Bitcoin",
+      "readiness": "NOT_CONNECTED",
+      "badge": "NOT_CONNECTED",
+      "settlement_enabled": false,
+      "plain": "Not connected. Not installed.",
+      "fund_holder": null
+    },
+    {
+      "id": "usdc-base",
+      "label": "USDC on Base",
+      "readiness": "CONFIGURED_UNVERIFIED",
+      "badge": "CONFIGURED_UNVERIFIED",
+      "settlement_enabled": false,
+      "plain": "Configured, not yet verified. Not connected. Settlement is off, so a payment cannot be completed here.",
+      "fund_holder": null
+    },
+    {
+      "id": "usdc-ethereum",
+      "label": "USDC on Ethereum",
+      "readiness": "CONFIGURED_UNVERIFIED",
+      "badge": "CONFIGURED_UNVERIFIED",
+      "settlement_enabled": false,
+      "plain": "Configured, not yet verified. Same limit as Base.",
+      "fund_holder": null
+    },
+    {
+      "id": "usdc-base-sepolia",
+      "label": "USDC on Base Sepolia",
+      "readiness": "TEST_ONLY",
+      "badge": "TEST_ONLY",
+      "settlement_enabled": false,
+      "plain": "Test only. Not installed. Test funds would not pay a real bill.",
+      "fund_holder": null
+    },
+    {
+      "id": "usdc-ethereum-sepolia",
+      "label": "USDC on Ethereum Sepolia",
+      "readiness": "TEST_ONLY",
+      "badge": "TEST_ONLY",
+      "settlement_enabled": false,
+      "plain": "Test only. Not installed. Test funds would not pay a real bill.",
+      "fund_holder": null
+    },
+    {
+      "id": "usdc-solana",
+      "label": "USDC on Solana",
+      "readiness": "NOT_CONNECTED",
+      "badge": "NOT_CONNECTED",
+      "settlement_enabled": false,
+      "plain": "Not connected. Not installed.",
+      "fund_holder": null
+    },
+    {
+      "id": "aap-native",
+      "label": "Native payment network",
+      "readiness": "NOT_LIVE",
+      "badge": "NOT_LIVE",
+      "settlement_enabled": false,
+      "plain": "Not live. Not installed.",
+      "fund_holder": null
+    }
   ],
   "fee": {
     "bps": 50,
@@ -47,6 +111,255 @@
   },
   "lifecycle": {
     "scope": "Installed work-order checks used by the browser sample. Not the public host.",
-    "states": ["PROPOSED", "BOUND", "DELIVERED", "DISPUTED", "DECIDED", "SETTLED", "RELEASED"]
+    "states": [
+      "PROPOSED",
+      "BOUND",
+      "DELIVERED",
+      "DISPUTED",
+      "DECIDED",
+      "SETTLED",
+      "RELEASED"
+    ]
+  },
+  "can_pay": false,
+  "funds": {
+    "covenant_holds_customer_funds": false,
+    "role": "platform",
+    "merchant_of_record": "seller",
+    "fee_taken": "at_payment_time",
+    "fee_amount": "TODO(owner)",
+    "note": "Covenant never holds customer funds. Name a rail only when fund_holder is set on that payment method."
+  },
+  "standards": [
+    {
+      "id": "mcp-2025-11-25",
+      "name": "MCP 2025-11-25",
+      "what": "The tool connection the public server speaks. It can draft and check. It cannot sign, publish, pay or refund.",
+      "status": "Live",
+      "where": "Public host /mcp. Send MCP-Protocol-Version: 2025-11-25.",
+      "source": "https://modelcontextprotocol.io/specification/2025-11-25",
+      "source_date": "2025-11-25",
+      "date_note": "Specification date. The public server speaks this version, read-only for payment."
+    },
+    {
+      "id": "mcp-2026-07-28",
+      "name": "MCP 2026-07-28",
+      "what": "A later MCP specification. This host does not speak it.",
+      "status": "Test mode",
+      "where": "Exercised in the server sandbox in test. The public host still speaks 2025-11-25.",
+      "source": "https://modelcontextprotocol.io/specification/2026-07-28",
+      "source_date": "2026-07-28",
+      "date_note": "Specification date. server/discover is offered in the server sandbox in test."
+    },
+    {
+      "id": "rfc-9728",
+      "name": "MCP auth (RFC 9728)",
+      "what": "OAuth 2.0 Protected Resource Metadata. A client uses it to find how to ask for a token.",
+      "status": "Test mode",
+      "where": "Exercised in the server sandbox in test. Not published on the public host. The public MCP needs no token.",
+      "source": "https://www.rfc-editor.org/rfc/rfc9728.html",
+      "source_date": "2025-04",
+      "date_note": "RFC 9728 is dated April 2025. The RFC text does not give a day."
+    },
+    {
+      "id": "mcp-server-card",
+      "name": "MCP Server Card",
+      "what": "A static description of a remote MCP server, found from an AI catalog.",
+      "status": "Library only",
+      "where": "Prepared copy on this docs site at /.well-known/mcp/server-card.json. The API host path /mcp/server-card is not activated.",
+      "source": "https://modelcontextprotocol.io/seps/2127-mcp-server-cards",
+      "source_date": "2026-01-21",
+      "date_note": "SEP-2127 created 21 January 2026. The extension repository still describes the card format as experimental."
+    },
+    {
+      "id": "a2a-v1",
+      "name": "A2A v1.0",
+      "what": "A way for agents to give each other tasks. An agent card would live at /.well-known/agent-card.json.",
+      "status": "Library only",
+      "where": "Installed demo named on the agent start page. Not the public host. This site does not publish /.well-known/agent-card.json.",
+      "source": "https://github.com/a2aproject/A2A/releases/tag/v1.0.0",
+      "source_date": "2026-03-12",
+      "date_note": "v1.0.0 published 12 March 2026."
+    },
+    {
+      "id": "agent-card",
+      "name": "Agent card",
+      "what": "The A2A description a client reads from /.well-known/agent-card.json.",
+      "status": "Test mode",
+      "where": "The server sandbox serves this in test. This docs site does not publish the file.",
+      "source": "https://github.com/a2aproject/A2A/releases/tag/v1.0.0",
+      "source_date": "2026-03-12",
+      "date_note": "A2A v1.0.0 published 12 March 2026."
+    },
+    {
+      "id": "ap2-v0-2",
+      "name": "AP2 v0.2",
+      "what": "Checkout Mandate and Payment Mandate, each open or closed. IntentMandate and CartMandate are previous names from v0.1.",
+      "status": "Test mode",
+      "where": "The server sandbox checks mandates in test. Those checks do not charge a card and are not Live.",
+      "source": "https://github.com/google-agentic-commerce/AP2/blob/main/CHANGELOG.md",
+      "source_date": "2026-04-28",
+      "date_note": "v0.2.0 in the changelog. v0.1 was announced on 16 September 2025. Current terms are also on https://ap2-protocol.org/."
+    },
+    {
+      "id": "a2a-x402",
+      "name": "a2a-x402",
+      "what": "An A2A extension that carries an x402 payment between agents.",
+      "status": "Planned",
+      "where": "Not named as an installed check. The x402 row below is a separate local test ledger.",
+      "source": "https://github.com/google-agentic-commerce/a2a-x402/blob/main/spec/v0.2/spec.md",
+      "source_date": "2026-11-04",
+      "date_note": "Spec version v0.2. The spec page does not print a publication date. Checked 4 November 2026."
+    },
+    {
+      "id": "x402-v2-exact",
+      "name": "x402 v2 exact",
+      "what": "A fixed-price HTTP 402 payment. The buyer authorises the advertised amount.",
+      "status": "Library only",
+      "where": "Installed package has a local test ledger and payment-evidence checks. A matching message is not an external facilitator and does not move real funds.",
+      "source": "https://docs.x402.org/schemes/exact",
+      "source_date": "2026-11-04",
+      "date_note": "Protocol version 2 is stated in the x402 specification. This scheme page does not print a publication date. Checked 4 November 2026."
+    },
+    {
+      "id": "partial-capture",
+      "name": "Partial capture",
+      "what": "Taking only the finished part of a held test payment.",
+      "status": "Test mode",
+      "where": "Server sandbox only. This browser sample does not split a hold.",
+      "source": "https://docs.x402.org/schemes/overview",
+      "source_date": "2026-11-04",
+      "date_note": "Described with x402 auth-capture. The dedicated scheme URL returned 404 on 4 November 2026."
+    },
+    {
+      "id": "x402-v2-auth-capture",
+      "name": "x402 v2 auth-capture",
+      "what": "A refundable x402 payment: deposit, then capture, void or refund.",
+      "status": "Test mode",
+      "where": "The server sandbox runs auth-capture in test, including a partial capture. Release and refund move test money there. Reclaim stays planned.",
+      "source": "https://docs.x402.org/schemes/overview",
+      "source_date": "2026-11-04",
+      "date_note": "The schemes overview describes auth-capture. It does not print a publication date. Checked 4 November 2026."
+    },
+    {
+      "id": "acp-2026-04-17",
+      "name": "ACP 2026-04-17",
+      "what": "OpenAI and Stripe\u2019s Agentic Commerce Protocol for agent checkout. The business stays the merchant.",
+      "status": "Planned",
+      "where": "Not connected on this host.",
+      "source": "https://github.com/agentic-commerce-protocol/agentic-commerce-protocol/blob/main/changelog/2026-04-17.md",
+      "source_date": "2026-04-17",
+      "date_note": "Changelog version 2026-04-17."
+    },
+    {
+      "id": "stripe-spt",
+      "name": "Stripe Shared Payment Tokens",
+      "what": "A scoped grant an agent can give a seller for one payment method, without showing the card number.",
+      "status": "Planned",
+      "where": "Card is coming soon and not connected. An owner-run Stripe gateway in the installed package is not this host.",
+      "source": "https://docs.stripe.com/changelog/dahlia/2026-04-22/shared-payment-granted-token",
+      "source_date": "2026-04-22",
+      "date_note": "SharedPaymentGrantedToken API changelog. Stripe\u2019s SPT blog post is dated 7 October 2025."
+    },
+    {
+      "id": "ucp-2026-08-25",
+      "name": "UCP 2026-08-25",
+      "what": "Universal Commerce Protocol. A common checkout language for agents and businesses.",
+      "status": "Planned",
+      "where": "Not connected on this host.",
+      "source": "https://github.com/Universal-Commerce-Protocol/ucp/releases/tag/v2026-08-25",
+      "source_date": "2026-08-25",
+      "date_note": "Release v2026-08-25, published 25 August 2026."
+    },
+    {
+      "id": "web-bot-auth",
+      "name": "Web Bot Auth",
+      "what": "A signed directory a site publishes so others can check that a bot\u2019s request is genuine.",
+      "status": "Planned",
+      "where": "This site does not publish /.well-known/http-message-signatures-directory.",
+      "source": "https://developers.cloudflare.com/bots/reference/bot-verification/web-bot-auth/",
+      "source_date": "2026-10-08",
+      "date_note": "Cloudflare documentation dated 8 October 2026. It cites IETF drafts, not a finished RFC."
+    },
+    {
+      "id": "visa-tap",
+      "name": "Visa TAP",
+      "what": "Visa Trusted Agent Protocol. A merchant checks an agent\u2019s signed request.",
+      "status": "Library only",
+      "where": "Installed package can check supported request-signature profiles. Those checks do not charge a card or settle on Visa.",
+      "source": "https://github.com/visa/trusted-agent-protocol",
+      "source_date": "2026-11-04",
+      "date_note": "Repository checked 4 November 2026. A newsroom page dated 14 October 2025 in search results returned 404, so that announcement date is not confirmed from a page that still resolves."
+    },
+    {
+      "id": "mastercard-agent-pay",
+      "name": "Mastercard Agent Pay",
+      "what": "Mastercard\u2019s agent payment programme, including registered agents and network tokens.",
+      "status": "Library only",
+      "where": "Same installed request-signature checks as Visa TAP. They do not settle on Mastercard.",
+      "source": "https://www.mastercard.com/global/en/business/artificial-intelligence/mastercard-agent-pay.html",
+      "source_date": "2026-11-04",
+      "date_note": "Product page returned HTTP 403 to this review on 4 November 2026. No announcement date was confirmed from a page this review could read."
+    },
+    {
+      "id": "kyapay",
+      "name": "KYAPay",
+      "what": "An identity-linked token a service can check before accepting an agent.",
+      "status": "Planned",
+      "where": "Not in the installed checks described on the payments page.",
+      "source": "https://kyapay.org/whitepaper",
+      "source_date": "2025-06-26",
+      "date_note": "Whitepaper dated 26 June 2025."
+    },
+    {
+      "id": "release",
+      "name": "Release",
+      "what": "Sending a held payment to the seller.",
+      "status": "Test mode",
+      "where": "Moves test money in the server sandbox. Not real funds, and not Live.",
+      "source": "https://docs.x402.org/schemes/overview",
+      "source_date": "2026-11-04",
+      "date_note": "Listed in sandbox.works_in_test. Not a live payment."
+    },
+    {
+      "id": "refund",
+      "name": "Refund",
+      "what": "Sending a captured or held test payment back to the buyer.",
+      "status": "Test mode",
+      "where": "Moves test money in the server sandbox. Not real funds, and not Live.",
+      "source": "https://docs.x402.org/schemes/overview",
+      "source_date": "2026-11-04",
+      "date_note": "Listed in sandbox.works_in_test. Not a live payment."
+    },
+    {
+      "id": "reclaim",
+      "name": "Reclaim",
+      "what": "What is left comes back after the capture deadline.",
+      "status": "Planned",
+      "where": "Not confirmed by the server. TODO(owner): the number of days.",
+      "source": "https://docs.x402.org/schemes/overview",
+      "source_date": "2026-11-04",
+      "date_note": "Kept planned until the server registry confirms it. Checked 4 November 2026."
+    }
+  ],
+  "public_tools_mode": "read_only",
+  "can_sign": false,
+  "can_refund": false,
+  "can_dispute": false,
+  "custody": "none",
+  "holds_funds": false,
+  "merchant_of_record": "seller",
+  "sandbox": {
+    "works_in_test": [
+      "mcp-2026-07-28",
+      "server/discover",
+      "rfc-9728",
+      "agent-card",
+      "ap2-v0-2",
+      "x402-v2-auth-capture",
+      "partial-capture",
+      "release",
+      "refund"
+    ]
   }
 }

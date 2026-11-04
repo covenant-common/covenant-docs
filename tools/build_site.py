@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Apply the shared chrome and keep generated status text tied to the registry."""
+import html
 import json
 import re
 import sys
@@ -39,6 +40,96 @@ def tools_sentence():
     return 'The %d public tools are %s. Names from an installed private SDK are not tools on this public server.' % (len(names), quoted)
 
 
+FUNDS_SENTENCE = (
+    'Covenant never holds your money. In test mode, the test rail holds it; '
+    'for real payments, the payment provider or an escrow contract will.'
+)
+FUNDS_PAGES = (
+    'index.html',
+    'docs/PAY.html',
+    'docs/PAYING.html',
+    'docs/PAYMENTS.html',
+    'docs/APPROVALS.html',
+    'docs/TRUST_AND_LEGAL.html',
+)
+
+
+def funds_text():
+    return (
+        FUNDS_SENTENCE + '\n'
+        'The seller is who you are buying from. Covenant provides the platform. '
+        'The seller is the merchant of record. Covenant’s platform fee is taken at payment time. '
+        'TODO(owner): the fee amount.'
+    )
+
+
+def funds_html():
+    return (
+        '<div class="callout" id="never-holds"><p>%s</p>'
+        '<p>The seller is who you are buying from. Covenant provides the platform. '
+        'The seller is the merchant of record.</p>'
+        '<p>Covenant’s platform fee is taken at payment time. '
+        '<strong>TODO(owner):</strong> the fee amount.</p></div>'
+    ) % FUNDS_SENTENCE
+
+
+OWNER_BADGE = (
+    '<span class="owner-pending"><span class="todo-marker" aria-hidden="true">%s</span>'
+    '<span class="todo-label">Not set yet. The owner will confirm this</span></span>'
+)
+
+
+def badge_todos(text):
+    text = text.replace('<span class="todo-marker">', '<span class="todo-marker" aria-hidden="true">')
+
+    def wrap(match):
+        return OWNER_BADGE % match.group(0)
+
+    parts = re.split(r'(<[^>]+>)', text)
+    out = []
+    marker = 0
+    for part in parts:
+        if part.startswith('<'):
+            if part.startswith('<span class="todo-marker"'):
+                marker += 1
+            elif part.startswith('</span>') and marker:
+                marker -= 1
+            out.append(part)
+            continue
+        if marker:
+            out.append(part)
+            continue
+        part = re.sub(r'TODO\(owner, legal\)', wrap, part)
+        part = re.sub(r'TODO\(owner\)', wrap, part)
+        part = re.sub(r'Owner TODO', wrap, part)
+        out.append(part)
+    return ''.join(out)
+
+
+def standards_table():
+    from registry_view import apply_works_in_test
+    rows = []
+    standards = apply_works_in_test(REGISTRY.get('standards', []), (REGISTRY.get('sandbox') or {}).get('works_in_test'))
+    for row in standards:
+        note = (' ' + row['date_note']) if row.get('date_note') else ''
+        when = row['source_date']
+        cells = (
+            ('Standard', row['name']),
+            ('What it is', row['what']),
+            ('Covenant status', row['status']),
+            ('Where', row['where']),
+        )
+        body = ''.join('<td data-label="%s">%s</td>' % (html.escape(label, quote=True), html.escape(value)) for label, value in cells)
+        body += '<td data-label="Source and date"><a href="%s">Source</a> (<time datetime="%s">%s</time>%s)</td>' % (
+            html.escape(row['source'], quote=True),
+            html.escape(when, quote=True),
+            html.escape(when),
+            html.escape(note),
+        )
+        rows.append('<tr>' + body + '</tr>')
+    return '\n'.join(rows)
+
+
 def payment_rows():
     badges = REGISTRY['badges']
     rows = []
@@ -58,11 +149,21 @@ def sync_payment_labels(text):
     return re.sub(r'  const LABELS = \{.*?\};', payment_labels_line(), text, count=1, flags=re.DOTALL)
 
 
+def unwrap_term_abbr(text):
+    inner = re.compile(r'<abbr class="term" title="[^"]*">([^<]*)</abbr>', re.I)
+    while True:
+        updated = inner.sub(r'\1', text)
+        if updated == text:
+            return text
+        text = updated
+
+
 def wrap_tooltips(text):
-    pending = {term: title for term, title in TOOLTIPS.items()
-               if not re.search(r'<abbr class="term"[^>]*>' + re.escape(term) + r'</abbr>', text, re.I)}
-    if not pending:
+    text = unwrap_term_abbr(text)
+    terms = sorted(TOOLTIPS, key=len, reverse=True)
+    if not terms:
         return text
+    pattern = re.compile(r'\b(?:' + '|'.join(re.escape(term) for term in terms) + r')\b', re.I)
     parts = re.split(r'(<[^>]+>)', text)
     stack = []
     seen = set()
@@ -77,26 +178,24 @@ def wrap_tooltips(text):
                     stack.pop()
             elif start and not part.endswith('/>') and not part.startswith('<!'):
                 name = start.group(1).lower()
-                if name in SKIP_TAGS or name in ('nav', 'figure'):
+                if name in SKIP_TAGS or name in ('nav', 'figure', 'svg', 'desc'):
                     stack.append(name)
             out.append(part)
             continue
         if stack:
             out.append(part)
             continue
+
         def repl(match):
             word = match.group(0)
-            key = next((term for term in pending if term.lower() == word.lower()), None)
-            if key is None:
+            key = next(term for term in terms if term.lower() == word.lower())
+            if key.lower() in seen:
                 return word
-            if key in seen:
-                return word
-            seen.add(key)
-            title = TOOLTIPS[key].replace('&', '&amp;').replace('"', '&quot;')
+            seen.add(key.lower())
+            title = (TOOLTIPS[key].replace('&', '&amp;').replace('"', '&quot;').replace('<', '&lt;'))
             return '<abbr class="term" title="%s">%s</abbr>' % (title, word)
-        for term in TOOLTIPS:
-            part = re.sub(r'\b' + re.escape(term) + r'\b', repl, part, count=1, flags=re.I)
-        out.append(part)
+
+        out.append(pattern.sub(repl, part))
     return ''.join(out)
 
 
@@ -124,12 +223,22 @@ def transform(path):
             text = re.sub(r'<tbody>.*?</tbody>', '<tbody>\n' + payment_rows() + '\n</tbody>', text, count=1, flags=re.DOTALL)
         else:
             text = updated
+    if '<!-- funds-decision:start -->' in text:
+        updated = marked(text, '<!-- funds-decision:start -->', '<!-- funds-decision:end -->', funds_html())
+        if updated is not None:
+            text = updated
+    if rel == 'docs/AGENTIC_COMMERCE.html':
+        updated = marked(text, '<!-- standards-matrix:start -->', '<!-- standards-matrix:end -->', standards_table())
+        if updated is not None:
+            text = updated
     if rel == 'docs/GLOSSARY.html':
         updated = marked(text, '<!-- glossary-body:start -->', '<!-- glossary-body:end -->', glossary_body().split('\n', 1)[1].rsplit('\n', 1)[0])
         if updated is None and '<h2 id="access-file">' in text:
             text = re.sub(r'<h2 id="access-file">.*?(?=<!-- site-footer:start -->|</main>)', glossary_body() + '\n', text, count=1, flags=re.DOTALL)
         elif updated is not None:
             text = updated
+    if not rel.startswith('docs/technical/'):
+        text = badge_todos(text)
     text = apply(text, rel)
     if not rel.startswith('docs/technical/'):
         text = wrap_tooltips(text)
@@ -158,12 +267,20 @@ def main():
     updated = marked(llms_text, '<!-- registry-tools:start -->', '<!-- registry-tools:end -->', tools_sentence())
     if updated is None:
         updated = llms_text.replace(
-            'The nine public tools are `aap_public_listing_search`, `covenant_marketplace__quick_trade`, `covenant_contract__draft`, `covenant_contract__inspect`, `covenant_contract__compare`, `covenant_contract__render`, `covenant_review__review`, `covenant_review__authority` and `covenant_review__evidence`. Names from an installed private SDK are not tools on this public server.',
+            'The public tools are `aap_public_listing_search`, `covenant_marketplace__quick_trade`, `covenant_contract__draft`, `covenant_contract__inspect`, `covenant_contract__compare`, `covenant_contract__render`, `covenant_review__review`, `covenant_review__authority` and `covenant_review__evidence`. Names from an installed private SDK are not tools on this public server.',
             sentence, 1)
     if updated != llms_text:
         changed.append('llms.txt')
         if not check:
             llms.write_text(updated)
+        llms_text = updated if not check else llms_text
+    if check:
+        llms_text = llms.read_text()
+    funds_updated = marked(llms_text, '<!-- funds-decision:start -->', '<!-- funds-decision:end -->', funds_text())
+    if funds_updated is not None and funds_updated != llms.read_text():
+        changed.append('llms.txt')
+        if not check:
+            llms.write_text(funds_updated)
     if not check:
         ensure_sitemap([path.relative_to(ROOT).as_posix() for path in html_paths
                         if 'technical' not in path.parts and not path.as_posix().startswith(str(ROOT / 'sandbox'))])

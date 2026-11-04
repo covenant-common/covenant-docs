@@ -79,7 +79,7 @@ function show(result) {
   $('receipt').replaceChildren();
   line($('receipt'), 'Receipt. ' + result.feeText);
   if (result.recordId) {
-    line($('receipt'), 'Sample record ' + result.recordId + '. Next: fund the test hold, then deliver. This is not a hosted agreement.');
+    line($('receipt'), 'Sample record ' + result.recordId + '. Signed with a test key. No real money moved. Next: fund the test hold, then deliver.');
   }
   Object.entries(result.buttons).forEach(([id, spec]) => {
     const button = $(id);
@@ -140,7 +140,7 @@ async function run() {
     $('py-status').textContent = STAGES.ready;
     last = session.demo();
     $('record').textContent = JSON.stringify(last.record, null, 2);
-    $('py-status').textContent = 'Signed sample checked in this page. No real money moved and nothing was sent.';
+    $('py-status').textContent = 'Signed with a test key in this page. No real money moved.';
     $('check').disabled = false;
     $('forge').disabled = false;
   } catch (error) {

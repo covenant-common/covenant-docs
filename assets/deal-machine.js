@@ -29,26 +29,32 @@
     fund: 'Buyer', deliver: 'Seller', release: 'Buyer', dispute: 'Buyer', refund: 'Resolver'
   };
 
-  function formatThousandths(value) {
-    const sign = value < 0 ? '-' : '';
-    const whole = Math.floor(Math.abs(value) / 1000);
-    const frac = Math.abs(value) % 1000;
+  function halfUp(numerator, denominator) {
+    return Math.floor((numerator + Math.floor(denominator / 2)) / denominator);
+  }
+
+  function formatMinor(minor) {
+    const sign = minor < 0 ? '-' : '';
+    const abs = Math.abs(minor);
+    const whole = Math.floor(abs / 100);
+    const frac = abs % 100;
     if (!frac) return sign + String(whole);
-    return sign + whole + '.' + String(frac).padStart(3, '0').replace(/0+$/, '');
+    return sign + whole + '.' + String(frac).padStart(2, '0').replace(/0+$/, '');
   }
 
   function feeSplit(amount) {
     const units = Number(amount);
     if (!Number.isFinite(units) || units < 0) return null;
-    const thousandths = Math.round(units * 1000);
-    const fee = Math.round(thousandths * FEE_BPS / 10000);
+    const minor = Math.round(units * 100);
+    const fee = halfUp(minor * FEE_BPS, 10000);
     return {
-      price: formatThousandths(thousandths),
-      youPayOff: formatThousandths(thousandths),
-      sellerGets: formatThousandths(thousandths),
+      price: formatMinor(minor),
+      youPayOff: formatMinor(minor),
+      sellerGets: formatMinor(minor),
       feeOff: '0',
-      youPayOn: formatThousandths(thousandths + fee),
-      feeOn: formatThousandths(fee),
+      youPayOn: formatMinor(minor + fee),
+      feeOn: formatMinor(fee),
+      feeMinor: fee,
       ledgerCollectsFee: false
     };
   }
@@ -231,11 +237,11 @@
       refund: function () {
         if (phase !== 'disputed') return {error: MESSAGES.OUT_OF_ORDER};
         phase = 'released';
-        stage = 'RELEASED';
+        stage = 'Refunded';
         const returned = held;
         buyer += held;
         held = 0;
-        said = 'Refunded. Stage RELEASED. ' + returned + ' test USDC is back with the buyer. Test money only. Hosted USDC has no refund.';
+        said = returned + ' test USDC is back with the buyer. Signed with a test key. No real money moved. Hosted USDC has no refund.';
         remember('refund', said);
         return view();
       }

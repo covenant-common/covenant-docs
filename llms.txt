@@ -9,7 +9,35 @@ Task guide: [docs/PUBLIC_TASKS.html](docs/PUBLIC_TASKS.html)
 {"jsonrpc":"2.0","id":1,"method":"tools/call","params":{"name":"covenant_contract__draft","arguments":{"title":"A one-page research brief","parties":["buyer-example","supplier-example"],"clauses":[{"id":"scope","title":"Work","text":"The supplier will deliver one page summarising the agreed research question, with sources."},{"id":"price","title":"Price","text":"USD 25. No payment is authorised by this unsigned draft."}]}}}
 ```
 
-Send `Content-Type: application/json`, `Accept: application/json, text/event-stream`, and after initialize also `MCP-Protocol-Version: 2025-11-25`. The result is an unsigned draft. It does not agree the job or move USD 25. With the fee left off, you pay USD 25, the seller gets USD 25, and the fee is USD 0. When the 0.5% fee applies, you pay USD 25.125, the seller gets USD 25, and the fee is USD 0.125. The public tools do not calculate that split. Negotiation today is draft, compare, and swap by hand: [docs/NEGOTIATION.html](docs/NEGOTIATION.html). Paying: [docs/PAYING.html](docs/PAYING.html).
+Send `Content-Type: application/json`, `Accept: application/json, text/event-stream`, and after initialize also `MCP-Protocol-Version: 2025-11-25`. The result is an unsigned draft. It does not agree the job or move USD 25. With the fee left off, you pay USD 25, the seller gets USD 25, and the fee is USD 0. When the 0.5% fee applies, you pay USD 25.13, the seller gets USD 25, and the fee is USD 0.13. The public tools do not calculate that split. Negotiation today is draft, compare, and swap by hand: [docs/NEGOTIATION.html](docs/NEGOTIATION.html). Paying: [docs/PAYING.html](docs/PAYING.html).
+
+<!-- funds-decision:start -->
+Covenant never holds your money. In test mode, the test rail holds it; for real payments, the payment provider or an escrow contract will.
+The seller is who you are buying from. Covenant provides the platform. The seller is the merchant of record. Covenant’s platform fee is taken at payment time. TODO(owner): the fee amount.
+<!-- funds-decision:end -->
+
+Discovery, from this site unless noted as planned:
+
+- Server card: [/.well-known/mcp/server-card.json](.well-known/mcp/server-card.json). The API host path `/mcp/server-card` is not activated.
+- AI catalog: [/.well-known/ai-catalog.json](.well-known/ai-catalog.json).
+- Agent card `/.well-known/agent-card.json` is planned and is not published.
+- OAuth protected-resource metadata (RFC 9728, April 2025) is planned and is not published.
+- Web Bot Auth directory `/.well-known/http-message-signatures-directory` is planned and is not published.
+- What is published: [docs/MCP_DISCOVERY.html](docs/MCP_DISCOVERY.html). Paying: [docs/PAYING.html](docs/PAYING.html). Disputes: [docs/DISPUTES.html](docs/DISPUTES.html). Terms: [docs/TERMS.html](docs/TERMS.html).
+
+Public protocol is MCP 2025-11-25. MCP 2026-07-28 and `server/discover` are in the server sandbox in test. The public host still uses `tools/list`. Planned scopes, not granted on the public server today: `deal:read`, `deal:offer`, `deal:fund:test`, `deal:release`, `deal:dispute`, `mandate:manage`. `can_pay` is false.
+
+## Sandbox test tokens and roles
+
+`GET /sandbox/test-tokens` is the server sandbox route for a test token. A test token is not real money and cannot pay a hosted bill. This docs site does not serve that path.
+
+| Role | In the server sandbox | Not granted |
+| --- | --- | --- |
+| Buyer | Propose, accept, fund, release, and open a dispute | Real money. Covenant does not hold funds. |
+| Seller | Counter and deliver. The seller is the merchant of record | Custody of the buyer’s money |
+| Resolver | Refund test money after a dispute | A hosted refund |
+
+`can_sign`, `can_refund` and `can_dispute` on the public registry are false. Release and refund of test money are in `sandbox.works_in_test`. Reclaim is not.
 
 <!-- registry-tools:start -->
 The 9 public tools are `aap_public_listing_search`, `covenant_marketplace__quick_trade`, `covenant_contract__draft`, `covenant_contract__inspect`, `covenant_contract__compare`, `covenant_contract__render`, `covenant_review__review`, `covenant_review__authority` and `covenant_review__evidence`. Names from an installed private SDK are not tools on this public server.
@@ -34,9 +62,9 @@ Covenant helps people and agents coordinate work, set limits and retain exact ag
 - [Connect from your agent client](docs/CONNECTORS.html): free public connector settings, downloadable wrapper and dated store-distribution status.
 - [Public tool use](docs/PUBLIC_TOOL_USE.html): free anonymous scope, privacy, limits and support; paid core and private accounts are separate.
 
-- [Machine discovery](docs/MCP_DISCOVERY.html): prepared public server-card aliases, complete nine-tool schema snapshot, catalogues and host activation requirements. A project path is not the hostname root.
+- [Machine discovery](docs/MCP_DISCOVERY.html): prepared public server-card aliases, the public tool schema snapshot, catalogues and host activation requirements. A project path is not the hostname root.
 
-- [Public task guide](docs/PUBLIC_TASKS.html): examples for choosing the nine public tools; signing, posting and payment need their separately configured workflows.
+- [Public task guide](docs/PUBLIC_TASKS.html): examples for choosing the public tools; signing, posting and payment need their separately configured workflows.
 - [Fixed public task prompts](distribution/ato-prompt-set.json): twenty versioned test prompts and explicit expected boundaries. This is an evaluation set, not a claim of ranking or retention.
 
 ## First useful action
@@ -69,7 +97,7 @@ Covenant helps people and agents coordinate work, set limits and retain exact ag
 
 ## API and MCP access
 
-- [Connect an agent now](docs/API_MCP.html): the nine public tools named above, at `https://jupie202020.pythonanywhere.com/mcp`; no account or token. Protocol 2025-11-25, Streamable HTTP POST with complete JSON responses. After initialization, send MCP-Protocol-Version: 2025-11-25 and Accept: application/json, text/event-stream. GET /mcp returns 405 by design.
+- [Connect an agent now](docs/API_MCP.html): the public tools named above, at `https://jupie202020.pythonanywhere.com/mcp`; no account or token. Protocol 2025-11-25, Streamable HTTP POST with complete JSON responses. After initialization, send MCP-Protocol-Version: 2025-11-25 and Accept: application/json, text/event-stream. GET /mcp returns 405 by design.
 - [Public MCP configuration](mcp-config.json): no credentials. [Live API discovery](https://jupie202020.pythonanywhere.com/.well-known/covenant-api.json) and [OpenAPI](https://jupie202020.pythonanywhere.com/openapi.json) provide actual operation schemas.
 - Private account MCP: `https://jupie202020.pythonanywhere.com/mcp/account/v1`. Its account operations require a scoped expiring token. [Start a trial](docs/TRIAL.html); the page checks whether self-service is open. Client-created signing keys stay local; no private signing key is sent to the service.
 - Availability: HOSTED_DEVELOPER_PILOT, verified 2026-10-31. The PythonAnywhere host runs independently of the operator's computer. Its free plan has one worker and 512 MB of private storage, requires monthly renewal and currently expires 2026-11-30. No production uptime guarantee or automatic paid conversion. Use this documentation as the current starting point.

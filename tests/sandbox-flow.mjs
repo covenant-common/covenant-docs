@@ -56,8 +56,8 @@ test('sandbox labels, stage and amount follow one state, including refund', asyn
     await page.locator('#refund').click();
     await page.locator('#confirm-yes').click();
     const status = await page.locator('#step-status').textContent();
-    await assert.match(status, /RELEASED/);
     await assert.match(status, /Refunded/);
+    await assert.doesNotMatch(status, /RELEASED/);
     await assert.match(status, /20 test USDC/);
     await assert.doesNotMatch(status, /REFUTED/);
     await assert.match(await page.locator('#money').textContent(), /Held: 0/);

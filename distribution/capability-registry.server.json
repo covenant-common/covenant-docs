@@ -1,0 +1,169 @@
+{
+  "schema_version": 1,
+  "source_commit": "221df81e",
+  "note": "Shape of covenant #201 as described in round 8. The 10604-byte file was not readable from this environment (HTTP 404). Tool names are the docs server card via public_tools_list until the raw file is synced.",
+  "public_tools": "read_only",
+  "public_tools_list": [
+    "aap_public_listing_search",
+    "covenant_marketplace__quick_trade",
+    "covenant_contract__draft",
+    "covenant_contract__inspect",
+    "covenant_contract__compare",
+    "covenant_contract__render",
+    "covenant_review__review",
+    "covenant_review__authority",
+    "covenant_review__evidence"
+  ],
+  "can_pay": false,
+  "can_sign": false,
+  "can_refund": false,
+  "can_dispute": false,
+  "custody": "none",
+  "holds_funds": false,
+  "merchant_of_record": "seller",
+  "methods": [
+    {
+      "id": "card",
+      "label": "Card",
+      "readiness": "NOT_CONNECTED",
+      "badge": "COMING_SOON",
+      "settlement_enabled": false,
+      "plain": "Coming soon (not connected). Not installed."
+    },
+    {
+      "id": "bitcoin",
+      "label": "Bitcoin",
+      "readiness": "NOT_CONNECTED",
+      "badge": "NOT_CONNECTED",
+      "settlement_enabled": false,
+      "plain": "Not connected. Not installed."
+    },
+    {
+      "id": "usdc-base",
+      "label": "USDC on Base",
+      "readiness": "CONFIGURED_UNVERIFIED",
+      "badge": "CONFIGURED_UNVERIFIED",
+      "settlement_enabled": false,
+      "plain": "Configured, not yet verified. Not connected. Settlement is off, so a payment cannot be completed here."
+    },
+    {
+      "id": "usdc-ethereum",
+      "label": "USDC on Ethereum",
+      "readiness": "CONFIGURED_UNVERIFIED",
+      "badge": "CONFIGURED_UNVERIFIED",
+      "settlement_enabled": false,
+      "plain": "Configured, not yet verified. Same limit as Base."
+    },
+    {
+      "id": "usdc-base-sepolia",
+      "label": "USDC on Base Sepolia",
+      "readiness": "TEST_ONLY",
+      "badge": "TEST_ONLY",
+      "settlement_enabled": false,
+      "plain": "Test only. Not installed. Test funds would not pay a real bill."
+    },
+    {
+      "id": "usdc-ethereum-sepolia",
+      "label": "USDC on Ethereum Sepolia",
+      "readiness": "TEST_ONLY",
+      "badge": "TEST_ONLY",
+      "settlement_enabled": false,
+      "plain": "Test only. Not installed. Test funds would not pay a real bill."
+    },
+    {
+      "id": "usdc-solana",
+      "label": "USDC on Solana",
+      "readiness": "NOT_CONNECTED",
+      "badge": "NOT_CONNECTED",
+      "settlement_enabled": false,
+      "plain": "Not connected. Not installed."
+    },
+    {
+      "id": "aap-native",
+      "label": "Native payment network",
+      "readiness": "NOT_LIVE",
+      "badge": "NOT_LIVE",
+      "settlement_enabled": false,
+      "plain": "Not live. Not installed."
+    }
+  ],
+  "payment_methods": [
+    {
+      "id": "card",
+      "label": "Card",
+      "readiness": "NOT_CONNECTED",
+      "badge": "COMING_SOON",
+      "settlement_enabled": false,
+      "plain": "Coming soon (not connected). Not installed."
+    },
+    {
+      "id": "bitcoin",
+      "label": "Bitcoin",
+      "readiness": "NOT_CONNECTED",
+      "badge": "NOT_CONNECTED",
+      "settlement_enabled": false,
+      "plain": "Not connected. Not installed."
+    },
+    {
+      "id": "usdc-base",
+      "label": "USDC on Base",
+      "readiness": "CONFIGURED_UNVERIFIED",
+      "badge": "CONFIGURED_UNVERIFIED",
+      "settlement_enabled": false,
+      "plain": "Configured, not yet verified. Not connected. Settlement is off, so a payment cannot be completed here."
+    },
+    {
+      "id": "usdc-ethereum",
+      "label": "USDC on Ethereum",
+      "readiness": "CONFIGURED_UNVERIFIED",
+      "badge": "CONFIGURED_UNVERIFIED",
+      "settlement_enabled": false,
+      "plain": "Configured, not yet verified. Same limit as Base."
+    },
+    {
+      "id": "usdc-base-sepolia",
+      "label": "USDC on Base Sepolia",
+      "readiness": "TEST_ONLY",
+      "badge": "TEST_ONLY",
+      "settlement_enabled": false,
+      "plain": "Test only. Not installed. Test funds would not pay a real bill."
+    },
+    {
+      "id": "usdc-ethereum-sepolia",
+      "label": "USDC on Ethereum Sepolia",
+      "readiness": "TEST_ONLY",
+      "badge": "TEST_ONLY",
+      "settlement_enabled": false,
+      "plain": "Test only. Not installed. Test funds would not pay a real bill."
+    },
+    {
+      "id": "usdc-solana",
+      "label": "USDC on Solana",
+      "readiness": "NOT_CONNECTED",
+      "badge": "NOT_CONNECTED",
+      "settlement_enabled": false,
+      "plain": "Not connected. Not installed."
+    },
+    {
+      "id": "aap-native",
+      "label": "Native payment network",
+      "readiness": "NOT_LIVE",
+      "badge": "NOT_LIVE",
+      "settlement_enabled": false,
+      "plain": "Not live. Not installed."
+    }
+  ],
+  "sandbox": {
+    "works_in_test": [
+      "mcp-2026-07-28",
+      "server/discover",
+      "rfc-9728",
+      "agent-card",
+      "ap2-v0-2",
+      "x402-v2-auth-capture",
+      "partial-capture",
+      "release",
+      "refund"
+    ]
+  }
+}

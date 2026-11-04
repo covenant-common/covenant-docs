@@ -33,6 +33,7 @@ CURRENT = {
     'docs/HOW_IT_WORKS.html': 'deliver',
     'docs/DELIVER.html': 'deliver',
     'docs/RESOLVE.html': 'resolve',
+    'docs/DISPUTES.html': 'resolve',
     'sandbox/index.html': 'resolve',
 }
 NEXT = {

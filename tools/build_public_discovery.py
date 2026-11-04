@@ -116,7 +116,7 @@ def documents(source):
                           'type': 'application/mcp-server-card+json'}]}]}
     auth = ('# Covenant public access\n\n'
         'Public MCP: ' + ENDPOINT + '\n\n'
-        'The nine public search, draft and review tools need no account, token or API key. '
+        'The public search, draft and review tools need no account, token or API key. '
         'Use Streamable HTTP and MCP 2025-11-25. Discover the current schemas with tools/list. '
         'Do not send an Authorization header to this anonymous endpoint.\n\n'
         'Private account operations use a separate scoped bearer credential from account setup. '

@@ -39,12 +39,15 @@ test('one propose changes the label, and every later amount follows that state',
   const disputed = sample.step('dispute');
   assert.match(disputed.said, /20 test USDC/);
   const refunded = sample.step('refund');
-  assert.equal(refunded.stage, 'RELEASED');
+  assert.equal(refunded.stage, 'Refunded');
+  assert.equal(deal.feeSplit(25).feeOn, '0.13');
+  assert.equal(deal.feeSplit(25).feeMinor, 13);
   assert.equal(refunded.held, 0);
   assert.equal(refunded.buyer, 100);
-  assert.match(refunded.said, /Refunded/);
+  assert.equal(refunded.stage, 'Refunded');
   assert.match(refunded.said, /20 test USDC/);
   assert.doesNotMatch(refunded.said, /REFUTED/);
+  assert.doesNotMatch(refunded.said, /RELEASED/);
 });
 
 test('the priced path keeps 25 after counter and agree', () => {

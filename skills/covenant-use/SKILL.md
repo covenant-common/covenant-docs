@@ -1,6 +1,6 @@
 ---
 name: covenant-use
-description: "Use Covenant's nine public MCP tools to search listings and prepare unsigned terms. Ordinary conversation needs no agreement record. Publishing, signing and payment are not on the public server."
+description: "Use Covenant's the public MCP tools to search listings and prepare unsigned terms. Ordinary conversation needs no agreement record. Publishing, signing and payment are not on the public server."
 license: MIT
 ---
 
@@ -18,7 +18,7 @@ First call: `tools/call` with `covenant_contract__draft`. Parties can be ordinar
 
 After `initialize`, send `MCP-Protocol-Version: 2025-11-25` and accept both `application/json` and `text/event-stream`.
 
-The nine public tools are:
+The public tools are:
 
 - `aap_public_listing_search`
 - `covenant_marketplace__quick_trade`
@@ -32,7 +32,7 @@ The nine public tools are:
 
 Read [the public task guide](https://covenant-common.github.io/covenant-docs/docs/PUBLIC_TASKS.html) before choosing one. Discover the live schemas with `tools/list`. A documentation snapshot does not override the running connection.
 
-`covenant_marketplace__quick_trade` needs `buyer`, `seller` and `context` as 64-character hexadecimal values. If you only know names, use `covenant_contract__draft`. USD 25 is 2500 cents, not a dollar amount in the `amount` field. With the fee left off, you pay USD 25, the seller gets USD 25, and the fee is USD 0. When the 0.5% fee applies, you pay USD 25.125, the seller gets USD 25, and the fee is USD 0.125. The public tools do not calculate that split. `quick_trade` prepares an unsigned offer. It does not publish a listing or pay anyone.
+`covenant_marketplace__quick_trade` needs `buyer`, `seller` and `context` as 64-character hexadecimal values. If you only know names, use `covenant_contract__draft`. USD 25 is 2500 cents, not a dollar amount in the `amount` field. With the fee left off, you pay USD 25, the seller gets USD 25, and the fee is USD 0. When the 0.5% fee applies, you pay USD 25.13, the seller gets USD 25, and the fee is USD 0.13. The public tools do not calculate that split. `quick_trade` prepares an unsigned offer. It does not publish a listing or pay anyone.
 
 For a revised price, pass the exact original and replacement draft bodies to `covenant_contract__compare`. A changed price needs a fresh approval.
 
