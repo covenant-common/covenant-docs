@@ -1,6 +1,7 @@
 {
   "format": "covenant-docs-capability-registry/0.1",
-  "note": "Vendored copy. The server repository did not publish a registry file in this docs checkout. Public tool names come from mcp/tool-inventory.json observed 2026-11-02. Payment rows match the live payment catalogue read on 2026-11-04. Do not describe a method as live or connected unless its badge says so.",
+  "note": "Vendored copy until server pull request 192 publishes a registry path this docs repo can read. Public tool names come from mcp/tool-inventory.json observed 2026-11-02. Payment rows match the live payment catalogue read on 2026-11-04. Do not describe a method as live or connected unless its badge says so.",
+  "server_pr": "https://github.com/covenant-common/covenant/pull/192",
   "owner_todo": "Point this file at the server registry when that path exists, and refresh it when the live catalogue changes.",
   "public_tools": [
     "aap_public_listing_search",

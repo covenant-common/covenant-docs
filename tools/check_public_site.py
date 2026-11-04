@@ -60,9 +60,9 @@ def check():
                           'docs/OWNER_LISTING_APPROVAL.html':{'../assets/owner-listing-approval.js'},
                           'docs/PAYMENTS.html':{'../assets/payment-options.js'},
                           'docs/MATRIX.html':{'../assets/pilot-workspace.js','../assets/matrix.js','../assets/deal-structures.js','../assets/deal-machine.js'},
-                          'docs/TERMINAL.html':{'../assets/terminal.js','../assets/deal-structures.js'},
+                          'docs/TERMINAL.html':{'../assets/terminal.js','../assets/deal-structures.js','../assets/site-controls.js'},
                           'docs/DEAL_STRUCTURES.html':{'../assets/deal-structures.js'},
-                          'docs/START.html':{'../assets/start.js'},
+                          'docs/START.html':{'../assets/start.js','../assets/site-controls.js'},
                           'docs/API_MCP.html':{'../assets/copy-mcp-config.js'},
                           'docs/EXPLORE.html':{'../assets/explore.js'},
                           'docs/PILOT_WORKSPACE.html':{'../assets/pilot-workspace.js'}}

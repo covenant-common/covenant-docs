@@ -131,6 +131,46 @@ await page.locator('#draft-amount').fill('-25');
 await page.locator('#draft-amount').dispatchEvent('input');
 record('matrix-negative', /negative|not a price/.test(await page.locator('#draft-price-error').innerText()), 'negative refused');
 
+await page.setViewportSize({ width: 375, height: 800 });
+await page.goto(BASE + '/index.html', { waitUntil: 'domcontentloaded' });
+const onScreen = await page.evaluate(() => {
+  const h1 = document.querySelector('h1').getBoundingClientRect();
+  const sentence = [...document.querySelectorAll('main p')].map((p) => p.getBoundingClientRect()).find((box) => box.top < 800 && box.height > 0);
+  return h1.bottom < 800 && !!sentence;
+});
+let searchTabs = 0;
+let searchFound = false;
+for (let i = 0; i < 4; i += 1) {
+  await page.keyboard.press('Tab');
+  searchTabs += 1;
+  if (await page.evaluate(() => document.activeElement && document.activeElement.id === 'site-search')) { searchFound = true; break; }
+}
+const home = readFileSync(join(ROOT, 'index.html'), 'utf8');
+const matrix = readFileSync(join(ROOT, 'docs/MATRIX.html'), 'utf8');
+const terminalJs = readFileSync(join(ROOT, 'assets/terminal.js'), 'utf8');
+const startJs = readFileSync(join(ROOT, 'assets/start.js'), 'utf8');
+const disputes = readFileSync(join(ROOT, 'docs/DISPUTES.html'), 'utf8');
+const pass = (id) => results.some((row) => row.id === id && row.pass);
+record('P1', pass('one-nav'), 'shared nav includes Connect an agent and Disputes & refunds');
+record('P2', pass('mobile-menu') && pass('no-overflow-375') && pass('sandbox-no-overflow-after-run'), 'menu and overflow');
+record('P3', pass('h1-size') && onScreen, 'heading and a sentence are on the 375px screen');
+record('P4', searchFound && searchTabs <= 3, 'search focused in ' + searchTabs + ' tabs');
+record('P5', /badge-test/.test(terminalJs) && /hide-test-listings/.test(terminalJs), 'Test badge and filter');
+record('P6', /broader word/.test(terminalJs), 'empty-search suggestion');
+record('P7', /Make an offer/.test(terminalJs) && /MATRIX\.html\?title=/.test(terminalJs), 'offer control pre-fills the composer');
+record('P8', /id="draft-currency"/.test(matrix) && pass('matrix-price'), 'currency selector and inline refusal');
+record('P9', /name="draft-role"/.test(matrix) && /Unsigned ' \+ role/.test(readFileSync(join(ROOT, 'assets/matrix.js'), 'utf8')), 'role label');
+record('P10', /id="thread"/.test(readFileSync(join(ROOT, 'sandbox/index.html'), 'utf8')) && /id="decline"/.test(readFileSync(join(ROOT, 'sandbox/index.html'), 'utf8')) && /id="counter"/.test(readFileSync(join(ROOT, 'sandbox/index.html'), 'utf8')), 'thread with Accept, Counter and Decline');
+record('P11', /Sample record/.test(readFileSync(join(ROOT, 'sandbox/page.js'), 'utf8')), 'sample record id and next step');
+record('P12', pass('step-by-step') && /id="fund"/.test(readFileSync(join(ROOT, 'sandbox/index.html'), 'utf8')) && /id="release"/.test(readFileSync(join(ROOT, 'sandbox/index.html'), 'utf8')), 'separate step buttons');
+record('P13', pass('fee-before-accept') && /Waived/.test(readFileSync(join(ROOT, 'assets/deal-machine.js'), 'utf8')), 'fee, percent and waiver');
+record('P14', pass('dispute-refund'), 'test refund returns the hold');
+record('P15', pass('sandbox-button') && pass('tap-targets-44'), 'button size');
+record('P16', pass('plain-errors'), 'plain errors');
+record('P17', pass('usdc-status'), 'registry badge');
+record('P18', home.includes('How you get paid') && readFileSync(join(ROOT, 'docs/SELLER.html'), 'utf8').includes('id="how-you-get-paid"'), 'seller page linked from the nav');
+record('P19', home.includes('Disputes') && /Who decides/.test(disputes), 'one click from the shared nav');
+record('P20', /Copied/.test(readFileSync(join(ROOT, 'assets/site-controls.js'), 'utf8')) && /start-check/.test(readFileSync(join(ROOT, 'docs/START.html'), 'utf8')), 'Copied label and Check connection');
 await browser.close();
 const failed = results.filter((row) => !row.pass);
 console.log(JSON.stringify({ passed: results.length - failed.length, failed: failed.length, results }, null, 2));

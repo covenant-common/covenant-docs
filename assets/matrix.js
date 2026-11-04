@@ -524,6 +524,12 @@
     const result = deal.validatePrice(composePrice());
     showPriceError(result.ok ? '' : result.message);
     if (result.ok) $('draft-price').value = result.canonical;
+    const preview = $('sample-lifecycle');
+    if (preview) {
+      if (result.ok && result.kind === 'money') {
+        preview.textContent = 'Sample stages, same machine as the browser sample: ' + deal.SERVER_STATES.join(' → ') + '. ' + deal.moneyText(deal.feeSplit(result.amount), result.currency);
+      } else preview.textContent = '';
+    }
     return result.ok;
   }
   ['draft-currency', 'draft-amount'].forEach((id) => $(id).addEventListener('input', checkPrice));

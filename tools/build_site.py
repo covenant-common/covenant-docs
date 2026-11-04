@@ -9,23 +9,42 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from site_chrome import ROOT, apply, pages
 
 REGISTRY = json.loads((ROOT / 'distribution' / 'capability-registry.json').read_text())
-TOOLTIPS = {
-    'counter-offer': 'A new draft that changes the price or the deadline. A recorded counter-offer is coming soon.',
-    'fee_opt_in': 'The payer’s choice to add the posted fee. It defaults to off.',
-    'bearer token': 'The account credential. It is not a signature and it does not pay.',
-    'USDC_MICRO': 'Six-decimal token units. 25 USDC = 25,000,000 micro-units. Not a dollar conversion.',
-    'Ed25519': 'The signature type used by the account tools.',
-    'supersedes': 'A link to the previous draft. A public draft refuses it.',
-    'eip155': 'A network id in the payment catalogue. Naming it does not move money.',
-    'escrow': 'The browser sample can hold test funds. Hosted USDC does not. That payment is final.',
-    'resolver': 'A third party in the browser sample. Hosted USDC does not require one.',
-    'offer': 'A draft you swap by hand today. A recorded offer is coming soon.',
-    'MCP': 'The public tool connection. It can draft. It cannot sign, publish, pay or refund.',
-    'AAP': 'The engine name under Covenant. The native payment network is not live.',
-}
+GLOSSARY = json.loads((ROOT / 'distribution' / 'glossary.json').read_text())
+TOOLTIPS = {entry['term']: entry['tooltip'] for entry in GLOSSARY['entries'] if entry.get('tooltip')}
 SKIP_TAGS = {'script', 'style', 'code', 'pre', 'abbr', 'textarea'}
 SITEMAP = ROOT / 'sitemap.xml'
 BASE = 'https://covenant-common.github.io/covenant-docs/'
+
+
+def marked(text, start, end, body):
+    block = start + '\n' + body.strip() + '\n' + end
+    pattern = re.escape(start) + r'.*?' + re.escape(end)
+    if start in text and end in text:
+        return re.sub(pattern, lambda _match: block, text, count=1, flags=re.DOTALL)
+    return None
+
+
+def glossary_body():
+    parts = ['<!-- glossary-body:start -->']
+    for entry in GLOSSARY['entries']:
+        parts.append('<h2 id="%s">%s</h2>' % (entry['id'], entry['term']))
+        parts.append('<p>%s</p>' % entry['body'])
+    parts.append('<!-- glossary-body:end -->')
+    return '\n'.join(parts)
+
+
+def tools_sentence():
+    names = REGISTRY['public_tools']
+    quoted = ', '.join('`%s`' % name for name in names[:-1]) + ' and `%s`' % names[-1]
+    return 'The %d public tools are %s. Names from an installed private SDK are not tools on this public server.' % (len(names), quoted)
+
+
+def payment_rows():
+    badges = REGISTRY['badges']
+    rows = []
+    for row in REGISTRY['payments']:
+        rows.append('<tr><td>%s</td><td>%s</td><td>%s</td></tr>' % (row['label'], badges[row['badge']], row['plain']))
+    return '<!-- registry-payments:start -->\n' + '\n'.join(rows) + '\n<!-- registry-payments:end -->'
 
 
 def payment_labels_line():
@@ -99,6 +118,18 @@ def transform(path):
     text = path.read_text()
     if rel == 'docs/PAYING.html' and 'id="refunds"' not in text:
         text = text.replace('<h2>Refunds and disputes today</h2>', '<h2 id="refunds">Refunds and disputes today</h2>', 1)
+    if rel == 'docs/PAYING.html':
+        updated = marked(text, '<!-- registry-payments:start -->', '<!-- registry-payments:end -->', payment_rows().split('\n', 1)[1].rsplit('\n', 1)[0])
+        if updated is None:
+            text = re.sub(r'<tbody>.*?</tbody>', '<tbody>\n' + payment_rows() + '\n</tbody>', text, count=1, flags=re.DOTALL)
+        else:
+            text = updated
+    if rel == 'docs/GLOSSARY.html':
+        updated = marked(text, '<!-- glossary-body:start -->', '<!-- glossary-body:end -->', glossary_body().split('\n', 1)[1].rsplit('\n', 1)[0])
+        if updated is None and '<h2 id="access-file">' in text:
+            text = re.sub(r'<h2 id="access-file">.*?(?=<!-- site-footer:start -->|</main>)', glossary_body() + '\n', text, count=1, flags=re.DOTALL)
+        elif updated is not None:
+            text = updated
     text = apply(text, rel)
     if not rel.startswith('docs/technical/'):
         text = wrap_tooltips(text)
@@ -121,6 +152,18 @@ def main():
         changed.append('assets/payment-options.js')
         if not check:
             labels.write_text(new_labels)
+    llms = ROOT / 'llms.txt'
+    llms_text = llms.read_text()
+    sentence = '<!-- registry-tools:start -->\n' + tools_sentence() + '\n<!-- registry-tools:end -->'
+    updated = marked(llms_text, '<!-- registry-tools:start -->', '<!-- registry-tools:end -->', tools_sentence())
+    if updated is None:
+        updated = llms_text.replace(
+            'The nine public tools are `aap_public_listing_search`, `covenant_marketplace__quick_trade`, `covenant_contract__draft`, `covenant_contract__inspect`, `covenant_contract__compare`, `covenant_contract__render`, `covenant_review__review`, `covenant_review__authority` and `covenant_review__evidence`. Names from an installed private SDK are not tools on this public server.',
+            sentence, 1)
+    if updated != llms_text:
+        changed.append('llms.txt')
+        if not check:
+            llms.write_text(updated)
     if not check:
         ensure_sitemap([path.relative_to(ROOT).as_posix() for path in html_paths
                         if 'technical' not in path.parts and not path.as_posix().startswith(str(ROOT / 'sandbox'))])

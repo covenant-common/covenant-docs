@@ -824,9 +824,8 @@
   $('terminal-copy').addEventListener('click', async () => {
     try {
       if (!navigator.clipboard || typeof navigator.clipboard.writeText !== 'function') throw new Error('Clipboard unavailable');
-      await navigator.clipboard.writeText(ENDPOINT);
-      $('terminal-copy').textContent = 'Copied';
-      $('terminal-copy-state').textContent = 'Copied';
+      if (window.CovenantControls) await window.CovenantControls.copied($('terminal-copy'), $('terminal-copy-state'), ENDPOINT);
+      else { await navigator.clipboard.writeText(ENDPOINT); $('terminal-copy').textContent = 'Copied'; $('terminal-copy-state').textContent = 'Copied'; }
     } catch (_) {
       $('terminal-mcp').focus();
       $('terminal-copy-state').textContent = 'Clipboard access was unavailable. Select and copy the address above.';

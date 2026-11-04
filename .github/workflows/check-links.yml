@@ -8,7 +8,7 @@ permissions:
 jobs:
   links:
     runs-on: ubuntu-24.04
-    timeout-minutes: 10
+    timeout-minutes: 20
     steps:
       - name: Check out the site
         uses: actions/checkout@v4

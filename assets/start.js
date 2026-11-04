@@ -134,7 +134,10 @@
       await global.navigator.clipboard.writeText(text); status.textContent = success; if (statusId === 'start-copy-status') { var button = document.getElementById('start-copy-mcp'); if (button) button.textContent = 'Copied'; }
     } catch (error) { status.textContent = 'Automatic copy is unavailable. Select and copy the text shown below.'; var shown = document.createElement('pre'); shown.textContent = text; status.appendChild(shown); }
   }
-  document.getElementById('start-copy-mcp').addEventListener('click', function () { copy(MCP, 'start-copy-status', 'Copied'); });
+  document.getElementById('start-copy-mcp').addEventListener('click', function () {
+    if (global.CovenantControls) global.CovenantControls.copied(document.getElementById('start-copy-mcp'), document.getElementById('start-copy-status'), MCP);
+    else copy(MCP, 'start-copy-status', 'Copied');
+  });
   document.getElementById('start-check').addEventListener('click', async function () {
     var status = document.getElementById('start-copy-status');
     status.textContent = 'Checking the public connection…';
