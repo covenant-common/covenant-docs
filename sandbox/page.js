@@ -1,16 +1,34 @@
-// The sandbox page: wires sandbox.js to the document. Every value is set as text (textContent).
+// Steps use the shared sample ledger. The signature check still loads Python.
+import '../assets/deal-machine.js';
 import { SandboxError, start } from './sandbox.js';
 
+const { createSample, explain } = globalThis.CovenantDeal;
 const base = new URL('./', document.baseURI);
 const $ = (id) => document.getElementById(id);
 const STAGES = {
   manifest: 'Reading the site manifest...',
   package: 'Downloading the package and checking its fingerprint...',
-  python: (manifest) => `Loading Python into this page (${(manifest.download_bytes / 1e6).toFixed(1)} MB in all, the first time)...`,
-  ready: 'Running the test deal...',
+  python: (manifest) => `Still loading Python (${(manifest.download_bytes / 1e6).toFixed(1)} MB the first time)...`,
+  ready: 'Running the signed sample...',
+};
+const NEXT_STEP = { ready: 'quote', quote: 'offer', offer: 'counter', counter: 'agree', agree: 'accept', bound: 'deliver' };
+const NEXT_LABEL = {
+  ready: 'Show the quote',
+  quote: 'Send the buyer’s offer',
+  offer: 'Send the seller’s counter',
+  counter: 'Use 25 test USDC',
+  agree: 'Accept and hold the test funds',
+  bound: 'Mark the work delivered',
+};
+const CONFIRM = {
+  accept: 'Accepting holds 25 test USDC in this page. It does not bind a real person and it does not pay a hosted bill.',
+  release: 'Release pays the seller in test USDC. It does not move real money.',
+  refund: 'Refund returns the held test USDC to the buyer. Hosted USDC cannot do this.',
 };
 let session = null;
 let last = null;
+let sample = createSample();
+let pending = null;
 
 function hex(buffer) {
   return [...new Uint8Array(buffer)].map((b) => b.toString(16).padStart(2, '0')).join('');
@@ -34,7 +52,7 @@ const env = {
   loadPyodide: async (options) => (await import(new URL('pyodide/pyodide.mjs', base).href)).loadPyodide(options),
   progress: (stage, manifest) => {
     const text = STAGES[stage];
-    $('status').textContent = typeof text === 'function' ? text(manifest) : text || '';
+    $('py-status').textContent = typeof text === 'function' ? text(manifest) : text || '';
   },
 };
 
@@ -44,28 +62,60 @@ function line(parent, text) {
   parent.append(p);
 }
 
-function money(balances) {
-  return `buyer ${balances.buyer}, seller ${balances.seller}, held in escrow ${balances.escrow} (test USDC)`;
+function show(result) {
+  $('step-error').textContent = '';
+  if (result.error) {
+    $('step-error').textContent = explain(result.error) || result.error;
+    return;
+  }
+  const item = document.createElement('li');
+  item.textContent = result.said + ' ' + result.money + ' ' + result.feeText;
+  $('step-log').append(item);
+  $('money').replaceChildren();
+  line($('money'), result.money);
+  line($('money'), result.feeText);
+  $('step-status').textContent = result.serverState + '. ' + result.said;
+  const phase = sample.phase();
+  $('next').hidden = phase === 'delivered' || phase === 'disputed' || phase === 'settled' || phase === 'released';
+  $('next').textContent = NEXT_LABEL[phase] || 'Next';
+  $('branch').hidden = phase !== 'delivered' && phase !== 'disputed';
+  $('release').disabled = phase !== 'delivered';
+  $('dispute').disabled = phase !== 'delivered';
+  $('refund').disabled = phase !== 'disputed';
 }
 
-function render(result) {
-  for (const step of result.steps) {
-    const out = $(`out-${step.step}`);
-    out.replaceChildren();
-    line(out, step.said);
-    line(out, `Result: ${step.verdict}. Signed by: ${step.signed_by.join(' and ')}. Balances: ${money(step.balances)}.`);
-    const folded = document.createElement('details');
-    const summary = document.createElement('summary');
-    summary.textContent = 'Show the record identifiers';
-    folded.append(summary);
-    if (step.proof) line(folded, `Proof: SHA-256 ${step.proof.content_sha256} over ${step.proof.content_bytes} bytes, signed by the ${step.proof.signed_by}.`);
-    line(folded, `Record ID after this step: ${step.record_id}`);
-    out.append(folded);
-  }
-  $('record').textContent = JSON.stringify(result.record, null, 2);
-  $('summary').textContent = `Done in ${result.elapsed_ms} ms. The demo finished in this page. No real money moved and nothing was sent. The long identifiers are folded under each step.`;
-  $('summary').tabIndex = -1;
-  $('summary').focus();
+function ask(action) {
+  pending = action;
+  $('confirm-text').textContent = CONFIRM[action];
+  $('confirm').hidden = false;
+}
+
+function act(name) {
+  show(sample.step(name));
+}
+
+$('next').addEventListener('click', () => {
+  const name = NEXT_STEP[sample.phase()];
+  if (!name) return;
+  if (CONFIRM[name]) ask(name);
+  else act(name);
+});
+$('release').addEventListener('click', () => ask('release'));
+$('dispute').addEventListener('click', () => act('dispute'));
+$('refund').addEventListener('click', () => ask('refund'));
+$('confirm-no').addEventListener('click', () => { pending = null; $('confirm').hidden = true; });
+$('confirm-yes').addEventListener('click', () => {
+  const name = pending;
+  pending = null;
+  $('confirm').hidden = true;
+  if (name) act(name);
+});
+
+function withTimeout(promise, ms) {
+  return new Promise((resolve, reject) => {
+    const timer = setTimeout(() => reject(new SandboxError('SANDBOX_TIMEOUT')), ms);
+    promise.then((value) => { clearTimeout(timer); resolve(value); }, (error) => { clearTimeout(timer); reject(error); });
+  });
 }
 
 function fail(error) {
@@ -73,15 +123,10 @@ function fail(error) {
   const info = known.explain();
   const box = $('error');
   box.replaceChildren();
-  line(box, `${info.code}: ${info.what}`);
-  line(box, `What to do: ${info.fix} Retrying ${info.retry ? 'can help' : 'will not help'}.`);
-  if (info.detail) line(box, `Detail: ${info.detail}`);
-  const link = document.createElement('a');
-  link.href = info.reference;
-  link.textContent = 'What this code means';
-  box.append(link);
+  line(box, (info.code in globalThis.CovenantDeal.MESSAGES ? explain(info.code) : info.what));
+  line(box, info.fix);
   box.hidden = false;
-  $('status').textContent = 'Stopped.';
+  $('py-status').textContent = 'The signature check stopped. The steps above are unchanged. No real money moved.';
 }
 
 async function run() {
@@ -89,14 +134,11 @@ async function run() {
   $('error').hidden = true;
   try {
     if (!globalThis.isSecureContext || !globalThis.crypto || !crypto.subtle) throw new SandboxError('SANDBOX_INSECURE_PAGE');
-    if (session === null) {
-      session = await start(env);
-      $('code').textContent = session.code;
-    }
-    $('status').textContent = STAGES.ready;
+    if (session === null) session = await withTimeout(start(env), 90000);
+    $('py-status').textContent = STAGES.ready;
     last = session.demo();
-    render(last);
-    $('status').textContent = 'Done. Run it again for a fresh deal with new keys.';
+    $('record').textContent = JSON.stringify(last.record, null, 2);
+    $('py-status').textContent = 'Signed sample checked in this page. No real money moved and nothing was sent.';
     $('check').disabled = false;
     $('forge').disabled = false;
   } catch (error) {
@@ -112,12 +154,11 @@ function check(tamper) {
     const out = $('checked');
     out.replaceChildren();
     const original = last.record.terms.quantity;
-    const changed = original * 100;
     line(out, tamper
-      ? `The price was changed from ${original} to ${changed} test USDC: ${report.verdict}.`
-      : `The record checks out: ${report.verdict}.`);
-    for (const problem of report.problems) line(out, `${problem.code}: ${problem.fix}`);
-    line(out, report.note);
+      ? `The price was changed from ${original} to ${original * 100} test USDC. The check refused it.`
+      : 'The signed record checks out.');
+    for (const problem of report.problems) line(out, (problem.code in globalThis.CovenantDeal.MESSAGES ? explain(problem.code) : (problem.fix || 'The check refused the record.')));
+    line(out, 'Signatures were checked in this page. Escrow here is test money.');
   } catch (error) {
     fail(error);
   }

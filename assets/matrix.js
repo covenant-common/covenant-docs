@@ -502,8 +502,25 @@
       }
     } finally {$('draft-copy').disabled = drafting || latestDraftRaw === null;}
   });
+  function showPriceError(message) {
+    const error = $('draft-price-error');
+    if (error) error.textContent = message || '';
+    $('draft-price').setCustomValidity(message || '');
+  }
+  $('draft-price').addEventListener('input', () => {
+    const deal = globalThis.CovenantDeal;
+    if (!deal) {showPriceError('The price check did not load. Nothing was sent.'); return;}
+    const result = deal.validatePrice($('draft-price').value);
+    showPriceError(result.ok ? '' : result.message);
+    if (result.ok) $('draft-price').value = result.canonical;
+  });
   $('matrix-draft').addEventListener('submit', async (event) => {
     event.preventDefault();
+    const deal = globalThis.CovenantDeal;
+    const price = deal ? deal.validatePrice($('draft-price').value) : {ok: false, message: 'The price check did not load. Nothing was sent.'};
+    showPriceError(price.ok ? '' : price.message);
+    if (!price.ok) {$('draft-price').focus(); return;}
+    $('draft-price').value = price.canonical;
     if (!structures || !selection || drafting || !event.currentTarget.reportValidity()) return;
     const values = {};
     ['title', 'buyer', 'supplier', 'deliverable', 'price'].forEach((key) => {values[key] = $('draft-' + key).value.trim();});

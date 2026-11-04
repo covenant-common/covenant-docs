@@ -1,0 +1,46 @@
+{
+  "format": "covenant-docs-capability-registry/0.1",
+  "note": "Vendored copy. The server repository did not publish a registry file in this docs checkout. Public tool names come from mcp/tool-inventory.json observed 2026-11-02. Payment rows match the live payment catalogue read on 2026-11-04. Do not describe a method as live or connected unless its badge says so.",
+  "owner_todo": "Point this file at the server registry when that path exists, and refresh it when the live catalogue changes.",
+  "public_tools": [
+    "aap_public_listing_search",
+    "covenant_marketplace__quick_trade",
+    "covenant_contract__draft",
+    "covenant_contract__inspect",
+    "covenant_contract__compare",
+    "covenant_contract__render",
+    "covenant_review__review",
+    "covenant_review__authority",
+    "covenant_review__evidence"
+  ],
+  "first_public_tool": "covenant_contract__draft",
+  "badges": {
+    "NOT_CONNECTED": "Not connected",
+    "CONFIGURED_UNVERIFIED": "Configured, not yet verified",
+    "TEST_ONLY": "Test only",
+    "NOT_LIVE": "Not live",
+    "COMING_SOON": "Coming soon",
+    "LIVE": "Live"
+  },
+  "payments": [
+    {"id": "card", "label": "Card", "readiness": "NOT_CONNECTED", "badge": "COMING_SOON", "settlement_enabled": false, "plain": "Coming soon (not connected). Not installed."},
+    {"id": "bitcoin", "label": "Bitcoin", "readiness": "NOT_CONNECTED", "badge": "NOT_CONNECTED", "settlement_enabled": false, "plain": "Not connected. Not installed."},
+    {"id": "usdc-base", "label": "USDC on Base", "readiness": "CONFIGURED_UNVERIFIED", "badge": "CONFIGURED_UNVERIFIED", "settlement_enabled": false, "plain": "Configured, not yet verified. Not connected. Settlement is off, so a payment cannot be completed here."},
+    {"id": "usdc-ethereum", "label": "USDC on Ethereum", "readiness": "CONFIGURED_UNVERIFIED", "badge": "CONFIGURED_UNVERIFIED", "settlement_enabled": false, "plain": "Configured, not yet verified. Same limit as Base."},
+    {"id": "usdc-base-sepolia", "label": "USDC on Base Sepolia", "readiness": "TEST_ONLY", "badge": "TEST_ONLY", "settlement_enabled": false, "plain": "Test only. Not installed. Test funds would not pay a real bill."},
+    {"id": "usdc-ethereum-sepolia", "label": "USDC on Ethereum Sepolia", "readiness": "TEST_ONLY", "badge": "TEST_ONLY", "settlement_enabled": false, "plain": "Test only. Not installed. Test funds would not pay a real bill."},
+    {"id": "usdc-solana", "label": "USDC on Solana", "readiness": "NOT_CONNECTED", "badge": "NOT_CONNECTED", "settlement_enabled": false, "plain": "Not connected. Not installed."},
+    {"id": "aap-native", "label": "Native payment network", "readiness": "NOT_LIVE", "badge": "NOT_LIVE", "settlement_enabled": false, "plain": "Not live. Not installed."}
+  ],
+  "fee": {
+    "bps": 50,
+    "optional_from": "2026-11-01",
+    "optional_days": 14,
+    "end": null,
+    "payer_opt_in_default": false
+  },
+  "lifecycle": {
+    "scope": "Installed work-order checks used by the browser sample. Not the public host.",
+    "states": ["PROPOSED", "BOUND", "DELIVERED", "DISPUTED", "DECIDED", "SETTLED", "RELEASED"]
+  }
+}

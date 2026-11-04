@@ -36,8 +36,7 @@
       account:'treasury', testnet:false, states:['NOT_LIVE'],
       steps:['The native payment network is not live.', 'This recorded treasury name is not a live external payment address.']}
   ];
-  const LABELS = {NOT_CONNECTED:'Connection needed', CONFIGURED_UNVERIFIED:'Configured, not yet verified',
-    TEST_ONLY:'Test funds only', NOT_LIVE:'Not live'};
+  const LABELS = {NOT_CONNECTED:'Not connected', CONFIGURED_UNVERIFIED:'Configured, not yet verified', TEST_ONLY:'Test only', NOT_LIVE:'Not live', COMING_SOON:'Coming soon', LIVE:'Live'};
   function readinessText(id, readiness) {
     return id === 'card' && readiness === 'NOT_CONNECTED' ? 'Coming soon (not connected)' : LABELS[readiness];
   }
@@ -100,8 +99,11 @@
         const fee = row.id === 'aap-native' ? '<p><strong>Recorded treasury:</strong> treasury. No live payment address.</p>' :
           row.feeAccount === null ? '<p><strong>Covenant fee destination:</strong> not connected.</p>' :
           '<p><strong>Covenant fee destination only:</strong> <span class="payment-address">'+escape(row.feeAccount)+'</span></p>';
+        const badge = row.readinessLabel.indexOf('Coming soon') === 0 ? 'badge-soon' :
+          row.readinessLabel === 'Test only' ? 'badge-test' :
+          row.readinessLabel === 'Live' ? 'badge-live' : 'badge-off';
         return '<details class="payment-choice" data-payment-method="'+escape(row.id)+'"><summary>'+escape(row.label)+
-          '<span class="payment-readiness">'+escape(row.readinessLabel)+'</span></summary><div class="payment-detail">'+
+          '<span class="badge '+badge+'">'+escape(row.readinessLabel)+'</span> <span class="badge badge-off">You cannot pay with this yet</span></summary><div class="payment-detail">'+
           '<p><strong>Network:</strong> '+escape(row.network)+' · '+escape(row.asset==='EXACT_ADOPTED_FIAT_CURRENCY'?'agreed card currency':row.asset)+'</p>'+
           '<ol>'+row.steps.map(step => '<li>'+escape(step)+'</li>').join('')+'</ol>'+fee+
           (row.id==='aap-native'?'':'<p>The seller’s payment goes to the seller’s separately approved destination. Do not send the order price to the Covenant fee destination.</p>')+

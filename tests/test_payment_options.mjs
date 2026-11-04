@@ -136,7 +136,8 @@ test('missing endpoint, malformed response and oversized body preserve the saved
 
 test('public page asks for no payment secrets and retains useful non-script routes', () => {
   const html=readFileSync(new URL('../docs/PAYMENTS.html',import.meta.url),'utf8');
-  assert.ok(!/<(?:input|form|iframe)\b/i.test(html));
+  assert.ok(!/<(?:form|iframe)\b/i.test(html));
+  assert.ok(!/<input(?![^>]*class="nav-toggle")\b/i.test(html));
   assert.match(html,/<noscript>/);
   for (const target of ['MATRIX.html','TRIAL.html','API_MCP.html']) assert.ok(html.includes('href="'+target+'"'));
   assert.match(html,/Your agent should show you the seller, the amount, the network and any Covenant fee/);
