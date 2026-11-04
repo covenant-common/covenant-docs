@@ -2,27 +2,207 @@
   "format": "covenant-docs-glossary/0.1",
   "note": "Single source for glossary entries and jargon tooltips. Rendered into docs/GLOSSARY.html and title attributes by tools/build_site.py.",
   "entries": [
-    {"id": "access-file", "term": "Access file", "body": "The private trial file. In the terminal client it is access.json. It contains the signing seed and the account token. The MCP configuration is a second file, mcp.json, and contains the bearer token only. Keep both outside an agent chat."},
-    {"id": "bearer-token", "term": "Bearer token", "tooltip": "The account credential. It is not a signature and it does not pay.", "body": "The account credential in the MCP configuration’s Authorization header. That file does not contain the signing seed. It is not itself an approval of a deal or a payment."},
-    {"id": "agreement-id", "term": "Agreement ID", "body": "The identifier of one exact agreement. Keep the expected agreement ID separately from any shortened summary. The source order and the final payment-enabled agreement have different IDs."},
-    {"id": "request-key", "term": "Request key", "body": "The retained key for one operation. A retry uses the identical operation, unchanged fields, and its original request key."},
-    {"id": "successor-bundle", "term": "Successor bundle", "body": "For a marketplace successor agreement, the market package includes the original advert, order, fee disclosure and full payment requests. Approving the source does not approve the successor."},
-    {"id": "leg-give-0", "term": "Leg give-0", "body": "The wallet-instruction example names the payment leg give-0 on an original source deal that uses Base or Ethereum USDC."},
-    {"id": "sender-destination", "term": "Sender and destination instruction", "body": "The seller uses destination. The payer uses sender. The instruction names a wallet. It alone does not authorize spending."},
-    {"id": "usdc-micro", "term": "USDC_MICRO", "tooltip": "Six-decimal token units. 25 USDC = 25,000,000 micro-units. Not a dollar conversion.", "body": "Base and Ethereum USDC amounts on the payments page use six-decimal micro-units. 25 USDC = 25,000,000 micro-units. That is a token amount, not a dollar conversion."},
-    {"id": "transfer-terms", "term": "transfer_terms", "body": "A field on the named asset in the USDC examples. Those examples show it as an empty object. Naming the asset does not, by itself, move the tokens."},
-    {"id": "offer", "term": "Offer", "tooltip": "A draft you swap by hand today. A recorded offer is coming soon.", "body": "A proposed set of terms: the work, the price, the deadline and how the result will be checked. Today an offer is a draft you send yourself, by email or chat. The public server does not deliver it and does not mark one draft as the open offer. A recorded offer is coming soon."},
-    {"id": "counter-offer", "term": "Counter-offer", "tooltip": "A new draft that changes the price or the deadline. A recorded counter-offer is coming soon.", "body": "A new draft that changes the other side’s terms, such as the price or the number of days. Today you write that new draft and swap it by hand. There is no counter-offer action on the public server. A recorded counter-offer is coming soon."},
-    {"id": "fresh-approval", "term": "Fresh approval", "body": "After the terms change, everyone who must agree has to approve the new exact version. An earlier approval stays with the earlier version. The public comparison asks for this when the two copies differ, including when the only difference is the order of the same clauses."},
-    {"id": "budget-limit", "term": "Budget limit", "body": "A cap on what an agent may agree, such as up to £130. This cap is not available on the public tools or the hosted account tools. A budget limit is coming soon. The open server change is pull request 192. That link does not mean the pull request already adds amount caps."},
-    {"id": "hold-and-release", "term": "Hold and release", "body": "In the browser sandbox, test money moves into a hold when the sample is funded, and the buyer releases it after delivery. Those are test units, not real USDC. On the hosted USDC route there is no hold. Payment is a direct transfer and it is final."},
-    {"id": "resolver", "term": "Resolver", "tooltip": "A third party in the browser sample. Hosted USDC does not require one.", "body": "A named third party in the local sandbox sample, used when a job is disputed there. The hosted USDC path does not require a resolver. A hosted dispute is a signed record between the buyer and the seller. The fee recipient is not required to co-sign that dispute."},
-    {"id": "mcp", "term": "MCP", "tooltip": "The public tool connection. It can draft. It cannot sign, publish, pay or refund.", "body": "The public tool connection. It can search and draft. It cannot sign, publish, pay or refund."},
-    {"id": "aap", "term": "AAP", "tooltip": "The engine name under Covenant. The native payment network is not live.", "body": "The engine name under Covenant. The native payment network is not live."},
-    {"id": "fee-opt-in", "term": "fee_opt_in", "tooltip": "The payer’s choice to add the posted fee. It defaults to off.", "body": "The payer’s choice to add a platform fee. The fee is not set yet, so this choice does not add an amount. The owner will confirm this."},
-    {"id": "ed25519", "term": "Ed25519", "tooltip": "The signature type used by the account tools.", "body": "The signature type used by the account tools."},
-    {"id": "supersedes", "term": "supersedes", "tooltip": "A link to the previous draft. A public draft refuses it.", "body": "A link to the previous draft. A public draft refuses it. Each public draft stands alone."},
-    {"id": "eip155", "term": "eip155", "tooltip": "A network id in the payment catalogue. Naming it does not move money.", "body": "A network id in the payment catalogue. Naming it does not move money."},
-    {"id": "escrow", "term": "escrow", "tooltip": "The browser sample can hold test funds. Hosted USDC does not. That payment is final.", "body": "The browser sample can hold test funds. Hosted USDC does not. That payment is final."}
+    {
+      "id": "access-file",
+      "term": "Access file",
+      "body": "The private trial file. In the terminal client it is access.json. It contains the signing seed and the account token. The MCP configuration is a second file, mcp.json, and contains the bearer token only. Keep both outside an agent chat."
+    },
+    {
+      "id": "bearer-token",
+      "term": "Bearer token",
+      "tooltip": "The account credential. It is not a signature and it does not pay.",
+      "body": "The account credential in the MCP configuration’s Authorization header. That file does not contain the signing seed. It is not itself an approval of a deal or a payment."
+    },
+    {
+      "id": "agreement-id",
+      "term": "Agreement ID",
+      "body": "The identifier of one exact agreement. Keep the expected agreement ID separately from any shortened summary. The source order and the final payment-enabled agreement have different IDs."
+    },
+    {
+      "id": "request-key",
+      "term": "Request key",
+      "body": "The retained key for one operation. A retry uses the identical operation, unchanged fields, and its original request key."
+    },
+    {
+      "id": "successor-bundle",
+      "term": "Successor bundle",
+      "body": "For a marketplace successor agreement, the market package includes the original advert, order, fee disclosure and full payment requests. Approving the source does not approve the successor."
+    },
+    {
+      "id": "leg-give-0",
+      "term": "Leg give-0",
+      "body": "The wallet-instruction example names the payment leg give-0 on an original source deal that uses Base or Ethereum USDC."
+    },
+    {
+      "id": "sender-destination",
+      "term": "Sender and destination instruction",
+      "body": "The seller uses destination. The payer uses sender. The instruction names a wallet. It alone does not authorize spending."
+    },
+    {
+      "id": "usdc-micro",
+      "term": "USDC_MICRO",
+      "tooltip": "Six-decimal token units. 25 USDC = 25,000,000 micro-units. Not a dollar conversion.",
+      "body": "Base and Ethereum USDC amounts on the payments page use six-decimal micro-units. 25 USDC = 25,000,000 micro-units. That is a token amount, not a dollar conversion."
+    },
+    {
+      "id": "transfer-terms",
+      "term": "transfer_terms",
+      "body": "A field on the named asset in the USDC examples. Those examples show it as an empty object. Naming the asset does not, by itself, move the tokens."
+    },
+    {
+      "id": "offer",
+      "term": "Offer",
+      "tooltip": "A draft you swap by hand today. A recorded offer is coming soon.",
+      "body": "A proposed set of terms: the work, the price, the deadline and how the result will be checked. Today an offer is a draft you send yourself, by email or chat. The public server does not deliver it and does not mark one draft as the open offer. A recorded offer is coming soon."
+    },
+    {
+      "id": "counter-offer",
+      "term": "Counter-offer",
+      "tooltip": "A new draft that changes the price or the deadline. A recorded counter-offer is coming soon.",
+      "body": "A new draft that changes the other side’s terms, such as the price or the number of days. Today you write that new draft and swap it by hand. There is no counter-offer action on the public server. A recorded counter-offer is coming soon."
+    },
+    {
+      "id": "fresh-approval",
+      "term": "Fresh approval",
+      "body": "After the terms change, everyone who must agree has to approve the new exact version. An earlier approval stays with the earlier version. The public comparison asks for this when the two copies differ, including when the only difference is the order of the same clauses."
+    },
+    {
+      "id": "budget-limit",
+      "term": "Budget limit",
+      "body": "A cap on what an agent may agree, such as up to £130. This cap is not available on the public tools or the hosted account tools. A budget limit is coming soon. The open server change is pull request 192. That link does not mean the pull request already adds amount caps."
+    },
+    {
+      "id": "hold-and-release",
+      "term": "Hold and release",
+      "body": "In the browser sandbox, test money moves into a hold when the sample is funded, and the buyer releases it after delivery. Those are test units, not real USDC. On the hosted USDC route there is no hold. Payment is a direct transfer and it is final."
+    },
+    {
+      "id": "resolver",
+      "term": "Resolver",
+      "tooltip": "A third party in the browser sample. Hosted USDC does not require one.",
+      "body": "A named third party in the local sandbox sample, used when a job is disputed there. The hosted USDC path does not require a resolver. A hosted dispute is a signed record between the buyer and the seller. The fee recipient is not required to co-sign that dispute."
+    },
+    {
+      "id": "mcp",
+      "term": "MCP",
+      "tooltip": "The public tool connection. It can draft. It cannot sign, publish, pay or refund.",
+      "body": "The public tool connection. It can search and draft. It cannot sign, publish, pay or refund."
+    },
+    {
+      "id": "aap",
+      "term": "AAP",
+      "tooltip": "The engine name under Covenant. The native payment network is not live.",
+      "body": "The engine name under Covenant. The native payment network is not live."
+    },
+    {
+      "id": "fee-opt-in",
+      "term": "fee_opt_in",
+      "tooltip": "The payer’s choice to add the posted fee. It defaults to off.",
+      "body": "The payer’s choice to add a platform fee. The fee is not set yet, so this choice does not add an amount. The owner will confirm this."
+    },
+    {
+      "id": "ed25519",
+      "term": "Ed25519",
+      "tooltip": "The signature type used by the account tools.",
+      "body": "The signature type used by the account tools."
+    },
+    {
+      "id": "supersedes",
+      "term": "supersedes",
+      "tooltip": "A link to the previous draft. A public draft refuses it.",
+      "body": "A link to the previous draft. A public draft refuses it. Each public draft stands alone."
+    },
+    {
+      "id": "eip155",
+      "term": "eip155",
+      "tooltip": "A network id in the payment catalogue. Naming it does not move money.",
+      "body": "A network id in the payment catalogue. Naming it does not move money."
+    },
+    {
+      "id": "escrow",
+      "term": "escrow",
+      "tooltip": "The browser sample can hold test funds. Hosted USDC does not. That payment is final.",
+      "body": "The browser sample can hold test funds. Hosted USDC does not. That payment is final."
+    },
+    {
+      "id": "trusted-surface",
+      "term": "Trusted Surface",
+      "tooltip": "The Covenant page where you approve. The chat is not that page.",
+      "body": "The page where you see the full price and approve with your passkey. An agent chat is not a Trusted Surface. Approval on this host is planned."
+    },
+    {
+      "id": "mandate",
+      "term": "mandate",
+      "tooltip": "A signed limit on what your agent may do. Open or closed. Planned here.",
+      "body": "A signed limit on what your agent may do. AP2 v0.2 has a Checkout Mandate and a Payment Mandate. Each can be open (a limit before the exact cart exists) or closed (a yes to one exact checkout or amount). IntentMandate and CartMandate are previous names from AP2 v0.1. A mandate on this host is planned."
+    },
+    {
+      "id": "idempotency-key",
+      "term": "idempotency key",
+      "tooltip": "A caller-chosen key so a retry does not do the work twice. Planned.",
+      "body": "A caller-chosen key sent with a request. The same key and the same body are one operation. A repeat is planned to come back as idempotent_replayed. A different body with the same key is planned to come back as IDEMPOTENCY_CONFLICT. A request still running is planned to come back as IDEMPOTENCY_IN_FLIGHT. The public tools do not require this key today."
+    },
+    {
+      "id": "receipt-chain",
+      "term": "receipt chain",
+      "tooltip": "Each receipt names the receipt before it. Planned for real payments.",
+      "body": "A series of signed receipts where each one names the receipt before it. A sandbox receipt is test-labelled. It does not prove real funds."
+    },
+    {
+      "id": "server-card",
+      "term": "server card",
+      "tooltip": "A static file that describes an MCP server before you connect.",
+      "body": "A static JSON file that describes one remote MCP server. This docs site publishes a prepared copy. The API host path is not activated."
+    },
+    {
+      "id": "agent-card",
+      "term": "agent card",
+      "tooltip": "A static file that describes an A2A agent. Not published here.",
+      "body": "A static JSON file at /.well-known/agent-card.json that describes an A2A agent. This site does not publish one. That path is planned."
+    },
+    {
+      "id": "web-bot-auth",
+      "term": "Web Bot Auth",
+      "tooltip": "A signed directory a site can publish so a bot’s request can be checked. Planned.",
+      "body": "A directory of signing keys a site publishes so a receiver can check that a bot’s HTTP request was signed by that bot. Cloudflare’s documentation is dated 8 October 2026. Covenant does not publish that directory. It is planned."
+    },
+    {
+      "id": "capture-deadline",
+      "term": "capture deadline",
+      "tooltip": "The last moment a hold can be captured. After that, reclaim is planned. The time is not set yet.",
+      "body": "The last moment a held payment can be captured. After that moment, the planned path returns what is left. Not set yet. The owner will confirm this. No live rail has this deadline.",
+      "owner_todo": "TODO(owner): the number of days."
+    },
+    {
+      "id": "authorize",
+      "term": "authorize",
+      "tooltip": "A yes that reserves a payment, before capture. Planned.",
+      "body": "The step that reserves a payment without taking it yet. On a live card rail this is often called an authorisation. No hosted method can authorise a real payment today."
+    },
+    {
+      "id": "capture",
+      "term": "capture",
+      "tooltip": "Taking some or all of a held payment. Planned.",
+      "body": "The step that takes some or all of a payment that was held. A partial capture takes only the agreed part. Capture on this host is planned. The browser sample can release test funds. That is not a card capture."
+    },
+    {
+      "id": "void",
+      "term": "void",
+      "tooltip": "Cancel a hold before capture. Planned.",
+      "body": "Cancel a hold before any of it is captured, so the reserved amount is not taken. Void is planned. It is not a hosted refund of money already sent."
+    },
+    {
+      "id": "refund",
+      "term": "refund",
+      "tooltip": "Money sent back after capture. The sandbox can return test funds only.",
+      "body": "Money sent back after it has been captured. The browser sample can return held test funds to the buyer. A hosted USDC transfer cannot be pulled back, and Covenant cannot refund it, because Covenant never holds your money."
+    },
+    {
+      "id": "reclaim",
+      "term": "reclaim",
+      "tooltip": "What is left comes back after the capture deadline in the server sandbox. The window is not set yet.",
+      "body": "After the capture deadline, what was held and not captured comes back in the server sandbox. Not set yet. The owner will confirm this. No day count is set. The browser sample does not split a hold.",
+      "owner_todo": "TODO(owner): how long that window is."
+    }
   ]
 }
