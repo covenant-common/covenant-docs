@@ -149,6 +149,11 @@
         phase = 'disputed';
         return view('dispute', 'Disputed. Stage DISPUTED. The 25 test USDC stays held while the resolver looks at the reason.', 'DISPUTED');
       },
+      decline: function () {
+        if (phase !== 'offer' && phase !== 'counter' && phase !== 'agree' && phase !== 'quote') return {error: MESSAGES.OUT_OF_ORDER};
+        phase = 'declined';
+        return view('decline', 'Declined. No test funds moved. This sample does not notify the other side.', 'PROPOSED');
+      },
       refund: function () {
         if (phase !== 'disputed') return {error: MESSAGES.OUT_OF_ORDER};
         phase = 'released';

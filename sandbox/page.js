@@ -17,7 +17,7 @@ const CONFIRM = {
   release: 'Release pays the seller in test USDC. It does not move real money.',
   refund: 'Refund returns the held test USDC to the buyer. Hosted USDC cannot do this.',
 };
-const AUTHORS = { quote: 'Buyer', offer: 'Buyer', counter: 'Seller', agree: 'Buyer', accept: 'Both', fund: 'Buyer', deliver: 'Seller', release: 'Buyer', dispute: 'Buyer', refund: 'Resolver' };
+const AUTHORS = { quote: 'Buyer', offer: 'Buyer', counter: 'Seller', agree: 'Buyer', accept: 'Both', decline: 'Buyer', fund: 'Buyer', deliver: 'Seller', release: 'Buyer', dispute: 'Buyer', refund: 'Resolver' };
 let session = null;
 let last = null;
 let sample = createSample();
@@ -82,6 +82,7 @@ function show(result) {
   $('counter').disabled = phase !== 'offer';
   $('agree').disabled = phase !== 'counter';
   $('accept').disabled = phase !== 'agree' && phase !== 'offer' && phase !== 'counter';
+  $('decline').disabled = phase !== 'quote' && phase !== 'offer' && phase !== 'counter' && phase !== 'agree';
   $('fund').disabled = phase !== 'accepted';
   $('deliver').disabled = phase !== 'bound';
   $('release').disabled = phase !== 'delivered';
@@ -104,7 +105,7 @@ function clickStep(name) {
   if (CONFIRM[name]) ask(name);
   else act(name);
 }
-['propose', 'counter', 'agree', 'accept', 'fund', 'deliver', 'release', 'dispute', 'refund'].forEach((id) => {
+['propose', 'counter', 'agree', 'accept', 'decline', 'fund', 'deliver', 'release', 'dispute', 'refund'].forEach((id) => {
   $(id).addEventListener('click', () => clickStep(id === 'agree' ? 'agree' : id));
 });
 $('confirm-no').addEventListener('click', () => { pending = null; $('confirm').hidden = true; });
