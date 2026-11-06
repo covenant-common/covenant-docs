@@ -49,7 +49,9 @@ def call(path,value):
 def save(path,value):
     fd,name=tempfile.mkstemp(prefix='.aap-',dir=path.parent)
     try:
-        os.fchmod(fd,0o600)
+        # Windows has no fchmod; there the file keeps the private ACL of the
+        # user's own directory, which mkstemp already creates it under.
+        if hasattr(os,'fchmod'):os.fchmod(fd,0o600)
         with os.fdopen(fd,'wb') as out: out.write(canonical(value)+b'\n');out.flush();os.fsync(out.fileno())
         os.replace(name,path)
     finally:
@@ -71,10 +73,12 @@ def main():
     parser.add_argument('--resume',action='store_true',help='Repeat only the original retained setup request')
     args=parser.parse_args();home=args.output.expanduser().absolute()
     if args.resume:
+        # Windows reports no POSIX permission bits, so only the type and size checks apply there.
+        posix=os.name=='posix'
         info=home.stat(follow_symlinks=False)
-        if not stat.S_ISDIR(info.st_mode) or stat.S_IMODE(info.st_mode)&0o077:raise ValueError('Access directory must be private (0700).')
+        if not stat.S_ISDIR(info.st_mode) or posix and stat.S_IMODE(info.st_mode)&0o077:raise ValueError('Access directory must be private (0700).')
         path=home/'access.json';info=path.stat(follow_symlinks=False)
-        if not stat.S_ISREG(info.st_mode) or stat.S_IMODE(info.st_mode)&0o077 or info.st_size>32768:raise ValueError('Use a private regular access file (0600).')
+        if not stat.S_ISREG(info.st_mode) or posix and stat.S_IMODE(info.st_mode)&0o077 or info.st_size>32768:raise ValueError('Use a private regular access file (0600).')
         access=json.loads(path.read_text())
         if type(access) is not dict or set(access)!=ACCESS_FIELDS or access.get('version')!=VERSION or access.get('origin')!=ORIGIN:raise ValueError('Wrong service access file.')
         if not all(type(access.get(k)) is str and HEX64.fullmatch(access[k]) for k in ('actor','private_seed','token','client_nonce')):raise ValueError('Incomplete access file.')
