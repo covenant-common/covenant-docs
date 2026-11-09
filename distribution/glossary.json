@@ -170,8 +170,7 @@
       "id": "capture-deadline",
       "term": "capture deadline",
       "tooltip": "The last moment a hold can be captured. After that, reclaim is planned. The time is not set yet.",
-      "body": "The last moment a held payment can be captured. After that moment, the planned path returns what is left. Not set yet. The owner will confirm this. No live rail has this deadline.",
-      "owner_todo": "TODO(owner): the number of days."
+      "body": "The last moment a held payment can be captured. After that moment, the planned path returns what is left. Not set yet. The owner will confirm this. No live rail has this deadline."
     },
     {
       "id": "authorize",
@@ -201,8 +200,7 @@
       "id": "reclaim",
       "term": "reclaim",
       "tooltip": "What is left comes back after the capture deadline in the server sandbox. The window is not set yet.",
-      "body": "After the capture deadline, what was held and not captured comes back in the server sandbox. Not set yet. The owner will confirm this. No day count is set. The browser sample does not split a hold.",
-      "owner_todo": "TODO(owner): how long that window is."
+      "body": "After the capture deadline, what was held and not captured comes back in the server sandbox. Not set yet. The owner will confirm this. No day count is set. The browser sample does not split a hold."
     }
   ]
 }
