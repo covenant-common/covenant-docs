@@ -25,6 +25,7 @@ jobs:
           python3 tools/lint_tool_counts.py
           python3 tools/fee_copy.py --check
           python3 tools/check_owner_todos.py
+          python3 tools/check_agentic_claims.py
           node --test tests/*.test.cjs tests/deal-machine.test.mjs tests/test_payment_options.mjs tests/pricing-controls.test.mjs
       - name: Install the browser used by the people checklist
         run: npm install --no-save --no-package-lock playwright@1.64.1 @axe-core/playwright@4.14.0 && npx playwright install --with-deps chromium

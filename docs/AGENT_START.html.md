@@ -18,7 +18,7 @@ Covenant never holds your money. In test mode, the test rail holds it; for real 
 | Seller | Counter and deliver. The seller is the merchant of record | Custody of the buyer’s money |
 | Resolver | Refund test money after a dispute | A hosted refund |
 
-Discovery: [server card](../.well-known/mcp/server-card.json), [AI catalog](../.well-known/ai-catalog.json). `/.well-known/agent-card.json`, OAuth protected-resource metadata, and the Web Bot Auth directory are planned and are not published. Published discovery: [MCP_DISCOVERY.html](MCP_DISCOVERY.html). Deal approval stays with the owner: [OWNER_TRADE.html](OWNER_TRADE.html).
+Discovery: [server card](../.well-known/mcp/server-card.json), [AI catalog](../.well-known/ai-catalog.json). `/.well-known/agent-card.json`, OAuth protected-resource metadata, and the Web Bot Auth directory are planned and are not published. Standards matrix: [AGENTIC_COMMERCE.html](AGENTIC_COMMERCE.html). Approval is planned: [APPROVALS.html](APPROVALS.html).
 
 [Choose your first task](START.html) · [Connection instructions](API_MCP.html#connect) · [Compare the full cost of a job](PILOT_WORKSPACE.html#buyer-comparison).
 

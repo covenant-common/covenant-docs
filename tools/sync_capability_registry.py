@@ -60,10 +60,21 @@ def main():
         raw = json.loads(source.read_text())
     else:
         raw = fetch_pr(args.pr)
+    existing_standards = []
+    if PROJECTION.is_file():
+        try:
+            previous = json.loads(PROJECTION.read_text())
+        except (OSError, json.JSONDecodeError):
+            previous = {}
+        if isinstance(previous.get('standards'), list):
+            existing_standards = previous['standards']
     try:
         view = normalize(raw)
     except ValueError as exc:
         raise SystemExit(str(exc))
+    if existing_standards:
+        from registry_view import apply_works_in_test
+        view['standards'] = apply_works_in_test(existing_standards, view['sandbox']['works_in_test'])
     view['source_path'] = SERVER_PATH
     view['source_repo'] = 'covenant-common/covenant'
     view['source_pr'] = args.pr
