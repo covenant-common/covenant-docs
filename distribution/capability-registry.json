@@ -239,7 +239,7 @@
       "name": "x402 v2 auth-capture",
       "what": "A refundable x402 payment: deposit, then capture, void or refund.",
       "status": "Test mode",
-      "where": "The server sandbox runs auth-capture in test, including a partial capture. Release and refund move test money there. Reclaim stays planned.",
+      "where": "Listed in sandbox.works_in_test. An outside HTTP caller can offer and accept. The registry does not list an HTTP approval role or a dispute role, so that caller cannot fund or resolve. Not real funds, and not Live.",
       "source": "https://docs.x402.org/schemes/overview",
       "source_date": "2026-11-04",
       "date_note": "The schemes overview describes auth-capture. It does not print a publication date. Checked 4 November 2026."
