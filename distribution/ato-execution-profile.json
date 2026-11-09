@@ -4,7 +4,7 @@
   "suite_sha256": "5b7b00e8614d436e3d5c2c8d459c291710fe3a46cb18711900d1d9474d7cc3b5",
   "protocol_version": "2025-11-25",
   "endpoint": "https://jupie202020.pythonanywhere.com/mcp",
-  "inventory_sha256": "bf8bf934d1136a24efec496fa8d6a2fe1034c7ffe0972229d7f589b7890600ad",
+  "inventory_sha256": "40f0eb5e7161e044b8220a79dbad16f07b2647ed134c436c34b6a60ff8a58d6c",
   "fixture_origin": "SYNTHETIC_TRANSPORT_FIXTURES_NOT_OBSERVED: minimal evaluator fixtures, not stored live responses. Placeholder IDs for the two new drafts test format only. Offline pass validates replay and dispatch guards, not a live server or model.",
   "execution_scope": "14 predetermined read-only calls and six zero-dispatch controls. The harness does not interpret prompt text or make agent tool choices. Search inventory and prices are not fixed expected facts.",
   "cases": [
@@ -1340,5 +1340,5 @@
       "synthetic_fixture_payload": null
     }
   ],
-  "profile_sha256": "6da02df79c079da0da502b591f6ac95446daf2a5752bf5020ce2d920af702271"
+  "profile_sha256": "15f66cb33dc256f2b00107baa5ff99e18ab655070415e637d00ce10da2bee134"
 }

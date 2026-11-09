@@ -9,6 +9,7 @@ The docs fixes that remain on this branch are in [`afc96d4`](https://github.com/
 | [Round 7](round7/report.md) | Before 4 Nov 2026 | 2.54 → **3.28** | 2.62 → **3.53** | [scores](round7/scores.csv) |
 | [Round 8](round8/report.md) | 4 Nov 2026 | 3.28 → **3.44** | 3.53 → **3.49** | [scores](round8/scores.csv) |
 | [Round 9](round9/report.md) | 9 Nov 2026 | 3.44 → **3.50** | 3.49 → **3.46** | [scores](round9/scores.csv), [what the docs did](round9-findings.md) |
+| [Round 10](round10/report.md) | 9 Nov 2026 | 3.50 → **3.50** | 3.46 → **3.46** | [scores](round10/scores.csv) |
 | [Agentic commerce](agentic-commerce/report.md) | 4 Nov 2026 | — | — | [gaps](agentic-commerce/gaps.csv) |
 
 Server findings (token mint, conservation, resolve outcomes, the sandbox clock) are still open. They live in the private covenant repo, not in these docs.
@@ -59,7 +60,7 @@ Report: [round9/report.md](round9/report.md). What the docs changed: [round9-fin
 | R9-8. Fee shown as 0.5% while the server fee is null | Fixed in [`afc96d4`](https://github.com/covenant-common/covenant-docs/commit/afc96d4d2347f8ee56a48ce27d4a351be4b3dc2c). |
 | R9-14. `TODO(owner)` in screen readers and `llms.txt` | Fixed in [`afc96d4`](https://github.com/covenant-common/covenant-docs/commit/afc96d4d2347f8ee56a48ce27d4a351be4b3dc2c). |
 | R9-17. #13 conflicts with main | Fixed in [`afc96d4`](https://github.com/covenant-common/covenant-docs/commit/afc96d4d2347f8ee56a48ce27d4a351be4b3dc2c). |
-| Registry drift, 10th tool, card and AAP native rows | Fixed in [`afc96d4`](https://github.com/covenant-common/covenant-docs/commit/afc96d4d2347f8ee56a48ce27d4a351be4b3dc2c) and [`f1528ed`](https://github.com/covenant-common/covenant-docs/commit/f1528ed513fcf1213346e055f3be3a6e8b2c9b8c). The frozen 9-tool inventory file is unchanged. |
+| Registry drift, 10th tool, card and AAP native rows | Fixed in [`afc96d4`](https://github.com/covenant-common/covenant-docs/commit/afc96d4d2347f8ee56a48ce27d4a351be4b3dc2c) and [`f1528ed`](https://github.com/covenant-common/covenant-docs/commit/f1528ed513fcf1213346e055f3be3a6e8b2c9b8c). Round 10 then included the tenth name in the frozen inventory. |
 | Reclaim described as not working | Fixed in [`afc96d4`](https://github.com/covenant-common/covenant-docs/commit/afc96d4d2347f8ee56a48ce27d4a351be4b3dc2c). |
 | Dispute day counts | Still open as `TODO(owner)`. The page states the sandbox has no post-release window. |
 | Approval pages overstate enforcement | Fixed in [`f1528ed`](https://github.com/covenant-common/covenant-docs/commit/f1528ed513fcf1213346e055f3be3a6e8b2c9b8c). |
@@ -73,3 +74,19 @@ Report: [round9/report.md](round9/report.md). What the docs changed: [round9-fin
 Report: [agentic-commerce/report.md](agentic-commerce/report.md). Gap table: [agentic-commerce/gaps.csv](agentic-commerce/gaps.csv). Compared on 4 Nov 2026.
 
 The docs side of that comparison is the standards matrix on the stacked branch ([`f1528ed`](https://github.com/covenant-common/covenant-docs/commit/f1528ed513fcf1213346e055f3be3a6e8b2c9b8c)). Rows stay Test mode or Planned until `sandbox.works_in_test` says otherwise. Gaps that need a server change, a fee amount, or a legal decision are still open. Do not invent those decisions.
+
+## Round 10
+
+Report: [round10/report.md](round10/report.md). Scores: [round10/scores.csv](round10/scores.csv). Person 3.50, agent 3.46, flat with round 9. Tested #13 `38480c94` and #15 `f1528ed5` on 9 Nov 2026.
+
+| Finding | Status |
+| --- | --- |
+| R10-1. Fee sentence repeated, and a £0.60 example under “not set yet” | Fixed in this round’s docs commit. `tools/fee_copy.py` reads `platform_fee_bps`. While it is null, the sentence appears once, inside the funds block, and a stated rate fails the check. |
+| R10-2. Asset inventory stale | Fixed in this round’s docs commit. `tools/build_site.py` rewrites `manifest.json` after a write, and `tools/check_public_site.py` names the stale paths. |
+| R10-5. Inventory and AI catalog say 9 tools | Fixed in this round’s docs commit. The frozen inventory, the server card and the AI catalog list the registry’s 10 names, including `covenant_payment__quote`. The quote schema is not invented: the entry says to discover it with tools/list. The 2 Nov public host response is recorded as 9 tools. `tools/check_registry_drift.py` compares the frozen inventory. |
+| R10-7. #15 pull request text says “8 pass” | Fixed in the #15 pull request description. `tests/standards-cards.mjs` has 2 tests. |
+| R10-8. `TODO(owner)` in the Resolve description and glossary | Fixed in this round’s docs commit for the Resolve description. `tools/check_owner_todos.py` fails if a meta description, glossary body, or `llms.txt` contains the marker. |
+| R10-9. Price error does not echo the input, set `aria-invalid`, or move focus | Fixed in this round’s docs commit (`assets/deal-machine.js`, `assets/matrix.js`). |
+| “Open the connection page” | Fixed in this round’s docs commit. The link text is “Connect an agent”. |
+| Small-business comparison misses payout timing and chargebacks | Fixed in this round’s docs commit (`docs/SELLER.html`). Both say not set yet. No number is invented. |
+| R10-3, R10-4, R10-6, R10-11, and the server findings carried from round 9 | Still open in the covenant server. |

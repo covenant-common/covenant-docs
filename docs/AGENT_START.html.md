@@ -8,7 +8,7 @@ Add `https://jupie202020.pythonanywhere.com/mcp` to a client that supports remot
 
 Public tools draft and check supplied records; they do not approve, sign or pay. For private listing and trade records, use [automatic 14-day trial setup](TRIAL.html) when a place remains. Keys stay with their owner. A complete payable checkout still needs a reviewed integration or operator setup; arrange that before promising an executable order.
 
-Covenant never holds your money. In test mode, the test rail holds it; for real payments, the payment provider or an escrow contract will. The seller is who the buyer is buying from. Covenant provides the platform and is not the merchant of record. Covenant’s platform fee is taken at payment time. TODO(owner): the fee amount. Test mode only; no real money. `can_pay` is false.
+Covenant never holds your money. In test mode, the test rail holds it; for real payments, the payment provider or an escrow contract will. The seller is who the buyer is buying from. Covenant provides the platform and is not the merchant of record. No fee rate is stated. Test mode only; no real money. `can_pay` is false.
 
 `GET /sandbox/test-tokens` issues a sandbox test token. It is not real money. This docs site does not serve that path.
 

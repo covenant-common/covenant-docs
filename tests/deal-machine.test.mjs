@@ -7,7 +7,7 @@ const deal = require('../assets/deal-machine.js');
 
 test('a vague price and a negative price are refused', () => {
   assert.equal(deal.validatePrice('a hundred quid maybe').ok, false);
-  assert.match(deal.validatePrice('a hundred quid maybe').message, /not a price/);
+  assert.match(deal.validatePrice('a hundred quid maybe').message, /a hundred quid maybe/);
   assert.equal(deal.validatePrice('USD -25').ok, false);
   assert.match(deal.validatePrice('-5').message, /negative/);
   assert.equal(deal.validatePrice('25').ok, false);
@@ -64,10 +64,10 @@ test('the priced path keeps 25 after counter and agree', () => {
 test('a non-numeric amount is its own field message', () => {
   const both = deal.priceFieldErrors('', 'a hundred quid');
   assert.equal(both.currencyMessage, 'Choose a currency.');
-  assert.match(both.amountMessage, /not a price/);
+  assert.match(both.amountMessage, /a hundred quid/);
   const amountOnly = deal.priceFieldErrors('USD', 'a hundred quid');
   assert.equal(amountOnly.currencyMessage, '');
-  assert.match(amountOnly.amountMessage, /not a price/);
+  assert.match(amountOnly.amountMessage, /a hundred quid/);
 });
 
 test('engine codes are not the words a person sees', () => {

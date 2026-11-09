@@ -18,6 +18,6 @@ The only tools on this server are:
 - `covenant_review__authority`
 - `covenant_review__evidence`
 
-If you only know names, use `covenant_contract__draft`. `covenant_marketplace__quick_trade` needs 64-character hexadecimal party values. USD 25 is 2500 cents. The platform fee is not set yet. The owner will confirm this. The platform fee is not set yet. The owner will confirm this. The public tools do not calculate that split.
+If you only know names, use `covenant_contract__draft`. `covenant_marketplace__quick_trade` needs 64-character hexadecimal party values. USD 25 is 2500 cents. The public tools do not calculate that split.
 
 An installed private SDK is a separate product. It is not part of this public server, and this file does not name its tools.

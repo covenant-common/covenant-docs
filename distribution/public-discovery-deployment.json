@@ -35,7 +35,7 @@
       "contentType": "application/json",
       "file": "mcp/tool-inventory.json",
       "path": "/mcp/tool-inventory.json",
-      "sha256": "bf8bf934d1136a24efec496fa8d6a2fe1034c7ffe0972229d7f589b7890600ad"
+      "sha256": "40f0eb5e7161e044b8220a79dbad16f07b2647ed134c436c34b6a60ff8a58d6c"
     },
     {
       "contentType": "text/markdown; charset=utf-8",

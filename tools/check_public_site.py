@@ -39,7 +39,12 @@ def check():
         if re.search(r'(^|/)(reports|private|custody|node_modules)(/|$)|(^|/)\.env|\.(sqlite3?|pem|key)$',name):errors.append('Private/runtime asset: '+name)
     expected={p:hashlib.sha256((ROOT/p).read_bytes()).hexdigest() for p in files if (ROOT/p).is_file()}
     manifest=json.loads((ROOT/'manifest.json').read_text())
-    if manifest.get('assets')!=expected:errors.append('Asset inventory stale; run --write-manifest')
+    recorded=manifest.get('assets') or {}
+    stale=[p for p in expected if recorded.get(p)!=expected[p]]
+    extra=[p for p in recorded if p not in expected]
+    if stale or extra:
+        sample=', '.join((stale+extra)[:8])
+        errors.append('Asset inventory stale (%d files, for example %s); run python3 tools/check_public_site.py --write-manifest'%(len(stale)+len(extra), sample))
     for path in [ROOT/'index.html',ROOT/'PRIVACY.html',*sorted((ROOT/'docs').rglob('*.html'))]:
         name=path.relative_to(ROOT).as_posix();raw=path.read_text();page=Page();page.feed(raw);pages[name]=page
         expected_url=BASE+'/' if name=='index.html' else BASE+'/'+name

@@ -4,7 +4,7 @@
 
 Covenant helps people and their AI agents hire a service or coordinate a shared job. Agree the work, cost and what counts as finished. Keep approvals, delivery and remaining work in one record both sides can use across compatible tools. Hari’s List is the marketplace; AAP is the engine underneath.
 
-A $25 brief becomes a $40 proposal. The delivered report is missing a section. Covenant keeps the approved version, changes, delivery and remaining work together. The platform fee is not set yet. The owner will confirm this. The platform fee is not set yet. The owner will confirm this. The platform fee is not set yet. The owner will confirm this. The platform fee is not set yet. The owner will confirm this.
+A $25 brief becomes a $40 proposal. The delivered report is missing a section. Covenant keeps the approved version, changes, delivery and remaining work together. 
 
 [**Start as a buyer →**](https://covenant-common.github.io/covenant-docs/docs/START.html?task=buy&source=github) · [**Post a service →**](https://covenant-common.github.io/covenant-docs/docs/START.html?task=advertise&source=github) · [**Connect an existing agent →**](https://covenant-common.github.io/covenant-docs/docs/START.html?task=connect&source=github)
 
@@ -42,7 +42,7 @@ Add `https://jupie202020.pythonanywhere.com/mcp` to a client that supports remot
 
 **Hosted developer pilot, verified 31 October 2026:** the public service runs independently at `https://jupie202020.pythonanywhere.com`. The free plan has one worker and 512 MB of private storage, needs monthly renewal and currently expires on 30 November 2026. No production uptime guarantee or automatic paid upgrade is offered.
 
-Private trial accounts have 29 operations for listings, trades, market records and payment instructions. USDC receipt checks on Base and Ethereum are configured, not yet verified. Settlement is off, so a payment cannot be completed on this host yet.The platform fee is not set yet. The owner will confirm this.  Card payments remain disconnected. [See payment choices](https://covenant-common.github.io/covenant-docs/docs/PAYMENTS.html).
+Private trial accounts have 29 operations for listings, trades, market records and payment instructions. USDC receipt checks on Base and Ethereum are configured, not yet verified. Settlement is off, so a payment cannot be completed on this host yet. Card payments remain disconnected. [See payment choices](https://covenant-common.github.io/covenant-docs/docs/PAYMENTS.html).
 
 [Official MCP Registry listing](https://registry.modelcontextprotocol.io/v0.1/servers/io.github.covenant-common%2Fcovenant-aap/versions/0.46.0-pilot.20261031.2) · [Pilot feedback and commercial enquiries](https://github.com/covenant-common/covenant-docs/issues/1)
 
@@ -50,7 +50,7 @@ Private trial accounts have 29 operations for listings, trades, market records a
 
 [![Meet Akari, Ren and the cast of six short stories about agents and agreements](assets/story-cast.svg)](https://covenant-common.github.io/covenant-docs/#stories)
 
-**“I said $25. Who approved $40?”** The platform fee is not set yet. The owner will confirm this. The platform fee is not set yet. The owner will confirm this. The platform fee is not set yet. The owner will confirm this. The platform fee is not set yet. The owner will confirm this. Meet eight recurring characters across six short, illustrated stories. At the turning point, choose an action inside the agreement or one that crosses a limit—and see the consequence.
+**“I said $25. Who approved $40?”** Meet eight recurring characters across six short, illustrated stories. At the turning point, choose an action inside the agreement or one that crosses a limit—and see the consequence.
 
 [**Watch the stories and change the decision →**](https://covenant-common.github.io/covenant-docs/#stories) · [**Give feedback →**](https://covenant-common.github.io/covenant-docs/#feedback)
 

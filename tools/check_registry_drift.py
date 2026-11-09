@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Fail when pages, llms.txt or the payment labels drift from the vendored registry."""
+import hashlib
 import json
 import re
 import sys
@@ -34,12 +35,22 @@ def main():
     tools = REGISTRY['public_tools']
     if len(tools) != len(set(tools)):
         errors.append('Registry tool names are not unique')
-    # The inventory is a retained public-host observation with its own hash.
-    # The registry can list a tool before that snapshot is reviewed again.
-    inventory_names = {row['name'] for row in INVENTORY['tools']}
-    outside = sorted(inventory_names - set(tools))
-    if outside:
-        errors.append('Retained inventory names tools outside the registry: ' + ', '.join(outside))
+    inventory_names = [row['name'] for row in INVENTORY['tools']]
+    if sorted(inventory_names) != sorted(tools) or INVENTORY.get('toolCount') != len(tools):
+        errors.append('Frozen inventory does not match the registry tool list')
+    inventory_sha = hashlib.sha256((ROOT / 'mcp' / 'tool-inventory.json').read_bytes()).hexdigest()
+    for label, path, pointer in (
+        ('server card', ROOT / '.well-known' / 'mcp' / 'server-card.json', None),
+        ('AI catalog', ROOT / '.well-known' / 'ai-catalog.json', ('entries', 0, 'data')),
+    ):
+        card = json.loads(path.read_text())
+        for key in pointer or ():
+            card = card[key]
+        meta = card['_meta']['io.github.covenant-common/public-tools']
+        if sorted(meta.get('names') or []) != sorted(tools) or meta.get('toolCount') != len(tools):
+            errors.append(label + ' tool list does not match the registry')
+        if meta.get('sha256') != inventory_sha:
+            errors.append(label + ' inventory hash does not match mcp/tool-inventory.json')
     llms = (ROOT / 'llms.txt').read_text()
     omitted = [name for name in tools if name not in llms]
     if omitted:

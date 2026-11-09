@@ -1,0 +1,198 @@
+item,baseline,round7,round8,round9,now,evidence
+person T1 discoverability,4.0,4.0,4.0,4.0,4,"6/6 personas find ""Covenant never holds your money"" on the home page in 0 clicks (36-144 s est.); hero paragraph now repeats ""The platform fee is not set yet. The owner will confirm this."" 4 times (d15_home_hero_fee_repeat_1280.png)"
+person T1 affordances,3.0,4.0,4.0,4.0,4,"6/6 personas find ""Covenant never holds your money"" on the home page in 0 clicks (36-144 s est.); hero paragraph now repeats ""The platform fee is not set yet. The owner will confirm this."" 4 times (d15_home_hero_fee_repeat_1280.png)"
+person T1 signifiers,3.0,4.0,3.0,4.0,3,"6/6 personas find ""Covenant never holds your money"" on the home page in 0 clicks (36-144 s est.); hero paragraph now repeats ""The platform fee is not set yet. The owner will confirm this."" 4 times (d15_home_hero_fee_repeat_1280.png)"
+person T1 mapping,3.0,4.0,3.0,3.0,3,"6/6 personas find ""Covenant never holds your money"" on the home page in 0 clicks (36-144 s est.); hero paragraph now repeats ""The platform fee is not set yet. The owner will confirm this."" 4 times (d15_home_hero_fee_repeat_1280.png)"
+person T1 feedback,4.0,4.0,4.0,4.0,4,"6/6 personas find ""Covenant never holds your money"" on the home page in 0 clicks (36-144 s est.); hero paragraph now repeats ""The platform fee is not set yet. The owner will confirm this."" 4 times (d15_home_hero_fee_repeat_1280.png)"
+person T1 constraints,3.0,3.0,3.0,3.0,3,"6/6 personas find ""Covenant never holds your money"" on the home page in 0 clicks (36-144 s est.); hero paragraph now repeats ""The platform fee is not set yet. The owner will confirm this."" 4 times (d15_home_hero_fee_repeat_1280.png)"
+person T1 conceptual_model,3.0,3.0,3.0,3.0,3,"6/6 personas find ""Covenant never holds your money"" on the home page in 0 clicks (36-144 s est.); hero paragraph now repeats ""The platform fee is not set yet. The owner will confirm this."" 4 times (d15_home_hero_fee_repeat_1280.png)"
+person T1 error_prevention_recovery,3.0,3.0,3.0,3.0,3,"6/6 personas find ""Covenant never holds your money"" on the home page in 0 clicks (36-144 s est.); hero paragraph now repeats ""The platform fee is not set yet. The owner will confirm this."" 4 times (d15_home_hero_fee_repeat_1280.png)"
+person T2 discoverability,3.0,4.0,4.0,4.0,4,search not re-tested in depth this round; no-results suggestion copy exists in matrix.js but not reproduced on TERMINAL from local preview
+person T2 affordances,4.0,3.0,4.0,4.0,4,search not re-tested in depth this round; no-results suggestion copy exists in matrix.js but not reproduced on TERMINAL from local preview
+person T2 signifiers,4.0,4.0,4.0,4.0,4,search not re-tested in depth this round; no-results suggestion copy exists in matrix.js but not reproduced on TERMINAL from local preview
+person T2 mapping,3.0,3.0,3.0,3.0,3,search not re-tested in depth this round; no-results suggestion copy exists in matrix.js but not reproduced on TERMINAL from local preview
+person T2 feedback,4.0,4.0,4.0,4.0,4,search not re-tested in depth this round; no-results suggestion copy exists in matrix.js but not reproduced on TERMINAL from local preview
+person T2 constraints,2.0,3.0,4.0,4.0,4,search not re-tested in depth this round; no-results suggestion copy exists in matrix.js but not reproduced on TERMINAL from local preview
+person T2 conceptual_model,3.0,3.0,3.0,3.0,3,search not re-tested in depth this round; no-results suggestion copy exists in matrix.js but not reproduced on TERMINAL from local preview
+person T2 error_prevention_recovery,4.0,3.0,3.0,3.0,3,search not re-tested in depth this round; no-results suggestion copy exists in matrix.js but not reproduced on TERMINAL from local preview
+person T3 discoverability,2.0,4.0,4.0,4.0,4,"bad price ""about hundred pound"": field error + aria-describedby, but message quotes ""a hundred quid"" not the typed text, aria-invalid not set, focus not moved"
+person T3 affordances,4.0,4.0,4.0,4.0,4,"bad price ""about hundred pound"": field error + aria-describedby, but message quotes ""a hundred quid"" not the typed text, aria-invalid not set, focus not moved"
+person T3 signifiers,4.0,4.0,4.0,4.0,4,"bad price ""about hundred pound"": field error + aria-describedby, but message quotes ""a hundred quid"" not the typed text, aria-invalid not set, focus not moved"
+person T3 mapping,3.0,4.0,4.0,4.0,4,"bad price ""about hundred pound"": field error + aria-describedby, but message quotes ""a hundred quid"" not the typed text, aria-invalid not set, focus not moved"
+person T3 feedback,4.0,3.0,3.0,3.0,3,"bad price ""about hundred pound"": field error + aria-describedby, but message quotes ""a hundred quid"" not the typed text, aria-invalid not set, focus not moved"
+person T3 constraints,2.0,4.0,4.0,4.0,4,"bad price ""about hundred pound"": field error + aria-describedby, but message quotes ""a hundred quid"" not the typed text, aria-invalid not set, focus not moved"
+person T3 conceptual_model,3.0,3.0,3.0,3.0,3,"bad price ""about hundred pound"": field error + aria-describedby, but message quotes ""a hundred quid"" not the typed text, aria-invalid not set, focus not moved"
+person T3 error_prevention_recovery,3.0,3.0,4.0,4.0,4,"bad price ""about hundred pound"": field error + aria-describedby, but message quotes ""a hundred quid"" not the typed text, aria-invalid not set, focus not moved"
+person T4 discoverability,2.0,3.0,3.0,3.0,4,"390px: step nav wraps to 2 rows, scrollWidth 390 on 11 pages, aria-current follows deal state (READY none, PROPOSED Agree, BOUND Pay, DELIVERED Deliver, DISPUTED Resolve) - R9-6 fixed"
+person T4 affordances,2.0,3.0,4.0,4.0,4,"390px: step nav wraps to 2 rows, scrollWidth 390 on 11 pages, aria-current follows deal state (READY none, PROPOSED Agree, BOUND Pay, DELIVERED Deliver, DISPUTED Resolve) - R9-6 fixed"
+person T4 signifiers,2.0,2.0,4.0,4.0,4,"390px: step nav wraps to 2 rows, scrollWidth 390 on 11 pages, aria-current follows deal state (READY none, PROPOSED Agree, BOUND Pay, DELIVERED Deliver, DISPUTED Resolve) - R9-6 fixed"
+person T4 mapping,3.0,3.0,3.0,3.0,4,"390px: step nav wraps to 2 rows, scrollWidth 390 on 11 pages, aria-current follows deal state (READY none, PROPOSED Agree, BOUND Pay, DELIVERED Deliver, DISPUTED Resolve) - R9-6 fixed"
+person T4 feedback,3.0,3.0,4.0,4.0,4,"390px: step nav wraps to 2 rows, scrollWidth 390 on 11 pages, aria-current follows deal state (READY none, PROPOSED Agree, BOUND Pay, DELIVERED Deliver, DISPUTED Resolve) - R9-6 fixed"
+person T4 constraints,1.0,3.0,4.0,4.0,4,"390px: step nav wraps to 2 rows, scrollWidth 390 on 11 pages, aria-current follows deal state (READY none, PROPOSED Agree, BOUND Pay, DELIVERED Deliver, DISPUTED Resolve) - R9-6 fixed"
+person T4 conceptual_model,2.0,3.0,3.0,3.0,3,"390px: step nav wraps to 2 rows, scrollWidth 390 on 11 pages, aria-current follows deal state (READY none, PROPOSED Agree, BOUND Pay, DELIVERED Deliver, DISPUTED Resolve) - R9-6 fixed"
+person T4 error_prevention_recovery,2.0,3.0,3.0,3.0,3,"390px: step nav wraps to 2 rows, scrollWidth 390 on 11 pages, aria-current follows deal state (READY none, PROPOSED Agree, BOUND Pay, DELIVERED Deliver, DISPUTED Resolve) - R9-6 fixed"
+person T5 discoverability,1.0,3.0,3.0,3.0,3,ACCEPTED status announced via step-status live region; journey current step now maps to state
+person T5 affordances,1.0,3.0,3.0,4.0,4,ACCEPTED status announced via step-status live region; journey current step now maps to state
+person T5 signifiers,1.0,3.0,4.0,4.0,4,ACCEPTED status announced via step-status live region; journey current step now maps to state
+person T5 mapping,1.0,2.0,3.0,3.0,4,ACCEPTED status announced via step-status live region; journey current step now maps to state
+person T5 feedback,1.0,2.0,4.0,4.0,4,ACCEPTED status announced via step-status live region; journey current step now maps to state
+person T5 constraints,2.0,3.0,3.0,3.0,3,ACCEPTED status announced via step-status live region; journey current step now maps to state
+person T5 conceptual_model,2.0,3.0,3.0,3.0,3,ACCEPTED status announced via step-status live region; journey current step now maps to state
+person T5 error_prevention_recovery,1.0,3.0,3.0,3.0,3,ACCEPTED status announced via step-status live region; journey current step now maps to state
+person T6 discoverability,4.0,4.0,4.0,4.0,4,fund/hold/release balances consistent (100->80/20->seller 20); every log line repeats the fee-not-set sentence (d15_mobile390_sandbox_disputed_nav.png)
+person T6 affordances,2.0,4.0,4.0,4.0,4,fund/hold/release balances consistent (100->80/20->seller 20); every log line repeats the fee-not-set sentence (d15_mobile390_sandbox_disputed_nav.png)
+person T6 signifiers,3.0,3.0,3.0,3.0,3,fund/hold/release balances consistent (100->80/20->seller 20); every log line repeats the fee-not-set sentence (d15_mobile390_sandbox_disputed_nav.png)
+person T6 mapping,3.0,4.0,4.0,4.0,4,fund/hold/release balances consistent (100->80/20->seller 20); every log line repeats the fee-not-set sentence (d15_mobile390_sandbox_disputed_nav.png)
+person T6 feedback,4.0,4.0,4.0,4.0,4,fund/hold/release balances consistent (100->80/20->seller 20); every log line repeats the fee-not-set sentence (d15_mobile390_sandbox_disputed_nav.png)
+person T6 constraints,4.0,4.0,4.0,4.0,4,fund/hold/release balances consistent (100->80/20->seller 20); every log line repeats the fee-not-set sentence (d15_mobile390_sandbox_disputed_nav.png)
+person T6 conceptual_model,3.0,4.0,4.0,4.0,4,fund/hold/release balances consistent (100->80/20->seller 20); every log line repeats the fee-not-set sentence (d15_mobile390_sandbox_disputed_nav.png)
+person T6 error_prevention_recovery,3.0,3.0,4.0,4.0,4,fund/hold/release balances consistent (100->80/20->seller 20); every log line repeats the fee-not-set sentence (d15_mobile390_sandbox_disputed_nav.png)
+person T7 discoverability,2.0,4.0,4.0,4.0,4,"fees: ""not set yet"" everywhere (75 hits) but PAYING still shows a bold ""The platform fee is not set yet."" label followed by ""you pay £120.60 ... fee is £0.60""; PRICING says the 14-day window starts 1 Nov 2026 yet ""does not state when it ends""; raw fee_opt_in shown to people; no Etsy/chargeback/payout comparison for the SMB persona"
+person T7 affordances,2.0,3.0,3.0,3.0,3,"fees: ""not set yet"" everywhere (75 hits) but PAYING still shows a bold ""The platform fee is not set yet."" label followed by ""you pay £120.60 ... fee is £0.60""; PRICING says the 14-day window starts 1 Nov 2026 yet ""does not state when it ends""; raw fee_opt_in shown to people; no Etsy/chargeback/payout comparison for the SMB persona"
+person T7 signifiers,1.0,3.0,3.0,3.0,2,"fees: ""not set yet"" everywhere (75 hits) but PAYING still shows a bold ""The platform fee is not set yet."" label followed by ""you pay £120.60 ... fee is £0.60""; PRICING says the 14-day window starts 1 Nov 2026 yet ""does not state when it ends""; raw fee_opt_in shown to people; no Etsy/chargeback/payout comparison for the SMB persona"
+person T7 mapping,2.0,3.0,3.0,3.0,3,"fees: ""not set yet"" everywhere (75 hits) but PAYING still shows a bold ""The platform fee is not set yet."" label followed by ""you pay £120.60 ... fee is £0.60""; PRICING says the 14-day window starts 1 Nov 2026 yet ""does not state when it ends""; raw fee_opt_in shown to people; no Etsy/chargeback/payout comparison for the SMB persona"
+person T7 feedback,2.0,3.0,3.0,3.0,3,"fees: ""not set yet"" everywhere (75 hits) but PAYING still shows a bold ""The platform fee is not set yet."" label followed by ""you pay £120.60 ... fee is £0.60""; PRICING says the 14-day window starts 1 Nov 2026 yet ""does not state when it ends""; raw fee_opt_in shown to people; no Etsy/chargeback/payout comparison for the SMB persona"
+person T7 constraints,2.0,3.0,3.0,3.0,3,"fees: ""not set yet"" everywhere (75 hits) but PAYING still shows a bold ""The platform fee is not set yet."" label followed by ""you pay £120.60 ... fee is £0.60""; PRICING says the 14-day window starts 1 Nov 2026 yet ""does not state when it ends""; raw fee_opt_in shown to people; no Etsy/chargeback/payout comparison for the SMB persona"
+person T7 conceptual_model,2.0,3.0,2.0,3.0,2,"fees: ""not set yet"" everywhere (75 hits) but PAYING still shows a bold ""The platform fee is not set yet."" label followed by ""you pay £120.60 ... fee is £0.60""; PRICING says the 14-day window starts 1 Nov 2026 yet ""does not state when it ends""; raw fee_opt_in shown to people; no Etsy/chargeback/payout comparison for the SMB persona"
+person T7 error_prevention_recovery,1.0,3.0,3.0,3.0,3,"fees: ""not set yet"" everywhere (75 hits) but PAYING still shows a bold ""The platform fee is not set yet."" label followed by ""you pay £120.60 ... fee is £0.60""; PRICING says the 14-day window starts 1 Nov 2026 yet ""does not state when it ends""; raw fee_opt_in shown to people; no Etsy/chargeback/payout comparison for the SMB persona"
+person T8 discoverability,1.0,4.0,4.0,4.0,4,"DISPUTES reached in 1 click by 6/6; states ""no time limit"" after release in the sandbox; RESOLVE meta description still contains TODO(owner); sandbox dispute->refund returns 20 to buyer"
+person T8 affordances,1.0,3.0,3.0,3.0,3,"DISPUTES reached in 1 click by 6/6; states ""no time limit"" after release in the sandbox; RESOLVE meta description still contains TODO(owner); sandbox dispute->refund returns 20 to buyer"
+person T8 signifiers,1.0,3.0,3.0,4.0,4,"DISPUTES reached in 1 click by 6/6; states ""no time limit"" after release in the sandbox; RESOLVE meta description still contains TODO(owner); sandbox dispute->refund returns 20 to buyer"
+person T8 mapping,1.0,2.0,3.0,3.0,3,"DISPUTES reached in 1 click by 6/6; states ""no time limit"" after release in the sandbox; RESOLVE meta description still contains TODO(owner); sandbox dispute->refund returns 20 to buyer"
+person T8 feedback,1.0,2.0,3.0,3.0,3,"DISPUTES reached in 1 click by 6/6; states ""no time limit"" after release in the sandbox; RESOLVE meta description still contains TODO(owner); sandbox dispute->refund returns 20 to buyer"
+person T8 constraints,1.0,3.0,3.0,3.0,3,"DISPUTES reached in 1 click by 6/6; states ""no time limit"" after release in the sandbox; RESOLVE meta description still contains TODO(owner); sandbox dispute->refund returns 20 to buyer"
+person T8 conceptual_model,2.0,3.0,3.0,3.0,3,"DISPUTES reached in 1 click by 6/6; states ""no time limit"" after release in the sandbox; RESOLVE meta description still contains TODO(owner); sandbox dispute->refund returns 20 to buyer"
+person T8 error_prevention_recovery,1.0,3.0,3.0,3.0,3,"DISPUTES reached in 1 click by 6/6; states ""no time limit"" after release in the sandbox; RESOLVE meta description still contains TODO(owner); sandbox dispute->refund returns 20 to buyer"
+person T9 discoverability,4.0,4.0,4.0,4.0,4,"Copy -> ""Copied"", clipboard = https://jupie202020.pythonanywhere.com/mcp; check explains CORS/offline from local preview; screen-reader persona stalls on AGENT.html (""open the connection page"" link text has no agent/connect words)"
+person T9 affordances,4.0,4.0,4.0,4.0,4,"Copy -> ""Copied"", clipboard = https://jupie202020.pythonanywhere.com/mcp; check explains CORS/offline from local preview; screen-reader persona stalls on AGENT.html (""open the connection page"" link text has no agent/connect words)"
+person T9 signifiers,4.0,4.0,4.0,4.0,4,"Copy -> ""Copied"", clipboard = https://jupie202020.pythonanywhere.com/mcp; check explains CORS/offline from local preview; screen-reader persona stalls on AGENT.html (""open the connection page"" link text has no agent/connect words)"
+person T9 mapping,4.0,4.0,4.0,4.0,4,"Copy -> ""Copied"", clipboard = https://jupie202020.pythonanywhere.com/mcp; check explains CORS/offline from local preview; screen-reader persona stalls on AGENT.html (""open the connection page"" link text has no agent/connect words)"
+person T9 feedback,4.0,3.0,3.0,3.0,3,"Copy -> ""Copied"", clipboard = https://jupie202020.pythonanywhere.com/mcp; check explains CORS/offline from local preview; screen-reader persona stalls on AGENT.html (""open the connection page"" link text has no agent/connect words)"
+person T9 constraints,3.0,3.0,3.0,3.0,3,"Copy -> ""Copied"", clipboard = https://jupie202020.pythonanywhere.com/mcp; check explains CORS/offline from local preview; screen-reader persona stalls on AGENT.html (""open the connection page"" link text has no agent/connect words)"
+person T9 conceptual_model,3.0,3.0,3.0,3.0,3,"Copy -> ""Copied"", clipboard = https://jupie202020.pythonanywhere.com/mcp; check explains CORS/offline from local preview; screen-reader persona stalls on AGENT.html (""open the connection page"" link text has no agent/connect words)"
+person T9 error_prevention_recovery,3.0,3.0,3.0,3.0,3,"Copy -> ""Copied"", clipboard = https://jupie202020.pythonanywhere.com/mcp; check explains CORS/offline from local preview; screen-reader persona stalls on AGENT.html (""open the connection page"" link text has no agent/connect words)"
+agent T1 discoverability,4.0,4.0,4.0,5.0,5,naive agent: llms.txt -> server card -> test_tokens URL -> tokens in 4 GETs locally; live server-card and test-tokens still 404; docs ai-catalog says toolCount 9 while card lists 10; card capabilities say can_dispute/can_refund false although the sandbox does both
+agent T1 affordances,4.0,4.0,4.0,4.0,4,naive agent: llms.txt -> server card -> test_tokens URL -> tokens in 4 GETs locally; live server-card and test-tokens still 404; docs ai-catalog says toolCount 9 while card lists 10; card capabilities say can_dispute/can_refund false although the sandbox does both
+agent T1 signifiers,3.0,4.0,4.0,4.0,4,naive agent: llms.txt -> server card -> test_tokens URL -> tokens in 4 GETs locally; live server-card and test-tokens still 404; docs ai-catalog says toolCount 9 while card lists 10; card capabilities say can_dispute/can_refund false although the sandbox does both
+agent T1 mapping,3.0,4.0,4.0,4.0,4,naive agent: llms.txt -> server card -> test_tokens URL -> tokens in 4 GETs locally; live server-card and test-tokens still 404; docs ai-catalog says toolCount 9 while card lists 10; card capabilities say can_dispute/can_refund false although the sandbox does both
+agent T1 feedback,4.0,4.0,4.0,4.0,4,naive agent: llms.txt -> server card -> test_tokens URL -> tokens in 4 GETs locally; live server-card and test-tokens still 404; docs ai-catalog says toolCount 9 while card lists 10; card capabilities say can_dispute/can_refund false although the sandbox does both
+agent T1 constraints,4.0,4.0,4.0,4.0,4,naive agent: llms.txt -> server card -> test_tokens URL -> tokens in 4 GETs locally; live server-card and test-tokens still 404; docs ai-catalog says toolCount 9 while card lists 10; card capabilities say can_dispute/can_refund false although the sandbox does both
+agent T1 conceptual_model,3.0,3.0,3.0,3.0,3,naive agent: llms.txt -> server card -> test_tokens URL -> tokens in 4 GETs locally; live server-card and test-tokens still 404; docs ai-catalog says toolCount 9 while card lists 10; card capabilities say can_dispute/can_refund false although the sandbox does both
+agent T1 error_prevention_recovery,4.0,4.0,4.0,4.0,4,naive agent: llms.txt -> server card -> test_tokens URL -> tokens in 4 GETs locally; live server-card and test-tokens still 404; docs ai-catalog says toolCount 9 while card lists 10; card capabilities say can_dispute/can_refund false although the sandbox does both
+agent T2 discoverability,4.0,4.0,4.0,4.0,4,unchanged build (beb7457c); not re-scored
+agent T2 affordances,4.0,4.0,4.0,4.0,4,unchanged build (beb7457c); not re-scored
+agent T2 signifiers,3.0,4.0,4.0,4.0,4,unchanged build (beb7457c); not re-scored
+agent T2 mapping,3.0,3.0,4.0,4.0,4,unchanged build (beb7457c); not re-scored
+agent T2 feedback,3.0,4.0,4.0,4.0,4,unchanged build (beb7457c); not re-scored
+agent T2 constraints,4.0,4.0,4.0,4.0,4,unchanged build (beb7457c); not re-scored
+agent T2 conceptual_model,3.0,4.0,4.0,4.0,4,unchanged build (beb7457c); not re-scored
+agent T2 error_prevention_recovery,4.0,4.0,4.0,4.0,4,unchanged build (beb7457c); not re-scored
+agent T3 discoverability,4.0,4.0,4.0,4.0,4,unchanged build; quick_trade USDC_MICRO double scale carried (R9-9)
+agent T3 affordances,4.0,4.0,4.0,4.0,4,unchanged build; quick_trade USDC_MICRO double scale carried (R9-9)
+agent T3 signifiers,4.0,4.0,4.0,4.0,4,unchanged build; quick_trade USDC_MICRO double scale carried (R9-9)
+agent T3 mapping,3.0,4.0,4.0,4.0,4,unchanged build; quick_trade USDC_MICRO double scale carried (R9-9)
+agent T3 feedback,4.0,4.0,4.0,4.0,4,unchanged build; quick_trade USDC_MICRO double scale carried (R9-9)
+agent T3 constraints,3.0,3.0,4.0,3.0,3,unchanged build; quick_trade USDC_MICRO double scale carried (R9-9)
+agent T3 conceptual_model,3.0,4.0,3.0,3.0,3,unchanged build; quick_trade USDC_MICRO double scale carried (R9-9)
+agent T3 error_prevention_recovery,4.0,4.0,4.0,3.0,3,unchanged build; quick_trade USDC_MICRO double scale carried (R9-9)
+agent T4 discoverability,2.0,4.0,4.0,4.0,4,"next_actions list only the caller's own moves: after offer the buyer sees [withdraw], never ""seller accepts""; 2 wrong calls (accept as buyer -> ACCEPT_RECIPIENT) on each PV"
+agent T4 affordances,2.0,3.0,3.0,4.0,4,"next_actions list only the caller's own moves: after offer the buyer sees [withdraw], never ""seller accepts""; 2 wrong calls (accept as buyer -> ACCEPT_RECIPIENT) on each PV"
+agent T4 signifiers,2.0,3.0,3.0,3.0,3,"next_actions list only the caller's own moves: after offer the buyer sees [withdraw], never ""seller accepts""; 2 wrong calls (accept as buyer -> ACCEPT_RECIPIENT) on each PV"
+agent T4 mapping,2.0,4.0,4.0,4.0,3,"next_actions list only the caller's own moves: after offer the buyer sees [withdraw], never ""seller accepts""; 2 wrong calls (accept as buyer -> ACCEPT_RECIPIENT) on each PV"
+agent T4 feedback,3.0,4.0,4.0,4.0,3,"next_actions list only the caller's own moves: after offer the buyer sees [withdraw], never ""seller accepts""; 2 wrong calls (accept as buyer -> ACCEPT_RECIPIENT) on each PV"
+agent T4 constraints,3.0,3.0,4.0,3.0,3,"next_actions list only the caller's own moves: after offer the buyer sees [withdraw], never ""seller accepts""; 2 wrong calls (accept as buyer -> ACCEPT_RECIPIENT) on each PV"
+agent T4 conceptual_model,2.0,3.0,3.0,3.0,3,"next_actions list only the caller's own moves: after offer the buyer sees [withdraw], never ""seller accepts""; 2 wrong calls (accept as buyer -> ACCEPT_RECIPIENT) on each PV"
+agent T4 error_prevention_recovery,3.0,4.0,3.0,3.0,3,"next_actions list only the caller's own moves: after offer the buyer sees [withdraw], never ""seller accepts""; 2 wrong calls (accept as buyer -> ACCEPT_RECIPIENT) on each PV"
+agent T5 discoverability,1.0,2.0,3.0,4.0,4,"sandbox tools/list 34,834 chars (~8.7k tokens) on 2025-11-25, 32,090 on 2026-07-28: 25 tools x one shared 15-property schema; 2026-07-28 structuredContent drops allowed_next_actions that outputSchema advertises"
+agent T5 affordances,1.0,2.0,3.0,4.0,4,"sandbox tools/list 34,834 chars (~8.7k tokens) on 2025-11-25, 32,090 on 2026-07-28: 25 tools x one shared 15-property schema; 2026-07-28 structuredContent drops allowed_next_actions that outputSchema advertises"
+agent T5 signifiers,2.0,2.0,4.0,3.0,3,"sandbox tools/list 34,834 chars (~8.7k tokens) on 2025-11-25, 32,090 on 2026-07-28: 25 tools x one shared 15-property schema; 2026-07-28 structuredContent drops allowed_next_actions that outputSchema advertises"
+agent T5 mapping,2.0,3.0,3.0,3.0,3,"sandbox tools/list 34,834 chars (~8.7k tokens) on 2025-11-25, 32,090 on 2026-07-28: 25 tools x one shared 15-property schema; 2026-07-28 structuredContent drops allowed_next_actions that outputSchema advertises"
+agent T5 feedback,2.0,4.0,4.0,4.0,4,"sandbox tools/list 34,834 chars (~8.7k tokens) on 2025-11-25, 32,090 on 2026-07-28: 25 tools x one shared 15-property schema; 2026-07-28 structuredContent drops allowed_next_actions that outputSchema advertises"
+agent T5 constraints,4.0,4.0,4.0,3.0,3,"sandbox tools/list 34,834 chars (~8.7k tokens) on 2025-11-25, 32,090 on 2026-07-28: 25 tools x one shared 15-property schema; 2026-07-28 structuredContent drops allowed_next_actions that outputSchema advertises"
+agent T5 conceptual_model,2.0,3.0,3.0,3.0,3,"sandbox tools/list 34,834 chars (~8.7k tokens) on 2025-11-25, 32,090 on 2026-07-28: 25 tools x one shared 15-property schema; 2026-07-28 structuredContent drops allowed_next_actions that outputSchema advertises"
+agent T5 error_prevention_recovery,3.0,4.0,4.0,4.0,4,"sandbox tools/list 34,834 chars (~8.7k tokens) on 2025-11-25, 32,090 on 2026-07-28: 25 tools x one shared 15-property schema; 2026-07-28 structuredContent drops allowed_next_actions that outputSchema advertises"
+agent T6 discoverability,2.0,3.0,3.0,4.0,4,"mandate.create_request next_actions = {action:""approve"", tool:""mandate.status""}: following the tool loops forever (12 loops observed before the fix to read the action name); approver token needed, 2x403 per attempt; refused-call money bugs unchanged (R9-2)"
+agent T6 affordances,1.0,3.0,3.0,4.0,4,"mandate.create_request next_actions = {action:""approve"", tool:""mandate.status""}: following the tool loops forever (12 loops observed before the fix to read the action name); approver token needed, 2x403 per attempt; refused-call money bugs unchanged (R9-2)"
+agent T6 signifiers,1.0,3.0,3.0,4.0,4,"mandate.create_request next_actions = {action:""approve"", tool:""mandate.status""}: following the tool loops forever (12 loops observed before the fix to read the action name); approver token needed, 2x403 per attempt; refused-call money bugs unchanged (R9-2)"
+agent T6 mapping,2.0,3.0,3.0,4.0,3,"mandate.create_request next_actions = {action:""approve"", tool:""mandate.status""}: following the tool loops forever (12 loops observed before the fix to read the action name); approver token needed, 2x403 per attempt; refused-call money bugs unchanged (R9-2)"
+agent T6 feedback,2.0,4.0,4.0,3.0,3,"mandate.create_request next_actions = {action:""approve"", tool:""mandate.status""}: following the tool loops forever (12 loops observed before the fix to read the action name); approver token needed, 2x403 per attempt; refused-call money bugs unchanged (R9-2)"
+agent T6 constraints,2.0,3.0,2.0,2.0,2,"mandate.create_request next_actions = {action:""approve"", tool:""mandate.status""}: following the tool loops forever (12 loops observed before the fix to read the action name); approver token needed, 2x403 per attempt; refused-call money bugs unchanged (R9-2)"
+agent T6 conceptual_model,2.0,3.0,3.0,3.0,3,"mandate.create_request next_actions = {action:""approve"", tool:""mandate.status""}: following the tool loops forever (12 loops observed before the fix to read the action name); approver token needed, 2x403 per attempt; refused-call money bugs unchanged (R9-2)"
+agent T6 error_prevention_recovery,2.0,4.0,3.0,2.0,2,"mandate.create_request next_actions = {action:""approve"", tool:""mandate.status""}: following the tool loops forever (12 loops observed before the fix to read the action name); approver token needed, 2x403 per attempt; refused-call money bugs unchanged (R9-2)"
+agent T7 discoverability,1.0,3.0,3.0,4.0,4,unchanged: capture 40.5 refused yet 40.5 vanishes; capture true -> seller +1 (attacks re-run identical to round 9)
+agent T7 affordances,1.0,3.0,3.0,4.0,4,unchanged: capture 40.5 refused yet 40.5 vanishes; capture true -> seller +1 (attacks re-run identical to round 9)
+agent T7 signifiers,1.0,4.0,4.0,4.0,4,unchanged: capture 40.5 refused yet 40.5 vanishes; capture true -> seller +1 (attacks re-run identical to round 9)
+agent T7 mapping,1.0,3.0,4.0,4.0,4,unchanged: capture 40.5 refused yet 40.5 vanishes; capture true -> seller +1 (attacks re-run identical to round 9)
+agent T7 feedback,1.0,4.0,4.0,3.0,3,unchanged: capture 40.5 refused yet 40.5 vanishes; capture true -> seller +1 (attacks re-run identical to round 9)
+agent T7 constraints,2.0,4.0,4.0,2.0,2,unchanged: capture 40.5 refused yet 40.5 vanishes; capture true -> seller +1 (attacks re-run identical to round 9)
+agent T7 conceptual_model,2.0,4.0,4.0,4.0,4,unchanged: capture 40.5 refused yet 40.5 vanishes; capture true -> seller +1 (attacks re-run identical to round 9)
+agent T7 error_prevention_recovery,1.0,4.0,4.0,2.0,2,unchanged: capture 40.5 refused yet 40.5 vanishes; capture true -> seller +1 (attacks re-run identical to round 9)
+agent T8 discoverability,2.0,3.0,3.0,4.0,4,"unchanged: resolve(split) ""rail moved the test funds"" moves nothing; dispute after release, any time; resolver token from ?tenant= reuse"
+agent T8 affordances,2.0,3.0,3.0,3.0,3,"unchanged: resolve(split) ""rail moved the test funds"" moves nothing; dispute after release, any time; resolver token from ?tenant= reuse"
+agent T8 signifiers,2.0,3.0,3.0,3.0,3,"unchanged: resolve(split) ""rail moved the test funds"" moves nothing; dispute after release, any time; resolver token from ?tenant= reuse"
+agent T8 mapping,2.0,3.0,3.0,3.0,3,"unchanged: resolve(split) ""rail moved the test funds"" moves nothing; dispute after release, any time; resolver token from ?tenant= reuse"
+agent T8 feedback,2.0,3.0,4.0,2.0,2,"unchanged: resolve(split) ""rail moved the test funds"" moves nothing; dispute after release, any time; resolver token from ?tenant= reuse"
+agent T8 constraints,1.0,2.0,1.0,1.0,1,"unchanged: resolve(split) ""rail moved the test funds"" moves nothing; dispute after release, any time; resolver token from ?tenant= reuse"
+agent T8 conceptual_model,2.0,3.0,3.0,3.0,3,"unchanged: resolve(split) ""rail moved the test funds"" moves nothing; dispute after release, any time; resolver token from ?tenant= reuse"
+agent T8 error_prevention_recovery,2.0,3.0,3.0,2.0,2,"unchanged: resolve(split) ""rail moved the test funds"" moves nothing; dispute after release, any time; resolver token from ?tenant= reuse"
+agent T9 discoverability,3.0,4.0,4.0,4.0,4,registry sync PASS on the real beb7457c file (byte-identical committed copy); drift/claims/tool-count/build --check PASS on both heads; but check_public_site FAILS on both heads (manifest.json stale) so CI step 1 is red; mcp/tool-inventory.json + ai-catalog still say 9 tools and no check flags it
+agent T9 affordances,4.0,4.0,3.0,3.0,4,registry sync PASS on the real beb7457c file (byte-identical committed copy); drift/claims/tool-count/build --check PASS on both heads; but check_public_site FAILS on both heads (manifest.json stale) so CI step 1 is red; mcp/tool-inventory.json + ai-catalog still say 9 tools and no check flags it
+agent T9 signifiers,3.0,4.0,3.0,3.0,4,registry sync PASS on the real beb7457c file (byte-identical committed copy); drift/claims/tool-count/build --check PASS on both heads; but check_public_site FAILS on both heads (manifest.json stale) so CI step 1 is red; mcp/tool-inventory.json + ai-catalog still say 9 tools and no check flags it
+agent T9 mapping,4.0,4.0,3.0,3.0,4,registry sync PASS on the real beb7457c file (byte-identical committed copy); drift/claims/tool-count/build --check PASS on both heads; but check_public_site FAILS on both heads (manifest.json stale) so CI step 1 is red; mcp/tool-inventory.json + ai-catalog still say 9 tools and no check flags it
+agent T9 feedback,4.0,4.0,3.0,4.0,4,registry sync PASS on the real beb7457c file (byte-identical committed copy); drift/claims/tool-count/build --check PASS on both heads; but check_public_site FAILS on both heads (manifest.json stale) so CI step 1 is red; mcp/tool-inventory.json + ai-catalog still say 9 tools and no check flags it
+agent T9 constraints,4.0,4.0,3.0,3.0,3,registry sync PASS on the real beb7457c file (byte-identical committed copy); drift/claims/tool-count/build --check PASS on both heads; but check_public_site FAILS on both heads (manifest.json stale) so CI step 1 is red; mcp/tool-inventory.json + ai-catalog still say 9 tools and no check flags it
+agent T9 conceptual_model,3.0,4.0,2.0,3.0,3,registry sync PASS on the real beb7457c file (byte-identical committed copy); drift/claims/tool-count/build --check PASS on both heads; but check_public_site FAILS on both heads (manifest.json stale) so CI step 1 is red; mcp/tool-inventory.json + ai-catalog still say 9 tools and no check flags it
+agent T9 error_prevention_recovery,3.0,3.0,3.0,3.0,3,registry sync PASS on the real beb7457c file (byte-identical committed copy); drift/claims/tool-count/build --check PASS on both heads; but check_public_site FAILS on both heads (manifest.json stale) so CI step 1 is red; mcp/tool-inventory.json + ai-catalog still say 9 tools and no check flags it
+person MEAN discoverability,2.56,3.78,3.78,3.78,3.89,mean of T1-T9
+person MEAN affordances,2.56,3.44,3.67,3.78,3.78,mean of T1-T9
+person MEAN signifiers,2.56,3.33,3.56,3.78,3.56,mean of T1-T9
+person MEAN mapping,2.56,3.22,3.33,3.33,3.56,mean of T1-T9
+person MEAN feedback,3.00,3.11,3.56,3.56,3.56,mean of T1-T9
+person MEAN constraints,2.22,3.22,3.44,3.44,3.44,mean of T1-T9
+person MEAN conceptual_model,2.56,3.11,3.00,3.11,3.00,mean of T1-T9
+person MEAN error_prevention_recovery,2.33,3.00,3.22,3.22,3.22,mean of T1-T9
+person MEAN all,2.54,3.28,3.44,3.50,3.50,overall
+agent MEAN discoverability,2.56,3.44,3.56,4.11,4.11,mean of T1-T9
+agent MEAN affordances,2.56,3.33,3.33,3.78,3.89,mean of T1-T9
+agent MEAN signifiers,2.33,3.44,3.56,3.56,3.67,mean of T1-T9
+agent MEAN mapping,2.44,3.44,3.56,3.67,3.56,mean of T1-T9
+agent MEAN feedback,2.78,3.89,3.89,3.56,3.44,mean of T1-T9
+agent MEAN constraints,3.00,3.44,3.33,2.78,2.78,mean of T1-T9
+agent MEAN conceptual_model,2.44,3.44,3.11,3.22,3.22,mean of T1-T9
+agent MEAN error_prevention_recovery,2.89,3.78,3.56,3.00,3.00,mean of T1-T9
+agent MEAN all,2.62,3.53,3.49,3.46,3.46,overall
+P1,fail,pass,pass,pass,pass,same nav all pages
+P2,fail,pass,pass,partial,pass,"390px: 11 pages scrollWidth=390, journey links 2 rows, none outside viewport; sandbox nav fixed (R9-6)"
+P3,fail,pass,pass,pass,pass,unchanged
+P4,fail,pass,pass,pass,pass,unchanged
+P5,fail,untested,pass,pass,pass,unchanged
+P6,fail,partial,partial,partial,partial,suggestion copy in matrix.js; TERMINAL no-results not reproduced from local preview
+P7,fail,fail/untested,pass,pass,pass,unchanged
+P8,fail,partial,pass,pass,pass,per-field price error; message does not echo typed text
+P9,fail,partial,pass,pass,pass,unchanged
+P10,fail,fail,pass,pass,pass,thread with author + time
+P11,fail,partial,pass,pass,pass,ACCEPTED announced
+P12,fail,pass*,pass,pass,pass,stepwise balances 100/80/20
+P13,fail,pass,pass,pass,pass,"sandbox: ""This sample does not add a fee"", you pay 20 seller gets 20"
+P14,fail,partial,pass,pass,pass,refund returns 20 to buyer
+P15,fail,pass,pass,pass,pass,unchanged
+P16,fail,pass,pass,pass,pass,no raw codes in sandbox
+P17,fail,pass,pass,pass,pass,configured-not-verified wording
+P18,fail,pass,partial,pass,partial,"How you get paid linked; PAYING fee example still shows £0.60 under a ""not set yet"" label"
+P19,fail,partial,fail,partial,partial,"DISPUTES: ""no time limit"" stated for the sandbox; windows Not set yet; RESOLVE meta description has TODO(owner)"
+P20,fail,partial,partial,partial,partial,Copied + check; check cannot reach live from local preview (CORS)
+A1,fail,pass (local) / fail (live 404),pass (local) / fail live 404,pass (local) / fail live 404,pass (local) / fail live 404,local card has sandbox + test_tokens; live server-card/test-tokens 404 (9 Nov 2026)
+A2,fail,"pass (9,437ch) / live 13,231",pass,pass,pass,public tools/list unchanged
+A3,fail,"pass (4,161ch, test flag) / live 92,981",pass,pass,pass,unchanged
+A4,fail,pass,pass,pass,pass,unchanged
+A5,fail,pass,pass,pass,pass,unchanged
+A6,fail,fail,pass,pass,pass,unchanged
+A7,fail,pass,pass,pass,pass,unchanged
+A8,fail,partial,partial,partial,partial,next_actions only for caller; approve action points at mandate.status; 2026-07-28 omits allowed_next_actions
+A9,fail,fail,pass,pass,pass,unchanged
+A10,fail,pass,pass,pass,pass,fee null = not set
+A11,fail,partial,pass,pass,pass,unchanged
+A12,fail,pass (local) / fail live -32700,pass,pass,pass,unchanged
+A13,fail,pass (local) / fail live true,pass,pass,pass,unchanged
+A14,fail,partial,untested,fail,fail (carried),same build beb7457c; not re-run
+A15,fail,pass,pass,pass,pass,unchanged

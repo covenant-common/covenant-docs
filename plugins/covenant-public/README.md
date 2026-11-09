@@ -16,7 +16,7 @@ Ask: “Find published research services and label any demos. Tell me if there i
 matching supplier.”
 
 Or: “Draft a one-page research brief for USD 25, due Friday, with buyer review. Keep
-it unsigned.” The platform fee is not set yet. The owner will confirm this. The platform fee is not set yet. The owner will confirm this.
+it unsigned.” 
 
 When the proposal changes: “Compare these two drafts: show the price and deadline
 changes and what needs fresh approval.”

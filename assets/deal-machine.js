@@ -74,9 +74,9 @@
     if (exchange) return {ok: true, canonical: 'Agreed exchange: ' + exchange[1].trim(), kind: 'exchange'};
     const money = value.match(/^(USD|GBP|EUR|USDC)\s+([0-9]+)(?:\.([0-9]{1,2}))?$/i);
     if (!money) {
-      if (/[a-z]/i.test(value) && !/^(USD|GBP|EUR|USDC)\b/i.test(value)) return {ok: false, message: MESSAGES.NOT_A_PRICE};
+      if (/[a-z]/i.test(value) && !/^(USD|GBP|EUR|USDC)\b/i.test(value)) return {ok: false, message: '“' + value.slice(0, 80) + '” is not a price. Use a number and a currency, such as USD 25.'};
       if (/^[0-9]/.test(value)) return {ok: false, message: MESSAGES.MISSING_CURRENCY};
-      return {ok: false, message: MESSAGES.NOT_A_PRICE};
+      return {ok: false, message: '“' + value.slice(0, 80) + '” is not a price. Use a number and a currency, such as USD 25.'};
     }
     const currency = money[1].toUpperCase();
     const canonical = currency + ' ' + money[2] + (money[3] ? '.' + money[3] : '');
@@ -89,7 +89,7 @@
     const currencyMessage = chosen ? '' : MESSAGES.CHOOSE_CURRENCY;
     let amountMessage = '';
     if (chosen === 'none') amountMessage = '';
-    else if (raw && !/^[0-9]+(?:\.[0-9]{1,2})?$/.test(raw)) amountMessage = MESSAGES.NOT_A_PRICE;
+    else if (raw && !/^[0-9]+(?:\.[0-9]{1,2})?$/.test(raw)) amountMessage = '“' + raw.slice(0, 80) + '” is not a price. Use a number and a currency, such as USD 25.';
     else if (chosen && chosen !== 'none' && !raw) amountMessage = MESSAGES.MISSING_PRICE;
     return {currencyMessage: currencyMessage, amountMessage: amountMessage};
   }

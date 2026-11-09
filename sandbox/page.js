@@ -73,7 +73,7 @@ function show(result) {
   $('step-log').replaceChildren();
   result.history.forEach((row) => {
     const item = document.createElement('li');
-    item.textContent = row.text + ' ' + result.money + ' ' + result.feeText;
+    item.textContent = row.text + ' ' + result.money;
     $('step-log').append(item);
   });
   $('money').replaceChildren();

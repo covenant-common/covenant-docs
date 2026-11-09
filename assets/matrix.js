@@ -505,6 +505,12 @@
   function showFieldError(id, message) {
     const error = $(id);
     if (error) error.textContent = message || '';
+    const field = $(id.replace(/-error$/, ''));
+    if (!field) return;
+    if (message) {
+      field.setAttribute('aria-invalid', 'true');
+      if (document.activeElement !== field) field.focus();
+    } else field.removeAttribute('aria-invalid');
   }
   function composePrice() {
     const currency = $('draft-currency').value;

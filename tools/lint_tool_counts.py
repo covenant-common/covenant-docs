@@ -8,7 +8,7 @@ ROOT = Path(__file__).resolve().parents[1]
 WORD = r'(?:two|three|four|five|six|seven|eight|nine|ten|eleven|twelve)'
 GAP = r'(?:free|public|mcp|hosted|anonymous|search|draft|drafting|review|and)'
 PATTERN = re.compile(r'\b' + WORD + r'(?:[-\s,]+' + GAP + r')*[-\s,]+tools?\b', re.I)
-SKIP = {'node_modules', '.git', 'pyodide'}
+SKIP = {'node_modules', '.git', 'pyodide', 'testing'}
 
 
 def files():

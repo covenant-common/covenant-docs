@@ -7,6 +7,7 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
+from fee_copy import fee_sentence
 from site_chrome import ROOT, apply, pages
 
 REGISTRY = json.loads((ROOT / 'distribution' / 'capability-registry.json').read_text())
@@ -54,7 +55,7 @@ FUNDS_PAGES = (
 )
 
 
-FEE_NOT_SET = 'The platform fee is not set yet. The owner will confirm this.'
+FEE_NOT_SET = fee_sentence(REGISTRY)
 
 
 def funds_text():
@@ -293,6 +294,8 @@ def main():
     if not check:
         ensure_sitemap([path.relative_to(ROOT).as_posix() for path in html_paths
                         if 'technical' not in path.parts and not path.as_posix().startswith(str(ROOT / 'sandbox'))])
+        import subprocess
+        subprocess.check_call([sys.executable, str(ROOT / 'tools' / 'check_public_site.py'), '--write-manifest'])
     print({'status': 'FAIL' if check and changed else 'PASS', 'changed': changed})
     return 1 if check and changed else 0
 
