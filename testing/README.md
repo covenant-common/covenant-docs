@@ -99,8 +99,8 @@ Report: [round11/report.md](round11/report.md). Retest on 9 Nov 2026 of covenant
 
 | Finding | Status |
 | --- | --- |
-| Custody and merchant sentences repeat | Fixed in this round’s docs commit. `tools/fee_copy.py` fails when the funds sentence, the test-rail sentence, the merchant sentence, or “Covenant does not hold it.” appears twice on one page. |
+| Custody and merchant sentences repeat | Fixed in [`261603d`](https://github.com/covenant-common/covenant-docs/commit/261603d1166fb70cf54fb558d9c62cd53da038e7). `tools/fee_copy.py` fails when the funds sentence, the test-rail sentence, the merchant sentence, or “Covenant does not hold it.” appears twice on one page. |
 | Glossary `TODO(owner)` on #15 and #17 | The checker now reads the whole `distribution/glossary.json`. The stacked branches remove the remaining `owner_todo` fields. |
-| N2. “move test money” for an outside HTTP caller | Fixed in this round’s docs commit. `sandbox_http_sentence` reads `sandbox.http_roles` or `sandbox.http_actions` when the server publishes them. Until then it says an outside caller can offer and accept, and cannot fund or resolve. |
+| N2. “move test money” for an outside HTTP caller | Fixed in [`261603d`](https://github.com/covenant-common/covenant-docs/commit/261603d1166fb70cf54fb558d9c62cd53da038e7). `sandbox_http_sentence` reads `sandbox.http_roles` or `sandbox.http_actions` when the server publishes them. Until then it says an outside caller can offer and accept, and cannot fund or resolve. |
 | R10-3, R10-4, R10-11 | Fixed in covenant #201 commit `a9977a1a`. |
 | N1, N3 to N7, and R10-6 | Still open in the covenant server. |
