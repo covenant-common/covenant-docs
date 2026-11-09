@@ -1,5 +1,7 @@
 # Round 9 findings
 
+The tester’s report and scores are in [round9/report.md](round9/report.md) and [round9/scores.csv](round9/scores.csv). The index of every round is [README.md](README.md).
+
 Source: independent DOET report, 9 Nov 2026, plus the covenant #201 registry and authority table at `beb7457c`. This file records what the docs change did with each docs-relevant finding. Owner TODOs stay `TODO(owner)`.
 
 Shared docs commit: `afc96d4d2347f8ee56a48ce27d4a351be4b3dc2c` on `cursor/docs-site-link-fixes-1065`.

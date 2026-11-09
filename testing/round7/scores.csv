@@ -1,0 +1,201 @@
+item,before,now,evidence
+person T1 discoverability,4,4,"shots/t1_home_390.png: one-line purpose + 2x H1 above fold; same 16-link nav on all pages; dense fee arithmetic paragraph; orphan ""Stage names"" label; serif fallback font"
+person T1 affordances,3,4,"shots/t1_home_390.png: one-line purpose + 2x H1 above fold; same 16-link nav on all pages; dense fee arithmetic paragraph; orphan ""Stage names"" label; serif fallback font"
+person T1 signifiers,3,4,"shots/t1_home_390.png: one-line purpose + 2x H1 above fold; same 16-link nav on all pages; dense fee arithmetic paragraph; orphan ""Stage names"" label; serif fallback font"
+person T1 mapping,3,4,"shots/t1_home_390.png: one-line purpose + 2x H1 above fold; same 16-link nav on all pages; dense fee arithmetic paragraph; orphan ""Stage names"" label; serif fallback font"
+person T1 feedback,4,4,"shots/t1_home_390.png: one-line purpose + 2x H1 above fold; same 16-link nav on all pages; dense fee arithmetic paragraph; orphan ""Stage names"" label; serif fallback font"
+person T1 constraints,3,3,"shots/t1_home_390.png: one-line purpose + 2x H1 above fold; same 16-link nav on all pages; dense fee arithmetic paragraph; orphan ""Stage names"" label; serif fallback font"
+person T1 conceptual_model,3,3,"shots/t1_home_390.png: one-line purpose + 2x H1 above fold; same 16-link nav on all pages; dense fee arithmetic paragraph; orphan ""Stage names"" label; serif fallback font"
+person T1 error_prevention_recovery,3,3,"shots/t1_home_390.png: one-line purpose + 2x H1 above fold; same 16-link nav on all pages; dense fee arithmetic paragraph; orphan ""Stage names"" label; serif fallback font"
+person T1 mean,3.25,3.62,"shots/t1_home_390.png: one-line purpose + 2x H1 above fold; same 16-link nav on all pages; dense fee arithmetic paragraph; orphan ""Stage names"" label; serif fallback font"
+person T2 discoverability,3,4,"search box 2 Tabs from load; local preview shows ""live listings are available on the published site"" (browser call to live MCP fails from localhost) so DEMO badges/offer buttons not observable locally"
+person T2 affordances,4,3,"search box 2 Tabs from load; local preview shows ""live listings are available on the published site"" (browser call to live MCP fails from localhost) so DEMO badges/offer buttons not observable locally"
+person T2 signifiers,4,4,"search box 2 Tabs from load; local preview shows ""live listings are available on the published site"" (browser call to live MCP fails from localhost) so DEMO badges/offer buttons not observable locally"
+person T2 mapping,3,3,"search box 2 Tabs from load; local preview shows ""live listings are available on the published site"" (browser call to live MCP fails from localhost) so DEMO badges/offer buttons not observable locally"
+person T2 feedback,4,4,"search box 2 Tabs from load; local preview shows ""live listings are available on the published site"" (browser call to live MCP fails from localhost) so DEMO badges/offer buttons not observable locally"
+person T2 constraints,2,3,"search box 2 Tabs from load; local preview shows ""live listings are available on the published site"" (browser call to live MCP fails from localhost) so DEMO badges/offer buttons not observable locally"
+person T2 conceptual_model,3,3,"search box 2 Tabs from load; local preview shows ""live listings are available on the published site"" (browser call to live MCP fails from localhost) so DEMO badges/offer buttons not observable locally"
+person T2 error_prevention_recovery,4,3,"search box 2 Tabs from load; local preview shows ""live listings are available on the published site"" (browser call to live MCP fails from localhost) so DEMO badges/offer buttons not observable locally"
+person T2 mean,3.38,3.38,"search box 2 Tabs from load; local preview shows ""live listings are available on the published site"" (browser call to live MCP fails from localhost) so DEMO badges/offer buttons not observable locally"
+person T3 discoverability,2,4,"shots/t3_composer_390.png: role radios, currency select; bad price text shows ""Choose a currency."" (message names wrong field)"
+person T3 affordances,4,4,"shots/t3_composer_390.png: role radios, currency select; bad price text shows ""Choose a currency."" (message names wrong field)"
+person T3 signifiers,4,4,"shots/t3_composer_390.png: role radios, currency select; bad price text shows ""Choose a currency."" (message names wrong field)"
+person T3 mapping,3,4,"shots/t3_composer_390.png: role radios, currency select; bad price text shows ""Choose a currency."" (message names wrong field)"
+person T3 feedback,4,3,"shots/t3_composer_390.png: role radios, currency select; bad price text shows ""Choose a currency."" (message names wrong field)"
+person T3 constraints,2,4,"shots/t3_composer_390.png: role radios, currency select; bad price text shows ""Choose a currency."" (message names wrong field)"
+person T3 conceptual_model,3,3,"shots/t3_composer_390.png: role radios, currency select; bad price text shows ""Choose a currency."" (message names wrong field)"
+person T3 error_prevention_recovery,3,3,"shots/t3_composer_390.png: role radios, currency select; bad price text shows ""Choose a currency."" (message names wrong field)"
+person T3 mean,3.12,3.62,"shots/t3_composer_390.png: role radios, currency select; bad price text shows ""Choose a currency."" (message names wrong field)"
+person T4 discoverability,2,3,sandbox Counter exists; Propose must be clicked twice (label never changes); no version thread with author/time
+person T4 affordances,2,3,sandbox Counter exists; Propose must be clicked twice (label never changes); no version thread with author/time
+person T4 signifiers,2,2,sandbox Counter exists; Propose must be clicked twice (label never changes); no version thread with author/time
+person T4 mapping,3,3,sandbox Counter exists; Propose must be clicked twice (label never changes); no version thread with author/time
+person T4 feedback,3,3,sandbox Counter exists; Propose must be clicked twice (label never changes); no version thread with author/time
+person T4 constraints,1,3,sandbox Counter exists; Propose must be clicked twice (label never changes); no version thread with author/time
+person T4 conceptual_model,2,3,sandbox Counter exists; Propose must be clicked twice (label never changes); no version thread with author/time
+person T4 error_prevention_recovery,2,3,sandbox Counter exists; Propose must be clicked twice (label never changes); no version thread with author/time
+person T4 mean,2.12,2.88,sandbox Counter exists; Propose must be clicked twice (label never changes); no version thread with author/time
+person T5 discoverability,1,3,sandbox Accept works in browser but Stage still reads PROPOSED after accept; no record id; one person plays both sides
+person T5 affordances,1,3,sandbox Accept works in browser but Stage still reads PROPOSED after accept; no record id; one person plays both sides
+person T5 signifiers,1,3,sandbox Accept works in browser but Stage still reads PROPOSED after accept; no record id; one person plays both sides
+person T5 mapping,1,2,sandbox Accept works in browser but Stage still reads PROPOSED after accept; no record id; one person plays both sides
+person T5 feedback,1,2,sandbox Accept works in browser but Stage still reads PROPOSED after accept; no record id; one person plays both sides
+person T5 constraints,2,3,sandbox Accept works in browser but Stage still reads PROPOSED after accept; no record id; one person plays both sides
+person T5 conceptual_model,2,3,sandbox Accept works in browser but Stage still reads PROPOSED after accept; no record id; one person plays both sides
+person T5 error_prevention_recovery,1,3,sandbox Accept works in browser but Stage still reads PROPOSED after accept; no record id; one person plays both sides
+person T5 mean,1.25,2.75,sandbox Accept works in browser but Stage still reads PROPOSED after accept; no record id; one person plays both sides
+person T6 discoverability,4,4,"shots/sb_* happy: stepwise Fund/Deliver/Release, fee line before approval, balances buyer 75 / seller 25"
+person T6 affordances,2,4,"shots/sb_* happy: stepwise Fund/Deliver/Release, fee line before approval, balances buyer 75 / seller 25"
+person T6 signifiers,3,3,"shots/sb_* happy: stepwise Fund/Deliver/Release, fee line before approval, balances buyer 75 / seller 25"
+person T6 mapping,3,4,"shots/sb_* happy: stepwise Fund/Deliver/Release, fee line before approval, balances buyer 75 / seller 25"
+person T6 feedback,4,4,"shots/sb_* happy: stepwise Fund/Deliver/Release, fee line before approval, balances buyer 75 / seller 25"
+person T6 constraints,4,4,"shots/sb_* happy: stepwise Fund/Deliver/Release, fee line before approval, balances buyer 75 / seller 25"
+person T6 conceptual_model,3,4,"shots/sb_* happy: stepwise Fund/Deliver/Release, fee line before approval, balances buyer 75 / seller 25"
+person T6 error_prevention_recovery,3,3,"shots/sb_* happy: stepwise Fund/Deliver/Release, fee line before approval, balances buyer 75 / seller 25"
+person T6 mean,3.25,3.75,"shots/sb_* happy: stepwise Fund/Deliver/Release, fee line before approval, balances buyer 75 / seller 25"
+person T7 discoverability,2,4,"How you get paid linked (SELLER.html#how-you-get-paid); payment labels honest (""Not connected""); no seller-side walk-through"
+person T7 affordances,2,3,"How you get paid linked (SELLER.html#how-you-get-paid); payment labels honest (""Not connected""); no seller-side walk-through"
+person T7 signifiers,1,3,"How you get paid linked (SELLER.html#how-you-get-paid); payment labels honest (""Not connected""); no seller-side walk-through"
+person T7 mapping,2,3,"How you get paid linked (SELLER.html#how-you-get-paid); payment labels honest (""Not connected""); no seller-side walk-through"
+person T7 feedback,2,3,"How you get paid linked (SELLER.html#how-you-get-paid); payment labels honest (""Not connected""); no seller-side walk-through"
+person T7 constraints,2,3,"How you get paid linked (SELLER.html#how-you-get-paid); payment labels honest (""Not connected""); no seller-side walk-through"
+person T7 conceptual_model,2,3,"How you get paid linked (SELLER.html#how-you-get-paid); payment labels honest (""Not connected""); no seller-side walk-through"
+person T7 error_prevention_recovery,1,3,"How you get paid linked (SELLER.html#how-you-get-paid); payment labels honest (""Not connected""); no seller-side walk-through"
+person T7 mean,1.75,3.12,"How you get paid linked (SELLER.html#how-you-get-paid); payment labels honest (""Not connected""); no seller-side walk-through"
+person T8 discoverability,1,4,"Disputes page in nav (What to do/Who decides/Timelines/Refunds, no day counts); sandbox refund returns buyer to 100 but text says 25 held when 20 held and ""REFUTED ... RELEASED"" for a refund; #13 RESOLVE redirects to PAYING.html#refunds"
+person T8 affordances,1,3,"Disputes page in nav (What to do/Who decides/Timelines/Refunds, no day counts); sandbox refund returns buyer to 100 but text says 25 held when 20 held and ""REFUTED ... RELEASED"" for a refund; #13 RESOLVE redirects to PAYING.html#refunds"
+person T8 signifiers,1,3,"Disputes page in nav (What to do/Who decides/Timelines/Refunds, no day counts); sandbox refund returns buyer to 100 but text says 25 held when 20 held and ""REFUTED ... RELEASED"" for a refund; #13 RESOLVE redirects to PAYING.html#refunds"
+person T8 mapping,1,2,"Disputes page in nav (What to do/Who decides/Timelines/Refunds, no day counts); sandbox refund returns buyer to 100 but text says 25 held when 20 held and ""REFUTED ... RELEASED"" for a refund; #13 RESOLVE redirects to PAYING.html#refunds"
+person T8 feedback,1,2,"Disputes page in nav (What to do/Who decides/Timelines/Refunds, no day counts); sandbox refund returns buyer to 100 but text says 25 held when 20 held and ""REFUTED ... RELEASED"" for a refund; #13 RESOLVE redirects to PAYING.html#refunds"
+person T8 constraints,1,3,"Disputes page in nav (What to do/Who decides/Timelines/Refunds, no day counts); sandbox refund returns buyer to 100 but text says 25 held when 20 held and ""REFUTED ... RELEASED"" for a refund; #13 RESOLVE redirects to PAYING.html#refunds"
+person T8 conceptual_model,2,3,"Disputes page in nav (What to do/Who decides/Timelines/Refunds, no day counts); sandbox refund returns buyer to 100 but text says 25 held when 20 held and ""REFUTED ... RELEASED"" for a refund; #13 RESOLVE redirects to PAYING.html#refunds"
+person T8 error_prevention_recovery,1,3,"Disputes page in nav (What to do/Who decides/Timelines/Refunds, no day counts); sandbox refund returns buyer to 100 but text says 25 held when 20 held and ""REFUTED ... RELEASED"" for a refund; #13 RESOLVE redirects to PAYING.html#refunds"
+person T8 mean,1.12,2.88,"Disputes page in nav (What to do/Who decides/Timelines/Refunds, no day counts); sandbox refund returns buyer to 100 but text says 25 held when 20 held and ""REFUTED ... RELEASED"" for a refund; #13 RESOLVE redirects to PAYING.html#refunds"
+person T9 discoverability,4,4,"shots/t8_connect_check_390.png: Copy -> ""Copied""; Check connection exists but says ""did not answer (Failed to fetch)"" locally"
+person T9 affordances,4,4,"shots/t8_connect_check_390.png: Copy -> ""Copied""; Check connection exists but says ""did not answer (Failed to fetch)"" locally"
+person T9 signifiers,4,4,"shots/t8_connect_check_390.png: Copy -> ""Copied""; Check connection exists but says ""did not answer (Failed to fetch)"" locally"
+person T9 mapping,4,4,"shots/t8_connect_check_390.png: Copy -> ""Copied""; Check connection exists but says ""did not answer (Failed to fetch)"" locally"
+person T9 feedback,4,3,"shots/t8_connect_check_390.png: Copy -> ""Copied""; Check connection exists but says ""did not answer (Failed to fetch)"" locally"
+person T9 constraints,3,3,"shots/t8_connect_check_390.png: Copy -> ""Copied""; Check connection exists but says ""did not answer (Failed to fetch)"" locally"
+person T9 conceptual_model,3,3,"shots/t8_connect_check_390.png: Copy -> ""Copied""; Check connection exists but says ""did not answer (Failed to fetch)"" locally"
+person T9 error_prevention_recovery,3,3,"shots/t8_connect_check_390.png: Copy -> ""Copied""; Check connection exists but says ""did not answer (Failed to fetch)"" locally"
+person T9 mean,3.62,3.5,"shots/t8_connect_check_390.png: Copy -> ""Copied""; Check connection exists but says ""did not answer (Failed to fetch)"" locally"
+agent T1 discoverability,4,4,"local #200: initialize 1,138ch with can_* false; tools/list 9,437ch; server-card 200; instructions point at https://localhost/advertising-reference.json"
+agent T1 affordances,4,4,"local #200: initialize 1,138ch with can_* false; tools/list 9,437ch; server-card 200; instructions point at https://localhost/advertising-reference.json"
+agent T1 signifiers,3,4,"local #200: initialize 1,138ch with can_* false; tools/list 9,437ch; server-card 200; instructions point at https://localhost/advertising-reference.json"
+agent T1 mapping,3,4,"local #200: initialize 1,138ch with can_* false; tools/list 9,437ch; server-card 200; instructions point at https://localhost/advertising-reference.json"
+agent T1 feedback,4,4,"local #200: initialize 1,138ch with can_* false; tools/list 9,437ch; server-card 200; instructions point at https://localhost/advertising-reference.json"
+agent T1 constraints,4,4,"local #200: initialize 1,138ch with can_* false; tools/list 9,437ch; server-card 200; instructions point at https://localhost/advertising-reference.json"
+agent T1 conceptual_model,3,3,"local #200: initialize 1,138ch with can_* false; tools/list 9,437ch; server-card 200; instructions point at https://localhost/advertising-reference.json"
+agent T1 error_prevention_recovery,4,4,"local #200: initialize 1,138ch with can_* false; tools/list 9,437ch; server-card 200; instructions point at https://localhost/advertising-reference.json"
+agent T1 mean,3.62,3.88,"local #200: initialize 1,138ch with can_* false; tools/list 9,437ch; server-card 200; instructions point at https://localhost/advertising-reference.json"
+agent T2 discoverability,4,4,"limit5 4,161ch, test/demo flags, suggestions on 0 results; ""logo designer"" 0 hits vs ""logo"" 1 (AND match, no stemming)"
+agent T2 affordances,4,4,"limit5 4,161ch, test/demo flags, suggestions on 0 results; ""logo designer"" 0 hits vs ""logo"" 1 (AND match, no stemming)"
+agent T2 signifiers,3,4,"limit5 4,161ch, test/demo flags, suggestions on 0 results; ""logo designer"" 0 hits vs ""logo"" 1 (AND match, no stemming)"
+agent T2 mapping,3,3,"limit5 4,161ch, test/demo flags, suggestions on 0 results; ""logo designer"" 0 hits vs ""logo"" 1 (AND match, no stemming)"
+agent T2 feedback,3,4,"limit5 4,161ch, test/demo flags, suggestions on 0 results; ""logo designer"" 0 hits vs ""logo"" 1 (AND match, no stemming)"
+agent T2 constraints,4,4,"limit5 4,161ch, test/demo flags, suggestions on 0 results; ""logo designer"" 0 hits vs ""logo"" 1 (AND match, no stemming)"
+agent T2 conceptual_model,3,4,"limit5 4,161ch, test/demo flags, suggestions on 0 results; ""logo designer"" 0 hits vs ""logo"" 1 (AND match, no stemming)"
+agent T2 error_prevention_recovery,4,4,"limit5 4,161ch, test/demo flags, suggestions on 0 results; ""logo designer"" 0 hits vs ""logo"" 1 (AND match, no stemming)"
+agent T2 mean,3.5,3.88,"limit5 4,161ch, test/demo flags, suggestions on 0 results; ""logo designer"" 0 hits vs ""logo"" 1 (AND match, no stemming)"
+agent T3 discoverability,4,4,"quick_trade/draft OK; bad price -> PUBLIC_PRICE_FORMAT with fix; free-form settlement {mode:""test""} still accepted"
+agent T3 affordances,4,4,"quick_trade/draft OK; bad price -> PUBLIC_PRICE_FORMAT with fix; free-form settlement {mode:""test""} still accepted"
+agent T3 signifiers,4,4,"quick_trade/draft OK; bad price -> PUBLIC_PRICE_FORMAT with fix; free-form settlement {mode:""test""} still accepted"
+agent T3 mapping,3,4,"quick_trade/draft OK; bad price -> PUBLIC_PRICE_FORMAT with fix; free-form settlement {mode:""test""} still accepted"
+agent T3 feedback,4,4,"quick_trade/draft OK; bad price -> PUBLIC_PRICE_FORMAT with fix; free-form settlement {mode:""test""} still accepted"
+agent T3 constraints,3,3,"quick_trade/draft OK; bad price -> PUBLIC_PRICE_FORMAT with fix; free-form settlement {mode:""test""} still accepted"
+agent T3 conceptual_model,3,4,"quick_trade/draft OK; bad price -> PUBLIC_PRICE_FORMAT with fix; free-form settlement {mode:""test""} still accepted"
+agent T3 error_prevention_recovery,4,4,"quick_trade/draft OK; bad price -> PUBLIC_PRICE_FORMAT with fix; free-form settlement {mode:""test""} still accepted"
+agent T3 mean,3.62,3.88,"quick_trade/draft OK; bad price -> PUBLIC_PRICE_FORMAT with fix; free-form settlement {mode:""test""} still accepted"
+agent T4 discoverability,2,4,"supersedes accepted; compare has clause_changes; changed_by null; next_actions name ""account offer"" (not a tool)"
+agent T4 affordances,2,3,"supersedes accepted; compare has clause_changes; changed_by null; next_actions name ""account offer"" (not a tool)"
+agent T4 signifiers,2,3,"supersedes accepted; compare has clause_changes; changed_by null; next_actions name ""account offer"" (not a tool)"
+agent T4 mapping,2,4,"supersedes accepted; compare has clause_changes; changed_by null; next_actions name ""account offer"" (not a tool)"
+agent T4 feedback,3,4,"supersedes accepted; compare has clause_changes; changed_by null; next_actions name ""account offer"" (not a tool)"
+agent T4 constraints,3,3,"supersedes accepted; compare has clause_changes; changed_by null; next_actions name ""account offer"" (not a tool)"
+agent T4 conceptual_model,2,3,"supersedes accepted; compare has clause_changes; changed_by null; next_actions name ""account offer"" (not a tool)"
+agent T4 error_prevention_recovery,3,4,"supersedes accepted; compare has clause_changes; changed_by null; next_actions name ""account offer"" (not a tool)"
+agent T4 mean,2.38,3.5,"supersedes accepted; compare has clause_changes; changed_by null; next_actions name ""account offer"" (not a tool)"
+agent T5 discoverability,1,2,no accept tool; unknown-tool error gives fix; review says cannot judge legal safety
+agent T5 affordances,1,2,no accept tool; unknown-tool error gives fix; review says cannot judge legal safety
+agent T5 signifiers,2,2,no accept tool; unknown-tool error gives fix; review says cannot judge legal safety
+agent T5 mapping,2,3,no accept tool; unknown-tool error gives fix; review says cannot judge legal safety
+agent T5 feedback,2,4,no accept tool; unknown-tool error gives fix; review says cannot judge legal safety
+agent T5 constraints,4,4,no accept tool; unknown-tool error gives fix; review says cannot judge legal safety
+agent T5 conceptual_model,2,3,no accept tool; unknown-tool error gives fix; review says cannot judge legal safety
+agent T5 error_prevention_recovery,3,4,no accept tool; unknown-tool error gives fix; review says cannot judge legal safety
+agent T5 mean,2.12,3.0,no accept tool; unknown-tool error gives fix; review says cannot judge legal safety
+agent T6 discoverability,2,3,covenant_payment__quote fee_bps 50 but fee 1 on 120 (0.6 rounded up); 120.5 -> PUBLIC_MCP_EXACT_INTEGER; Base Sepolia quick_trade test_network:false; /payment-methods.json 404 locally; no pay tool
+agent T6 affordances,1,3,covenant_payment__quote fee_bps 50 but fee 1 on 120 (0.6 rounded up); 120.5 -> PUBLIC_MCP_EXACT_INTEGER; Base Sepolia quick_trade test_network:false; /payment-methods.json 404 locally; no pay tool
+agent T6 signifiers,1,3,covenant_payment__quote fee_bps 50 but fee 1 on 120 (0.6 rounded up); 120.5 -> PUBLIC_MCP_EXACT_INTEGER; Base Sepolia quick_trade test_network:false; /payment-methods.json 404 locally; no pay tool
+agent T6 mapping,2,3,covenant_payment__quote fee_bps 50 but fee 1 on 120 (0.6 rounded up); 120.5 -> PUBLIC_MCP_EXACT_INTEGER; Base Sepolia quick_trade test_network:false; /payment-methods.json 404 locally; no pay tool
+agent T6 feedback,2,4,covenant_payment__quote fee_bps 50 but fee 1 on 120 (0.6 rounded up); 120.5 -> PUBLIC_MCP_EXACT_INTEGER; Base Sepolia quick_trade test_network:false; /payment-methods.json 404 locally; no pay tool
+agent T6 constraints,2,3,covenant_payment__quote fee_bps 50 but fee 1 on 120 (0.6 rounded up); 120.5 -> PUBLIC_MCP_EXACT_INTEGER; Base Sepolia quick_trade test_network:false; /payment-methods.json 404 locally; no pay tool
+agent T6 conceptual_model,2,3,covenant_payment__quote fee_bps 50 but fee 1 on 120 (0.6 rounded up); 120.5 -> PUBLIC_MCP_EXACT_INTEGER; Base Sepolia quick_trade test_network:false; /payment-methods.json 404 locally; no pay tool
+agent T6 error_prevention_recovery,2,4,covenant_payment__quote fee_bps 50 but fee 1 on 120 (0.6 rounded up); 120.5 -> PUBLIC_MCP_EXACT_INTEGER; Base Sepolia quick_trade test_network:false; /payment-methods.json 404 locally; no pay tool
+agent T6 mean,1.75,3.25,covenant_payment__quote fee_bps 50 but fee 1 on 120 (0.6 rounded up); 120.5 -> PUBLIC_MCP_EXACT_INTEGER; Base Sepolia quick_trade test_network:false; /payment-methods.json 404 locally; no pay tool
+agent T7 discoverability,1,3,payout_readiness can_receive_today:false with per-method reasons
+agent T7 affordances,1,3,payout_readiness can_receive_today:false with per-method reasons
+agent T7 signifiers,1,4,payout_readiness can_receive_today:false with per-method reasons
+agent T7 mapping,1,3,payout_readiness can_receive_today:false with per-method reasons
+agent T7 feedback,1,4,payout_readiness can_receive_today:false with per-method reasons
+agent T7 constraints,2,4,payout_readiness can_receive_today:false with per-method reasons
+agent T7 conceptual_model,2,4,payout_readiness can_receive_today:false with per-method reasons
+agent T7 error_prevention_recovery,1,4,payout_readiness can_receive_today:false with per-method reasons
+agent T7 mean,1.25,3.62,payout_readiness can_receive_today:false with per-method reasons
+agent T8 discoverability,2,3,empty evidence -> NO_PROOFS_PROVIDED (fixed); dispute object recognised; authority budget 100 with no offer amount -> PASS
+agent T8 affordances,2,3,empty evidence -> NO_PROOFS_PROVIDED (fixed); dispute object recognised; authority budget 100 with no offer amount -> PASS
+agent T8 signifiers,2,3,empty evidence -> NO_PROOFS_PROVIDED (fixed); dispute object recognised; authority budget 100 with no offer amount -> PASS
+agent T8 mapping,2,3,empty evidence -> NO_PROOFS_PROVIDED (fixed); dispute object recognised; authority budget 100 with no offer amount -> PASS
+agent T8 feedback,2,3,empty evidence -> NO_PROOFS_PROVIDED (fixed); dispute object recognised; authority budget 100 with no offer amount -> PASS
+agent T8 constraints,1,2,empty evidence -> NO_PROOFS_PROVIDED (fixed); dispute object recognised; authority budget 100 with no offer amount -> PASS
+agent T8 conceptual_model,2,3,empty evidence -> NO_PROOFS_PROVIDED (fixed); dispute object recognised; authority budget 100 with no offer amount -> PASS
+agent T8 error_prevention_recovery,2,3,empty evidence -> NO_PROOFS_PROVIDED (fixed); dispute object recognised; authority budget 100 with no offer amount -> PASS
+agent T8 mean,1.88,2.88,empty evidence -> NO_PROOFS_PROVIDED (fixed); dispute object recognised; authority budget 100 with no offer amount -> PASS
+agent T9 discoverability,3,4,"server-card 200, no auth needed; payment-methods.json 404 on local server"
+agent T9 affordances,4,4,"server-card 200, no auth needed; payment-methods.json 404 on local server"
+agent T9 signifiers,3,4,"server-card 200, no auth needed; payment-methods.json 404 on local server"
+agent T9 mapping,4,4,"server-card 200, no auth needed; payment-methods.json 404 on local server"
+agent T9 feedback,4,4,"server-card 200, no auth needed; payment-methods.json 404 on local server"
+agent T9 constraints,4,4,"server-card 200, no auth needed; payment-methods.json 404 on local server"
+agent T9 conceptual_model,3,4,"server-card 200, no auth needed; payment-methods.json 404 on local server"
+agent T9 error_prevention_recovery,3,3,"server-card 200, no auth needed; payment-methods.json 404 on local server"
+agent T9 mean,3.5,3.88,"server-card 200, no auth needed; payment-methods.json 404 on local server"
+agent T5-sandbox#201 mean,,2.5,"sandbox201_happy_*: accept hard-coded to seller, so seller accepted own 130 counter and it was funded"
+agent T6-sandbox#201 mean,,2.75,15 calls ~9k tok end-to-end; Bearer token only learnable from source; fund with no offer works (fundfirst); capture before delivery works
+agent T8-sandbox#201 mean,,2.38,"dispute: resolve(refund) marks refunded, moves no money; refund 503; only void returns 1000"
+P1,fail,pass,16-link nav identical on all checked pages (journey_*.json)
+P2,fail,pass,Menu button at 390; scrollWidth=390 on 12 pages x 2 builds (pages15.json); #15 AGENTIC_COMMERCE table clipped at 390
+P3,fail,pass,H1 ~2x body; purpose sentence above fold (t1_home_390.png)
+P4,fail,pass,search = Tab 2
+P5,fail,untested,listings not loaded in local preview; server marks demo/test
+P6,fail,partial,server suggestions; page hint only
+P7,fail,fail/untested,no listings locally so no Make-an-offer control seen; composer reached separately
+P8,fail,partial,"currency select present; non-numeric price gives ""Choose a currency."""
+P9,fail,partial,role radios; author label not verified
+P10,fail,fail,no version thread with author/time
+P11,fail,partial,sandbox Accept in browser; no record id; stage stays PROPOSED
+P12,fail,pass*,"separate buttons, balances update; Propose needs 2 clicks"
+P13,fail,pass,fee line before approval
+P14,fail,partial,"refund returns buyer to 100; wrong held amount (25 vs 20), REFUTED/RELEASED wording"
+P15,fail,pass,buttons bordered >=44px
+P16,fail,pass,no raw codes in sandbox (rawCodes [])
+P17,fail,pass,"""Not connected"" labels; USDC ""needs operator setup"""
+P18,fail,pass,SELLER.html#how-you-get-paid linked
+P19,fail,partial,page + nav link; no day counts
+P20,fail,partial,"""Copied"" + Check connection; check fails locally"
+A1,fail,pass (local) / fail (live 404),"agent_local.json, agent_live.json"
+A2,fail,"pass (9,437ch) / live 13,231",tools/list
+A3,fail,"pass (4,161ch, test flag) / live 92,981",search limit 5
+A4,fail,pass,suggestions list
+A5,fail,pass,dispute_guidance; dispute object recognised
+A6,fail,fail,settlement {mode:test} accepted
+A7,fail,pass,supersedes + clause_changes
+A8,fail,partial,"next_actions tool ""account offer"" not listed"
+A9,fail,fail,eip155:84532 quick_trade test_network:false settles_real_value:false
+A10,fail,pass,fees amount/bps/percent/waiver:null
+A11,fail,partial,payout_readiness selectable:false; /payment-methods.json 404 locally
+A12,fail,pass (local) / fail live -32700,PUBLIC_MCP_EXACT_INTEGER
+A13,fail,pass (local) / fail live true,NO_PROOFS_PROVIDED
+A14,fail,partial,"empty_case refused as-is; works wrapped in {""case"":...}"
+A15,fail,pass,payout_readiness.can_receive_today

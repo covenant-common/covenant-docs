@@ -1,5 +1,7 @@
 # Review notes
 
+Testing history, scores, and which commit fixed each finding: [testing/README.md](testing/README.md).
+
 Priorities for a docs change:
 
 1. Registry sync uses `distribution/capability-registry.server.json`, the real server file. Regenerate the projection and the pages from it. Do not treat an older projection as verified.
