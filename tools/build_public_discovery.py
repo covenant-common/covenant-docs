@@ -107,13 +107,16 @@ def documents(source):
         'displayName': 'Covenant public tools',
         'type': 'application/mcp-server-card+json', 'data': card}]}
     api = {'linkset': [
-        {'anchor': ORIGIN + '/.well-known/api-catalog', 'item': [{'href': ENDPOINT}]},
+        # The API host does not serve this path (it 404s). Anchor the linkset
+        # on the website file that actually returns these bytes.
+        {'anchor': WEBSITE + '/.well-known/api-catalog.json', 'item': [{'href': ENDPOINT}]},
         {'anchor': ENDPOINT,
          'service-doc': [{'href': WEBSITE + '/docs/API_MCP.html', 'type': 'text/html'}],
-         'describedby': [{'href': ORIGIN + '/mcp/server-card', 'type': 'application/mcp-server-card+json'}]}]}
+         'describedby': [{'href': WEBSITE + '/.well-known/mcp/server-card.json',
+                          'type': 'application/mcp-server-card+json'}]}]}
     auth = ('# Covenant public access\n\n'
         'Public MCP: ' + ENDPOINT + '\n\n'
-        'The nine public search, draft and review tools need no account, token or API key. '
+        'The public search, draft and review tools need no account, token or API key. '
         'Use Streamable HTTP and MCP 2025-11-25. Discover the current schemas with tools/list. '
         'Do not send an Authorization header to this anonymous endpoint.\n\n'
         'Private account operations use a separate scoped bearer credential from account setup. '
@@ -126,6 +129,9 @@ def documents(source):
         '.well-known/mcp/server-card.json': ('application/mcp-server-card+json', card_bytes),
         '.well-known/ai-catalog.json': ('application/ai-catalog+json', wire(catalog)),
         '.well-known/api-catalog': ('application/linkset+json', wire(api)),
+        # GitHub Pages types an extensionless file as application/octet-stream.
+        # The same bytes with a .json name are served as application/json.
+        '.well-known/api-catalog.json': ('application/json', wire(api)),
         'mcp/tool-inventory.json': ('application/json', inventory_bytes),
         'auth.md': ('text/markdown; charset=utf-8', auth.encode('utf-8'))}
 

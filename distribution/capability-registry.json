@@ -1,0 +1,137 @@
+{
+  "format": "covenant-docs-capability-registry/0.1",
+  "source_path": "covenant_chain/data/capability_registry.json",
+  "source_repo": "covenant-common/covenant",
+  "source_pr": 201,
+  "related_pr": 192,
+  "public_tools": [
+    "covenant_marketplace__quick_trade",
+    "covenant_contract__draft",
+    "covenant_contract__compare",
+    "covenant_contract__inspect",
+    "covenant_contract__render",
+    "covenant_review__review",
+    "covenant_review__authority",
+    "covenant_review__evidence",
+    "aap_public_listing_search",
+    "covenant_payment__quote"
+  ],
+  "public_tools_mode": "read_only",
+  "tool_name_source": "public_tools_list",
+  "can_pay": false,
+  "can_sign": false,
+  "can_refund": false,
+  "can_dispute": false,
+  "custody": "none",
+  "holds_funds": false,
+  "merchant_of_record": "seller",
+  "platform_fee_bps": null,
+  "fee_window_note": "No fee-window start or end date is configured in this build.",
+  "sandbox": {
+    "works_in_test": [
+      "discover",
+      "quote",
+      "mandate.create_request",
+      "mandate.approve",
+      "mandate.revoke",
+      "mandate.list",
+      "mandate.status",
+      "offer",
+      "counter",
+      "accept",
+      "withdraw",
+      "reject",
+      "cancel",
+      "fund",
+      "deliver",
+      "capture",
+      "release",
+      "void",
+      "refund",
+      "reclaim",
+      "dispute",
+      "evidence",
+      "resolve",
+      "receipt.verify",
+      "advance_clock"
+    ]
+  },
+  "first_public_tool": "covenant_contract__draft",
+  "badges": {
+    "NOT_CONNECTED": "Not connected",
+    "CONFIGURED_UNVERIFIED": "Configured, not yet verified",
+    "TEST_ONLY": "Test only",
+    "NOT_LIVE": "Not live",
+    "COMING_SOON": "Coming soon",
+    "LIVE": "Live"
+  },
+  "payments": [
+    {
+      "id": "card",
+      "label": "Card through Stripe",
+      "readiness": "NOT_CONNECTED",
+      "badge": "NOT_CONNECTED",
+      "settlement_enabled": false,
+      "plain": "Not connected. Not selectable."
+    },
+    {
+      "id": "usdc-base",
+      "label": "USDC on Base",
+      "readiness": "NOT_CONNECTED",
+      "badge": "NOT_CONNECTED",
+      "settlement_enabled": false,
+      "plain": "Not connected. Not selectable."
+    },
+    {
+      "id": "usdc-ethereum",
+      "label": "USDC on Ethereum",
+      "readiness": "NOT_CONNECTED",
+      "badge": "NOT_CONNECTED",
+      "settlement_enabled": false,
+      "plain": "Not connected. Not selectable."
+    },
+    {
+      "id": "usdc-base-sepolia",
+      "label": "USDC on Base Sepolia",
+      "readiness": "TEST_ONLY",
+      "badge": "TEST_ONLY",
+      "settlement_enabled": false,
+      "plain": "Test network only. Not mainnet. Not selectable until a local test adapter is installed."
+    },
+    {
+      "id": "usdc-ethereum-sepolia",
+      "label": "USDC on Ethereum Sepolia",
+      "readiness": "TEST_ONLY",
+      "badge": "TEST_ONLY",
+      "settlement_enabled": false,
+      "plain": "Test network only. Not mainnet. Not selectable until a local test adapter is installed."
+    },
+    {
+      "id": "usdc-solana",
+      "label": "USDC on Solana",
+      "readiness": "NOT_CONNECTED",
+      "badge": "NOT_CONNECTED",
+      "settlement_enabled": false,
+      "plain": "Not connected. Not selectable."
+    },
+    {
+      "id": "bitcoin",
+      "label": "Bitcoin",
+      "readiness": "NOT_CONNECTED",
+      "badge": "NOT_CONNECTED",
+      "settlement_enabled": false,
+      "plain": "Not connected. Not selectable."
+    },
+    {
+      "id": "aap-native",
+      "label": "AAP native treasury",
+      "readiness": "NOT_LIVE",
+      "badge": "NOT_LIVE",
+      "settlement_enabled": false,
+      "plain": "Not live. Not selectable."
+    }
+  ],
+  "standards_from_server": [],
+  "lifecycle": null,
+  "note": "Projected from covenant_chain/data/capability_registry.json on draft PR 201. Do not edit payment or tool rows by hand."
+}

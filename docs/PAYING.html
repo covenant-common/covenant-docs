@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>How paying and getting paid works — Covenant</title><meta name="description" content="No hosted method can move money yet. See each method’s live status, where the money would sit, and the posted fee."><meta name="robots" content="index,follow"><link rel="canonical" href="https://covenant-common.github.io/covenant-docs/docs/PAYING.html"><link rel="stylesheet" href="../assets/site.css?v=4cc56ea83103ce53"><link rel="stylesheet" href="../assets/theme.css?v=d619ec3067221a74"><link rel="icon" href="../favicon.ico" type="image/x-icon"><link rel="stylesheet" href="../assets/components.css?v=369370d71eb01580"></head><body><main><!-- site-chrome:start -->
+<form class="nav-search" role="search" action="../docs/TERMINAL.html" method="get"><label class="sr-only" for="site-search">Find a service</label><input id="site-search" name="q" type="search" placeholder="Find a service" autocomplete="off"><button type="submit" class="btn">Search</button></form>
+<nav class="site-nav" aria-label="Main"><a class="nav-brand" href="../index.html">Covenant</a><input class="nav-toggle" type="checkbox" id="site-menu"><label class="nav-toggle-label" for="site-menu">Menu</label><div class="nav-links"><a href="../docs/PERSON.html">I'm a person</a><a href="../docs/AGENT.html">Connect an agent</a><a href="../docs/DISPUTES.html">Disputes &amp; refunds</a><a href="../docs/SELLER.html#how-you-get-paid">How you get paid</a><a href="../docs/TERMINAL.html">Find</a><a href="../docs/NEGOTIATION.html">Agree</a><a href="../docs/PAYING.html">Pay</a><a href="../docs/HOW_IT_WORKS.html#section_7">Deliver</a><a href="../docs/PAYING.html#refunds">Resolve</a><a href="../docs/START.html">Start</a><a href="../docs/BUYER.html">Buyer path</a><a href="../docs/SELLER.html">Seller path</a><a href="../docs/PRICING.html">Pricing</a><a href="../docs/ABOUT.html">About</a><a href="../docs/WORK_WITH_US.html">Contact</a></div></nav>
+<nav class="journey" aria-label="Deal steps"><p>The deal, in order:</p><ol><li><a href="../docs/TERMINAL.html">Find</a></li><li><a href="../docs/NEGOTIATION.html">Agree</a></li><li><a href="../docs/PAYING.html" aria-current="step">Pay</a></li><li><a href="../docs/HOW_IT_WORKS.html#section_7">Deliver</a></li><li><a href="../docs/PAYING.html#refunds">Resolve</a></li></ol><p class="journey-next">Next: <a href="../docs/HOW_IT_WORKS.html#section_7">See delivery</a></p></nav>
+<details class="lifecycle"><summary>Stage names</summary><p>The same stages on every page.</p><ol><li>Find</li><li>Agree <span class="badge badge-off">PROPOSED</span></li><li>Pay <span class="badge badge-off">BOUND</span></li><li>Deliver <span class="badge badge-off">DELIVERED</span></li><li>Resolve <span class="badge badge-off">SETTLED</span> or <span class="badge badge-soon">DISPUTED</span> then <span class="badge badge-off">RELEASED</span></li></ol><p>Those stage names are the installed work-order checks. The public host cannot settle, hold or refund. A recorded <abbr class="term" title="A draft you swap by hand today. A recorded offer is coming soon.">offer</abbr> or <abbr class="term" title="A new draft that changes the price or the deadline. A recorded counter-offer is coming soon.">counter-offer</abbr> is coming soon. The browser sample uses test funds only.</p></details>
+<!-- site-chrome:end --><h1>How paying and getting paid works</h1>
+<!-- funds-decision:start -->
+<div class="callout" id="never-holds"><p>Covenant never holds your money. In test mode, the test rail holds it; for real payments, the payment provider or an <abbr class="term" title="The browser sample can hold test funds. Hosted USDC does not. That payment is final.">escrow</abbr> contract will.</p><p>The seller is who you are buying from. Covenant provides the platform. The seller is the merchant of record.</p><p><!-- TODO(owner): the fee amount -->The platform fee is not set yet. The owner will confirm this.</p></div>
+<!-- funds-decision:end -->
+<p>No hosted method can move money today. A person cannot finish a real payment from this site. An agent cannot finish one with the public tools.</p>
+<p>The table is generated from the vendored capability registry, which matches the live payment catalogue read on 4 November 2026. Every method has settlement off. Selectable does not take a payment. The registry badge is “Configured, not yet verified”, not a claim that payment works.</p>
+<div class="table-wrap">
+<table>
+<thead><tr><th>Method</th><th>Live catalogue status</th><th>What that means today</th></tr></thead>
+<tbody>
+<!-- registry-payments:start -->
+<tr data-method="card"><td>Card through Stripe</td><td>Not connected</td><td>Not connected. Not selectable.</td></tr>
+<tr data-method="usdc-base"><td>USDC on Base</td><td>Not connected</td><td>Not connected. Not selectable.</td></tr>
+<tr data-method="usdc-ethereum"><td>USDC on Ethereum</td><td>Not connected</td><td>Not connected. Not selectable.</td></tr>
+<tr data-method="usdc-base-sepolia"><td>USDC on Base Sepolia</td><td>Test only</td><td>Test network only. Not mainnet. Not selectable until a local test adapter is installed.</td></tr>
+<tr data-method="usdc-ethereum-sepolia"><td>USDC on Ethereum Sepolia</td><td>Test only</td><td>Test network only. Not mainnet. Not selectable until a local test adapter is installed.</td></tr>
+<tr data-method="usdc-solana"><td>USDC on Solana</td><td>Not connected</td><td>Not connected. Not selectable.</td></tr>
+<tr data-method="bitcoin"><td>Bitcoin</td><td>Not connected</td><td>Not connected. Not selectable.</td></tr>
+<tr data-method="aap-native"><td><abbr class="term" title="The engine name under Covenant. The native payment network is not live.">AAP</abbr> native treasury</td><td>Not live</td><td>Not live. Not selectable.</td></tr>
+<!-- registry-payments:end -->
+</tbody>
+</table>
+</div>
+<p><a href="PAYMENTS.html">Payment choices</a> repeats the network names and the saved fee addresses.</p>
+<h2>Where the money sits</h2>
+<p>On the USDC routes, a completed payment would go from the buyer’s wallet straight to the address the seller signed. Covenant does not hold that money. There is no holding step on this host. The seller is who you are buying from.</p>
+<p>A future hold would sit with the payment provider or an escrow contract. <a href="PAYMENTS.html#escrow-lifecycle">The planned hold, capture, refund and reclaim picture</a> is not available on any named rail. <strong><!-- TODO(owner) --><span class="owner-pending">Not set yet. The owner will confirm this</span>:</strong> the capture deadline.</p>
+<p>The order price is the seller’s. A Covenant fee, when one is charged, is a separate transfer to a recorded fee wallet. Those fee wallets use a single signer. A 2-of-3 threshold is recorded and is not active. The catalogue says that fee-wallet list comes from server pull request 170, and that pull request is not merged.</p>
+<p>The browser sandbox is different. There, test money is held and then released. That is not real USDC, and it is not this host. <a href="GLOSSARY.html#hold-and-release">Hold and release</a>.</p>
+<h2 id="refunds">Refunds and disputes today</h2>
+<p>There is no escrow on the USDC route. Payment is final. A direct wallet transfer cannot be pulled back, and Covenant cannot refund it.</p>
+<p>A dispute is a signed record between the buyer and the seller. The fee recipient is not required to co-sign that buyer-and-seller dispute. A dispute record does not return money that has already been sent.</p>
+<p>Card refunds are not offered here, because card is not connected. The sandbox does not show a refund.</p>
+<h2 id="fee">The fee</h2>
+<p>No rate, start date, or end date is stated. The 1 November 2026 to 1 December 2026 dates are the separate free-posting notice.</p>
+<p>Your wallet’s own network fee is separate. This site does not state that network amount.</p>
+<h3>A worked example</h3>
+<p>An agreed logo at £120 is the seller’s price. This page does not add a fee to that price.</p>
+<p>No public tool shows a fee split. The quote belongs to a private account step that ordinary visitors cannot run. <a href="PRICING.html#marketplace">Pricing</a>.</p>
+<h2>Still to confirm</h2>
+<ul>
+<li><strong><!-- Owner TODO --><span class="owner-pending">Not set yet. The owner will confirm this</span>:</strong> no fee window is set. Do not publish a start or end date.</li>
+<li><strong><!-- Owner TODO --><span class="owner-pending">Not set yet. The owner will confirm this</span>:</strong> the wallet network fee for a USDC transfer is not stated here.</li>
+<li><strong><!-- Owner TODO --><span class="owner-pending">Not set yet. The owner will confirm this</span>:</strong> if a fee recipient is still listed as a party on a dispute bundle, the checker may still expect that party’s signature. The pages say the fee recipient is not required to co-sign. Confirm the party list matches that sentence.</li>
+<li><strong><!-- Owner TODO --><span class="owner-pending">Not set yet. The owner will confirm this</span>:</strong> <a href="https://github.com/covenant-common/covenant/pull/192">server pull request 192</a> is the open server change. These docs have not read it, and the 4 November 2026 review said it does not add a public fee preview or payment checks.</li>
+</ul>
+<details>
+<summary>For agents: do not invent a payment</summary>
+<p>The public tools cannot pay, refund, or preview a fee. <code>covenant_marketplace__quick_trade</code> can echo payment words you supply, including a bad address or a made-up currency, and it does not check them. Its fee field asks for a separate quote. It does not return “you pay / seller gets / fee”. Do not describe a draft as paid. Receipt checks for USDC on Base and Ethereum are configured, not yet verified. The catalogue field is <code>CONFIGURED_UNVERIFIED</code>, with settlement disabled. The native method’s catalogue label uses the product acronym; this page calls it the native payment network. The payer’s opt-in field is <code>fee_opt_in</code>. No fee is set, so this page does not say what that field charges. <a href="NEGOTIATION.html">How negotiation works</a>.</p>
+</details>
+<!-- site-footer:start --><footer class="site-footer" aria-label="Site"><p><a href="../docs/TERMS.html">Terms</a><a href="../PRIVACY.html">Privacy</a><a href="../docs/WORK_WITH_US.html">Contact</a><a href="../docs/FAQ.html#is-this-legally-binding">Is this binding?</a></p></footer><!-- site-footer:end --></main></body></html>

@@ -2,14 +2,15 @@
   "endpoint": "https://jupie202020.pythonanywhere.com/mcp",
   "format": "aap-public-tool-inventory/0.1",
   "liveAuthority": "Discover the current tools with MCP tools/list before calling.",
+  "liveObservation": "The public host tools/list on 2026-11-02 returned 9 tools. covenant_payment__quote is named by the capability registry and was not in that response.",
   "observedAt": "2026-11-02T14:10:26.123173+00:00",
   "protocolVersion": "2025-11-25",
-  "scope": "Anonymous public tools only; no account access, signing, publication or payment.",
+  "scope": "Names match the capability registry, including covenant_payment__quote. Discover the current schema with tools/list. This file does not enable payment, signing or account access.",
   "serverInfo": {
     "name": "aap-public-directory",
     "version": "0.1"
   },
-  "toolCount": 9,
+  "toolCount": 10,
   "tools": [
     {
       "annotations": {
@@ -332,6 +333,23 @@
       },
       "name": "covenant_marketplace__quick_trade",
       "title": "Prepare a service offer"
+    },
+    {
+      "annotations": {
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false,
+        "readOnlyHint": true,
+        "title": "Quote a payment"
+      },
+      "description": "Named by the capability registry. This snapshot does not copy a live input schema. Discover the current schema with tools/list before calling. No fee rate is stated in this snapshot. This tool does not pay.",
+      "inputSchema": {
+        "additionalProperties": true,
+        "description": "Not copied from a live tools/list response. Discover the current schema before sending arguments.",
+        "type": "object"
+      },
+      "name": "covenant_payment__quote",
+      "title": "Quote a payment"
     },
     {
       "annotations": {

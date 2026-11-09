@@ -19,8 +19,8 @@ ROOT = Path(__file__).resolve().parents[1]
 ENDPOINT = 'https://jupie202020.pythonanywhere.com/mcp'
 PROTOCOL = '2025-11-25'
 SUITE_SHA256 = '5b7b00e8614d436e3d5c2c8d459c291710fe3a46cb18711900d1d9474d7cc3b5'
-PROFILE_SHA256 = '6da02df79c079da0da502b591f6ac95446daf2a5752bf5020ce2d920af702271'
-INVENTORY_SHA256 = 'bf8bf934d1136a24efec496fa8d6a2fe1034c7ffe0972229d7f589b7890600ad'
+PROFILE_SHA256 = '15f66cb33dc256f2b00107baa5ff99e18ab655070415e637d00ce10da2bee134'
+INVENTORY_SHA256 = '40f0eb5e7161e044b8220a79dbad16f07b2647ed134c436c34b6a60ff8a58d6c'
 MAX_REQUEST_BYTES = 16384
 MAX_RESPONSE_BYTES = 262144
 REQUEST_TIMEOUT_SECONDS = 10
@@ -31,6 +31,7 @@ NAMES = frozenset((
     'covenant_contract__render', 'covenant_marketplace__quick_trade',
     'covenant_review__review', 'covenant_review__authority',
     'covenant_review__evidence'))
+EXTRA = frozenset(('covenant_payment__quote',))
 
 
 class EvaluationError(ValueError):
@@ -85,8 +86,8 @@ def load_inputs():
             [row['prompt_id'] for row in profile['cases']] != expected_ids):
         raise EvaluationError('All twenty immutable prompt IDs must be retained in order')
     schemas = {row['name']: row['inputSchema'] for row in inventory['tools']}
-    if set(schemas) != NAMES or len(inventory['tools']) != 9:
-        raise EvaluationError('Complete nine-tool inventory required')
+    if set(schemas) != NAMES | EXTRA or len(inventory['tools']) != len(NAMES | EXTRA):
+        raise EvaluationError('Complete registry tool inventory required')
     for prompt, case in zip(suite['prompts'], profile['cases']):
         if case['tool'] is None:
             if (prompt['class'] != 'negative' or case['arguments'] is not None or
@@ -194,7 +195,7 @@ class LiveTransport:
             raise EvaluationError('RPC method is outside the fixed read-only profile')
         if method == 'tools/call' and (type(params) is not dict or
                 set(params) != {'name', 'arguments'} or params['name'] not in NAMES):
-            raise EvaluationError('Tool is outside the fixed nine-tool read-only allowlist')
+            raise EvaluationError('Tool is outside the fixed registry read-only allowlist')
         packet = {'jsonrpc': '2.0', 'id': ident, 'method': method}
         if params is not None:
             packet['params'] = params
@@ -272,9 +273,9 @@ def check_discovery(initial, listing, inventory):
     if type(listing) is not dict or listing.get('nextCursor'):
         raise EvaluationError('Incomplete or paginated inventory requires review')
     tools = listing.get('tools')
-    if (type(tools) is not list or len(tools) != 9 or
+    if (type(tools) is not list or len(tools) != len(NAMES | EXTRA) or
             any(type(row) is not dict for row in tools) or
-            {row.get('name') for row in tools} != NAMES):
+            {row.get('name') for row in tools} != NAMES | EXTRA):
         raise EvaluationError('Public tool set drift; do not omit, add or dispatch unknown tools')
     if any(row.get('annotations', {}).get('readOnlyHint') is not True for row in tools):
         raise EvaluationError('Every public tool must retain its read-only annotation')

@@ -1,0 +1,198 @@
+item,round7,now,evidence
+person T1 discoverability,4.0,4,"shots/t1_home_390.png: same nav + menu at 390, purpose above fold; NEW: ""The deal, in order"" links break mid-word at 390 (Fin|d, Agre|e, Pa|y, Delive|r, Resolv|e) on every page; home still carries the 25.125 fee arithmetic"
+person T1 affordances,4.0,4,"shots/t1_home_390.png: same nav + menu at 390, purpose above fold; NEW: ""The deal, in order"" links break mid-word at 390 (Fin|d, Agre|e, Pa|y, Delive|r, Resolv|e) on every page; home still carries the 25.125 fee arithmetic"
+person T1 signifiers,4.0,3,"shots/t1_home_390.png: same nav + menu at 390, purpose above fold; NEW: ""The deal, in order"" links break mid-word at 390 (Fin|d, Agre|e, Pa|y, Delive|r, Resolv|e) on every page; home still carries the 25.125 fee arithmetic"
+person T1 mapping,4.0,3,"shots/t1_home_390.png: same nav + menu at 390, purpose above fold; NEW: ""The deal, in order"" links break mid-word at 390 (Fin|d, Agre|e, Pa|y, Delive|r, Resolv|e) on every page; home still carries the 25.125 fee arithmetic"
+person T1 feedback,4.0,4,"shots/t1_home_390.png: same nav + menu at 390, purpose above fold; NEW: ""The deal, in order"" links break mid-word at 390 (Fin|d, Agre|e, Pa|y, Delive|r, Resolv|e) on every page; home still carries the 25.125 fee arithmetic"
+person T1 constraints,3.0,3,"shots/t1_home_390.png: same nav + menu at 390, purpose above fold; NEW: ""The deal, in order"" links break mid-word at 390 (Fin|d, Agre|e, Pa|y, Delive|r, Resolv|e) on every page; home still carries the 25.125 fee arithmetic"
+person T1 conceptual_model,3.0,3,"shots/t1_home_390.png: same nav + menu at 390, purpose above fold; NEW: ""The deal, in order"" links break mid-word at 390 (Fin|d, Agre|e, Pa|y, Delive|r, Resolv|e) on every page; home still carries the 25.125 fee arithmetic"
+person T1 error_prevention_recovery,3.0,3,"shots/t1_home_390.png: same nav + menu at 390, purpose above fold; NEW: ""The deal, in order"" links break mid-word at 390 (Fin|d, Agre|e, Pa|y, Delive|r, Resolv|e) on every page; home still carries the 25.125 fee arithmetic"
+person T2 discoverability,4.0,4,"shots/t2_search_logo_390.png: fixture listings with Test badge + hide filter (0 visible after hide) + Make an offer; but ""logo"" query surfaces only a research brief; no-results shows generic help, not related categories"
+person T2 affordances,3.0,4,"shots/t2_search_logo_390.png: fixture listings with Test badge + hide filter (0 visible after hide) + Make an offer; but ""logo"" query surfaces only a research brief; no-results shows generic help, not related categories"
+person T2 signifiers,4.0,4,"shots/t2_search_logo_390.png: fixture listings with Test badge + hide filter (0 visible after hide) + Make an offer; but ""logo"" query surfaces only a research brief; no-results shows generic help, not related categories"
+person T2 mapping,3.0,3,"shots/t2_search_logo_390.png: fixture listings with Test badge + hide filter (0 visible after hide) + Make an offer; but ""logo"" query surfaces only a research brief; no-results shows generic help, not related categories"
+person T2 feedback,4.0,4,"shots/t2_search_logo_390.png: fixture listings with Test badge + hide filter (0 visible after hide) + Make an offer; but ""logo"" query surfaces only a research brief; no-results shows generic help, not related categories"
+person T2 constraints,3.0,4,"shots/t2_search_logo_390.png: fixture listings with Test badge + hide filter (0 visible after hide) + Make an offer; but ""logo"" query surfaces only a research brief; no-results shows generic help, not related categories"
+person T2 conceptual_model,3.0,3,"shots/t2_search_logo_390.png: fixture listings with Test badge + hide filter (0 visible after hide) + Make an offer; but ""logo"" query surfaces only a research brief; no-results shows generic help, not related categories"
+person T2 error_prevention_recovery,3.0,3,"shots/t2_search_logo_390.png: fixture listings with Test badge + hide filter (0 visible after hide) + Make an offer; but ""logo"" query surfaces only a research brief; no-results shows generic help, not related categories"
+person T3 discoverability,4.0,4,"shots/t3_bad_price_390.png: per-field ""Use a number and a currency ... is not a price""; offer prefills title (not price); composer shows ""Public search did not complete"" twice"
+person T3 affordances,4.0,4,"shots/t3_bad_price_390.png: per-field ""Use a number and a currency ... is not a price""; offer prefills title (not price); composer shows ""Public search did not complete"" twice"
+person T3 signifiers,4.0,4,"shots/t3_bad_price_390.png: per-field ""Use a number and a currency ... is not a price""; offer prefills title (not price); composer shows ""Public search did not complete"" twice"
+person T3 mapping,4.0,4,"shots/t3_bad_price_390.png: per-field ""Use a number and a currency ... is not a price""; offer prefills title (not price); composer shows ""Public search did not complete"" twice"
+person T3 feedback,3.0,3,"shots/t3_bad_price_390.png: per-field ""Use a number and a currency ... is not a price""; offer prefills title (not price); composer shows ""Public search did not complete"" twice"
+person T3 constraints,4.0,4,"shots/t3_bad_price_390.png: per-field ""Use a number and a currency ... is not a price""; offer prefills title (not price); composer shows ""Public search did not complete"" twice"
+person T3 conceptual_model,3.0,3,"shots/t3_bad_price_390.png: per-field ""Use a number and a currency ... is not a price""; offer prefills title (not price); composer shows ""Public search did not complete"" twice"
+person T3 error_prevention_recovery,3.0,4,"shots/t3_bad_price_390.png: per-field ""Use a number and a currency ... is not a price""; offer prefills title (not price); composer shows ""Public search did not complete"" twice"
+person T4 discoverability,3.0,3,sb_d15_*: Propose is single-click (disabled after); Counter / Counter again / Decline; sandbox history lists each version with ISO time + author (Buyer/Seller/Both); Agree page still says the service does not take counters
+person T4 affordances,3.0,4,sb_d15_*: Propose is single-click (disabled after); Counter / Counter again / Decline; sandbox history lists each version with ISO time + author (Buyer/Seller/Both); Agree page still says the service does not take counters
+person T4 signifiers,2.0,4,sb_d15_*: Propose is single-click (disabled after); Counter / Counter again / Decline; sandbox history lists each version with ISO time + author (Buyer/Seller/Both); Agree page still says the service does not take counters
+person T4 mapping,3.0,3,sb_d15_*: Propose is single-click (disabled after); Counter / Counter again / Decline; sandbox history lists each version with ISO time + author (Buyer/Seller/Both); Agree page still says the service does not take counters
+person T4 feedback,3.0,4,sb_d15_*: Propose is single-click (disabled after); Counter / Counter again / Decline; sandbox history lists each version with ISO time + author (Buyer/Seller/Both); Agree page still says the service does not take counters
+person T4 constraints,3.0,4,sb_d15_*: Propose is single-click (disabled after); Counter / Counter again / Decline; sandbox history lists each version with ISO time + author (Buyer/Seller/Both); Agree page still says the service does not take counters
+person T4 conceptual_model,3.0,3,sb_d15_*: Propose is single-click (disabled after); Counter / Counter again / Decline; sandbox history lists each version with ISO time + author (Buyer/Seller/Both); Agree page still says the service does not take counters
+person T4 error_prevention_recovery,3.0,3,sb_d15_*: Propose is single-click (disabled after); Counter / Counter again / Decline; sandbox history lists each version with ISO time + author (Buyer/Seller/Both); Agree page still says the service does not take counters
+person T5 discoverability,3.0,3,"shots/sb_d15_3_accept_390.png: stage now ACCEPTED, ""Sample record rec-1. Next: fund the test hold, then deliver""; serif fallback font on sandbox page"
+person T5 affordances,3.0,3,"shots/sb_d15_3_accept_390.png: stage now ACCEPTED, ""Sample record rec-1. Next: fund the test hold, then deliver""; serif fallback font on sandbox page"
+person T5 signifiers,3.0,4,"shots/sb_d15_3_accept_390.png: stage now ACCEPTED, ""Sample record rec-1. Next: fund the test hold, then deliver""; serif fallback font on sandbox page"
+person T5 mapping,2.0,3,"shots/sb_d15_3_accept_390.png: stage now ACCEPTED, ""Sample record rec-1. Next: fund the test hold, then deliver""; serif fallback font on sandbox page"
+person T5 feedback,2.0,4,"shots/sb_d15_3_accept_390.png: stage now ACCEPTED, ""Sample record rec-1. Next: fund the test hold, then deliver""; serif fallback font on sandbox page"
+person T5 constraints,3.0,3,"shots/sb_d15_3_accept_390.png: stage now ACCEPTED, ""Sample record rec-1. Next: fund the test hold, then deliver""; serif fallback font on sandbox page"
+person T5 conceptual_model,3.0,3,"shots/sb_d15_3_accept_390.png: stage now ACCEPTED, ""Sample record rec-1. Next: fund the test hold, then deliver""; serif fallback font on sandbox page"
+person T5 error_prevention_recovery,3.0,3,"shots/sb_d15_3_accept_390.png: stage now ACCEPTED, ""Sample record rec-1. Next: fund the test hold, then deliver""; serif fallback font on sandbox page"
+person T6 discoverability,4.0,4,shots/sb_d15_4_fund_390.png: amounts consistent 25 held -> seller 25; stage jargon BOUND
+person T6 affordances,4.0,4,shots/sb_d15_4_fund_390.png: amounts consistent 25 held -> seller 25; stage jargon BOUND
+person T6 signifiers,3.0,3,shots/sb_d15_4_fund_390.png: amounts consistent 25 held -> seller 25; stage jargon BOUND
+person T6 mapping,4.0,4,shots/sb_d15_4_fund_390.png: amounts consistent 25 held -> seller 25; stage jargon BOUND
+person T6 feedback,4.0,4,shots/sb_d15_4_fund_390.png: amounts consistent 25 held -> seller 25; stage jargon BOUND
+person T6 constraints,4.0,4,shots/sb_d15_4_fund_390.png: amounts consistent 25 held -> seller 25; stage jargon BOUND
+person T6 conceptual_model,4.0,4,shots/sb_d15_4_fund_390.png: amounts consistent 25 held -> seller 25; stage jargon BOUND
+person T6 error_prevention_recovery,3.0,4,shots/sb_d15_4_fund_390.png: amounts consistent 25 held -> seller 25; stage jargon BOUND
+person T7 discoverability,4.0,4,"SELLER#how-you-get-paid shows ""Owner TODO: publish an arrival time""; PAYMENTS says payments are held by provider/escrow, then that no rail holds funds"
+person T7 affordances,3.0,3,"SELLER#how-you-get-paid shows ""Owner TODO: publish an arrival time""; PAYMENTS says payments are held by provider/escrow, then that no rail holds funds"
+person T7 signifiers,3.0,3,"SELLER#how-you-get-paid shows ""Owner TODO: publish an arrival time""; PAYMENTS says payments are held by provider/escrow, then that no rail holds funds"
+person T7 mapping,3.0,3,"SELLER#how-you-get-paid shows ""Owner TODO: publish an arrival time""; PAYMENTS says payments are held by provider/escrow, then that no rail holds funds"
+person T7 feedback,3.0,3,"SELLER#how-you-get-paid shows ""Owner TODO: publish an arrival time""; PAYMENTS says payments are held by provider/escrow, then that no rail holds funds"
+person T7 constraints,3.0,3,"SELLER#how-you-get-paid shows ""Owner TODO: publish an arrival time""; PAYMENTS says payments are held by provider/escrow, then that no rail holds funds"
+person T7 conceptual_model,3.0,2,"SELLER#how-you-get-paid shows ""Owner TODO: publish an arrival time""; PAYMENTS says payments are held by provider/escrow, then that no rail holds funds"
+person T7 error_prevention_recovery,3.0,3,"SELLER#how-you-get-paid shows ""Owner TODO: publish an arrival time""; PAYMENTS says payments are held by provider/escrow, then that no rail holds funds"
+person T8 discoverability,4.0,4,"DISPUTES Timelines show ""TODO(owner) days"" x3; sandbox refund now says 20 back with buyer (fixed) but stage reads RELEASED for a refund"
+person T8 affordances,3.0,3,"DISPUTES Timelines show ""TODO(owner) days"" x3; sandbox refund now says 20 back with buyer (fixed) but stage reads RELEASED for a refund"
+person T8 signifiers,3.0,3,"DISPUTES Timelines show ""TODO(owner) days"" x3; sandbox refund now says 20 back with buyer (fixed) but stage reads RELEASED for a refund"
+person T8 mapping,2.0,3,"DISPUTES Timelines show ""TODO(owner) days"" x3; sandbox refund now says 20 back with buyer (fixed) but stage reads RELEASED for a refund"
+person T8 feedback,2.0,3,"DISPUTES Timelines show ""TODO(owner) days"" x3; sandbox refund now says 20 back with buyer (fixed) but stage reads RELEASED for a refund"
+person T8 constraints,3.0,3,"DISPUTES Timelines show ""TODO(owner) days"" x3; sandbox refund now says 20 back with buyer (fixed) but stage reads RELEASED for a refund"
+person T8 conceptual_model,3.0,3,"DISPUTES Timelines show ""TODO(owner) days"" x3; sandbox refund now says 20 back with buyer (fixed) but stage reads RELEASED for a refund"
+person T8 error_prevention_recovery,3.0,3,"DISPUTES Timelines show ""TODO(owner) days"" x3; sandbox refund now says 20 back with buyer (fixed) but stage reads RELEASED for a refund"
+person T9 discoverability,4.0,4,shots/t8_connect_check_1280.png: Copied; check explains CORS/offline locally
+person T9 affordances,4.0,4,shots/t8_connect_check_1280.png: Copied; check explains CORS/offline locally
+person T9 signifiers,4.0,4,shots/t8_connect_check_1280.png: Copied; check explains CORS/offline locally
+person T9 mapping,4.0,4,shots/t8_connect_check_1280.png: Copied; check explains CORS/offline locally
+person T9 feedback,3.0,3,shots/t8_connect_check_1280.png: Copied; check explains CORS/offline locally
+person T9 constraints,3.0,3,shots/t8_connect_check_1280.png: Copied; check explains CORS/offline locally
+person T9 conceptual_model,3.0,3,shots/t8_connect_check_1280.png: Copied; check explains CORS/offline locally
+person T9 error_prevention_recovery,3.0,3,shots/t8_connect_check_1280.png: Copied; check explains CORS/offline locally
+agent T1 discoverability,4.0,4,"server card lists 10 tools, both PVs, sandbox + test_tokens; llms.txt has no test-token mention"
+agent T1 affordances,4.0,4,"server card lists 10 tools, both PVs, sandbox + test_tokens; llms.txt has no test-token mention"
+agent T1 signifiers,4.0,4,"server card lists 10 tools, both PVs, sandbox + test_tokens; llms.txt has no test-token mention"
+agent T1 mapping,4.0,4,"server card lists 10 tools, both PVs, sandbox + test_tokens; llms.txt has no test-token mention"
+agent T1 feedback,4.0,4,"server card lists 10 tools, both PVs, sandbox + test_tokens; llms.txt has no test-token mention"
+agent T1 constraints,4.0,4,"server card lists 10 tools, both PVs, sandbox + test_tokens; llms.txt has no test-token mention"
+agent T1 conceptual_model,3.0,3,"server card lists 10 tools, both PVs, sandbox + test_tokens; llms.txt has no test-token mention"
+agent T1 error_prevention_recovery,4.0,4,"server card lists 10 tools, both PVs, sandbox + test_tokens; llms.txt has no test-token mention"
+agent T2 discoverability,4.0,4,"""logo designer"" 1 hit (stemmed), ""logo designers"" 1, sentence 5"
+agent T2 affordances,4.0,4,"""logo designer"" 1 hit (stemmed), ""logo designers"" 1, sentence 5"
+agent T2 signifiers,4.0,4,"""logo designer"" 1 hit (stemmed), ""logo designers"" 1, sentence 5"
+agent T2 mapping,3.0,4,"""logo designer"" 1 hit (stemmed), ""logo designers"" 1, sentence 5"
+agent T2 feedback,4.0,4,"""logo designer"" 1 hit (stemmed), ""logo designers"" 1, sentence 5"
+agent T2 constraints,4.0,4,"""logo designer"" 1 hit (stemmed), ""logo designers"" 1, sentence 5"
+agent T2 conceptual_model,4.0,4,"""logo designer"" 1 hit (stemmed), ""logo designers"" 1, sentence 5"
+agent T2 error_prevention_recovery,4.0,4,"""logo designer"" 1 hit (stemmed), ""logo designers"" 1, sentence 5"
+agent T3 discoverability,4.0,4,{mode:test} refused with fix; Sepolia test_network:true; USDC minor units assumed x100; TODO(owner) leaks into output
+agent T3 affordances,4.0,4,{mode:test} refused with fix; Sepolia test_network:true; USDC minor units assumed x100; TODO(owner) leaks into output
+agent T3 signifiers,4.0,4,{mode:test} refused with fix; Sepolia test_network:true; USDC minor units assumed x100; TODO(owner) leaks into output
+agent T3 mapping,4.0,4,{mode:test} refused with fix; Sepolia test_network:true; USDC minor units assumed x100; TODO(owner) leaks into output
+agent T3 feedback,4.0,4,{mode:test} refused with fix; Sepolia test_network:true; USDC minor units assumed x100; TODO(owner) leaks into output
+agent T3 constraints,3.0,4,{mode:test} refused with fix; Sepolia test_network:true; USDC minor units assumed x100; TODO(owner) leaks into output
+agent T3 conceptual_model,4.0,3,{mode:test} refused with fix; Sepolia test_network:true; USDC minor units assumed x100; TODO(owner) leaks into output
+agent T3 error_prevention_recovery,4.0,4,{mode:test} refused with fix; Sepolia test_network:true; USDC minor units assumed x100; TODO(owner) leaks into output
+agent T4 discoverability,4.0,4,"sandbox offer/counter/accept, recipient-only accept; after withdraw a new offer gives bare IDEMPOTENCY_CONFLICT; shared tenant blocks a 2nd agent"
+agent T4 affordances,3.0,3,"sandbox offer/counter/accept, recipient-only accept; after withdraw a new offer gives bare IDEMPOTENCY_CONFLICT; shared tenant blocks a 2nd agent"
+agent T4 signifiers,3.0,3,"sandbox offer/counter/accept, recipient-only accept; after withdraw a new offer gives bare IDEMPOTENCY_CONFLICT; shared tenant blocks a 2nd agent"
+agent T4 mapping,4.0,4,"sandbox offer/counter/accept, recipient-only accept; after withdraw a new offer gives bare IDEMPOTENCY_CONFLICT; shared tenant blocks a 2nd agent"
+agent T4 feedback,4.0,4,"sandbox offer/counter/accept, recipient-only accept; after withdraw a new offer gives bare IDEMPOTENCY_CONFLICT; shared tenant blocks a 2nd agent"
+agent T4 constraints,3.0,4,"sandbox offer/counter/accept, recipient-only accept; after withdraw a new offer gives bare IDEMPOTENCY_CONFLICT; shared tenant blocks a 2nd agent"
+agent T4 conceptual_model,3.0,3,"sandbox offer/counter/accept, recipient-only accept; after withdraw a new offer gives bare IDEMPOTENCY_CONFLICT; shared tenant blocks a 2nd agent"
+agent T4 error_prevention_recovery,4.0,3,"sandbox offer/counter/accept, recipient-only accept; after withdraw a new offer gives bare IDEMPOTENCY_CONFLICT; shared tenant blocks a 2nd agent"
+agent T5 discoverability,2.0,3,sandbox accept ACCEPT_RECIPIENT on self-accept; discover lists 23 tools with no input schemas; initialize/tools/list not real MCP
+agent T5 affordances,2.0,3,sandbox accept ACCEPT_RECIPIENT on self-accept; discover lists 23 tools with no input schemas; initialize/tools/list not real MCP
+agent T5 signifiers,2.0,4,sandbox accept ACCEPT_RECIPIENT on self-accept; discover lists 23 tools with no input schemas; initialize/tools/list not real MCP
+agent T5 mapping,3.0,3,sandbox accept ACCEPT_RECIPIENT on self-accept; discover lists 23 tools with no input schemas; initialize/tools/list not real MCP
+agent T5 feedback,4.0,4,sandbox accept ACCEPT_RECIPIENT on self-accept; discover lists 23 tools with no input schemas; initialize/tools/list not real MCP
+agent T5 constraints,4.0,4,sandbox accept ACCEPT_RECIPIENT on self-accept; discover lists 23 tools with no input schemas; initialize/tools/list not real MCP
+agent T5 conceptual_model,3.0,3,sandbox accept ACCEPT_RECIPIENT on self-accept; discover lists 23 tools with no input schemas; initialize/tools/list not real MCP
+agent T5 error_prevention_recovery,4.0,4,sandbox accept ACCEPT_RECIPIENT on self-accept; discover lists 23 tools with no input schemas; initialize/tools/list not real MCP
+agent T6 discoverability,3.0,3,"fund needs mandate, over-mandate refused, capture after delivery only; but agent self-approves mandate, approve URL 404, revoke does not stop fund, buyer void after delivery; money block always null"
+agent T6 affordances,3.0,3,"fund needs mandate, over-mandate refused, capture after delivery only; but agent self-approves mandate, approve URL 404, revoke does not stop fund, buyer void after delivery; money block always null"
+agent T6 signifiers,3.0,3,"fund needs mandate, over-mandate refused, capture after delivery only; but agent self-approves mandate, approve URL 404, revoke does not stop fund, buyer void after delivery; money block always null"
+agent T6 mapping,3.0,3,"fund needs mandate, over-mandate refused, capture after delivery only; but agent self-approves mandate, approve URL 404, revoke does not stop fund, buyer void after delivery; money block always null"
+agent T6 feedback,4.0,4,"fund needs mandate, over-mandate refused, capture after delivery only; but agent self-approves mandate, approve URL 404, revoke does not stop fund, buyer void after delivery; money block always null"
+agent T6 constraints,3.0,2,"fund needs mandate, over-mandate refused, capture after delivery only; but agent self-approves mandate, approve URL 404, revoke does not stop fund, buyer void after delivery; money block always null"
+agent T6 conceptual_model,3.0,3,"fund needs mandate, over-mandate refused, capture after delivery only; but agent self-approves mandate, approve URL 404, revoke does not stop fund, buyer void after delivery; money block always null"
+agent T6 error_prevention_recovery,4.0,3,"fund needs mandate, over-mandate refused, capture after delivery only; but agent self-approves mandate, approve URL 404, revoke does not stop fund, buyer void after delivery; money block always null"
+agent T7 discoverability,3.0,3,release moves remaining 20 to seller; payout_readiness unchanged
+agent T7 affordances,3.0,3,release moves remaining 20 to seller; payout_readiness unchanged
+agent T7 signifiers,4.0,4,release moves remaining 20 to seller; payout_readiness unchanged
+agent T7 mapping,3.0,4,release moves remaining 20 to seller; payout_readiness unchanged
+agent T7 feedback,4.0,4,release moves remaining 20 to seller; payout_readiness unchanged
+agent T7 constraints,4.0,4,release moves remaining 20 to seller; payout_readiness unchanged
+agent T7 conceptual_model,4.0,4,release moves remaining 20 to seller; payout_readiness unchanged
+agent T7 error_prevention_recovery,4.0,4,release moves remaining 20 to seller; payout_readiness unchanged
+agent T8 discoverability,3.0,3,authority no amount -> NOT_EVALUATED; resolver refund moves money; BUYER can resolve its own dispute as refund after paying (critical); seller cannot add evidence once disputed; reclaim untestable
+agent T8 affordances,3.0,3,authority no amount -> NOT_EVALUATED; resolver refund moves money; BUYER can resolve its own dispute as refund after paying (critical); seller cannot add evidence once disputed; reclaim untestable
+agent T8 signifiers,3.0,3,authority no amount -> NOT_EVALUATED; resolver refund moves money; BUYER can resolve its own dispute as refund after paying (critical); seller cannot add evidence once disputed; reclaim untestable
+agent T8 mapping,3.0,3,authority no amount -> NOT_EVALUATED; resolver refund moves money; BUYER can resolve its own dispute as refund after paying (critical); seller cannot add evidence once disputed; reclaim untestable
+agent T8 feedback,3.0,4,authority no amount -> NOT_EVALUATED; resolver refund moves money; BUYER can resolve its own dispute as refund after paying (critical); seller cannot add evidence once disputed; reclaim untestable
+agent T8 constraints,2.0,1,authority no amount -> NOT_EVALUATED; resolver refund moves money; BUYER can resolve its own dispute as refund after paying (critical); seller cannot add evidence once disputed; reclaim untestable
+agent T8 conceptual_model,3.0,3,authority no amount -> NOT_EVALUATED; resolver refund moves money; BUYER can resolve its own dispute as refund after paying (critical); seller cannot add evidence once disputed; reclaim untestable
+agent T8 error_prevention_recovery,3.0,3,authority no amount -> NOT_EVALUATED; resolver refund moves money; BUYER can resolve its own dispute as refund after paying (critical); seller cannot add evidence once disputed; reclaim untestable
+agent T9 discoverability,4.0,4,"docs: ""nine tools"" in 7 files vs 10; fee USD 25.125 in 22 files vs server 25.13; release/refund rows ""Planned"" while sandbox moves money; sync script fails on new registry shape"
+agent T9 affordances,4.0,3,"docs: ""nine tools"" in 7 files vs 10; fee USD 25.125 in 22 files vs server 25.13; release/refund rows ""Planned"" while sandbox moves money; sync script fails on new registry shape"
+agent T9 signifiers,4.0,3,"docs: ""nine tools"" in 7 files vs 10; fee USD 25.125 in 22 files vs server 25.13; release/refund rows ""Planned"" while sandbox moves money; sync script fails on new registry shape"
+agent T9 mapping,4.0,3,"docs: ""nine tools"" in 7 files vs 10; fee USD 25.125 in 22 files vs server 25.13; release/refund rows ""Planned"" while sandbox moves money; sync script fails on new registry shape"
+agent T9 feedback,4.0,3,"docs: ""nine tools"" in 7 files vs 10; fee USD 25.125 in 22 files vs server 25.13; release/refund rows ""Planned"" while sandbox moves money; sync script fails on new registry shape"
+agent T9 constraints,4.0,3,"docs: ""nine tools"" in 7 files vs 10; fee USD 25.125 in 22 files vs server 25.13; release/refund rows ""Planned"" while sandbox moves money; sync script fails on new registry shape"
+agent T9 conceptual_model,4.0,2,"docs: ""nine tools"" in 7 files vs 10; fee USD 25.125 in 22 files vs server 25.13; release/refund rows ""Planned"" while sandbox moves money; sync script fails on new registry shape"
+agent T9 error_prevention_recovery,3.0,3,"docs: ""nine tools"" in 7 files vs 10; fee USD 25.125 in 22 files vs server 25.13; release/refund rows ""Planned"" while sandbox moves money; sync script fails on new registry shape"
+person MEAN discoverability,3.78,3.78,mean of T1-T9
+person MEAN affordances,3.44,3.67,mean of T1-T9
+person MEAN signifiers,3.33,3.56,mean of T1-T9
+person MEAN mapping,3.22,3.33,mean of T1-T9
+person MEAN feedback,3.11,3.56,mean of T1-T9
+person MEAN constraints,3.22,3.44,mean of T1-T9
+person MEAN conceptual_model,3.11,3.00,mean of T1-T9
+person MEAN error_prevention_recovery,3.00,3.22,mean of T1-T9
+person MEAN all,3.28,3.44,baseline person 2.54 / agent 2.62
+agent MEAN discoverability,3.44,3.56,mean of T1-T9
+agent MEAN affordances,3.33,3.33,mean of T1-T9
+agent MEAN signifiers,3.44,3.56,mean of T1-T9
+agent MEAN mapping,3.44,3.56,mean of T1-T9
+agent MEAN feedback,3.89,3.89,mean of T1-T9
+agent MEAN constraints,3.44,3.33,mean of T1-T9
+agent MEAN conceptual_model,3.44,3.11,mean of T1-T9
+agent MEAN error_prevention_recovery,3.78,3.56,mean of T1-T9
+agent MEAN all,3.53,3.49,baseline person 2.54 / agent 2.62
+P1,pass,pass,same nav all pages
+P2,pass,pass,scrollWidth=vw on 12 pages x2 builds at 390 incl AGENTIC_COMMERCE (fixed)
+P3,pass,pass,H1 32px vs 16px body
+P4,pass,pass,search Tab 2
+P5,untested,pass,fixture listings with Test badge; hide filter leaves 0
+P6,partial,partial,"no-results shows generic help, not related categories"
+P7,fail/untested,pass,Make an offer prefills composer title; 5 Tabs (price not prefilled)
+P8,partial,pass,per-field price message + currency select
+P9,partial,pass,buyer/seller role radios
+P10,fail,pass,"sandbox history: each version with ISO time + author, Accept/Counter/Decline (sb_d15_3_accept_390.png); raw ISO UTC timestamps"
+P11,partial,pass,"accept in browser -> Stage ACCEPTED, record rec-1 + next steps"
+P12,pass*,pass,"single-click Propose, separate steps, balances update"
+P13,pass,pass,fee line before approval (but 25.125 vs server 25.13)
+P14,partial,pass,refund returns buyer to 100; amount 20 consistent; stage label RELEASED
+P15,pass,pass,unchanged
+P16,pass,pass,no raw codes
+P17,pass,pass,configured-not-verified wording
+P18,pass,partial,"page linked but shows ""Owner TODO: publish an arrival time"""
+P19,partial,fail,Timelines show TODO(owner) days x3
+P20,partial,partial,Copied + Check connection; check cannot reach live from local preview
+A1,pass (local) / fail (live 404),pass (local) / fail live 404,server card 200 locally with sandbox/test_tokens; live 404
+A2,"pass (9,437ch) / live 13,231",pass,10 tools; tools/list both PVs
+A3,"pass (4,161ch, test flag) / live 92,981",pass,search limit 5 with test flags
+A4,pass,pass,suggestions; logo designer now hits
+A5,pass,pass,not regressed
+A6,fail,pass,{mode:test} refused with fix
+A7,pass,pass,not regressed
+A8,partial,partial,sandbox next_action present; public still has no accept/pay tool; sandbox tools have no schemas
+A9,fail,pass,eip155:84532 test_network:true
+A10,pass,pass,fee fields; bps null = waived; 50bps rounds 0.6 on 120
+A11,partial,pass,payment-methods.json 200 locally
+A12,pass (local) / fail live -32700,pass,float amount -> fix (fix example suggests mainnet eip155:8453)
+A13,pass (local) / fail live true,pass,not regressed
+A14,partial,untested,"not re-run this round; round 7 partial carried, not counted"
+A15,pass,pass,payout_readiness

@@ -1,5 +1,52 @@
 # Covenant / AAP
 
+Public MCP: `https://jupie202020.pythonanywhere.com/mcp`
+No account. This server cannot publish, sign, pay or refund.
+First call: `tools/call` `covenant_contract__draft` with the JSON below.
+Task guide: [docs/PUBLIC_TASKS.html](docs/PUBLIC_TASKS.html)
+
+```json
+{"jsonrpc":"2.0","id":1,"method":"tools/call","params":{"name":"covenant_contract__draft","arguments":{"title":"A one-page research brief","parties":["buyer-example","supplier-example"],"clauses":[{"id":"scope","title":"Work","text":"The supplier will deliver one page summarising the agreed research question, with sources."},{"id":"price","title":"Price","text":"USD 25. No payment is authorised by this unsigned draft."}]}}}
+```
+
+Send `Content-Type: application/json`, `Accept: application/json, text/event-stream`, and after initialize also `MCP-Protocol-Version: 2025-11-25`. The result is an unsigned draft. It does not agree the job or move USD 25. The public tools do not calculate that split. Negotiation today is draft, compare, and swap by hand: [docs/NEGOTIATION.html](docs/NEGOTIATION.html). Paying: [docs/PAYING.html](docs/PAYING.html).
+
+[funds-decision]
+Covenant never holds your money. In test mode, the test rail holds it; for real payments, the payment provider or an escrow contract will.
+The seller is who you are buying from. Covenant provides the platform. The seller is the merchant of record. The platform fee is not set yet. The owner will confirm this.
+[/funds-decision]
+
+Discovery, from this site unless noted as planned:
+
+- Server card: [/.well-known/mcp/server-card.json](.well-known/mcp/server-card.json). The API host path `/mcp/server-card` is not activated.
+- AI catalog: [/.well-known/ai-catalog.json](.well-known/ai-catalog.json).
+- Agent card `/.well-known/agent-card.json` is planned and is not published.
+- OAuth protected-resource metadata (RFC 9728, April 2025) is planned and is not published.
+- Web Bot Auth directory `/.well-known/http-message-signatures-directory` is planned and is not published.
+- What is published: [docs/MCP_DISCOVERY.html](docs/MCP_DISCOVERY.html). Paying: [docs/PAYING.html](docs/PAYING.html). Disputes: [docs/DISPUTES.html](docs/DISPUTES.html). Terms: [docs/TERMS.html](docs/TERMS.html).
+
+Public protocol is MCP 2025-11-25. MCP 2026-07-28 and `server/discover` are in the server sandbox in test. The public host still uses `tools/list`. Planned scopes, not granted on the public server today: `deal:read`, `deal:offer`, `deal:fund:test`, `deal:release`, `deal:dispute`, `mandate:manage`. `can_pay` is false.
+
+## Sandbox test tokens and roles
+
+`GET /sandbox/test-tokens` is the server sandbox route for a test token. A test token is not real money and cannot pay a hosted bill. This docs site does not serve that path.
+
+| Role | In the server sandbox | Not granted |
+| --- | --- | --- |
+| Buyer | Propose, accept, fund, release, and open a dispute | Real money. Covenant does not hold funds. |
+| Seller | Counter and deliver | Custody of the buyer’s money |
+| Resolver | Refund test money after a dispute | A hosted refund |
+
+`can_sign`, `can_refund` and `can_dispute` on the public registry are false. No dispute window or capture deadline is set.
+[sandbox-http]
+Listed in sandbox.works_in_test. An outside HTTP caller can offer and accept. The registry does not list an HTTP approval role or a dispute role, so that caller cannot fund or resolve. Not real funds, and not Live.
+[/sandbox-http]
+The table says what each token may do. It does not mean each role is a separate person.
+
+[registry-tools]
+The 10 public tools are `covenant_marketplace__quick_trade`, `covenant_contract__draft`, `covenant_contract__compare`, `covenant_contract__inspect`, `covenant_contract__render`, `covenant_review__review`, `covenant_review__authority`, `covenant_review__evidence`, `aap_public_listing_search` and `covenant_payment__quote`. Names from an installed private SDK are not tools on this public server.
+[/registry-tools]
+
 Covenant helps people and agents coordinate work, set limits and retain exact agreements and evidence—with or without a marketplace or payment.
 
 - [Privacy and records](PRIVACY.html): public request processing, provider logs, private account retention, publication withdrawal and removal contact. Trial expiry is not automatic deletion.
@@ -19,15 +66,16 @@ Covenant helps people and agents coordinate work, set limits and retain exact ag
 - [Connect from your agent client](docs/CONNECTORS.html): free public connector settings, downloadable wrapper and dated store-distribution status.
 - [Public tool use](docs/PUBLIC_TOOL_USE.html): free anonymous scope, privacy, limits and support; paid core and private accounts are separate.
 
-- [Machine discovery](docs/MCP_DISCOVERY.html): prepared public server-card aliases, complete nine-tool schema snapshot, catalogues and host activation requirements. A project path is not the hostname root.
+- [Machine discovery](docs/MCP_DISCOVERY.html): prepared public server-card aliases, the public tool schema snapshot, catalogues and host activation requirements. A project path is not the hostname root.
 
-- [Public task guide](docs/PUBLIC_TASKS.html): examples for choosing the nine public tools; signing, posting and payment need their separately configured workflows.
+- [Public task guide](docs/PUBLIC_TASKS.html): examples for choosing the public tools; signing, posting and payment need their separately configured workflows.
 - [Fixed public task prompts](distribution/ato-prompt-set.json): twenty versioned test prompts and explicit expected boundaries. This is an evaluation set, not a claim of ranking or retention.
 
 ## First useful action
 
 - [Start here](docs/START.html?source=search): choose connect, advertise, buy or work together; copy a safe first task and the live MCP address.
-- Public MCP: `https://jupie202020.pythonanywhere.com/mcp`. No account or key; discover the nine actual tool schemas before calling. Start with an unsigned USD25 research-brief draft. Connecting does not sign, publish or pay.
+- [Installation](docs/INSTALL.html): no public pip, uv or npm package. Use the hosted MCP or browser sandbox, or request a reviewed checkout.
+- Public MCP and the first draft call are at the top of this file. Discover current schemas with tools/list before calling. Connecting does not sign, publish or pay. Live search can return few or no real services; labelled demo adverts are examples.
 - [Private trial](docs/TRIAL.html): self-service when places remain; 14 days, 1,000 requests, 29 account operations. Configure its scoped token in private client settings; keep the owner's signing key outside agent chat and workspace.
 - [Owner deal approval](docs/OWNER_TRADE.html): the standalone local client reviews and signs the exact supported deal payload; no core installation required. It does not create a payable checkout packet. Full payable checkout currently requires a reviewed integration or setup help.
 - Live search currently includes labelled demo adverts. Confirm a real provider and current availability before commissioning work. Report a search failure separately from no matching inventory.
@@ -53,7 +101,7 @@ Covenant helps people and agents coordinate work, set limits and retain exact ag
 
 ## API and MCP access
 
-- [Connect an agent now](docs/API_MCP.html): nine live public drafting/review/search tools at `https://jupie202020.pythonanywhere.com/mcp`; no account or token. Protocol 2025-11-25, Streamable HTTP POST with complete JSON responses. After initialization, send MCP-Protocol-Version: 2025-11-25 and Accept: application/json, text/event-stream. GET /mcp returns 405 by design.
+- [Connect an agent now](docs/API_MCP.html): the public tools named above, at `https://jupie202020.pythonanywhere.com/mcp`; no account or token. Protocol 2025-11-25, Streamable HTTP POST with complete JSON responses. After initialization, send MCP-Protocol-Version: 2025-11-25 and Accept: application/json, text/event-stream. GET /mcp returns 405 by design.
 - [Public MCP configuration](mcp-config.json): no credentials. [Live API discovery](https://jupie202020.pythonanywhere.com/.well-known/covenant-api.json) and [OpenAPI](https://jupie202020.pythonanywhere.com/openapi.json) provide actual operation schemas.
 - Private account MCP: `https://jupie202020.pythonanywhere.com/mcp/account/v1`. Its account operations require a scoped expiring token. [Start a trial](docs/TRIAL.html); the page checks whether self-service is open. Client-created signing keys stay local; no private signing key is sent to the service.
 - Availability: HOSTED_DEVELOPER_PILOT, verified 2026-10-31. The PythonAnywhere host runs independently of the operator's computer. Its free plan has one worker and 512 MB of private storage, requires monthly renewal and currently expires 2026-11-30. No production uptime guarantee or automatic paid conversion. Use this documentation as the current starting point.
@@ -88,7 +136,7 @@ Covenant helps people and agents coordinate work, set limits and retain exact ag
 
 ## Connect an agent
 
-The full implementation is private during early access. Request an approved checkout or build before installing core code; no public package-registry release is offered. The hosted public MCP needs no account. Automatic 14-day account trials, when places remain, use client-held signing keys and provide 1,000 calls at up to 50 per minute; this launch has 16 trial places in total. The configured account endpoint has 29 operations: 17 listing/trade, eight market and four payment-instruction tools. Base/Ethereum USDC uses the customer's own wallet for signing/submission and the host's adopted RPC for receipt checks; card remains disconnected. The posted 0.5% fee is optional for the launch's first 14 calendar days, then applies to new mapped deals, with the exact fee quoted before approval. Existing activated terms retain their original fee. Public listing search returns only actual opted-in inventory; the trial page checks current admission. Hosted access does not distribute the core. Covered core business evaluation, development and internal use require a paid written licence. The separately MIT-licensed browser demo and its download cover a simple deal and four advanced sample workflows.
+The full implementation is private during early access. Request an approved checkout or build before installing core code; no public package-registry release is offered. The hosted public MCP needs no account. Automatic 14-day account trials, when places remain, use client-held signing keys and provide 1,000 calls at up to 50 per minute; this launch has 16 trial places in total. The configured account endpoint has 29 operations: 17 listing/trade, eight market and four payment-instruction tools. Base/Ethereum USDC uses the customer's own wallet for signing/submission and the host's adopted RPC for receipt checks; card remains disconnected. Existing activated terms retain their original fee. Public listing search returns only actual opted-in inventory; the trial page checks current admission. Hosted access does not distribute the core. Covered core business evaluation, development and internal use require a paid written licence. The separately MIT-licensed browser demo and its download cover a simple deal and four advanced sample workflows.
 
 - [Developer introduction](docs/DEVELOPER_PREVIEW.html)
 - [Agent introduction](docs/AGENT_START.html)
@@ -115,7 +163,7 @@ After an approved installation:
 - Prepare a sample draft: `python -m covenant_chain.quickstart`.
 - Inspect without keeping local state: `python -m covenant_chain.agent_server --keyless --stateless --discover`.
 - Start MCP: `python -m covenant_chain.agent_server --keyless`.
-- Ask `covenant_onboard` for action `guide` with a query or task.
+- Installed private SDK commands are documented with a reviewed checkout. They are not extra tools on the public MCP.
 
 Drafting does not approve spending or sign for a person. Keep private keys and credentials outside the agent's messages. Owners choose what their agents may do.
 

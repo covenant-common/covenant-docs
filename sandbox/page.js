@@ -1,16 +1,26 @@
-// The sandbox page: wires sandbox.js to the document. Every value is set as text (textContent).
+// Steps use the shared sample ledger. The signature check still loads Python.
+import '../assets/deal-machine.js';
 import { SandboxError, start } from './sandbox.js';
 
+const { createSample, explain } = globalThis.CovenantDeal;
 const base = new URL('./', document.baseURI);
 const $ = (id) => document.getElementById(id);
 const STAGES = {
   manifest: 'Reading the site manifest...',
   package: 'Downloading the package and checking its fingerprint...',
-  python: (manifest) => `Loading Python into this page (${(manifest.download_bytes / 1e6).toFixed(1)} MB in all, the first time)...`,
-  ready: 'Running the test deal...',
+  python: (manifest) => `Still loading Python (${(manifest.download_bytes / 1e6).toFixed(1)} MB the first time)...`,
+  ready: 'Running the signed sample...',
+};
+const CONFIRM = {
+  accept: 'Accepting records this sample version. It does not bind a real person and it does not move test funds yet.',
+  fund: 'Funding holds the current test USDC in this page. It does not pay a hosted bill.',
+  release: 'Release pays the seller in test USDC. It does not move real money.',
+  refund: 'Refund returns the held test USDC to the buyer. Hosted USDC cannot do this.',
 };
 let session = null;
 let last = null;
+let sample = createSample();
+let pending = null;
 
 function hex(buffer) {
   return [...new Uint8Array(buffer)].map((b) => b.toString(16).padStart(2, '0')).join('');
@@ -34,7 +44,7 @@ const env = {
   loadPyodide: async (options) => (await import(new URL('pyodide/pyodide.mjs', base).href)).loadPyodide(options),
   progress: (stage, manifest) => {
     const text = STAGES[stage];
-    $('status').textContent = typeof text === 'function' ? text(manifest) : text || '';
+    $('py-status').textContent = typeof text === 'function' ? text(manifest) : text || '';
   },
 };
 
@@ -44,21 +54,81 @@ function line(parent, text) {
   parent.append(p);
 }
 
-function money(balances) {
-  return `buyer ${balances.buyer}, seller ${balances.seller}, held in escrow ${balances.escrow} (test USDC)`;
+const JOURNEY = {PROPOSED: 'Agree', ACCEPTED: 'Agree', BOUND: 'Pay', DELIVERED: 'Deliver', DISPUTED: 'Resolve', SETTLED: 'Resolve', Refunded: 'Resolve'};
+
+function markJourney(stage) {
+  const name = JOURNEY[stage] || '';
+  document.querySelectorAll('.journey ol a').forEach((link) => {
+    if (name && link.textContent.trim() === name) link.setAttribute('aria-current', 'step');
+    else link.removeAttribute('aria-current');
+  });
 }
 
-function render(result) {
-  for (const step of result.steps) {
-    const out = $(`out-${step.step}`);
-    out.replaceChildren();
-    line(out, step.said);
-    line(out, `Result: ${step.verdict}. Signed by: ${step.signed_by.join(' and ')}. Balances: ${money(step.balances)}.`);
-    if (step.proof) line(out, `Proof: SHA-256 ${step.proof.content_sha256} over ${step.proof.content_bytes} bytes, signed by the ${step.proof.signed_by}.`);
-    line(out, `Record ID after this step: ${step.record_id}`);
+function show(result) {
+  $('step-error').textContent = '';
+  if (result.error) {
+    $('step-error').textContent = explain(result.error) || result.error;
+    return;
   }
-  $('record').textContent = JSON.stringify(result.record, null, 2);
-  $('summary').textContent = `Done in ${result.elapsed_ms} ms. Mode: ${result.mode}. Real value moved: no. Network used: no. Keys kept: no.`;
+  $('step-log').replaceChildren();
+  result.history.forEach((row) => {
+    const item = document.createElement('li');
+    item.textContent = row.text + ' ' + result.money;
+    $('step-log').append(item);
+  });
+  $('money').replaceChildren();
+  line($('money'), result.money);
+  line($('money'), result.feeText);
+  $('step-status').textContent = result.stage + '. ' + result.said;
+  markJourney(result.stage);
+  $('thread').replaceChildren();
+  result.history.forEach((row) => {
+    const entry = document.createElement('li');
+    entry.textContent = row.at + ' · ' + row.author + ' · ' + row.text;
+    $('thread').append(entry);
+  });
+  $('receipt').replaceChildren();
+  line($('receipt'), 'Receipt. ' + result.feeText);
+  if (result.recordId) {
+    line($('receipt'), 'Sample record ' + result.recordId + '. Signed with a test key. No real money moved. Next: fund the test hold, then deliver.');
+  }
+  Object.entries(result.buttons).forEach(([id, spec]) => {
+    const button = $(id);
+    button.textContent = spec.label;
+    button.disabled = !spec.enabled;
+  });
+}
+
+function ask(action) {
+  pending = action;
+  $('confirm-text').textContent = CONFIRM[action];
+  $('confirm').hidden = false;
+}
+
+function act(name) {
+  show(sample.step(name));
+}
+
+function clickStep(name) {
+  if (CONFIRM[name]) ask(name);
+  else act(name);
+}
+['propose', 'counter', 'agree', 'accept', 'decline', 'fund', 'deliver', 'release', 'dispute', 'refund'].forEach((id) => {
+  $(id).addEventListener('click', () => clickStep(id === 'agree' ? 'agree' : id));
+});
+$('confirm-no').addEventListener('click', () => { pending = null; $('confirm').hidden = true; });
+$('confirm-yes').addEventListener('click', () => {
+  const name = pending;
+  pending = null;
+  $('confirm').hidden = true;
+  if (name) act(name);
+});
+
+function withTimeout(promise, ms) {
+  return new Promise((resolve, reject) => {
+    const timer = setTimeout(() => reject(new SandboxError('SANDBOX_TIMEOUT')), ms);
+    promise.then((value) => { clearTimeout(timer); resolve(value); }, (error) => { clearTimeout(timer); reject(error); });
+  });
 }
 
 function fail(error) {
@@ -66,15 +136,10 @@ function fail(error) {
   const info = known.explain();
   const box = $('error');
   box.replaceChildren();
-  line(box, `${info.code}: ${info.what}`);
-  line(box, `What to do: ${info.fix} Retrying ${info.retry ? 'can help' : 'will not help'}.`);
-  if (info.detail) line(box, `Detail: ${info.detail}`);
-  const link = document.createElement('a');
-  link.href = info.reference;
-  link.textContent = 'What this code means';
-  box.append(link);
+  line(box, (info.code in globalThis.CovenantDeal.MESSAGES ? explain(info.code) : info.what));
+  line(box, info.fix);
   box.hidden = false;
-  $('status').textContent = 'Stopped.';
+  $('py-status').textContent = 'The signature check stopped. The steps above are unchanged. No real money moved.';
 }
 
 async function run() {
@@ -82,14 +147,11 @@ async function run() {
   $('error').hidden = true;
   try {
     if (!globalThis.isSecureContext || !globalThis.crypto || !crypto.subtle) throw new SandboxError('SANDBOX_INSECURE_PAGE');
-    if (session === null) {
-      session = await start(env);
-      $('code').textContent = session.code;
-    }
-    $('status').textContent = STAGES.ready;
+    if (session === null) session = await withTimeout(start(env), 90000);
+    $('py-status').textContent = STAGES.ready;
     last = session.demo();
-    render(last);
-    $('status').textContent = 'Done. Run it again for a fresh deal with new keys.';
+    $('record').textContent = JSON.stringify(last.record, null, 2);
+    $('py-status').textContent = 'Signed with a test key in this page. No real money moved.';
     $('check').disabled = false;
     $('forge').disabled = false;
   } catch (error) {
@@ -104,16 +166,18 @@ function check(tamper) {
     const report = session.check(last.record, tamper);
     const out = $('checked');
     out.replaceChildren();
+    const original = last.record.terms.quantity;
     line(out, tamper
-      ? `After changing the price to ${last.record.terms.quantity * 100}: ${report.verdict}.`
-      : `The record checks out: ${report.verdict}.`);
-    for (const problem of report.problems) line(out, `${problem.code}: ${problem.fix}`);
-    line(out, report.note);
+      ? `The price was changed from ${original} to ${original * 100} test USDC. The check refused it.`
+      : 'The signed record checks out.');
+    for (const problem of report.problems) line(out, explain(problem.code));
+    line(out, 'Signatures were checked in this page. Escrow here is test money.');
   } catch (error) {
     fail(error);
   }
 }
 
+show(sample.state());
 $('run').addEventListener('click', run);
 $('check').addEventListener('click', () => check(false));
 $('forge').addEventListener('click', () => check(true));

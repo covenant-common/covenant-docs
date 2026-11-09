@@ -27,6 +27,8 @@ test('GBP penny and pence are display aliases without changing signed asset name
     assert.deepEqual(result.view, input); assert.equal(JSON.stringify(input), before);
   }
   assert.equal(T.publicLeg(leg('penny', 1)).label, 'GBP 0.01');
+  assert.equal(T.publicLeg({amount: 25000000, asset: {namespace: 'eip155:8453', identifier: 'USDC', unit: 'USDC_MICRO'}}).label, '25 USDC');
+  assert.equal(T.publicLeg({amount: 125000, asset: {namespace: 'eip155:8453', identifier: 'USDC', unit: 'USDC_MICRO'}}).label, '0.125 USDC');
   assert.equal(T.publicLeg(leg('penny', Number.MAX_SAFE_INTEGER)).label, 'GBP 90071992547409.91');
 });
 
@@ -88,8 +90,9 @@ function matrixRig(publications, {structures = S} = {}) {
   get('draft-structure').value='fixed-deliverable';
   const calls=[];
   const document = {getElementById:get,createElement:tag=>new Element('',tag),querySelectorAll:s=>s==='#matrix-tabs [role="tab"]'?tabs:[]};
-  const context = {window:{AAPDealStructures:structures,location:new URL('https://covenant-common.github.io/covenant-docs/docs/MATRIX.html'),addEventListener(){}},document,
-    URL,Blob,TextEncoder,TextDecoder,Uint8Array,AbortController,setTimeout,clearTimeout,navigator:{},
+  const location = new URL('https://covenant-common.github.io/covenant-docs/docs/MATRIX.html');
+  const context = {window:{AAPDealStructures:structures,location,addEventListener(){}},document,location,
+    URL,URLSearchParams,Blob,TextEncoder,TextDecoder,Uint8Array,AbortController,setTimeout,clearTimeout,navigator:{},
     fetch:async(_url,opts)=>{const body=JSON.parse(opts.body);calls.push(body);
       const data={result:{items:publications.map(publication=>({publication})),total:publications.length,next_offset:null,scope:'CURRENT_INDEXED_PUBLICATIONS_ONLY'}};
       const result=body.method==='initialize'?{protocolVersion:'2025-11-25'}:{content:[{type:'text',text:JSON.stringify(data)}]};
@@ -112,6 +115,8 @@ test('actual Matrix search cards show public custom description, scope and reque
     assert.ok(text.includes('Offers: 1 review · five-page-review [service]')); assert.ok(text.includes('Wants: GBP 40.00'));
     assert.ok(!r.get(id).textContent.includes('DO-NOT-DISPLAY'));
   }
+  const actions = r.get('market-results').children[0].children.find((node) => node.className === 'card-actions');
+  assert.deepEqual(actions.children.map((node) => node.tagName), ['A', 'BUTTON']);
   assert.equal(JSON.stringify(publication),before);
   assert.equal(r.calls.filter(c=>c.method==='tools/call').length,1);
   assert.ok(r.calls.every(c=>c.method==='initialize'||c.params.name==='aap_public_listing_search'));

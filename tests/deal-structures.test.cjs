@@ -44,5 +44,5 @@ const checks=[];
  await assert.rejects(S.buildDraft(input('contingent-rights-draft')),/drafting-only/);const option=input('contingent-rights-draft');option.specialist_acknowledged=true;const descriptor=await S.buildDraft(option);assert.equal(descriptor.extension.template_snapshot.status,'DRAFTING_ONLY_NO_OPTIONS_LIFECYCLE');assert.equal(descriptor.extension.execution_authorized,false);assert.ok(descriptor.request.clauses.some(c=>c.id==='specialist-boundary'));assert.throws(()=>S.template('unknown-template'),/known/);
  checks.push('Specialist contingent rights require explicit acknowledgement and remain descriptors without an options lifecycle.');
  const result={status:'PASS',cases:checks.length,checks,template_pins:pins,scope:'Focused synthetic frontend proposal and privacy regressions; not source authenticity, legal effect, custody or market execution.'};
- fs.writeFileSync('/private/tmp/aap-deal-structures-public-checks-20261031.json',JSON.stringify(result,null,2)+'\n');console.log(JSON.stringify(result));
+ fs.writeFileSync(require('node:path').join(require('node:os').tmpdir(),'aap-deal-structures-public-checks-20261031.json'),JSON.stringify(result,null,2)+'\n');console.log(JSON.stringify(result));
 })().catch(error=>{console.error(error);process.exitCode=1;});
