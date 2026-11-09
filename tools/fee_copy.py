@@ -98,6 +98,15 @@ def problems(text, rel, sentence):
         errors.append('assets/deal-machine.js must use the fee sentence once')
     if RATE.search(outside):
         errors.append('%s states a fee amount while the registry fee is not set' % rel)
+    for label, phrase in (
+        ('custody sentence', 'Covenant never holds your money'),
+        ('test-rail sentence', 'In test mode, the test rail holds it'),
+        ('merchant sentence', 'The seller is the merchant of record'),
+        ('custody sentence', 'Covenant does not hold it.'),
+    ):
+        visible = re.sub(r'<!--.*?-->', '', text, flags=re.S)
+        if visible.count(phrase) > 1:
+            errors.append('%s repeats the %s' % (rel, label))
     return errors
 
 

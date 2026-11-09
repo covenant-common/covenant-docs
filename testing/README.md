@@ -10,6 +10,7 @@ The docs fixes that remain on this branch are in [`afc96d4`](https://github.com/
 | [Round 8](round8/report.md) | 4 Nov 2026 | 3.28 → **3.44** | 3.53 → **3.49** | [scores](round8/scores.csv) |
 | [Round 9](round9/report.md) | 9 Nov 2026 | 3.44 → **3.50** | 3.49 → **3.46** | [scores](round9/scores.csv), [what the docs did](round9-findings.md) |
 | [Round 10](round10/report.md) | 9 Nov 2026 | 3.50 → **3.50** | 3.46 → **3.46** | [scores](round10/scores.csv) |
+| [Round 11](round11/report.md) | 9 Nov 2026 | retest | retest | Server #201 `fa883649` and #212 `64d3eef7`, docs #13 `7022e8a8` |
 | [Agentic commerce](agentic-commerce/report.md) | 4 Nov 2026 | — | — | [gaps](agentic-commerce/gaps.csv) |
 
 Server findings (token mint, conservation, resolve outcomes, the sandbox clock) are still open. They live in the private covenant repo, not in these docs.
@@ -89,4 +90,17 @@ Report: [round10/report.md](round10/report.md). Scores: [round10/scores.csv](rou
 | R10-9. Price error does not echo the input, set `aria-invalid`, or move focus | Fixed in [`6d01d2d`](https://github.com/covenant-common/covenant-docs/commit/6d01d2d53fce2c68801c071ef3a39cfc65e2a4e8) (`assets/deal-machine.js`, `assets/matrix.js`). |
 | “Open the connection page” | Fixed in [`6d01d2d`](https://github.com/covenant-common/covenant-docs/commit/6d01d2d53fce2c68801c071ef3a39cfc65e2a4e8). The link text is “Connect an agent”. |
 | Small-business comparison misses payout timing and chargebacks | Fixed in [`6d01d2d`](https://github.com/covenant-common/covenant-docs/commit/6d01d2d53fce2c68801c071ef3a39cfc65e2a4e8) (`docs/SELLER.html`). Both say not set yet. No number is invented. |
-| R10-3, R10-4, R10-6, R10-11, and the server findings carried from round 9 | Still open in the covenant server. |
+| R10-3, R10-4, R10-11 | Fixed in covenant #201 commit `a9977a1a`. Round 11 retested them on `fa883649`. |
+| R10-6 and the remaining server findings | R10-6 is only partly fixed, and #212 makes the tool list larger. N1 to N7 in [round 11](round11/report.md) are still open in the covenant server. |
+
+## Round 11
+
+Report: [round11/report.md](round11/report.md). Retest on 9 Nov 2026 of covenant #201 `fa883649` and #212 `64d3eef7`, and docs #13 `7022e8a8`, #15 `561bf15`, #17 `8084d2a2`.
+
+| Finding | Status |
+| --- | --- |
+| Custody and merchant sentences repeat | Fixed in this round’s docs commit. `tools/fee_copy.py` fails when the funds sentence, the test-rail sentence, the merchant sentence, or “Covenant does not hold it.” appears twice on one page. |
+| Glossary `TODO(owner)` on #15 and #17 | The checker now reads the whole `distribution/glossary.json`. The stacked branches remove the remaining `owner_todo` fields. |
+| N2. “move test money” for an outside HTTP caller | Fixed in this round’s docs commit. `sandbox_http_sentence` reads `sandbox.http_roles` or `sandbox.http_actions` when the server publishes them. Until then it says an outside caller can offer and accept, and cannot fund or resolve. |
+| R10-3, R10-4, R10-11 | Fixed in covenant #201 commit `a9977a1a`. |
+| N1, N3 to N7, and R10-6 | Still open in the covenant server. |

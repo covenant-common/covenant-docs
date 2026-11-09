@@ -109,7 +109,7 @@ def badge_todos(text):
 def standards_table():
     from registry_view import apply_works_in_test
     rows = []
-    standards = apply_works_in_test(REGISTRY.get('standards', []), (REGISTRY.get('sandbox') or {}).get('works_in_test'))
+    standards = apply_works_in_test(REGISTRY.get('standards', []), (REGISTRY.get('sandbox') or {}).get('works_in_test'), REGISTRY)
     for row in standards:
         note = (' ' + row['date_note']) if row.get('date_note') else ''
         when = row['source_date']
@@ -212,6 +212,26 @@ def ensure_sitemap(names):
     return missing
 
 
+def fill_registry_markers(text):
+    from registry_view import registry_list_sentence, sandbox_http_sentence
+    note = sandbox_http_sentence(REGISTRY)
+
+    def lists(match):
+        names = match.group(1).split()
+        body = registry_list_sentence(REGISTRY, names)
+        return '<!-- registry-lists:start %s -->%s<!-- registry-lists:end -->' % (match.group(1), body)
+
+    text = re.sub(r'<!-- registry-lists:start ([^>]*?) -->.*?<!-- registry-lists:end -->', lists, text, flags=re.S)
+    text = re.sub(
+        r'<!-- sandbox-http:start -->.*?<!-- sandbox-http:end -->',
+        '<!-- sandbox-http:start -->%s<!-- sandbox-http:end -->' % note,
+        text,
+        flags=re.S,
+    )
+    text = re.sub(r'\[sandbox-http\].*?\[/sandbox-http\]', '[sandbox-http]\n%s\n[/sandbox-http]' % note, text, flags=re.S)
+    return text
+
+
 def transform(path):
     rel = path.relative_to(ROOT).as_posix()
     text = path.read_text()
@@ -242,7 +262,7 @@ def transform(path):
     text = apply(text, rel)
     if not rel.startswith('docs/technical/'):
         text = wrap_tooltips(text)
-    return text
+    return fill_registry_markers(text)
 
 
 def main():
@@ -272,6 +292,11 @@ def main():
             if not check:
                 path.write_text(updated)
     llms = ROOT / 'llms.txt'
+    filled = fill_registry_markers(llms.read_text())
+    if filled != llms.read_text():
+        changed.append('llms.txt')
+        if not check:
+            llms.write_text(filled)
     llms_text = llms.read_text()
     sentence = '[registry-tools]\n' + tools_sentence() + '\n[/registry-tools]'
     updated = marked(llms_text, '[registry-tools]', '[/registry-tools]', tools_sentence())

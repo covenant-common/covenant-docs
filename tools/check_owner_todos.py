@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 """Published text must not contain a raw TODO(owner) marker."""
-import json
 import re
 import sys
 from pathlib import Path
@@ -24,11 +23,9 @@ def main():
             text = visible(text)
         if MARKER in text:
             errors.append(path.relative_to(ROOT).as_posix())
-    glossary = json.loads((ROOT / 'distribution' / 'glossary.json').read_text())
-    for entry in glossary['entries']:
-        for field in ('body', 'tooltip', 'term'):
-            if MARKER in entry.get(field, ''):
-                errors.append('glossary.json ' + entry.get('id', '?') + ' ' + field)
+    glossary_path = ROOT / 'distribution' / 'glossary.json'
+    if MARKER in glossary_path.read_text():
+        errors.append('distribution/glossary.json')
     print({'status': 'FAIL' if errors else 'PASS', 'errors': errors})
     return 1 if errors else 0
 

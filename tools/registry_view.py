@@ -219,7 +219,7 @@ def normalize(doc):
         'merchant_of_record': doc.get('merchant_of_record'),
         'platform_fee_bps': fee_bps(doc),
         'fee_window_note': doc.get('fee_window_note'),
-        'sandbox': {'works_in_test': sandbox_works(doc)},
+        'sandbox': sandbox_projection(doc),
         'first_public_tool': first,
         'badges': dict(BADGES),
         'payments': [{
@@ -259,6 +259,74 @@ def fee_bps(doc):
     return doc.get('platform_fee_bps') if isinstance(doc, dict) else None
 
 
+def sandbox_projection(doc):
+    """Keep works_in_test, and copy HTTP role fields when the server publishes them."""
+    sandbox = doc.get('sandbox') if isinstance(doc, dict) and isinstance(doc.get('sandbox'), dict) else {}
+    projected = {'works_in_test': sandbox_works(doc)}
+    for key in ('http_roles', 'http_actions'):
+        if key in sandbox:
+            projected[key] = sandbox[key]
+    return projected
+
+
+def sandbox_http_sentence(doc=None, works=None):
+    """Say what an outside HTTP caller can do. http_roles or http_actions override the gap."""
+    sandbox = {}
+    if isinstance(doc, dict) and isinstance(doc.get('sandbox'), dict):
+        sandbox = doc['sandbox']
+    roles = sandbox.get('http_roles')
+    actions = sandbox.get('http_actions')
+    if isinstance(actions, list):
+        money = [name for name in ('fund', 'capture', 'release', 'void', 'refund', 'reclaim', 'resolve') if name in actions]
+        if money:
+            return 'sandbox.http_actions includes %s, so those steps move test money for an HTTP caller. Not real funds, and not Live.' % ', '.join(money)
+        return 'sandbox.http_actions does not include fund or resolve, so an outside HTTP caller cannot move test money that way. Not Live.'
+    if isinstance(roles, list):
+        labels = {'approver': 'approval role', 'resolver': 'dispute role'}
+        named = ', '.join(labels.get(str(role), str(role)) for role in roles) or 'none'
+        if 'approver' in roles and 'resolver' in roles:
+            return 'The registry lists HTTP roles %s, so fund and resolve can move test money in the server sandbox. Not real funds, and not Live.' % named
+        missing = [labels[role] for role in ('approver', 'resolver') if role not in roles]
+        return 'The registry http_roles are %s. An outside HTTP caller cannot mint %s, so fund and resolve are not both available on that path. Not Live.' % (named, ' or '.join(missing))
+    return (
+        'Listed in sandbox.works_in_test. An outside HTTP caller can offer and accept. '
+        'The registry does not list an HTTP approval role or a dispute role, so that caller cannot fund or resolve. '
+        'Not real funds, and not Live.'
+    )
+
+
+def _contains_name(node, name):
+    if isinstance(node, dict):
+        if name in node:
+            return True
+        return any(_contains_name(value, name) for value in node.values())
+    if isinstance(node, list):
+        return any(_contains_name(value, name) for value in node)
+    return node == name
+
+
+def registry_lists(doc, name):
+    """True when a tool or field name is a key or an exact value in the registry."""
+    if not isinstance(doc, dict) or not name:
+        return False
+    return _contains_name(doc, name)
+
+
+def registry_list_sentence(doc, names):
+    """One sentence that stays true when a later registry adds the names."""
+    wanted = [name for name in names if name]
+    present = [name for name in wanted if registry_lists(doc, name)]
+    missing = [name for name in wanted if name not in present]
+    if not missing:
+        return 'The registry lists %s. Read sandbox.works_in_test for the status. Do not call it Live.' % ', '.join('`%s`' % name for name in present)
+    if not present:
+        return 'The registry does not list %s.' % ' or '.join('`%s`' % name for name in missing)
+    return 'The registry lists %s. It does not list %s.' % (
+        ', '.join('`%s`' % name for name in present),
+        ' or '.join('`%s`' % name for name in missing),
+    )
+
+
 def sandbox_works(doc):
     sandbox = doc.get('sandbox') if isinstance(doc, dict) else None
     if not isinstance(sandbox, dict):
@@ -277,7 +345,7 @@ def sandbox_works(doc):
     return []
 
 
-def apply_works_in_test(standards, works):
+def apply_works_in_test(standards, works, doc=None):
     known = set(works or [])
     rows = []
     for row in standards:
@@ -290,10 +358,8 @@ def apply_works_in_test(standards, works):
             item['status'] = 'Test mode'
             if item.get('id') == 'mcp-2026-07-28':
                 item['where'] = 'server/discover is offered in the server sandbox in test. The public host still speaks MCP 2025-11-25.'
-            elif item.get('id') in ('release', 'refund'):
-                item['where'] = 'Moves test money in the server sandbox. Not real funds, and not Live.'
-            elif item.get('id') == 'reclaim':
-                item['where'] = 'Moves test money in the server sandbox. No day count is set. Not real funds, and not Live.'
+            elif item.get('id') in ('release', 'refund', 'reclaim'):
+                item['where'] = sandbox_http_sentence(doc, known)
         elif item.get('id') == 'reclaim':
             item['status'] = 'Planned'
             item['where'] = 'Not in sandbox.works_in_test.'

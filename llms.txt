@@ -34,10 +34,14 @@ Public protocol is MCP 2025-11-25. MCP 2026-07-28 and `server/discover` are in t
 | Role | In the server sandbox | Not granted |
 | --- | --- | --- |
 | Buyer | Propose, accept, fund, release, and open a dispute | Real money. Covenant does not hold funds. |
-| Seller | Counter and deliver. The seller is the merchant of record | Custody of the buyer’s money |
+| Seller | Counter and deliver | Custody of the buyer’s money |
 | Resolver | Refund test money after a dispute | A hosted refund |
 
-`can_sign`, `can_refund` and `can_dispute` on the public registry are false. Release, refund and reclaim are in `sandbox.works_in_test` and move test money. No dispute window or capture deadline is set. One `GET /sandbox/test-tokens` response includes every role token, including resolver and approver. The table says what each token may do. It does not mean each role is a separate person.
+`can_sign`, `can_refund` and `can_dispute` on the public registry are false. No dispute window or capture deadline is set.
+[sandbox-http]
+Listed in sandbox.works_in_test. An outside HTTP caller can offer and accept. The registry does not list an HTTP approval role or a dispute role, so that caller cannot fund or resolve. Not real funds, and not Live.
+[/sandbox-http]
+The table says what each token may do. It does not mean each role is a separate person.
 
 [registry-tools]
 The 10 public tools are `covenant_marketplace__quick_trade`, `covenant_contract__draft`, `covenant_contract__compare`, `covenant_contract__inspect`, `covenant_contract__render`, `covenant_review__review`, `covenant_review__authority`, `covenant_review__evidence`, `aap_public_listing_search` and `covenant_payment__quote`. Names from an installed private SDK are not tools on this public server.

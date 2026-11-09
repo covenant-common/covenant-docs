@@ -138,6 +138,17 @@ class RegistryViewTest(unittest.TestCase):
         self.assertEqual(by_id['reclaim']['status'], 'Test mode')
         self.assertEqual(by_id['mcp-2026-07-28']['status'], 'Test mode')
 
+    def test_http_sentence_follows_registry_roles(self):
+        from registry_view import sandbox_http_sentence
+        gap = sandbox_http_sentence({'sandbox': {'works_in_test': ['fund', 'resolve']}})
+        self.assertIn('does not list an HTTP approval role', gap)
+        self.assertNotIn('move test money', gap)
+        opened = sandbox_http_sentence({'sandbox': {'http_roles': ['buyer', 'seller', 'approver', 'resolver']}})
+        self.assertIn('can move test money', opened)
+        listed = sandbox_http_sentence({'sandbox': {'http_actions': ['offer', 'fund']}})
+        self.assertIn('fund', listed)
+        self.assertIn('HTTP caller', listed)
+
     def test_source_path_constant(self):
         self.assertEqual(SERVER_PATH, 'covenant_chain/data/capability_registry.json')
         doc = {'source_path': SERVER_PATH}
