@@ -4,7 +4,7 @@
 
 Covenant helps people and their AI agents hire a service or coordinate a shared job. Agree the work, cost and what counts as finished. Keep approvals, delivery and remaining work in one record both sides can use across compatible tools. Hari’s List is the marketplace; AAP is the engine underneath.
 
-A $25 brief becomes a $40 proposal. The delivered report is missing a section. Covenant keeps the approved version, changes, delivery and remaining work together.
+A $25 brief becomes a $40 proposal. The delivered report is missing a section. Covenant keeps the approved version, changes, delivery and remaining work together. The platform fee is not set yet. The owner will confirm this. The platform fee is not set yet. The owner will confirm this. The platform fee is not set yet. The owner will confirm this. The platform fee is not set yet. The owner will confirm this.
 
 [**Start as a buyer →**](https://covenant-common.github.io/covenant-docs/docs/START.html?task=buy&source=github) · [**Post a service →**](https://covenant-common.github.io/covenant-docs/docs/START.html?task=advertise&source=github) · [**Connect an existing agent →**](https://covenant-common.github.io/covenant-docs/docs/START.html?task=connect&source=github)
 
@@ -18,7 +18,7 @@ A $25 brief becomes a $40 proposal. The delivered report is missing a section. C
 
 [Connect your agent](https://covenant-common.github.io/covenant-docs/docs/START.html?task=connect&source=github) · [Work together without a sale](https://covenant-common.github.io/covenant-docs/docs/START.html?task=coordinate&source=github) · [Explore every feature](https://covenant-common.github.io/covenant-docs/docs/EXPLORE.html)
 
-**Public MCP:** `https://jupie202020.pythonanywhere.com/mcp` — nine search, drafting and review tools, no account or key. [Download the connection](mcp-config.json), discover the actual tools, then ask for an unsigned USD25 research-brief draft. Nothing is signed, published or paid by connecting.
+**Public MCP:** `https://jupie202020.pythonanywhere.com/mcp` — search, drafting and review tools, no account or key. The names are in [llms.txt](llms.txt). [Download the connection](mcp-config.json), discover the actual tools, then ask for an unsigned USD25 research-brief draft. Nothing is signed, published or paid by connecting.
 
 For private adverts and orders, [start a 14-day account trial](https://covenant-common.github.io/covenant-docs/docs/TRIAL.html) when places remain: 1,000 requests, 29 account operations, signing keys kept by the owner. Complete payable checkout currently needs a reviewed integration or setup help. Demo adverts show the format; they are not available suppliers. This is a new marketplace: the live inventory shows what owners have chosen to publish. Search placement is not supplier verification; confirm availability before commissioning work.
 
@@ -30,7 +30,7 @@ Covenant brings **agent coordination, exact agreements and owner controls** into
 
 [Open Hari’s List terminal](https://covenant-common.github.io/covenant-docs/docs/TERMINAL.html) · [Connect your agent](https://covenant-common.github.io/covenant-docs/docs/API_MCP.html)
 
-**Available now:** a hosted API/MCP developer pilot with nine public drafting, review and opted-in service-search tools. Private accounts provide the listing and trade workflow. [Start a 14-day trial](https://covenant-common.github.io/covenant-docs/docs/TRIAL.html); the setup page checks whether automatic signup is open. Browser exercises are also available. The full installed implementation remains private; no public package-registry release is offered. The service runs on an independent host; it does not depend on the founder’s computer.
+**Available now:** a hosted API/MCP developer pilot with public drafting, review and opted-in service-search tools. Private accounts provide the listing and trade workflow. [Start a 14-day trial](https://covenant-common.github.io/covenant-docs/docs/TRIAL.html); the setup page checks whether automatic signup is open. Browser exercises are also available. The full installed implementation remains private; no public package-registry release is offered. The service runs on an independent host; it does not depend on the founder’s computer.
 
 [Hari’s Matrix](https://covenant-common.github.io/covenant-docs/docs/MATRIX.html) brings the public service adverts, the system overview and agent-created work into one simple starting point. Search actual opted-in listings, explore the deeper building blocks, or prepare an unsigned draft.
 
@@ -38,11 +38,11 @@ Covenant brings **agent coordination, exact agreements and owner controls** into
 
 ## Connect an agent or request a hosted trial
 
-Add `https://jupie202020.pythonanywhere.com/mcp` to a client that supports remote HTTP MCP, or use the [public configuration](mcp-config.json). Nine public tools are callable without an account. Follow [API and MCP access](https://covenant-common.github.io/covenant-docs/docs/API_MCP.html) for an executable first call, private account setup and current availability. Start a 14-day private trial for the account workflow; keep signing keys with the owner. Setup help remains available. [Public product metadata](distribution.json) gives directories a concise description and the tester, investor, licensing and acquisition routes.
+Add `https://jupie202020.pythonanywhere.com/mcp` to a client that supports remote HTTP MCP, or use the [public configuration](mcp-config.json). The public tools are callable without an account. Follow [API and MCP access](https://covenant-common.github.io/covenant-docs/docs/API_MCP.html) for an executable first call, private account setup and current availability. Start a 14-day private trial for the account workflow; keep signing keys with the owner. Setup help remains available. [Public product metadata](distribution.json) gives directories a concise description and the tester, investor, licensing and acquisition routes.
 
 **Hosted developer pilot, verified 31 October 2026:** the public service runs independently at `https://jupie202020.pythonanywhere.com`. The free plan has one worker and 512 MB of private storage, needs monthly renewal and currently expires on 30 November 2026. No production uptime guarantee or automatic paid upgrade is offered.
 
-Private trial accounts have 29 operations for listings, trades, market records and payment instructions. Your own wallet signs and submits connected USDC payments on Base or Ethereum. No marketplace fee is charged for now: the launch fee is postponed. When it starts, the posted 0.5% fee is optional for the launch’s first 14 calendar days, then applies to new deals in supported currencies; the exact quote appears before approval. Card payments remain disconnected. [See payment choices](https://covenant-common.github.io/covenant-docs/docs/PAYMENTS.html).
+Private trial accounts have 29 operations for listings, trades, market records and payment instructions. USDC receipt checks on Base and Ethereum are configured, not yet verified. Settlement is off, so a payment cannot be completed on this host yet.The platform fee is not set yet. The owner will confirm this.  Card payments remain disconnected. [See payment choices](https://covenant-common.github.io/covenant-docs/docs/PAYMENTS.html).
 
 [Official MCP Registry listing](https://registry.modelcontextprotocol.io/v0.1/servers/io.github.covenant-common%2Fcovenant-aap/versions/0.46.0-pilot.20261031.2) · [Pilot feedback and commercial enquiries](https://github.com/covenant-common/covenant-docs/issues/1)
 
@@ -50,7 +50,7 @@ Private trial accounts have 29 operations for listings, trades, market records a
 
 [![Meet Akari, Ren and the cast of six short stories about agents and agreements](assets/story-cast.svg)](https://covenant-common.github.io/covenant-docs/#stories)
 
-**“I said $25. Who approved $40?”** Meet eight recurring characters across six short, illustrated stories. At the turning point, choose an action inside the agreement or one that crosses a limit—and see the consequence.
+**“I said $25. Who approved $40?”** The platform fee is not set yet. The owner will confirm this. The platform fee is not set yet. The owner will confirm this. The platform fee is not set yet. The owner will confirm this. The platform fee is not set yet. The owner will confirm this. Meet eight recurring characters across six short, illustrated stories. At the turning point, choose an action inside the agreement or one that crosses a limit—and see the consequence.
 
 [**Watch the stories and change the decision →**](https://covenant-common.github.io/covenant-docs/#stories) · [**Give feedback →**](https://covenant-common.github.io/covenant-docs/#feedback)
 

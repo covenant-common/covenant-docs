@@ -7,8 +7,8 @@
     USD: { scale: 100, digits: 2, maxAmount: 1000000000, label: 'USD', minor: 'cents' },
     GBP: { scale: 100, digits: 2, maxAmount: 1000000000, label: 'GBP', minor: 'pence' },
     EUR: { scale: 100, digits: 2, maxAmount: 1000000000, label: 'EUR', minor: 'cents' },
-    USDC_BASE: { scale: 1000000, digits: 6, maxAmount: 1000000000000, label: 'USDC_BASE', minor: 'USDC micro-units on Base (eip155:8453)' },
-    USDC_ETHEREUM: { scale: 1000000, digits: 6, maxAmount: 1000000000000, label: 'USDC_ETHEREUM', minor: 'USDC micro-units on Ethereum (eip155:1)' }
+    USDC_BASE: { scale: 1000000, digits: 6, maxAmount: 1000000000000, label: 'USDC_BASE', minor: 'USDC micro-units on Base (eip155:8453). 25 USDC = 25,000,000 micro-units' },
+    USDC_ETHEREUM: { scale: 1000000, digits: 6, maxAmount: 1000000000000, label: 'USDC_ETHEREUM', minor: 'USDC micro-units on Ethereum (eip155:1). 25 USDC = 25,000,000 micro-units' }
   };
   var CURRENCIES = Object.keys(ASSETS);
   var DATES = ['approachedOn', 'agreedOn', 'setupOn', 'approvedOn', 'deliveredOn', 'reviewedOn', 'reopenedOn', 'secondJobOn', 'offerOn', 'abandonedOn'];

@@ -44,7 +44,7 @@ function rig() {
   TestURL.revokeObjectURL=u=>revoked.push(u);
   const document={getElementById:get,createElement:()=>new Element(),querySelectorAll:s=>s==='#matrix-tabs [role="tab"]'?tabs:[]};
   const window={AAPDealStructures:S,AAPPilotWorkspace:P,location:new URL('https://covenant-common.github.io/covenant-docs/docs/MATRIX.html'),addEventListener(){}};
-  const context={window,document,URL:TestURL,Blob,TextEncoder,TextDecoder,Uint8Array,AbortController,setTimeout,clearTimeout,
+  const context={window,document,URL:TestURL,URLSearchParams,location:window.location,Blob,TextEncoder,TextDecoder,Uint8Array,AbortController,setTimeout,clearTimeout,
     fetch:async (_url,opts)=>{const body=JSON.parse(opts.body);calls.push(body);const result=body.method==='initialize'?{protocolVersion:'2025-11-25'}:{content:[{type:'text',text:JSON.stringify({listings:[],next_offset:null})}]};return {ok:true,status:200,text:async()=>JSON.stringify({jsonrpc:'2.0',id:body.id,result})};},
     navigator:{},localStorage:{getItem(){throw Error('Unexpected storage');},setItem(){throw Error('Unexpected storage');}}};
   vm.runInNewContext(fs.readFileSync(require('node:path').join(__dirname,'../assets/matrix.js'),'utf8'),context);

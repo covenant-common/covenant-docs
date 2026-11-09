@@ -1,0 +1,1038 @@
+{
+  "assets": [
+    {
+      "code": "GBP",
+      "decimals": 2
+    },
+    {
+      "code": "USD",
+      "decimals": 2
+    },
+    {
+      "code": "EUR",
+      "decimals": 2
+    },
+    {
+      "code": "JPY",
+      "decimals": 0
+    },
+    {
+      "code": "USDC",
+      "decimals": 6
+    }
+  ],
+  "authority_table": {
+    "default": "deny",
+    "requires": {
+      "mandate": "An approved, unrevoked mandate covers the price, payee and expiry."
+    },
+    "roles": [
+      "buyer",
+      "seller",
+      "resolver",
+      "approver",
+      "reader",
+      "stranger"
+    ],
+    "rules": [
+      {
+        "action": "offer",
+        "allow": true,
+        "next": "offered",
+        "role": "buyer",
+        "scope": "deal:offer",
+        "state": "draft"
+      },
+      {
+        "action": "offer",
+        "allow": true,
+        "next": "offered",
+        "role": "seller",
+        "scope": "deal:offer",
+        "state": "draft"
+      },
+      {
+        "action": "offer",
+        "allow": true,
+        "next": "offered",
+        "role": "buyer",
+        "scope": "deal:offer",
+        "state": "withdrawn"
+      },
+      {
+        "action": "offer",
+        "allow": true,
+        "next": "offered",
+        "role": "seller",
+        "scope": "deal:offer",
+        "state": "withdrawn"
+      },
+      {
+        "action": "offer",
+        "allow": true,
+        "next": "offered",
+        "role": "buyer",
+        "scope": "deal:offer",
+        "state": "expired"
+      },
+      {
+        "action": "offer",
+        "allow": true,
+        "next": "offered",
+        "role": "seller",
+        "scope": "deal:offer",
+        "state": "expired"
+      },
+      {
+        "action": "counter",
+        "allow": true,
+        "next": "countered",
+        "role": "buyer",
+        "scope": "deal:offer",
+        "state": "offered",
+        "when": "not_author"
+      },
+      {
+        "action": "accept",
+        "allow": true,
+        "next": "agreed",
+        "role": "buyer",
+        "scope": "deal:offer",
+        "state": "offered",
+        "when": "recipient"
+      },
+      {
+        "action": "withdraw",
+        "allow": true,
+        "next": "withdrawn",
+        "role": "buyer",
+        "scope": "deal:offer",
+        "state": "offered",
+        "when": "author"
+      },
+      {
+        "action": "reject",
+        "allow": true,
+        "next": "withdrawn",
+        "role": "buyer",
+        "scope": "deal:offer",
+        "state": "offered",
+        "when": "recipient"
+      },
+      {
+        "action": "counter",
+        "allow": true,
+        "next": "countered",
+        "role": "seller",
+        "scope": "deal:offer",
+        "state": "offered",
+        "when": "not_author"
+      },
+      {
+        "action": "accept",
+        "allow": true,
+        "next": "agreed",
+        "role": "seller",
+        "scope": "deal:offer",
+        "state": "offered",
+        "when": "recipient"
+      },
+      {
+        "action": "withdraw",
+        "allow": true,
+        "next": "withdrawn",
+        "role": "seller",
+        "scope": "deal:offer",
+        "state": "offered",
+        "when": "author"
+      },
+      {
+        "action": "reject",
+        "allow": true,
+        "next": "withdrawn",
+        "role": "seller",
+        "scope": "deal:offer",
+        "state": "offered",
+        "when": "recipient"
+      },
+      {
+        "action": "counter",
+        "allow": true,
+        "next": "countered",
+        "role": "buyer",
+        "scope": "deal:offer",
+        "state": "countered",
+        "when": "not_author"
+      },
+      {
+        "action": "accept",
+        "allow": true,
+        "next": "agreed",
+        "role": "buyer",
+        "scope": "deal:offer",
+        "state": "countered",
+        "when": "recipient"
+      },
+      {
+        "action": "withdraw",
+        "allow": true,
+        "next": "withdrawn",
+        "role": "buyer",
+        "scope": "deal:offer",
+        "state": "countered",
+        "when": "author"
+      },
+      {
+        "action": "reject",
+        "allow": true,
+        "next": "withdrawn",
+        "role": "buyer",
+        "scope": "deal:offer",
+        "state": "countered",
+        "when": "recipient"
+      },
+      {
+        "action": "counter",
+        "allow": true,
+        "next": "countered",
+        "role": "seller",
+        "scope": "deal:offer",
+        "state": "countered",
+        "when": "not_author"
+      },
+      {
+        "action": "accept",
+        "allow": true,
+        "next": "agreed",
+        "role": "seller",
+        "scope": "deal:offer",
+        "state": "countered",
+        "when": "recipient"
+      },
+      {
+        "action": "withdraw",
+        "allow": true,
+        "next": "withdrawn",
+        "role": "seller",
+        "scope": "deal:offer",
+        "state": "countered",
+        "when": "author"
+      },
+      {
+        "action": "reject",
+        "allow": true,
+        "next": "withdrawn",
+        "role": "seller",
+        "scope": "deal:offer",
+        "state": "countered",
+        "when": "recipient"
+      },
+      {
+        "action": "cancel",
+        "allow": true,
+        "next": "withdrawn",
+        "role": "buyer",
+        "scope": "deal:offer",
+        "state": "agreed"
+      },
+      {
+        "action": "cancel",
+        "allow": true,
+        "next": "withdrawn",
+        "role": "seller",
+        "scope": "deal:offer",
+        "state": "agreed"
+      },
+      {
+        "action": "fund",
+        "allow": true,
+        "next": "funded",
+        "requires": [
+          "mandate"
+        ],
+        "role": "buyer",
+        "scope": "deal:fund:test",
+        "state": "agreed"
+      },
+      {
+        "action": "deliver",
+        "allow": true,
+        "next": "delivered",
+        "role": "seller",
+        "scope": "deal:release",
+        "state": "funded"
+      },
+      {
+        "action": "void",
+        "allow": true,
+        "next": "expired",
+        "role": "buyer",
+        "scope": "deal:fund:test",
+        "state": "funded"
+      },
+      {
+        "action": "reclaim",
+        "allow": true,
+        "next": "expired",
+        "role": "buyer",
+        "scope": "deal:fund:test",
+        "state": "funded",
+        "when": "after_deadline"
+      },
+      {
+        "action": "capture",
+        "allow": true,
+        "next": "released",
+        "role": "buyer",
+        "scope": "deal:fund:test",
+        "state": "delivered"
+      },
+      {
+        "action": "capture",
+        "allow": true,
+        "next": "released",
+        "role": "buyer",
+        "scope": "deal:fund:test",
+        "state": "resolved"
+      },
+      {
+        "action": "release",
+        "allow": true,
+        "next": "released",
+        "role": "buyer",
+        "scope": "deal:fund:test",
+        "state": "delivered"
+      },
+      {
+        "action": "refund",
+        "allow": true,
+        "role": "seller",
+        "scope": "deal:release",
+        "state": "delivered"
+      },
+      {
+        "action": "dispute",
+        "allow": true,
+        "next": "disputed",
+        "role": "buyer",
+        "scope": "deal:dispute",
+        "state": "funded"
+      },
+      {
+        "action": "dispute",
+        "allow": true,
+        "next": "disputed",
+        "role": "seller",
+        "scope": "deal:dispute",
+        "state": "funded"
+      },
+      {
+        "action": "dispute",
+        "allow": true,
+        "next": "disputed",
+        "role": "buyer",
+        "scope": "deal:dispute",
+        "state": "delivered"
+      },
+      {
+        "action": "dispute",
+        "allow": true,
+        "next": "disputed",
+        "role": "seller",
+        "scope": "deal:dispute",
+        "state": "delivered"
+      },
+      {
+        "action": "resolve",
+        "allow": true,
+        "next": "resolved",
+        "next_refund": "refunded",
+        "role": "resolver",
+        "scope": "deal:resolve",
+        "state": "disputed"
+      },
+      {
+        "action": "evidence",
+        "allow": true,
+        "role": "buyer",
+        "scope": "deal:dispute",
+        "state": "disputed",
+        "when": "before_respond_by"
+      },
+      {
+        "action": "evidence",
+        "allow": true,
+        "role": "seller",
+        "scope": "deal:dispute",
+        "state": "disputed",
+        "when": "before_respond_by"
+      },
+      {
+        "action": "mandate.create_request",
+        "allow": true,
+        "role": "buyer",
+        "scope": "mandate:manage",
+        "state": "*"
+      },
+      {
+        "action": "mandate.approve",
+        "allow": true,
+        "role": "approver",
+        "scope": "mandate:approve",
+        "state": "*"
+      },
+      {
+        "action": "mandate.revoke",
+        "allow": true,
+        "role": "buyer",
+        "scope": "mandate:manage",
+        "state": "*"
+      },
+      {
+        "action": "mandate.revoke",
+        "allow": true,
+        "role": "approver",
+        "scope": "mandate:approve",
+        "state": "*"
+      },
+      {
+        "action": "discover",
+        "allow": true,
+        "role": "buyer",
+        "scope": "deal:read",
+        "state": "*"
+      },
+      {
+        "action": "discover",
+        "allow": true,
+        "role": "seller",
+        "scope": "deal:read",
+        "state": "*"
+      },
+      {
+        "action": "discover",
+        "allow": true,
+        "role": "resolver",
+        "scope": "deal:read",
+        "state": "*"
+      },
+      {
+        "action": "discover",
+        "allow": true,
+        "role": "approver",
+        "scope": "deal:read",
+        "state": "*"
+      },
+      {
+        "action": "discover",
+        "allow": true,
+        "role": "reader",
+        "scope": "deal:read",
+        "state": "*"
+      },
+      {
+        "action": "quote",
+        "allow": true,
+        "role": "buyer",
+        "scope": "deal:read",
+        "state": "*"
+      },
+      {
+        "action": "quote",
+        "allow": true,
+        "role": "seller",
+        "scope": "deal:read",
+        "state": "*"
+      },
+      {
+        "action": "quote",
+        "allow": true,
+        "role": "resolver",
+        "scope": "deal:read",
+        "state": "*"
+      },
+      {
+        "action": "quote",
+        "allow": true,
+        "role": "approver",
+        "scope": "deal:read",
+        "state": "*"
+      },
+      {
+        "action": "quote",
+        "allow": true,
+        "role": "reader",
+        "scope": "deal:read",
+        "state": "*"
+      },
+      {
+        "action": "receipt.verify",
+        "allow": true,
+        "role": "buyer",
+        "scope": "deal:read",
+        "state": "*"
+      },
+      {
+        "action": "receipt.verify",
+        "allow": true,
+        "role": "seller",
+        "scope": "deal:read",
+        "state": "*"
+      },
+      {
+        "action": "receipt.verify",
+        "allow": true,
+        "role": "resolver",
+        "scope": "deal:read",
+        "state": "*"
+      },
+      {
+        "action": "receipt.verify",
+        "allow": true,
+        "role": "approver",
+        "scope": "deal:read",
+        "state": "*"
+      },
+      {
+        "action": "receipt.verify",
+        "allow": true,
+        "role": "reader",
+        "scope": "deal:read",
+        "state": "*"
+      },
+      {
+        "action": "mandate.list",
+        "allow": true,
+        "role": "buyer",
+        "scope": "deal:read",
+        "state": "*"
+      },
+      {
+        "action": "mandate.list",
+        "allow": true,
+        "role": "seller",
+        "scope": "deal:read",
+        "state": "*"
+      },
+      {
+        "action": "mandate.list",
+        "allow": true,
+        "role": "resolver",
+        "scope": "deal:read",
+        "state": "*"
+      },
+      {
+        "action": "mandate.list",
+        "allow": true,
+        "role": "approver",
+        "scope": "deal:read",
+        "state": "*"
+      },
+      {
+        "action": "mandate.list",
+        "allow": true,
+        "role": "reader",
+        "scope": "deal:read",
+        "state": "*"
+      },
+      {
+        "action": "mandate.status",
+        "allow": true,
+        "role": "buyer",
+        "scope": "deal:read",
+        "state": "*"
+      },
+      {
+        "action": "mandate.status",
+        "allow": true,
+        "role": "seller",
+        "scope": "deal:read",
+        "state": "*"
+      },
+      {
+        "action": "mandate.status",
+        "allow": true,
+        "role": "resolver",
+        "scope": "deal:read",
+        "state": "*"
+      },
+      {
+        "action": "mandate.status",
+        "allow": true,
+        "role": "approver",
+        "scope": "deal:read",
+        "state": "*"
+      },
+      {
+        "action": "mandate.status",
+        "allow": true,
+        "role": "reader",
+        "scope": "deal:read",
+        "state": "*"
+      },
+      {
+        "action": "advance_clock",
+        "allow": true,
+        "role": "buyer",
+        "scope": "deal:read",
+        "state": "*"
+      },
+      {
+        "action": "advance_clock",
+        "allow": true,
+        "role": "seller",
+        "scope": "deal:read",
+        "state": "*"
+      },
+      {
+        "action": "advance_clock",
+        "allow": true,
+        "role": "resolver",
+        "scope": "deal:read",
+        "state": "*"
+      },
+      {
+        "action": "advance_clock",
+        "allow": true,
+        "role": "approver",
+        "scope": "deal:read",
+        "state": "*"
+      },
+      {
+        "action": "advance_clock",
+        "allow": true,
+        "role": "reader",
+        "scope": "deal:read",
+        "state": "*"
+      },
+      {
+        "action": "dispute",
+        "allow": true,
+        "next": "disputed",
+        "role": "buyer",
+        "scope": "deal:dispute",
+        "state": "released"
+      },
+      {
+        "action": "dispute",
+        "allow": true,
+        "next": "disputed",
+        "role": "seller",
+        "scope": "deal:dispute",
+        "state": "released"
+      }
+    ],
+    "schema_version": "urn:aap:authority-table:0.1",
+    "when": {
+      "after_deadline": "now is after the capture deadline.",
+      "author": "The caller is the author of the latest offer.",
+      "before_respond_by": "respond_by is unset or now is not after it.",
+      "not_author": "The caller is not the author of the latest offer.",
+      "recipient": "The caller is the recipient of the latest offer."
+    }
+  },
+  "can_dispute": false,
+  "can_pay": false,
+  "can_publish": false,
+  "can_refund": false,
+  "can_sign": false,
+  "capabilities": {
+    "can_dispute": false,
+    "can_pay": false,
+    "can_publish": false,
+    "can_refund": false,
+    "can_sign": false,
+    "custody": "none",
+    "holds_funds": false,
+    "merchant_of_record": "seller"
+  },
+  "custody": "none",
+  "execution": "RECORD_AND_VERIFY_ONLY",
+  "fee_window_end": null,
+  "fee_window_note": "No fee-window start or end date is configured in this build.",
+  "fee_window_start": null,
+  "holds_funds": false,
+  "json_schema": {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "properties": {
+      "assets": {
+        "items": {
+          "required": [
+            "code",
+            "decimals"
+          ],
+          "type": "object"
+        },
+        "type": "array"
+      },
+      "authority_table": {
+        "type": "object"
+      },
+      "methods": {
+        "type": "array"
+      },
+      "public_tools": {
+        "type": "string"
+      },
+      "public_tools_list": {
+        "items": {
+          "type": "string"
+        },
+        "type": "array"
+      },
+      "schema_version": {
+        "type": "string"
+      }
+    },
+    "required": [
+      "schema_version",
+      "methods",
+      "public_tools",
+      "public_tools_list",
+      "authority_table",
+      "assets"
+    ],
+    "type": "object"
+  },
+  "merchant_of_record": "seller",
+  "methods": [
+    {
+      "connection_installed": false,
+      "executable": false,
+      "execution": "RECORD_AND_VERIFY_ONLY",
+      "id": "card",
+      "label": "Card through Stripe",
+      "looks_like_mainnet": true,
+      "network": "stripe",
+      "payment_dispatch": false,
+      "readiness": "NOT_CONNECTED",
+      "reason": "Not connected. Not selectable.",
+      "selectable": false,
+      "settlement_enabled": false,
+      "status_text": "Not connected. Not selectable.",
+      "test_mode": false
+    },
+    {
+      "connection_installed": false,
+      "executable": false,
+      "execution": "RECORD_AND_VERIFY_ONLY",
+      "id": "usdc-base",
+      "label": "USDC on Base",
+      "looks_like_mainnet": true,
+      "network": "eip155:8453",
+      "payment_dispatch": false,
+      "readiness": "NOT_CONNECTED",
+      "reason": "Not connected. Not selectable.",
+      "selectable": false,
+      "settlement_enabled": false,
+      "status_text": "Not connected. Not selectable.",
+      "test_mode": false
+    },
+    {
+      "connection_installed": false,
+      "executable": false,
+      "execution": "RECORD_AND_VERIFY_ONLY",
+      "id": "usdc-ethereum",
+      "label": "USDC on Ethereum",
+      "looks_like_mainnet": true,
+      "network": "eip155:1",
+      "payment_dispatch": false,
+      "readiness": "NOT_CONNECTED",
+      "reason": "Not connected. Not selectable.",
+      "selectable": false,
+      "settlement_enabled": false,
+      "status_text": "Not connected. Not selectable.",
+      "test_mode": false
+    },
+    {
+      "connection_installed": false,
+      "executable": false,
+      "execution": "RECORD_AND_VERIFY_ONLY",
+      "id": "usdc-base-sepolia",
+      "label": "USDC on Base Sepolia",
+      "looks_like_mainnet": false,
+      "network": "eip155:84532",
+      "payment_dispatch": false,
+      "readiness": "TEST_ONLY",
+      "reason": "Test network only. Not mainnet. Not selectable until a local test adapter is installed.",
+      "selectable": false,
+      "settlement_enabled": false,
+      "status_text": "Test network only. Not mainnet. Not selectable until a local test adapter is installed.",
+      "test_mode": true
+    },
+    {
+      "connection_installed": false,
+      "executable": false,
+      "execution": "RECORD_AND_VERIFY_ONLY",
+      "id": "usdc-ethereum-sepolia",
+      "label": "USDC on Ethereum Sepolia",
+      "looks_like_mainnet": false,
+      "network": "eip155:11155111",
+      "payment_dispatch": false,
+      "readiness": "TEST_ONLY",
+      "reason": "Test network only. Not mainnet. Not selectable until a local test adapter is installed.",
+      "selectable": false,
+      "settlement_enabled": false,
+      "status_text": "Test network only. Not mainnet. Not selectable until a local test adapter is installed.",
+      "test_mode": true
+    },
+    {
+      "connection_installed": false,
+      "executable": false,
+      "execution": "RECORD_AND_VERIFY_ONLY",
+      "id": "usdc-solana",
+      "label": "USDC on Solana",
+      "looks_like_mainnet": true,
+      "network": "solana",
+      "payment_dispatch": false,
+      "readiness": "NOT_CONNECTED",
+      "reason": "Not connected. Not selectable.",
+      "selectable": false,
+      "settlement_enabled": false,
+      "status_text": "Not connected. Not selectable.",
+      "test_mode": false
+    },
+    {
+      "connection_installed": false,
+      "executable": false,
+      "execution": "RECORD_AND_VERIFY_ONLY",
+      "id": "bitcoin",
+      "label": "Bitcoin",
+      "looks_like_mainnet": true,
+      "network": "bitcoin",
+      "payment_dispatch": false,
+      "readiness": "NOT_CONNECTED",
+      "reason": "Not connected. Not selectable.",
+      "selectable": false,
+      "settlement_enabled": false,
+      "status_text": "Not connected. Not selectable.",
+      "test_mode": false
+    },
+    {
+      "connection_installed": false,
+      "executable": false,
+      "execution": "RECORD_AND_VERIFY_ONLY",
+      "id": "aap-native",
+      "label": "AAP native treasury",
+      "looks_like_mainnet": true,
+      "network": "aap",
+      "payment_dispatch": false,
+      "readiness": "NOT_LIVE",
+      "reason": "Not live. Not selectable.",
+      "selectable": false,
+      "settlement_enabled": false,
+      "status_text": "Not live. Not selectable.",
+      "test_mode": false
+    }
+  ],
+  "path": "covenant_chain/data/capability_registry.json",
+  "payment_dispatch": false,
+  "payment_methods": [
+    {
+      "connection_installed": false,
+      "executable": false,
+      "execution": "RECORD_AND_VERIFY_ONLY",
+      "id": "card",
+      "label": "Card through Stripe",
+      "looks_like_mainnet": true,
+      "network": "stripe",
+      "payment_dispatch": false,
+      "readiness": "NOT_CONNECTED",
+      "reason": "Not connected. Not selectable.",
+      "selectable": false,
+      "settlement_enabled": false,
+      "status_text": "Not connected. Not selectable.",
+      "test_mode": false
+    },
+    {
+      "connection_installed": false,
+      "executable": false,
+      "execution": "RECORD_AND_VERIFY_ONLY",
+      "id": "usdc-base",
+      "label": "USDC on Base",
+      "looks_like_mainnet": true,
+      "network": "eip155:8453",
+      "payment_dispatch": false,
+      "readiness": "NOT_CONNECTED",
+      "reason": "Not connected. Not selectable.",
+      "selectable": false,
+      "settlement_enabled": false,
+      "status_text": "Not connected. Not selectable.",
+      "test_mode": false
+    },
+    {
+      "connection_installed": false,
+      "executable": false,
+      "execution": "RECORD_AND_VERIFY_ONLY",
+      "id": "usdc-ethereum",
+      "label": "USDC on Ethereum",
+      "looks_like_mainnet": true,
+      "network": "eip155:1",
+      "payment_dispatch": false,
+      "readiness": "NOT_CONNECTED",
+      "reason": "Not connected. Not selectable.",
+      "selectable": false,
+      "settlement_enabled": false,
+      "status_text": "Not connected. Not selectable.",
+      "test_mode": false
+    },
+    {
+      "connection_installed": false,
+      "executable": false,
+      "execution": "RECORD_AND_VERIFY_ONLY",
+      "id": "usdc-base-sepolia",
+      "label": "USDC on Base Sepolia",
+      "looks_like_mainnet": false,
+      "network": "eip155:84532",
+      "payment_dispatch": false,
+      "readiness": "TEST_ONLY",
+      "reason": "Test network only. Not mainnet. Not selectable until a local test adapter is installed.",
+      "selectable": false,
+      "settlement_enabled": false,
+      "status_text": "Test network only. Not mainnet. Not selectable until a local test adapter is installed.",
+      "test_mode": true
+    },
+    {
+      "connection_installed": false,
+      "executable": false,
+      "execution": "RECORD_AND_VERIFY_ONLY",
+      "id": "usdc-ethereum-sepolia",
+      "label": "USDC on Ethereum Sepolia",
+      "looks_like_mainnet": false,
+      "network": "eip155:11155111",
+      "payment_dispatch": false,
+      "readiness": "TEST_ONLY",
+      "reason": "Test network only. Not mainnet. Not selectable until a local test adapter is installed.",
+      "selectable": false,
+      "settlement_enabled": false,
+      "status_text": "Test network only. Not mainnet. Not selectable until a local test adapter is installed.",
+      "test_mode": true
+    },
+    {
+      "connection_installed": false,
+      "executable": false,
+      "execution": "RECORD_AND_VERIFY_ONLY",
+      "id": "usdc-solana",
+      "label": "USDC on Solana",
+      "looks_like_mainnet": true,
+      "network": "solana",
+      "payment_dispatch": false,
+      "readiness": "NOT_CONNECTED",
+      "reason": "Not connected. Not selectable.",
+      "selectable": false,
+      "settlement_enabled": false,
+      "status_text": "Not connected. Not selectable.",
+      "test_mode": false
+    },
+    {
+      "connection_installed": false,
+      "executable": false,
+      "execution": "RECORD_AND_VERIFY_ONLY",
+      "id": "bitcoin",
+      "label": "Bitcoin",
+      "looks_like_mainnet": true,
+      "network": "bitcoin",
+      "payment_dispatch": false,
+      "readiness": "NOT_CONNECTED",
+      "reason": "Not connected. Not selectable.",
+      "selectable": false,
+      "settlement_enabled": false,
+      "status_text": "Not connected. Not selectable.",
+      "test_mode": false
+    },
+    {
+      "connection_installed": false,
+      "executable": false,
+      "execution": "RECORD_AND_VERIFY_ONLY",
+      "id": "aap-native",
+      "label": "AAP native treasury",
+      "looks_like_mainnet": true,
+      "network": "aap",
+      "payment_dispatch": false,
+      "readiness": "NOT_LIVE",
+      "reason": "Not live. Not selectable.",
+      "selectable": false,
+      "settlement_enabled": false,
+      "status_text": "Not live. Not selectable.",
+      "test_mode": false
+    }
+  ],
+  "profile": "urn:aap:capability-registry:0.1",
+  "public_tools": "read_only",
+  "public_tools_list": [
+    "covenant_marketplace__quick_trade",
+    "covenant_contract__draft",
+    "covenant_contract__compare",
+    "covenant_contract__inspect",
+    "covenant_contract__render",
+    "covenant_review__review",
+    "covenant_review__authority",
+    "covenant_review__evidence",
+    "aap_public_listing_search",
+    "covenant_payment__quote"
+  ],
+  "sandbox": {
+    "base_sepolia": "eip155:84532",
+    "base_sepolia_enabled": false,
+    "can_pay_real_funds": false,
+    "custody": "none",
+    "endpoint": "/mcp/sandbox/v1",
+    "merchant_of_record": "seller",
+    "platform_fee_bps": null,
+    "stripe_test_mode": false,
+    "test_mode": true,
+    "works_in_test": [
+      "discover",
+      "quote",
+      "mandate.create_request",
+      "mandate.approve",
+      "mandate.revoke",
+      "mandate.list",
+      "mandate.status",
+      "offer",
+      "counter",
+      "accept",
+      "withdraw",
+      "reject",
+      "cancel",
+      "fund",
+      "deliver",
+      "capture",
+      "release",
+      "void",
+      "refund",
+      "reclaim",
+      "dispute",
+      "evidence",
+      "resolve",
+      "receipt.verify",
+      "advance_clock"
+    ]
+  },
+  "schema": {
+    "capabilities": {
+      "required": [
+        "can_pay",
+        "custody",
+        "merchant_of_record",
+        "holds_funds"
+      ]
+    },
+    "methods": {
+      "items": {
+        "required": [
+          "id",
+          "network",
+          "selectable",
+          "executable",
+          "test_mode",
+          "reason"
+        ]
+      },
+      "type": "array"
+    },
+    "payment_methods": "alias of methods",
+    "read": "methods. payment_methods is the same list. capabilities repeats the top-level flags. public_tools stays a string. public_tools_list is the names. authority_table is the role x action x state table. assets carry decimals."
+  },
+  "schema_version": "urn:aap:capability-registry:0.2"
+}

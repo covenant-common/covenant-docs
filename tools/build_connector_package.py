@@ -114,7 +114,7 @@ def validate_metadata(manifest):
             if kind == 'positive':
                 covered.update(names)
     if covered != PUBLIC_TOOLS:
-        raise ValueError('Positive reviewer cases must cover all nine public tools')
+        raise ValueError('Positive reviewer cases must cover all the public tools')
 
 
 def build():

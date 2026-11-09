@@ -19,6 +19,9 @@
     <loc>https://covenant-common.github.io/covenant-docs/docs/BILATERAL_WORK_ORDERS_02.html</loc>
   </url>
   <url>
+    <loc>https://covenant-common.github.io/covenant-docs/docs/BUYER.html</loc>
+  </url>
+  <url>
     <loc>https://covenant-common.github.io/covenant-docs/docs/BUILDERS.html</loc>
   </url>
   <url>
@@ -42,6 +45,10 @@
   <url>
     <loc>https://covenant-common.github.io/covenant-docs/docs/FAQ.html</loc>
     <lastmod>2026-11-01</lastmod>
+  </url>
+  <url>
+    <loc>https://covenant-common.github.io/covenant-docs/docs/GLOSSARY.html</loc>
+    <lastmod>2026-11-04</lastmod>
   </url>
   <url>
     <loc>https://covenant-common.github.io/covenant-docs/docs/HOW_IT_WORKS.html</loc>
@@ -86,6 +93,9 @@
     <loc>https://covenant-common.github.io/covenant-docs/docs/RELEASE_NOTES.html</loc>
   </url>
   <url>
+    <loc>https://covenant-common.github.io/covenant-docs/docs/SELLER.html</loc>
+  </url>
+  <url>
     <loc>https://covenant-common.github.io/covenant-docs/docs/SERVICES.html</loc>
   </url>
   <url>
@@ -113,4 +123,16 @@
   <url><loc>https://covenant-common.github.io/covenant-docs/docs/MCP_DISCOVERY.html</loc><lastmod>2026-11-02</lastmod></url>
 <url><loc>https://covenant-common.github.io/covenant-docs/docs/OWNER_LISTING_APPROVAL.html</loc><lastmod>2026-11-02</lastmod></url>
   <url><loc>https://covenant-common.github.io/covenant-docs/docs/PUBLIC_TASKS.html</loc><lastmod>2026-11-02</lastmod></url>
+  <url><loc>https://covenant-common.github.io/covenant-docs/docs/INSTALL.html</loc><lastmod>2026-11-04</lastmod></url>
+  <url><loc>https://covenant-common.github.io/covenant-docs/docs/NEGOTIATION.html</loc><lastmod>2026-11-04</lastmod></url>
+  <url><loc>https://covenant-common.github.io/covenant-docs/docs/PAYING.html</loc><lastmod>2026-11-04</lastmod></url>
+  <url><loc>https://covenant-common.github.io/covenant-docs/docs/AGENT.html</loc></url>
+  <url><loc>https://covenant-common.github.io/covenant-docs/docs/AGREE.html</loc></url>
+  <url><loc>https://covenant-common.github.io/covenant-docs/docs/DELIVER.html</loc></url>
+  <url><loc>https://covenant-common.github.io/covenant-docs/docs/FIND.html</loc></url>
+  <url><loc>https://covenant-common.github.io/covenant-docs/docs/PAY.html</loc></url>
+  <url><loc>https://covenant-common.github.io/covenant-docs/docs/PERSON.html</loc></url>
+  <url><loc>https://covenant-common.github.io/covenant-docs/docs/RESOLVE.html</loc></url>
+  <url><loc>https://covenant-common.github.io/covenant-docs/docs/TERMS.html</loc></url>
+  <url><loc>https://covenant-common.github.io/covenant-docs/docs/DISPUTES.html</loc></url>
 </urlset>

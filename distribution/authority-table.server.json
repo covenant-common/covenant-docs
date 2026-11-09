@@ -1,0 +1,610 @@
+{
+  "default": "deny",
+  "requires": {
+    "mandate": "An approved, unrevoked mandate covers the price, payee and expiry."
+  },
+  "roles": [
+    "buyer",
+    "seller",
+    "resolver",
+    "approver",
+    "reader",
+    "stranger"
+  ],
+  "rules": [
+    {
+      "action": "offer",
+      "allow": true,
+      "next": "offered",
+      "role": "buyer",
+      "scope": "deal:offer",
+      "state": "draft"
+    },
+    {
+      "action": "offer",
+      "allow": true,
+      "next": "offered",
+      "role": "seller",
+      "scope": "deal:offer",
+      "state": "draft"
+    },
+    {
+      "action": "offer",
+      "allow": true,
+      "next": "offered",
+      "role": "buyer",
+      "scope": "deal:offer",
+      "state": "withdrawn"
+    },
+    {
+      "action": "offer",
+      "allow": true,
+      "next": "offered",
+      "role": "seller",
+      "scope": "deal:offer",
+      "state": "withdrawn"
+    },
+    {
+      "action": "offer",
+      "allow": true,
+      "next": "offered",
+      "role": "buyer",
+      "scope": "deal:offer",
+      "state": "expired"
+    },
+    {
+      "action": "offer",
+      "allow": true,
+      "next": "offered",
+      "role": "seller",
+      "scope": "deal:offer",
+      "state": "expired"
+    },
+    {
+      "action": "counter",
+      "allow": true,
+      "next": "countered",
+      "role": "buyer",
+      "scope": "deal:offer",
+      "state": "offered",
+      "when": "not_author"
+    },
+    {
+      "action": "accept",
+      "allow": true,
+      "next": "agreed",
+      "role": "buyer",
+      "scope": "deal:offer",
+      "state": "offered",
+      "when": "recipient"
+    },
+    {
+      "action": "withdraw",
+      "allow": true,
+      "next": "withdrawn",
+      "role": "buyer",
+      "scope": "deal:offer",
+      "state": "offered",
+      "when": "author"
+    },
+    {
+      "action": "reject",
+      "allow": true,
+      "next": "withdrawn",
+      "role": "buyer",
+      "scope": "deal:offer",
+      "state": "offered",
+      "when": "recipient"
+    },
+    {
+      "action": "counter",
+      "allow": true,
+      "next": "countered",
+      "role": "seller",
+      "scope": "deal:offer",
+      "state": "offered",
+      "when": "not_author"
+    },
+    {
+      "action": "accept",
+      "allow": true,
+      "next": "agreed",
+      "role": "seller",
+      "scope": "deal:offer",
+      "state": "offered",
+      "when": "recipient"
+    },
+    {
+      "action": "withdraw",
+      "allow": true,
+      "next": "withdrawn",
+      "role": "seller",
+      "scope": "deal:offer",
+      "state": "offered",
+      "when": "author"
+    },
+    {
+      "action": "reject",
+      "allow": true,
+      "next": "withdrawn",
+      "role": "seller",
+      "scope": "deal:offer",
+      "state": "offered",
+      "when": "recipient"
+    },
+    {
+      "action": "counter",
+      "allow": true,
+      "next": "countered",
+      "role": "buyer",
+      "scope": "deal:offer",
+      "state": "countered",
+      "when": "not_author"
+    },
+    {
+      "action": "accept",
+      "allow": true,
+      "next": "agreed",
+      "role": "buyer",
+      "scope": "deal:offer",
+      "state": "countered",
+      "when": "recipient"
+    },
+    {
+      "action": "withdraw",
+      "allow": true,
+      "next": "withdrawn",
+      "role": "buyer",
+      "scope": "deal:offer",
+      "state": "countered",
+      "when": "author"
+    },
+    {
+      "action": "reject",
+      "allow": true,
+      "next": "withdrawn",
+      "role": "buyer",
+      "scope": "deal:offer",
+      "state": "countered",
+      "when": "recipient"
+    },
+    {
+      "action": "counter",
+      "allow": true,
+      "next": "countered",
+      "role": "seller",
+      "scope": "deal:offer",
+      "state": "countered",
+      "when": "not_author"
+    },
+    {
+      "action": "accept",
+      "allow": true,
+      "next": "agreed",
+      "role": "seller",
+      "scope": "deal:offer",
+      "state": "countered",
+      "when": "recipient"
+    },
+    {
+      "action": "withdraw",
+      "allow": true,
+      "next": "withdrawn",
+      "role": "seller",
+      "scope": "deal:offer",
+      "state": "countered",
+      "when": "author"
+    },
+    {
+      "action": "reject",
+      "allow": true,
+      "next": "withdrawn",
+      "role": "seller",
+      "scope": "deal:offer",
+      "state": "countered",
+      "when": "recipient"
+    },
+    {
+      "action": "cancel",
+      "allow": true,
+      "next": "withdrawn",
+      "role": "buyer",
+      "scope": "deal:offer",
+      "state": "agreed"
+    },
+    {
+      "action": "cancel",
+      "allow": true,
+      "next": "withdrawn",
+      "role": "seller",
+      "scope": "deal:offer",
+      "state": "agreed"
+    },
+    {
+      "action": "fund",
+      "allow": true,
+      "next": "funded",
+      "requires": [
+        "mandate"
+      ],
+      "role": "buyer",
+      "scope": "deal:fund:test",
+      "state": "agreed"
+    },
+    {
+      "action": "deliver",
+      "allow": true,
+      "next": "delivered",
+      "role": "seller",
+      "scope": "deal:release",
+      "state": "funded"
+    },
+    {
+      "action": "void",
+      "allow": true,
+      "next": "expired",
+      "role": "buyer",
+      "scope": "deal:fund:test",
+      "state": "funded"
+    },
+    {
+      "action": "reclaim",
+      "allow": true,
+      "next": "expired",
+      "role": "buyer",
+      "scope": "deal:fund:test",
+      "state": "funded",
+      "when": "after_deadline"
+    },
+    {
+      "action": "capture",
+      "allow": true,
+      "next": "released",
+      "role": "buyer",
+      "scope": "deal:fund:test",
+      "state": "delivered"
+    },
+    {
+      "action": "capture",
+      "allow": true,
+      "next": "released",
+      "role": "buyer",
+      "scope": "deal:fund:test",
+      "state": "resolved"
+    },
+    {
+      "action": "release",
+      "allow": true,
+      "next": "released",
+      "role": "buyer",
+      "scope": "deal:fund:test",
+      "state": "delivered"
+    },
+    {
+      "action": "refund",
+      "allow": true,
+      "role": "seller",
+      "scope": "deal:release",
+      "state": "delivered"
+    },
+    {
+      "action": "dispute",
+      "allow": true,
+      "next": "disputed",
+      "role": "buyer",
+      "scope": "deal:dispute",
+      "state": "funded"
+    },
+    {
+      "action": "dispute",
+      "allow": true,
+      "next": "disputed",
+      "role": "seller",
+      "scope": "deal:dispute",
+      "state": "funded"
+    },
+    {
+      "action": "dispute",
+      "allow": true,
+      "next": "disputed",
+      "role": "buyer",
+      "scope": "deal:dispute",
+      "state": "delivered"
+    },
+    {
+      "action": "dispute",
+      "allow": true,
+      "next": "disputed",
+      "role": "seller",
+      "scope": "deal:dispute",
+      "state": "delivered"
+    },
+    {
+      "action": "resolve",
+      "allow": true,
+      "next": "resolved",
+      "next_refund": "refunded",
+      "role": "resolver",
+      "scope": "deal:resolve",
+      "state": "disputed"
+    },
+    {
+      "action": "evidence",
+      "allow": true,
+      "role": "buyer",
+      "scope": "deal:dispute",
+      "state": "disputed",
+      "when": "before_respond_by"
+    },
+    {
+      "action": "evidence",
+      "allow": true,
+      "role": "seller",
+      "scope": "deal:dispute",
+      "state": "disputed",
+      "when": "before_respond_by"
+    },
+    {
+      "action": "mandate.create_request",
+      "allow": true,
+      "role": "buyer",
+      "scope": "mandate:manage",
+      "state": "*"
+    },
+    {
+      "action": "mandate.approve",
+      "allow": true,
+      "role": "approver",
+      "scope": "mandate:approve",
+      "state": "*"
+    },
+    {
+      "action": "mandate.revoke",
+      "allow": true,
+      "role": "buyer",
+      "scope": "mandate:manage",
+      "state": "*"
+    },
+    {
+      "action": "mandate.revoke",
+      "allow": true,
+      "role": "approver",
+      "scope": "mandate:approve",
+      "state": "*"
+    },
+    {
+      "action": "discover",
+      "allow": true,
+      "role": "buyer",
+      "scope": "deal:read",
+      "state": "*"
+    },
+    {
+      "action": "discover",
+      "allow": true,
+      "role": "seller",
+      "scope": "deal:read",
+      "state": "*"
+    },
+    {
+      "action": "discover",
+      "allow": true,
+      "role": "resolver",
+      "scope": "deal:read",
+      "state": "*"
+    },
+    {
+      "action": "discover",
+      "allow": true,
+      "role": "approver",
+      "scope": "deal:read",
+      "state": "*"
+    },
+    {
+      "action": "discover",
+      "allow": true,
+      "role": "reader",
+      "scope": "deal:read",
+      "state": "*"
+    },
+    {
+      "action": "quote",
+      "allow": true,
+      "role": "buyer",
+      "scope": "deal:read",
+      "state": "*"
+    },
+    {
+      "action": "quote",
+      "allow": true,
+      "role": "seller",
+      "scope": "deal:read",
+      "state": "*"
+    },
+    {
+      "action": "quote",
+      "allow": true,
+      "role": "resolver",
+      "scope": "deal:read",
+      "state": "*"
+    },
+    {
+      "action": "quote",
+      "allow": true,
+      "role": "approver",
+      "scope": "deal:read",
+      "state": "*"
+    },
+    {
+      "action": "quote",
+      "allow": true,
+      "role": "reader",
+      "scope": "deal:read",
+      "state": "*"
+    },
+    {
+      "action": "receipt.verify",
+      "allow": true,
+      "role": "buyer",
+      "scope": "deal:read",
+      "state": "*"
+    },
+    {
+      "action": "receipt.verify",
+      "allow": true,
+      "role": "seller",
+      "scope": "deal:read",
+      "state": "*"
+    },
+    {
+      "action": "receipt.verify",
+      "allow": true,
+      "role": "resolver",
+      "scope": "deal:read",
+      "state": "*"
+    },
+    {
+      "action": "receipt.verify",
+      "allow": true,
+      "role": "approver",
+      "scope": "deal:read",
+      "state": "*"
+    },
+    {
+      "action": "receipt.verify",
+      "allow": true,
+      "role": "reader",
+      "scope": "deal:read",
+      "state": "*"
+    },
+    {
+      "action": "mandate.list",
+      "allow": true,
+      "role": "buyer",
+      "scope": "deal:read",
+      "state": "*"
+    },
+    {
+      "action": "mandate.list",
+      "allow": true,
+      "role": "seller",
+      "scope": "deal:read",
+      "state": "*"
+    },
+    {
+      "action": "mandate.list",
+      "allow": true,
+      "role": "resolver",
+      "scope": "deal:read",
+      "state": "*"
+    },
+    {
+      "action": "mandate.list",
+      "allow": true,
+      "role": "approver",
+      "scope": "deal:read",
+      "state": "*"
+    },
+    {
+      "action": "mandate.list",
+      "allow": true,
+      "role": "reader",
+      "scope": "deal:read",
+      "state": "*"
+    },
+    {
+      "action": "mandate.status",
+      "allow": true,
+      "role": "buyer",
+      "scope": "deal:read",
+      "state": "*"
+    },
+    {
+      "action": "mandate.status",
+      "allow": true,
+      "role": "seller",
+      "scope": "deal:read",
+      "state": "*"
+    },
+    {
+      "action": "mandate.status",
+      "allow": true,
+      "role": "resolver",
+      "scope": "deal:read",
+      "state": "*"
+    },
+    {
+      "action": "mandate.status",
+      "allow": true,
+      "role": "approver",
+      "scope": "deal:read",
+      "state": "*"
+    },
+    {
+      "action": "mandate.status",
+      "allow": true,
+      "role": "reader",
+      "scope": "deal:read",
+      "state": "*"
+    },
+    {
+      "action": "advance_clock",
+      "allow": true,
+      "role": "buyer",
+      "scope": "deal:read",
+      "state": "*"
+    },
+    {
+      "action": "advance_clock",
+      "allow": true,
+      "role": "seller",
+      "scope": "deal:read",
+      "state": "*"
+    },
+    {
+      "action": "advance_clock",
+      "allow": true,
+      "role": "resolver",
+      "scope": "deal:read",
+      "state": "*"
+    },
+    {
+      "action": "advance_clock",
+      "allow": true,
+      "role": "approver",
+      "scope": "deal:read",
+      "state": "*"
+    },
+    {
+      "action": "advance_clock",
+      "allow": true,
+      "role": "reader",
+      "scope": "deal:read",
+      "state": "*"
+    },
+    {
+      "action": "dispute",
+      "allow": true,
+      "next": "disputed",
+      "role": "buyer",
+      "scope": "deal:dispute",
+      "state": "released"
+    },
+    {
+      "action": "dispute",
+      "allow": true,
+      "next": "disputed",
+      "role": "seller",
+      "scope": "deal:dispute",
+      "state": "released"
+    }
+  ],
+  "schema_version": "urn:aap:authority-table:0.1",
+  "when": {
+    "after_deadline": "now is after the capture deadline.",
+    "author": "The caller is the author of the latest offer.",
+    "before_respond_by": "respond_by is unset or now is not after it.",
+    "not_author": "The caller is not the author of the latest offer.",
+    "recipient": "The caller is the recipient of the latest offer."
+  }
+}
