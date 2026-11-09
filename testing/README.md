@@ -2,7 +2,7 @@
 
 Independent DOET passes and the agentic-commerce standards comparison. Scores are the tester’s own measurements. Nothing here is a secret, a signing key, or a live token.
 
-The docs fixes that remain on this branch are in [`afc96d4`](https://github.com/covenant-common/covenant-docs/commit/afc96d4d2347f8ee56a48ce27d4a351be4b3dc2c). Standards pages and the claims check are in [`f1528ed`](https://github.com/covenant-common/covenant-docs/commit/f1528ed513fcf1213346e055f3be3a6e8b2c9b8c) on the stacked branch. Earlier SHAs named in the reports were the heads under test; the rebase onto main kept that work in `afc96d4`.
+The docs fixes that remain on this branch are in [`afc96d4`](https://github.com/covenant-common/covenant-docs/commit/afc96d4d2347f8ee56a48ce27d4a351be4b3dc2c). Standards pages and the claims check are in [`bb3570a`](https://github.com/covenant-common/covenant-docs/commit/bb3570a9db25251331abeedf2606c39220caa6db) on the stacked branch. Earlier SHAs named in the reports were the heads under test; the rebase onto main kept that work in `afc96d4`.
 
 | Round | Date | Person | Agent | Files |
 | --- | --- | --- | --- | --- |
@@ -12,6 +12,7 @@ The docs fixes that remain on this branch are in [`afc96d4`](https://github.com/
 | [Round 10](round10/report.md) | 9 Nov 2026 | 3.50 → **3.50** | 3.46 → **3.46** | [scores](round10/scores.csv) |
 | [Round 11](round11/report.md) | 9 Nov 2026 | retest | retest | Server #201 `fa883649` and #212 `64d3eef7`, docs #13 `7022e8a8` |
 | [Agentic commerce](agentic-commerce/report.md) | 4 Nov 2026 | — | — | [gaps](agentic-commerce/gaps.csv) |
+| [Scaling Trust](scaling-trust/proposals.md) | 9 Nov 2026 | — | — | [sources](scaling-trust/sources.md), [docs brief](scaling-trust/brief_docs.md) |
 
 Server findings (token mint, conservation, resolve outcomes, the sandbox clock) are still open. They live in the private covenant repo, not in these docs.
 
@@ -28,7 +29,7 @@ Report: [round7/report.md](round7/report.md). Docs #13 `c72f8b80`, server #200 `
 | 21 | No version thread or record id | Fixed in [`afc96d4`](https://github.com/covenant-common/covenant-docs/commit/afc96d4d2347f8ee56a48ce27d4a351be4b3dc2c). |
 | 22 | Disputes page has no day counts | Still open as `TODO(owner)`. [`afc96d4`](https://github.com/covenant-common/covenant-docs/commit/afc96d4d2347f8ee56a48ce27d4a351be4b3dc2c) states that the sandbox has no time limit after release. |
 | 23 | Deliver and Resolve redirect | Fixed in [`afc96d4`](https://github.com/covenant-common/covenant-docs/commit/afc96d4d2347f8ee56a48ce27d4a351be4b3dc2c). |
-| 24 | Standards table clipped at 390px | Fixed in [`afc96d4`](https://github.com/covenant-common/covenant-docs/commit/afc96d4d2347f8ee56a48ce27d4a351be4b3dc2c) (card layout) and [`f1528ed`](https://github.com/covenant-common/covenant-docs/commit/f1528ed513fcf1213346e055f3be3a6e8b2c9b8c) (the standards page). |
+| 24 | Standards table clipped at 390px | Fixed in [`afc96d4`](https://github.com/covenant-common/covenant-docs/commit/afc96d4d2347f8ee56a48ce27d4a351be4b3dc2c) (card layout) and [`bb3570a`](https://github.com/covenant-common/covenant-docs/commit/bb3570a9db25251331abeedf2606c39220caa6db) (the standards page). |
 | 25 | Local Find shows no listings | Fixed in [`afc96d4`](https://github.com/covenant-common/covenant-docs/commit/afc96d4d2347f8ee56a48ce27d4a351be4b3dc2c) (`assets/terminal.js`). |
 | 26 | Serif font | Fixed in [`afc96d4`](https://github.com/covenant-common/covenant-docs/commit/afc96d4d2347f8ee56a48ce27d4a351be4b3dc2c). |
 | — | Deploy gap | Still open. These pages are not what the live host serves. |
@@ -41,7 +42,7 @@ Report: [round8/report.md](round8/report.md). Server #201 `221df81e`, docs #15 `
 | --- | --- |
 | Registry shape `public_tools: "read_only"` rejected as missing | Fixed in [`afc96d4`](https://github.com/covenant-common/covenant-docs/commit/afc96d4d2347f8ee56a48ce27d4a351be4b3dc2c). The check says `unrecognised shape: keys …`. |
 | Hard-coded “nine tools” | Fixed in [`afc96d4`](https://github.com/covenant-common/covenant-docs/commit/afc96d4d2347f8ee56a48ce27d4a351be4b3dc2c). The count is generated. Round 9’s real file lists 10. |
-| Release, refund, and reclaim “stay planned”; discover “not offered” | Fixed in [`afc96d4`](https://github.com/covenant-common/covenant-docs/commit/afc96d4d2347f8ee56a48ce27d4a351be4b3dc2c) and [`f1528ed`](https://github.com/covenant-common/covenant-docs/commit/f1528ed513fcf1213346e055f3be3a6e8b2c9b8c). Status comes from `sandbox.works_in_test`. |
+| Release, refund, and reclaim “stay planned”; discover “not offered” | Fixed in [`afc96d4`](https://github.com/covenant-common/covenant-docs/commit/afc96d4d2347f8ee56a48ce27d4a351be4b3dc2c) and [`bb3570a`](https://github.com/covenant-common/covenant-docs/commit/bb3570a9db25251331abeedf2606c39220caa6db). Status comes from `sandbox.works_in_test`. |
 | N6. Step links break mid-word at 390px | Fixed in [`afc96d4`](https://github.com/covenant-common/covenant-docs/commit/afc96d4d2347f8ee56a48ce27d4a351be4b3dc2c). Round 9 then found the sandbox row still clipped; that is fixed in the same commit. |
 | N8. Raw `TODO(owner)` on Disputes and Seller | Fixed in [`afc96d4`](https://github.com/covenant-common/covenant-docs/commit/afc96d4d2347f8ee56a48ce27d4a351be4b3dc2c). The marker stays in a comment. The visible text is “Not set yet.” |
 | N9. Fee 0.125 vs server 0.13, then a stated 0.5% | Fixed in [`afc96d4`](https://github.com/covenant-common/covenant-docs/commit/afc96d4d2347f8ee56a48ce27d4a351be4b3dc2c). The real registry fee is null, so the pages say the fee is not set yet. |
@@ -61,20 +62,20 @@ Report: [round9/report.md](round9/report.md). What the docs changed: [round9-fin
 | R9-8. Fee shown as 0.5% while the server fee is null | Fixed in [`afc96d4`](https://github.com/covenant-common/covenant-docs/commit/afc96d4d2347f8ee56a48ce27d4a351be4b3dc2c). |
 | R9-14. `TODO(owner)` in screen readers and `llms.txt` | Fixed in [`afc96d4`](https://github.com/covenant-common/covenant-docs/commit/afc96d4d2347f8ee56a48ce27d4a351be4b3dc2c). |
 | R9-17. #13 conflicts with main | Fixed in [`afc96d4`](https://github.com/covenant-common/covenant-docs/commit/afc96d4d2347f8ee56a48ce27d4a351be4b3dc2c). |
-| Registry drift, 10th tool, card and AAP native rows | Fixed in [`afc96d4`](https://github.com/covenant-common/covenant-docs/commit/afc96d4d2347f8ee56a48ce27d4a351be4b3dc2c) and [`f1528ed`](https://github.com/covenant-common/covenant-docs/commit/f1528ed513fcf1213346e055f3be3a6e8b2c9b8c). Round 10 then included the tenth name in the frozen inventory. |
+| Registry drift, 10th tool, card and AAP native rows | Fixed in [`afc96d4`](https://github.com/covenant-common/covenant-docs/commit/afc96d4d2347f8ee56a48ce27d4a351be4b3dc2c) and [`2488641`](https://github.com/covenant-common/covenant-docs/commit/248864169952bc830836b451e88b996a8a583581). Round 10 then included the tenth name in the frozen inventory. |
 | Reclaim described as not working | Fixed in [`afc96d4`](https://github.com/covenant-common/covenant-docs/commit/afc96d4d2347f8ee56a48ce27d4a351be4b3dc2c). |
 | Dispute day counts | Still open as `TODO(owner)`. The page states the sandbox has no post-release window. |
-| Approval pages overstate enforcement | Fixed in [`f1528ed`](https://github.com/covenant-common/covenant-docs/commit/f1528ed513fcf1213346e055f3be3a6e8b2c9b8c). |
+| Approval pages overstate enforcement | Fixed in [`bb3570a`](https://github.com/covenant-common/covenant-docs/commit/bb3570a9db25251331abeedf2606c39220caa6db). |
 | N18. Sandbox banner vs a working hold | Fixed in [`afc96d4`](https://github.com/covenant-common/covenant-docs/commit/afc96d4d2347f8ee56a48ce27d4a351be4b3dc2c). |
 | Empty search with no suggestion; partial connection check | Fixed in [`afc96d4`](https://github.com/covenant-common/covenant-docs/commit/afc96d4d2347f8ee56a48ce27d4a351be4b3dc2c). |
-| Claims checker passes on stale data | Fixed in [`f1528ed`](https://github.com/covenant-common/covenant-docs/commit/f1528ed513fcf1213346e055f3be3a6e8b2c9b8c). |
+| Claims checker passes on stale data | Fixed in [`bb3570a`](https://github.com/covenant-common/covenant-docs/commit/bb3570a9db25251331abeedf2606c39220caa6db). |
 | R9-1 to R9-5, R9-9 to R9-13, R9-15, R9-16 | Still open in the covenant server. |
 
 ## Agentic commerce
 
 Report: [agentic-commerce/report.md](agentic-commerce/report.md). Gap table: [agentic-commerce/gaps.csv](agentic-commerce/gaps.csv). Compared on 4 Nov 2026.
 
-The docs side of that comparison is the standards matrix on the stacked branch ([`f1528ed`](https://github.com/covenant-common/covenant-docs/commit/f1528ed513fcf1213346e055f3be3a6e8b2c9b8c)). Rows stay Test mode or Planned until `sandbox.works_in_test` says otherwise. Gaps that need a server change, a fee amount, or a legal decision are still open. Do not invent those decisions.
+The docs side of that comparison is the standards matrix on the stacked branch ([`2488641`](https://github.com/covenant-common/covenant-docs/commit/248864169952bc830836b451e88b996a8a583581)). Rows stay Test mode or Planned until `sandbox.works_in_test` says otherwise. Gaps that need a server change, a fee amount, or a legal decision are still open. Do not invent those decisions.
 
 ## Round 10
 
@@ -90,6 +91,7 @@ Report: [round10/report.md](round10/report.md). Scores: [round10/scores.csv](rou
 | R10-9. Price error does not echo the input, set `aria-invalid`, or move focus | Fixed in [`6d01d2d`](https://github.com/covenant-common/covenant-docs/commit/6d01d2d53fce2c68801c071ef3a39cfc65e2a4e8) (`assets/deal-machine.js`, `assets/matrix.js`). |
 | “Open the connection page” | Fixed in [`6d01d2d`](https://github.com/covenant-common/covenant-docs/commit/6d01d2d53fce2c68801c071ef3a39cfc65e2a4e8). The link text is “Connect an agent”. |
 | Small-business comparison misses payout timing and chargebacks | Fixed in [`6d01d2d`](https://github.com/covenant-common/covenant-docs/commit/6d01d2d53fce2c68801c071ef3a39cfc65e2a4e8) (`docs/SELLER.html`). Both say not set yet. No number is invented. |
+<<<<<<< HEAD
 | R10-3, R10-4, R10-11 | Fixed in covenant #201 commit `a9977a1a`. Round 11 retested them on `fa883649`. |
 | R10-6 and the remaining server findings | R10-6 is only partly fixed, and #212 makes the tool list larger. N1 to N7 in [round 11](round11/report.md) are still open in the covenant server. |
 
@@ -104,3 +106,7 @@ Report: [round11/report.md](round11/report.md). Retest on 9 Nov 2026 of covenant
 | N2. “move test money” for an outside HTTP caller | Fixed in [`261603d`](https://github.com/covenant-common/covenant-docs/commit/261603d1166fb70cf54fb558d9c62cd53da038e7). `sandbox_http_sentence` reads `sandbox.http_roles` or `sandbox.http_actions` when the server publishes them. Until then it says an outside caller can offer and accept, and cannot fund or resolve. |
 | R10-3, R10-4, R10-11 | Fixed in covenant #201 commit `a9977a1a`. |
 | N1, N3 to N7, and R10-6 | Still open in the covenant server. |
+
+## Scaling Trust
+
+Proposals: [scaling-trust/proposals.md](scaling-trust/proposals.md). Sources that may be cited: [scaling-trust/sources.md](scaling-trust/sources.md). The public explanation is [docs/SCALING_TRUST.html](../docs/SCALING_TRUST.html), and the citations page is [docs/WHY_THIS_WAY.html](../docs/WHY_THIS_WAY.html). Those features are Planned until the capability registry lists them. The dispute bond amount is not set.

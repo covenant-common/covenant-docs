@@ -2,6 +2,8 @@
 
 Testing history, scores, and which commit fixed each finding: [testing/README.md](testing/README.md).
 
+Scaling Trust proposals and the sources they may cite: [testing/scaling-trust/proposals.md](testing/scaling-trust/proposals.md). The public pages that explain them are planned until the capability registry lists the tool or field.
+
 Priorities for a docs change:
 
 1. Registry sync uses `distribution/capability-registry.server.json`, the real server file. Regenerate the projection and the pages from it. Do not treat an older projection as verified.

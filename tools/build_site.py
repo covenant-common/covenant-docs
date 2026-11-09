@@ -213,7 +213,7 @@ def ensure_sitemap(names):
 
 
 def fill_registry_markers(text):
-    from registry_view import registry_list_sentence, sandbox_http_sentence
+    from registry_view import registry_list_sentence, registry_status_word, sandbox_http_sentence
     note = sandbox_http_sentence(REGISTRY)
 
     def lists(match):
@@ -221,7 +221,12 @@ def fill_registry_markers(text):
         body = registry_list_sentence(REGISTRY, names)
         return '<!-- registry-lists:start %s -->%s<!-- registry-lists:end -->' % (match.group(1), body)
 
+    def status(match):
+        names = match.group(1).split()
+        return '<!-- registry-status:start %s -->%s<!-- registry-status:end -->' % (match.group(1), registry_status_word(REGISTRY, names))
+
     text = re.sub(r'<!-- registry-lists:start ([^>]*?) -->.*?<!-- registry-lists:end -->', lists, text, flags=re.S)
+    text = re.sub(r'<!-- registry-status:start ([^>]*?) -->.*?<!-- registry-status:end -->', status, text, flags=re.S)
     text = re.sub(
         r'<!-- sandbox-http:start -->.*?<!-- sandbox-http:end -->',
         '<!-- sandbox-http:start -->%s<!-- sandbox-http:end -->' % note,
