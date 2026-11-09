@@ -318,13 +318,23 @@ def registry_list_sentence(doc, names):
     present = [name for name in wanted if registry_lists(doc, name)]
     missing = [name for name in wanted if name not in present]
     if not missing:
-        return 'The registry lists %s. Read sandbox.works_in_test for the status. Do not call it Live.' % ', '.join('`%s`' % name for name in present)
+        return 'The registry lists %s. Read sandbox.works_in_test for the status. Do not call it Live.' % ', '.join('<code>%s</code>' % name for name in present)
     if not present:
-        return 'The registry does not list %s.' % ' or '.join('`%s`' % name for name in missing)
+        return 'The registry does not list %s.' % ' or '.join('<code>%s</code>' % name for name in missing)
     return 'The registry lists %s. It does not list %s.' % (
-        ', '.join('`%s`' % name for name in present),
-        ' or '.join('`%s`' % name for name in missing),
+        ', '.join('<code>%s</code>' % name for name in present),
+        ' or '.join('<code>%s</code>' % name for name in missing),
     )
+
+
+def registry_status_word(doc, names):
+    wanted = [name for name in names if name]
+    if any(not registry_lists(doc, name) for name in wanted):
+        return 'Planned'
+    works = set(((doc.get('sandbox') or {}).get('works_in_test') or []))
+    if any(name in works for name in wanted):
+        return 'Test mode'
+    return 'Listed'
 
 
 def sandbox_works(doc):

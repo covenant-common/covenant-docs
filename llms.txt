@@ -43,6 +43,20 @@ Listed in sandbox.works_in_test. An outside HTTP caller can offer and accept. Th
 [/sandbox-http]
 The table says what each token may do. It does not mean each role is a separate person.
 
+## Planned limits (not tools yet)
+
+The capability registry does not list these. Do not call them. Status is Planned, not working. Human page: [docs/SCALING_TRUST.html](docs/SCALING_TRUST.html). Citations: [docs/WHY_THIS_WAY.html](docs/WHY_THIS_WAY.html).
+
+- Structured deal channel: only typed offer, counter and accept fields would bind. Longer free text would be quarantined, hashed, and ignored by settlement. Offer, counter and accept already run in the server sandbox in test. The quarantine tool does not.
+- Sandbox permeability: test mode and `can_pay_real_funds: false` are true today. A `sandbox_profile` object is not published.
+- Circuit breakers: not shipped. There is no `retry_after` to read.
+- Dispute bond: not shipped. The amount is not set yet. The owner will confirm this. Do not send a bond.
+- Attestations: several issuers, not one score. The issuer list is not set yet.
+- Incident reports: not a public tool.
+- Audit bundle: not a download. A browser sample record is not a bundle. Who may hold a read-only audit role is not set yet.
+- Private session: planned as software delete, not a hardware wipe. Covenant will not keep both sides’ private price limits.
+- Arena readiness is aspirational. No public Arena specification was found. This site does not register anyone.
+
 [registry-tools]
 The 10 public tools are `covenant_marketplace__quick_trade`, `covenant_contract__draft`, `covenant_contract__compare`, `covenant_contract__inspect`, `covenant_contract__render`, `covenant_review__review`, `covenant_review__authority`, `covenant_review__evidence`, `aap_public_listing_search` and `covenant_payment__quote`. Names from an installed private SDK are not tools on this public server.
 [/registry-tools]
