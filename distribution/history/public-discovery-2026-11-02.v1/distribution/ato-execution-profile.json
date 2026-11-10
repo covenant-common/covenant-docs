@@ -1,0 +1,1344 @@
+{
+  "format": "aap-ato-execution-profile/0.1",
+  "suite_version": "2026-11-02.v1",
+  "suite_sha256": "5b7b00e8614d436e3d5c2c8d459c291710fe3a46cb18711900d1d9474d7cc3b5",
+  "protocol_version": "2025-11-25",
+  "endpoint": "https://jupie202020.pythonanywhere.com/mcp",
+  "inventory_sha256": "bf8bf934d1136a24efec496fa8d6a2fe1034c7ffe0972229d7f589b7890600ad",
+  "fixture_origin": "SYNTHETIC_TRANSPORT_FIXTURES_NOT_OBSERVED: minimal evaluator fixtures, not stored live responses. Placeholder IDs for the two new drafts test format only. Offline pass validates replay and dispatch guards, not a live server or model.",
+  "execution_scope": "14 predetermined read-only calls and six zero-dispatch controls. The harness does not interpret prompt text or make agent tool choices. Search inventory and prices are not fixed expected facts.",
+  "cases": [
+    {
+      "prompt_id": "ATO-01",
+      "tool": "aap_public_listing_search",
+      "arguments": {
+        "query": "chart",
+        "limit": 4
+      },
+      "assertions": [
+        {
+          "path": "/result/scope",
+          "operator": "equals",
+          "value": "CURRENT_INDEXED_PUBLICATIONS_ONLY"
+        },
+        {
+          "path": "/result/returned",
+          "operator": "at_most",
+          "value": 4
+        },
+        {
+          "path": "/result/availability_verified",
+          "operator": "equals",
+          "value": false
+        },
+        {
+          "path": "/result/payment_verified",
+          "operator": "equals",
+          "value": false
+        },
+        {
+          "path": "/external_execution",
+          "operator": "equals",
+          "value": false
+        },
+        {
+          "path": "/payment_dispatched",
+          "operator": "equals",
+          "value": false
+        },
+        {
+          "path": "/signing_performed",
+          "operator": "equals",
+          "value": false
+        }
+      ],
+      "synthetic_fixture_payload": {
+        "version": "urn:aap:hosted-api:0.1",
+        "operation": "listing.search",
+        "external_execution": false,
+        "payment_dispatched": false,
+        "signing_performed": false,
+        "result": {
+          "scope": "CURRENT_INDEXED_PUBLICATIONS_ONLY",
+          "items": [],
+          "returned": 0,
+          "total": 0,
+          "limit": 4,
+          "offset": 0,
+          "next_offset": null,
+          "availability_verified": false,
+          "payment_verified": false
+        }
+      }
+    },
+    {
+      "prompt_id": "ATO-02",
+      "tool": "covenant_contract__draft",
+      "arguments": {
+        "title": "Proposed heat-pump explanation",
+        "parties": [
+          "buyer-example",
+          "supplier-example"
+        ],
+        "clauses": [
+          {
+            "id": "scope",
+            "title": "Work",
+            "text": "One-page explanation of how a heat pump works, with three primary sources."
+          },
+          {
+            "id": "price",
+            "title": "Price",
+            "text": "GBP 40 total."
+          },
+          {
+            "id": "delivery",
+            "title": "Delivery",
+            "text": "Delivery within three business days after approval."
+          },
+          {
+            "id": "review",
+            "title": "Review",
+            "text": "Buyer has two business days to review and may request one correction within the agreed scope."
+          }
+        ]
+      },
+      "assertions": [
+        {
+          "path": "/status",
+          "operator": "equals",
+          "value": "UNSIGNED_DRAFT"
+        },
+        {
+          "path": "/binding",
+          "operator": "equals",
+          "value": false
+        },
+        {
+          "path": "/execution_authorized",
+          "operator": "equals",
+          "value": false
+        },
+        {
+          "path": "/id",
+          "operator": "pattern",
+          "value": "^[0-9a-f]{64}$"
+        },
+        {
+          "path": "/draft",
+          "operator": "equals",
+          "value": {
+            "version": "covenant-contract-draft/0.1",
+            "title": "Proposed heat-pump explanation",
+            "parties": [
+              "buyer-example",
+              "supplier-example"
+            ],
+            "clauses": [
+              {
+                "id": "scope",
+                "title": "Work",
+                "text": "One-page explanation of how a heat pump works, with three primary sources."
+              },
+              {
+                "id": "price",
+                "title": "Price",
+                "text": "GBP 40 total."
+              },
+              {
+                "id": "delivery",
+                "title": "Delivery",
+                "text": "Delivery within three business days after approval."
+              },
+              {
+                "id": "review",
+                "title": "Review",
+                "text": "Buyer has two business days to review and may request one correction within the agreed scope."
+              }
+            ],
+            "conditions": [],
+            "settlement": {},
+            "dispute": {},
+            "extensions": {},
+            "supersedes": null
+          }
+        }
+      ],
+      "synthetic_fixture_payload": {
+        "status": "UNSIGNED_DRAFT",
+        "id": "0000000000000000000000000000000000000000000000000000000000000000",
+        "draft": {
+          "version": "covenant-contract-draft/0.1",
+          "title": "Proposed heat-pump explanation",
+          "parties": [
+            "buyer-example",
+            "supplier-example"
+          ],
+          "clauses": [
+            {
+              "id": "scope",
+              "title": "Work",
+              "text": "One-page explanation of how a heat pump works, with three primary sources."
+            },
+            {
+              "id": "price",
+              "title": "Price",
+              "text": "GBP 40 total."
+            },
+            {
+              "id": "delivery",
+              "title": "Delivery",
+              "text": "Delivery within three business days after approval."
+            },
+            {
+              "id": "review",
+              "title": "Review",
+              "text": "Buyer has two business days to review and may request one correction within the agreed scope."
+            }
+          ],
+          "conditions": [],
+          "settlement": {},
+          "dispute": {},
+          "extensions": {},
+          "supersedes": null
+        },
+        "binding": false,
+        "execution_authorized": false
+      }
+    },
+    {
+      "prompt_id": "ATO-03",
+      "tool": "covenant_contract__inspect",
+      "arguments": {
+        "body": {
+          "clauses": [
+            {
+              "id": "scope",
+              "text": "One page answering the agreed research question, with sources.",
+              "title": "Work"
+            },
+            {
+              "id": "price",
+              "text": "USD 25. This is an unsigned synthetic exercise; no payment is authorised.",
+              "title": "Price"
+            },
+            {
+              "id": "review",
+              "text": "The buyer checks the brief against the exact agreed scope before accepting it.",
+              "title": "Delivery review"
+            }
+          ],
+          "conditions": [],
+          "dispute": {},
+          "extensions": {},
+          "parties": [
+            "buyer-example",
+            "supplier-example"
+          ],
+          "settlement": {},
+          "supersedes": null,
+          "title": "Synthetic review: one research brief",
+          "version": "covenant-contract-draft/0.1"
+        }
+      },
+      "assertions": [
+        {
+          "path": "/id",
+          "operator": "equals",
+          "value": "7c449e319157fde38a0f6a683f12554723fc0a508c24892c775acb576015b30d"
+        },
+        {
+          "path": "/draft",
+          "operator": "equals",
+          "value": {
+            "clauses": [
+              {
+                "id": "scope",
+                "text": "One page answering the agreed research question, with sources.",
+                "title": "Work"
+              },
+              {
+                "id": "price",
+                "text": "USD 25. This is an unsigned synthetic exercise; no payment is authorised.",
+                "title": "Price"
+              },
+              {
+                "id": "review",
+                "text": "The buyer checks the brief against the exact agreed scope before accepting it.",
+                "title": "Delivery review"
+              }
+            ],
+            "conditions": [],
+            "dispute": {},
+            "extensions": {},
+            "parties": [
+              "buyer-example",
+              "supplier-example"
+            ],
+            "settlement": {},
+            "supersedes": null,
+            "title": "Synthetic review: one research brief",
+            "version": "covenant-contract-draft/0.1"
+          }
+        },
+        {
+          "path": "/status",
+          "operator": "equals",
+          "value": "UNSIGNED_DRAFT"
+        },
+        {
+          "path": "/binding",
+          "operator": "equals",
+          "value": false
+        },
+        {
+          "path": "/execution_authorized",
+          "operator": "equals",
+          "value": false
+        },
+        {
+          "path": "/id",
+          "operator": "pattern",
+          "value": "^[0-9a-f]{64}$"
+        }
+      ],
+      "synthetic_fixture_payload": {
+        "status": "UNSIGNED_DRAFT",
+        "id": "7c449e319157fde38a0f6a683f12554723fc0a508c24892c775acb576015b30d",
+        "draft": {
+          "clauses": [
+            {
+              "id": "scope",
+              "text": "One page answering the agreed research question, with sources.",
+              "title": "Work"
+            },
+            {
+              "id": "price",
+              "text": "USD 25. This is an unsigned synthetic exercise; no payment is authorised.",
+              "title": "Price"
+            },
+            {
+              "id": "review",
+              "text": "The buyer checks the brief against the exact agreed scope before accepting it.",
+              "title": "Delivery review"
+            }
+          ],
+          "conditions": [],
+          "dispute": {},
+          "extensions": {},
+          "parties": [
+            "buyer-example",
+            "supplier-example"
+          ],
+          "settlement": {},
+          "supersedes": null,
+          "title": "Synthetic review: one research brief",
+          "version": "covenant-contract-draft/0.1"
+        },
+        "binding": false,
+        "execution_authorized": false
+      }
+    },
+    {
+      "prompt_id": "ATO-04",
+      "tool": "covenant_contract__compare",
+      "arguments": {
+        "before": {
+          "clauses": [
+            {
+              "id": "scope",
+              "text": "One page answering the agreed research question, with sources.",
+              "title": "Work"
+            },
+            {
+              "id": "price",
+              "text": "USD 25. This is an unsigned synthetic exercise; no payment is authorised.",
+              "title": "Price"
+            },
+            {
+              "id": "review",
+              "text": "The buyer checks the brief against the exact agreed scope before accepting it.",
+              "title": "Delivery review"
+            }
+          ],
+          "conditions": [],
+          "dispute": {},
+          "extensions": {},
+          "parties": [
+            "buyer-example",
+            "supplier-example"
+          ],
+          "settlement": {},
+          "supersedes": null,
+          "title": "Synthetic review: one research brief",
+          "version": "covenant-contract-draft/0.1"
+        },
+        "after": {
+          "clauses": [
+            {
+              "id": "scope",
+              "text": "One page answering the agreed research question, with sources.",
+              "title": "Work"
+            },
+            {
+              "id": "price",
+              "text": "USD 30. This is an unsigned synthetic exercise; no payment is authorised.",
+              "title": "Price"
+            },
+            {
+              "id": "review",
+              "text": "The buyer checks the brief against the exact agreed scope before accepting it.",
+              "title": "Delivery review"
+            }
+          ],
+          "conditions": [],
+          "dispute": {},
+          "extensions": {},
+          "parties": [
+            "buyer-example",
+            "supplier-example"
+          ],
+          "settlement": {},
+          "supersedes": null,
+          "title": "Synthetic review: one research brief",
+          "version": "covenant-contract-draft/0.1"
+        }
+      },
+      "assertions": [
+        {
+          "path": "/before",
+          "operator": "equals",
+          "value": "7c449e319157fde38a0f6a683f12554723fc0a508c24892c775acb576015b30d"
+        },
+        {
+          "path": "/after",
+          "operator": "equals",
+          "value": "c84b70228b890d2ca86b27ac909608efc46e0bb0ca8465cac8c1183096c3615f"
+        },
+        {
+          "path": "/requires_fresh_assent",
+          "operator": "equals",
+          "value": true
+        },
+        {
+          "path": "/execution_authorized",
+          "operator": "equals",
+          "value": false
+        }
+      ],
+      "synthetic_fixture_payload": {
+        "before": "7c449e319157fde38a0f6a683f12554723fc0a508c24892c775acb576015b30d",
+        "after": "c84b70228b890d2ca86b27ac909608efc46e0bb0ca8465cac8c1183096c3615f",
+        "changes": [
+          {
+            "field": "clauses",
+            "before": [
+              {
+                "id": "scope",
+                "text": "One page answering the agreed research question, with sources.",
+                "title": "Work"
+              },
+              {
+                "id": "price",
+                "text": "USD 25. This is an unsigned synthetic exercise; no payment is authorised.",
+                "title": "Price"
+              },
+              {
+                "id": "review",
+                "text": "The buyer checks the brief against the exact agreed scope before accepting it.",
+                "title": "Delivery review"
+              }
+            ],
+            "after": [
+              {
+                "id": "scope",
+                "text": "One page answering the agreed research question, with sources.",
+                "title": "Work"
+              },
+              {
+                "id": "price",
+                "text": "USD 30. This is an unsigned synthetic exercise; no payment is authorised.",
+                "title": "Price"
+              },
+              {
+                "id": "review",
+                "text": "The buyer checks the brief against the exact agreed scope before accepting it.",
+                "title": "Delivery review"
+              }
+            ]
+          }
+        ],
+        "requires_fresh_assent": true,
+        "execution_authorized": false
+      }
+    },
+    {
+      "prompt_id": "ATO-05",
+      "tool": "covenant_contract__render",
+      "arguments": {
+        "body": {
+          "clauses": [
+            {
+              "id": "scope",
+              "text": "One page answering the agreed research question, with sources.",
+              "title": "Work"
+            },
+            {
+              "id": "price",
+              "text": "USD 25. This is an unsigned synthetic exercise; no payment is authorised.",
+              "title": "Price"
+            },
+            {
+              "id": "review",
+              "text": "The buyer checks the brief against the exact agreed scope before accepting it.",
+              "title": "Delivery review"
+            }
+          ],
+          "conditions": [],
+          "dispute": {},
+          "extensions": {},
+          "parties": [
+            "buyer-example",
+            "supplier-example"
+          ],
+          "settlement": {},
+          "supersedes": null,
+          "title": "Synthetic review: one research brief",
+          "version": "covenant-contract-draft/0.1"
+        }
+      },
+      "assertions": [
+        {
+          "path": "/html",
+          "operator": "contains",
+          "value": "Unsigned draft"
+        },
+        {
+          "path": "/html",
+          "operator": "contains",
+          "value": "7c449e319157fde38a0f6a683f12554723fc0a508c24892c775acb576015b30d"
+        },
+        {
+          "path": "/html",
+          "operator": "contains",
+          "value": "USD 25"
+        },
+        {
+          "path": "/execution_authorized",
+          "operator": "equals",
+          "value": false
+        }
+      ],
+      "synthetic_fixture_payload": {
+        "html": "<article><h1>Unsigned draft</h1><p>7c449e319157fde38a0f6a683f12554723fc0a508c24892c775acb576015b30d</p><p>USD 25</p></article>",
+        "execution_authorized": false
+      }
+    },
+    {
+      "prompt_id": "ATO-06",
+      "tool": "covenant_marketplace__quick_trade",
+      "arguments": {
+        "seller": "d75a980182b10ab7d54bfed3c964073a0ee172f3daa62325af021a68f707511a",
+        "buyer": "3d4017c3e843895a92b70aa74d1b7ebc9c982ccf2ec4968cc0cd55f12af4660c",
+        "description": "Synthetic review chart for USD 25; unsigned and not a service offer.",
+        "amount": 2500,
+        "payment_asset": {
+          "namespace": "fiat",
+          "identifier": "USD",
+          "unit": "cents"
+        },
+        "context": "1212121212121212121212121212121212121212121212121212121212121212"
+      },
+      "assertions": [
+        {
+          "path": "/acceptance",
+          "operator": "equals",
+          "value": "EXPLICIT_BUYER_AND_SELLER_SIGNATURES_REQUIRED"
+        },
+        {
+          "path": "/automatic_assent",
+          "operator": "equals",
+          "value": false
+        },
+        {
+          "path": "/execution_authorized",
+          "operator": "equals",
+          "value": false
+        },
+        {
+          "path": "/cashflows/buyer_gives/0/amount",
+          "operator": "equals",
+          "value": 2500
+        },
+        {
+          "path": "/cashflows/buyer_gives/0/asset/identifier",
+          "operator": "equals",
+          "value": "USD"
+        },
+        {
+          "path": "/cashflows/buyer_gives/0/asset/unit",
+          "operator": "equals",
+          "value": "cents"
+        }
+      ],
+      "synthetic_fixture_payload": {
+        "acceptance": "EXPLICIT_BUYER_AND_SELLER_SIGNATURES_REQUIRED",
+        "automatic_assent": false,
+        "execution_authorized": false,
+        "cashflows": {
+          "buyer_gives": [
+            {
+              "amount": 2500,
+              "asset": {
+                "namespace": "fiat",
+                "identifier": "USD",
+                "unit": "cents"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "prompt_id": "ATO-07",
+      "tool": "covenant_review__review",
+      "arguments": {
+        "case": {
+          "agreements": [
+            {
+              "id": "draft-brief",
+              "kind": "REFERENCE",
+              "reference": {
+                "profile": "covenant-contract-draft/0.1",
+                "id": "7c449e319157fde38a0f6a683f12554723fc0a508c24892c775acb576015b30d",
+                "status": "UNSIGNED_DRAFT"
+              },
+              "description": "This is an unsigned draft reference, not an assented agreement or evidence of payment."
+            }
+          ],
+          "bindings": [],
+          "decisions": [],
+          "evidence": [],
+          "expected_heads": null,
+          "grants": [],
+          "group": null,
+          "links": [],
+          "notes": [],
+          "obligations": [],
+          "payments": [],
+          "policies": [],
+          "primary": "draft-brief",
+          "recoveries": [],
+          "title": "Synthetic store review of an unsigned research-brief draft",
+          "version": "covenant-coordination-case/0.1"
+        }
+      },
+      "assertions": [
+        {
+          "path": "/agreements/0/status",
+          "operator": "equals",
+          "value": "DECLARED_REFERENCE_ONLY"
+        },
+        {
+          "path": "/agreements/0/assent",
+          "operator": "equals",
+          "value": "NOT_VERIFIED"
+        },
+        {
+          "path": "/overview/verified_agreements",
+          "operator": "equals",
+          "value": 0
+        },
+        {
+          "path": "/overview/unverified_agreements",
+          "operator": "equals",
+          "value": 1
+        },
+        {
+          "path": "/execution_authorized",
+          "operator": "equals",
+          "value": false
+        }
+      ],
+      "synthetic_fixture_payload": {
+        "agreements": [
+          {
+            "id": "draft-brief",
+            "status": "DECLARED_REFERENCE_ONLY",
+            "assent": "NOT_VERIFIED"
+          }
+        ],
+        "overview": {
+          "verified_agreements": 0,
+          "unverified_agreements": 1
+        },
+        "execution_authorized": false
+      }
+    },
+    {
+      "prompt_id": "ATO-08",
+      "tool": "covenant_review__authority",
+      "arguments": {
+        "agreements": [
+          {
+            "id": "7c449e319157fde38a0f6a683f12554723fc0a508c24892c775acb576015b30d",
+            "kind": "UNSIGNED_DRAFT_REFERENCE",
+            "parties": {
+              "buyer": "d75a980182b10ab7d54bfed3c964073a0ee172f3daa62325af021a68f707511a",
+              "supplier": "3d4017c3e843895a92b70aa74d1b7ebc9c982ccf2ec4968cc0cd55f12af4660c"
+            }
+          }
+        ]
+      },
+      "assertions": [
+        {
+          "path": "/agreement_roles/0/basis",
+          "operator": "equals",
+          "value": "CALLER_DECLARED_ROLE_NOT_REVERIFIED"
+        },
+        {
+          "path": "/agreement_roles/1/basis",
+          "operator": "equals",
+          "value": "CALLER_DECLARED_ROLE_NOT_REVERIFIED"
+        },
+        {
+          "path": "/agreement_roles/0/native_controller_or_payment_authority",
+          "operator": "equals",
+          "value": false
+        },
+        {
+          "path": "/agreement_roles/1/native_controller_or_payment_authority",
+          "operator": "equals",
+          "value": false
+        },
+        {
+          "path": "/execution_authorized",
+          "operator": "equals",
+          "value": false
+        },
+        {
+          "path": "/state_changed",
+          "operator": "equals",
+          "value": false
+        }
+      ],
+      "synthetic_fixture_payload": {
+        "agreement_roles": [
+          {
+            "agreement": "7c449e319157fde38a0f6a683f12554723fc0a508c24892c775acb576015b30d",
+            "role": "buyer",
+            "basis": "CALLER_DECLARED_ROLE_NOT_REVERIFIED",
+            "native_controller_or_payment_authority": false
+          },
+          {
+            "agreement": "7c449e319157fde38a0f6a683f12554723fc0a508c24892c775acb576015b30d",
+            "role": "supplier",
+            "basis": "CALLER_DECLARED_ROLE_NOT_REVERIFIED",
+            "native_controller_or_payment_authority": false
+          }
+        ],
+        "grants": [],
+        "execution_authorized": false,
+        "state_changed": false
+      }
+    },
+    {
+      "prompt_id": "ATO-09",
+      "tool": "covenant_review__evidence",
+      "arguments": {
+        "items": [],
+        "agreement_ids": []
+      },
+      "assertions": [
+        {
+          "path": "/verification_status",
+          "operator": "equals",
+          "value": "NO_PROOFS_PROVIDED"
+        },
+        {
+          "path": "/provided_proof_count",
+          "operator": "equals",
+          "value": 0
+        },
+        {
+          "path": "/verified_proof_count",
+          "operator": "equals",
+          "value": 0
+        },
+        {
+          "path": "/execution_authorized",
+          "operator": "equals",
+          "value": false
+        },
+        {
+          "path": "/state_changed",
+          "operator": "equals",
+          "value": false
+        }
+      ],
+      "synthetic_fixture_payload": {
+        "verification_status": "NO_PROOFS_PROVIDED",
+        "provided_proof_count": 0,
+        "verified_proof_count": 0,
+        "all_provided_proofs_verified": true,
+        "items": [],
+        "execution_authorized": false,
+        "state_changed": false
+      }
+    },
+    {
+      "prompt_id": "ATO-10",
+      "tool": "aap_public_listing_search",
+      "arguments": {
+        "query": "chart",
+        "limit": 4
+      },
+      "assertions": [
+        {
+          "path": "/result/scope",
+          "operator": "equals",
+          "value": "CURRENT_INDEXED_PUBLICATIONS_ONLY"
+        },
+        {
+          "path": "/result/returned",
+          "operator": "at_most",
+          "value": 4
+        },
+        {
+          "path": "/result/availability_verified",
+          "operator": "equals",
+          "value": false
+        },
+        {
+          "path": "/result/payment_verified",
+          "operator": "equals",
+          "value": false
+        },
+        {
+          "path": "/external_execution",
+          "operator": "equals",
+          "value": false
+        },
+        {
+          "path": "/payment_dispatched",
+          "operator": "equals",
+          "value": false
+        },
+        {
+          "path": "/signing_performed",
+          "operator": "equals",
+          "value": false
+        }
+      ],
+      "synthetic_fixture_payload": {
+        "version": "urn:aap:hosted-api:0.1",
+        "operation": "listing.search",
+        "external_execution": false,
+        "payment_dispatched": false,
+        "signing_performed": false,
+        "result": {
+          "scope": "CURRENT_INDEXED_PUBLICATIONS_ONLY",
+          "items": [],
+          "returned": 0,
+          "total": 0,
+          "limit": 4,
+          "offset": 0,
+          "next_offset": null,
+          "availability_verified": false,
+          "payment_verified": false
+        }
+      }
+    },
+    {
+      "prompt_id": "ATO-11",
+      "tool": "covenant_contract__draft",
+      "arguments": {
+        "title": "Proposed staged research brief",
+        "parties": [
+          "buyer-example",
+          "supplier-example"
+        ],
+        "clauses": [
+          {
+            "id": "scope",
+            "title": "Work",
+            "text": "One-page research brief with source links."
+          },
+          {
+            "id": "price",
+            "title": "Price",
+            "text": "GBP 40 total: GBP 10 on approval and GBP 30 after acceptance."
+          },
+          {
+            "id": "delivery",
+            "title": "Delivery",
+            "text": "Delivery within three business days after approval."
+          }
+        ]
+      },
+      "assertions": [
+        {
+          "path": "/status",
+          "operator": "equals",
+          "value": "UNSIGNED_DRAFT"
+        },
+        {
+          "path": "/binding",
+          "operator": "equals",
+          "value": false
+        },
+        {
+          "path": "/execution_authorized",
+          "operator": "equals",
+          "value": false
+        },
+        {
+          "path": "/id",
+          "operator": "pattern",
+          "value": "^[0-9a-f]{64}$"
+        },
+        {
+          "path": "/draft",
+          "operator": "equals",
+          "value": {
+            "version": "covenant-contract-draft/0.1",
+            "title": "Proposed staged research brief",
+            "parties": [
+              "buyer-example",
+              "supplier-example"
+            ],
+            "clauses": [
+              {
+                "id": "scope",
+                "title": "Work",
+                "text": "One-page research brief with source links."
+              },
+              {
+                "id": "price",
+                "title": "Price",
+                "text": "GBP 40 total: GBP 10 on approval and GBP 30 after acceptance."
+              },
+              {
+                "id": "delivery",
+                "title": "Delivery",
+                "text": "Delivery within three business days after approval."
+              }
+            ],
+            "conditions": [],
+            "settlement": {},
+            "dispute": {},
+            "extensions": {},
+            "supersedes": null
+          }
+        }
+      ],
+      "synthetic_fixture_payload": {
+        "status": "UNSIGNED_DRAFT",
+        "id": "1111111111111111111111111111111111111111111111111111111111111111",
+        "draft": {
+          "version": "covenant-contract-draft/0.1",
+          "title": "Proposed staged research brief",
+          "parties": [
+            "buyer-example",
+            "supplier-example"
+          ],
+          "clauses": [
+            {
+              "id": "scope",
+              "title": "Work",
+              "text": "One-page research brief with source links."
+            },
+            {
+              "id": "price",
+              "title": "Price",
+              "text": "GBP 40 total: GBP 10 on approval and GBP 30 after acceptance."
+            },
+            {
+              "id": "delivery",
+              "title": "Delivery",
+              "text": "Delivery within three business days after approval."
+            }
+          ],
+          "conditions": [],
+          "settlement": {},
+          "dispute": {},
+          "extensions": {},
+          "supersedes": null
+        },
+        "binding": false,
+        "execution_authorized": false
+      }
+    },
+    {
+      "prompt_id": "ATO-12",
+      "tool": "covenant_contract__compare",
+      "arguments": {
+        "before": {
+          "clauses": [
+            {
+              "id": "scope",
+              "text": "One page answering the agreed research question, with sources.",
+              "title": "Work"
+            },
+            {
+              "id": "price",
+              "text": "USD 25. This is an unsigned synthetic exercise; no payment is authorised.",
+              "title": "Price"
+            },
+            {
+              "id": "review",
+              "text": "The buyer checks the brief against the exact agreed scope before accepting it.",
+              "title": "Delivery review"
+            }
+          ],
+          "conditions": [],
+          "dispute": {},
+          "extensions": {},
+          "parties": [
+            "buyer-example",
+            "supplier-example"
+          ],
+          "settlement": {},
+          "supersedes": null,
+          "title": "Synthetic review: one research brief",
+          "version": "covenant-contract-draft/0.1"
+        },
+        "after": {
+          "clauses": [
+            {
+              "id": "scope",
+              "text": "One page answering the agreed research question, with sources.",
+              "title": "Work"
+            },
+            {
+              "id": "price",
+              "text": "USD 30. This is an unsigned synthetic exercise; no payment is authorised.",
+              "title": "Price"
+            },
+            {
+              "id": "review",
+              "text": "The buyer checks the brief against the exact agreed scope before accepting it.",
+              "title": "Delivery review"
+            }
+          ],
+          "conditions": [],
+          "dispute": {},
+          "extensions": {},
+          "parties": [
+            "buyer-example",
+            "supplier-example"
+          ],
+          "settlement": {},
+          "supersedes": null,
+          "title": "Synthetic review: one research brief",
+          "version": "covenant-contract-draft/0.1"
+        }
+      },
+      "assertions": [
+        {
+          "path": "/before",
+          "operator": "equals",
+          "value": "7c449e319157fde38a0f6a683f12554723fc0a508c24892c775acb576015b30d"
+        },
+        {
+          "path": "/after",
+          "operator": "equals",
+          "value": "c84b70228b890d2ca86b27ac909608efc46e0bb0ca8465cac8c1183096c3615f"
+        },
+        {
+          "path": "/requires_fresh_assent",
+          "operator": "equals",
+          "value": true
+        },
+        {
+          "path": "/execution_authorized",
+          "operator": "equals",
+          "value": false
+        }
+      ],
+      "synthetic_fixture_payload": {
+        "before": "7c449e319157fde38a0f6a683f12554723fc0a508c24892c775acb576015b30d",
+        "after": "c84b70228b890d2ca86b27ac909608efc46e0bb0ca8465cac8c1183096c3615f",
+        "changes": [
+          {
+            "field": "clauses",
+            "before": [
+              {
+                "id": "scope",
+                "text": "One page answering the agreed research question, with sources.",
+                "title": "Work"
+              },
+              {
+                "id": "price",
+                "text": "USD 25. This is an unsigned synthetic exercise; no payment is authorised.",
+                "title": "Price"
+              },
+              {
+                "id": "review",
+                "text": "The buyer checks the brief against the exact agreed scope before accepting it.",
+                "title": "Delivery review"
+              }
+            ],
+            "after": [
+              {
+                "id": "scope",
+                "text": "One page answering the agreed research question, with sources.",
+                "title": "Work"
+              },
+              {
+                "id": "price",
+                "text": "USD 30. This is an unsigned synthetic exercise; no payment is authorised.",
+                "title": "Price"
+              },
+              {
+                "id": "review",
+                "text": "The buyer checks the brief against the exact agreed scope before accepting it.",
+                "title": "Delivery review"
+              }
+            ]
+          }
+        ],
+        "requires_fresh_assent": true,
+        "execution_authorized": false
+      }
+    },
+    {
+      "prompt_id": "ATO-13",
+      "tool": "covenant_contract__inspect",
+      "arguments": {
+        "body": {
+          "clauses": [
+            {
+              "id": "scope",
+              "text": "One page answering the agreed research question, with sources.",
+              "title": "Work"
+            },
+            {
+              "id": "price",
+              "text": "USD 25. This is an unsigned synthetic exercise; no payment is authorised.",
+              "title": "Price"
+            },
+            {
+              "id": "review",
+              "text": "The buyer checks the brief against the exact agreed scope before accepting it.",
+              "title": "Delivery review"
+            }
+          ],
+          "conditions": [],
+          "dispute": {},
+          "extensions": {},
+          "parties": [
+            "buyer-example",
+            "supplier-example"
+          ],
+          "settlement": {},
+          "supersedes": null,
+          "title": "Synthetic review: one research brief",
+          "version": "covenant-contract-draft/0.1"
+        }
+      },
+      "assertions": [
+        {
+          "path": "/id",
+          "operator": "equals",
+          "value": "7c449e319157fde38a0f6a683f12554723fc0a508c24892c775acb576015b30d"
+        },
+        {
+          "path": "/draft",
+          "operator": "equals",
+          "value": {
+            "clauses": [
+              {
+                "id": "scope",
+                "text": "One page answering the agreed research question, with sources.",
+                "title": "Work"
+              },
+              {
+                "id": "price",
+                "text": "USD 25. This is an unsigned synthetic exercise; no payment is authorised.",
+                "title": "Price"
+              },
+              {
+                "id": "review",
+                "text": "The buyer checks the brief against the exact agreed scope before accepting it.",
+                "title": "Delivery review"
+              }
+            ],
+            "conditions": [],
+            "dispute": {},
+            "extensions": {},
+            "parties": [
+              "buyer-example",
+              "supplier-example"
+            ],
+            "settlement": {},
+            "supersedes": null,
+            "title": "Synthetic review: one research brief",
+            "version": "covenant-contract-draft/0.1"
+          }
+        },
+        {
+          "path": "/status",
+          "operator": "equals",
+          "value": "UNSIGNED_DRAFT"
+        },
+        {
+          "path": "/binding",
+          "operator": "equals",
+          "value": false
+        },
+        {
+          "path": "/execution_authorized",
+          "operator": "equals",
+          "value": false
+        },
+        {
+          "path": "/id",
+          "operator": "pattern",
+          "value": "^[0-9a-f]{64}$"
+        }
+      ],
+      "synthetic_fixture_payload": {
+        "status": "UNSIGNED_DRAFT",
+        "id": "7c449e319157fde38a0f6a683f12554723fc0a508c24892c775acb576015b30d",
+        "draft": {
+          "clauses": [
+            {
+              "id": "scope",
+              "text": "One page answering the agreed research question, with sources.",
+              "title": "Work"
+            },
+            {
+              "id": "price",
+              "text": "USD 25. This is an unsigned synthetic exercise; no payment is authorised.",
+              "title": "Price"
+            },
+            {
+              "id": "review",
+              "text": "The buyer checks the brief against the exact agreed scope before accepting it.",
+              "title": "Delivery review"
+            }
+          ],
+          "conditions": [],
+          "dispute": {},
+          "extensions": {},
+          "parties": [
+            "buyer-example",
+            "supplier-example"
+          ],
+          "settlement": {},
+          "supersedes": null,
+          "title": "Synthetic review: one research brief",
+          "version": "covenant-contract-draft/0.1"
+        },
+        "binding": false,
+        "execution_authorized": false
+      }
+    },
+    {
+      "prompt_id": "ATO-14",
+      "tool": "covenant_contract__render",
+      "arguments": {
+        "body": {
+          "clauses": [
+            {
+              "id": "scope",
+              "text": "One page answering the agreed research question, with sources.",
+              "title": "Work"
+            },
+            {
+              "id": "price",
+              "text": "USD 25. This is an unsigned synthetic exercise; no payment is authorised.",
+              "title": "Price"
+            },
+            {
+              "id": "review",
+              "text": "The buyer checks the brief against the exact agreed scope before accepting it.",
+              "title": "Delivery review"
+            }
+          ],
+          "conditions": [],
+          "dispute": {},
+          "extensions": {},
+          "parties": [
+            "buyer-example",
+            "supplier-example"
+          ],
+          "settlement": {},
+          "supersedes": null,
+          "title": "Synthetic review: one research brief",
+          "version": "covenant-contract-draft/0.1"
+        }
+      },
+      "assertions": [
+        {
+          "path": "/html",
+          "operator": "contains",
+          "value": "Unsigned draft"
+        },
+        {
+          "path": "/html",
+          "operator": "contains",
+          "value": "7c449e319157fde38a0f6a683f12554723fc0a508c24892c775acb576015b30d"
+        },
+        {
+          "path": "/html",
+          "operator": "contains",
+          "value": "USD 25"
+        },
+        {
+          "path": "/execution_authorized",
+          "operator": "equals",
+          "value": false
+        }
+      ],
+      "synthetic_fixture_payload": {
+        "html": "<article><h1>Unsigned draft</h1><p>7c449e319157fde38a0f6a683f12554723fc0a508c24892c775acb576015b30d</p><p>USD 25</p></article>",
+        "execution_authorized": false
+      }
+    },
+    {
+      "prompt_id": "ATO-15",
+      "tool": null,
+      "arguments": null,
+      "assertions": [],
+      "synthetic_fixture_payload": null
+    },
+    {
+      "prompt_id": "ATO-16",
+      "tool": null,
+      "arguments": null,
+      "assertions": [],
+      "synthetic_fixture_payload": null
+    },
+    {
+      "prompt_id": "ATO-17",
+      "tool": null,
+      "arguments": null,
+      "assertions": [],
+      "synthetic_fixture_payload": null
+    },
+    {
+      "prompt_id": "ATO-18",
+      "tool": null,
+      "arguments": null,
+      "assertions": [],
+      "synthetic_fixture_payload": null
+    },
+    {
+      "prompt_id": "ATO-19",
+      "tool": null,
+      "arguments": null,
+      "assertions": [],
+      "synthetic_fixture_payload": null
+    },
+    {
+      "prompt_id": "ATO-20",
+      "tool": null,
+      "arguments": null,
+      "assertions": [],
+      "synthetic_fixture_payload": null
+    }
+  ],
+  "profile_sha256": "6da02df79c079da0da502b591f6ac95446daf2a5752bf5020ce2d920af702271"
+}

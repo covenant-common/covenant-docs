@@ -1,0 +1,27 @@
+{
+  "linkset": [
+    {
+      "anchor": "https://jupie202020.pythonanywhere.com/.well-known/api-catalog",
+      "item": [
+        {
+          "href": "https://jupie202020.pythonanywhere.com/mcp"
+        }
+      ]
+    },
+    {
+      "anchor": "https://jupie202020.pythonanywhere.com/mcp",
+      "describedby": [
+        {
+          "href": "https://jupie202020.pythonanywhere.com/mcp/server-card",
+          "type": "application/mcp-server-card+json"
+        }
+      ],
+      "service-doc": [
+        {
+          "href": "https://covenant-common.github.io/covenant-docs/docs/API_MCP.html",
+          "type": "text/html"
+        }
+      ]
+    }
+  ]
+}

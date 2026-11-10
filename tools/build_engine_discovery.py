@@ -3,7 +3,7 @@
 
 These are public interface descriptors, not a core implementation or a live
 observation. Activation requires a separately reviewed live discovery successor.
-The original nine-tool observation and its generator remain unchanged.
+Earlier prepared candidates and the historical nine-tool observation remain intact.
 """
 import argparse
 from copy import deepcopy
@@ -22,6 +22,12 @@ INVENTORY = 'mcp/engine-tool-inventory-' + VERSION + '.json'
 CARD = 'mcp/engine-server-card-' + VERSION + '.json'
 ENTRY = ('covenant_onboard', 'covenant_find', 'covenant_explain', 'covenant_call')
 SCHEMA_PIN = '6d739ec80e85ef0498bccd82840fc8506b0dee07ec9c55b11f668cffef39a628'
+PROFILES = {
+    VERSION: {'profile': PROFILE, 'schemaPin': SCHEMA_PIN,
+              'cardVersion': '0.1-prepared.20261110.1'},
+    '2026-11-10.f2.v1': {'profile': 'urn:aap:hosted-engine-mcp:0.2',
+        'schemaPin': '34422ab8332323c088a579030792a1656a4bbe54f928ac27f9d5a7517eb94ada',
+        'cardVersion': '0.2-prepared.20261110.f2.1'}}
 
 
 def wire(value):
@@ -29,7 +35,16 @@ def wire(value):
 
 
 def documents(source):
-    if (source.get('format') != FORMAT or source.get('profile') != PROFILE or
+    versions = [version for version in PROFILES
+                if source.get('format') == 'aap-hosted-engine-candidate/' + version]
+    if len(versions) != 1:
+        raise ValueError('Only explicitly reviewed prepared candidate versions are supported')
+    version = versions[0]
+    policy = PROFILES[version]
+    profile = policy['profile']
+    inventory_path = 'mcp/engine-tool-inventory-' + version + '.json'
+    card_path = 'mcp/engine-server-card-' + version + '.json'
+    if (source.get('profile') != profile or
             source.get('origin') != ORIGIN or source.get('status') != 'PREPARED_NOT_ACTIVATED' or
             source.get('protocolVersion') != '2025-11-25'):
         raise ValueError('A new engine profile or live observation needs explicit review')
@@ -37,7 +52,7 @@ def documents(source):
     if (type(rows) is not list or len(rows) != len(ENTRY) or
             any(type(row) is not dict for row in rows) or
             tuple(row.get('name') for row in rows) != ENTRY or
-            hashlib.sha256(wire(rows)).hexdigest() != SCHEMA_PIN):
+            hashlib.sha256(wire(rows)).hexdigest() != policy['schemaPin']):
         raise ValueError('Preserve complete reviewed schemas; use a versioned successor for changes')
     activation = source.get('activation')
     if activation != {'operatorOption': 'engine_access=True', 'sourceDefault': False,
@@ -45,8 +60,8 @@ def documents(source):
         raise ValueError('Prepared metadata cannot activate an engine')
     tools = deepcopy(rows)
     inventory = {
-        'format': 'aap-hosted-engine-tool-inventory/' + VERSION,
-        'profile': PROFILE, 'status': source['status'],
+        'format': 'aap-hosted-engine-tool-inventory/' + version,
+        'profile': profile, 'status': source['status'],
         'endpoint': ORIGIN + '/mcp/engine/v1',
         'endpointAliasesWhenEnabled': [ORIGIN + '/mcp', ORIGIN + '/mcp/agent/v1'],
         'protocolVersion': source['protocolVersion'], 'preparedDate': source['preparedDate'],
@@ -63,21 +78,24 @@ def documents(source):
         'currentAuthority': 'Read host discovery and tools/list before use. This is not a live observation.',
         'fullSchemaLookup': {'tool': 'covenant_explain', 'arguments': {'tool': 'covenant_offline__spec'}},
     }
+    for key in ('currentObservedProfile', 'privacyBoundary', 'planningBoundary', 'candidateScope'):
+        if key in source:
+            inventory[key] = deepcopy(source[key])
     inventory_bytes = wire(inventory)
     card = {
         '$schema': 'https://static.modelcontextprotocol.io/schemas/v1/server-card.schema.json',
-        'name': 'io.github.covenant-common/aap-engine', 'version': '0.1-prepared.20261110.1',
+        'name': 'io.github.covenant-common/aap-engine', 'version': policy['cardVersion'],
         'title': 'Covenant engine — prepared connection profile',
         'description': 'Discover capabilities and call available actions. Account writes require current scoped permission.',
         'websiteUrl': WEBSITE + '/docs/API_MCP.html#engine',
         'remotes': [{'type': 'streamable-http', 'url': inventory['endpoint'],
                      'supportedProtocolVersions': [source['protocolVersion']]}],
         '_meta': {'io.github.covenant-common/hosted-engine-candidate': {
-            'status': source['status'], 'profile': PROFILE,
+            'status': source['status'], 'profile': profile,
             'preparedDate': source['preparedDate'], 'liveObservation': False,
             'entryToolCount': len(tools), 'entryToolNames': list(ENTRY),
             'entryToolSchemas': deepcopy(tools),
-            'inventoryUrl': WEBSITE + '/' + INVENTORY,
+            'inventoryUrl': WEBSITE + '/' + inventory_path,
             'inventorySha256': hashlib.sha256(inventory_bytes).hexdigest(),
             'currentListingMethod': 'tools/list',
             'fullSchemaLookup': inventory['fullSchemaLookup'],
@@ -85,14 +103,19 @@ def documents(source):
             'accountActionsNeedScopedPermission': True, 'signingKeysAccepted': False,
             'note': 'Review artifact only. Active well-known aliases and historical nine-tool metadata are unchanged.'}},
     }
-    return {INVENTORY: inventory_bytes, CARD: wire(card)}
+    for key in ('currentObservedProfile', 'privacyBoundary', 'planningBoundary', 'candidateScope'):
+        if key in source:
+            card['_meta']['io.github.covenant-common/hosted-engine-candidate'][key] = deepcopy(source[key])
+    return {inventory_path: inventory_bytes, card_path: wire(card)}
 
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--check', action='store_true')
+    parser.add_argument('--profile', choices=sorted(PROFILES), default=VERSION)
     args = parser.parse_args()
-    for name, body in documents(json.loads(SOURCE.read_text())).items():
+    source_path = ROOT / ('distribution/engine-mcp-candidate-' + args.profile + '.json')
+    for name, body in documents(json.loads(source_path.read_text())).items():
         path = ROOT / name
         if args.check:
             if not path.is_file() or path.read_bytes() != body:

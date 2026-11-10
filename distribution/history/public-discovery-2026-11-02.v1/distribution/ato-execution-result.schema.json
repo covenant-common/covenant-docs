@@ -1,0 +1,407 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:aap:ato:execution-result:0.1",
+  "title": "Frozen public-task deterministic execution result",
+  "description": "Results are separate from immutable prompts/oracles. Synthetic replay is not actual tool use; zero-dispatch controls are harness decisions, not agent behavior.",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "format": {
+      "type": "string",
+      "const": "aap-ato-execution-result/0.1"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "PASS",
+        "PASS_FIXTURE_REPLAY",
+        "FAIL"
+      ]
+    },
+    "mode": {
+      "type": "string",
+      "enum": [
+        "LIVE_PUBLIC_DETERMINISTIC_EXECUTION",
+        "OFFLINE_SYNTHETIC_FIXTURE_REPLAY"
+      ]
+    },
+    "started_at_utc": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "finished_at_utc": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "suite_version": {
+      "type": "string",
+      "const": "2026-11-02.v1"
+    },
+    "suite_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "execution_profile_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "inventory_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "protocol_version": {
+      "type": "string",
+      "const": "2025-11-25"
+    },
+    "endpoint": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "runtime_server_info_expected": {
+      "type": "object",
+      "const": {
+        "name": "aap-public-directory",
+        "version": "0.1"
+      }
+    },
+    "measurement_boundaries": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "organic_store_visibility",
+        "model_tool_selection",
+        "cross_model_rankings",
+        "human_usability",
+        "retention",
+        "outside_world_performance_or_payment",
+        "live_deterministic_execution"
+      ],
+      "properties": {
+        "organic_store_visibility": {
+          "const": "NOT_MEASURED"
+        },
+        "model_tool_selection": {
+          "const": "NOT_MEASURED"
+        },
+        "cross_model_rankings": {
+          "const": "NOT_MEASURED"
+        },
+        "human_usability": {
+          "const": "NOT_MEASURED"
+        },
+        "retention": {
+          "const": "NOT_MEASURED"
+        },
+        "outside_world_performance_or_payment": {
+          "const": "NOT_MEASURED"
+        },
+        "live_deterministic_execution": {
+          "type": "string",
+          "enum": [
+            "MEASURED",
+            "NOT_MEASURED"
+          ]
+        }
+      }
+    },
+    "counts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "prompts",
+        "predetermined_positive_checks_passed",
+        "negative_harness_controls_zero_dispatch",
+        "actual_tool_calls",
+        "actual_rpc_requests_attempted",
+        "fixture_tool_calls",
+        "fixture_rpc_replays",
+        "errors"
+      ],
+      "properties": {
+        "prompts": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 20,
+          "const": 20
+        },
+        "predetermined_positive_checks_passed": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 20
+        },
+        "negative_harness_controls_zero_dispatch": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 20,
+          "const": 6
+        },
+        "actual_tool_calls": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 20
+        },
+        "actual_rpc_requests_attempted": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 20
+        },
+        "fixture_tool_calls": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 20
+        },
+        "fixture_rpc_replays": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 20
+        },
+        "errors": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 20
+        }
+      }
+    },
+    "negative_control_boundary": {
+      "type": "string"
+    },
+    "blocking_condition": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "case_results": {
+      "type": "array",
+      "minItems": 20,
+      "maxItems": 20,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "prompt_id",
+          "tool",
+          "status",
+          "actual_tool_call_count",
+          "fixture_tool_call_count",
+          "elapsed_seconds",
+          "visible_response_characters",
+          "assertions",
+          "error"
+        ],
+        "properties": {
+          "prompt_id": {
+            "type": "string",
+            "pattern": "^ATO-(0[1-9]|1[0-9]|20)$"
+          },
+          "tool": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "PASS",
+              "FAIL",
+              "HARNESS_ABSTENTION_ZERO_DISPATCH",
+              "BLOCKED_NOT_RUN",
+              "ERROR_STOPPED_WITHOUT_RETRY"
+            ]
+          },
+          "actual_tool_call_count": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "fixture_tool_call_count": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "elapsed_seconds": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "minimum": 0
+          },
+          "visible_response_characters": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "minimum": 0
+          },
+          "assertions": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "path",
+                "operator",
+                "passed"
+              ],
+              "properties": {
+                "path": {
+                  "type": "string"
+                },
+                "operator": {
+                  "type": "string",
+                  "enum": [
+                    "equals",
+                    "contains",
+                    "pattern",
+                    "at_most",
+                    "consistent_public_page"
+                  ]
+                },
+                "passed": {
+                  "type": "boolean"
+                },
+                "value": {}
+              },
+              "additionalProperties": false
+            }
+          },
+          "error": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      }
+    },
+    "rpc_records": {
+      "type": "array",
+      "maxItems": 16,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "request",
+          "response",
+          "elapsed_seconds",
+          "response_bytes",
+          "error"
+        ],
+        "properties": {
+          "request": {
+            "type": "object"
+          },
+          "response": {
+            "type": [
+              "object",
+              "null"
+            ]
+          },
+          "elapsed_seconds": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "minimum": 0
+          },
+          "response_bytes": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "minimum": 0
+          },
+          "error": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "required": [
+    "format",
+    "status",
+    "mode",
+    "started_at_utc",
+    "finished_at_utc",
+    "suite_version",
+    "suite_sha256",
+    "execution_profile_sha256",
+    "inventory_sha256",
+    "protocol_version",
+    "endpoint",
+    "runtime_server_info_expected",
+    "measurement_boundaries",
+    "counts",
+    "negative_control_boundary",
+    "blocking_condition",
+    "case_results",
+    "rpc_records"
+  ],
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "mode": {
+            "const": "OFFLINE_SYNTHETIC_FIXTURE_REPLAY"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "endpoint": {
+            "type": "null"
+          },
+          "counts": {
+            "properties": {
+              "actual_tool_calls": {
+                "const": 0
+              },
+              "actual_rpc_requests_attempted": {
+                "const": 0
+              }
+            }
+          },
+          "measurement_boundaries": {
+            "properties": {
+              "live_deterministic_execution": {
+                "const": "NOT_MEASURED"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "mode": {
+            "const": "LIVE_PUBLIC_DETERMINISTIC_EXECUTION"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "endpoint": {
+            "const": "https://jupie202020.pythonanywhere.com/mcp"
+          },
+          "counts": {
+            "properties": {
+              "fixture_tool_calls": {
+                "const": 0
+              },
+              "fixture_rpc_replays": {
+                "const": 0
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
+}

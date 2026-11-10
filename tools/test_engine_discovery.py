@@ -7,6 +7,7 @@ import unittest
 
 import build_engine_discovery as engine
 import build_public_discovery as public
+import build_live_engine_discovery as live
 
 
 class Examples(HTMLParser):
@@ -70,13 +71,13 @@ class PreparedEngineDiscovery(unittest.TestCase):
         with self.assertRaises(ValueError):
             engine.documents(case)
 
-    def test_original_nine_schema_inventory_and_active_aliases_stay_byte_exact(self):
+    def test_original_nine_schema_inventory_and_archived_aliases_stay_byte_exact(self):
         original = public.documents(json.loads(public.SOURCE.read_text()))
         candidate_paths = set(engine.documents(self.source))
         self.assertFalse(candidate_paths.intersection(original))
         for path, (_media, body) in original.items():
             with self.subTest(path=path):
-                self.assertEqual((engine.ROOT / path).read_bytes(), body)
+                self.assertEqual((engine.ROOT / 'distribution/history/public-discovery-2026-11-02.v1' / path).read_bytes(), body)
         self.assertEqual(len(json.loads(original['mcp/tool-inventory.json'][1])['tools']), 9)
 
     def test_guide_requests_select_all_four_exact_entry_tools_and_mounted_read_action(self):
@@ -97,6 +98,53 @@ class PreparedEngineDiscovery(unittest.TestCase):
         self.assertEqual(packets[3]['params']['arguments'], {'tool': selected, 'arguments': {}})
         meta = json.loads(engine.documents(self.source)[engine.CARD])
         self.assertEqual(meta['websiteUrl'], engine.WEBSITE + '/docs/API_MCP.html#engine')
+
+
+class PreparedF2Successor(unittest.TestCase):
+    def setUp(self):
+        self.version = '2026-11-10.f2.v1'
+        self.source = json.loads((engine.ROOT / ('distribution/engine-mcp-candidate-' + self.version + '.json')).read_text())
+
+    def test_inactive_successor_retains_complete_disjoint_search_schemas(self):
+        original = deepcopy(self.source)
+        output = engine.documents(self.source)
+        inventory = json.loads(output['mcp/engine-tool-inventory-' + self.version + '.json'])
+        self.assertEqual(self.source, original)
+        self.assertEqual(inventory['tools'], original['entryTools'])
+        self.assertEqual(inventory['profile'], 'urn:aap:hosted-engine-mcp:0.2')
+        self.assertEqual(inventory['status'], 'PREPARED_NOT_ACTIVATED')
+        branches = inventory['tools'][1]['inputSchema']['oneOf']
+        self.assertEqual(len(branches), 4)
+        self.assertEqual([row['properties']['kind'] for row in branches[:2]], [{'const': 'features'}] * 2)
+        self.assertEqual([row['properties']['kind'] for row in branches[2:]], [{'enum': ['services']}] * 2)
+        for row in branches:
+            self.assertFalse(row['additionalProperties'])
+            self.assertNotEqual('q' in row['properties'], 'query' in row['properties'])
+
+    def test_inactive_successor_cannot_replace_the_observed_active_profile(self):
+        with self.assertRaises(ValueError):
+            live.documents(self.source)
+        prepared = engine.documents(self.source)
+        active = live.documents(json.loads(live.SOURCE.read_text()))
+        self.assertFalse(set(prepared).intersection(active))
+        card = json.loads(prepared['mcp/engine-server-card-' + self.version + '.json'])
+        meta = card['_meta']['io.github.covenant-common/hosted-engine-candidate']
+        self.assertFalse(meta['liveObservation'])
+        self.assertEqual(meta['currentObservedProfile']['profile'], 'urn:aap:hosted-engine-mcp:0.1')
+        self.assertEqual(meta['currentObservedProfile']['reviewedKeylessActions'], 127)
+        inventory = json.loads(prepared['mcp/engine-tool-inventory-' + self.version + '.json'])
+        self.assertEqual(inventory['catalogueScope']['reviewedKeylessActions'], 159)
+        self.assertEqual(sum(row['actions'] for row in inventory['candidateScope']), 32)
+
+    def test_conditional_schema_omission_or_false_readonly_hint_requires_review(self):
+        for kind in ('branch', 'readonly'):
+            case = deepcopy(self.source)
+            if kind == 'branch':
+                case['entryTools'][1]['inputSchema']['oneOf'].pop()
+            else:
+                case['entryTools'][-1]['annotations']['readOnlyHint'] = True
+            with self.subTest(kind=kind), self.assertRaises(ValueError):
+                engine.documents(case)
 
 
 if __name__ == '__main__':
