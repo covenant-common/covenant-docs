@@ -352,9 +352,13 @@ def run_paste(*, stdin, stdout, stderr, secret_reader=None, now=None):
 
     The host platform's getpass backend owns hidden input. Refuse redirection;
     this is local review and signing, not hardware isolation or memory erasure.
+    Caller-pasted preview data is displayed before the seed is known. The later
+    known-seed check prevents signing, but cannot redact earlier input or output.
     """
     require(stdin.isatty() and stdout.isatty() and stderr.isatty(),
         'OWNER_TERMINAL_REQUIRED')
+    stdout.write('Paste only prepared public advert data. It will be displayed locally.\n')
+    stdout.write('Never paste a private key here; enter your seed only at the separate hidden prompt.\n')
     stdout.write('Paste the prepared advert JSON, then END PREVIEW on its own line.\n')
     stdout.flush()
     chunks, total = [], 0
@@ -399,6 +403,7 @@ def run_paste(*, stdin, stdout, stderr, secret_reader=None, now=None):
     key = Ed25519PrivateKey.from_private_bytes(bytes.fromhex(seed))
     require(key.public_key().public_bytes(Encoding.Raw, PublicFormat.Raw).hex() == actor,
         'ACCESS_ACTOR_MISMATCH')
+    # Refuse signing a known seed into the advert; prior caller-pasted output cannot be redacted.
     require(seed.lower() not in canonical(body).decode('ascii').lower(), 'SECRET_IN_PUBLICATION')
     # Recheck expiry after the person has read and confirmed the exact terms.
     checked_listing(prepared, actor, clock())

@@ -80,6 +80,44 @@ class PasteApprovalJourney(unittest.TestCase):
         self.assertIn('No file was saved', displayed)
         self.assertNotIn(SEED, displayed + self.stderr.getvalue())
 
+    def test_preview_warning_is_displayed_before_the_first_input_read(self):
+        owner = self
+        class ObservedInput(Terminal):
+            first_read = True
+            def readline(self, size=-1):
+                if self.first_read:
+                    displayed = owner.stdout.getvalue()
+                    owner.assertIn('Paste only prepared public advert data', displayed)
+                    owner.assertIn('displayed locally', displayed)
+                    owner.assertIn('Never paste a private key here', displayed)
+                    owner.assertIn('separate hidden prompt', displayed)
+                    self.first_read = False
+                return super().readline(size)
+        stream = ObservedInput(self.pasted().getvalue())
+        self.approve(stdin=stream)
+        self.assertFalse(stream.first_read)
+
+    def test_caller_pasted_seed_is_refused_before_signing_without_claiming_prior_redaction(self):
+        # Legacy prepared shape permits independent synthetic selected fields.
+        # The caller already supplied this value in ordinary echoed preview input.
+        prepared = {name: value for name, value in self.preview.items()
+            if name not in ('source', 'draft_profile')}
+        self.body['fields']['title'] = 'Synthetic caller-pasted value ' + SEED
+        prepared['preview']['public_fields'] = deepcopy(self.body['fields'])
+        self.message = b'COVENANT-PUBLIC-WEB-0.1\0' + wire(self.body)
+        signing_key = Mock(wraps=self.key)
+        factory = Mock()
+        factory.from_private_bytes.return_value = signing_key
+        reader = Mock(return_value=SEED)
+        with patch.object(signer, 'Ed25519PrivateKey', factory), \
+             self.assertRaisesRegex(signer.Refused, '^SECRET_IN_PUBLICATION$'):
+            self.approve(stdin=self.pasted(prepared), reader=reader)
+        reader.assert_called_once()
+        signing_key.sign.assert_not_called()
+        self.assert_no_approval()
+        # This is a documented display residual, not a leak from hidden input.
+        self.assertIn(SEED, self.stdout.getvalue())
+
     def test_confirmation_is_complete_before_hidden_seed_prompt(self):
         stream = self.pasted()
         def hidden(prompt, *, stream):
