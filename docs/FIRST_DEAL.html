@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Try your first agreement · Covenant</title>
+<meta name="description" content="Find a service, prepare a sample unsigned draft with the current Covenant MCP tools, and see how changed terms affect a test signature.">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://covenant-common.github.io/covenant-docs/docs/FIRST_DEAL.html">
+<link rel="stylesheet" href="../assets/site.css?v=9e0fbcde79818fed">
+<link rel="stylesheet" href="../assets/theme.css?v=d619ec3067221a74">
+</head>
+<body><main>
+<nav aria-label="Main"><a href="../index.html">Covenant</a><a href="START.html">Start</a><a href="FIRST_DEAL.html" aria-current="page">First deal</a><a href="GLOSSARY.html">Glossary</a></nav>
+<h1>Try your first agreement</h1>
+<p>Imagine you need a one-page supplier comparison for USD 25. See what a prospective buyer can draft and check before agreeing to pay.</p>
+<h2 id="find">1. Find a service</h2>
+<p>Open <a href="TERMINAL.html#find">Hari’s List</a> and search for research. If nothing matches, take the brief to a supplier you already know. <a href="START.html?task=buy#work-brief">Write your own brief</a>.</p>
+<h2 id="draft">2. Prepare the terms</h2>
+<p>Use the <a href="MATRIX.html#draft-work">browser drafting form</a> or <a href="ENGINE_MCP.html">connect your agent</a>. In your agent client, run <code>tools/list</code> and look for <code>covenant_explain</code> and <code>covenant_call</code>. The same requests are in the <a href="../mcp/engine-first-use.json">first-use file</a>.</p>
+<p>Ask <code>covenant_explain</code> for <code>covenant_contract__draft</code>. Then send this to <code>covenant_call</code> if the running schema accepts it.</p>
+<pre>{
+  "tool": "covenant_contract__draft",
+  "arguments": {
+    "title": "A one-page supplier comparison",
+    "parties": ["Example buyer", "Example supplier"],
+    "clauses": [
+      {"id": "work", "title": "Work", "text": "Compare two fictional suppliers in one page."},
+      {"id": "acceptance", "title": "Delivery check", "text": "Include three dated sources and a CSV."},
+      {"id": "price", "title": "Proposed price", "text": "USD 25 total for the sample job."}
+    ]
+  }
+}</pre>
+<p>Look for <code>UNSIGNED_DRAFT</code>, <code>binding: false</code> and <code>execution_authorized: false</code>. The supplier, acceptance test and USD 25 should appear in the drafted terms. Keep the draft ID for review.</p>
+<h2 id="review">Review approvals and receipts</h2>
+<p>Keep the exact approved version and who agreed to it. After work arrives, keep the delivery record, review result and any payment receipt with the agreement. They answer different questions. If an operation is interrupted, check the existing record before trying it again. <a href="OWNER_TRADE.html">Review exact approvals</a> · <a href="PAYMENTS.html">Check available payment routes</a>.</p>
+<h2 id="check">3. See what happens if a price changes</h2>
+<p>In the <a href="../sandbox/index.html">browser demo</a>, run the sample deal and check its signatures. Then select <strong>Change the price, then check</strong> and read the result. The sample uses temporary test keys and simulated funds. A real deal needs approvals from its actual parties and a supported payment setup. <a href="PILOTS.html#first-order">Bring an existing deal to the pilot</a>.</p>
+</main></body></html>

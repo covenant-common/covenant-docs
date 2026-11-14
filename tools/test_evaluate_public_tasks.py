@@ -50,8 +50,29 @@ def reply(result=None, ident=1):
     return E.canonical({'jsonrpc': '2.0', 'id': ident, 'result': result or {}})
 
 
-class FrozenInputs(unittest.TestCase):
+class ArchivedInputs(unittest.TestCase):
+    """Run the unchanged nine-tool controls against explicit archived inputs."""
     def setUp(self):
+        archived = E.ROOT / 'distribution/history/public-discovery-2026-11-02.v1'
+        selection = patch.object(E, 'ROOT', archived)
+        selection.start()
+        self.addCleanup(selection.stop)
+
+
+class CurrentAliasDrift(unittest.TestCase):
+    def test_unchanged_default_runner_refuses_four_entry_inventory_before_network(self):
+        with patch.object(E, 'LiveTransport', side_effect=AssertionError('network path')), \
+                contextlib.redirect_stdout(io.StringIO()) as stdout:
+            self.assertEqual(E.main(['--live']), 1)
+        result = json.loads(stdout.getvalue())
+        self.assertEqual(result['status'], 'FAIL_BEFORE_RUN')
+        self.assertIn('Retained inventory changed', result['error'])
+        self.assertFalse(result['live_execution_claimed'])
+
+
+class FrozenInputs(ArchivedInputs):
+    def setUp(self):
+        super().setUp()
         self.suite, self.profile, self.inventory = E.load_inputs()
 
     def test_twenty_frozen_ids_cover_all_nine_original_tools_and_six_abstentions(self):
@@ -118,8 +139,9 @@ class FrozenInputs(unittest.TestCase):
             E.validate_schema({}, {'type': 'object', 'oneOf': []})
 
 
-class ResultAndDiscoveryControls(unittest.TestCase):
+class ResultAndDiscoveryControls(ArchivedInputs):
     def setUp(self):
+        super().setUp()
         self.suite, self.profile, self.inventory = E.load_inputs()
 
     def run_modified(self, modify):
@@ -197,7 +219,7 @@ class ResultAndDiscoveryControls(unittest.TestCase):
             E.decode_tool_result({'content': [{'type': 'image', 'data': 'untrusted'}]})
 
 
-class TransportControls(unittest.TestCase):
+class TransportControls(ArchivedInputs):
     def test_mocked_live_flow_records_actual_attempts_separately_from_replays(self):
         suite, profile, inventory = E.load_inputs()
         fixtures = E.FixtureTransport(profile, inventory)
@@ -287,7 +309,7 @@ class TransportControls(unittest.TestCase):
         self.assertEqual(now[0], 12)
 
 
-class SavedArtifacts(unittest.TestCase):
+class SavedArtifacts(ArchivedInputs):
     def test_existing_result_refuses_before_live_transport_is_constructed(self):
         with tempfile.TemporaryDirectory() as td:
             (Path(td) / 'results.json').write_text('preserved')

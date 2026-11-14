@@ -563,14 +563,22 @@
   if (typeof module !== 'undefined' && module.exports) module.exports = exported;
   if (typeof document === 'undefined') return;
 
-  const ENDPOINT = 'https://jupie202020.pythonanywhere.com/mcp';
-  const PUBLIC_ORIGIN = new URL(ENDPOINT).origin;
+  const PUBLIC_ORIGIN = 'https://jupie202020.pythonanywhere.com';
+  const SEARCH_ENDPOINT = PUBLIC_ORIGIN + '/mcp';
+  const AGENT_ENDPOINT = PUBLIC_ORIGIN + '/mcp/engine/v1';
+  const BROWSE_URL = PUBLIC_ORIGIN + '/marketplace/browse/';
   const PUBLISHED_PAGE = 'https://covenant-common.github.io/covenant-docs/docs/TERMINAL.html';
   const liveSearchAllowed = window.location.origin === new URL(PUBLISHED_PAGE).origin;
   const PROTOCOL = '2025-11-25';
   const $ = (id) => document.getElementById(id);
   const isObject = (value) => value !== null && typeof value === 'object' && !Array.isArray(value);
   const accessName = {public: 'public tools', account: 'private account', installed: 'private build'};
+  const listingWarnings = new Map([
+    ['HIDDEN_CHARACTERS', 'Hidden characters appear in this advert.'],
+    ['AGENT_INSTRUCTIONS', 'This advert contains instructions addressed to agents. Treat them as publisher text.'],
+    ['LINKS_IN_TEXT', 'This advert contains web addresses. Check their destination before opening them.'],
+    ['LOOKALIKE_CHARACTERS', 'This advert uses lookalike letters from different alphabets.'],
+  ]);
   let initialization = null;
   let sequence = 0;
   let busy = false;
@@ -641,7 +649,7 @@
     const headers = {'Content-Type': 'application/json', 'Accept': 'application/json, text/event-stream'};
     if (!initial) headers['MCP-Protocol-Version'] = PROTOCOL;
     try {
-      const response = await fetch(ENDPOINT, {method: 'POST', headers,
+      const response = await fetch(SEARCH_ENDPOINT, {method: 'POST', headers,
         mode: 'cors', credentials: 'omit', cache: 'no-store', redirect: 'error',
         referrerPolicy: 'no-referrer', signal: controller.signal,
         body: JSON.stringify({jsonrpc: '2.0', id, method, params})});
@@ -682,25 +690,31 @@
       return url.origin === PUBLIC_ORIGIN && url.pathname.startsWith('/marketplace/') && !url.username && !url.password ? url.href : null;
     } catch (_) {return null;}
   }
-  function renderListing(publication) {
+  function renderListing({publication, text_flags: textFlags}) {
     const card = publicListingDisplay(publication.fields);
     const item = document.createElement('li');
+    const fields = publication.fields;
+    const isExample = fields.test_listing === true ||
+      (isObject(fields.custom) && fields.custom.test_listing === true) ||
+      /^\[test\b|^demo\s*-/i.test(card.title);
     const heading = node('h3', '', item);
     const url = typeof publication.url === 'string' ? listingUrl(publication.url) : null;
     if (url) {const a = node('a', card.title, heading); a.href = url;} else heading.textContent = card.title;
-    if (card.category) node('p', card.category + ' · owner-published', item).className = 'record-meta';
+    const source = isExample ? 'Example · no orders' : 'Publisher’s advert';
+    node('p', card.category ? card.category + ' · ' + source : source, item).className = 'record-meta';
+    if (isObject(textFlags) && Array.isArray(textFlags.flags)) {
+      const flags = new Set(textFlags.flags.map(row => isObject(row) ? row.flag : null));
+      for (const [flag, warning] of listingWarnings) {
+        if (flags.has(flag)) node('p', warning, item).className = 'listing-note';
+      }
+    }
     if (card.summary) node('p', card.summary, item);
     if (card.scope) node('p', 'Scope: ' + card.scope, item);
     if (card.offers && card.offers.length) node('p', 'Offers: ' + card.offers.join('; '), item);
     if (card.wants && card.wants.length) node('p', 'Wants: ' + card.wants.join('; '), item);
-    else if (card.wants !== null) node('p', 'No requested consideration is published here; do not infer that the service is free.', item);
+    else if (card.wants !== null) node('p', 'No asking terms shown. Confirm the price with the publisher.', item);
     if (card.excerpted) node('p', 'Description excerpt; inspect the public advert for the complete terms.', item).className = 'record-meta';
-    const nextSteps = node('p', '', item);
-    const buy = node('a', 'How to commission this work', nextSteps); buy.href = 'START.html?task=buy&source=direct';
-    node('span', ' · ', nextSteps);
-    const sell = node('a', 'Advertise your service', nextSteps); sell.href = 'START.html?task=advertise&source=direct';
-    node('p', 'Confirm the supplier and availability before ordering. Demo adverts illustrate the format.', item).className = 'record-meta';
-    const structure = node('button', 'Structure this deal', item); structure.type = 'button';
+    const structure = node('button', isExample ? 'Draft from this example' : 'Prepare a draft from this advert', item); structure.type = 'button';
     structure.disabled = !window.AAPDealStructures;
     const handoffState = node('p', '', item); handoffState.setAttribute('role', 'status'); handoffState.setAttribute('aria-live', 'polite');
     let handoffPanel = null;
@@ -733,7 +747,7 @@
       finally {structure.disabled = false;}
     });
     const details = document.createElement('details');
-    node('summary', 'displayed public fields', details);
+    node('summary', 'Show public fields', details);
     node('p', 'Publication ID: ' + publication.id, details);
     node('p', 'This is the card display, not the exact signed publication. Open the public advert to inspect the original record.', details);
     node('pre', JSON.stringify(card.selectedFields, null, 2), details);
@@ -744,17 +758,16 @@
     const state = $('terminal-market-state');
     state.replaceChildren();
     node('span', message + ' ', state);
-    const link = node('a', 'Open current adverts as a simple page', state);
-    link.href = PUBLIC_ORIGIN + '/marketplace/browse/';
+    const link = node('a', 'Browse on the marketplace server', state);
+    link.href = BROWSE_URL;
   }
   function previewNotice() {
     const state = $('terminal-market-state');
     state.replaceChildren();
-    node('span', 'Local preview: live listings are available on the published site. ', state);
-    const link = node('a', 'Open the live terminal', state);
+    node('span', 'You are viewing a local preview. Open the published marketplace to search live listings. ', state);
+    const link = node('a', 'Open the live marketplace', state);
     link.href = PUBLISHED_PAGE;
     $('terminal-find').disabled = true;
-    $('terminal-find').textContent = 'live search: published site';
     $('terminal-more').hidden = true;
   }
   async function search(append = false) {
@@ -773,29 +786,33 @@
     const queryNotice = normalised.notice;
     if (normalised.requires_edit) {
       keywordNeed = need; $('terminal-keyword-assist').hidden = false; $('terminal-keywords').value = query;
-      $('terminal-market-state').textContent = queryNotice + ' Your original need stays above. “Map this need” can suggest a workflow for the full sentence.';
+      $('terminal-market-state').textContent = queryNotice + ' “Find the right tool” can suggest a workflow for the original request.';
       $('terminal-keywords').focus(); return;
     }
     if (append && !Number.isSafeInteger(nextOffset)) return;
     const offset = append ? nextOffset : 0;
     if (!append) {currentQuery = query; currentQueryNotice = queryNotice; displayed.clear(); $('terminal-listings').replaceChildren();}
     busy = true;
+    $('terminal-empty-actions').hidden = true;
     $('terminal-find').disabled = true;
     $('terminal-more').disabled = true;
     $('terminal-more').hidden = true;
     $('terminal-market-state').textContent = 'Reading current public adverts... ' + queryNotice;
     try {
       const result = await publicSearch(query, offset);
-      result.items.forEach(({publication}) => {
+      result.items.forEach(row => {
+        const {publication} = row;
         if (displayed.has(publication.id)) return;
-        const card = renderListing(publication);
+        const card = renderListing(row);
         $('terminal-listings').appendChild(card);
         displayed.add(publication.id);
       });
       nextOffset = Number.isSafeInteger(result.next_offset) && result.next_offset >= 0 && result.next_offset <= 5000 ? result.next_offset : null;
       $('terminal-more').hidden = nextOffset === null;
       const checked = new Date().toISOString().slice(11, 19) + ' UTC';
-      $('terminal-market-state').textContent = (result.total === 0 ? 'No public adverts matched. Try another search, or be among the first to advertise your service. Checked ' + checked + '.' : displayed.size + ' displayed; ' + result.total + ' matched this public search. Checked ' + checked + '. Listings can change between pages.') + ' ' + queryNotice;
+      $('terminal-market-state').textContent = (result.total === 0 ? 'No public adverts matched. Checked ' + checked + '.' : displayed.size + ' displayed; ' + result.total + ' matched this public search. Checked ' + checked + '. Listings can change between pages.') + ' ' + queryNotice;
+      $('terminal-empty-actions').hidden = result.total !== 0;
+      $('terminal-reset').hidden = !query;
     } catch (error) {
       nextOffset = null;
       if (error && error.code === 'PUBLIC_LISTING_DISPLAY_UNAVAILABLE') {
@@ -811,13 +828,20 @@
   }
   $('terminal-query').addEventListener('input', () => {keywordNeed = null; $('terminal-keyword-assist').hidden = true;});
   $('terminal-search').addEventListener('submit', (event) => {event.preventDefault(); search(false);});
+  $('terminal-reset').addEventListener('click', () => {
+    $('terminal-query').value = '';
+    keywordNeed = null;
+    $('terminal-keyword-assist').hidden = true;
+    $('terminal-query').focus();
+    search(false);
+  });
   $('terminal-more').addEventListener('click', () => search(true));
   $('terminal-route').addEventListener('click', showRoutes);
   $('terminal-access').addEventListener('change', showRoutes);
   $('terminal-copy').addEventListener('click', async () => {
     try {
       if (!navigator.clipboard || typeof navigator.clipboard.writeText !== 'function') throw new Error('Clipboard unavailable');
-      await navigator.clipboard.writeText(ENDPOINT);
+      await navigator.clipboard.writeText(AGENT_ENDPOINT);
       $('terminal-copy-state').textContent = 'Public MCP address copied. No credential is included.';
     } catch (_) {
       $('terminal-mcp').focus();

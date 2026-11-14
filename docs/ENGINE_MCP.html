@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="index,follow">
+<meta name="description" content="Connect a remote MCP client to the live Covenant engine and find its four entry tools.">
+<title>Connect to the Covenant engine</title>
+<link rel="canonical" href="https://covenant-common.github.io/covenant-docs/docs/ENGINE_MCP.html">
+<link rel="stylesheet" href="../assets/site.css?v=9e0fbcde79818fed">
+<link rel="stylesheet" href="../assets/theme.css?v=d619ec3067221a74">
+</head>
+<body><main>
+<nav aria-label="Main"><a href="../index.html">Covenant</a><a href="CONNECTORS.html">Connection options</a><a href="API_MCP.html">API guide</a></nav>
+<h1>Connect to the Covenant engine</h1>
+<p>Use <code>https://jupie202020.pythonanywhere.com/mcp/engine/v1</code> in a remote Streamable HTTP MCP client. Discovery and reviewed public actions work without an API key. The connection was checked on 14 November 2026 and reported <code>aap-engine</code> version <code>0.1</code> over MCP <code>2025-11-25</code>.</p>
+<p>In Cursor, add the <code>covenant-engine</code> entry to your project’s <code>mcpServers</code> settings and refresh the tool list. Keep other entries in your configuration. <a href="../mcp-config-engine-0.1.json" download>Download the engine configuration</a>.</p>
+<pre>{
+  "mcpServers": {
+    "covenant-engine": {
+      "url": "https://jupie202020.pythonanywhere.com/mcp/engine/v1"
+    }
+  }
+}</pre>
+<p><a href="../mcp/engine-first-use.json">Machine-readable first tasks</a> · <a href="FIRST_DEAL.html">Try your first agreement</a> · <a href="START.html?task=buy#work-brief">Build a job brief</a></p>
+<h2>Find the action you need</h2>
+<ol>
+<li><code>covenant_onboard</code> gives you the host’s access routes.</li>
+<li><code>covenant_find</code> finds services and features. Use <code>{"kind":"features","query":"covenant_contract__draft"}</code> to find the drafting action by name. A broad search can surface a related concept first.</li>
+<li><code>covenant_explain</code> gives you the input schema and access requirements for a named action. For contract drafting, use <code>{"tool":"covenant_contract__draft"}</code>.</li>
+<li><code>covenant_call</code> takes the action’s <code>tool</code> name and an <code>arguments</code> object shaped by that schema.</li>
+</ol>
+<p>Try asking your client to find the agreement-drafting action and prepare unsigned terms for an icon design brief. Use <code>tools/list</code> and the action schema to check current availability. Some actions have separate account, provider or local setup requirements. <a href="https://jupie202020.pythonanywhere.com/.well-known/mcp/server-card.json">Live server card and entry schemas</a> · <a href="https://jupie202020.pythonanywhere.com/engine-reference.json">Live engine reference</a>.</p>
+<p>For private account work, use the scoped credential in your client’s private account settings. Keep signing keys out of tool arguments. <a href="TRIAL.html">Private account setup</a> · <a href="../PRIVACY.html">Request privacy</a>.</p>
+<p><code>/mcp</code> remains available for existing connections. Its current tool list also starts with the four engine entry tools. The earlier nine-tool inventory and connector packages document their original review scope. <a href="MCP_DISCOVERY.html#historical">Historical discovery records</a>.</p>
+</main></body></html>

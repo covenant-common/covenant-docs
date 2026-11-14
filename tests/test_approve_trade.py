@@ -458,8 +458,10 @@ class NativeInteroperability(unittest.TestCase):
                 self.assertTrue(crypto.verify(actor,self.rig.payload['label'],self.rig.payload['body'],record['signature']))
 
     def market_package(self,opt=True):
+        """Historical fee-bearing policy fixture, separate from today's postponed default."""
         from covenant_chain import crypto,hosted_api,hosted_usdc_payments as usdc
         from covenant_chain import hosted_payments,payment_instructions,marketplace_launch_economics as launch
+        from covenant_chain import public_fee_quote
         from covenant_language import marketplace
         path = Path(os.environ['AAP_CORE_TEST_PATH'])/'tests'/'test_hosted_account_market.py'
         spec = importlib.util.spec_from_file_location('core_market_fixture_for_public_client',path)
@@ -496,8 +498,17 @@ class NativeInteroperability(unittest.TestCase):
             allocations=[{'account':f.founder,'bps':10000,'purpose':'FOUNDER'}],nonce='c'*64)
         approved = {'signer':f.founder,'signature':crypto.sign(f.keys[2],
             posted['signing_payload']['label'],posted['signing_payload']['body'])}
-        economics = launch.LaunchEconomics(posted,approved,clock=lambda:f.now,
-            sign=lambda label,body:crypto.sign(f.keys[2],label,body))
+        # Current owner policy refuses a new fee campaign. These cases instead
+        # retain the exact signed package of a previously started synthetic one.
+        self.assertTrue(public_fee_quote.FEE_POSTPONED)
+        with self.assertRaisesRegex(ValueError,'^MARKET_LAUNCH_POSTPONED$'):
+            launch.LaunchEconomics(posted,approved,clock=lambda:f.now,
+                sign=lambda label,body:crypto.sign(f.keys[2],label,body))
+        with patch.object(public_fee_quote,'FEE_POSTPONED',False):
+            economics = launch.LaunchEconomics(posted,approved,clock=lambda:f.now,
+                sign=lambda label,body:crypto.sign(f.keys[2],label,body))
+        # Restore the real default before preparing, approving or receiving.
+        self.assertTrue(public_fee_quote.FEE_POSTPONED)
         f.engine = f.open_engine(economics=economics,route_for=None,routes_for=facade.routes_for,
             verifiers={adapter.verifier_id:adapter.verifier})
         package = f.call('market.prepare',{'source_packet':source,

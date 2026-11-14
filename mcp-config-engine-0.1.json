@@ -1,0 +1,7 @@
+{
+  "mcpServers": {
+    "covenant-engine": {
+      "url": "https://jupie202020.pythonanywhere.com/mcp/engine/v1"
+    }
+  }
+}

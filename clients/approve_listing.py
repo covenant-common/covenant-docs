@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
-"""Approve one exact hosted advert offline. Python 3.10+, macOS/Linux, cryptography.
+"""Approve one exact hosted advert offline. Python 3.10+, cryptography.
+
+The private-file mode requires POSIX. --paste uses only an interactive terminal
+and a hidden seed prompt, with no credential or approval file, including on Windows.
 
 Independent implementation of the public-web/0.1 publication wire format.
 No Covenant core imports, network access, publication, payment or general signer.
@@ -7,6 +10,7 @@ The terminal review is a local consent step, not hardware or process isolation.
 """
 import argparse
 import hashlib
+import getpass
 import json
 import os
 from pathlib import Path
@@ -14,6 +18,7 @@ import re
 import stat
 import sys
 import time
+import warnings as warning_control
 
 from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PrivateKey
 from cryptography.hazmat.primitives.serialization import Encoding, PublicFormat
@@ -342,6 +347,74 @@ def run(access_path, preview_path, output_path, *, stdin, stdout, now=None):
     stdout.flush()
 
 
+def run_paste(*, stdin, stdout, stderr, secret_reader=None, now=None):
+    """Interactive memory-only route; no file access, network or token needed.
+
+    The host platform's getpass backend owns hidden input. Refuse redirection;
+    this is local review and signing, not hardware isolation or memory erasure.
+    Caller-pasted preview data is displayed before the seed is known. The later
+    known-seed check prevents signing, but cannot redact earlier input or output.
+    """
+    require(stdin.isatty() and stdout.isatty() and stderr.isatty(),
+        'OWNER_TERMINAL_REQUIRED')
+    stdout.write('Paste only prepared public advert data. It will be displayed locally.\n')
+    stdout.write('Never paste a private key here; enter your seed only at the separate hidden prompt.\n')
+    stdout.write('Paste the prepared advert JSON, then END PREVIEW on its own line.\n')
+    stdout.flush()
+    chunks, total = [], 0
+    while True:
+        # Allow the short terminator even when the preview has reached its bound.
+        line = stdin.readline(max(len('END PREVIEW\r\n'), 262145 - total))
+        require(line != '', 'PREVIEW_INCOMPLETE')
+        if line.rstrip('\r\n') == 'END PREVIEW':
+            break
+        raw = line.encode('utf-8')
+        total += len(raw)
+        require(total <= 262144, 'PUBLICATION_SIZE')
+        chunks.append(raw)
+    prepared = decode(b''.join(chunks))
+    value = preview_value(prepared)
+    body = value.get('body')
+    require(type(body) is dict and type(body.get('principals')) is list and
+        len(body['principals']) == 1 and hex_key(body['principals'][0]), 'SIGNER_MISMATCH')
+    actor = body['principals'][0]
+    clock = (lambda: int(time.time())) if now is None else (lambda: now)
+    body, message = checked_listing(prepared, actor, clock())
+    stdout.write('APPROVE ONE HOSTED SERVICE ADVERT\n')
+    stdout.write(json.dumps(body, sort_keys=True, indent=2, ensure_ascii=True) + '\n')
+    warnings = {'PRIVATE': 'PRIVATE keeps this record out of public pages; it is not encrypted storage.',
+        'UNLISTED': 'UNLISTED is readable by anyone with the link; it is not confidential.',
+        'INDEXED': 'INDEXED makes these fields and metadata public and searchable.'}
+    stdout.write(warnings[body['visibility']] + '\n')
+    stdout.write('Review every field. Shared copies cannot be recalled. This signs only this advert.\n')
+    stdout.write('No contract, payment, delegation or publication is executed.\n')
+    confirmation = 'APPROVE ' + hashlib.sha256(message).hexdigest()[:12]
+    stdout.write('Type exactly: ' + confirmation + '\n> ')
+    stdout.flush()
+    require(stdin.readline(256).rstrip('\r\n') == confirmation, 'APPROVAL_NOT_GIVEN')
+    reader = getpass.getpass if secret_reader is None else secret_reader
+    try:
+        with warning_control.catch_warnings():
+            warning_control.simplefilter('error', getpass.GetPassWarning)
+            seed = reader('Private signing seed (hidden; never paste it into chat): ', stream=stderr)
+    except getpass.GetPassWarning:
+        raise Refused('HIDDEN_INPUT_UNAVAILABLE') from None
+    require(hex_key(seed), 'PRIVATE_SEED_FORMAT')
+    key = Ed25519PrivateKey.from_private_bytes(bytes.fromhex(seed))
+    require(key.public_key().public_bytes(Encoding.Raw, PublicFormat.Raw).hex() == actor,
+        'ACCESS_ACTOR_MISMATCH')
+    # Refuse signing a known seed into the advert; prior caller-pasted output cannot be redacted.
+    require(seed.lower() not in canonical(body).decode('ascii').lower(), 'SECRET_IN_PUBLICATION')
+    # Recheck expiry after the person has read and confirmed the exact terms.
+    checked_listing(prepared, actor, clock())
+    approval = {'signer': actor, 'signature': key.sign(message).hex()}
+    stdout.write('APPROVAL JSON (return only this object with the unchanged prepared body):\n')
+    stdout.write(canonical(approval).decode('ascii') + '\n')
+    stdout.write('No file was saved. Nothing was published or paid.\n')
+    stdout.flush()
+    return approval
+
+
 class Parser(argparse.ArgumentParser):
     def error(self, unused):
         raise Refused('ARGUMENTS')
@@ -349,11 +422,17 @@ class Parser(argparse.ArgumentParser):
 
 def main():
     parser = Parser(description=__doc__)
-    parser.add_argument('--access', required=True, type=Path, help='Owner-private 0600 trial access JSON')
-    parser.add_argument('--preview', required=True, type=Path, help='Owner-private 0600 listing.prepare JSON')
-    parser.add_argument('--output', required=True, type=Path, help='NEW approval JSON; never overwritten')
+    parser.add_argument('--access', type=Path, help='Owner-private 0600 trial access JSON')
+    parser.add_argument('--preview', type=Path, help='Owner-private 0600 listing.prepare JSON')
+    parser.add_argument('--output', type=Path, help='NEW approval JSON; never overwritten')
+    parser.add_argument('--paste', action='store_true', help='Interactive memory-only review/signing, including Windows; no files')
     args = parser.parse_args()
-    run(args.access, args.preview, args.output, stdin=sys.stdin, stdout=sys.stdout)
+    if args.paste:
+        require(args.access is None and args.preview is None and args.output is None, 'ARGUMENTS')
+        run_paste(stdin=sys.stdin, stdout=sys.stdout, stderr=sys.stderr)
+    else:
+        require(all(value is not None for value in (args.access, args.preview, args.output)), 'ARGUMENTS')
+        run(args.access, args.preview, args.output, stdin=sys.stdin, stdout=sys.stdout)
 
 
 if __name__ == '__main__':
@@ -361,5 +440,9 @@ if __name__ == '__main__':
         main()
     except Exception as error:
         code = str(error) if type(error) is Refused else 'LOCAL_CHECK_FAILED'
-        print('Approval not created: ' + code + '. Keep the original files; check the owner-signing guide. No publication or payment was attempted.', file=sys.stderr)
+        remedy = ('Use a supported local terminal with hidden input or the browser approval page.'
+            if code == 'HIDDEN_INPUT_UNAVAILABLE' else
+            'Keep the original files; check the owner-signing guide.')
+        print('Approval not created: ' + code + '. ' + remedy +
+            ' No publication or payment was attempted.', file=sys.stderr)
         raise SystemExit(1)
