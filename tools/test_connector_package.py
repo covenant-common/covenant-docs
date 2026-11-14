@@ -149,7 +149,7 @@ class PublicConnectorPackageTests(unittest.TestCase):
 
 class CurrentReviewerCases(unittest.TestCase):
     def test_public_package_and_cases_match_review_pinned_live_inventory(self):
-        profile = engine.reviewed_profile(engine.ACTIVE_VERSION)
+        profile = engine.reviewed_profile(engine.SUCCESSOR_VERSION)
         source = engine.validate(json.loads(profile.observation.read_bytes()), profile.version)
         schemas = {tool['name']: tool['inputSchema'] for tool in source['tools']}
         self.assertEqual(set(schemas), PACKAGE.PUBLIC_TOOLS)
@@ -162,7 +162,12 @@ class CurrentReviewerCases(unittest.TestCase):
         self.assertEqual(cases['protocolVersion'], source['protocolVersion'])
         self.assertEqual((root / cases['observation']).read_bytes(), profile.observation.read_bytes())
         self.assertEqual(cases['inventory'], profile.inventory)
-        self.assertEqual((root / profile.inventory).read_bytes(), (root / 'mcp/tool-inventory.json').read_bytes())
+        active = engine.reviewed_profile(engine.ACTIVE_VERSION)
+        active_source = engine.validate(json.loads(active.observation.read_bytes()), active.version)
+        active_outputs = engine.documents(active_source, active.version)
+        self.assertEqual(active_outputs[active.inventory][1], (root / 'mcp/tool-inventory.json').read_bytes())
+        for compatibility_field in ('endpoint', 'protocolVersion', 'tools'):
+            self.assertEqual(source[compatibility_field], active_source[compatibility_field])
         help_text = (root / 'docs/CONNECTORS.html').read_text()
         self.assertIn('id="refresh"', help_text)
         for label, rows in cases['test_cases'].items():

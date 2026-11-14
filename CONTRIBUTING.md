@@ -47,3 +47,12 @@ python3 tools/build_live_engine_discovery.py --capture-for-review /tmp/engine-0.
 This performs only anonymous server-card, initialization and tools/list requests to the fixed public host. It reports hashes for review and leaves website files untouched. Match the reported identity, complete schemas and access counts against the intended deployed build and confirm that build independently. Keep the original capture bytes apart from the maintained published observation.
 
 The capture tool currently targets the configured 0.2 identity. When the live profile or schemas change, add a separately reviewed observation, review pins and version before moving the active aliases. The `--check-live` command reads public discovery and checks the existing files. The `--refresh` command checks public discovery and rebuilds aliases from the retained observation. Keep earlier observations, inventories and frozen task suites byte-for-byte. Website publication and connector catalogue updates have their own checks.
+
+After the hiring release is independently verified on the host, capture its public metadata into a new file:
+
+```sh
+python3 tools/build_live_engine_discovery.py --profile 2026-11-14.d25.v1 \
+  --capture-for-review /tmp/covenant-engine-d25-observation.json
+```
+
+The capture accepts six additional account operations with the same four public entry schemas. If other fields drift, inspect the external capture and keep the current aliases. After review, retain the exact capture bytes at the new version’s observation path, set `HIRING_PINS` to the reviewed hashes, and select the new `ACTIVE_VERSION`. Regenerate discovery and the site manifest. The connector 0.2.0 reviewer file keeps its original f6 observation and inventory.
