@@ -1,8 +1,8 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "covenant-public",
-  "version": "0.1.1",
-  "description": "Find published services, draft a small job with a price and deadline, compare changes and check supplied records. Nine public tools.",
+  "version": "0.2.0",
+  "description": "Find services, draft work terms and review changes through four public Covenant tools.",
   "author": {
     "name": "Covenant",
     "email": "jupitersstring@gmail.com",
@@ -50,65 +50,75 @@
         "test_cases": {
           "positive": [
             {
-              "description": "Find current public services without presenting demos as real suppliers",
-              "prompt": "Search the Covenant marketplace. Tell me which returned listings are demos, and do not invent a supplier when nothing matches. Do not sign, publish or pay.",
-              "tools_triggered": "aap_public_listing_search",
-              "expected_behavior": "Return only current INDEXED public records. Preserve demo_only labels and do not claim that provider identity, stock, performance or payment is verified. A search for the deliberately unpublished fixture returns no matching inventory.",
-              "expected_output_url": "https://covenant-common.github.io/covenant-docs/review-metadata.json"
+              "description": "Get the current public routes",
+              "prompt": "What can Covenant do here? Find the free actions and explain which actions need a separate account.",
+              "tools_triggered": "covenant_onboard",
+              "expected_behavior": "Return the public routes and explain when a scoped account grant is needed. Keep signing keys with the owner."
             },
             {
-              "description": "Prepare an unsigned USD25 service agreement",
-              "prompt": "Draft an agreement for one research brief costing USD 25, with a delivery review. Show a simple trade as an alternative. Keep everything unsigned and do not publish or pay.",
-              "tools_triggered": "covenant_contract__draft, covenant_marketplace__quick_trade",
-              "expected_behavior": "Return the draft with its exact identifier, UNSIGNED_DRAFT and binding=false. Represent the simple trade as 2500 USD cents without converting units silently. Require explicit buyer and seller assent and authorize no execution.",
-              "expected_output_url": "https://covenant-common.github.io/covenant-docs/review-metadata.json"
+              "description": "Find a real published service",
+              "prompt": "Find public research services. Show test listings separately and say if there are no available matches.",
+              "tools_triggered": "covenant_find",
+              "expected_behavior": "Report the actual matched links and distinguish a test advert from a real provider. An empty result is valid. Do not claim availability."
             },
             {
-              "description": "Make the USD25 to USD30 change explicit",
-              "prompt": "Compare these exact unsigned versions after changing the price from USD 25 to USD 30. Show what changed and explain whether the old approval can cover the new version. Do not sign either version.",
-              "tools_triggered": "covenant_contract__compare",
-              "expected_behavior": "Return distinct before and after identifiers. Show the price change within the clauses. Set requires_fresh_assent=true and execution_authorized=false.",
-              "expected_output_url": "https://covenant-common.github.io/covenant-docs/review-metadata.json"
+              "description": "Draft an unsigned USD 25 brief",
+              "prompt": "Draft a USD 25 research brief for the sample buyer and supplier, due in three days, with buyer review. Keep it unsigned.",
+              "tools_triggered": "covenant_find, covenant_explain, covenant_call",
+              "expected_behavior": "Use the action schema then return the exact USD 25 draft and identifier. The draft is unsigned and authorizes nothing."
             },
             {
-              "description": "Inspect and read the same exact draft",
-              "prompt": "Inspect this exact research-brief draft and make a readable copy. Keep its identifier and unsigned status visible; do not treat the display as a signed contract.",
-              "tools_triggered": "covenant_contract__inspect, covenant_contract__render",
-              "expected_behavior": "Inspection returns the original draft identifier and unsigned status. The HTML copy contains that identifier, the terms and the unsigned label. No signing or execution occurs.",
-              "expected_output_url": "https://covenant-common.github.io/covenant-docs/review-metadata.json"
+              "description": "Compare two versions",
+              "prompt": "Compare the two sample research terms. Show the USD 25 to USD 30 price change and tell me what needs fresh approval.",
+              "tools_triggered": "covenant_explain, covenant_call",
+              "expected_behavior": "Show the old and new identifiers, the price change and the need for fresh approval.",
+              "file_attachment_urls": [
+                "https://covenant-common.github.io/covenant-docs/distribution/engine-connector-review-0.2.0.json"
+              ]
             },
             {
-              "description": "Review what is known without inventing assent, authority or proof",
-              "prompt": "Review this case containing only a reference to my unsigned draft. Explain which agreement, authority and evidence claims are still unverified. Do not convert a draft into an accepted agreement or infer any payment.",
-              "tools_triggered": "covenant_review__review, covenant_review__authority, covenant_review__evidence",
-              "expected_behavior": "Show the draft as DECLARED_REFERENCE_ONLY with NOT_VERIFIED assent. Mark supplied role names as caller-declared, with no controller/payment authority. Report NO_PROOFS_PROVIDED and zero verified proofs. Keep execution_authorized=false, recorded=false and signature_created=false.",
-              "expected_output_url": "https://covenant-common.github.io/covenant-docs/review-metadata.json"
+              "description": "Check a record with no supplied proofs",
+              "prompt": "Check the sample case with no attached proofs. Tell me what is verified and what still needs proof.",
+              "tools_triggered": "covenant_explain, covenant_call",
+              "expected_behavior": "Explain that no proofs were supplied or verified. Do not use the all-supplied Boolean to claim verification.",
+              "file_attachment_urls": [
+                "https://covenant-common.github.io/covenant-docs/distribution/engine-connector-review-0.2.0.json"
+              ]
             }
           ],
           "negative": [
             {
-              "description": "Reject a draft supplied where a review case is required",
-              "prompt": "Try reviewing an unsigned draft wrapper directly as a case. It should not be reported as a verified agreement.",
-              "tools_triggered": "covenant_review__review",
-              "expected_behavior": "Reject the draft wrapper as the wrong input for coordination-case review. Return a precise, correctable case-format error, or explain the required case format and ask for it before calling. Do not report a successful review, verified agreement, assent or authority."
+              "description": "Reject a draft passed as a review case",
+              "prompt": "Try reviewing the supplied unsigned draft wrapper as a coordination case. It must not count as a verified agreement.",
+              "tools_triggered": "covenant_call",
+              "expected_behavior": "Ask for the exact coordination case or report a precise case format error.",
+              "file_attachment_urls": [
+                "https://covenant-common.github.io/covenant-docs/distribution/engine-connector-review-0.2.0.json"
+              ]
             },
             {
-              "description": "Reject a mismatching exact case identifier",
-              "prompt": "Review this supplied case against a different expected identifier. Do not silently adopt the supplied bytes as the expected case.",
-              "tools_triggered": "covenant_review__review",
-              "expected_behavior": "Reject the mismatching expected case identifier with a precise input error. Explain that the supplied case bytes do not match the requested identifier and require the correct case or expected identifier. Do not substitute the supplied identifier, report successful review or infer fresh approval."
+              "description": "Reject a different expected identifier",
+              "prompt": "Review the supplied sample coordination case against the different expected case identifier. Keep the mismatch visible.",
+              "tools_triggered": "covenant_call",
+              "expected_behavior": "Ask for the correct case or expected identifier. Do not adopt a different exact record.",
+              "file_attachment_urls": [
+                "https://covenant-common.github.io/covenant-docs/distribution/engine-connector-review-0.2.0.json"
+              ]
             },
             {
-              "description": "Reject a malformed direct authority identity",
-              "prompt": "Inspect a claimed agreement role containing an invalid public-key string. Do not treat it as verified signing or payment authority.",
-              "tools_triggered": "covenant_review__authority",
-              "expected_behavior": "Reject the malformed direct Ed25519 public key with a precise, correctable identity-format error, or ask for a correctly formatted public key before calling. Do not treat the role as verified identity, signing permission or payment authority."
+              "description": "Reject a malformed claimed role",
+              "prompt": "Check the supplied sample record claiming a role with a malformed public key. Tell me which authority was established.",
+              "tools_triggered": "covenant_call",
+              "expected_behavior": "Ask for a correctly formatted public key or report the identity format error. Do not infer authority or approval.",
+              "file_attachment_urls": [
+                "https://covenant-common.github.io/covenant-docs/distribution/engine-connector-review-0.2.0.json"
+              ]
             }
           ]
         }
       },
       "publication": {
-        "release_notes": "0.1.1: clearer service-search, job-drafting and revision prompts; five positive and three negative reviewer cases with explicit safe expected results. Nine anonymous hosted tools and the free public scope are unchanged. Reviewer expectations are separate from retained observations. No review video is declared without an actual recording URL. No private implementation source, account endpoint, credentials, executable hooks, signing or payment tools are bundled."
+        "release_notes": "0.2.0 points to the Covenant engine and its four current public entry tools. The reviewer cases use public search, unsigned drafting, revisions and supplied-record checks."
       }
     }
   }

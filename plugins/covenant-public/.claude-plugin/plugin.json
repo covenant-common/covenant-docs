@@ -1,7 +1,7 @@
 {
   "name": "covenant-public",
-  "version": "0.1.1",
-  "description": "Find published services, draft exact terms and check supplied agreements. Free public tools; no signing or payments.",
+  "version": "0.2.0",
+  "description": "Find services, draft work terms and review changes through four public Covenant tools.",
   "author": {
     "name": "Covenant",
     "email": "jupitersstring@gmail.com"

@@ -1,0 +1,399 @@
+{
+  "format": "aap-public-connector-review/0.2.0",
+  "endpoint": "https://jupie202020.pythonanywhere.com/mcp/engine/v1",
+  "protocolVersion": "2025-11-25",
+  "observation": "distribution/engine-mcp-observation-2026-11-14.f6.v1.json",
+  "inventory": "mcp/engine-tool-inventory-2026-11-14.f6.v1.json",
+  "steps": "Each request is the params object of tools/call after initialize and tools/list. Compare expect with the parsed tool response. The cases use public data or fictional inputs and no private account.",
+  "evidence": "Expected synthetic reviewer outcomes. Native installation, model tool selection and store acceptance require separate checks.",
+  "test_cases": {
+    "positive": [
+      {
+        "id": "start",
+        "description": "Get the current public routes",
+        "prompt": "What can Covenant do here? Find the free actions and explain which actions need a separate account.",
+        "steps": [
+          {
+            "request": {
+              "name": "covenant_onboard",
+              "arguments": {}
+            },
+            "expect": {
+              "profile": "urn:aap:hosted-engine-mcp:0.2",
+              "keys_accepted": false
+            }
+          }
+        ]
+      },
+      {
+        "id": "find-service",
+        "description": "Find a real published service",
+        "prompt": "Find public research services. Show test listings separately and say if there are no available matches.",
+        "steps": [
+          {
+            "request": {
+              "name": "covenant_find",
+              "arguments": {
+                "kind": "services",
+                "query": "research",
+                "limit": 5,
+                "include_test": true
+              }
+            },
+            "expect": {
+              "signed": false,
+              "paid": false,
+              "published": false
+            }
+          }
+        ]
+      },
+      {
+        "id": "draft-terms",
+        "description": "Draft an unsigned USD 25 brief",
+        "prompt": "Draft a USD 25 research brief for the sample buyer and supplier, due in three days, with buyer review. Keep it unsigned.",
+        "steps": [
+          {
+            "request": {
+              "name": "covenant_find",
+              "arguments": {
+                "kind": "features",
+                "query": "covenant_contract__draft",
+                "limit": 5
+              }
+            },
+            "expect": {
+              "metadata_only": true,
+              "execution_authorized": false
+            }
+          },
+          {
+            "request": {
+              "name": "covenant_explain",
+              "arguments": {
+                "tool": "covenant_contract__draft"
+              }
+            },
+            "expect": {
+              "available_here": true,
+              "name": "covenant_contract__draft",
+              "execution_authorized": false
+            }
+          },
+          {
+            "request": {
+              "name": "covenant_call",
+              "arguments": {
+                "tool": "covenant_contract__draft",
+                "arguments": {
+                  "title": "Synthetic review: one research brief",
+                  "parties": [
+                    "buyer-example",
+                    "supplier-example"
+                  ],
+                  "clauses": [
+                    {
+                      "id": "scope",
+                      "title": "Work",
+                      "text": "One page answering the agreed research question, with sources."
+                    },
+                    {
+                      "id": "price",
+                      "title": "Price",
+                      "text": "USD 25. This is an unsigned synthetic exercise; no payment is authorised."
+                    },
+                    {
+                      "id": "deadline",
+                      "title": "Deadline",
+                      "text": "Deliver the brief within three days after both parties approve the terms."
+                    },
+                    {
+                      "id": "review",
+                      "title": "Delivery review",
+                      "text": "The buyer checks the brief against the exact agreed scope before accepting it."
+                    }
+                  ]
+                }
+              }
+            },
+            "expect": {
+              "status": "UNSIGNED_DRAFT",
+              "binding": false,
+              "execution_authorized": false,
+              "draft": {
+                "title": "Synthetic review: one research brief",
+                "clauses": [
+                  {
+                    "id": "scope",
+                    "title": "Work",
+                    "text": "One page answering the agreed research question, with sources."
+                  },
+                  {
+                    "id": "price",
+                    "title": "Price",
+                    "text": "USD 25. This is an unsigned synthetic exercise; no payment is authorised."
+                  },
+                  {
+                    "id": "deadline",
+                    "title": "Deadline",
+                    "text": "Deliver the brief within three days after both parties approve the terms."
+                  },
+                  {
+                    "id": "review",
+                    "title": "Delivery review",
+                    "text": "The buyer checks the brief against the exact agreed scope before accepting it."
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      },
+      {
+        "id": "price-change",
+        "description": "Compare two versions",
+        "prompt": "Compare the two sample research terms. Show the USD 25 to USD 30 price change and tell me what needs fresh approval.",
+        "steps": [
+          {
+            "request": {
+              "name": "covenant_explain",
+              "arguments": {
+                "tool": "covenant_contract__compare"
+              }
+            },
+            "expect": {
+              "available_here": true,
+              "name": "covenant_contract__compare"
+            }
+          },
+          {
+            "request": {
+              "name": "covenant_call",
+              "arguments": {
+                "tool": "covenant_contract__compare",
+                "arguments": {
+                  "before": {
+                    "clauses": [
+                      {
+                        "id": "scope",
+                        "text": "One page answering the agreed research question, with sources.",
+                        "title": "Work"
+                      },
+                      {
+                        "id": "price",
+                        "text": "USD 25. This is an unsigned synthetic exercise; no payment is authorised.",
+                        "title": "Price"
+                      },
+                      {
+                        "id": "review",
+                        "text": "The buyer checks the brief against the exact agreed scope before accepting it.",
+                        "title": "Delivery review"
+                      }
+                    ],
+                    "conditions": [],
+                    "dispute": {},
+                    "extensions": {},
+                    "parties": [
+                      "buyer-example",
+                      "supplier-example"
+                    ],
+                    "settlement": {},
+                    "supersedes": null,
+                    "title": "Synthetic review: one research brief",
+                    "version": "covenant-contract-draft/0.1"
+                  },
+                  "after": {
+                    "clauses": [
+                      {
+                        "id": "scope",
+                        "text": "One page answering the agreed research question, with sources.",
+                        "title": "Work"
+                      },
+                      {
+                        "id": "price",
+                        "text": "USD 30. This is an unsigned synthetic exercise; no payment is authorised.",
+                        "title": "Price"
+                      },
+                      {
+                        "id": "review",
+                        "text": "The buyer checks the brief against the exact agreed scope before accepting it.",
+                        "title": "Delivery review"
+                      }
+                    ],
+                    "conditions": [],
+                    "dispute": {},
+                    "extensions": {},
+                    "parties": [
+                      "buyer-example",
+                      "supplier-example"
+                    ],
+                    "settlement": {},
+                    "supersedes": null,
+                    "title": "Synthetic review: one research brief",
+                    "version": "covenant-contract-draft/0.1"
+                  }
+                }
+              }
+            },
+            "expect": {
+              "requires_fresh_assent": true,
+              "execution_authorized": false
+            }
+          }
+        ]
+      },
+      {
+        "id": "check-evidence",
+        "description": "Check a record with no supplied proofs",
+        "prompt": "Check the sample case with no attached proofs. Tell me what is verified and what still needs proof.",
+        "steps": [
+          {
+            "request": {
+              "name": "covenant_explain",
+              "arguments": {
+                "tool": "covenant_review__evidence"
+              }
+            },
+            "expect": {
+              "available_here": true,
+              "name": "covenant_review__evidence"
+            }
+          },
+          {
+            "request": {
+              "name": "covenant_call",
+              "arguments": {
+                "tool": "covenant_review__evidence",
+                "arguments": {
+                  "items": [],
+                  "agreement_ids": []
+                }
+              }
+            },
+            "expect": {
+              "verification_status": "NO_PROOFS_PROVIDED",
+              "provided_proof_count": 0,
+              "verified_proof_count": 0,
+              "execution_authorized": false
+            }
+          }
+        ]
+      }
+    ],
+    "negative": [
+      {
+        "id": "wrong-record",
+        "description": "Reject a draft passed as a review case",
+        "prompt": "Try reviewing the supplied unsigned draft wrapper as a coordination case. It must not count as a verified agreement.",
+        "steps": [
+          {
+            "request": {
+              "name": "covenant_call",
+              "arguments": {
+                "tool": "covenant_review__review",
+                "arguments": {
+                  "case": {
+                    "title": "Synthetic unsigned contract draft",
+                    "parties": [
+                      "buyer-example",
+                      "supplier-example"
+                    ],
+                    "clauses": [],
+                    "binding": false
+                  }
+                }
+              }
+            },
+            "expect": {
+              "code": "PUBLIC_REVIEW_CASE_FORMAT",
+              "status": "REFUSED",
+              "execution_authorized": false
+            }
+          }
+        ]
+      },
+      {
+        "id": "case-pin-mismatch",
+        "description": "Reject a different expected identifier",
+        "prompt": "Review the supplied sample coordination case against the different expected case identifier. Keep the mismatch visible.",
+        "steps": [
+          {
+            "request": {
+              "name": "covenant_call",
+              "arguments": {
+                "tool": "covenant_review__review",
+                "arguments": {
+                  "case": {
+                    "agreements": [
+                      {
+                        "id": "unfetched-notice",
+                        "kind": "REFERENCE",
+                        "reference": {
+                          "uri": "https://example.invalid/never-fetched",
+                          "sha256": "abababababababababababababababababababababababababababababababab"
+                        },
+                        "description": "Synthetic reference only; no assent or truth is claimed."
+                      }
+                    ],
+                    "bindings": [],
+                    "decisions": [],
+                    "evidence": [],
+                    "expected_heads": null,
+                    "grants": [],
+                    "group": null,
+                    "links": [],
+                    "notes": [],
+                    "obligations": [],
+                    "payments": [],
+                    "policies": [],
+                    "primary": "unfetched-notice",
+                    "recoveries": [],
+                    "title": "Synthetic unfetched reference: not an agreed contract",
+                    "version": "covenant-coordination-case/0.1"
+                  },
+                  "expected_id": "0a76e75309128ac8cafd5e0b0dd42f87ca7ed8db16a729f994df17c684575f52"
+                }
+              }
+            },
+            "expect": {
+              "code": "PUBLIC_REVIEW_CASE_PIN_MISMATCH",
+              "status": "REFUSED",
+              "execution_authorized": false
+            }
+          }
+        ]
+      },
+      {
+        "id": "invalid-authority",
+        "description": "Reject a malformed claimed role",
+        "prompt": "Check the supplied sample record claiming a role with a malformed public key. Tell me which authority was established.",
+        "steps": [
+          {
+            "request": {
+              "name": "covenant_call",
+              "arguments": {
+                "tool": "covenant_review__authority",
+                "arguments": {
+                  "agreements": [
+                    {
+                      "id": "abababababababababababababababababababababababababababababababab",
+                      "kind": "EXTERNAL",
+                      "parties": {
+                        "buyer": "not-an-ed25519-verification-key"
+                      }
+                    }
+                  ]
+                }
+              }
+            },
+            "expect": {
+              "code": "PUBLIC_REVIEW_ROLE_FORMAT",
+              "status": "REFUSED",
+              "execution_authorized": false
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -8,7 +8,7 @@
     {
       "name": "covenant-public",
       "source": "./plugins/covenant-public",
-      "description": "Connect to Covenant public search and exact agreement tools."
+      "description": "Find services and draft or check work terms with four public Covenant entry tools."
     }
   ],
   "metadata": {

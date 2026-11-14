@@ -12,20 +12,21 @@ import zipfile
 
 ROOT = Path(__file__).resolve().parents[1]
 PLUGIN = ROOT / 'plugins' / 'covenant-public'
-VERSION = '0.1.1'
+VERSION = '0.2.0'
 OUTPUT = ROOT / 'downloads' / f'covenant-public-{VERSION}.zip'
-LEGACY_OUTPUT = ROOT / 'downloads' / 'covenant-public-0.1.0.zip'
-LEGACY_SHA256 = '62b1d56df51c4f80bb36c5c5135d953657029f0a5fb017b2fd8571554d175dea'
+ARCHIVE_DATE = (2026, 11, 14, 0, 0, 0)
+RETAINED_ARCHIVES = {
+    ROOT / 'downloads' / 'covenant-public-0.1.0.zip':
+        '62b1d56df51c4f80bb36c5c5135d953657029f0a5fb017b2fd8571554d175dea',
+    ROOT / 'downloads' / 'covenant-public-0.1.1.zip':
+        '1cc48e59d196a639b809ccae2af0d097ffa3159334c3622e0712c06ddc78f2e1',
+}
 FILES = (
     '.claude-plugin/plugin.json', '.cursor-plugin/plugin.json', '.mcp.json',
     'LICENSE', 'README.md', 'assets/icon.png', 'mcp.json', 'plugin.json',
 )
-ENDPOINT = 'https://jupie202020.pythonanywhere.com/mcp'
-PUBLIC_TOOLS = frozenset((
-    'aap_public_listing_search', 'covenant_contract__compare', 'covenant_contract__draft',
-    'covenant_contract__inspect', 'covenant_contract__render', 'covenant_marketplace__quick_trade',
-    'covenant_review__authority', 'covenant_review__evidence', 'covenant_review__review',
-))
+ENDPOINT = 'https://jupie202020.pythonanywhere.com/mcp/engine/v1'
+PUBLIC_TOOLS = frozenset(('covenant_onboard', 'covenant_find', 'covenant_explain', 'covenant_call'))
 MANIFEST_FIELDS = frozenset(('$schema', 'name', 'version', 'description', 'author',
                              'homepage', 'repository', 'license', 'keywords', 'extensions'))
 NATIVE_MANIFEST_FIELDS = frozenset(('name', 'version', 'description', 'author', 'homepage',
@@ -109,17 +110,18 @@ def validate_metadata(manifest):
                 if not isinstance(case.get(key), str) or not case[key].strip():
                     raise ValueError(f'Missing reviewer case field: {key}')
             names = {x.strip() for x in case.get('tools_triggered', '').split(',') if x.strip()}
-            if not names <= PUBLIC_TOOLS or (kind == 'positive' and not names):
+            if not names or not names <= PUBLIC_TOOLS:
                 raise ValueError('Reviewer case contains a non-public or missing tool')
             if kind == 'positive':
                 covered.update(names)
     if covered != PUBLIC_TOOLS:
-        raise ValueError('Positive reviewer cases must cover all nine public tools')
+        raise ValueError('Positive reviewer cases must cover all four public entry tools')
 
 
 def build():
-    if not LEGACY_OUTPUT.is_file() or hashlib.sha256(LEGACY_OUTPUT.read_bytes()).hexdigest() != LEGACY_SHA256:
-        raise ValueError('The retained 0.1.0 archive must remain byte-exact')
+    for archive, expected in RETAINED_ARCHIVES.items():
+        if not archive.is_file() or hashlib.sha256(archive.read_bytes()).hexdigest() != expected:
+            raise ValueError(f'The retained archive {archive.name} must remain byte-exact')
     found = {p.relative_to(PLUGIN).as_posix() for p in PLUGIN.rglob('*') if p.is_file()}
     if found != set(FILES):
         raise ValueError('Package inventory differs from the reviewed eight-file allowlist')
@@ -154,7 +156,7 @@ def build():
     result = io.BytesIO()
     with zipfile.ZipFile(result, 'w', compression=zipfile.ZIP_DEFLATED, compresslevel=9) as z:
         for name in FILES:
-            entry = zipfile.ZipInfo(name, (2026, 11, 2, 0, 0, 0))
+            entry = zipfile.ZipInfo(name, ARCHIVE_DATE)
             entry.create_system = 3
             entry.external_attr = (stat.S_IFREG | 0o644) << 16
             entry.compress_type = zipfile.ZIP_DEFLATED
@@ -174,7 +176,8 @@ def main():
         OUTPUT.parent.mkdir(exist_ok=True)
         OUTPUT.write_bytes(data)
     print(json.dumps({'status': 'PASS', 'archive': str(OUTPUT.relative_to(ROOT)),
-                      'version': VERSION, 'retained_0_1_0_sha256': LEGACY_SHA256,
+                      'version': VERSION, 'retained_sha256': {
+                          path.name: digest for path, digest in RETAINED_ARCHIVES.items()},
                       'sha256': hashlib.sha256(data).hexdigest(), 'members': list(FILES),
                       'configuration_only': True, 'core_source_included': False,
                       'native_client_installation': 'SEPARATE_NOT_ESTABLISHED',
