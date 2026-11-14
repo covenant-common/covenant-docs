@@ -34,8 +34,15 @@ SUCCESSOR_PINS = {
     'engine': 'e64b3261920c9a4b7a8ac296d232a465e58d745bab39d099876688b92faef980',
     'observation': 'd6c3111cf7a683e54c8d4463bff2dd1c9fb6ba5e796c1315cd3e7a788b6db954',
 }
-ENTRY_PROFILES = (VERSION, SUCCESSOR_VERSION)
-ACTIVE_VERSION = SUCCESSOR_VERSION
+HIRING_VERSION = '2026-11-14.d25.v1'
+HIRING_PINS = {
+    'tools': '77d9411e8b3b65ba000433d07a0b0c7b4446f1e06a8d3d2a57918d8c16cd6e57',
+    'serverCard': '601f2406d9838f39360b15a42ce4bdd06bf3fc61e96a231f49110d8e8c044808',
+    'engine': '3f0921049276c111c18afdb66a3fb263b42af77ae5f76ec10e936aae5824687a',
+    'observation': '7e4f2f30b03452638c1ab75bc70bcb97e9283fd3ccc98e12da234d2d1dfe7017',
+}
+ENTRY_PROFILES = (VERSION, SUCCESSOR_VERSION, HIRING_VERSION)
+ACTIVE_VERSION = HIRING_VERSION
 PROTOCOL = '2025-11-25'
 META = 'io.github.covenant-common/aap'
 ALIASES = [ORIGIN + '/mcp', ORIGIN + '/mcp/agent/v1']
@@ -70,13 +77,14 @@ class LiveProfile:
 def reviewed_profile(version):
     if version == VERSION:
         return LiveProfile(VERSION, '0.1', PINS)
-    if version == SUCCESSOR_VERSION and SUCCESSOR_PINS is not None:
-        if (set(SUCCESSOR_PINS) != set(PINS) | {'observation'} or
-                not all(isinstance(value, str) and re.fullmatch(r'[0-9a-f]{64}', value)
-                        for value in SUCCESSOR_PINS.values())):
-            raise ValueError('Review pins must cover the observation, tool list, server card and engine projection')
-        return LiveProfile(SUCCESSOR_VERSION, SUCCESSOR_RUNTIME, SUCCESSOR_PINS)
-    raise ValueError('The selected observation is awaiting explicit review pins')
+    pins = {SUCCESSOR_VERSION: SUCCESSOR_PINS, HIRING_VERSION: HIRING_PINS}.get(version)
+    if pins is None:
+        raise ValueError('The selected observation is awaiting explicit review pins')
+    if (set(pins) != set(PINS) | {'observation'} or
+            not all(isinstance(value, str) and re.fullmatch(r'[0-9a-f]{64}', value)
+                    for value in pins.values())):
+        raise ValueError('Review pins must cover the observation, tool list, server card and engine projection')
+    return LiveProfile(version, SUCCESSOR_RUNTIME, pins)
 
 
 def _validate_shape(source, version, runtime_version):
@@ -118,7 +126,7 @@ def validate(source, version=VERSION):
 def documents(source, version=VERSION):
     selected = reviewed_profile(version)
     validate(source, selected.version)
-    if (selected.version == SUCCESSOR_VERSION and
+    if ('observation' in selected.pins and
             selected.pins['observation'] != hashlib.sha256(wire(source)).hexdigest()):
         raise ValueError('Retained successor observation differs from the reviewed record')
     inventory = {'format': 'aap-hosted-engine-tool-inventory/' + selected.version,
@@ -233,15 +241,40 @@ def observe(version=VERSION):
     return validate(_capture(version, selected.runtime_version), version)
 
 
-def capture_successor_for_review(path):
+def check_hiring_candidate(previous, source):
+    """Require exactly the expected account-only change before printing candidate pins."""
+    _validate_shape(source, HIRING_VERSION, SUCCESSOR_RUNTIME)
+    old_engine = previous['engine']
+    changed = deepcopy(old_engine)
+    changed['account_tools'] += 6
+    catalogue = changed['catalogue']
+    catalogue['mounted_descriptors_by_interface']['account'] += 6
+    catalogue['browsable_names'] += 6
+    if source['engine'] != changed:
+        raise ValueError('Unexpected engine projection drift in the hiring candidate')
+    expected_card = deepcopy(previous['serverCard'])
+    expected_card['_meta'][META].update(changed)
+    if (source['serverCard'] != expected_card or
+            any(source[field] != previous[field] for field in ('tools', 'serverInfo', 'protocolVersion'))):
+        raise ValueError('Unexpected card or public schema drift in the hiring candidate')
+
+
+def capture_successor_for_review(path, version=SUCCESSOR_VERSION):
+    if version not in (SUCCESSOR_VERSION, HIRING_VERSION):
+        raise ValueError('Choose a configured public observation version')
     target = Path(path).absolute()
     if target.resolve().is_relative_to(ROOT.resolve()) or target.exists() or target.is_symlink():
         raise ValueError('Choose a new capture file outside the public-site checkout')
-    source = _capture(SUCCESSOR_VERSION, SUCCESSOR_RUNTIME)
+    source = _capture(version, SUCCESSOR_RUNTIME)
     with target.open('xb') as out:
         out.write(wire(source))
+    if version == HIRING_VERSION:
+        earlier = reviewed_profile(SUCCESSOR_VERSION)
+        previous = json.loads(earlier.observation.read_bytes())
+        documents(previous, earlier.version)
+        check_hiring_candidate(previous, source)
     return {'status': 'CAPTURED_FOR_REVIEW', 'file': str(target),
-            'profileVersion': SUCCESSOR_VERSION,
+            'profileVersion': version,
             'candidatePins': {**review_pins(source), 'observation': hashlib.sha256(wire(source)).hexdigest()},
             'runtimeCommitVerifiedByThisCapture': False}
 
@@ -249,9 +282,10 @@ def capture_successor_for_review(path):
 def main():
     parser = argparse.ArgumentParser(description='Capture the future 0.2 observation for separate review.')
     parser.add_argument('--capture-for-review', type=Path, required=True)
+    parser.add_argument('--profile', choices=(SUCCESSOR_VERSION, HIRING_VERSION), default=SUCCESSOR_VERSION)
     args = parser.parse_args()
     try:
-        print(json.dumps(capture_successor_for_review(args.capture_for_review), indent=2))
+        print(json.dumps(capture_successor_for_review(args.capture_for_review, args.profile), indent=2))
     except (ValueError, OSError, KeyError, TypeError) as error:
         parser.exit(1, 'FAIL: ' + str(error) + '\n')
 

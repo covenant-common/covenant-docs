@@ -6,11 +6,11 @@
   ],
   "engine": {
     "account_authentication": "CURRENT_SCOPED_BEARER_PER_REQUEST",
-    "account_tools": 30,
+    "account_tools": 36,
     "api_call": "https://jupie202020.pythonanywhere.com/v1/engine/call",
     "catalogue": {
       "approved_family_action_aliases": 156,
-      "browsable_names": 423,
+      "browsable_names": 429,
       "completeness": "COMPLETE_PAGINATION_NO_RANK_CUTOFF",
       "customer_authority_checked": false,
       "domains": [
@@ -95,7 +95,7 @@
       "maintained_families": 205,
       "metadata_only": true,
       "mounted_descriptors_by_interface": {
-        "account": 30,
+        "account": 36,
         "keyless": 159,
         "public": 16,
         "sandbox": 43
@@ -121,10 +121,10 @@
     "reference": "https://jupie202020.pythonanywhere.com/engine-reference.json",
     "url": "https://jupie202020.pythonanywhere.com/mcp/engine/v1"
   },
-  "format": "aap-hosted-engine-tool-inventory/2026-11-14.f6.v1",
+  "format": "aap-hosted-engine-tool-inventory/2026-11-14.d25.v1",
   "legacyPublicNamesRemainCallable": true,
   "liveAuthority": "Discover current schemas with tools/list; use covenant_explain for the selected action.",
-  "observedAt": "2026-11-14T13:02:31.877820+00:00",
+  "observedAt": "2026-11-14T16:52:44.247954+00:00",
   "planningBoundary": "Templates and plans remain unsigned and unadopted. Group preparation does not create a forum.",
   "privacyBoundary": "The host receives supplied parameters. Keep private inputs, proving witnesses and commitment openings local; send only shareable proof envelopes and records.",
   "profile": "urn:aap:hosted-engine-mcp:0.2",
@@ -138,7 +138,7 @@
   "sourceEvidence": {
     "rawResponseSha256": {
       "initialize": "0793d52dcf3cf0c93d813eeb49d2707b2e9f98822845c408731e765bf24f4f49",
-      "server-card": "ad9142c7a4eae0c1f869901d18f39b19dd0fb76d8009fbe5c222fd39fc62e9ad",
+      "server-card": "5f9336df7880627712c38065f8e9427e40a3268971b215f1bde224c6bbe76241",
       "tools/list": "91a2919364ab48c12b34681e1277f9423fcc478b573bff87241071d33385615c"
     },
     "runtimeCommitVerifiedByThisCapture": false

@@ -1,0 +1,390 @@
+{
+  "endpoint": "https://jupie202020.pythonanywhere.com/mcp/engine/v1",
+  "endpointAliases": [
+    "https://jupie202020.pythonanywhere.com/mcp",
+    "https://jupie202020.pythonanywhere.com/mcp/agent/v1"
+  ],
+  "engine": {
+    "account_authentication": "CURRENT_SCOPED_BEARER_PER_REQUEST",
+    "account_tools": 36,
+    "api_call": "https://jupie202020.pythonanywhere.com/v1/engine/call",
+    "catalogue": {
+      "approved_family_action_aliases": 156,
+      "browsable_names": 429,
+      "completeness": "COMPLETE_PAGINATION_NO_RANK_CUTOFF",
+      "customer_authority_checked": false,
+      "domains": [
+        {
+          "id": "navigation",
+          "title": "Find a capability and its exact interface"
+        },
+        {
+          "id": "agreements",
+          "title": "Draft, structure and revise exact agreements"
+        },
+        {
+          "id": "identity",
+          "title": "Identity, representation and bounded authority"
+        },
+        {
+          "id": "proofs",
+          "title": "Evidence, resources and private disclosure"
+        },
+        {
+          "id": "exchange",
+          "title": "Payments, resources and effect adapters"
+        },
+        {
+          "id": "work",
+          "title": "Deliver work and continue unfinished obligations"
+        },
+        {
+          "id": "markets",
+          "title": "Advertise, discover and reuse market structures"
+        },
+        {
+          "id": "mechanisms",
+          "title": "Auctions, credit, predictions and economic games"
+        },
+        {
+          "id": "groups",
+          "title": "Groups, discussion, voting and collaboration"
+        },
+        {
+          "id": "review",
+          "title": "Independent review, disputes and arbitration"
+        },
+        {
+          "id": "records",
+          "title": "Portable records, offline work and recovery"
+        },
+        {
+          "id": "transport",
+          "title": "Other protocols, carriers, robots and tool connections"
+        },
+        {
+          "id": "reputation",
+          "title": "Find relevant people, resources and trusted evidence"
+        },
+        {
+          "id": "publication",
+          "title": "Public pages, promotions and growth"
+        },
+        {
+          "id": "builders",
+          "title": "Build applications and reusable implementation layers"
+        },
+        {
+          "id": "network",
+          "title": "Operate and upgrade a qualified network"
+        },
+        {
+          "id": "memory",
+          "title": "Attention, memory and local safeguards"
+        },
+        {
+          "id": "evidence-work",
+          "title": "Reuse evidence, collaborate privately and correct derived knowledge"
+        },
+        {
+          "id": "agent-trust",
+          "title": "Trade goods or work safely with another agent"
+        }
+      ],
+      "execution_authorized": false,
+      "maintained_families": 205,
+      "metadata_only": true,
+      "mounted_descriptors_by_interface": {
+        "account": 36,
+        "keyless": 159,
+        "public": 16,
+        "sandbox": 43
+      },
+      "mounted_public_family_action_aliases": 14,
+      "owner_prerequisites_checked": false,
+      "scope": "KNOWN_CORE_TOOL_FAMILIES_AND_QUALIFIED_SOURCE_CATALOG_ACTIONS; NOT_EVERY_PRIVATE_HELPER_OR_EXECUTION_PROOF",
+      "source_interface_variants": 423,
+      "source_schemas_are_installed": false,
+      "version": "urn:aap:hosted-feature-catalogue:0.1"
+    },
+    "entry_tools": [
+      "covenant_onboard",
+      "covenant_find",
+      "covenant_explain",
+      "covenant_call"
+    ],
+    "fixed_public_tools": 9,
+    "keyless_actions": 159,
+    "keys_accepted": false,
+    "profile": "urn:aap:hosted-engine-mcp:0.2",
+    "public_tools": 16,
+    "reference": "https://jupie202020.pythonanywhere.com/engine-reference.json",
+    "url": "https://jupie202020.pythonanywhere.com/mcp/engine/v1"
+  },
+  "format": "aap-hosted-engine-tool-inventory/2026-11-14.d25.v1",
+  "legacyPublicNamesRemainCallable": true,
+  "liveAuthority": "Discover current schemas with tools/list; use covenant_explain for the selected action.",
+  "observedAt": "2026-11-14T16:52:44.247954+00:00",
+  "planningBoundary": "Templates and plans remain unsigned and unadopted. Group preparation does not create a forum.",
+  "privacyBoundary": "The host receives supplied parameters. Keep private inputs, proving witnesses and commitment openings local; send only shareable proof envelopes and records.",
+  "profile": "urn:aap:hosted-engine-mcp:0.2",
+  "protocolVersion": "2025-11-25",
+  "scope": "Four entry tools. Keyless actions need no account; account writes require current scoped permission. Every maintained family is discoverable, not anonymously callable.",
+  "serverInfo": {
+    "name": "aap-engine",
+    "version": "0.2"
+  },
+  "signingKeysAccepted": false,
+  "sourceEvidence": {
+    "rawResponseSha256": {
+      "initialize": "0793d52dcf3cf0c93d813eeb49d2707b2e9f98822845c408731e765bf24f4f49",
+      "server-card": "5f9336df7880627712c38065f8e9427e40a3268971b215f1bde224c6bbe76241",
+      "tools/list": "91a2919364ab48c12b34681e1277f9423fcc478b573bff87241071d33385615c"
+    },
+    "runtimeCommitVerifiedByThisCapture": false
+  },
+  "toolCount": 4,
+  "tools": [
+    {
+      "annotations": {
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false,
+        "readOnlyHint": true
+      },
+      "description": "See the available engine, marketplace and account routes. No account or key is needed to start.",
+      "inputSchema": {
+        "additionalProperties": false,
+        "properties": {},
+        "required": [],
+        "type": "object"
+      },
+      "name": "covenant_onboard",
+      "title": "Start with Covenant"
+    },
+    {
+      "annotations": {
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false,
+        "readOnlyHint": true
+      },
+      "description": "Find public services, or set kind=features to discover every maintained capability and its actual access route. No seller is invented when a search is empty.",
+      "inputSchema": {
+        "oneOf": [
+          {
+            "additionalProperties": false,
+            "properties": {
+              "cursor": {
+                "maximum": 100000,
+                "minimum": 0,
+                "type": "integer"
+              },
+              "kind": {
+                "const": "features"
+              },
+              "limit": {
+                "maximum": 50,
+                "minimum": 1,
+                "type": "integer"
+              },
+              "query": {
+                "maxLength": 256,
+                "type": "string"
+              }
+            },
+            "required": [
+              "kind"
+            ],
+            "type": "object"
+          },
+          {
+            "additionalProperties": false,
+            "properties": {
+              "cursor": {
+                "maximum": 100000,
+                "minimum": 0,
+                "type": "integer"
+              },
+              "kind": {
+                "const": "features"
+              },
+              "limit": {
+                "maximum": 50,
+                "minimum": 1,
+                "type": "integer"
+              },
+              "q": {
+                "maxLength": 256,
+                "type": "string"
+              }
+            },
+            "required": [
+              "kind",
+              "q"
+            ],
+            "type": "object"
+          },
+          {
+            "additionalProperties": false,
+            "properties": {
+              "category": {
+                "maxLength": 64,
+                "type": "string"
+              },
+              "full": {
+                "type": "boolean"
+              },
+              "include_test": {
+                "type": "boolean"
+              },
+              "kind": {
+                "enum": [
+                  "services"
+                ]
+              },
+              "limit": {
+                "maximum": 50,
+                "minimum": 1,
+                "type": "integer"
+              },
+              "offset": {
+                "maximum": 5000,
+                "minimum": 0,
+                "type": "integer"
+              },
+              "query": {
+                "maxLength": 120,
+                "type": "string"
+              }
+            },
+            "required": [],
+            "type": "object"
+          },
+          {
+            "additionalProperties": false,
+            "properties": {
+              "category": {
+                "maxLength": 64,
+                "type": "string"
+              },
+              "full": {
+                "type": "boolean"
+              },
+              "include_test": {
+                "type": "boolean"
+              },
+              "kind": {
+                "enum": [
+                  "services"
+                ]
+              },
+              "limit": {
+                "maximum": 50,
+                "minimum": 1,
+                "type": "integer"
+              },
+              "offset": {
+                "maximum": 5000,
+                "minimum": 0,
+                "type": "integer"
+              },
+              "q": {
+                "maxLength": 120,
+                "type": "string"
+              }
+            },
+            "required": [
+              "q"
+            ],
+            "type": "object"
+          }
+        ],
+        "type": "object"
+      },
+      "name": "covenant_find",
+      "title": "Find services or features"
+    },
+    {
+      "annotations": {
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false,
+        "readOnlyHint": true
+      },
+      "description": "Get the one recommended call for a tool: its exact arguments, a working example and what access it needs. Pass detail \"full\" to see every version of the tool with its exact schema. Select interface when several versions share a name.",
+      "inputSchema": {
+        "additionalProperties": false,
+        "properties": {
+          "action": {
+            "maxLength": 80,
+            "minLength": 1,
+            "type": "string"
+          },
+          "detail": {
+            "description": "short (the default) gives the recommended call; full gives every version.",
+            "enum": [
+              "short",
+              "full"
+            ]
+          },
+          "interface": {
+            "maxLength": 120,
+            "minLength": 1,
+            "type": "string"
+          },
+          "tool": {
+            "maxLength": 80,
+            "minLength": 1,
+            "type": "string"
+          }
+        },
+        "required": [
+          "tool"
+        ],
+        "type": "object"
+      },
+      "name": "covenant_explain",
+      "title": "Show a tool and how to use it"
+    },
+    {
+      "annotations": {
+        "destructiveHint": true,
+        "idempotentHint": false,
+        "openWorldHint": true,
+        "readOnlyHint": false
+      },
+      "description": "Call a reviewed keyless engine tool or an existing account operation. Account actions require the current scoped bearer grant; all original signatures, permissions and idempotency checks still apply. This router cannot install code, configure a host or acquire signing authority.",
+      "inputSchema": {
+        "additionalProperties": false,
+        "properties": {
+          "action": {
+            "maxLength": 80,
+            "minLength": 1,
+            "type": "string"
+          },
+          "arguments": {
+            "type": "object"
+          },
+          "interface": {
+            "maxLength": 120,
+            "minLength": 1,
+            "type": "string"
+          },
+          "tool": {
+            "maxLength": 80,
+            "minLength": 1,
+            "type": "string"
+          }
+        },
+        "required": [
+          "tool",
+          "arguments"
+        ],
+        "type": "object"
+      },
+      "name": "covenant_call",
+      "title": "Use a Covenant tool"
+    }
+  ]
+}

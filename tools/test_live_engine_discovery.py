@@ -230,5 +230,60 @@ class FutureEngineDiscovery(unittest.TestCase):
             self.assertEqual(manifest['sourceObservation'], str(selected_path.relative_to(root)))
 
 
+class HiringEngineObservation(unittest.TestCase):
+    def setUp(self):
+        f6 = engine.reviewed_profile(engine.SUCCESSOR_VERSION)
+        self.previous = json.loads(f6.observation.read_bytes())
+        self.candidate = deepcopy(self.previous)
+        self.candidate['format'] = 'aap-hosted-engine-observation/' + engine.HIRING_VERSION
+        changed = self.candidate['engine']
+        changed['account_tools'] += 6
+        changed['catalogue']['mounted_descriptors_by_interface']['account'] += 6
+        changed['catalogue']['browsable_names'] += 6
+        self.candidate['serverCard']['_meta'][engine.META].update(deepcopy(changed))
+        self.pins = {**engine.review_pins(self.candidate),
+                     'observation': hashlib.sha256(engine.wire(self.candidate)).hexdigest()}
+
+    def test_unpinned_hiring_profile_never_reads_network_for_publication(self):
+        with patch.object(engine, 'HIRING_PINS', None), \
+                patch.object(engine, 'build_opener', side_effect=AssertionError('network')), \
+                patch('sys.argv', ['build_public_discovery.py', '--profile',
+                                   engine.HIRING_VERSION, '--refresh']):
+            with self.assertRaisesRegex(SystemExit, 'awaiting explicit review pins'):
+                legacy.main()
+
+    def test_capture_allowed_for_review_and_requires_exact_drift(self):
+        with tempfile.TemporaryDirectory() as folder:
+            path = Path(folder) / 'candidate.json'
+            with patch.object(engine, '_capture', return_value=self.candidate) as capture:
+                result = engine.capture_successor_for_review(path, engine.HIRING_VERSION)
+            capture.assert_called_once_with(engine.HIRING_VERSION, '0.2')
+            self.assertEqual(path.read_bytes(), engine.wire(self.candidate))
+            self.assertEqual(result['candidatePins'], self.pins)
+            self.assertFalse(result['runtimeCommitVerifiedByThisCapture'])
+            for field, value in (('description', 'changed public copy'), ('version', '0.3')):
+                other = deepcopy(self.candidate)
+                other['serverCard'][field] = value
+                refused = Path(folder) / (field + '.json')
+                with patch.object(engine, '_capture', return_value=other), self.assertRaises(ValueError):
+                    engine.capture_successor_for_review(refused, engine.HIRING_VERSION)
+                self.assertTrue(refused.is_file())
+
+    def test_candidate_requires_all_review_pins_and_preserves_f6_outputs(self):
+        archived = engine.documents(self.previous, engine.SUCCESSOR_VERSION)
+        with patch.object(engine, 'HIRING_PINS', self.pins):
+            active = engine.documents(self.candidate, engine.HIRING_VERSION)
+            manifest = engine.reviewed_profile(engine.HIRING_VERSION)
+            retained = active[manifest.inventory][1]
+            self.assertEqual(json.loads(retained)['engine']['account_tools'], 36)
+            self.assertEqual(active['mcp/tool-inventory.json'][1], retained)
+            self.assertEqual(archived['auth.md'], active['auth.md'])
+            self.assertEqual(archived['.well-known/api-catalog'], active['.well-known/api-catalog'])
+            self.assertEqual(archived, engine.documents(self.previous, engine.SUCCESSOR_VERSION))
+            other = {**self.candidate, 'observedAt': '2099-01-01Z'}
+            with self.assertRaisesRegex(ValueError, 'differs from the reviewed record'):
+                engine.documents(other, engine.HIRING_VERSION)
+
+
 if __name__ == '__main__':
     unittest.main()

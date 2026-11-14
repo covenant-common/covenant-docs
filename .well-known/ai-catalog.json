@@ -6,11 +6,11 @@
         "_meta": {
           "io.github.covenant-common/aap": {
             "account_authentication": "CURRENT_SCOPED_BEARER_PER_REQUEST",
-            "account_tools": 30,
+            "account_tools": 36,
             "api_call": "https://jupie202020.pythonanywhere.com/v1/engine/call",
             "catalogue": {
               "approved_family_action_aliases": 156,
-              "browsable_names": 423,
+              "browsable_names": 429,
               "completeness": "COMPLETE_PAGINATION_NO_RANK_CUTOFF",
               "customer_authority_checked": false,
               "domains": [
@@ -95,7 +95,7 @@
               "maintained_families": 205,
               "metadata_only": true,
               "mounted_descriptors_by_interface": {
-                "account": 30,
+                "account": 36,
                 "keyless": 159,
                 "public": 16,
                 "sandbox": 43
@@ -407,12 +407,12 @@
               "covenant_explain",
               "covenant_call"
             ],
-            "observedAt": "2026-11-14T13:02:31.877820+00:00",
-            "profileVersion": "2026-11-14.f6.v1",
-            "sha256": "b1267d3ed0119485e19dabd2385e4bc3ec04cc3c372faa74a27ced039780b1d7",
+            "observedAt": "2026-11-14T16:52:44.247954+00:00",
+            "profileVersion": "2026-11-14.d25.v1",
+            "sha256": "76236e8ed6954adc9014527da8ccbd805079699c624ccff18907c715151de2e7",
             "snapshotOnly": true,
             "toolCount": 4,
-            "url": "https://covenant-common.github.io/covenant-docs/mcp/engine-tool-inventory-2026-11-14.f6.v1.json"
+            "url": "https://covenant-common.github.io/covenant-docs/mcp/engine-tool-inventory-2026-11-14.d25.v1.json"
           }
         },
         "description": "Discover and use Covenant tools. Account actions need your scoped permission.",
