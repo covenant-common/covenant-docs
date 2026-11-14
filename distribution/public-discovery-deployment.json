@@ -5,19 +5,19 @@
       "contentType": "application/mcp-server-card+json",
       "file": "mcp/server-card",
       "path": "/mcp/server-card",
-      "sha256": "8087e56742c1b7c1b1dd36aeed4e0f216a07c614d51dab544ee7760b56729f43"
+      "sha256": "3597308708f575659ea4d6463ff529ab1633dab8c17cdeba66100025b17969b8"
     },
     {
       "contentType": "application/mcp-server-card+json",
       "file": ".well-known/mcp/server-card.json",
       "path": "/.well-known/mcp/server-card.json",
-      "sha256": "8087e56742c1b7c1b1dd36aeed4e0f216a07c614d51dab544ee7760b56729f43"
+      "sha256": "3597308708f575659ea4d6463ff529ab1633dab8c17cdeba66100025b17969b8"
     },
     {
       "contentType": "application/ai-catalog+json",
       "file": ".well-known/ai-catalog.json",
       "path": "/.well-known/ai-catalog.json",
-      "sha256": "91f65c68a7ed78ac4f1ef550e56b6cdac4216769f20d35151d14c0a2d2432be5"
+      "sha256": "fea8d75aba1bcb263d4b5021894c30b62d449c32c41e870d827bcc3601c91304"
     },
     {
       "contentType": "application/linkset+json",
@@ -29,7 +29,7 @@
       "contentType": "application/json",
       "file": "mcp/tool-inventory.json",
       "path": "/mcp/tool-inventory.json",
-      "sha256": "367a68c4853843645e31a26fd67ef923209b49670bb6a72e03f6a3d50697ce7d"
+      "sha256": "b1267d3ed0119485e19dabd2385e4bc3ec04cc3c372faa74a27ced039780b1d7"
     },
     {
       "contentType": "text/markdown; charset=utf-8",
@@ -38,17 +38,17 @@
       "sha256": "a39060da6edfe6e74774f5c5acdd0f80e97b1f0fd6c1695526fcc8288125243e"
     }
   ],
-  "format": "aap-public-discovery-deployment/2026-11-10.v2",
+  "format": "aap-public-discovery-deployment/2026-11-14.f6.v1",
   "githubPagesProjectPrefixIsNotDomainRoot": true,
   "hostedEngineStatus": "OBSERVED_LIVE",
   "legacyProfile": "distribution/history/public-discovery-2026-11-02.v1",
-  "observedAt": "2026-11-10",
+  "observedAt": "2026-11-14T13:02:31.877820+00:00",
   "origin": "https://jupie202020.pythonanywhere.com",
-  "profile": "urn:aap:hosted-engine-mcp:0.1",
+  "profile": "urn:aap:hosted-engine-mcp:0.2",
   "registryAndStoreRefresh": "SEPARATE_NOT_PERFORMED",
-  "sourceObservation": "distribution/engine-mcp-observation-2026-11-10.v2.json",
+  "sourceObservation": "distribution/engine-mcp-observation-2026-11-14.f6.v1.json",
   "staticWebsiteStatus": "PREPARED_FOR_PUBLICATION",
   "websiteOnlyDocuments": [
-    "mcp/engine-tool-inventory-2026-11-10.v2.json"
+    "mcp/engine-tool-inventory-2026-11-14.f6.v1.json"
   ]
 }

@@ -9,9 +9,9 @@
     "account_tools": 30,
     "api_call": "https://jupie202020.pythonanywhere.com/v1/engine/call",
     "catalogue": {
-      "approved_family_action_aliases": 127,
-      "browsable_names": 394,
-      "completeness": "ALPHABETICAL_PAGINATION_NO_RANK_CUTOFF",
+      "approved_family_action_aliases": 156,
+      "browsable_names": 423,
+      "completeness": "COMPLETE_PAGINATION_NO_RANK_CUTOFF",
       "customer_authority_checked": false,
       "domains": [
         {
@@ -96,7 +96,7 @@
       "metadata_only": true,
       "mounted_descriptors_by_interface": {
         "account": 30,
-        "keyless": 127,
+        "keyless": 159,
         "public": 16,
         "sandbox": 43
       },
@@ -114,37 +114,34 @@
       "covenant_call"
     ],
     "fixed_public_tools": 9,
-    "keyless_actions": 127,
+    "keyless_actions": 159,
     "keys_accepted": false,
-    "profile": "urn:aap:hosted-engine-mcp:0.1",
+    "profile": "urn:aap:hosted-engine-mcp:0.2",
     "public_tools": 16,
     "reference": "https://jupie202020.pythonanywhere.com/engine-reference.json",
     "url": "https://jupie202020.pythonanywhere.com/mcp/engine/v1"
   },
-  "format": "aap-hosted-engine-tool-inventory/2026-11-10.v2",
+  "format": "aap-hosted-engine-tool-inventory/2026-11-14.f6.v1",
   "legacyPublicNamesRemainCallable": true,
   "liveAuthority": "Discover current schemas with tools/list; use covenant_explain for the selected action.",
-  "observedAt": "2026-11-10",
+  "observedAt": "2026-11-14T13:02:31.877820+00:00",
   "planningBoundary": "Templates and plans remain unsigned and unadopted. Group preparation does not create a forum.",
   "privacyBoundary": "The host receives supplied parameters. Keep private inputs, proving witnesses and commitment openings local; send only shareable proof envelopes and records.",
-  "profile": "urn:aap:hosted-engine-mcp:0.1",
+  "profile": "urn:aap:hosted-engine-mcp:0.2",
   "protocolVersion": "2025-11-25",
   "scope": "Four entry tools. Keyless actions need no account; account writes require current scoped permission. Every maintained family is discoverable, not anonymously callable.",
   "serverInfo": {
     "name": "aap-engine",
-    "version": "0.1"
+    "version": "0.2"
   },
   "signingKeysAccepted": false,
   "sourceEvidence": {
-    "liveVerificationStatus": "PASS_LIVE_ANONYMOUS_ENGINE",
     "rawResponseSha256": {
-      "03-discovery.response.json": "9cdbb5e2a08449318b161638fa26f23f45107163e6c5456a38e669b3c50be2f3",
-      "04-card.response.json": "5dafa4d71fc00d5335893d85ac845ed3f5ebc1307306357c2393ec677ad82e91",
-      "05-reference.response.json": "121639dde24a37bce801e8845c29446ee47dcadb5b054a50573d65eba79c8097",
-      "06-tools.response.json": "efd11a2cb192e1345946af38b4c64cc1e238c8c1af0331a252a4a5cadd015e7a"
+      "initialize": "0793d52dcf3cf0c93d813eeb49d2707b2e9f98822845c408731e765bf24f4f49",
+      "server-card": "ad9142c7a4eae0c1f869901d18f39b19dd0fb76d8009fbe5c222fd39fc62e9ad",
+      "tools/list": "91a2919364ab48c12b34681e1277f9423fcc478b573bff87241071d33385615c"
     },
-    "runtimeCommit": "d2faecb7c0e8f96c77dfa8f64794b584fc6907da",
-    "verifiedRequests": 19
+    "runtimeCommitVerifiedByThisCapture": false
   },
   "toolCount": 4,
   "tools": [
@@ -174,50 +171,135 @@
       },
       "description": "Find public services, or set kind=features to discover every maintained capability and its actual access route. No seller is invented when a search is empty.",
       "inputSchema": {
-        "additionalProperties": false,
-        "properties": {
-          "category": {
-            "maxLength": 64,
-            "type": "string"
-          },
-          "cursor": {
-            "maximum": 100000,
-            "minimum": 0,
-            "type": "integer"
-          },
-          "full": {
-            "type": "boolean"
-          },
-          "include_test": {
-            "type": "boolean"
-          },
-          "kind": {
-            "enum": [
-              "services",
-              "features"
+        "oneOf": [
+          {
+            "additionalProperties": false,
+            "properties": {
+              "cursor": {
+                "maximum": 100000,
+                "minimum": 0,
+                "type": "integer"
+              },
+              "kind": {
+                "const": "features"
+              },
+              "limit": {
+                "maximum": 50,
+                "minimum": 1,
+                "type": "integer"
+              },
+              "query": {
+                "maxLength": 256,
+                "type": "string"
+              }
+            },
+            "required": [
+              "kind"
             ],
-            "type": "string"
+            "type": "object"
           },
-          "limit": {
-            "maximum": 50,
-            "minimum": 1,
-            "type": "integer"
+          {
+            "additionalProperties": false,
+            "properties": {
+              "cursor": {
+                "maximum": 100000,
+                "minimum": 0,
+                "type": "integer"
+              },
+              "kind": {
+                "const": "features"
+              },
+              "limit": {
+                "maximum": 50,
+                "minimum": 1,
+                "type": "integer"
+              },
+              "q": {
+                "maxLength": 256,
+                "type": "string"
+              }
+            },
+            "required": [
+              "kind",
+              "q"
+            ],
+            "type": "object"
           },
-          "offset": {
-            "maximum": 5000,
-            "minimum": 0,
-            "type": "integer"
+          {
+            "additionalProperties": false,
+            "properties": {
+              "category": {
+                "maxLength": 64,
+                "type": "string"
+              },
+              "full": {
+                "type": "boolean"
+              },
+              "include_test": {
+                "type": "boolean"
+              },
+              "kind": {
+                "enum": [
+                  "services"
+                ]
+              },
+              "limit": {
+                "maximum": 50,
+                "minimum": 1,
+                "type": "integer"
+              },
+              "offset": {
+                "maximum": 5000,
+                "minimum": 0,
+                "type": "integer"
+              },
+              "query": {
+                "maxLength": 120,
+                "type": "string"
+              }
+            },
+            "required": [],
+            "type": "object"
           },
-          "q": {
-            "maxLength": 120,
-            "type": "string"
-          },
-          "query": {
-            "maxLength": 120,
-            "type": "string"
+          {
+            "additionalProperties": false,
+            "properties": {
+              "category": {
+                "maxLength": 64,
+                "type": "string"
+              },
+              "full": {
+                "type": "boolean"
+              },
+              "include_test": {
+                "type": "boolean"
+              },
+              "kind": {
+                "enum": [
+                  "services"
+                ]
+              },
+              "limit": {
+                "maximum": 50,
+                "minimum": 1,
+                "type": "integer"
+              },
+              "offset": {
+                "maximum": 5000,
+                "minimum": 0,
+                "type": "integer"
+              },
+              "q": {
+                "maxLength": 120,
+                "type": "string"
+              }
+            },
+            "required": [
+              "q"
+            ],
+            "type": "object"
           }
-        },
-        "required": [],
+        ],
         "type": "object"
       },
       "name": "covenant_find",
@@ -230,7 +312,7 @@
         "openWorldHint": false,
         "readOnlyHint": true
       },
-      "description": "Get the exact schema, supported action and access requirements. Select interface when several implementations use the same name.",
+      "description": "Get the one recommended call for a tool: its exact arguments, a working example and what access it needs. Pass detail \"full\" to see every version of the tool with its exact schema. Select interface when several versions share a name.",
       "inputSchema": {
         "additionalProperties": false,
         "properties": {
@@ -238,6 +320,13 @@
             "maxLength": 80,
             "minLength": 1,
             "type": "string"
+          },
+          "detail": {
+            "description": "short (the default) gives the recommended call; full gives every version.",
+            "enum": [
+              "short",
+              "full"
+            ]
           },
           "interface": {
             "maxLength": 120,

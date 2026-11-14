@@ -132,7 +132,9 @@ def documents(source):
 
 
 def main():
+    import build_live_engine_discovery as engine
     parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--profile', choices=engine.ENTRY_PROFILES, default=engine.ACTIVE_VERSION)
     action = parser.add_mutually_exclusive_group()
     action.add_argument('--check', action='store_true')
     action.add_argument('--refresh', action='store_true')
@@ -140,16 +142,23 @@ def main():
     args = parser.parse_args()
     # The historical nine-tool functions and observation above remain available
     # for byte-exact reproduction. The CLI now publishes the reviewed successor.
-    import build_live_engine_discovery as engine
-    source = json.loads(engine.SOURCE.read_text())
+    try:
+        selected = engine.reviewed_profile(args.profile)
+    except ValueError as error:
+        raise SystemExit('FAIL: ' + str(error)) from error
+    # Retain the existing default source path for frozen checks and fixtures.
+    retained = (
+        engine.SOURCE if selected.version == engine.VERSION else selected.observation
+    )
+    source = json.loads(retained.read_text())
     # A refresh checks live discovery and rebuilds aliases. It must never
     # overwrite the explicitly versioned retained observation.
     if args.refresh or args.check_live:
-        live = engine.observe()
+        live = engine.observe(selected.version)
         for key in ('tools', 'serverInfo', 'protocolVersion', 'engine', 'serverCard'):
             if wire(live[key]) != wire(source[key]):
                 raise SystemExit('FAIL: live engine metadata drift in ' + key)
-    outputs = engine.documents(source)
+    outputs = engine.documents(source, selected.version)
     for name, (media, body) in outputs.items():
         path = ROOT / name
         if args.check or args.check_live:
@@ -158,13 +167,13 @@ def main():
         else:
             path.parent.mkdir(parents=True, exist_ok=True)
             path.write_bytes(body)
-    manifest = {'format': 'aap-public-discovery-deployment/' + engine.VERSION,
-        'profile': engine.PROFILE, 'origin': ORIGIN, 'observedAt': source['observedAt'],
-        'sourceObservation': engine.SOURCE.relative_to(ROOT).as_posix(),
+    manifest = {'format': 'aap-public-discovery-deployment/' + selected.version,
+        'profile': selected.profile, 'origin': ORIGIN, 'observedAt': source['observedAt'],
+        'sourceObservation': retained.relative_to(ROOT).as_posix(),
         'documents': [{'path': '/' + name, 'file': name, 'contentType': media,
                        'sha256': hashlib.sha256(body).hexdigest()}
-                      for name, (media, body) in outputs.items() if name != engine.INVENTORY],
-        'websiteOnlyDocuments': [engine.INVENTORY],
+                      for name, (media, body) in outputs.items() if name != selected.inventory],
+        'websiteOnlyDocuments': [selected.inventory],
         'hostedEngineStatus': 'OBSERVED_LIVE',
         'staticWebsiteStatus': 'PREPARED_FOR_PUBLICATION',
         'deploymentStatus': 'LIVE_ENGINE_OBSERVED_STATIC_FILES_PREPARED_FOR_PUBLICATION',
@@ -178,7 +187,7 @@ def main():
     else:
         target.write_bytes(wire(manifest))
     print(json.dumps({'status': 'PASS', 'files': len(outputs), 'tools': len(engine.ENTRY),
-        'profileVersion': engine.VERSION, 'live_inventory_checked': args.refresh or args.check_live,
+        'profileVersion': selected.version, 'live_inventory_checked': args.refresh or args.check_live,
         'hosted_engine': 'OBSERVED_IN_RETAINED_CAPTURE',
         'static_publication': 'NOT_ESTABLISHED_BY_THIS_COMMAND'}, indent=2))
 
