@@ -9,7 +9,7 @@
 
 export const SENTENCE = "A deal is a promise both sides sign. Proof shows it was kept. If it wasn't, there is a fair way to fix it.";
 export const MANIFEST_FORMAT = 'aap-sandbox-site/0.1';
-export const REFERENCE = '../docs/INSTALL.html#sandbox-errors';
+export const REFERENCE = '../docs/GLOSSARY.html#sandbox-errors';
 export const LIMITS = { manifest: 16384, wheel: 32 * 1024 * 1024, script: 65536, record: 65536 };
 const WHEEL = /^agentic_agreements-[0-9][0-9A-Za-z.!+]*-py3-none-any\.whl$/;
 const HEX64 = /^[0-9a-f]{64}$/;

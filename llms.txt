@@ -132,3 +132,5 @@ Proposed prices do not place an order. Read [licensing](docs/FAQ.html#licensing)
 
 - [Optional buyer comparison](docs/PILOT_WORKSPACE.html#buyer-comparison): compare exact same-asset quotes, fees, review, coordination and repair ranges against buyer-declared checks. Unknown inputs stay unknown; no automatic winner or execution authority. Export one selected note, then load it explicitly into the editable [Matrix draft](docs/MATRIX.html#buyer-comparison-handoff). The note is not an offer or assent.
 - [Research behind the design](docs/RESEARCH.html): primary agent-economy, incentive and decision-theory work, assumptions and proposed experiments. Research is not production validation.
+
+- [Try a first agreement](docs/FIRST_DEAL.html): a sample public draft and a browser exercise with test signatures. [Glossary](docs/GLOSSARY.html) explains result fields.

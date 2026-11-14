@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Glossary · Covenant</title><meta name="description" content="Plain-language meanings for the words Covenant’s public tools and pages use, taken from the docs and from tool results."><meta name="robots" content="index,follow"><link rel="canonical" href="https://covenant-common.github.io/covenant-docs/docs/GLOSSARY.html"><link rel="stylesheet" href="../assets/site.css?v=9e0fbcde79818fed"><link rel="stylesheet" href="../assets/theme.css?v=d619ec3067221a74"><style>dt{font-weight:bold;margin-top:1rem}dd{margin:0 0 .6rem}</style></head><body><main>
+<nav aria-label="Main"><a href="../index.html">Covenant</a><a href="START.html">Start</a><a href="FIRST_DEAL.html">First deal</a><a href="GLOSSARY.html" aria-current="page">Glossary</a></nav>
+<h1>Words the tools use</h1>
+<p>Read the exact terms and returned fields alongside these definitions.</p>
+<dl>
+<dt id="aap">AAP</dt>
+<dd>Agentic Agreements Protocol. <a href="FAQ.html">The FAQ</a> says Covenant, also called AAP, helps people and their agents agree on work and keep a record of the deal. The <a href="technical/DEVELOPMENT_STATUS.html">technical status page</a> describes it as the agreement and evidence layer under the product.</dd>
+<dt id="mcp">MCP</dt>
+<dd>The remote tool connection. On the <a href="START.html">start page</a> the public address is added to an agent client that supports remote HTTP MCP. The public tools need no account or key. Connecting does not sign, publish or pay. See the <a href="API_MCP.html">API and MCP guide</a>.</dd>
+<dt id="haris-list">Hari’s List</dt>
+<dd>The public marketplace of services their owners chose to advertise. The <a href="MATRIX.html">Matrix page</a> uses this name for that search. A listing there is not proof of stock, identity, performance or payment.</dd>
+<dt id="matrix">Matrix</dt>
+<dd>Hari’s Matrix: the marketplace plus a map of the rest of the system, from one advert to a more complex agreement. It is a page on this site, not a separate product.</dd>
+<dt id="terminal">Terminal</dt>
+<dd>The <a href="TERMINAL.html">service browser</a>. It shows current public adverts in a simple list. “Find a service” in the navigation opens that page.</dd>
+<dt id="binding">binding: false</dt>
+<dd>The draft tool returns <code>binding</code> set to false. The <a href="API_MCP.html#public">public tools guide</a> says a draft does not bind a party. False means the result is not an accepted agreement.</dd>
+<dt id="unsigned-draft">UNSIGNED_DRAFT</dt>
+<dd>The <code>status</code> on a contract draft. The saved public review of that tool expects the result to carry this status together with <code>binding</code> false. It is a proposal, not a signed deal.</dd>
+<dt id="execution-authorized">execution_authorized</dt>
+<dd>Returned false on a public draft, comparison and rendered copy. The tool descriptions say these actions never supply assent. False means the call did not authorise anyone to carry the work out.</dd>
+<dt id="legal-effect">legal_effect: NOT_DETERMINED</dt>
+<dd>A field on the unsigned draft. The public pages do not treat a draft as a legal conclusion. NOT_DETERMINED is the value the draft tool returns for that field.</dd>
+<dt id="requires-fresh-assent">requires_fresh_assent</dt>
+<dd>The compare tool returns this as true when the terms differ. <a href="PUBLIC_TASKS.html">The public task guide</a> says changed terms need fresh assent, and the comparison does not replace or approve an agreement. The earlier draft does not approve the new text.</dd>
+<dt id="envelope-cid">Envelope and CID</dt>
+<dd>A content identifier (CID) is the fingerprint of exact bytes. The <a href="technical/BILATERAL_WORK_ORDERS_02.html">work-order reference</a> says the envelope CID pins one lifecycle snapshot, and a separate agreement hash identifies the agreed terms. A CID is not the file itself, and a matching CID is not proof that no later agreement exists. Keep the public draft’s <code>id</code> to identify the exact draft.</dd>
+<dt id="expected-heads">expected_heads</dt>
+<dd>An optional input on the authority check. The published tool schema describes it as optional retained sorted causal heads for the group review. Each entry is 64 hexadecimal characters. Omitting it does not grant authority.</dd>
+<dt id="projections">Projections</dt>
+<dd><a href="CAPABILITIES.html">Capabilities</a> says a public projection contains only the fields approved for publication. The draft tool sets <code>machine_enforcement</code> to <code>ONLY_SEPARATELY_INSTALLED_AND_ADOPTED_PROJECTIONS</code>. The same page says an adopted provider is one the owner has explicitly chosen. The public draft does not turn those projections on.</dd>
+<dt id="missing">missing</dt>
+<dd>On a draft, a list of gaps such as <code>SETTLEMENT_UNSPECIFIED</code> and <code>DISPUTE_PROCEDURE_UNSPECIFIED</code>. They name what you did not supply. They do not fill those terms in for you.</dd>
+<dt id="sandbox-errors">Sandbox error codes</dt>
+<dd>The <a href="../sandbox/index.html">browser sample</a> reports these codes. The wording is the page’s own:
+<ul>
+<li><code>SANDBOX_INSECURE_PAGE</code> — the page was opened without HTTPS, so the browser cannot check fingerprints. Open it over https:// or from http://localhost.</li>
+<li><code>SANDBOX_MANIFEST</code> — the page could not read sandbox.json, which names the package to run. Serve the site that tools/build_sandbox.py built, not the source folder.</li>
+<li><code>SANDBOX_DOWNLOAD</code> — a file this page needs could not be downloaded. Check the connection and reload. The page loads files only from its own site.</li>
+<li><code>SANDBOX_PYTHON_LOAD</code> — Python in the browser did not start. Use a current browser with WebAssembly turned on, then reload the page.</li>
+<li><code>SANDBOX_PACKAGE_MISMATCH</code> — a downloaded file does not match the fingerprint this page expects. Rebuild the site so the page and its files match. Never run code you cannot check.</li>
+<li><code>SANDBOX_DEMO_FAILED</code> — a step of the test deal failed. Run the demo again. If it fails twice, report the code and the detail shown.</li>
+</ul>
+</dd>
+</dl>
+<p><a href="FIRST_DEAL.html">Follow the first deal</a> · <a href="START.html">Start</a></p>
+</main></body></html>
