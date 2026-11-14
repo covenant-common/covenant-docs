@@ -129,7 +129,7 @@
     "acquisition": "mailto:jupitersstring@gmail.com?subject=Covenant%20codebase%20and%20IP%20acquisition%20offer"
   },
   "submission_notice": "Public marketing metadata only; not an MCP Registry server.json, installation manifest, proof of live hosting or independent qualification.",
-  "mcp_configuration_url": "https://covenant-common.github.io/covenant-docs/mcp-config.json",
+  "mcp_configuration_url": "https://covenant-common.github.io/covenant-docs/mcp-config-engine-0.1.json",
   "matrix_url": "https://covenant-common.github.io/covenant-docs/docs/MATRIX.html",
   "channels": {
     "official_mcp_registry": {

@@ -3490,7 +3490,7 @@
   ],
   "version": "0.46.0",
   "hosted_first_action": {
-    "connection": "mcp-config.json",
+    "connection": "mcp-config-engine-0.1.json",
     "guide": "docs/START.html",
     "installation_required": false,
     "signing_authority_granted": false

@@ -2,7 +2,7 @@
   "mcpServers": {
     "covenant-public": {
       "type": "http",
-      "url": "https://jupie202020.pythonanywhere.com/mcp"
+      "url": "https://jupie202020.pythonanywhere.com/mcp/engine/v1"
     }
   }
 }
