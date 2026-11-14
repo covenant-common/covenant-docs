@@ -9,9 +9,9 @@
             "account_tools": 30,
             "api_call": "https://jupie202020.pythonanywhere.com/v1/engine/call",
             "catalogue": {
-              "approved_family_action_aliases": 127,
-              "browsable_names": 394,
-              "completeness": "ALPHABETICAL_PAGINATION_NO_RANK_CUTOFF",
+              "approved_family_action_aliases": 156,
+              "browsable_names": 423,
+              "completeness": "COMPLETE_PAGINATION_NO_RANK_CUTOFF",
               "customer_authority_checked": false,
               "domains": [
                 {
@@ -96,7 +96,7 @@
               "metadata_only": true,
               "mounted_descriptors_by_interface": {
                 "account": 30,
-                "keyless": 127,
+                "keyless": 159,
                 "public": 16,
                 "sandbox": 43
               },
@@ -107,6 +107,7 @@
               "source_schemas_are_installed": false,
               "version": "urn:aap:hosted-feature-catalogue:0.1"
             },
+            "engine_only_actions": 32,
             "entry_tool_schemas": [
               {
                 "annotations": {
@@ -134,50 +135,135 @@
                 },
                 "description": "Find public services, or set kind=features to discover every maintained capability and its actual access route. No seller is invented when a search is empty.",
                 "inputSchema": {
-                  "additionalProperties": false,
-                  "properties": {
-                    "category": {
-                      "maxLength": 64,
-                      "type": "string"
-                    },
-                    "cursor": {
-                      "maximum": 100000,
-                      "minimum": 0,
-                      "type": "integer"
-                    },
-                    "full": {
-                      "type": "boolean"
-                    },
-                    "include_test": {
-                      "type": "boolean"
-                    },
-                    "kind": {
-                      "enum": [
-                        "services",
-                        "features"
+                  "oneOf": [
+                    {
+                      "additionalProperties": false,
+                      "properties": {
+                        "cursor": {
+                          "maximum": 100000,
+                          "minimum": 0,
+                          "type": "integer"
+                        },
+                        "kind": {
+                          "const": "features"
+                        },
+                        "limit": {
+                          "maximum": 50,
+                          "minimum": 1,
+                          "type": "integer"
+                        },
+                        "query": {
+                          "maxLength": 256,
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "kind"
                       ],
-                      "type": "string"
+                      "type": "object"
                     },
-                    "limit": {
-                      "maximum": 50,
-                      "minimum": 1,
-                      "type": "integer"
+                    {
+                      "additionalProperties": false,
+                      "properties": {
+                        "cursor": {
+                          "maximum": 100000,
+                          "minimum": 0,
+                          "type": "integer"
+                        },
+                        "kind": {
+                          "const": "features"
+                        },
+                        "limit": {
+                          "maximum": 50,
+                          "minimum": 1,
+                          "type": "integer"
+                        },
+                        "q": {
+                          "maxLength": 256,
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "kind",
+                        "q"
+                      ],
+                      "type": "object"
                     },
-                    "offset": {
-                      "maximum": 5000,
-                      "minimum": 0,
-                      "type": "integer"
+                    {
+                      "additionalProperties": false,
+                      "properties": {
+                        "category": {
+                          "maxLength": 64,
+                          "type": "string"
+                        },
+                        "full": {
+                          "type": "boolean"
+                        },
+                        "include_test": {
+                          "type": "boolean"
+                        },
+                        "kind": {
+                          "enum": [
+                            "services"
+                          ]
+                        },
+                        "limit": {
+                          "maximum": 50,
+                          "minimum": 1,
+                          "type": "integer"
+                        },
+                        "offset": {
+                          "maximum": 5000,
+                          "minimum": 0,
+                          "type": "integer"
+                        },
+                        "query": {
+                          "maxLength": 120,
+                          "type": "string"
+                        }
+                      },
+                      "required": [],
+                      "type": "object"
                     },
-                    "q": {
-                      "maxLength": 120,
-                      "type": "string"
-                    },
-                    "query": {
-                      "maxLength": 120,
-                      "type": "string"
+                    {
+                      "additionalProperties": false,
+                      "properties": {
+                        "category": {
+                          "maxLength": 64,
+                          "type": "string"
+                        },
+                        "full": {
+                          "type": "boolean"
+                        },
+                        "include_test": {
+                          "type": "boolean"
+                        },
+                        "kind": {
+                          "enum": [
+                            "services"
+                          ]
+                        },
+                        "limit": {
+                          "maximum": 50,
+                          "minimum": 1,
+                          "type": "integer"
+                        },
+                        "offset": {
+                          "maximum": 5000,
+                          "minimum": 0,
+                          "type": "integer"
+                        },
+                        "q": {
+                          "maxLength": 120,
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "q"
+                      ],
+                      "type": "object"
                     }
-                  },
-                  "required": [],
+                  ],
                   "type": "object"
                 },
                 "name": "covenant_find",
@@ -190,7 +276,7 @@
                   "openWorldHint": false,
                   "readOnlyHint": true
                 },
-                "description": "Get the exact schema, supported action and access requirements. Select interface when several implementations use the same name.",
+                "description": "Get the one recommended call for a tool: its exact arguments, a working example and what access it needs. Pass detail \"full\" to see every version of the tool with its exact schema. Select interface when several versions share a name.",
                 "inputSchema": {
                   "additionalProperties": false,
                   "properties": {
@@ -198,6 +284,13 @@
                       "maxLength": 80,
                       "minLength": 1,
                       "type": "string"
+                    },
+                    "detail": {
+                      "description": "short (the default) gives the recommended call; full gives every version.",
+                      "enum": [
+                        "short",
+                        "full"
+                      ]
                     },
                     "interface": {
                       "maxLength": 120,
@@ -265,21 +358,29 @@
               "covenant_call"
             ],
             "fixed_public_tools": 9,
+            "formula_check_modes": [
+              "nonnegative",
+              "release_bps",
+              "suggest",
+              "schedule"
+            ],
             "full_schema_lookup": {
               "arguments": {
                 "tool": "covenant_concept__review"
               },
               "tool": "covenant_explain"
             },
-            "keyless_actions": 127,
+            "keyless_actions": 159,
             "keys_accepted": false,
-            "profile": "urn:aap:hosted-engine-mcp:0.1",
+            "legacy_keyless_actions": 127,
+            "profile": "urn:aap:hosted-engine-mcp:0.2",
             "progressive_disclosure": true,
+            "public_proof_verifiers": "EXACT_STOCK_BUILTINS_ONLY",
             "public_tools": 16,
             "reference": "https://jupie202020.pythonanywhere.com/engine-reference.json",
             "serverInfo": {
               "name": "aap-engine",
-              "version": "0.1"
+              "version": "0.2"
             },
             "signing_keys_accepted": false,
             "source_tools": [
@@ -306,12 +407,12 @@
               "covenant_explain",
               "covenant_call"
             ],
-            "observedAt": "2026-11-10",
-            "profileVersion": "2026-11-10.v2",
-            "sha256": "367a68c4853843645e31a26fd67ef923209b49670bb6a72e03f6a3d50697ce7d",
+            "observedAt": "2026-11-14T13:02:31.877820+00:00",
+            "profileVersion": "2026-11-14.f6.v1",
+            "sha256": "b1267d3ed0119485e19dabd2385e4bc3ec04cc3c372faa74a27ced039780b1d7",
             "snapshotOnly": true,
             "toolCount": 4,
-            "url": "https://covenant-common.github.io/covenant-docs/mcp/engine-tool-inventory-2026-11-10.v2.json"
+            "url": "https://covenant-common.github.io/covenant-docs/mcp/engine-tool-inventory-2026-11-14.f6.v1.json"
           }
         },
         "description": "Discover and use Covenant tools. Account actions need your scoped permission.",
@@ -329,7 +430,7 @@
           }
         ],
         "title": "Covenant agent tools",
-        "version": "0.1",
+        "version": "0.2",
         "websiteUrl": "https://covenant-common.github.io/covenant-docs/docs/API_MCP.html#engine"
       },
       "displayName": "Covenant engine",

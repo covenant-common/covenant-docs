@@ -97,12 +97,15 @@ class LiveEngineDiscovery(unittest.TestCase):
         self.assertFalse(observed['sourceEvidence']['runtimeCommitVerifiedByThisCapture'])
 
     def test_six_host_documents_exclude_website_only_versioned_inventory(self):
+        profile = engine.reviewed_profile(engine.ACTIVE_VERSION)
+        source = json.loads(profile.observation.read_text())
         manifest = json.loads((engine.ROOT / 'distribution/public-discovery-deployment.json').read_text())
         self.assertEqual(len(manifest['documents']), 6)
-        self.assertEqual(manifest['websiteOnlyDocuments'], [engine.INVENTORY])
+        self.assertEqual(manifest['websiteOnlyDocuments'], [profile.inventory])
         self.assertEqual(manifest['hostedEngineStatus'], 'OBSERVED_LIVE')
         self.assertEqual(manifest['staticWebsiteStatus'], 'PREPARED_FOR_PUBLICATION')
-        output = engine.documents(self.source)
+        self.assertEqual(manifest['profile'], profile.profile)
+        output = engine.documents(source, profile.version)
         records = {row['path']: (row['contentType'], output[row['file']][1]) for row in manifest['documents']}
         delegated = []
         sentinel = [b'unchanged engine response']
@@ -129,12 +132,102 @@ class LiveEngineDiscovery(unittest.TestCase):
             current['observedAt'] = '2099-01-01T00:00:00Z'
             with patch.object(legacy, 'ROOT', root), patch.object(engine, 'SOURCE', retained), \
                     patch.object(engine, 'observe', return_value=current), \
-                    patch('sys.argv', ['build_public_discovery.py', '--refresh']), \
+                    patch('sys.argv', ['build_public_discovery.py', '--profile', engine.VERSION, '--refresh']), \
                     contextlib.redirect_stdout(StringIO()):
                 legacy.main()
             self.assertEqual(retained.read_bytes(), original)
             published = json.loads((root / 'mcp/tool-inventory.json').read_text())
             self.assertEqual(published['observedAt'], self.source['observedAt'])
+
+
+class FutureEngineDiscovery(unittest.TestCase):
+    def setUp(self):
+        self.source = json.loads(engine.SOURCE.read_text())
+        self.source['format'] = 'aap-hosted-engine-observation/' + engine.SUCCESSOR_VERSION
+        self.source['profile'] = 'urn:aap:hosted-engine-mcp:0.2'
+        self.source['serverInfo']['version'] = '0.2'
+        # These are isolated test transport values, not a deployment claim.
+        card = self.source['serverCard']
+        card['version'] = '0.2'
+        meta = card['_meta'][engine.META]
+        meta.update(serverInfo=deepcopy(self.source['serverInfo']), profile=self.source['profile'],
+                    keyless_actions=159)
+        self.source['engine'].update(profile=self.source['profile'], keyless_actions=159)
+        self.source['sourceEvidence'] = {'runtimeCommitVerifiedByThisCapture': False}
+        self.pins = {**engine.review_pins(self.source),
+                     'observation': hashlib.sha256(engine.wire(self.source)).hexdigest()}
+
+    def test_unpinned_upgrade_cannot_read_network_or_generate_output(self):
+        with patch.object(engine, 'SUCCESSOR_PINS', None), \
+                patch.object(engine, 'build_opener', side_effect=AssertionError('network')), \
+                patch('sys.argv', ['build_public_discovery.py', '--profile',
+                                   engine.SUCCESSOR_VERSION, '--refresh']):
+            with self.assertRaisesRegex(SystemExit, 'awaiting explicit review pins'):
+                legacy.main()
+            with self.assertRaisesRegex(ValueError, 'awaiting explicit review pins'):
+                engine.documents(self.source, engine.SUCCESSOR_VERSION)
+
+    def test_new_capture_writes_only_exclusive_external_file_and_does_not_select_profile(self):
+        with tempfile.TemporaryDirectory() as directory, \
+                patch.object(engine, 'SUCCESSOR_PINS', None), \
+                patch.object(engine, '_capture', return_value=self.source) as capture:
+            path = Path(directory) / 'observation.json'
+            result = engine.capture_successor_for_review(path)
+            self.assertEqual(json.loads(path.read_text()), self.source)
+            self.assertEqual(result['status'], 'CAPTURED_FOR_REVIEW')
+            self.assertEqual(result['candidatePins'], self.pins)
+            self.assertFalse(result['runtimeCommitVerifiedByThisCapture'])
+            capture.assert_called_once_with(engine.SUCCESSOR_VERSION, '0.2')
+            for refused in (path, engine.ROOT / 'capture.json'):
+                with self.assertRaises(ValueError):
+                    engine.capture_successor_for_review(refused)
+            with self.assertRaises(ValueError):
+                engine.documents(self.source, engine.SUCCESSOR_VERSION)
+            self.assertEqual(capture.call_count, 1)
+
+    def test_reviewed_upgrade_checks_pins_exact_projection_and_retained_observation(self):
+        with patch.object(engine, 'SUCCESSOR_PINS', self.pins):
+            self.assertEqual(engine.validate(self.source, engine.SUCCESSOR_VERSION), self.source)
+            for field, value in [('tools', []), ('sourceEvidence', {'unreviewed': True})]:
+                successor = {**self.source, field: value}
+                with self.subTest(field=field), self.assertRaises(ValueError):
+                    engine.documents(successor, engine.SUCCESSOR_VERSION)
+            successor = deepcopy(self.source)
+            successor['serverCard']['_meta'][engine.META]['keyless_actions'] = 160
+            with self.assertRaisesRegex(ValueError, 'projection must agree'):
+                engine.documents(successor, engine.SUCCESSOR_VERSION)
+
+    def test_explicit_upgrade_writes_new_version_and_preserves_historical_files(self):
+        with tempfile.TemporaryDirectory() as directory, \
+                patch.object(engine, 'SUCCESSOR_PINS', self.pins):
+            root = Path(directory)
+            base = root / 'distribution'
+            base.mkdir()
+            historical = base / engine.SOURCE.name
+            historical.write_bytes(engine.SOURCE.read_bytes())
+            original = historical.read_bytes()
+            version = engine.SUCCESSOR_VERSION
+            selected_path = base / ('engine-mcp-observation-' + version + '.json')
+            selected_path.write_bytes(engine.wire(self.source))
+            older_inventory = root / engine.INVENTORY
+            older_inventory.parent.mkdir()
+            older_inventory.write_bytes((engine.ROOT / engine.INVENTORY).read_bytes())
+            older = older_inventory.read_bytes()
+            with patch.object(legacy, 'ROOT', root), patch.object(engine, 'ROOT', root), \
+                    patch.object(engine, 'observe', return_value=self.source) as observe, \
+                    patch('sys.argv', ['build_public_discovery.py', '--profile', version, '--refresh']), \
+                    contextlib.redirect_stdout(StringIO()):
+                legacy.main()
+            observe.assert_called_once_with(version)
+            self.assertEqual(historical.read_bytes(), original)
+            self.assertEqual(older_inventory.read_bytes(), older)
+            self.assertEqual(selected_path.read_bytes(), engine.wire(self.source))
+            manifest = json.loads((base / 'public-discovery-deployment.json').read_bytes())
+            name, = manifest['websiteOnlyDocuments']
+            snapshot = (root / name).read_bytes()
+            self.assertEqual(snapshot, (root / 'mcp/tool-inventory.json').read_bytes())
+            self.assertEqual(json.loads(snapshot)['serverInfo']['version'], '0.2')
+            self.assertEqual(manifest['sourceObservation'], str(selected_path.relative_to(root)))
 
 
 if __name__ == '__main__':

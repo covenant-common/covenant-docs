@@ -28,3 +28,22 @@ Start with a concrete problem and a useful next step. Use everyday words and sho
 [Apply to the developer pilot](https://github.com/covenant-common/covenant-docs/issues/new?template=pilot-tester.yml) or contact the founders if your contribution needs source access. Propose a small interface, reproducible synthetic case and explicit limits. Access and any paid work, employment, ownership or rewards are separately agreed; no entitlement is implied by contributing.
 
 Report vulnerabilities through [SECURITY.md](SECURITY.md), not public issues. Ordinary docs bugs and non-sensitive integration goals can use the issue forms.
+
+## Refresh the public engine observation
+
+The default discovery generator uses the reviewed engine 0.2 observation, `2026-11-14.f6.v1`. Run these checks for the current profile:
+
+```sh
+python3 tools/build_public_discovery.py --check
+python3 tools/build_public_discovery.py --check-live
+```
+
+For a separate capture of live engine 0.2 responses, choose a new file outside the website checkout:
+
+```sh
+python3 tools/build_live_engine_discovery.py --capture-for-review /tmp/engine-0.2-observation.json
+```
+
+This performs only anonymous server-card, initialization and tools/list requests to the fixed public host. It reports hashes for review and leaves website files untouched. Match the reported identity, complete schemas and access counts against the intended deployed build and confirm that build independently. Keep the original capture bytes apart from the maintained published observation.
+
+The capture tool currently targets the configured 0.2 identity. When the live profile or schemas change, add a separately reviewed observation, review pins and version before moving the active aliases. The `--check-live` command reads public discovery and checks the existing files. The `--refresh` command checks public discovery and rebuilds aliases from the retained observation. Keep earlier observations, inventories and frozen task suites byte-for-byte. Website publication and connector catalogue updates have their own checks.
