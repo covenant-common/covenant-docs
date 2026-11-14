@@ -1,0 +1,46 @@
+{
+  "deploymentStatus": "PREPARED_NOT_ACTIVATED",
+  "documents": [
+    {
+      "contentType": "application/mcp-server-card+json",
+      "file": "mcp/server-card",
+      "path": "/mcp/server-card",
+      "sha256": "dd0d1174199f5b4322517e6d33a85b81a414801df54caa05a8559cb4f9970fcf"
+    },
+    {
+      "contentType": "application/mcp-server-card+json",
+      "file": ".well-known/mcp/server-card.json",
+      "path": "/.well-known/mcp/server-card.json",
+      "sha256": "dd0d1174199f5b4322517e6d33a85b81a414801df54caa05a8559cb4f9970fcf"
+    },
+    {
+      "contentType": "application/ai-catalog+json",
+      "file": ".well-known/ai-catalog.json",
+      "path": "/.well-known/ai-catalog.json",
+      "sha256": "f65481378e2eddbd435f649a9449a4506c2ecf3528b490cad8aeb632fca237aa"
+    },
+    {
+      "contentType": "application/linkset+json",
+      "file": ".well-known/api-catalog",
+      "path": "/.well-known/api-catalog",
+      "sha256": "e5e3df2be015a39351304de9a6f9bcd974feb3836319506a232b43bc0fd628b2"
+    },
+    {
+      "contentType": "application/json",
+      "file": "mcp/tool-inventory.json",
+      "path": "/mcp/tool-inventory.json",
+      "sha256": "bf8bf934d1136a24efec496fa8d6a2fe1034c7ffe0972229d7f589b7890600ad"
+    },
+    {
+      "contentType": "text/markdown; charset=utf-8",
+      "file": "auth.md",
+      "path": "/auth.md",
+      "sha256": "148fa1d581cfd622df9f6a03d7a8bc373018d4f3a571b59f92b1ae1fe895095f"
+    }
+  ],
+  "format": "aap-public-discovery-deployment/0.1",
+  "githubPagesProjectPrefixIsNotDomainRoot": true,
+  "observedAt": "2026-11-02T14:10:26.123173+00:00",
+  "origin": "https://jupie202020.pythonanywhere.com",
+  "runtimeIdentityMatchesCard": false
+}
