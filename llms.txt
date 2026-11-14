@@ -16,12 +16,12 @@ Covenant helps people and agents coordinate work, set limits and retain exact ag
 - [Can different agent tools share the same terms?](docs/FAQ.html#can-agents-on-different-tools-share-terms)
 - [Can I stop one agent without replacing my card?](docs/FAQ.html#can-i-stop-one-agent-without-replacing-my-card)
 
-- [Connect from your agent client](docs/CONNECTORS.html): free public connector settings, downloadable wrapper and dated store-distribution status.
+- [Connect to the hosted engine](docs/ENGINE_MCP.html): four entry tools, live schemas and a downloadable configuration for Cursor and other clients using URL-based MCP settings. [Other connection options](docs/CONNECTORS.html).
 - [Public tool use](docs/PUBLIC_TOOL_USE.html): free anonymous scope, privacy, limits and support; paid core and private accounts are separate.
 
-- [Machine discovery](docs/MCP_DISCOVERY.html): prepared public server-card aliases, complete nine-tool schema snapshot, catalogues and host activation requirements. A project path is not the hostname root.
+- [Machine discovery](docs/ENGINE_MCP.html): live server-card and action discovery. [Original nine-tool inventory and catalogues](docs/MCP_DISCOVERY.html#historical).
 
-- [Public task guide](docs/PUBLIC_TASKS.html): examples for choosing the nine public tools; signing, posting and payment need their separately configured workflows.
+- [Public task guide](docs/PUBLIC_TASKS.html): examples for choosing the original public actions; signing, posting and payment need their separately configured workflows.
 - [Fixed public task prompts](distribution/ato-prompt-set.json): twenty versioned test prompts and explicit expected boundaries. This is an evaluation set, not a claim of ranking or retention.
 
 ## First useful action
