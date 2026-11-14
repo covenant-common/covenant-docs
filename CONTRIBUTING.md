@@ -31,28 +31,22 @@ Report vulnerabilities through [SECURITY.md](SECURITY.md), not public issues. Or
 
 ## Refresh the public engine observation
 
-The default discovery generator uses the reviewed engine 0.2 observation, `2026-11-14.f6.v1`. Run these checks for the current profile:
+The default discovery generator uses the reviewed engine 0.2 observation, `2026-11-14.d25.v1`. Run these checks for the current profile:
 
 ```sh
 python3 tools/build_public_discovery.py --check
 python3 tools/build_public_discovery.py --check-live
 ```
 
-For a separate capture of live engine 0.2 responses, choose a new file outside the website checkout:
-
-```sh
-python3 tools/build_live_engine_discovery.py --capture-for-review /tmp/engine-0.2-observation.json
-```
-
-This performs only anonymous server-card, initialization and tools/list requests to the fixed public host. It reports hashes for review and leaves website files untouched. Match the reported identity, complete schemas and access counts against the intended deployed build and confirm that build independently. Keep the original capture bytes apart from the maintained published observation.
-
-The capture tool currently targets the configured 0.2 identity. When the live profile or schemas change, add a separately reviewed observation, review pins and version before moving the active aliases. The `--check-live` command reads public discovery and checks the existing files. The `--refresh` command checks public discovery and rebuilds aliases from the retained observation. Keep earlier observations, inventories and frozen task suites byte-for-byte. Website publication and connector catalogue updates have their own checks.
-
-After the hiring release is independently verified on the host, capture its public metadata into a new file:
+For a separate capture of the current hiring profile, choose a new file outside the website checkout:
 
 ```sh
 python3 tools/build_live_engine_discovery.py --profile 2026-11-14.d25.v1 \
   --capture-for-review /tmp/covenant-engine-d25-observation.json
 ```
 
-The capture accepts six additional account operations with the same four public entry schemas. If other fields drift, inspect the external capture and keep the current aliases. After review, retain the exact capture bytes at the new version’s observation path, set `HIRING_PINS` to the reviewed hashes, and select the new `ACTIVE_VERSION`. Regenerate discovery and the site manifest. The connector 0.2.0 reviewer file keeps its original f6 observation and inventory.
+This performs only anonymous server-card, initialization and tools/list requests to the fixed public host. It reports hashes for review and leaves website files untouched. Match the reported identity, complete schemas and access counts against the intended deployed build and confirm that build independently. Keep the original capture bytes apart from the maintained published observation.
+
+The capture tool currently targets the configured 0.2 identity. When the live profile or schemas change, add a separately reviewed observation, review pins and version before moving the active aliases. The `--check-live` command reads public discovery and checks the existing files. The `--refresh` command checks public discovery and rebuilds aliases from the retained observation. Keep earlier observations, inventories and frozen task suites byte-for-byte. Website publication and connector catalogue updates have their own checks.
+
+The hiring capture checks for six additional account operations compared with `2026-11-14.f6.v1`, with the same four public entry schemas. If other fields drift, inspect the new local capture and keep the published aliases until review. A new version needs its own observation and pins. Regenerate discovery and the site manifest after review. The connector 0.2.0 reviewer file keeps its original f6 observation and inventory.
