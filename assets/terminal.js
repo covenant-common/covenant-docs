@@ -58,9 +58,20 @@
     "link_source": "SERVICES.html"
   },
   {
+    "id": "hiring",
+    "title": "Post a job and take bids",
+    "summary": "Use a private account to publish a job, exchange signed bids and hire one supplier.",
+    "keywords": "post job jobs bid bids bidding hiring applicant applicants inbox supplier",
+    "href": "ONBOARDING.html#private-hiring",
+    "access": "account",
+    "group": "Work",
+    "links": ["requests", "offers", "approval"],
+    "link_source": "ONBOARDING.html#private-hiring"
+  },
+  {
     "id": "requests",
-    "title": "Requests for work",
-    "summary": "Explore request markets in the installed workspace.",
+    "title": "Request markets",
+    "summary": "Explore custom request markets in the installed workspace.",
     "keywords": "request requests work jobs tasks commission bounty bounties",
     "href": "CAPABILITIES.html#markets",
     "access": "installed",
@@ -485,7 +496,9 @@
     {id: 'find-service', actions: ['find', 'buy', 'buying', 'purchase', 'book', 'source', 'procure'], objects: ['developer', 'developers', 'programmer', 'programmers', 'engineer', 'supplier', 'provider', 'service', 'services', 'freelancer', 'editor', 'researcher', 'research', 'software', 'reviewer'], primary: ['services'], related: ['requests', 'offers']}
   ]);
   function taskIntent(need) {
-    const tokens = need.toLowerCase().normalize('NFKC').match(/[a-z0-9]+/g) || [];
+    const words = need.toLowerCase().normalize('NFKC');
+    const privateHiring = /\b(?:post|publish)\s+(?:(?:a|my|the)\s+)?job(?:s|\s+advert)?\b|\b(?:send|submit|accept|compare|review|receive|take|collect|manage)\s+(?:(?:a|my|the|supplier|private|incoming)\s+)*(?:bid|bids|bid inbox)\b/.exec(words);
+    const tokens = words.match(/[a-z0-9]+/g) || [];
     const staged = /\b(?:milestones?|stages?|staged)\b|\boutline\b[\s\S]*\b(?:final|approval|approve)\b|\bapproval\s+before\b/i.test(need);
     const service = /\b(?:brief|research|service|supplier|provider|hire|hiring|commission|review|report|csv|analysis|editing)\b/i.test(need);
     const matches = [];
@@ -494,6 +507,10 @@
       if (position < 0 || rule.objects.length && !tokens.some((token) => rule.objects.includes(token))) return;
       matches.push({rule, position, order});
     });
+    if (privateHiring) {
+      const position = (words.slice(0, privateHiring.index).match(/[a-z0-9]+/g) || []).length;
+      matches.push({position, order: -1, rule: {id: 'private-hiring', primary: ['hiring'], related: ['requests', 'offers']}});
+    }
     // The first requested action wins: "hire a developer to build an adapter"
     // is a buying journey; "build a marketplace to hire developers" is building.
     matches.sort((a, b) => a.position - b.position || a.order - b.order);

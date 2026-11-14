@@ -62,3 +62,16 @@ test('new installed routes retain the exact source action and parameters when a 
     for (const key of ['native_tool', 'action', 'required_parameters', 'schema_command', 'boundary', 'purpose', 'keywords']) assert.deepEqual(row[key], exact[key], row.id + '.' + key);
   }
 });
+
+test('job adverts and private bids lead to the hosted hiring guide at the account tier', () => {
+  const route = T.catalogue.find(entry => entry.id === 'hiring');
+  assert.equal(route.href, 'ONBOARDING.html#private-hiring');
+  assert.equal(route.access, 'account');
+  for (const need of ['post a job', 'send a private bid', 'review supplier bids']) {
+   assert.equal(T.rankNavigation(T.catalogue, need, 'account').routes[0].id, 'hiring', need);
+   assert.ok(T.rankNavigation(T.catalogue, need, 'public').routes.every(entry => entry.id !== 'hiring'), need);
+  }
+  assert.equal(T.rankNavigation(T.catalogue, 'hire a developer', 'account').routes[0].id, 'services');
+  assert.equal(T.rankNavigation(T.catalogue, 'advertise research service', 'account').routes[0].id, 'advertise');
+  assert.equal(T.rankNavigation(T.catalogue, 'advertise a service before I post a job', 'account').routes[0].id, 'advertise');
+});
