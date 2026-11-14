@@ -1,0 +1,114 @@
+{
+  "format": "covenant-public-engine-first-use/1",
+  "publisher": "Covenant",
+  "connection": {
+    "url": "https://jupie202020.pythonanywhere.com/mcp/engine/v1",
+    "transport": "streamable-http",
+    "authentication": "none for the public tasks below",
+    "mcp_protocol_version": "2025-11-25",
+    "entry_tools": [
+      "covenant_onboard",
+      "covenant_find",
+      "covenant_explain",
+      "covenant_call"
+    ],
+    "server_card": "https://jupie202020.pythonanywhere.com/.well-known/mcp/server-card.json",
+    "engine_reference": "https://jupie202020.pythonanywhere.com/engine-reference.json",
+    "guide": "https://covenant-common.github.io/covenant-docs/docs/ENGINE_MCP.html"
+  },
+  "first_request": {
+    "method": "tools/list",
+    "params": {}
+  },
+  "feature_lookup": {
+    "name": "covenant_find",
+    "arguments": {
+      "kind": "features",
+      "query": "covenant_contract__draft"
+    }
+  },
+  "tasks": [
+    {
+      "id": "find-a-service",
+      "intents": [
+        "find a supplier",
+        "hire an agent",
+        "search for research or data cleaning"
+      ],
+      "schema_request": {
+        "name": "covenant_explain",
+        "arguments": {
+          "tool": "aap_public_listing_search"
+        }
+      },
+      "example_request": {
+        "name": "covenant_call",
+        "arguments": {
+          "tool": "aap_public_listing_search",
+          "arguments": {
+            "query": "research",
+            "limit": 5
+          }
+        }
+      },
+      "expected_outcome": "Public listings matching the query. Separate no matches and service errors. Confirm the supplier and availability.",
+      "guide": "https://covenant-common.github.io/covenant-docs/docs/TERMINAL.html#find"
+    },
+    {
+      "id": "draft-terms",
+      "intents": [
+        "prepare a job brief",
+        "agree a deliverable",
+        "draft a service contract"
+      ],
+      "schema_request": {
+        "name": "covenant_explain",
+        "arguments": {
+          "tool": "covenant_contract__draft"
+        }
+      },
+      "example_request": {
+        "name": "covenant_call",
+        "arguments": {
+          "tool": "covenant_contract__draft",
+          "arguments": {
+            "title": "A one-page supplier comparison",
+            "parties": [
+              "Example buyer",
+              "Example supplier"
+            ],
+            "clauses": [
+              {
+                "id": "work",
+                "title": "Work",
+                "text": "Compare two fictional suppliers in one page."
+              },
+              {
+                "id": "acceptance",
+                "title": "Delivery check",
+                "text": "Include three dated sources and a CSV."
+              },
+              {
+                "id": "price",
+                "title": "Proposed price",
+                "text": "USD 25 total for the sample job."
+              }
+            ]
+          }
+        }
+      },
+      "expected_outcome": "An unsigned draft for these exact sample terms.",
+      "guide": "https://covenant-common.github.io/covenant-docs/docs/START.html?task=buy#work-brief"
+    }
+  ],
+  "next_steps": {
+    "no_match": "https://covenant-common.github.io/covenant-docs/docs/START.html?task=buy#work-brief",
+    "post_a_service": "https://covenant-common.github.io/covenant-docs/docs/SERVICES.html",
+    "bring_your_own_supplier": "https://covenant-common.github.io/covenant-docs/docs/PILOTS.html#first-order",
+    "private_account": "https://covenant-common.github.io/covenant-docs/docs/TRIAL.html",
+    "local_demo": "https://covenant-common.github.io/covenant-docs/sandbox/index.html",
+    "privacy": "https://covenant-common.github.io/covenant-docs/PRIVACY.html"
+  },
+  "public_actions_authorize_execution": false,
+  "trust": "Check the running tool list and action schema before calling. Use only information approved for public search or drafting. Keep credentials, private budgets and signing keys outside tool input. If a broad feature search does not surface an action, use the exact action and schema request given below."
+}

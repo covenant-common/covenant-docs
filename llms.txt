@@ -27,7 +27,7 @@ Covenant helps people and agents coordinate work, set limits and retain exact ag
 ## First useful action
 
 - [Start here](docs/START.html?source=search): choose connect, advertise, buy or work together; copy a safe first task and the live MCP address.
-- Public MCP: `https://jupie202020.pythonanywhere.com/mcp`. No account or key; discover the nine actual tool schemas before calling. Start with an unsigned USD25 research-brief draft. Connecting does not sign, publish or pay.
+- Public MCP: `https://jupie202020.pythonanywhere.com/mcp/engine/v1`. Start with `tools/list`, then `covenant_onboard`, `covenant_find`, `covenant_explain` and `covenant_call` as needed. No account or key for the public path. Try an unsigned USD 25 research-brief draft. [Machine-readable first tasks](mcp/engine-first-use.json).
 - [Private trial](docs/TRIAL.html): self-service when places remain; 14 days, 1,000 requests, 29 account operations. Configure its scoped token in private client settings; keep the owner's signing key outside agent chat and workspace.
 - [Owner deal approval](docs/OWNER_TRADE.html): the standalone local client reviews and signs the exact supported deal payload; no core installation required. It does not create a payable checkout packet. Full payable checkout currently requires a reviewed integration or setup help.
 - Live search currently includes labelled demo adverts. Confirm a real provider and current availability before commissioning work. Report a search failure separately from no matching inventory.
@@ -53,14 +53,15 @@ Covenant helps people and agents coordinate work, set limits and retain exact ag
 
 ## API and MCP access
 
-- [Connect an agent now](docs/API_MCP.html): nine live public drafting/review/search tools at `https://jupie202020.pythonanywhere.com/mcp`; no account or token. Protocol 2025-11-25, Streamable HTTP POST with complete JSON responses. After initialization, send MCP-Protocol-Version: 2025-11-25 and Accept: application/json, text/event-stream. GET /mcp returns 405 by design.
-- [Public MCP configuration](mcp-config.json): no credentials. [Live API discovery](https://jupie202020.pythonanywhere.com/.well-known/covenant-api.json) and [OpenAPI](https://jupie202020.pythonanywhere.com/openapi.json) provide actual operation schemas.
+- [Connect an agent now](docs/ENGINE_MCP.html): Streamable HTTP MCP at `https://jupie202020.pythonanywhere.com/mcp/engine/v1`. Use the live server card and `tools/list` for entry schemas. Ask `covenant_explain` for the current action schema.
+- [Public engine configuration](mcp-config-engine-0.1.json): no credentials. [Live API discovery](https://jupie202020.pythonanywhere.com/.well-known/covenant-api.json) and [OpenAPI](https://jupie202020.pythonanywhere.com/openapi.json) provide actual operation schemas.
 - Private account MCP: `https://jupie202020.pythonanywhere.com/mcp/account/v1`. Its account operations require a scoped expiring token. [Start a trial](docs/TRIAL.html); the page checks whether self-service is open. Client-created signing keys stay local; no private signing key is sent to the service.
 - Availability: HOSTED_DEVELOPER_PILOT, verified 2026-10-31. The PythonAnywhere host runs independently of the operator's computer. Its free plan has one worker and 512 MB of private storage, requires monthly renewal and currently expires 2026-11-30. No production uptime guarantee or automatic paid conversion. Use this documentation as the current starting point.
 - [Public distribution metadata](distribution.json): product description, actual endpoint status and tester, investor, licensing and codebase acquisition contact routes. This is marketing metadata, not an install manifest.
 
 ## Start here
 
+- [Write a job brief](docs/START.html?task=buy#work-brief): capture the work, how to check it, must-haves and flexibility before searching.
 - [Bring an existing order](docs/PILOTS.html#first-order): agree assisted setup with your own buyer or supplier; no signature or payment is made by this page.
 - [Local pilot workspace](docs/PILOT_WORKSPACE.html): an operator-owned observation record, baseline comparison and collected-economics scorecard. JSON stays local until the user exports or shares it; these are self-reports, not service verification.
 

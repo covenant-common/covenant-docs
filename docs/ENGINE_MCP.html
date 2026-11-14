@@ -22,10 +22,11 @@
     }
   }
 }</pre>
+<p><a href="../mcp/engine-first-use.json">Machine-readable first tasks</a> · <a href="START.html?task=buy#work-brief">Build a job brief</a></p>
 <h2>Find the action you need</h2>
 <ol>
 <li><code>covenant_onboard</code> gives you the host’s access routes.</li>
-<li><code>covenant_find</code> finds services and features. For example, use <code>{"kind":"features","query":"draft a contract for a designer"}</code>.</li>
+<li><code>covenant_find</code> finds services and features. Use <code>{"kind":"features","query":"covenant_contract__draft"}</code> to find the drafting action by name. A broad search can surface a related concept first.</li>
 <li><code>covenant_explain</code> gives you the input schema and access requirements for a named action. For contract drafting, use <code>{"tool":"covenant_contract__draft"}</code>.</li>
 <li><code>covenant_call</code> takes the action’s <code>tool</code> name and an <code>arguments</code> object shaped by that schema.</li>
 </ol>

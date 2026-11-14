@@ -19,7 +19,7 @@ test('all first-job routes use the current public connection and preserve owner 
   assert.throws(() => start.route('__proto__'));
   assert.throws(() => start.route('pay-now'));
   const changed = start.route('connect'); changed.primary[0] = 'https://evil.example';
-  assert.equal(start.route('connect').primary[0], 'API_MCP.html#connect');
+  assert.equal(start.route('connect').primary[0], 'ENGINE_MCP.html');
 });
 
 test('only bounded public source tags and closed task choices survive hostile query input', () => {
@@ -102,7 +102,7 @@ test('new page retains no-script routes, all capabilities and a private owner ha
     assert.ok(fs.existsSync(path.join(root, 'docs', href)), href);
   }
   assert.match(html, /<noscript>/);
-  assert.ok(html.includes('../mcp-config.json'));
+  assert.ok(html.includes('../mcp-config-engine-0.1.json'));
   assert.ok(html.includes('../assets/theme.css'));
   assert.ok(html.includes('nothing is stored or sent automatically'));
   assert.ok(html.includes('broader installed capabilities'));
@@ -124,7 +124,7 @@ function browserRig({ clipboardFailure = false, search = '?task=advertise&source
   const get = id => { if (!nodes.has(id)) nodes.set(id, new Element(id)); return nodes.get(id); };
   const routes = ['connect', 'advertise', 'buy', 'coordinate'].map(route => { const el = new Element(); el.dataset.startRoute = route; return el; });
   const stages = start.stages.map(stage => { const el = new Element(); el.dataset.startStage = stage; el.value = 'not-tried'; return el; });
-  const tags = ['start-primary', 'start-secondary'].map((id, index) => { const el = get(id); el.attributes.href = index ? 'TRIAL.html' : 'API_MCP.html#connect'; return el; });
+  const tags = ['start-primary', 'start-secondary'].map((id, index) => { const el = get(id); el.attributes.href = index ? 'TRIAL.html' : 'ENGINE_MCP.html'; return el; });
   const writes = [], external = [];
   const location = { search, href: 'https://covenant-common.github.io/covenant-docs/docs/START.html' };
   const context = {
@@ -174,4 +174,47 @@ test('clipboard failure gives visible manual text and the report is sent only as
   assert.ok(!draft.searchParams.get('body').includes('PRIVATE'));
   assert.match(rig.get('start-report-status').textContent, /submitted nothing/);
   assert.deepEqual(rig.external, []);
+});
+
+test('the private brief separates explicit requirements and preferences from unknowns', async () => {
+  const rig = browserRig({search: '?task=buy'});
+  rig.get('work-brief-goal').value = 'One-page market comparison';
+  rig.get('work-brief-check').value = 'Include three dated sources';
+  rig.get('work-brief-terms').value = 'Include downloadable CSV';
+  rig.get('work-brief-flex').value = 'Timing can vary by one day';
+  rig.get('work-brief-form').handlers.submit({preventDefault() {}});
+  assert.equal(rig.get('work-brief-preview').hidden, false);
+  const text = rig.get('work-brief-prompt').textContent;
+  assert.match(text, /"must_haves": "Include downloadable CSV"/);
+  assert.match(text, /"flexible_preferences": "Timing can vary by one day"/);
+  assert.match(text, /private negotiation ceiling/);
+  rig.get('work-brief-copy').handlers.click();
+  await new Promise(resolve => setImmediate(resolve));
+  assert.deepEqual(rig.writes, [text]);
+  assert.deepEqual(rig.external, []);
+  rig.get('work-brief-form').handlers.input();
+  assert.equal(rig.get('work-brief-preview').hidden, true);
+  assert.equal(rig.get('work-brief-prompt').textContent, '');
+  const brief = start.workBrief({goal: 'Review', check: '', requirements: '', flexibility: ''});
+  assert.match(brief, /"delivery_check": null/);
+  assert.throws(() => start.workBrief({goal: 'sk_proj_fictional', check: '', requirements: '', flexibility: ''}), /Remove keys/);
+  assert.throws(() => start.workBrief({goal: 'x'.repeat(401), check: '', requirements: '', flexibility: ''}), /400/);
+});
+
+test('first-use metadata and setup pages point agents to the same engine', () => {
+  const config = require('../mcp-config-engine-0.1.json');
+  const entry = require('../mcp/engine-first-use.json');
+  assert.equal(config.mcpServers['covenant-engine'].url, start.MCP);
+  assert.equal(entry.connection.url, start.MCP);
+  assert.deepEqual(entry.connection.entry_tools, ['covenant_onboard', 'covenant_find', 'covenant_explain', 'covenant_call']);
+  assert.deepEqual(entry.first_request, {method: 'tools/list', params: {}});
+  assert.equal(entry.public_actions_authorize_execution, false);
+  for (const task of entry.tasks) {
+    assert.equal(task.schema_request.name, 'covenant_explain');
+    assert.equal(task.example_request.name, 'covenant_call');
+    assert.equal(task.schema_request.arguments.tool, task.example_request.arguments.tool);
+  }
+  for (const guide of ['docs/START.html', 'docs/ENGINE_MCP.html', 'docs/TERMINAL.html', 'README.md', 'llms.txt']) {
+    assert.ok(fs.readFileSync(path.resolve(__dirname, '..', guide), 'utf8').includes(start.MCP), guide);
+  }
 });

@@ -2,7 +2,7 @@
 (function (global) {
   'use strict';
   var ORIGIN = 'https://covenant-common.github.io/covenant-docs/';
-  var MCP = 'https://jupie202020.pythonanywhere.com/mcp';
+  var MCP = 'https://jupie202020.pythonanywhere.com/mcp/engine/v1';
   var SOURCES = ['github', 'mcp-registry', 'glama', 'search', 'community', 'direct', 'referral'];
   var STAGES = ['connection', 'draft', 'approval', 'outcome', 'review', 'reopen', 'repeat'];
   var STATES = ['not-tried', 'completed', 'blocked', 'not-needed'];
@@ -27,7 +27,7 @@
       intro: 'Add this address to an agent client that supports remote HTTP MCP. Public tools need no account or key.',
       steps: ['Add the public address in your client’s MCP settings.', 'Copy the first task below into your agent.', 'Check the returned draft. Public access does not sign, publish or pay.'],
       prompt: 'Connect to ' + MCP + ' using remote HTTP MCP. Initialise the connection and discover the actual tools and schemas. Draft terms for a one-page research brief costing USD 25, including delivery and buyer review. Use sample parties, keep it unsigned and explain the next approval step. Do not create an account, publish, sign or pay. Never ask me to paste private signing keys, account tokens or card details into chat.',
-      primary: ['API_MCP.html#connect', 'Open connection instructions'],
+      primary: ['ENGINE_MCP.html', 'Open connection instructions'],
       secondary: ['TRIAL.html', 'Start a private trial'],
       outcome: 'A useful first result is an exact unsigned draft you can inspect. A connection alone is not a completed deal.'
     },
@@ -44,12 +44,39 @@
       title: 'Find someone to do one job',
       intro: 'Search public adverts and prepare a clear job brief. Confirm that a real supplier is available before agreeing an order.',
       steps: ['Search the marketplace for the service you need. Demo adverts show the format; they are not available sellers.', 'Ask your agent to compare the work, total price, delivery and acceptance terms, then prepare an unsigned job brief. Search ranking does not verify the supplier or reserve stock.', 'For private records, start a trial and connect it through your client’s private settings.', 'The full exact checkout packet currently needs a reviewed SDK integration or operator setup help. Arrange that handoff before asking each side to approve the final terms; check the actual payment connection and fee.'],
-      prompt: 'Help me find a supplier for one job on Covenant. Ask what I need and my maximum total budget, including fees. Connect to ' + MCP + ', initialise and discover the actual tools. Search current public adverts and show a shortlist with the advertised terms. Treat Demo adverts as examples, not available sellers. Do not invent suppliers, stock or a reservation. Prepare an unsigned brief with scope, total price, deadline and how I accept delivery. Keep any selected advert and revisions distinct. Public drafting is not a complete payable checkout packet: that currently requires a reviewed SDK integration or operator setup help. Show that next step rather than inventing a public tool or assuming the draft can be paid. If private records are needed, guide me to https://covenant-common.github.io/covenant-docs/docs/TRIAL.html and my client’s private credential settings. Never ask me to paste private signing keys, access files, tokens or payment credentials into chat. Each side must review and approve the exact terms through its own signing flow. Check actual payment availability. Do not sign, publish or pay without the required separate approval.',
+      prompt: 'Help me find a supplier for one job on Covenant. Ask what I need, what is mandatory, what can be traded off and how I will check delivery. Keep the negotiation ceiling in private owner controls. Public searches and drafts should use only terms I choose to share. Connect to ' + MCP + ', initialise and discover the actual tools. Search current public adverts and show a shortlist with the advertised terms. Treat Demo adverts as examples, not available sellers. Do not invent suppliers, stock or a reservation. Prepare an unsigned brief with scope, proposed total price, deadline and how I accept delivery. Mark any unconfirmed fields and show me a concrete trade-off if two preferences conflict. Keep any selected advert and revisions distinct. Public drafting is not a complete payable checkout packet: that currently requires a reviewed SDK integration or operator setup help. Show that next step rather than inventing a public tool or assuming the draft can be paid. If private records are needed, guide me to https://covenant-common.github.io/covenant-docs/docs/TRIAL.html and my client’s private credential settings. Never ask me to paste private signing keys, access files, tokens or payment credentials into chat. Each side must review and approve the exact terms through its own signing flow. Check actual payment availability. Do not sign, publish or pay without the required separate approval.',
       primary: ['TERMINAL.html#find', 'Find a service'],
       secondary: ['PILOTS.html#first-order', 'Get exact-order setup help'],
       outcome: 'A useful first result today is a supplier shortlist and an unsigned job brief. The full exact-order handoff needs the reviewed integration or setup help; a draft or shortlist is not an accepted or payable order.'
     }
   };
+
+  function workBrief({goal, check, requirements, flexibility}) {
+    function field(value) {
+      if (typeof value !== 'string' || value.length > 400 ||
+          /[\x00-\x08\x0b\x0c\x0e-\x1f\x7f-\x9f\u2028\u2029\u202a-\u202e\u2066-\u2069]/.test(value))
+        throw new Error('Keep each answer to 400 characters of plain text.');
+      if (/(?:\bBearer\s+|\b(?:sk|rk|whsec|ghp|github_pat)[_-]|-----BEGIN [A-Z ]*PRIVATE KEY-----|\b[a-f0-9]{64}\b)/i.test(value))
+        throw new Error('Remove keys and access tokens before building the brief.');
+      return value.trim();
+    }
+
+    const title = field(goal);
+    if (!title) throw new Error('Describe the job first.');
+    const facts = {
+      work: title,
+      delivery_check: field(check) || null,
+      must_haves: field(requirements) || null,
+      flexible_preferences: field(flexibility) || null
+    };
+    return [
+      'Help me find a service and write a draft. Read this owner brief and confirm the work and delivery check with me before searching.',
+      JSON.stringify(facts, null, 2),
+      'Ask about any missing delivery check or condition that could change the choice. If preferences conflict, show two plausible options and ask me which fits.',
+      'Use ' + MCP + ' and discover the actual tools. Search with public service keywords. Keep exact discounts, deadlines, and other terms labelled as proposed until I confirm them. If there are no matches, give me an unsigned brief to take to my own supplier.',
+      'Only share terms I explicitly choose to share. Keep any private negotiation ceiling and credentials out of searches and supplier messages. Ask before signing, publishing or paying.'
+    ].join('\n\n');
+  }
 
   function tags(search) {
     var p = new URLSearchParams(typeof search === 'string' && search.length <= 4096 ? search : '');
@@ -105,7 +132,7 @@
     if (typeof text !== 'string' || text.length > 5000) throw new Error('Keep the feedback short.');
     return 'mailto:jupitersstring@gmail.com?subject=' + encodeURIComponent('Covenant first-job feedback') + '&body=' + encodeURIComponent(text);
   }
-  var api = { MCP: MCP, tags: tags, task: task, route: route, taggedLink: taggedLink, shareLink: shareLink, note: note, email: email, stages: STAGES.slice() };
+  var api = { MCP: MCP, workBrief: workBrief, tags: tags, task: task, route: route, taggedLink: taggedLink, shareLink: shareLink, note: note, email: email, stages: STAGES.slice() };
   if (typeof module === 'object' && module.exports) module.exports = api;
   if (typeof document === 'undefined') return;
   var panel = document.getElementById('start-route-panel');
@@ -133,6 +160,37 @@
       if (!global.navigator.clipboard || typeof global.navigator.clipboard.writeText !== 'function') throw new Error('unavailable');
       await global.navigator.clipboard.writeText(text); status.textContent = success;
     } catch (error) { status.textContent = 'Automatic copy is unavailable. Select and copy the text shown below.'; var shown = document.createElement('pre'); shown.textContent = text; status.appendChild(shown); }
+  }
+  var briefForm = document.getElementById('work-brief-form');
+  if (briefForm) {
+    var briefPreview = document.getElementById('work-brief-preview');
+    var briefPrompt = document.getElementById('work-brief-prompt');
+    var briefStatus = document.getElementById('work-brief-status');
+    briefForm.addEventListener('input', function () {
+      briefPreview.hidden = true;
+      briefPrompt.textContent = '';
+      briefStatus.textContent = '';
+    });
+    briefForm.addEventListener('submit', function (event) {
+      event.preventDefault();
+      try {
+        briefPrompt.textContent = workBrief({
+          goal: document.getElementById('work-brief-goal').value,
+          check: document.getElementById('work-brief-check').value,
+          requirements: document.getElementById('work-brief-terms').value,
+          flexibility: document.getElementById('work-brief-flex').value
+        });
+        briefPreview.hidden = false;
+        briefStatus.textContent = 'Brief ready to review. Nothing has been sent.';
+      } catch (error) {
+        briefPreview.hidden = true;
+        briefPrompt.textContent = '';
+        briefStatus.textContent = error.message;
+      }
+    });
+    document.getElementById('work-brief-copy').addEventListener('click', function () {
+      if (!briefPreview.hidden) copy(briefPrompt.textContent, 'work-brief-status', 'Brief copied. Nothing has been sent.');
+    });
   }
   document.getElementById('start-copy-mcp').addEventListener('click', function () { copy(MCP, 'start-copy-status', 'Copied the public MCP address. Add it to your client’s remote HTTP MCP settings.'); });
   document.getElementById('start-copy-prompt').addEventListener('click', function () { copy(route(chosen).prompt, 'start-prompt-status', 'Copied. Give this task to your agent after adding the connection. Nothing was sent by this page.'); });
